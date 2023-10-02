@@ -1,34 +1,34 @@
 using UnityEngine;
 using Physics = RotaryHeart.Lib.PhysicsExtension.Physics2D;
 using RotaryHeart.Lib.PhysicsExtension;
-using System.Net;
 
 public class playerMagnet : MonoBehaviour {
-    public SpriteRenderer magnetRange;
-    public BoxCollider2D magnetColl;
-    public Rigidbody2D player;
+    public PlayerMovement p;
 
-    void FixedUpdate()
+    Vector3 magDirection;
+
+    void FixedUpdate() //coroutine?
     {
         if (Input.GetKey("f"))
         {
-            //magnetRange.enabled = true;
-            //magnetColl.enabled = true;
+            if (Input.GetAxisRaw("Vertical") > 0)
+                magDirection = transform.up;
+            else if (p.isFacingRight)
+                magDirection = transform.right;
+            else
+                magDirection = transform.right * -1;
 
-            //Collider2D[] hitColliders = 
-            //Physics.OverlapBox(transform.root.position + transform.up + transform.right * 3, new Vector2(6,1), 0, 1 << 3, PreviewCondition.Both, 1, Color.green, Color.red);
-            Physics.Linecast(transform.root.position + transform.up, transform.root.position + transform.up + transform.right * 6, 1 << 3, PreviewCondition.Both, 1, Color.green, Color.red);
+            RaycastHit2D hit = Physics.Linecast(transform.root.position + transform.up, transform.root.position + transform.up + magDirection * 6, 1 << 3, PreviewCondition.Both, 1, Color.green, Color.red);
+
+            if (hit == true)
+            {
+                if (Input.GetAxisRaw("Vertical") > 0)
+                    p.rb.MovePosition(Vector2.MoveTowards(transform.position, new Vector2(transform.position.x, hit.point.y), Time.deltaTime * 5));
+                else
+                    p.rb.MovePosition(Vector2.MoveTowards(transform.position, new Vector2(hit.point.x, transform.position.y), Time.deltaTime * 5));
+            }
         }
-
-        //if (Input.GetKeyUp("f"))
-        //{
-        //    //magnetRange.enabled = false;
-        //    //magnetColl.enabled = false;
-        //}
     }
-
-    //void OnTriggerEnter(Collider other)
-    //{
-    //    Debug.Log("HIT");
-    //}
 }
+
+//Physics.OverlapBox(transform.root.position + transform.up + transform.right * 3, new Vector2(6,1), 0, 1 << 3, PreviewCondition.Both, 1, Color.green, Color.red);
