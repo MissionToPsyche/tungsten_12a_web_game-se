@@ -688,9 +688,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa3a594cbc342ba4faa8cdb06c6737c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  origColor: {r: 0, g: 0, b: 0, a: 0}
-  newColor: {r: 1, g: 0, b: 0, a: 1}
-  render: {fileID: 1410469861}
+  spriteRendererArray:
+  - {fileID: 1410469861}
+  - {fileID: 192033451}
+  - {fileID: 1840892959}
+  - {fileID: 1359034689}
+  - {fileID: 731446149}
+  - {fileID: 35357064}
+  - {fileID: 1460203203}
+  newColorArray:
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0.03342271, b: 1, a: 1}
+  - {r: 0, g: 0.03529412, b: 1, a: 1}
+  - {r: 0, g: 1, b: 0, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0.03529412, b: 1, a: 1}
+  - {r: 0.2920864, g: 0.3018868, b: 0.024207907, a: 1}
+  origColorArray:
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1359034688
 GameObject:
   m_ObjectHideFlags: 0
