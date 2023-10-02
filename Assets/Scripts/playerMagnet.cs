@@ -7,9 +7,9 @@ public class playerMagnet : MonoBehaviour {
 
     Vector3 magDirection;
 
-    void FixedUpdate() //coroutine?
+    void FixedUpdate()
     {
-        if (Input.GetKey("f"))
+        if (Input.GetButton("Fire1"))
         {
             if (Input.GetAxisRaw("Vertical") > 0)
                 magDirection = transform.up;
@@ -20,7 +20,7 @@ public class playerMagnet : MonoBehaviour {
 
             RaycastHit2D hit = Physics.Linecast(transform.root.position + transform.up, transform.root.position + transform.up + magDirection * 6, 1 << 3, PreviewCondition.Both, 1, Color.green, Color.red);
 
-            if (hit == true)
+            if (hit == true) //start coroutine?
             {
                 if (Input.GetAxisRaw("Vertical") > 0)
                     p.rb.MovePosition(Vector2.MoveTowards(transform.position, new Vector2(transform.position.x, hit.point.y), Time.deltaTime * 5));
