@@ -3,7 +3,7 @@ using Physics = RotaryHeart.Lib.PhysicsExtension.Physics2D;
 using RotaryHeart.Lib.PhysicsExtension;
 
 public class playerMagnet : MonoBehaviour {
-    public PlayerMovement p;
+    public PlayerMovement p; //to access player RigidBody and isFacingRight
 
     Vector3 magDirection;
 
@@ -11,24 +11,39 @@ public class playerMagnet : MonoBehaviour {
     {
         if (Input.GetButton("Fire1"))
         {
-            if (Input.GetAxisRaw("Vertical") > 0)
+            if (Input.GetAxisRaw("Vertical") > 0) //if player is holding the up button
                 magDirection = transform.up;
             else if (p.isFacingRight)
                 magDirection = transform.right;
             else
                 magDirection = transform.right * -1;
 
-            RaycastHit2D hit = Physics.Linecast(transform.root.position + transform.up, transform.root.position + transform.up + magDirection * 6, 1 << 3, PreviewCondition.Both, 1, Color.green, Color.red);
-
-            if (hit == true) //start coroutine?
+            /**
+             * Raycasts 6 units away from the center of the player and only hits objects on the Metal layer
+             */
+            RaycastHit2D hit = Physics.Linecast(transform.root.position + transform.up, transform.root.position + transform.up + magDirection * 6, 1 << 3, PreviewCondition.Both, 1, Color.green, Color.red); //transform.root.position + transform.up = about the center of the player
+            
+            /**
+             * Pulls the player towards the hit metal object
+             */
+            if (hit == true)
             {
+                Vector2 pullDirection;
                 if (Input.GetAxisRaw("Vertical") > 0)
-                    p.rb.MovePosition(Vector2.MoveTowards(transform.position, new Vector2(transform.position.x, hit.point.y), Time.deltaTime * 5));
+                    pullDirection = new Vector2(transform.position.x, hit.point.y);
                 else
-                    p.rb.MovePosition(Vector2.MoveTowards(transform.position, new Vector2(hit.point.x, transform.position.y), Time.deltaTime * 5));
+                    pullDirection = new Vector2(hit.point.x, transform.position.y);
+
+                p.rb.MovePosition(Vector2.MoveTowards(transform.position, pullDirection, Time.deltaTime * 10));
             }
         }
     }
 }
 
+
+//**Experimental code**
+
 //Physics.OverlapBox(transform.root.position + transform.up + transform.right * 3, new Vector2(6,1), 0, 1 << 3, PreviewCondition.Both, 1, Color.green, Color.red);
+
+//RaycastHit hit;
+//if (Physics.Linecast(transform.root.position + transform.up, transform.root.position + transform.up + magDirection * 6, out hit, 1 << 3)) //transform.root.position + transform.up = about the center of the player
