@@ -1,3 +1,9 @@
+/** 
+Description: player respawn script
+Author: mcmyers4
+Version: 20231004
+**/
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -10,7 +16,6 @@ public class PlayerLife : MonoBehaviour
     private Rigidbody2D rb2d;
     private Vector3 respawnPoint;
 
-    // Start is called before the first frame update
     private void Start()
     {
         animat = GetComponent<Animator>();
@@ -23,13 +28,7 @@ public class PlayerLife : MonoBehaviour
         if (collision.gameObject.CompareTag("Trap"))
         {
             Die();
-            //rb2d.bodyType = RigidbodyType2D.Static;
-            //animat.SetTrigger("death");
-            //rb2d.bodyType = RigidbodyType2D.Static;
-            //transform.position = respawnPoint;
-            //Die();
         }
-        //transform.position = respawnPoint;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -43,16 +42,11 @@ public class PlayerLife : MonoBehaviour
     private void Die()
     {
         animat.SetTrigger("death");
-        //rb2d.bodyType = RigidbodyType2D.Static;
-        //transform.position = respawnPoint;
     }
 
     private void RestartLevel()
     {
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         animat.SetTrigger("respawn");
         transform.position = respawnPoint;
-        //animat.SetTrigger("respawn");
-        //rb2d.bodyType = RigidbodyType2D.Kinematic;
     }
 }
