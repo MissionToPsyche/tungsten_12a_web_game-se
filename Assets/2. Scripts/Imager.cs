@@ -1,3 +1,9 @@
+/** 
+Description: imager tool script
+Author: mcmyers4
+Version: 20231004
+**/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

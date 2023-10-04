@@ -708,7 +708,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5191739513699025622, guid: 320f8a2c537535e46806416da66d3b19, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 5191739513699025622, guid: 320f8a2c537535e46806416da66d3b19, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1076,7 +1076,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -7750761410467519339, guid: dfc7090c56f3626418196653e1eb610d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1208,9 +1208,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   imager: {fileID: 323625945}
   rangeIncrease: 2
-  minRange: 0
-  maxRangeOuter: 25
-  maxRangeInner: 24.5
 --- !u!1 &1587642004
 GameObject:
   m_ObjectHideFlags: 0
@@ -1500,7 +1497,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5191739513699025622, guid: 320f8a2c537535e46806416da66d3b19, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 5191739513699025622, guid: 320f8a2c537535e46806416da66d3b19, type: 3}
       propertyPath: m_LocalRotation.w
