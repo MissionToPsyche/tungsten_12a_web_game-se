@@ -1,3 +1,9 @@
+/** 
+Description: Tool to pull the player towards metal objects
+Author: jmolive8
+Version: 1
+**/
+
 using UnityEngine;
 using Physics = RotaryHeart.Lib.PhysicsExtension.Physics2D;
 using RotaryHeart.Lib.PhysicsExtension;
