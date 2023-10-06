@@ -1,31 +1,37 @@
 /** 
 Description: player movement script
 Author: blopezro
-Version: 20230928
+Version: 20230930
 **/
 
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
+using UnityEditor.UI;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
-    public bool isFacingRight = true;
 
-    private float horiozntal;
+    private float horizontal;
     private float speed = 8f;
     private float jumpingPower = 16f;
+    public bool isFacingRight = true;
 
+    // movement
     public Rigidbody2D rb;
-
-    [SerializeField] private Transform groundcheck;
+    [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
 
-    // Update is called once per frame
+    // audio
+    [SerializeField] private AudioSource jumpSound;
+
+    // update is called once per frame
     void Update() {
-        horiozntal = Input.GetAxisRaw("Horizontal");
+        horizontal = Input.GetAxisRaw("Horizontal");
         
         if (Input.GetButtonDown("Jump") && IsGrounded()) {
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+            jumpSound.Play();
         }
 
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f) {
@@ -36,15 +42,17 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        rb.velocity = new Vector2(horiozntal * speed, rb.velocity.y);
+        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
     }
 
+    // checks if the player is touching the ground
     private bool IsGrounded() {
-        return Physics2D.OverlapCircle(groundcheck.position, 0.2f, groundLayer);
+        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
 
+    // changes the direction the player is facing 
     private void Flip() {
-        if (isFacingRight && horiozntal < 0f || !isFacingRight && horiozntal > 0f) {
+        if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f) {
             isFacingRight = !isFacingRight;
             Vector3 localScale = transform.localScale;
             localScale.x *= -1f;
