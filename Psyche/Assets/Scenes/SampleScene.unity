@@ -1307,6 +1307,7 @@ GameObject:
   - component: {fileID: 893728058}
   - component: {fileID: 893728061}
   - component: {fileID: 893728062}
+  - component: {fileID: 893728063}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Untagged
@@ -1466,11 +1467,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1183d67a9ccb29245999e580218b0b00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCharacter: {fileID: 0}
   groundCheck: {fileID: 265600938}
   groundCheckRadius: 0.2
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
+  isGrounded: 0
+--- !u!114 &893728063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 893728057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30e4205c21202344ba1bf727cda06856, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &982981228
 GameObject:
   m_ObjectHideFlags: 0
