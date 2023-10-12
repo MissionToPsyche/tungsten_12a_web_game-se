@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-
+///PlayerMovement is a script which makes changes to the player's current position, velocity, and behavior
 public class PlayerMovement : MonoBehaviour
 {
     public void handleMovement(Rigidbody2D playerCharacter, bool isGrounded)
