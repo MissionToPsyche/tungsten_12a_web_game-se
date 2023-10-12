@@ -1,15 +1,13 @@
-/** 
-Description: Functions for controlling the title screen.
-             Functions are called from the OnClick() event of buttons
-             Script is a component of the Main Menu gameobject
-Author: jmolive8
-Version: 1
-**/
-
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class titleScreenManager : MonoBehaviour {
+/// <summary>
+/// Functions for controlling the title screen.
+/// Functions are called from the OnClick() event of buttons.
+/// Script is a component of the Main Menu gameobject.
+/// </summary>
+/// Author: jmolive8
+public class TitleScreenManager : MonoBehaviour {
     /// <summary>
     /// Currently open submenu of title screen
     /// </summary>
