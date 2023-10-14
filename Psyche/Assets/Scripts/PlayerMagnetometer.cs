@@ -9,14 +9,9 @@ using Physics = RotaryHeart.Lib.PhysicsExtension.Physics2D;
 using RotaryHeart.Lib.PhysicsExtension;
 
 public class PlayerMagnetometer : MonoBehaviour {
-    //public PlayerMovement p; //to access player RigidBody and isFacingRight
+    public PlayerManagement player;
 
     Vector3 magDirection;
-
-    public void MagnetometerCall(Rigidbody2D rb)
-    {
-
-    }
 
     void FixedUpdate()
     {
@@ -24,10 +19,10 @@ public class PlayerMagnetometer : MonoBehaviour {
         {
             if (Input.GetAxisRaw("Vertical") > 0) //if player is holding the up button
                 magDirection = transform.up;
-            //else if (p.isFacingRight)
-            //    magDirection = transform.right;
-            //else
-            //    magDirection = transform.right * -1;
+            else if (Input.GetAxisRaw("Horizontal") > 0)
+                magDirection = transform.right;
+            else
+                magDirection = transform.right * -1;
 
             /**
              * Raycasts 6 units away from the center of the player and only hits objects on the Metal layer
@@ -45,7 +40,7 @@ public class PlayerMagnetometer : MonoBehaviour {
                 else
                     pullDirection = new Vector2(hit.point.x, transform.position.y);
 
-                //p.rb.MovePosition(Vector2.MoveTowards(transform.position, pullDirection, Time.deltaTime * 10));
+                player.playerCharacter.MovePosition(Vector2.MoveTowards(transform.position, pullDirection, Time.deltaTime * 10));
             }
         }
     }
