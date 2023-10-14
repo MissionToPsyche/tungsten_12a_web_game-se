@@ -17,11 +17,16 @@ public class GammaView : MonoBehaviour {
     public Color[] newColorArray;
 
     // used to hold the original colors (we do not need to set these in the UI)
-    // just need to make sure we have the same size as spriteRendererArray 
+    // just need to make sure we have the same size as spriteRendererArray
     public Color[] origColorArray; 
 
     // Start is called before the first frame update
     void Start() {
+    
+    // used to store current objects in scene 
+    GameObject[] sceneObjects = (GameObject[]) Object.FindObjectsOfType(typeof(GameObject));    
+    PrintSceneObjInfo(sceneObjects);
+
         // captures original colors of sprites
         for (int i = 0; i < spriteRendererArray.Length; i++) {
             origColorArray[i] = spriteRendererArray[i].color;
@@ -42,4 +47,16 @@ public class GammaView : MonoBehaviour {
             }
         }
     }
+
+    // prints out information for objects in the current scene
+    void PrintSceneObjInfo(GameObject[] sceneObjects) {
+        foreach (GameObject obj in sceneObjects) {
+            if (obj.GetComponent(typeof(SpriteRenderer))) {
+                print("SpriteRenderer found");
+                print(obj.name);
+                print(obj.layer);
+            }           
+        }
+    }
+
 }
