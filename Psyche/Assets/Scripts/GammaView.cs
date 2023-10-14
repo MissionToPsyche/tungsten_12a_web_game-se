@@ -62,7 +62,26 @@ public class GammaView : MonoBehaviour {
 
     // returns set color for the layer
     Color LayerColor(GameObject obj) {
-        return tempColor;
+        return obj.layer switch {
+            // User Layers within Unity are 3 and 6-31
+            3 => Color.black,// Terrain
+            6 => Color.grey,// Rock
+            7 => Color.gray,// Metal
+            8 => Color.magenta,// Crystal
+            9 => Color.green,// Grass
+            10 => Color.blue,// FloatingPlatform
+            11 => Color.green,// Background
+            12 => Color.blue,// Lifeform
+            13 => Color.clear,// Clear
+            14 => Color.red,// Iron
+            15 => Color.blue,// Nickel
+            16 => Color.yellow,// Sulfur
+            17 => Color.white,// Oxygen
+            18 => Color.cyan,// Silicon
+            19 => Color.blue,// Hydrogen
+            20 => Color.black,// Carbon
+            _ => tempColor,
+        };
     }
 
 }
