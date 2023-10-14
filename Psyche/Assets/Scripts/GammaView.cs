@@ -1,7 +1,7 @@
 /** 
 Description: spectrometer tool gamma view script
 Author: blopezro
-Version: 20231013
+Version: 20231014
 **/
 
 using System;
@@ -10,12 +10,10 @@ using UnityEngine;
 
 public class GammaView : MonoBehaviour {
 
-    public GameObject[] sceneObjects; // holds all current game objects in the scene
+    public GameObject[] sceneObjects;                // holds all current game objects in the scene
     public List<SpriteRenderer> spriteRenderersList; // holds all sprite renderers of game objects
-    public Color[] origColorArray; // holds original colors of the sprite renderers
-
-    // temp testing color
-    public Color tempColor = Color.green;
+    public Color[] origColorArray;                   // holds original colors of the sprite renderers
+    public Color tempColor = Color.green;            // testing / default color
 
     // Start is called before the first frame update
     void Start() {
@@ -33,10 +31,10 @@ public class GammaView : MonoBehaviour {
 
     // Update is called when keyboard keys are pressed
     void Update() {
-        // sets and shows new color
+        // shows new color
         if (Input.GetKeyDown(KeyCode.G)) {
             for (int i = 0; i < spriteRenderersList.Count; i++) {
-                spriteRenderersList[i].color = tempColor;
+                spriteRenderersList[i].color = LayerColor(spriteRenderersList[i].gameObject);
             }
         }
 
@@ -60,6 +58,11 @@ public class GammaView : MonoBehaviour {
     // returns the game objects layer
     int GetLayer(GameObject obj) {
         return obj.layer;
+    }
+
+    // returns set color for the layer
+    Color LayerColor(GameObject obj) {
+        return tempColor;
     }
 
 }
