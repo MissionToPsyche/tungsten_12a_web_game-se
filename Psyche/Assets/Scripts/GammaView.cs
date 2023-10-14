@@ -8,6 +8,10 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Gamma View script which captures all sprites of the game objects within the scene
+/// and changes their colors based on the layer assigned to the game objects.
+/// </summary>
 public class GammaView : MonoBehaviour {
 
     public GameObject[] sceneObjects;                // holds all current game objects in the scene
@@ -34,14 +38,18 @@ public class GammaView : MonoBehaviour {
         // shows new color
         if (Input.GetKeyDown(KeyCode.G)) {
             for (int i = 0; i < spriteRenderersList.Count; i++) {
-                spriteRenderersList[i].color = LayerColor(spriteRenderersList[i].gameObject);
+                if (spriteRenderersList[i] != null) {
+                    spriteRenderersList[i].color = LayerColor(spriteRenderersList[i].gameObject);
+                }
             }
         }
 
         // reverts to original color
         if (Input.GetKeyUp(KeyCode.G)) {
             for (int i = 0; i < spriteRenderersList.Count; i++) {
-                spriteRenderersList[i].color = origColorArray[i];
+                if (spriteRenderersList[i] != null) {
+                    spriteRenderersList[i].color = origColorArray[i];
+                }
             }
         }
     }
