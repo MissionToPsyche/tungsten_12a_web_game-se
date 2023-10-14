@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
+
+
 
 /// <summary>
 /// Player Management script controls how the player interacts with the system and various components.
@@ -9,7 +12,7 @@ using UnityEngine;
 public class PlayerManagement : MonoBehaviour
 {
     //Create the playercharacter assignment
-    private Rigidbody2D playerCharacter;
+    public Rigidbody2D playerCharacter;
 
     //Set up environmental checks
     public Transform groundCheck;
@@ -17,7 +20,10 @@ public class PlayerManagement : MonoBehaviour
     public LayerMask whatIsGround;
 
     //Booleans for environmental checks
-    private bool isGrounded;
+    public bool isGrounded;
+
+    //Management scripts
+    PlayerMovement playerMovement;
 
     //Booleans for the various tools
     private bool hasThrusters;
@@ -29,7 +35,8 @@ public class PlayerManagement : MonoBehaviour
     void Start()
     {
         //Assign the playerCharacter to its in-game object
-        playerCharacter = GetComponent<Rigidbody2D>();   
+        playerCharacter = GetComponent<Rigidbody2D>(); 
+        playerMovement = GetComponent<PlayerMovement>();
     }
 
     // Update is called once per frame
@@ -38,14 +45,9 @@ public class PlayerManagement : MonoBehaviour
         //Check booleans
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
 
-        //Horizontal Movement
-        float horizontalDirection = Input.GetAxisRaw("Horizontal");
-        playerCharacter.velocity = new Vector2(horizontalDirection * 7f, playerCharacter.velocity.y);
-
-        //Vertical "jump" only if player is on the ground
-        if (isGrounded && Input.GetButtonDown("Jump"))
-            playerCharacter.velocity = new Vector2(playerCharacter.velocity.x, 7f);
-
+        //Handle movement
+        playerMovement.handleMovement(playerCharacter, isGrounded);
+        
         //Call the requisite tool scripts here:
         //Thruster
         if(hasThrusters && !isGrounded && Input.GetButton("Jump"))
@@ -59,6 +61,5 @@ public class PlayerManagement : MonoBehaviour
         //Magnometer
         if (hasMagnetometer)
             return; //Magnometer script call
-
     }
 }
