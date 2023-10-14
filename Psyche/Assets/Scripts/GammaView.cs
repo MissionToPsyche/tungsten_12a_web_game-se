@@ -1,16 +1,14 @@
 /** 
-Description: spectrometer tool script
+Description: spectrometer tool gamma view script
 Author: blopezro
-Version: 20231001
+Version: 20231013
 **/
 
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-public class Spectrometer : MonoBehaviour {
+public class GammaView : MonoBehaviour {
     
     // used to hold the sprites we want to change the color of
     public SpriteRenderer[] spriteRendererArray;
