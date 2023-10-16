@@ -23,7 +23,8 @@ public class PlayerManagement : MonoBehaviour
     public bool isGrounded;
 
     //Management scripts
-    PlayerMovement playerMovement;
+    private PlayerMovement playerMovement;
+    private Thruster thruster;
 
     //Booleans for the various tools
     private bool hasThrusters;
@@ -47,11 +48,11 @@ public class PlayerManagement : MonoBehaviour
 
         //Handle movement
         playerMovement.handleMovement(playerCharacter, isGrounded);
-        
+
         //Call the requisite tool scripts here:
         //Thruster
-        if(hasThrusters && !isGrounded && Input.GetButton("Jump"))
-            return; //Thruster script call
+        if (hasThrusters && !isGrounded)
+            thruster.activateThruster(playerCharacter);
         //Imager
         if (hasImager)
             return; //Imager script call
