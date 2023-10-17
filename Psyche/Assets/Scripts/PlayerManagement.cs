@@ -19,14 +19,18 @@ public class PlayerManagement : MonoBehaviour
     //Management scripts
     PlayerMovement playerMovement;
     public Imager imager;
+    private Magnetometer magnetTool;
     public DialogueController dialBox;
     public InventoryController inventory;
 
     //Booleans for the various tools
     private bool hasThrusters;
     private bool hasImager;
-    private bool hasMagnetometer;
+    private bool hasMagnetometer = true; //temp assignment
     private bool hasSpectrometer;
+
+    //Booleans to prevent needless code runs
+    public bool magnetActive;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +38,7 @@ public class PlayerManagement : MonoBehaviour
         //Assign the playerCharacter to its in-game object
         playerCharacter = GetComponent<Rigidbody2D>(); 
         playerMovement = GetComponent<PlayerMovement>();
+        magnetTool = GetComponent<Magnetometer>();
     }
 
     // Update is called once per frame
@@ -56,8 +61,8 @@ public class PlayerManagement : MonoBehaviour
         if (hasSpectrometer)
             return; //Spectrometer script call
         //Magnometer
-        if (hasMagnetometer)
-            return; //Magnometer script call
+        if (hasMagnetometer && !magnetActive && Input.GetButton("Fire1"))
+            StartCoroutine(magnetTool.handleMagnet());
     }
 
     /// <summary>
