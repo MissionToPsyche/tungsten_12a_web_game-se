@@ -18,17 +18,26 @@ public class Imager : MonoBehaviour
     //The amount to increase the vision field
     [SerializeField] private float rangeIncrease = 2f;
 
-    //Pick up imager on contact and increase size of vision
-    private void OnTriggerEnter2D(Collider2D collision)
+    /// <summary>
+    /// Increases size of vision
+    /// </summary>
+    public void increaseVision()
     {
-        if (collision.gameObject.CompareTag("Imager"))
-        {
-            if (imager != null)
-            {
-                imager.pointLightInnerRadius += rangeIncrease;
-                imager.pointLightOuterRadius += rangeIncrease;
-                Destroy(collision.gameObject);
-            }
-        }
+        imager.pointLightInnerRadius += rangeIncrease;
+        imager.pointLightOuterRadius += rangeIncrease;
     }
+
+    ////Pick up imager on contact and increase size of vision
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Imager"))
+    //    {
+    //        if (imager != null)
+    //        {
+    //            imager.pointLightInnerRadius += rangeIncrease;
+    //            imager.pointLightOuterRadius += rangeIncrease;
+    //            Destroy(collision.gameObject);
+    //        }
+    //    }
+    //}
 }
