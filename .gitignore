@@ -8,8 +8,6 @@
 [Bb]uild/
 [Bb]uilds/
 [Ll]ogs/
-Psyche/Logs/
-*.log
 [Uu]ser[Ss]ettings/
 
 # MemoryCaptures can get excessive in size.
@@ -48,6 +46,8 @@ ExportedObj/
 *.mdb
 *.opendb
 *.VC.db
+*.vsconfig
+*.vscode
 
 # Unity3D generated meta files
 *.pidb.meta
@@ -72,3 +72,7 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# Log files
+Psyche/Logs/
+*.log
