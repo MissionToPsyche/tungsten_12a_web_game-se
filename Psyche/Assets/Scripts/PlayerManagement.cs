@@ -1,10 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
-
-
 
 /// <summary>
 /// Player Management script controls how the player interacts with the system and various components.
@@ -24,6 +18,9 @@ public class PlayerManagement : MonoBehaviour
 
     //Management scripts
     PlayerMovement playerMovement;
+    public Imager imager;
+    public DialogueController dialBox;
+    public InventoryController inventory;
 
     //Booleans for the various tools
     private bool hasThrusters;
@@ -61,5 +58,40 @@ public class PlayerManagement : MonoBehaviour
         //Magnometer
         if (hasMagnetometer)
             return; //Magnometer script call
+    }
+
+    /// <summary>
+    /// Activates tool when its pickup is collected
+    /// </summary>
+    /// <param name="toolName"></param>
+    public void toolPickedUp(string toolName) //close dialogue on tab and make sure inv doesn't open
+    {
+        switch (toolName)
+        {
+            case "Thruster":
+                hasThrusters = true;
+                dialBox.SetText("This is a Thruster");
+                break;
+
+            case "Imager":
+                hasImager = true;
+                dialBox.SetText("This is an Imager");
+                imager.increaseVision();
+                break;
+
+            case "Spectrometer":
+                hasImager = true;
+                dialBox.SetText("This is a Spectrometer");
+                break;
+
+            case "Magnetometer":
+                hasMagnetometer = true;
+                dialBox.SetText("This is a Magnetometer");
+                break;
+
+            default:
+                Debug.LogWarning("Tool name '" + toolName + "' not found!");
+                break;
+        }
     }
 }

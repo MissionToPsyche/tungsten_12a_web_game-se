@@ -9,7 +9,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class InventoryController : MonoBehaviour
+public class inventoryController_T : MonoBehaviour
 {
     public GameObject inventory;
     public TMP_Text toolName;
