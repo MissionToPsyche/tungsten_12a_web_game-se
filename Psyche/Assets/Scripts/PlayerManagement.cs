@@ -19,7 +19,7 @@ public class PlayerManagement : MonoBehaviour
 
     //Management scripts
     private PlayerMovement playerMovement;
-    private PlayerMagnetometer magnetTool;
+    private Magnetometer magnetTool;
 
     //Booleans for the various tools
     private bool hasThrusters;
@@ -36,7 +36,7 @@ public class PlayerManagement : MonoBehaviour
         //Assign the playerCharacter to its in-game object
         playerCharacter = GetComponent<Rigidbody2D>(); 
         playerMovement = GetComponent<PlayerMovement>();
-        magnetTool = GetComponent<PlayerMagnetometer>();
+        magnetTool = GetComponent<Magnetometer>();
     }
 
     // Update is called once per frame

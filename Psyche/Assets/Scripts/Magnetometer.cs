@@ -5,7 +5,7 @@ using UnityEngine;
 /// Tool to pull the player towards metal objects
 /// </summary>
 /// Author: jmolive8
-public class PlayerMagnetometer : MonoBehaviour {
+public class Magnetometer : MonoBehaviour {
     public PlayerManagement pManage;
     public GameObject magEffect;
 
