@@ -1,48 +1,99 @@
-/** 
-Description: Tool to pull the player towards metal objects
-Author: jmolive8
-Version: 1
-**/
-
+using System.Collections;
 using UnityEngine;
-using Physics = RotaryHeart.Lib.PhysicsExtension.Physics2D;
-using RotaryHeart.Lib.PhysicsExtension;
 
+/// <summary>
+/// Tool to pull the player towards metal objects
+/// </summary>
+/// Author: jmolive8
 public class PlayerMagnetometer : MonoBehaviour {
-    public PlayerManagement player;
+    public PlayerManagement pManage;
+    public GameObject magEffect;
 
-    Vector3 magDirection;
+    private int magRange = 6;
 
-    void FixedUpdate()
+    /// <summary>
+    /// Activates magnetometer tool
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator handleMagnet()
     {
+        pManage.magnetActive = true;
+        magEffect.SetActive(true);
+        RaycastHit2D hit = new RaycastHit2D();
+
+        do
+        {
+            Vector2 endpoint;
+            float shiftX = 0, shiftY = 0;
+
+            /**
+             * If player is holding the up button
+             */
+            if (Input.GetAxisRaw("Vertical") > 0)
+            {
+                shiftX = .25f;
+                endpoint = Vector2.up * magRange;
+                magEffect.transform.localEulerAngles = new Vector3(0,0,90);
+            }
+            else
+            {
+                shiftY = .25f;
+                if (Input.GetAxisRaw("Horizontal") < 0) //account for last direction faced
+                {
+                    endpoint = Vector2.right * -magRange;
+                    magEffect.transform.localEulerAngles = new Vector3(0, 0, 180);
+                }
+                else
+                {
+                    endpoint = Vector2.right * magRange;
+                    magEffect.transform.localEulerAngles = new Vector3(0, 0, 0);
+                }
+            }
+
+            /**
+             * Raycasts 6 units away slightly from the side of the player's center and only hits objects on the Metal layer
+             */
+            Vector2 origin1 = new Vector2(transform.position.x + shiftX, transform.position.y + shiftY);
+            RaycastHit2D ray1 = Physics2D.Linecast(origin1, origin1 + endpoint, 1 << 7);
+            if (ray1)
+                hit = ray1;
+            else
+            {
+                /**
+                 * Second raycast to create box-like area for magnet hit box. Doesn't run if first ray hit something already. Will make proper box cast later
+                 */
+                Vector2 origin2 = new Vector2(transform.position.x - shiftX, transform.position.y - shiftY);
+                RaycastHit2D ray2 = Physics2D.Linecast(origin2, origin2 + endpoint, 1 << 7);
+                if (ray2)
+                    hit = ray2;
+            }
+
+            yield return null;
+        } while (Input.GetButton("Fire1") && !hit);
+
+        /**
+         * Pulls the player towards the hit metal object and disables gravity
+         */
         if (Input.GetButton("Fire1"))
         {
-            if (Input.GetAxisRaw("Vertical") > 0) //if player is holding the up button
-                magDirection = transform.up;
-            else if (Input.GetAxisRaw("Horizontal") > 0)
-                magDirection = transform.right;
+            Vector2 pullDirection;
+            if (Input.GetAxisRaw("Vertical") > 0)
+                pullDirection = new Vector2(transform.position.x, hit.transform.position.y);
             else
-                magDirection = transform.right * -1;
+                pullDirection = new Vector2(hit.transform.position.x, transform.position.y);
 
-            /**
-             * Raycasts 6 units away from the center of the player and only hits objects on the Metal layer
-             */
-            RaycastHit2D hit = Physics.Linecast(transform.position, transform.position + magDirection * 6, 1 << 3, PreviewCondition.Both, 1, Color.green, Color.red);
+            pManage.playerCharacter.gravityScale = 0;
 
-            /**
-             * Pulls the player towards the hit metal object
-             */
-            if (hit == true)
-            {
-                Vector2 pullDirection;
-                if (Input.GetAxisRaw("Vertical") > 0)
-                    pullDirection = new Vector2(transform.position.x, hit.point.y);
-                else
-                    pullDirection = new Vector2(hit.point.x, transform.position.y);
-
-                player.playerCharacter.MovePosition(Vector2.MoveTowards(transform.position, pullDirection, Time.deltaTime * 10));
+            while (Input.GetButton("Fire1")) {
+                pManage.playerCharacter.MovePosition(Vector2.MoveTowards(transform.position, pullDirection, Time.deltaTime * 40));
+                yield return null;
             }
+
+            pManage.playerCharacter.gravityScale = 1;
         }
+
+        magEffect.SetActive(false);
+        pManage.magnetActive = false;
     }
 }
 
@@ -51,5 +102,10 @@ public class PlayerMagnetometer : MonoBehaviour {
 
 //Physics.OverlapBox(transform.root.position + transform.up + transform.right * 3, new Vector2(6,1), 0, 1 << 3, PreviewCondition.Both, 1, Color.green, Color.red);
 
-//RaycastHit hit;
-//if (Physics.Linecast(transform.root.position + transform.up, transform.root.position + transform.up + magDirection * 6, out hit, 1 << 3)) //transform.root.position + transform.up = about the center of the player
+
+//Collider2D hit = Physics2D.OverlapBox(transform.position + transform.forward * 3, new Vector2(6, 0.5f), 0, 1 << 6);
+
+//if (hit != null)
+//{
+//    Debug.Log(hit.gameObject.name);
+//}
