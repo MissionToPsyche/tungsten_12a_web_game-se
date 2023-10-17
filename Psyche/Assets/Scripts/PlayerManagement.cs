@@ -1,9 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
-
 
 
 /// <summary>
@@ -23,13 +18,17 @@ public class PlayerManagement : MonoBehaviour
     public bool isGrounded;
 
     //Management scripts
-    PlayerMovement playerMovement;
+    private PlayerMovement playerMovement;
+    private PlayerMagnetometer magnetTool;
 
     //Booleans for the various tools
     private bool hasThrusters;
     private bool hasImager;
-    private bool hasMagnetometer;
+    private bool hasMagnetometer = true; //temp assignment
     private bool hasSpectrometer;
+
+    //Booleans to prevent needless code runs
+    public bool magnetActive;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +36,7 @@ public class PlayerManagement : MonoBehaviour
         //Assign the playerCharacter to its in-game object
         playerCharacter = GetComponent<Rigidbody2D>(); 
         playerMovement = GetComponent<PlayerMovement>();
+        magnetTool = GetComponent<PlayerMagnetometer>();
     }
 
     // Update is called once per frame
@@ -59,7 +59,7 @@ public class PlayerManagement : MonoBehaviour
         if (hasSpectrometer)
             return; //Spectrometer script call
         //Magnometer
-        if (hasMagnetometer)
-            return; //Magnometer script call
+        if (hasMagnetometer && !magnetActive && Input.GetButton("Fire1"))
+            StartCoroutine(magnetTool.handleMagnet());
     }
 }
