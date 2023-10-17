@@ -872,7 +872,6 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
-  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1769,6 +1768,7 @@ GameObject:
   - component: {fileID: 893728063}
   - component: {fileID: 893728064}
   - component: {fileID: 893728065}
+  - component: {fileID: 893728066}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Untagged
@@ -1870,6 +1870,7 @@ Transform:
   m_Children:
   - {fileID: 265600938}
   - {fileID: 618750999}
+  - {fileID: 299081876}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &893728061
@@ -1979,6 +1980,20 @@ MonoBehaviour:
   spriteRenderersList: []
   origColorArray: []
   tempColor: {r: 0, g: 1, b: 0, a: 1}
+--- !u!114 &893728066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 893728057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8206ff74d192b874187abf217bf57ec9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pManage: {fileID: 893728062}
+  magEffect: {fileID: 299081875}
 --- !u!1 &982981228
 GameObject:
   m_ObjectHideFlags: 0
