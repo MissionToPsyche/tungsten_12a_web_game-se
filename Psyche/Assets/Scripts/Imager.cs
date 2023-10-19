@@ -27,6 +27,7 @@ public class Imager : MonoBehaviour
         imager.pointLightOuterRadius += rangeIncrease;
     }
 
+    //***Now handled from toolPickedUp() in PlayerManagement***
     ////Pick up imager on contact and increase size of vision
     //private void OnTriggerEnter2D(Collider2D collision)
     //{
