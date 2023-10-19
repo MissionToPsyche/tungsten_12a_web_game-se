@@ -25,6 +25,11 @@ public class Imager : MonoBehaviour
     {
         imager.pointLightInnerRadius += rangeIncrease;
         imager.pointLightOuterRadius += rangeIncrease;
+        //Plays tool sound
+                AudioManager audioManager = GameObject
+                    .FindGameObjectWithTag("AudioSources")
+                    .GetComponent<AudioManager>();
+                audioManager.PlayToolImager();
     }
 
     //***Now handled from toolPickedUp() in PlayerManagement***
