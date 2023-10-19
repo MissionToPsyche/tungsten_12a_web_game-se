@@ -38,6 +38,10 @@ public class PlayerManagement : MonoBehaviour
         //Assign the playerCharacter to its in-game object
         playerCharacter = GetComponent<Rigidbody2D>(); 
         playerMovement = GetComponent<PlayerMovement>();
+        thruster = GetComponent<Thruster>();
+        
+        //Testing purposes
+        hasThrusters = true;
     }
 
     // Update is called once per frame
@@ -51,7 +55,7 @@ public class PlayerManagement : MonoBehaviour
 
         //Call the requisite tool scripts here:
         //Thruster
-        if (hasThrusters && !isGrounded)
+        if (hasThrusters)
             thruster.activateThruster(playerCharacter);
         //Imager
         if (hasImager)

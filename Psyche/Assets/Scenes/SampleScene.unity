@@ -1392,6 +1392,7 @@ GameObject:
   - component: {fileID: 893728063}
   - component: {fileID: 893728064}
   - component: {fileID: 893728065}
+  - component: {fileID: 893728066}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Untagged
@@ -1584,7 +1585,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   imager: {fileID: 618751000}
-  rangeIncrease: 2
+  rangeIncrease: 0.9
 --- !u!114 &893728065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1601,6 +1602,19 @@ MonoBehaviour:
   spriteRenderersList: []
   origColorArray: []
   tempColor: {r: 0, g: 1, b: 0, a: 1}
+--- !u!114 &893728066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 893728057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 803067f3d4100c74c8ff18ba48d08dc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thrusterForce: 0.9
 --- !u!1 &982981228
 GameObject:
   m_ObjectHideFlags: 0
