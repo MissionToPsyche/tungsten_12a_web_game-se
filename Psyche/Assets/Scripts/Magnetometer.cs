@@ -21,6 +21,11 @@ public class Magnetometer : MonoBehaviour {
         magEffect.SetActive(true);
         RaycastHit2D hit = new RaycastHit2D();
 
+        // used to play tool sound
+        AudioManager audioManager = GameObject
+            .FindGameObjectWithTag("AudioSources")
+            .GetComponent<AudioManager>();
+
         do
         {
             Vector2 endpoint;
@@ -76,6 +81,7 @@ public class Magnetometer : MonoBehaviour {
          */
         if (Input.GetButton("Fire1"))
         {
+            audioManager.PlayToolMagnetometer(); // play tool sound
             Vector2 pullDirection;
             if (Input.GetAxisRaw("Vertical") > 0)
                 pullDirection = new Vector2(transform.position.x, hit.transform.position.y);
@@ -92,6 +98,7 @@ public class Magnetometer : MonoBehaviour {
             pManage.playerCharacter.gravityScale = 1;
         }
 
+        audioManager.StopToolMagnetometer(); // stop tool sound
         magEffect.SetActive(false);
         pManage.magnetActive = false;
     }
