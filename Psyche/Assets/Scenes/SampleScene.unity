@@ -1584,7 +1584,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0
+  m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: 00000000c76f616629b0cada
@@ -1853,6 +1853,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea04863a151d3d34091cd4200de436ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioManager: {fileID: 0}
   sceneObjects: []
   spriteRenderersList: []
   origColorArray: []
@@ -2363,7 +2364,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 2f58887361048c741a153e242c6ed4dd, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -3661,7 +3662,7 @@ GameObject:
   - component: {fileID: 2023364577}
   m_Layer: 0
   m_Name: AudioSources
-  m_TagString: Untagged
+  m_TagString: AudioSources
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3835,7 +3836,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 0.25
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

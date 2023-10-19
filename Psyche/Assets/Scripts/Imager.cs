@@ -28,6 +28,11 @@ public class Imager : MonoBehaviour
                 imager.pointLightInnerRadius += rangeIncrease;
                 imager.pointLightOuterRadius += rangeIncrease;
                 Destroy(collision.gameObject);
+                //Plays tool sound
+                AudioManager audioManager = GameObject
+                    .FindGameObjectWithTag("AudioSources")
+                    .GetComponent<AudioManager>();
+                audioManager.PlayToolImager();
             }
         }
     }
