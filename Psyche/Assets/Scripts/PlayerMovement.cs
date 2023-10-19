@@ -17,5 +17,10 @@ public class PlayerMovement : MonoBehaviour
         //Vertical "jump" only if player is on the ground
         if (isGrounded && Input.GetButtonDown("Jump"))
             playerCharacter.velocity = new Vector2(playerCharacter.velocity.x, 7f);
+            //Plays jump sound
+            /**AudioManager audioManager = GameObject
+                .FindGameObjectWithTag("AudioSources")
+                .GetComponent<AudioManager>();
+            audioManager.PlayPlayerJump();**/
     }
 }
