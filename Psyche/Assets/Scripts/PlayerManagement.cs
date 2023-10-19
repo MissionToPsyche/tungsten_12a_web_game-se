@@ -1,12 +1,12 @@
 using UnityEngine;
 
-
 /// <summary>
 /// Player Management script controls how the player interacts with the system and various components.
 /// </summary>
 public class PlayerManagement : MonoBehaviour
 {
     //Create the playercharacter assignment
+    [Header("Components")]
     public Rigidbody2D playerCharacter;
 
     //Set up environmental checks
@@ -15,31 +15,24 @@ public class PlayerManagement : MonoBehaviour
     public LayerMask whatIsGround;
 
     //Booleans for environmental checks
-    public bool isGrounded;
+    [HideInInspector] public bool isGrounded;
 
     //Management scripts
-    private PlayerMovement playerMovement;
-    private Magnetometer magnetTool;
+    [Header("Scripts")]
+    public PlayerMovement playerMovement;
+    public UIController UICon; //handle with static/instance variable?
+    public Imager imager;
+    public Magnetometer magnetTool;
 
     //Booleans for the various tools
     private bool hasThrusters;
     private bool hasImager;
-    private bool hasMagnetometer = true; //temp assignment
+    private bool hasMagnetometer;
     private bool hasSpectrometer;
 
     //Booleans to prevent needless code runs
-    public bool magnetActive;
+    [HideInInspector] public bool magnetActive;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        //Assign the playerCharacter to its in-game object
-        playerCharacter = GetComponent<Rigidbody2D>(); 
-        playerMovement = GetComponent<PlayerMovement>();
-        magnetTool = GetComponent<Magnetometer>();
-    }
-
-    // Update is called once per frame
     void Update()
     {
         //Check booleans
@@ -47,19 +40,62 @@ public class PlayerManagement : MonoBehaviour
 
         //Handle movement
         playerMovement.handleMovement(playerCharacter, isGrounded);
-        
+
         //Call the requisite tool scripts here:
         //Thruster
-        if(hasThrusters && !isGrounded && Input.GetButton("Jump"))
-            return; //Thruster script call
+        if (hasThrusters && !isGrounded && Input.GetButton("Jump"))
+            {}//Thruster script call
         //Imager
         if (hasImager)
-            return; //Imager script call
+            {}//Imager script call
         //Spectrometer
         if (hasSpectrometer)
-            return; //Spectrometer script call
+            {}//Spectrometer script call
         //Magnometer
         if (hasMagnetometer && !magnetActive && Input.GetButton("Fire1"))
             StartCoroutine(magnetTool.handleMagnet());
+
+        //Inventory and Dialogue Box
+        if (Input.GetKeyDown("tab"))
+            UICon.handleUI();
+    }
+
+    /// <summary>
+    /// Activates tool when its pickup is collected
+    /// </summary>
+    /// <param name="toolName"></param>
+    public void toolPickedUp(string toolName)
+    {
+        switch (toolName)
+        {
+            case "Thruster":
+                hasThrusters = true;
+                UICon.setDialogueText("This is a Thruster");
+                UICon.enableThrusterButton();
+                break;
+
+            case "Imager":
+                hasImager = true;
+                UICon.setDialogueText("This is an Imager");
+                UICon.enableImagerButton();
+                imager.increaseVision();
+                break;
+
+            case "Spectrometer":
+                hasImager = true;
+                UICon.setDialogueText("This is a Spectrometer");
+                UICon.enableSpectrometerButton();
+                break;
+
+            case "Magnetometer":
+                hasMagnetometer = true;
+                UICon.setDialogueText("This is a Magnetometer");
+                UICon.enableMagnetometerButton();
+                break;
+
+            default:
+                Debug.LogWarning("Tool name '" + toolName + "' not found!");
+                break;
+        }
     }
 }
