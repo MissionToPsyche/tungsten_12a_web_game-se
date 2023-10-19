@@ -27,8 +27,6 @@ public class AudioManager : MonoBehaviour {
     // these keys are temporary until all tools are in the same branch
     // and can call AudioManger as we currently have now with Imager and GRS.
     void Update() {
-        if (Input.GetKeyDown(KeyCode.M)) { PlayToolMagnetometer(); }
-        if (Input.GetKeyUp(KeyCode.M)) { StopToolMagnetometer(); }
         if (Input.GetKeyDown(KeyCode.T)) { PlayToolThrusters(); }
         if (Input.GetKeyUp(KeyCode.T)) { StopToolThrusters(); }
         if (Input.GetKeyDown(KeyCode.Space)) { PlayPlayerJump(); }
