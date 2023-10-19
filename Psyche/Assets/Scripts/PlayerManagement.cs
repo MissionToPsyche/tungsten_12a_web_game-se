@@ -71,26 +71,26 @@ public class PlayerManagement : MonoBehaviour
             case "Thruster":
                 hasThrusters = true;
                 UICon.setDialogueText("This is a Thruster");
-                UICon.activateThrusterButton();
+                UICon.enableThrusterButton();
                 break;
 
             case "Imager":
                 hasImager = true;
                 UICon.setDialogueText("This is an Imager");
-                UICon.activateImagerButton();
+                UICon.enableImagerButton();
                 imager.increaseVision();
                 break;
 
             case "Spectrometer":
                 hasImager = true;
                 UICon.setDialogueText("This is a Spectrometer");
-                UICon.activateSpectrometerButton();
+                UICon.enableSpectrometerButton();
                 break;
 
             case "Magnetometer":
                 hasMagnetometer = true;
                 UICon.setDialogueText("This is a Magnetometer");
-                UICon.activateMagnetometerButton();
+                UICon.enableMagnetometerButton();
                 break;
 
             default:

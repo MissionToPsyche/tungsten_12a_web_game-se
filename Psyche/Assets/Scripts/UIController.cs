@@ -39,10 +39,10 @@ public class UIController : MonoBehaviour
         dialogueBox.SetActive(true);
     }
 
-    public void activateImagerButton() { imagerButton.SetActive(true); }
-    public void activateSpectrometerButton() { spectrometerButton.SetActive(true); }
-    public void activateMagnetometerButton() { magnetometerButton.SetActive(true); }
-    public void activateThrusterButton() { thrusterButton.SetActive(true); }
+    public void enableImagerButton() { imagerButton.SetActive(true); }
+    public void enableSpectrometerButton() { spectrometerButton.SetActive(true); }
+    public void enableMagnetometerButton() { magnetometerButton.SetActive(true); }
+    public void enableThrusterButton() { thrusterButton.SetActive(true); }
 
     /// <summary>
     /// Title Screen button functionality
