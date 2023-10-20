@@ -165,7 +165,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player_idle3
+      name: player_walk1
       rect:
         serializedVersion: 2
         x: 1
@@ -186,7 +186,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player_idle
+      name: player_walk2
       rect:
         serializedVersion: 2
         x: 28
@@ -207,7 +207,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player_idl
+      name: player_walk3
       rect:
         serializedVersion: 2
         x: 55
@@ -228,7 +228,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player_idle4
+      name: player_walk4
       rect:
         serializedVersion: 2
         x: 81
@@ -322,15 +322,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      player_idl: -123678276
-      player_idle: 415988983
       player_idle1: -144854916
       player_idle2: 268469979
-      player_idle3: -371118114
-      player_idle4: -2006989601
       player_jump: 1653057647
       player_thruster1: -1941387578
       player_thruster2: -1273232773
+      player_walk1: -371118114
+      player_walk2: 415988983
+      player_walk3: -123678276
+      player_walk4: -2006989601
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
