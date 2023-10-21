@@ -82,20 +82,34 @@ public class Magnetometer : MonoBehaviour {
         if (Input.GetButton("Fire1"))
         {
             audioManager.PlayToolMagnetometer(); // play tool sound
-            Vector2 pullDirection;
-            if (Input.GetAxisRaw("Vertical") > 0)
-                pullDirection = new Vector2(transform.position.x, hit.transform.position.y);
-            else
-                pullDirection = new Vector2(hit.transform.position.x, transform.position.y);
 
-            pManage.playerCharacter.gravityScale = 0;
-
-            while (Input.GetButton("Fire1")) {
-                pManage.playerCharacter.MovePosition(Vector2.MoveTowards(transform.position, pullDirection, Time.deltaTime * 40));
-                yield return null;
+            if (hit.rigidbody != null)
+            {
+                do
+                {
+                    if (pManage.isGrounded)
+                        hit.rigidbody.MovePosition(Vector2.MoveTowards(hit.transform.position, transform.position, Time.deltaTime * 40)); //stop from pushing player: set mass back to 1 when done?, remove ground check?
+                    yield return null;
+                } while (Input.GetButton("Fire1"));
             }
+            else
+            {
+                Vector2 pullDirection;
+                if (Input.GetAxisRaw("Vertical") > 0)
+                    pullDirection = new Vector2(transform.position.x, hit.transform.position.y);
+                else
+                    pullDirection = new Vector2(hit.transform.position.x, transform.position.y);
 
-            pManage.playerCharacter.gravityScale = 1;
+                pManage.playerCharacter.gravityScale = 0;
+
+                do
+                {
+                    pManage.playerCharacter.MovePosition(Vector2.MoveTowards(transform.position, pullDirection, Time.deltaTime * 40));
+                    yield return null;
+                } while (Input.GetButton("Fire1"));
+
+                pManage.playerCharacter.gravityScale = 1;
+            }
         }
 
         audioManager.StopToolMagnetometer(); // stop tool sound
