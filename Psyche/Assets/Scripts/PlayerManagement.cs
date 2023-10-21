@@ -55,8 +55,6 @@ public class PlayerManagement : MonoBehaviour
 
         //Call the requisite tool scripts here:
         //Thruster
-        if (hasThrusters && !isGrounded && Input.GetButton("Jump"))
-            {}//Thruster script call
         if (hasThrusters)
             thruster.activateThruster(playerCharacter);
         //Imager
