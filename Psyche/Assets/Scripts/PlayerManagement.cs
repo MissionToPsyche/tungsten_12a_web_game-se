@@ -23,6 +23,7 @@ public class PlayerManagement : MonoBehaviour
     public UIController UICon; //handle with static/instance variable?
     public Imager imager;
     public Magnetometer magnetTool;
+    private Thruster thruster;
 
     //Booleans for the various tools
     private bool hasThrusters;
@@ -32,6 +33,17 @@ public class PlayerManagement : MonoBehaviour
 
     //Booleans to prevent needless code runs
     [HideInInspector] public bool magnetActive;
+    // Start is called before the first frame update
+    void Start()
+    {
+        //Assign the playerCharacter to its in-game object
+        playerCharacter = GetComponent<Rigidbody2D>(); 
+        playerMovement = GetComponent<PlayerMovement>();
+        thruster = GetComponent<Thruster>();
+        
+        //Testing purposes
+        hasThrusters = true;
+    }
 
     void Update()
     {
@@ -43,8 +55,8 @@ public class PlayerManagement : MonoBehaviour
 
         //Call the requisite tool scripts here:
         //Thruster
-        if (hasThrusters && !isGrounded && Input.GetButton("Jump"))
-            {}//Thruster script call
+        if (hasThrusters)
+            thruster.activateThruster(playerCharacter);
         //Imager
         if (hasImager)
             {}//Imager script call
