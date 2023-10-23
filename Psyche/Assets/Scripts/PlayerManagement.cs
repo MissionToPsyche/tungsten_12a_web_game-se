@@ -8,6 +8,7 @@ public class PlayerManagement : MonoBehaviour
     //Create the playercharacter assignment
     [Header("Components")]
     public Rigidbody2D playerCharacter;
+    public static PlayerManagement Instance; //For persistence through scenes
 
     //Set up environmental checks
     public Transform groundCheck;
@@ -70,6 +71,23 @@ public class PlayerManagement : MonoBehaviour
         //Inventory and Dialogue Box
         if (Input.GetKeyDown("tab"))
             UICon.handleUI();
+    }
+
+    /// <summary>
+    /// When transitioning between scenes, ensures playerstate remains
+    /// </summary>
+    public void Awake()
+    {
+        //Use singleton to ensure no duplicates are created
+        if(Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     /// <summary>
