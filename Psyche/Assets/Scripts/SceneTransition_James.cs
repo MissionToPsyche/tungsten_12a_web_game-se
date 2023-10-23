@@ -4,14 +4,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// Handles the scene transition management for the SceneTransition_Joshua object
+/// Handles the scene transition management for the SceneTransition_James object
 /// </summary>
-public class SceneTransition_Joshua : MonoBehaviour
+public class SceneTransition_James : MonoBehaviour
 {
     // When the playercharacter enters the object's bounds, start the coroutine to check for transition rules
     private void OnTriggerStay2D(Collider2D other)
     {
-        if(other.tag == "Player")
+        if (other.tag == "Player")
         {
             StartCoroutine(CheckTransition());
         }
@@ -26,9 +26,10 @@ public class SceneTransition_Joshua : MonoBehaviour
         float verticalAxis = Input.GetAxis("Vertical");
 
         //If a positive vertical button is pressed (w or up), then transition
-        if(Input.GetButton("Vertical") && verticalAxis > 0)
+        if (Input.GetButton("Vertical") && verticalAxis > 0)
         {
-            SceneManager.LoadScene("DeveloperScene_Joshua");
+            SceneManager.LoadScene("DeveloperScene_James");
         }
     }
 }
+
