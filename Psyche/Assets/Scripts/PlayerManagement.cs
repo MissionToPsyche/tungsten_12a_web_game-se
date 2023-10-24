@@ -67,9 +67,9 @@ public class PlayerManagement : MonoBehaviour
             //Imager script call
         //Spectrometer
         if (hasSpectrometer && Input.GetKeyDown(KeyCode.G))
-            gammaView.ActivateGRS();
+            gammaView.ActivateGRS(audioManager);
         if (hasSpectrometer && Input.GetKeyUp(KeyCode.G))
-            gammaView.DeactivateGRS();
+            gammaView.DeactivateGRS(audioManager);
         //Magnetometer
         if (hasMagnetometer && !magnetActive && Input.GetButton("Fire1"))
             StartCoroutine(magnetTool.handleMagnet(audioManager));
