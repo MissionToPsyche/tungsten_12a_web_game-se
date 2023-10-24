@@ -248,28 +248,14 @@ GameObject:
   m_Component:
   - component: {fileID: 199293620}
   - component: {fileID: 199293619}
-  - component: {fileID: 199293618}
   - component: {fileID: 199293617}
-  - component: {fileID: 199293616}
   m_Layer: 0
   m_Name: SceneTransition_James
-  m_TagString: Untagged
+  m_TagString: TransitionObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &199293616
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 199293615}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2630622ab1d28c84bb5d0068f05a41dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &199293617
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -315,18 +301,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &199293618
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 199293615}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f091eab577011f479d1a30164fcefd9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &199293619
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -534,28 +508,14 @@ GameObject:
   m_Component:
   - component: {fileID: 288372236}
   - component: {fileID: 288372235}
-  - component: {fileID: 288372234}
   - component: {fileID: 288372233}
-  - component: {fileID: 288372232}
   m_Layer: 0
   m_Name: SceneTransition_Matt
-  m_TagString: Untagged
+  m_TagString: TransitionObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &288372232
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 288372231}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3776e8ba6203ed141b04a83a54e8d13d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &288372233
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -601,18 +561,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &288372234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 288372231}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f091eab577011f479d1a30164fcefd9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &288372235
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2504,11 +2452,10 @@ GameObject:
   m_Component:
   - component: {fileID: 838885259}
   - component: {fileID: 838885258}
-  - component: {fileID: 838885260}
   - component: {fileID: 838885261}
   m_Layer: 0
   m_Name: SceneTransition_Joshua
-  m_TagString: Untagged
+  m_TagString: TransitionObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2580,18 +2527,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &838885260
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 838885257}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ad72169c9c63ef42be9bc4dcf0cbb0a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &838885261
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2647,11 +2582,10 @@ GameObject:
   m_Component:
   - component: {fileID: 847893996}
   - component: {fileID: 847893995}
-  - component: {fileID: 847893994}
   - component: {fileID: 847893993}
   m_Layer: 0
   m_Name: SceneTransition_Bryant
-  m_TagString: Untagged
+  m_TagString: TransitionObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2701,18 +2635,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &847893994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 847893992}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f091eab577011f479d1a30164fcefd9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &847893995
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3409,6 +3331,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thrusterForce: 0.9
+--- !u!61 &1191445164
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1191445131}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.12}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 0.19, y: 0.24}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.19, y: 0.24}
+  m_EdgeRadius: 0
 --- !u!1 &1214452668
 GameObject:
   m_ObjectHideFlags: 0
@@ -4888,10 +4855,9 @@ GameObject:
   - component: {fileID: 1918557220}
   - component: {fileID: 1918557219}
   - component: {fileID: 1918557222}
-  - component: {fileID: 1918557221}
   m_Layer: 0
   m_Name: SceneTransition_Dhalia
-  m_TagString: Untagged
+  m_TagString: TransitionObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4963,18 +4929,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1918557221
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1918557218}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24e9150394f42b842806731e7bf5721b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &1918557222
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5648,6 +5602,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 82528849670660265, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1191445153}
+    - targetCorrespondingSourceObject: {fileID: 82528849670660265, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1191445164}
   m_SourcePrefab: {fileID: 100100000, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
