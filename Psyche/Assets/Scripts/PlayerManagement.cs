@@ -24,6 +24,7 @@ public class PlayerManagement : MonoBehaviour
     public Imager imager;
     public Magnetometer magnetTool;
     private Thruster thruster;
+    private AudioManager audioManager;
 
     //Booleans for the various tools
     private bool hasThrusters;
@@ -36,10 +37,13 @@ public class PlayerManagement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Assign the playerCharacter to its in-game object
+        //Assign the playerCharacter to its in-game objects
         playerCharacter = GetComponent<Rigidbody2D>(); 
         playerMovement = GetComponent<PlayerMovement>();
         thruster = GetComponent<Thruster>();
+        audioManager = GameObject
+            .FindGameObjectWithTag("AudioSources")
+            .GetComponent<AudioManager>();
         
         //Testing purposes
         hasThrusters = true;
@@ -51,7 +55,7 @@ public class PlayerManagement : MonoBehaviour
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
 
         //Handle movement
-        playerMovement.handleMovement(playerCharacter, isGrounded);
+        playerMovement.handleMovement(playerCharacter, isGrounded, audioManager);
 
         //Call the requisite tool scripts here:
         //Thruster
@@ -65,7 +69,7 @@ public class PlayerManagement : MonoBehaviour
             {}//Spectrometer script call
         //Magnometer
         if (hasMagnetometer && !magnetActive && Input.GetButton("Fire1"))
-            StartCoroutine(magnetTool.handleMagnet());
+            StartCoroutine(magnetTool.handleMagnet(audioManager));
 
         //Inventory and Dialogue Box
         if (Input.GetKeyDown("tab"))
@@ -90,7 +94,7 @@ public class PlayerManagement : MonoBehaviour
                 hasImager = true;
                 UICon.setDialogueText("This is an Imager");
                 UICon.enableImagerButton();
-                imager.increaseVision();
+                imager.increaseVision(audioManager);
                 break;
 
             case "Spectrometer":
