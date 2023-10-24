@@ -25,11 +25,10 @@ public class AudioManager : MonoBehaviour {
     [SerializeField] private AudioSource playerJump;
 
     // these keys are temporary until all tools are in the same branch
-    // and can call AudioManger as we currently have now with Imager and GRS.
+    // and can call AudioManger
     void Update() {
         if (Input.GetKeyDown(KeyCode.T)) { PlayToolThrusters(); }
         if (Input.GetKeyUp(KeyCode.T)) { StopToolThrusters(); }
-        if (Input.GetKeyDown(KeyCode.Space)) { PlayPlayerJump(); }
     }
 
     public void PlayToolGRS() {
