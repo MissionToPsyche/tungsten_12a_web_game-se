@@ -1,7 +1,8 @@
 using UnityEngine;
 
 /// <summary>
-/// Player Management script controls how the player interacts with the system and various components.
+/// Player Management script controls how the player interacts with the 
+/// system and various components.
 /// </summary>
 public class PlayerManagement : MonoBehaviour
 {
@@ -19,8 +20,9 @@ public class PlayerManagement : MonoBehaviour
 
     //Management scripts
     [Header("Scripts")]
+    public Battery battery;
     public PlayerMovement playerMovement;
-    public UIController UICon; //handle with static/instance variable?
+    public UIController UICon; 
     public Imager imager;
     public Magnetometer magnetTool;
     private Thruster thruster;
@@ -28,6 +30,7 @@ public class PlayerManagement : MonoBehaviour
     private AudioManager audioManager;
 
     //Booleans for the various tools
+    private bool batteryDrained;
     private bool hasImager;
     private bool hasMagnetometer;
     private bool hasThrusters;
@@ -35,6 +38,7 @@ public class PlayerManagement : MonoBehaviour
 
     //Booleans to prevent needless code runs
     [HideInInspector] public bool magnetActive;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +50,10 @@ public class PlayerManagement : MonoBehaviour
             .FindGameObjectWithTag("AudioSources")
             .GetComponent<AudioManager>();
         
+        //Set up initial battery
+        battery.batteryPercentage = 100;
+        battery.rate = 1;
+
         //Testing purposes
         hasThrusters = true;
     }
@@ -60,19 +68,27 @@ public class PlayerManagement : MonoBehaviour
 
         //Call the requisite tool scripts here:
         //Thruster
-        if (hasThrusters)
+        if (hasThrusters && Input.GetButton("Jump")) {
             thruster.activateThruster(playerCharacter);
+            battery.DrainBatt(1);
+        }
         //Imager
-        if (hasImager)
+        if (hasImager) {
             //Imager script call
+        }
         //Spectrometer
-        if (hasSpectrometer && Input.GetKeyDown(KeyCode.G))
+        if (hasSpectrometer && Input.GetKeyDown(KeyCode.G)) {
             gammaView.ActivateGRS(audioManager);
-        if (hasSpectrometer && Input.GetKeyUp(KeyCode.G))
+            battery.DrainBatt(500);
+        }
+        if (hasSpectrometer && Input.GetKeyUp(KeyCode.G)) {
             gammaView.DeactivateGRS(audioManager);
+        }
         //Magnetometer
-        if (hasMagnetometer && !magnetActive && Input.GetButton("Fire1"))
+        if (hasMagnetometer && !magnetActive && Input.GetButton("Fire1")) {
             StartCoroutine(magnetTool.handleMagnet(audioManager));
+            battery.DrainBatt(500);
+        }
 
         //Inventory and Dialogue Box
         if (Input.GetKeyDown("tab"))
@@ -98,6 +114,7 @@ public class PlayerManagement : MonoBehaviour
                 UICon.setDialogueText("This is an Imager");
                 UICon.enableImagerButton();
                 imager.increaseVision(audioManager);
+                battery.DrainBatt(500);
                 break;
 
             case "Spectrometer":
