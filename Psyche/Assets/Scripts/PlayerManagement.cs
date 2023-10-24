@@ -24,12 +24,13 @@ public class PlayerManagement : MonoBehaviour
     public Imager imager;
     public Magnetometer magnetTool;
     private Thruster thruster;
+    public GammaView gammaView;
     private AudioManager audioManager;
 
     //Booleans for the various tools
-    private bool hasThrusters;
     private bool hasImager;
     private bool hasMagnetometer;
+    private bool hasThrusters;
     private bool hasSpectrometer;
 
     //Booleans to prevent needless code runs
@@ -37,7 +38,7 @@ public class PlayerManagement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Assign the playerCharacter to its in-game objects
+        //Assign the playerCharacter to it in-game objects
         playerCharacter = GetComponent<Rigidbody2D>(); 
         playerMovement = GetComponent<PlayerMovement>();
         thruster = GetComponent<Thruster>();
@@ -63,11 +64,13 @@ public class PlayerManagement : MonoBehaviour
             thruster.activateThruster(playerCharacter);
         //Imager
         if (hasImager)
-            {}//Imager script call
+            //Imager script call
         //Spectrometer
-        if (hasSpectrometer)
-            {}//Spectrometer script call
-        //Magnometer
+        if (hasSpectrometer && Input.GetKeyDown(KeyCode.G))
+            gammaView.ActivateGRS();
+        if (hasSpectrometer && Input.GetKeyUp(KeyCode.G))
+            gammaView.DeactivateGRS();
+        //Magnetometer
         if (hasMagnetometer && !magnetActive && Input.GetButton("Fire1"))
             StartCoroutine(magnetTool.handleMagnet(audioManager));
 
@@ -98,7 +101,7 @@ public class PlayerManagement : MonoBehaviour
                 break;
 
             case "Spectrometer":
-                hasImager = true;
+                hasSpectrometer = true;
                 UICon.setDialogueText("This is a Spectrometer");
                 UICon.enableSpectrometerButton();
                 break;

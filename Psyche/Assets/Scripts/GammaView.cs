@@ -36,7 +36,7 @@ public class GammaView : MonoBehaviour {
     }
 
     // Update is called when keyboard keys are pressed
-    void Update() {
+    /**void Update() {
         // shows new color
         if (Input.GetKeyDown(KeyCode.G)) {
             for (int i = 0; i < spriteRenderersList.Count; i++) {
@@ -47,6 +47,32 @@ public class GammaView : MonoBehaviour {
             }
         }
 
+        // reverts to original color
+        if (Input.GetKeyUp(KeyCode.G)) {
+            for (int i = 0; i < spriteRenderersList.Count; i++) {
+                if (spriteRenderersList[i] != null) {
+                    spriteRenderersList[i].color = origColorArray[i];
+                    audioManager.StopToolGRS();
+                }
+            }
+        }
+    }**/
+
+    // fire gamma ray spectrometer
+    public void ActivateGRS() {
+        // shows new color
+        if (Input.GetKeyDown(KeyCode.G)) {
+            for (int i = 0; i < spriteRenderersList.Count; i++) {
+                if (spriteRenderersList[i] != null) {
+                    spriteRenderersList[i].color = LayerColor(spriteRenderersList[i].gameObject);
+                    audioManager.PlayToolGRS();
+                }
+            }
+        }
+    }
+
+    // stop fire gamma ray spectrometer
+    public void DeactivateGRS() {
         // reverts to original color
         if (Input.GetKeyUp(KeyCode.G)) {
             for (int i = 0; i < spriteRenderersList.Count; i++) {
