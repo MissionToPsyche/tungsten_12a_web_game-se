@@ -10,8 +10,6 @@ public class Thruster : MonoBehaviour
     public float thrusterForce = 0.9f;
     public void activateThruster(Rigidbody2D playerCharacter)
     {
-        if (Input.GetButton("Jump"))
-            playerCharacter.velocity += new Vector2(0f, thrusterForce * Time.deltaTime * 10f); 
+        playerCharacter.velocity += new Vector2(0f, thrusterForce * Time.deltaTime * 10f); 
     }
 }
- 
