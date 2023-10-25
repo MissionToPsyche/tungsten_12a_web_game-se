@@ -109,7 +109,7 @@ public class PlayerManagement : MonoBehaviour
             battery.DrainBatt(500);
         }
 
-        //Inventory and Dialogue Box
+        //Inventory and Dialog Box
         if (Input.GetKeyDown("tab"))
             UIController.Instance.handleUI();
     }
