@@ -7,10 +7,11 @@ using System.Collections;
 /// </summary>
 public class PlayerManagement : MonoBehaviour
 {
+    [HideInInspector] public static PlayerManagement Instance; //For persistence through scenes
+
     //Create the playercharacter assignment
     [Header("Components")]
     public Rigidbody2D playerCharacter;
-    public static PlayerManagement Instance; //For persistence through scenes
 
     //Set up environmental checks
     public Transform groundCheck;
@@ -23,10 +24,10 @@ public class PlayerManagement : MonoBehaviour
     //Management scripts
     [Header("Scripts")]
     public PlayerMovement playerMovement;
-    public UIController UICon; //handle with static/instance variable?
     public Imager imager;
     public Magnetometer magnetTool;
     private Thruster thruster;
+    public PlayerDeath deathCon;
 
     //Booleans for the various tools
     private bool hasThrusters;
@@ -36,6 +37,24 @@ public class PlayerManagement : MonoBehaviour
 
     //Booleans to prevent needless code runs
     [HideInInspector] public bool magnetActive;
+
+    /// <summary>
+    /// When transitioning between scenes, ensures playerstate remains
+    /// </summary>
+    public void Awake()
+    {
+        //Use singleton to ensure no duplicates are created
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,7 +62,8 @@ public class PlayerManagement : MonoBehaviour
         playerCharacter = GetComponent<Rigidbody2D>(); 
         playerMovement = GetComponent<PlayerMovement>();
         thruster = GetComponent<Thruster>();
-        
+        deathCon = GetComponent<PlayerDeath>();
+
         //Testing purposes
         hasThrusters = true;
     }
@@ -72,7 +92,7 @@ public class PlayerManagement : MonoBehaviour
 
         //Inventory and Dialogue Box
         if (Input.GetKeyDown("tab"))
-            UICon.handleUI();
+            UIController.Instance.handleUI();
     }
 
     /// <summary>
@@ -117,23 +137,6 @@ public class PlayerManagement : MonoBehaviour
     }
 
     /// <summary>
-    /// When transitioning between scenes, ensures playerstate remains
-    /// </summary>
-    public void Awake()
-    {
-        //Use singleton to ensure no duplicates are created
-        if(Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    /// <summary>
     /// Activates tool when its pickup is collected
     /// </summary>
     /// <param name="toolName"></param>
@@ -143,27 +146,27 @@ public class PlayerManagement : MonoBehaviour
         {
             case "Thruster":
                 hasThrusters = true;
-                UICon.setDialogueText("This is a Thruster");
-                UICon.enableThrusterButton();
+                UIController.Instance.setDialogText("This is a Thruster");
+                UIController.Instance.enableThrusterButton();
                 break;
 
             case "Imager":
                 hasImager = true;
-                UICon.setDialogueText("This is an Imager");
-                UICon.enableImagerButton();
+                UIController.Instance.setDialogText("This is an Imager");
+                UIController.Instance.enableImagerButton();
                 imager.increaseVision();
                 break;
 
             case "Spectrometer":
                 hasImager = true;
-                UICon.setDialogueText("This is a Spectrometer");
-                UICon.enableSpectrometerButton();
+                UIController.Instance.setDialogText("This is a Spectrometer");
+                UIController.Instance.enableSpectrometerButton();
                 break;
 
             case "Magnetometer":
                 hasMagnetometer = true;
-                UICon.setDialogueText("This is a Magnetometer");
-                UICon.enableMagnetometerButton();
+                UIController.Instance.setDialogText("This is a Magnetometer");
+                UIController.Instance.enableMagnetometerButton();
                 break;
 
             default:
