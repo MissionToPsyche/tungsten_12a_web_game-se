@@ -1,7 +1,7 @@
 /** 
 Description: spectrometer tool gamma view script
 Author: blopezro
-Version: 20231014
+Version: 20231023
 **/
 
 using System;
@@ -14,7 +14,6 @@ using UnityEngine;
 /// </summary>
 public class GammaView : MonoBehaviour {
 
-    public AudioManager audioManager;                // used to play tool sound
     public GameObject[] sceneObjects;                // holds all current game objects in the scene
     public List<SpriteRenderer> spriteRenderersList; // holds all sprite renderers of game objects
     public Color[] origColorArray;                   // holds original colors of the sprite renderers
@@ -22,7 +21,6 @@ public class GammaView : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        audioManager = GameObject.FindGameObjectWithTag("AudioSources").GetComponent<AudioManager>();
         sceneObjects = (GameObject[])UnityEngine.Object.FindObjectsOfType(typeof(GameObject));
         CaptureSpriteRenderers(sceneObjects);
 
@@ -35,8 +33,8 @@ public class GammaView : MonoBehaviour {
         }
     }
 
-    // Update is called when keyboard keys are pressed
-    void Update() {
+    // activates gamma ray spectrometer
+    public void ActivateGRS(AudioManager audioManager) {
         // shows new color
         if (Input.GetKeyDown(KeyCode.G)) {
             for (int i = 0; i < spriteRenderersList.Count; i++) {
@@ -46,7 +44,10 @@ public class GammaView : MonoBehaviour {
                 }
             }
         }
+    }
 
+    // deactivates gamma ray spectrometer
+    public void DeactivateGRS(AudioManager audioManager) {
         // reverts to original color
         if (Input.GetKeyUp(KeyCode.G)) {
             for (int i = 0; i < spriteRenderersList.Count; i++) {
