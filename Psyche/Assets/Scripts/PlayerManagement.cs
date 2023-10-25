@@ -3,7 +3,8 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 
 /// <summary>
-/// Player Management script controls how the player interacts with the system and various components.
+/// Player Management script controls how the player interacts with the 
+/// system and various components.
 /// </summary>
 public class PlayerManagement : MonoBehaviour
 {
@@ -23,16 +24,20 @@ public class PlayerManagement : MonoBehaviour
 
     //Management scripts
     [Header("Scripts")]
+    public Battery battery;
     public PlayerMovement playerMovement;
     public Imager imager;
     public Magnetometer magnetTool;
     private Thruster thruster;
+    public GammaView gammaView;
+    private AudioManager audioManager;
     public PlayerDeath deathCon;
 
     //Booleans for the various tools
-    private bool hasThrusters;
+    private bool batteryDrained;
     private bool hasImager;
     private bool hasMagnetometer;
+    private bool hasThrusters;
     private bool hasSpectrometer;
 
     //Booleans to prevent needless code runs
@@ -58,14 +63,18 @@ public class PlayerManagement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Assign the playerCharacter to its in-game object
+        //Assign the playerCharacter to it in-game objects
         playerCharacter = GetComponent<Rigidbody2D>(); 
         playerMovement = GetComponent<PlayerMovement>();
         thruster = GetComponent<Thruster>();
         deathCon = GetComponent<PlayerDeath>();
-
-        //Testing purposes
-        hasThrusters = true;
+        audioManager = GameObject
+            .FindGameObjectWithTag("AudioSources")
+            .GetComponent<AudioManager>();
+        
+        //Set up initial battery
+        battery.batteryPercentage = 100;
+        battery.rate = 1;
     }
 
     void Update()
@@ -74,21 +83,31 @@ public class PlayerManagement : MonoBehaviour
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
 
         //Handle movement
-        playerMovement.handleMovement(playerCharacter, isGrounded);
+        playerMovement.handleMovement(playerCharacter, isGrounded, audioManager);
 
         //Call the requisite tool scripts here:
         //Thruster
-        if (hasThrusters)
+        if (hasThrusters && Input.GetButton("Jump")) {
             thruster.activateThruster(playerCharacter);
+            battery.DrainBatt(1);
+        }
         //Imager
-        if (hasImager)
-            {}//Imager script call
+        if (hasImager) {
+            //Imager script call
+        }
         //Spectrometer
-        if (hasSpectrometer)
-            {}//Spectrometer script call
-        //Magnometer
-        if (hasMagnetometer && !magnetActive && Input.GetButton("Fire1"))
-            StartCoroutine(magnetTool.handleMagnet());
+        if (hasSpectrometer && Input.GetKeyDown(KeyCode.G)) {
+            gammaView.ActivateGRS(audioManager);
+            battery.DrainBatt(500);
+        }
+        if (hasSpectrometer && Input.GetKeyUp(KeyCode.G)) {
+            gammaView.DeactivateGRS(audioManager);
+        }
+        //Magnetometer
+        if (hasMagnetometer && !magnetActive && Input.GetButton("Fire1")) {
+            StartCoroutine(magnetTool.handleMagnet(audioManager));
+            battery.DrainBatt(500);
+        }
 
         //Inventory and Dialogue Box
         if (Input.GetKeyDown("tab"))
@@ -154,7 +173,8 @@ public class PlayerManagement : MonoBehaviour
                 hasImager = true;
                 UIController.Instance.setDialogText("This is an Imager");
                 UIController.Instance.enableImagerButton();
-                imager.increaseVision();
+                imager.increaseVision(audioManager);
+                battery.DrainBatt(500);
                 break;
 
             case "Spectrometer":

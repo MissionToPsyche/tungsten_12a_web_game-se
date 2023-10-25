@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     /// <param name="playerCharacter"></param>
     /// <param name="isGrounded"></param>
-    public void handleMovement(Rigidbody2D playerCharacter, bool isGrounded)
+    public void handleMovement(Rigidbody2D playerCharacter, bool isGrounded, AudioManager audioManager)
     {
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -65,11 +65,7 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded && Input.GetButtonDown("Jump"))
         {
             playerCharacter.velocity = new Vector2(playerCharacter.velocity.x, 7f);
-            //Plays jump sound
-            /**AudioManager audioManager = GameObject
-                .FindGameObjectWithTag("AudioSources")
-                .GetComponent<AudioManager>();
-            audioManager.PlayPlayerJump();**/
+            audioManager.PlayPlayerJump(); // play jump sound
         }
 
         //checks the direction the player is moving
