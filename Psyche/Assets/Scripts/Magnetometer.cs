@@ -15,16 +15,11 @@ public class Magnetometer : MonoBehaviour {
     /// Activates magnetometer tool
     /// </summary>
     /// <returns></returns>
-    public IEnumerator handleMagnet()
+    public IEnumerator handleMagnet(AudioManager audioManager)
     {
         pManage.magnetActive = true;
         magEffect.SetActive(true);
         RaycastHit2D hit = new RaycastHit2D();
-
-        // used to play tool sound
-        AudioManager audioManager = GameObject
-            .FindGameObjectWithTag("AudioSources")
-            .GetComponent<AudioManager>();
 
         do
         {
@@ -117,16 +112,3 @@ public class Magnetometer : MonoBehaviour {
         pManage.magnetActive = false;
     }
 }
-
-
-//**Experimental code**
-
-//Physics.OverlapBox(transform.root.position + transform.up + transform.right * 3, new Vector2(6,1), 0, 1 << 3, PreviewCondition.Both, 1, Color.green, Color.red);
-
-
-//Collider2D hit = Physics2D.OverlapBox(transform.position + transform.forward * 3, new Vector2(6, 0.5f), 0, 1 << 6);
-
-//if (hit != null)
-//{
-//    Debug.Log(hit.gameObject.name);
-//}
