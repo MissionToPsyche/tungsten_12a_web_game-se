@@ -27,6 +27,7 @@ public class PlayerManagement : MonoBehaviour
     public PlayerMovement playerMovement;
     public UIController UICon; 
     public Imager imager;
+    public ImagerCursor flashlight;
     public Magnetometer magnetTool;
     private Thruster thruster;
     public GammaView gammaView;
@@ -77,7 +78,7 @@ public class PlayerManagement : MonoBehaviour
         }
         //Imager
         if (hasImager) {
-            //Imager script call
+            //imager
         }
         //Spectrometer
         if (hasSpectrometer && Input.GetKeyDown(KeyCode.G)) {
@@ -174,7 +175,8 @@ public class PlayerManagement : MonoBehaviour
                 hasImager = true;
                 UICon.setDialogueText("This is an Imager");
                 UICon.enableImagerButton();
-                imager.increaseVision(audioManager);
+                //imager.increaseVision(audioManager);
+                flashlight.Update();
                 battery.DrainBatt(500);
                 break;
 

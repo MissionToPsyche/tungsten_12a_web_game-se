@@ -17,16 +17,21 @@ public class ImagerCursor : MonoBehaviour
     //Mouse cursor
     Vector3 cursorPoint;
     public float speed = 1f;
+    [SerializeField] private UnityEngine.Rendering.Universal.Light2D flashlight;
 
     //Make cursor invisible
     void Start()
     {
+        flashlight.intensity = 0f;
         Cursor.visible = false;
+        this.enabled = false;
     }
 
     //Follow cursor movement
-    void Update()
+    public void Update()
     {
+        this.enabled = true;
+        flashlight.intensity = 1f;
         cursorPoint = Input.mousePosition;
         cursorPoint.z = speed;
         transform.position = Camera.main.ScreenToWorldPoint(cursorPoint);
