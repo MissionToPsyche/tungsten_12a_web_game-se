@@ -1,7 +1,7 @@
 /** 
-Description: imager tool script
+Description: imager on player tool script
 Author: mcmyers4
-Version: 20231014
+Version: 20231024
 **/
 
 using System.Collections;
@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Imager tool script increases field of vision with every additional imager pick up.
+/// Imager tool script increases field of vision surrounding player with every additional imager pick up.
 /// </summary>
 public class Imager : MonoBehaviour
 {
