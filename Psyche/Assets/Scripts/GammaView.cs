@@ -19,6 +19,7 @@ public class GammaView : MonoBehaviour {
     public List<SpriteRenderer> spriteRenderersList; // holds all sprite renderers of game objects
     public Color[] origColorArray;                   // holds original colors of the sprite renderers
     public Color defaultColor = Color.green;         // default color of items when default layer is used
+    public bool colorBlindMode;                      // color blind mode
 
     // subscribes to the SceneManager.sceneLoaded event
     void Awake() {
@@ -47,6 +48,13 @@ public class GammaView : MonoBehaviour {
         // captures original colors of sprites
         for (int i = 0; i < spriteRenderersList.Count; i++) {
                 origColorArray[i] = spriteRenderersList[i].color;
+        }
+
+        // apply modifications to sprites when color blind mode is enabled
+        if (colorBlindMode) {
+            foreach (var spriteRenderer in spriteRenderersList) {
+                ApplyColorBlindModifications(spriteRenderer);
+            }
         }
     }
 
@@ -114,4 +122,10 @@ public class GammaView : MonoBehaviour {
         };
     }
 
+    // modifies sprite properties to assist with color blind players
+    void ApplyColorBlindModifications(SpriteRenderer spriteRenderer) {
+        // Apply modifications for color-blind mode, e.g., patterns, outlines, etc.
+        // Modify spriteRenderer properties here to enhance visibility for color-blind users.
+        // Example: spriteRenderer.spriteOutline.enabled = true;
+    }
 }
