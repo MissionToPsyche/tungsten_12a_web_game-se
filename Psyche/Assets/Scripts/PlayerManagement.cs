@@ -52,10 +52,12 @@ public class PlayerManagement : MonoBehaviour
         audioManager = GameObject
             .FindGameObjectWithTag("AudioSources")
             .GetComponent<AudioManager>();
+        DontDestroyOnLoad(audioManager);
         
         //Set up initial battery
         battery.batteryPercentage = 100;
         battery.rate = 1;
+        DontDestroyOnLoad(battery);
 
         //Testing purposes
         hasThrusters = true;
