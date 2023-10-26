@@ -1,12 +1,13 @@
 /** 
 Description: spectrometer tool gamma view script
 Author: blopezro
-Version: 20231023
+Version: 20231025
 **/
 
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Gamma View script which captures all sprites of the game objects within the scene
@@ -17,10 +18,26 @@ public class GammaView : MonoBehaviour {
     public GameObject[] sceneObjects;                // holds all current game objects in the scene
     public List<SpriteRenderer> spriteRenderersList; // holds all sprite renderers of game objects
     public Color[] origColorArray;                   // holds original colors of the sprite renderers
-    public Color tempColor = Color.green;            // testing / default color
+    public Color defaultColor = Color.green;         // default color of items when default layer is used
 
-    // Start is called before the first frame update
-    void Start() {
+    // subscribes to the SceneManager.sceneLoaded event
+    void Awake() {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    // unsubscribes from event to prevent memory loss
+    void OnDestroy() {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    // runs each time a new scene is loaded
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+        // clears and empties out items before use in the scene
+        sceneObjects = new GameObject[0];
+        spriteRenderersList.Clear();
+        origColorArray = new Color[0];
+        Debug.Log("Reloaded needed data for GRS");
+
         sceneObjects = (GameObject[])UnityEngine.Object.FindObjectsOfType(typeof(GameObject));
         CaptureSpriteRenderers(sceneObjects);
 
@@ -93,7 +110,7 @@ public class GammaView : MonoBehaviour {
             18 => Color.cyan,// Silicon
             19 => Color.blue,// Hydrogen
             20 => Color.black,// Carbon
-            _ => tempColor,
+            _ => defaultColor,
         };
     }
 
