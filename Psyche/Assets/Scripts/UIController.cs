@@ -46,8 +46,10 @@ public class UIController : MonoBehaviour
             dialogBox.SetActive(false);
         else
         {
-            Cursor.visible = !inventoryBox.activeInHierarchy;
-            inventoryBox.SetActive(!inventoryBox.activeInHierarchy);
+            bool invToggle = !inventoryBox.activeInHierarchy;
+            PlayerManagement.Instance.inputBlocked = invToggle;
+            Cursor.visible = invToggle;
+            inventoryBox.SetActive(invToggle);
         }
     }
 
@@ -65,26 +67,6 @@ public class UIController : MonoBehaviour
     public void enableSpectrometerButton() { spectrometerButton.SetActive(true); }
     public void enableMagnetometerButton() { magnetometerButton.SetActive(true); }
     public void enableThrusterButton() { thrusterButton.SetActive(true); }
-
-    /// <summary>
-    /// Respawn button functionality. 
-    /// </summary>
-    public void checkpointWarp()
-    {
-        inventoryBox.SetActive(false);
-        PlayerManagement.Instance.deathCon.Die();
-    }
-
-    /// <summary>
-    /// Title Screen button functionality. Destroys Player and UI so they don't spawn on the title screen
-    /// </summary>
-    public void quitGame()
-    {
-        Destroy(PlayerManagement.Instance.gameObject);
-        Destroy(gameObject);
-        Cursor.visible = true;
-        SceneManager.LoadScene("Title_Screen");
-    }
 
     private bool shouldRespawn;
 
@@ -117,6 +99,7 @@ public class UIController : MonoBehaviour
         {
             confirmBoxText.transform.parent.gameObject.SetActive(false);
             inventoryBox.SetActive(false);
+            PlayerManagement.Instance.inputBlocked = false;
             PlayerManagement.Instance.deathCon.Die();
         }
         ///If Title Screen button opened the Confirmation Box
