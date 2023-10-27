@@ -1,13 +1,14 @@
 /** 
 Description: spectrometer tool gamma view script
 Author: blopezro
-Version: 20231025
+Version: 20231026
 **/
 
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 /// <summary>
 /// Gamma View script which captures all sprites of the game objects within the scene
@@ -102,30 +103,53 @@ public class GammaView : MonoBehaviour {
     Color LayerColor(GameObject obj) {
         return obj.layer switch {
             // User Layers within Unity are 3 and 6-31
-            3 => Color.black,// Terrain
-            6 => Color.grey,// Rock
-            7 => Color.gray,// Metal
-            8 => Color.magenta,// Crystal
-            9 => Color.green,// Grass
-            10 => Color.blue,// FloatingPlatform
-            11 => Color.green,// Background
-            12 => Color.blue,// Lifeform
-            13 => Color.clear,// Clear
-            14 => Color.red,// Iron
-            15 => Color.blue,// Nickel
-            16 => Color.yellow,// Sulfur
-            17 => Color.white,// Oxygen
-            18 => Color.cyan,// Silicon
-            19 => Color.blue,// Hydrogen
-            20 => Color.black,// Carbon
+            3 =>  Color.black,  // Terrain
+            6 =>  Color.grey,   // Rock
+            7 =>  Color.grey,   // Metal
+            8 =>  Color.magenta,// Crystal
+            9 =>  Color.green,  // Grass
+            10 => Color.blue,   // FloatingPlatform
+            11 => Color.green,  // Background
+            12 => Color.blue,   // Lifeform
+            13 => Color.clear,  // Clear
+            14 => Color.grey,   // Iron
+            15 => Color.grey,   // Nickel
+            16 => Color.yellow, // Sulfur
+            17 => Color.white,  // Oxygen
+            18 => Color.cyan,   // Silicon
+            19 => Color.blue,   // Hydrogen
+            20 => Color.black,  // Carbon
             _ => defaultColor,
         };
     }
 
-    // modifies sprite properties to assist with color blind players
+    /** BELOW IN WORK **/
+
+    // modifies game object properties to assist with color blind players
     void ApplyColorBlindModifications(SpriteRenderer spriteRenderer) {
-        // Apply modifications for color-blind mode, e.g., patterns, outlines, etc.
-        // Modify spriteRenderer properties here to enhance visibility for color-blind users.
-        // Example: spriteRenderer.spriteOutline.enabled = true;
+        // gets the game object of the current sprite renderer
+        GameObject gameObject = spriteRenderer.gameObject;
+
+        int displayNumber = gameObject.layer;
+
+        // adds text component to game object
+        Text textComponent = gameObject.AddComponent<Text>();
+
+        // sets properties of textComponent
+        textComponent.text = displayNumber.ToString();
+        textComponent.font = Resources.GetBuiltinResource<Font>("LegacyRuntime");
+        textComponent.fontSize = 24;
+        textComponent.alignment = TextAnchor.MiddleCenter;
+        textComponent.color = Color.white;
+
+        // ensures the GameObject has a RectTransform component to position the text in the center
+        RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
+        if (rectTransform == null) {
+            rectTransform = gameObject.AddComponent<RectTransform>();
+        }
+
+        // sets the text position to the center of the GameObject
+        rectTransform.sizeDelta = new Vector2(200, 50); // sets the size of the text box
+        rectTransform.localPosition = Vector3.zero; // centers the text in the GameObject
     }
 }
