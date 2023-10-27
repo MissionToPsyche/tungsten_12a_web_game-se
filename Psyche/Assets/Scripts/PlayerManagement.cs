@@ -71,16 +71,12 @@ public class PlayerManagement : MonoBehaviour
 
         //Call the requisite tool scripts here:
         //Thruster
-        if (hasThrusters && Input.GetButton("Jump")) {
+        if (hasThrusters && Input.GetButton("Jump") && battery.batteryPercentage != 0) {
             thruster.activateThruster(playerCharacter);
             battery.DrainBatt(1);
         }
-        //Imager
-        if (hasImager) {
-            //Imager script call
-        }
         //Spectrometer
-        if (hasSpectrometer && Input.GetKeyDown(KeyCode.G)) {
+        if (hasSpectrometer && Input.GetKeyDown(KeyCode.G) && battery.batteryPercentage != 0) {
             gammaView.ActivateGRS(audioManager);
             battery.DrainBatt(500);
         }
@@ -88,7 +84,7 @@ public class PlayerManagement : MonoBehaviour
             gammaView.DeactivateGRS(audioManager);
         }
         //Magnetometer
-        if (hasMagnetometer && !magnetActive && Input.GetButton("Fire1")) {
+        if (hasMagnetometer && !magnetActive && Input.GetButton("Fire1") && battery.batteryPercentage != 0) {
             StartCoroutine(magnetTool.handleMagnet(audioManager));
             battery.DrainBatt(500);
         }
