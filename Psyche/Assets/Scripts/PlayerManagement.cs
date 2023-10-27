@@ -31,6 +31,7 @@ public class PlayerManagement : MonoBehaviour
     private Thruster thruster;
     public GammaView gammaView;
     private AudioManager audioManager;
+    private SceneTransition sceneTransition;
 
     //Booleans for the various tools
     private bool batteryDrained;
@@ -52,6 +53,7 @@ public class PlayerManagement : MonoBehaviour
         audioManager = GameObject
             .FindGameObjectWithTag("AudioSources")
             .GetComponent<AudioManager>();
+        sceneTransition = GetComponent<SceneTransition>();
         
         //Set up initial battery
         battery.batteryPercentage = 100;
@@ -106,36 +108,7 @@ public class PlayerManagement : MonoBehaviour
     {
         if (other.tag == "TransitionObject")
         {
-            StartCoroutine(CheckTransition(other.name));
-        }
-    }
-
-    /// <summary>
-    /// Transitions the player to the respective scene if the necessary parameters are met
-    /// </summary>
-    /// <param name="name"></param>
-    /// <returns></returns>
-    IEnumerator CheckTransition(string name)
-    {
-        //Polling rate
-        yield return new WaitForSeconds(0.1f);
-
-        //Get the axis (positive or negative) for vertical buttons
-        float verticalAxis = Input.GetAxis("Vertical");
-
-        //If a positive vertical button is pressed (w or up), then transition
-        if (Input.GetButton("Vertical") && verticalAxis > 0)
-        {
-            if(name == "SceneTransition_Joshua")
-                SceneManager.LoadScene("DeveloperScene_Joshua");
-            if (name == "SceneTransition_Dhalia")
-                SceneManager.LoadScene("DeveloperScene_Dhalia");
-            if (name == "SceneTransition_Bryant")
-                SceneManager.LoadScene("DeveloperScene_Bryant");
-            if (name == "SceneTransition_Matt")
-                SceneManager.LoadScene("DeveloperScene_Matt");
-            if (name == "SceneTransition_James")
-                SceneManager.LoadScene("DeveloperScene_James");
+            StartCoroutine(sceneTransition.CheckTransition(other.name));
         }
     }
 
