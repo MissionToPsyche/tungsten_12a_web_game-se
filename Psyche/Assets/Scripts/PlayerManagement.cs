@@ -38,6 +38,7 @@ public class PlayerManagement : MonoBehaviour
     private bool hasMagnetometer;
     private bool hasThrusters;
     private bool hasSpectrometer;
+    private bool usingThruster;
 
     //Booleans to prevent needless code runs
     [HideInInspector] public bool magnetActive;
@@ -65,15 +66,14 @@ public class PlayerManagement : MonoBehaviour
     {
         //Check booleans
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
-
-        //Handle movement
-        playerMovement.handleMovement(playerCharacter, isGrounded, audioManager);
+        usingThruster = false; //for animation purposes. shouldn't affect continuous animation
 
         //Call the requisite tool scripts here:
         //Thruster
         if (hasThrusters && Input.GetButton("Jump")) {
             thruster.activateThruster(playerCharacter);
             battery.DrainBatt(1);
+            usingThruster = true;
         }
         //Imager
         if (hasImager) {
@@ -92,6 +92,9 @@ public class PlayerManagement : MonoBehaviour
             StartCoroutine(magnetTool.handleMagnet(audioManager));
             battery.DrainBatt(500);
         }
+
+        //Handle movement
+        playerMovement.handleMovement(playerCharacter, isGrounded, audioManager, usingThruster);
 
         //Inventory and Dialogue Box
         if (Input.GetKeyDown("tab"))
