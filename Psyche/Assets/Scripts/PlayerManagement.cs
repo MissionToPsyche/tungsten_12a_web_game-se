@@ -54,6 +54,7 @@ public class PlayerManagement : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(flashlight);
         }
         else
         {
@@ -95,8 +96,9 @@ public class PlayerManagement : MonoBehaviour
                 battery.DrainBatt(1);
             }
             //ImagerExpander
-            if (hasImager) {
+            if (hasImager && flashlight != null) {
                 //ImagerExpander script call
+                flashlight.Update();
             }
             //Spectrometer
             if (hasSpectrometer && Input.GetKeyDown(KeyCode.G)) {
@@ -177,12 +179,15 @@ public class PlayerManagement : MonoBehaviour
                 hasImager = true;
                 UIController.Instance.setDialogText("This is an Imager");
                 UIController.Instance.enableImagerButton();
-                flashlight.Update();
-                battery.DrainBatt(500);
+                if (flashlight != null)
+                {
+                    flashlight.Update();
+                    //battery.DrainBatt(500);
+                }
                 break;
 
             case "Spectrometer":
-                hasImager = true;
+                hasSpectrometer = true;
                 UIController.Instance.setDialogText("This is a Spectrometer");
                 UIController.Instance.enableSpectrometerButton();
                 break;

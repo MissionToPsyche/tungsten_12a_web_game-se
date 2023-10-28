@@ -35,7 +35,7 @@ public class ImagerExpander : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Imager"))
         {
-            if (flashlight.intensity > 0)
+            if (flashlight != null && flashlight.intensity > 0)
             {
                 playerlight.pointLightInnerRadius += rangeIncrease;
                 playerlight.pointLightOuterRadius += rangeIncrease;
