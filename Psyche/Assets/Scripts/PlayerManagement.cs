@@ -91,6 +91,7 @@ public class PlayerManagement : MonoBehaviour
         {
             //Handle movement
             playerMovement.handleMovement(playerCharacter, isGrounded, audioManager);
+        }
 
         //Call the requisite tool scripts here:
         //Thruster
@@ -181,15 +182,15 @@ public class PlayerManagement : MonoBehaviour
                 break;
 
             case "Spectrometer":
-                hasImager = true;
+                hasSpectrometer = true;
                 UIController.Instance.setDialogText("This is a Spectrometer");
                 UIController.Instance.enableSpectrometerButton();
                 break;
 
             case "Magnetometer":
                 hasMagnetometer = true;
-                UICon.setDialogueText("This is a Magnetometer");
-                UICon.enableMagnetometerButton();
+                UIController.Instance.setDialogText("This is a Magnetometer");
+                UIController.Instance.enableMagnetometerButton();
                 break;
 
             case "Battery":
