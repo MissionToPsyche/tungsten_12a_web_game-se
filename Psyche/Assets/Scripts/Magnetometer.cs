@@ -6,7 +6,7 @@ using UnityEngine;
 /// </summary>
 /// Author: jmolive8
 public class Magnetometer : MonoBehaviour {
-    public PlayerManagement pManage;
+    public PlayerManagement pManage; //use instance referance
     public GameObject magEffect;
 
     private int magRange = 6;
