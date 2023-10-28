@@ -14,8 +14,7 @@ public class PickupableTool : MonoBehaviour {
     /// <param name="other"></param>
     private void OnTriggerEnter2D(Collider2D other)
     {
-        //Grabs PlayerManagement manually to help minimize setup for new tool pickups
-        other.GetComponent<PlayerManagement>().toolPickedUp(toolName);
+        PlayerManagement.Instance.toolPickedUp(toolName);
         Destroy(gameObject);
     }
 }
