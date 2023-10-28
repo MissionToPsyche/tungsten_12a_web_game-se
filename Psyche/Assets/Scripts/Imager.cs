@@ -1,5 +1,5 @@
 /** 
-Description: imager on player tool script
+Description: imager on cursor tool script
 Author: mcmyers4
 Version: 20231024
 **/
@@ -7,24 +7,33 @@ Version: 20231024
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
-/// Imager tool script increases field of vision surrounding player with every additional imager pick up.
+/// ImagerExpander tool script increases field of vision surrounding mouse cursor with every additional imager pick up.
 /// </summary>
 public class Imager : MonoBehaviour
 {
-    //The player's imager which is being increased
-    [SerializeField] private UnityEngine.Rendering.Universal.Light2D imager;
-    //The amount to increase the vision field
-    [SerializeField] private float rangeIncrease = 2f;
+    //Mouse cursor
+    Vector3 cursorPoint;
+    public float speed = 1f;
+    [SerializeField] private UnityEngine.Rendering.Universal.Light2D flashlight;
 
-    /// <summary>
-    /// Increases size of vision
-    /// </summary>
-    public void increaseVision(AudioManager audioManager)
+    //Make cursor invisible
+    void Start()
     {
-        imager.pointLightInnerRadius += rangeIncrease;
-        imager.pointLightOuterRadius += rangeIncrease;
-        audioManager.PlayToolImager(); // play tool sound
+        flashlight.intensity = 0f;
+        Cursor.visible = false;
+        this.enabled = false;
+    }
+
+    //Follow cursor movement
+    public void Update()
+    {
+        this.enabled = true;
+        flashlight.intensity = 1f;
+        cursorPoint = Input.mousePosition;
+        cursorPoint.z = speed;
+        transform.position = Camera.main.ScreenToWorldPoint(cursorPoint);
     }
 }
