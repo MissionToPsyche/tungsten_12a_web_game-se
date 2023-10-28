@@ -1,7 +1,7 @@
 /** 
 Description: imager tool script
 Author: mcmyers4
-Version: 20231014
+Version: 20231028
 **/
 
 using System.Collections;
@@ -26,5 +26,21 @@ public class Imager : MonoBehaviour
         imager.pointLightInnerRadius += rangeIncrease;
         imager.pointLightOuterRadius += rangeIncrease;
         audioManager.PlayToolImager(); // play tool sound
+    }
+
+    /// <summary>
+    /// Turns off light
+    /// </summary>
+    public void turnOff()
+    {
+        imager.intensity = 0;
+    }
+
+    /// <summary>
+    /// Turns on light
+    /// </summary>
+    public void turnOn()
+    {
+        imager.intensity = 1;
     }
 }

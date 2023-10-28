@@ -33,7 +33,6 @@ public class PlayerManagement : MonoBehaviour
     private AudioManager audioManager;
 
     //Booleans for the various tools
-    private bool batteryDrained;
     private bool hasImager;
     private bool hasMagnetometer;
     private bool hasThrusters;
@@ -66,6 +65,11 @@ public class PlayerManagement : MonoBehaviour
     {
         //Check booleans
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
+        if (battery.batteryDrained) {
+            imager.turnOff();
+        } else {
+            imager.turnOn();
+        }
 
         //Handle movement
         playerMovement.handleMovement(playerCharacter, isGrounded, audioManager);
