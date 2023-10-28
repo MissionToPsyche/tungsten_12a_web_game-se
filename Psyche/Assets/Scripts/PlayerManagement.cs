@@ -52,6 +52,7 @@ public class PlayerManagement : MonoBehaviour
         audioManager = GameObject
             .FindGameObjectWithTag("AudioSources")
             .GetComponent<AudioManager>();
+        DontDestroyOnLoad(audioManager);    
         
         //Set up initial battery
         battery.batteryPercentage = 100;
@@ -187,8 +188,8 @@ public class PlayerManagement : MonoBehaviour
                 break;
 
             case "Battery":
-                Debug.Log("Battery percentage increase.");
-                battery.batteryPercentage += 10;
+                Debug.Log("Battery charge!");
+                battery.ChargeBatt(500);
                 break;    
 
             default:
