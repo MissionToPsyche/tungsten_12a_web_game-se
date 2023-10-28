@@ -34,7 +34,6 @@ public class PlayerManagement : MonoBehaviour
     public PlayerDeath deathCon;
 
     //Booleans for the various tools
-    private bool batteryDrained;
     private bool hasImager;
     private bool hasMagnetometer;
     private bool hasThrusters;
@@ -71,6 +70,7 @@ public class PlayerManagement : MonoBehaviour
         audioManager = GameObject
             .FindGameObjectWithTag("AudioSources")
             .GetComponent<AudioManager>();
+        DontDestroyOnLoad(audioManager);    
         
         //Set up initial battery
         battery.batteryPercentage = 100;
@@ -81,35 +81,36 @@ public class PlayerManagement : MonoBehaviour
     {
         //Check booleans
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
+        if (battery.batteryDrained) {
+            imager.turnOff();
+        } else {
+            imager.turnOn();
+        }
 
         if (!inputBlocked)
         {
             //Handle movement
             playerMovement.handleMovement(playerCharacter, isGrounded, audioManager);
+        }
 
-            //Call the requisite tool scripts here:
-            //Thruster
-            if (hasThrusters && Input.GetButton("Jump")) {
-                thruster.activateThruster(playerCharacter);
-                battery.DrainBatt(1);
-            }
-            //Imager
-            if (hasImager) {
-                //Imager script call
-            }
-            //Spectrometer
-            if (hasSpectrometer && Input.GetKeyDown(KeyCode.G)) {
-                gammaView.ActivateGRS(audioManager);
-                battery.DrainBatt(500);
-            }
-            if (hasSpectrometer && Input.GetKeyUp(KeyCode.G)) {
-                gammaView.DeactivateGRS(audioManager);
-            }
-            //Magnetometer
-            if (hasMagnetometer && !magnetActive && Input.GetButton("Fire1")) {
-                StartCoroutine(magnetTool.handleMagnet(audioManager));
-                battery.DrainBatt(500);
-            }
+        //Call the requisite tool scripts here:
+        //Thruster
+        if (hasThrusters && Input.GetButton("Jump") && battery.batteryPercentage != 0) {
+            thruster.activateThruster(playerCharacter);
+            battery.DrainBatt(1);
+        }
+        //Spectrometer
+        if (hasSpectrometer && Input.GetKeyDown(KeyCode.G) && battery.batteryPercentage != 0) {
+            gammaView.ActivateGRS(audioManager);
+            battery.DrainBatt(500);
+        }
+        if (hasSpectrometer && Input.GetKeyUp(KeyCode.G)) {
+            gammaView.DeactivateGRS(audioManager);
+        }
+        //Magnetometer
+        if (hasMagnetometer && !magnetActive && Input.GetButton("Fire1") && battery.batteryPercentage != 0) {
+            StartCoroutine(magnetTool.handleMagnet(audioManager));
+            battery.DrainBatt(500);
         }
 
         //Inventory and Dialog Box
@@ -181,7 +182,7 @@ public class PlayerManagement : MonoBehaviour
                 break;
 
             case "Spectrometer":
-                hasImager = true;
+                hasSpectrometer = true;
                 UIController.Instance.setDialogText("This is a Spectrometer");
                 UIController.Instance.enableSpectrometerButton();
                 break;
@@ -191,6 +192,11 @@ public class PlayerManagement : MonoBehaviour
                 UIController.Instance.setDialogText("This is a Magnetometer");
                 UIController.Instance.enableMagnetometerButton();
                 break;
+
+            case "Battery":
+                Debug.Log("Battery charge!");
+                battery.ChargeBatt(500);
+                break;    
 
             default:
                 Debug.LogWarning("Tool name '" + toolName + "' not found!");
