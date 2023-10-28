@@ -190,6 +190,11 @@ public class PlayerManagement : MonoBehaviour
                 UICon.enableMagnetometerButton();
                 break;
 
+            case "Battery":
+                Debug.Log("Battery percentage increase.");
+                battery.batteryPercentage += 10;
+                break;    
+
             default:
                 Debug.LogWarning("Tool name '" + toolName + "' not found!");
                 break;
