@@ -196,6 +196,7 @@ MonoBehaviour:
   gammaView: {fileID: 4691425001880923315}
   deathCon: {fileID: 0}
   magnetActive: 0
+  inputBlocked: 0
 --- !u!114 &7454889652593822882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -451,8 +452,8 @@ Transform:
   m_GameObject: {fileID: 2155109396161933314}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3, y: 0, z: 0}
-  m_LocalScale: {x: 6, y: 0.5, z: 1}
+  m_LocalPosition: {x: 0.75, y: 0, z: 0}
+  m_LocalScale: {x: 1.5, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3475574913144299634}
@@ -565,7 +566,7 @@ Transform:
   m_GameObject: {fileID: 6830663132286641818}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
