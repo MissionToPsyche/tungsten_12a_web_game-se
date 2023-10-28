@@ -68,8 +68,9 @@ public class UIController : MonoBehaviour
     public void enableMagnetometerButton() { magnetometerButton.SetActive(true); }
     public void enableThrusterButton() { thrusterButton.SetActive(true); }
 
-    private bool shouldRespawn;
+    public void openMagnetometerLink() { Application.OpenURL("https://psyche.asu.edu/gallery/meet-nasas-psyche-team-who-will-measure-the-asteroids-magnetic-field/"); }
 
+    private bool shouldRespawn;
     /// <summary>
     /// When Respawn/Title Screen button is clicked activates Confirmation Box and sets behavior for Yes button
     /// </summary>
