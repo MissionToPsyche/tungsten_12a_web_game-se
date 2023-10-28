@@ -1,7 +1,7 @@
 /** 
 Description: imager on cursor tool script
 Author: mcmyers4
-Version: 20231024
+Version: 20231027
 **/
 
 using System.Collections;
@@ -10,7 +10,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// ImagerExpander tool script increases field of vision surrounding mouse cursor with every additional imager pick up.
+/// Imager tool script which gives the player a flashlight feature controlled by the mouse cursor.
 /// </summary>
 public class Imager : MonoBehaviour
 {
