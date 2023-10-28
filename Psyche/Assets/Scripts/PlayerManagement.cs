@@ -181,7 +181,7 @@ public class PlayerManagement : MonoBehaviour
                 break;
 
             case "Spectrometer":
-                hasImager = true;
+                hasSpectrometer = true;
                 UIController.Instance.setDialogText("This is a Spectrometer");
                 UIController.Instance.enableSpectrometerButton();
                 break;
