@@ -38,6 +38,7 @@ public class PlayerManagement : MonoBehaviour
     private bool hasMagnetometer;
     private bool hasThrusters;
     private bool hasSpectrometer;
+    private bool usingThruster; //for animation purposes
 
     //Booleans to prevent needless code runs
     [HideInInspector] public bool magnetActive, inputBlocked;
@@ -87,16 +88,13 @@ public class PlayerManagement : MonoBehaviour
             imager.turnOn();
         }
 
-        if (!inputBlocked)
-        {
-            //Handle movement
-            playerMovement.handleMovement(playerCharacter, isGrounded, audioManager);
-        }
+        usingThruster = false; //default
 
         //Call the requisite tool scripts here:
         //Thruster
         if (hasThrusters && Input.GetButton("Jump") && battery.batteryPercentage != 0) {
             thruster.activateThruster(playerCharacter);
+            usingThruster = true;
             battery.DrainBatt(1);
         }
         //Spectrometer
@@ -111,6 +109,12 @@ public class PlayerManagement : MonoBehaviour
         if (hasMagnetometer && !magnetActive && Input.GetButton("Fire1") && battery.batteryPercentage != 0) {
             StartCoroutine(magnetTool.handleMagnet(audioManager));
             battery.DrainBatt(500);
+        }
+
+        if (!inputBlocked)
+        {
+            //Handle movement
+            playerMovement.handleMovement(playerCharacter, isGrounded, audioManager, usingThruster);
         }
 
         //Inventory and Dialog Box
