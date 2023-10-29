@@ -187,7 +187,7 @@ MonoBehaviour:
   groundCheckRadius: 0.2
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 16392
   isGrounded: 0
   battery: {fileID: 0}
   playerMovement: {fileID: 7454889652593822882}
@@ -251,8 +251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8206ff74d192b874187abf217bf57ec9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pManage: {fileID: 7911676450372591580}
-  magEffect: {fileID: 6830663132286641818}
+  magHitBox: {fileID: 2155109396161933314}
 --- !u!114 &8966456805578203647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -437,7 +436,7 @@ GameObject:
   - component: {fileID: 3983204935275127650}
   - component: {fileID: 4394061059875649149}
   m_Layer: 0
-  m_Name: Magnet Range
+  m_Name: Magnet Hit Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -453,7 +452,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.75, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 0.2, z: 1}
+  m_LocalScale: {x: 1.5, y: 0.15, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3475574913144299634}
@@ -551,12 +550,12 @@ GameObject:
   m_Component:
   - component: {fileID: 3475574913144299634}
   m_Layer: 0
-  m_Name: Magnet Effect
+  m_Name: Magnet Range
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3475574913144299634
 Transform:
   m_ObjectHideFlags: 0

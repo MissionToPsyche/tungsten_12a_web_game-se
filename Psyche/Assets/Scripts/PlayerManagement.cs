@@ -75,6 +75,8 @@ public class PlayerManagement : MonoBehaviour
         //Set up initial battery
         battery.batteryPercentage = 100;
         battery.rate = 1;
+
+        hasMagnetometer = true;
     }
 
     void Update()
@@ -108,7 +110,7 @@ public class PlayerManagement : MonoBehaviour
             //Magnetometer
             if (hasMagnetometer && !magnetActive && Input.GetButton("Fire1")) {
                 StartCoroutine(magnetTool.handleMagnet(audioManager));
-                battery.DrainBatt(500);
+                //battery.DrainBatt(500);
             }
         }
 
