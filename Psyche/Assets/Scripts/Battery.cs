@@ -16,6 +16,7 @@ public class Battery : MonoBehaviour {
 
     public float batteryPercentage;
     public float rate;
+    public bool batteryDrained;
     public TMP_Text battPerText;
 
     void Update() {
@@ -32,6 +33,9 @@ public class Battery : MonoBehaviour {
     public void DrainBatt(float rate) {
         batteryPercentage -= Time.deltaTime * rate;
         batteryPercentage = Mathf.Clamp(batteryPercentage, 0f, 100f); // keeps batt level between 0-100
+        if (batteryPercentage == 0) {
+            batteryDrained = true;
+        }
         UpdateSceneText();
         //Debug.Log("Battery % "+ batteryPercentage);
     }
@@ -40,6 +44,9 @@ public class Battery : MonoBehaviour {
     public void ChargeBatt(float rate) {
         batteryPercentage += Time.deltaTime * rate;
         batteryPercentage = Mathf.Clamp(batteryPercentage, 0f, 100f); // keeps batt level between 0-100
+        if (batteryPercentage > 0) {
+            batteryDrained = false;
+        }
         UpdateSceneText();
         //Debug.Log("Battery % "+ batteryPercentage);
     }
