@@ -31,6 +31,8 @@ public class PlayerManagement : MonoBehaviour
     private Thruster thruster;
     public GammaView gammaView;
     private AudioManager audioManager;
+    private SceneTransition sceneTransition;
+    private ElementManagement elementManagement;
     public PlayerDeath deathCon;
 
     //Booleans for the various tools
@@ -70,6 +72,8 @@ public class PlayerManagement : MonoBehaviour
         audioManager = GameObject
             .FindGameObjectWithTag("AudioSources")
             .GetComponent<AudioManager>();
+        sceneTransition = GetComponent<SceneTransition>();
+        elementManagement = GetComponent<ElementManagement>();
         DontDestroyOnLoad(audioManager);    
         
         //Set up initial battery
@@ -124,38 +128,22 @@ public class PlayerManagement : MonoBehaviour
     /// <param name="other"></param>
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.tag == "TransitionObject")
+        if (other.tag == "TransitionObject") //for Transition objects
         {
-            StartCoroutine(CheckTransition(other.name));
+            StartCoroutine(sceneTransition.CheckTransition(other.name));
         }
     }
 
     /// <summary>
-    /// Transitions the player to the respective scene if the necessary parameters are met
+    /// When the player enters the 2D collider, this function is triggered
     /// </summary>
-    /// <param name="name"></param>
-    /// <returns></returns>
-    IEnumerator CheckTransition(string name)
+    /// <param name="other"></param>
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        //Polling rate
-        yield return new WaitForSeconds(0.1f);
-
-        //Get the axis (positive or negative) for vertical buttons
-        float verticalAxis = Input.GetAxis("Vertical");
-
-        //If a positive vertical button is pressed (w or up), then transition
-        if (Input.GetButton("Vertical") && verticalAxis > 0)
+        if (other.tag == "Element") //for picking up the elements
         {
-            if(name == "SceneTransition_Joshua")
-                SceneManager.LoadScene("DeveloperScene_Joshua");
-            if (name == "SceneTransition_Dhalia")
-                SceneManager.LoadScene("DeveloperScene_Dhalia");
-            if (name == "SceneTransition_Bryant")
-                SceneManager.LoadScene("DeveloperScene_Bryant");
-            if (name == "SceneTransition_Matt")
-                SceneManager.LoadScene("DeveloperScene_Matt");
-            if (name == "SceneTransition_James")
-                SceneManager.LoadScene("DeveloperScene_James");
+            elementManagement.ElementPickUp(other.name); //pick up the element
+            Destroy(other.gameObject); //remove the element from the screen
         }
     }
 
