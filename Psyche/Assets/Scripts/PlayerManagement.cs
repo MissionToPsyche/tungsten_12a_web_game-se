@@ -32,6 +32,7 @@ public class PlayerManagement : MonoBehaviour
     public GammaView gammaView;
     private AudioManager audioManager;
     private SceneTransition sceneTransition;
+    private ElementManagement elementManagement;
 
     //Booleans for the various tools
     private bool batteryDrained;
@@ -54,6 +55,7 @@ public class PlayerManagement : MonoBehaviour
             .FindGameObjectWithTag("AudioSources")
             .GetComponent<AudioManager>();
         sceneTransition = GetComponent<SceneTransition>();
+        elementManagement = GetComponent<ElementManagement>();
         
         //Set up initial battery
         battery.batteryPercentage = 100;
@@ -106,9 +108,22 @@ public class PlayerManagement : MonoBehaviour
     /// <param name="other"></param>
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.tag == "TransitionObject")
+        if (other.tag == "TransitionObject") //for Transition objects
         {
             StartCoroutine(sceneTransition.CheckTransition(other.name));
+        }
+    }
+
+    /// <summary>
+    /// When the player enters the 2D collider, this function is triggered
+    /// </summary>
+    /// <param name="other"></param>
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Element") //for picking up the elements
+        {
+            elementManagement.ElementPickUp(other.name); //pick up the element
+            Destroy(other.gameObject); //remove the element from the screen
         }
     }
 
