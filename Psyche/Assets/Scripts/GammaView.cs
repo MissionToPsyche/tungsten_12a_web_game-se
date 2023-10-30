@@ -1,7 +1,7 @@
 /** 
 Description: spectrometer tool gamma view script
 Author: blopezro
-Version: 20231026
+Version: 20231030
 **/
 
 using System;
@@ -20,7 +20,8 @@ public class GammaView : MonoBehaviour {
     public List<SpriteRenderer> spriteRenderersList; // holds all sprite renderers of game objects
     public Color[] origColorArray;                   // holds original colors of the sprite renderers
     public Color defaultColor = Color.green;         // default color of items when default layer is used
-    public bool colorBlindMode;                      // color blind mode
+    public List<GameObject> colorBlindModeObjects;   // text objects stored for assistance with color blindness
+    public bool colorBlindMode;                      // color blind mode 
 
     // subscribes to the SceneManager.sceneLoaded event
     void Awake() {
@@ -38,6 +39,7 @@ public class GammaView : MonoBehaviour {
         sceneObjects = new GameObject[0];
         spriteRenderersList.Clear();
         origColorArray = new Color[0];
+        colorBlindModeObjects.Clear();
         Debug.Log("Reloaded needed data for GRS");
 
         sceneObjects = (GameObject[])UnityEngine.Object.FindObjectsOfType(typeof(GameObject));
@@ -67,6 +69,9 @@ public class GammaView : MonoBehaviour {
                 if (spriteRenderersList[i] != null) {
                     spriteRenderersList[i].color = LayerColor(spriteRenderersList[i].gameObject);
                     audioManager.PlayToolGRS();
+                    if (colorBlindMode) {
+                        ActivateGRSnumberObjs();
+                    }
                 }
             }
         }
@@ -80,6 +85,9 @@ public class GammaView : MonoBehaviour {
                 if (spriteRenderersList[i] != null) {
                     spriteRenderersList[i].color = origColorArray[i];
                     audioManager.StopToolGRS();
+                    if (colorBlindMode) {
+                        DeactivateGRSnumberObjs();
+                    }
                 }
             }
         }
@@ -101,55 +109,89 @@ public class GammaView : MonoBehaviour {
 
     // returns set color for the layer
     Color LayerColor(GameObject obj) {
-        return obj.layer switch {
-            // User Layers within Unity are 3 and 6-31
-            3 =>  Color.black,  // Terrain
-            6 =>  Color.grey,   // Rock
-            7 =>  Color.grey,   // Metal
-            8 =>  Color.magenta,// Crystal
-            9 =>  Color.green,  // Grass
-            10 => Color.blue,   // FloatingPlatform
-            11 => Color.green,  // Background
-            12 => Color.blue,   // Lifeform
-            13 => Color.clear,  // Clear
-            14 => Color.grey,   // Iron
-            15 => Color.grey,   // Nickel
-            16 => Color.yellow, // Sulfur
-            17 => Color.white,  // Oxygen
-            18 => Color.cyan,   // Silicon
-            19 => Color.blue,   // Hydrogen
-            20 => Color.black,  // Carbon
-            _ => defaultColor,
-        };
+        if (colorBlindMode) {
+            return defaultColor;
+        } else {
+            return obj.layer switch {
+                // User Layers within Unity are 3 and 6-31
+                3 =>  Color.black,  // Terrain
+                6 =>  Color.grey,   // Rock
+                7 =>  Color.grey,   // Metal
+                8 =>  Color.magenta,// Crystal
+                9 =>  Color.green,  // Grass
+                10 => Color.blue,   // FloatingPlatform
+                11 => Color.green,  // Background
+                12 => Color.blue,   // Lifeform
+                13 => Color.clear,  // Clear
+                14 => Color.grey,   // Iron
+                15 => Color.grey,   // Nickel
+                16 => Color.yellow, // Sulfur
+                17 => Color.white,  // Oxygen
+                18 => Color.cyan,   // Silicon
+                19 => Color.blue,   // Hydrogen
+                20 => Color.black,  // Carbon
+                _ => defaultColor,
+            };
+        }
     }
-
-    /** BELOW IN WORK **/
 
     // modifies game object properties to assist with color blind players
     void ApplyColorBlindModifications(SpriteRenderer spriteRenderer) {
-        // gets the game object of the current sprite renderer
-        GameObject gameObject = spriteRenderer.gameObject;
+        if (colorBlindMode) {
+            // get current game object
+            GameObject gameObject = spriteRenderer.gameObject;
+            // get layer of game object
+            int numberToDisplay = gameObject.layer;
 
-        int displayNumber = gameObject.layer;
+            // create game object to display number and anchor in center
+            GameObject grsNumberObject = new GameObject("GRS_ColorBlindMode");
+            TextMesh textMesh = grsNumberObject.AddComponent<TextMesh>();
+            
+            // initially set to false until GRS is activated
+            grsNumberObject.SetActive(false);
+            colorBlindModeObjects.Add(grsNumberObject);
 
-        // adds text component to game object
-        Text textComponent = gameObject.AddComponent<Text>();
+            // text properties
+            textMesh.text = numberToDisplay.ToString();
+            textMesh.characterSize = 0.15f;
+            textMesh.fontSize = 30;
+            textMesh.font = Resources.Load<Font>("");
+            textMesh.color = Color.white;
+            textMesh.anchor = TextAnchor.MiddleCenter;
 
-        // sets properties of textComponent
-        textComponent.text = displayNumber.ToString();
-        textComponent.font = Resources.GetBuiltinResource<Font>("LegacyRuntime");
-        textComponent.fontSize = 24;
-        textComponent.alignment = TextAnchor.MiddleCenter;
-        textComponent.color = Color.white;
+            // position the number object at the center of the object and set parent
+            grsNumberObject.transform.position = spriteRenderer.transform.position;
+            grsNumberObject.transform.parent = spriteRenderer.transform;
 
-        // ensures the GameObject has a RectTransform component to position the text in the center
-        RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
-        if (rectTransform == null) {
-            rectTransform = gameObject.AddComponent<RectTransform>();
+            // set sorting layer and order to view text in front of game object
+            grsNumberObject.GetComponent<Renderer>().sortingLayerName = "Foreground";
+            grsNumberObject.GetComponent<Renderer>().sortingOrder = 1;
+        } else {
+            // destroy number object if created
+            GameObject numberObject = spriteRenderer.transform.Find("GRS_ColorBlindMode").gameObject;
+            if (numberObject != null) {
+                colorBlindModeObjects.Remove(numberObject);
+                Destroy(numberObject);
+            }
         }
-
-        // sets the text position to the center of the GameObject
-        rectTransform.sizeDelta = new Vector2(200, 50); // sets the size of the text box
-        rectTransform.localPosition = Vector3.zero; // centers the text in the GameObject
     }
+
+    // show numbers
+    void ActivateGRSnumberObjs() {
+        foreach (GameObject numberObject in colorBlindModeObjects) {
+            if (numberObject != null) {
+                numberObject.SetActive(true);
+            }
+        }
+    }
+
+    // hide numbers
+    void DeactivateGRSnumberObjs() {
+        foreach (GameObject numberObject in colorBlindModeObjects) {
+            if (numberObject != null) {
+                numberObject.SetActive(false);
+            }
+        }
+    }
+
 }
