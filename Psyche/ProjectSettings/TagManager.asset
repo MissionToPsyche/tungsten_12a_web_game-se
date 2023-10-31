@@ -8,6 +8,8 @@ TagManager:
   - Hazard
   - Checkpoint
   - AudioSources
+  - TransitionObject
+  - Element
   layers:
   - Default
   - TransparentFX
