@@ -5688,11 +5688,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2542689318640551811, guid: 03038793f38437e42b224298834c254e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.88
+      value: -2.11
       objectReference: {fileID: 0}
     - target: {fileID: 2542689318640551811, guid: 03038793f38437e42b224298834c254e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 1.41
       objectReference: {fileID: 0}
     - target: {fileID: 2542689318640551811, guid: 03038793f38437e42b224298834c254e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5729,6 +5729,22 @@ PrefabInstance:
     - target: {fileID: 5824598847134807716, guid: 03038793f38437e42b224298834c254e, type: 3}
       propertyPath: m_Name
       value: Checkpoint (Flag Idle)(64x64)_9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6166571581658360064, guid: 03038793f38437e42b224298834c254e, type: 3}
+      propertyPath: m_Size.x
+      value: 0.14602119
+      objectReference: {fileID: 0}
+    - target: {fileID: 6166571581658360064, guid: 03038793f38437e42b224298834c254e, type: 3}
+      propertyPath: m_Size.y
+      value: 0.62613213
+      objectReference: {fileID: 0}
+    - target: {fileID: 6166571581658360064, guid: 03038793f38437e42b224298834c254e, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.0022693574
+      objectReference: {fileID: 0}
+    - target: {fileID: 6166571581658360064, guid: 03038793f38437e42b224298834c254e, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.3157838
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
