@@ -1,7 +1,7 @@
 /** 
 Description: imager tool script
 Author: mcmyers4
-Version: 20231014
+Version: 20231028
 **/
 
 using System.Collections;
@@ -21,29 +21,26 @@ public class Imager : MonoBehaviour
     /// <summary>
     /// Increases size of vision
     /// </summary>
-    public void increaseVision()
+    public void increaseVision(AudioManager audioManager)
     {
         imager.pointLightInnerRadius += rangeIncrease;
         imager.pointLightOuterRadius += rangeIncrease;
-        //Plays tool sound
-        AudioManager audioManager = GameObject
-            .FindGameObjectWithTag("AudioSources")
-            .GetComponent<AudioManager>();
-        audioManager.PlayToolImager();
+        audioManager.PlayToolImager(); // play tool sound
     }
 
-    //***Now handled from toolPickedUp() in PlayerManagement***
-    ////Pick up imager on contact and increase size of vision
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Imager"))
-    //    {
-    //        if (imager != null)
-    //        {
-    //            imager.pointLightInnerRadius += rangeIncrease;
-    //            imager.pointLightOuterRadius += rangeIncrease;
-    //            Destroy(collision.gameObject);
-    //        }
-    //    }
-    //}
+    /// <summary>
+    /// Turns off light
+    /// </summary>
+    public void turnOff()
+    {
+        imager.intensity = 0;
+    }
+
+    /// <summary>
+    /// Turns on light
+    /// </summary>
+    public void turnOn()
+    {
+        imager.intensity = 1;
+    }
 }

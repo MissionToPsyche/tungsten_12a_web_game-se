@@ -46,7 +46,7 @@ public class PlayerDeath : MonoBehaviour
     }
 
     //Respawn character to last checkpoint when player dies
-    private void Die()
+    public void Die()
     {
         if (startPoint.Equals(respawnPoint))
         {
@@ -54,5 +54,4 @@ public class PlayerDeath : MonoBehaviour
         }
         transform.position = respawnPoint;
     }
-
 }
