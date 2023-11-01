@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     /// <param name="playerCharacter"></param>
     /// <param name="isGrounded"></param>
-    public void handleMovement(Rigidbody2D playerCharacter, bool isGrounded, AudioManager audioManager)
+    public void handleMovement(Rigidbody2D playerCharacter, bool isGrounded, AudioManager audioManager, bool usingThruster)
     {
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -48,6 +48,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 newAnimation = PLAYER_WALK;
             }
+
             //if the player is not moving
             else
             {
@@ -58,7 +59,16 @@ public class PlayerMovement : MonoBehaviour
         //if the player is in the air; will be edited later to add thruster option
         else
         {
-            newAnimation = PLAYER_JUMP;
+            if (usingThruster)
+            {
+                newAnimation = PLAYER_THRUSTER;
+            }
+
+            else
+            {
+                newAnimation = PLAYER_JUMP;
+            }
+            
         }
 
         //Vertical "jump" only if player is on the ground
