@@ -71,9 +71,18 @@ public class ElementManagement : MonoBehaviour
         {
             if (copper > 0)
             {
-                Debug.Log("Thruster boost");
+                Debug.Log("Thruster boost | Copper: " + copper);
                 _playerManagement.thruster.thrusterForce += 1;
                 copper--;
+            }
+            else
+            {
+                Debug.Log("Not enough of that element..." +
+                    "\nCopper: " + copper + 
+                    "\nIron: " + iron + 
+                    "\nNickel: " + nickel +
+                    "\nGold: " + gold +
+                    "\nPlatinum: " + platinum);
             }
         }
     }
