@@ -24,8 +24,6 @@ public class ImagerCounter : MonoBehaviour
     public void updateImagerCount()
     {
         imagerCount++;
-        //imagerCountText.text = imagerCount.ToString();
-        //unity bug where OnTriggerEnter2D happens 3 times
-        imagerCountText.text = "Imagers Found: " + Mathf.RoundToInt(imagerCount / 3).ToString();
+        imagerCountText.text = "Imagers Found: " + imagerCount.ToString();
     }
 }
