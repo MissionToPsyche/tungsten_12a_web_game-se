@@ -27,39 +27,11 @@ public class Magnetometer : MonoBehaviour {
 
         do
         {
-            //Vector2 endpoint;
-            //float shiftX = 0, shiftY = 0;
-
-            ///**
-            // * If player is holding the up button
-            // */
-            //if (Input.GetAxisRaw("Vertical") > 0)
-            //{
-            //    shiftX = .25f;
-            //    endpoint = Vector2.up * magRange;
-            //    magEffect.transform.localEulerAngles = new Vector3(0,0,90);
-            //}
-            //else
-            //{
-            //    shiftY = .25f;
-            //    if (Input.GetAxisRaw("Horizontal") < 0) //account for last direction faced
-            //    {
-            //        endpoint = Vector2.right * -magRange;
-            //        magEffect.transform.localEulerAngles = new Vector3(0, 0, 180);
-            //    }
-            //    else
-            //    {
-            //        endpoint = Vector2.right * magRange;
-            //        magEffect.transform.localEulerAngles = new Vector3(0, 0, 0);
-            //    }
-            //}
-
-            //Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg
-
-            //Input.mousePosition;
-
-
-            hit = Physics2D.OverlapBox(magHitBox.transform.position, magHitBox.transform.lossyScale, 0, 1 << 7);
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 direction = mousePosition - hitBoxRotator.position;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            hitBoxRotator.eulerAngles = new Vector3(0, 0, angle);
+            hit = Physics2D.OverlapBox(magHitBox.transform.position, magHitBox.transform.lossyScale, angle, 1 << 7);
 
             yield return null;
         } while (Input.GetButton("Fire1") && hit == null);
