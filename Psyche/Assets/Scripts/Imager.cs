@@ -20,6 +20,8 @@ public class Imager : MonoBehaviour
     //The amount to increase the vision field
     [SerializeField] private float rangeIncrease = 0.5f;
 
+    [SerializeField] private ImagerCounter imagerCounter;
+
     /// <summary>
     /// Increases size of vision
     /// </summary>
@@ -30,6 +32,7 @@ public class Imager : MonoBehaviour
         flashlight.pointLightInnerRadius += rangeIncrease;
         flashlight.pointLightOuterRadius += rangeIncrease;
         audioManager.PlayToolImager(); // play tool sound
+        imagerCounter.updateImagerCount();
     }
 
     /// <summary>
