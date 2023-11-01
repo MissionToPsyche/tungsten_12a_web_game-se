@@ -5,6 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class SceneTransition : MonoBehaviour
 {
+    //Private variables
+    private PlayerManagement _playerManagement;
+    
+    public void Initialize(PlayerManagement playerManagement)
+    {
+        _playerManagement = playerManagement;
+    }
+
     /// <summary>
     /// Transitions the player to the respective scene if the necessary parameters are met
     /// </summary>
