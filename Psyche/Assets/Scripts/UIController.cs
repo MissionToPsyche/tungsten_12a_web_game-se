@@ -68,6 +68,8 @@ public class UIController : MonoBehaviour
     public void enableMagnetometerButton() { magnetometerButton.SetActive(true); }
     public void enableThrusterButton() { thrusterButton.SetActive(true); }
 
+    public void openImagerLink() { Application.OpenURL("https://www.jpl.nasa.gov/images/pia24894-psyches-imager-in-progress"); }
+
     public void openMagnetometerLink() { Application.OpenURL("https://psyche.asu.edu/gallery/meet-nasas-psyche-team-who-will-measure-the-asteroids-magnetic-field/"); }
 
     private bool shouldRespawn;

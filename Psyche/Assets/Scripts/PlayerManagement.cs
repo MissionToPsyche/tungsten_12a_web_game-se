@@ -27,6 +27,7 @@ public class PlayerManagement : MonoBehaviour
     public Battery battery;
     public PlayerMovement playerMovement;
     public Imager imager;
+    public ImagerCursor flashlight;
     public Magnetometer magnetTool;
     private Thruster thruster;
     public GammaView gammaView;
@@ -36,7 +37,7 @@ public class PlayerManagement : MonoBehaviour
     public PlayerDeath deathCon;
 
     //Booleans for the various tools
-    private bool hasImager;
+    //private bool hasImager; //eliminate warnings until used
     private bool hasMagnetometer;
     private bool hasThrusters;
     private bool hasSpectrometer;
@@ -169,10 +170,15 @@ public class PlayerManagement : MonoBehaviour
                 break;
 
             case "Imager":
-                hasImager = true;
+                imager.increaseVision(audioManager);
+                battery.DrainBatt(500);
+                break;
+
+            case "ImagerCursor":
+                //hasImager = true; //eliminate warnings until used
                 UIController.Instance.setDialogText("This is an Imager");
                 UIController.Instance.enableImagerButton();
-                imager.increaseVision(audioManager);
+                flashlight.Update();
                 battery.DrainBatt(500);
                 break;
 
