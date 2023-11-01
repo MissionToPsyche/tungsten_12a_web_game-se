@@ -3565,51 +3565,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thrusterForce: 0.9
---- !u!61 &1191445164
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1191445131}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.12}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 0.19, y: 0.24}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.19, y: 0.24}
-  m_EdgeRadius: 0
 --- !u!114 &1191445168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3638,7 +3593,7 @@ MonoBehaviour:
   iron: 0
   nickel: 0
   gold: 0
-  silicon: 0
+  platinum: 0
 --- !u!1 &1214452668
 GameObject:
   m_ObjectHideFlags: 0
@@ -5860,11 +5815,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4062955869878964537, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7911676450372591580, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: battery
       value: 
       objectReference: {fileID: 766869977}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4062955869878964537, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -5874,9 +5834,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 82528849670660265, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1191445153}
-    - targetCorrespondingSourceObject: {fileID: 82528849670660265, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1191445164}
     - targetCorrespondingSourceObject: {fileID: 82528849670660265, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1191445168}

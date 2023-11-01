@@ -7,9 +7,28 @@ using UnityEngine;
 /// </summary>
 public class Thruster : MonoBehaviour
 {
-    public float thrusterForce = 0.9f;
-    public void activateThruster(Rigidbody2D playerCharacter)
+    //Private Variables
+    private PlayerManagement _playerManagement;
+
+    //Public Variables
+    public float thrusterForce;
+
+    /// <summary>
+    /// Initializes the script
+    /// </summary>
+    /// <param name="playerManagement"></param>
+    public void Initialize(PlayerManagement playerManagement)
     {
-        playerCharacter.velocity += new Vector2(0f, thrusterForce * Time.deltaTime * 10f); 
+        _playerManagement = playerManagement;
+        thrusterForce = 0.9f;
+    }
+    
+    /// <summary>
+    /// Activates the thruster applying a vertical force
+    /// </summary>
+    /// <param name="playerCharacter"></param>
+    public void ActivateThruster()
+    {
+        _playerManagement.playerCharacter.velocity += new Vector2(0f, thrusterForce * Time.deltaTime * 10f); 
     }
 }

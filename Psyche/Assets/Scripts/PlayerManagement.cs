@@ -28,7 +28,7 @@ public class PlayerManagement : MonoBehaviour
     public PlayerMovement playerMovement;
     public Imager imager;
     public Magnetometer magnetTool;
-    private Thruster thruster;
+    public Thruster thruster;
     public GammaView gammaView;
     private AudioManager audioManager;
     private SceneTransition sceneTransition;
@@ -50,6 +50,21 @@ public class PlayerManagement : MonoBehaviour
     /// </summary>
     public void Awake()
     {
+        //Assign and initialize scripts
+        playerCharacter = GetComponent<Rigidbody2D>();
+        playerMovement = GetComponent<PlayerMovement>();
+        playerMovement.Initialize(this);
+        thruster = GetComponent<Thruster>();
+        thruster.Initialize(this);
+        sceneTransition = GetComponent<SceneTransition>();
+        sceneTransition.Initialize(this);
+        elementManagement = GetComponent<ElementManagement>();
+        elementManagement.Initialize(this);        
+        deathCon = GetComponent<PlayerDeath>();
+        audioManager = GameObject
+            .FindGameObjectWithTag("AudioSources")
+            .GetComponent<AudioManager>();
+
         //Use singleton to ensure no duplicates are created
         if (Instance == null)
         {
@@ -65,16 +80,6 @@ public class PlayerManagement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Assign the playerCharacter to it in-game objects
-        playerCharacter = GetComponent<Rigidbody2D>(); 
-        playerMovement = GetComponent<PlayerMovement>();
-        thruster = GetComponent<Thruster>();
-        deathCon = GetComponent<PlayerDeath>();
-        audioManager = GameObject
-            .FindGameObjectWithTag("AudioSources")
-            .GetComponent<AudioManager>();
-        sceneTransition = GetComponent<SceneTransition>();
-        elementManagement = GetComponent<ElementManagement>();
         DontDestroyOnLoad(audioManager);    
         
         //Set up initial battery
@@ -94,10 +99,16 @@ public class PlayerManagement : MonoBehaviour
 
         usingThruster = false; //default
 
+        //Handle movement
+        if (!inputBlocked)
+        {
+            playerMovement.handleMovement(audioManager, usingThruster);
+        }
+
         //Call the requisite tool scripts here:
         //Thruster
         if (hasThrusters && Input.GetButton("Jump") && battery.batteryPercentage != 0) {
-            thruster.activateThruster(playerCharacter);
+            thruster.ActivateThruster();
             usingThruster = true;
             battery.DrainBatt(1);
         }
@@ -115,10 +126,11 @@ public class PlayerManagement : MonoBehaviour
             battery.DrainBatt(500);
         }
 
-        if (!inputBlocked)
+
+        //Modify tools
+        if (hasThrusters && Input.GetButton("Thruster_Increase"))
         {
-            //Handle movement
-            playerMovement.handleMovement(playerCharacter, isGrounded, audioManager, usingThruster);
+            elementManagement.ModifyTool("Thruster");
         }
 
         //Inventory and Dialog Box
