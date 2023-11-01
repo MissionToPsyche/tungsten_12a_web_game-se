@@ -4822,7 +4822,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4691425001880923315, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: colorBlindMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6587819069879468902, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: m_Sprite
