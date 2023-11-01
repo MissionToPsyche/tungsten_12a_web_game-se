@@ -128,7 +128,7 @@ public class PlayerManagement : MonoBehaviour
 
 
         //Modify tools
-        if (hasThrusters && Input.GetButton("Thruster_Increase"))
+        if (hasThrusters && Input.GetButtonDown("Thruster_Increase"))
         {
             elementManagement.ModifyTool("Thruster");
         }
