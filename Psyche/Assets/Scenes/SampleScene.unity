@@ -2343,12 +2343,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 766869976}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bd2ae6f3bb942a548b7a61689e141795, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  batteryPercentage: 100
+  toolName: 
+  batteryLevel: 0
+  maxCapacity: 0
+  batteryPercent: 0
   rate: 1000
   batteryDrained: 0
   battPerText: {fileID: 766869982}
@@ -3564,6 +3567,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 803067f3d4100c74c8ff18ba48d08dc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toolName: 
   thrusterForce: 0.9
 --- !u!114 &1191445168
 MonoBehaviour:
@@ -3594,6 +3598,25 @@ MonoBehaviour:
   nickel: 0
   gold: 0
   platinum: 0
+--- !u!114 &1191445181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1191445131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd2ae6f3bb942a548b7a61689e141795, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toolName: 
+  batteryLevel: 0
+  maxCapacity: 0
+  batteryPercent: 0
+  rate: 0
+  batteryDrained: 0
+  battPerText: {fileID: 0}
 --- !u!1 &1214452668
 GameObject:
   m_ObjectHideFlags: 0
@@ -4103,8 +4126,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3240746905583605884, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: battPerText
+      value: 
+      objectReference: {fileID: 766869982}
     - target: {fileID: 5589539797666701746, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
       propertyPath: m_Name
+      value: UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 5589539797666701746, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: m_TagString
       value: UI
       objectReference: {fileID: 0}
     - target: {fileID: 7331055490882894279, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
@@ -5840,6 +5871,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 82528849670660265, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1191445169}
+    - targetCorrespondingSourceObject: {fileID: 82528849670660265, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1191445181}
   m_SourcePrefab: {fileID: 100100000, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

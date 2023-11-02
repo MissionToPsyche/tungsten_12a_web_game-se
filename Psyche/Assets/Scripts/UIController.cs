@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,11 +11,14 @@ public class UIController : MonoBehaviour
 {
     [HideInInspector] public static UIController Instance;
 
+    [SerializeField] public TMP_Text battPerText;
+
     /// <summary>
     /// When transitioning between scenes, ensures UI state remains
     /// </summary>
     void Awake()
     {
+        //Singleton
         if (Instance == null)
         {
             Instance = this;
@@ -24,6 +28,28 @@ public class UIController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void OnEnable()
+    {
+        PlayerManagement.Instance.batteryManager.onBatteryPercentageChanged += UpdateBatteryText;
+    }
+
+    private void OnDisable()
+    {
+        if (PlayerManagement.Instance.batteryManager != null)
+            PlayerManagement.Instance.batteryManager.onBatteryPercentageChanged -= UpdateBatteryText;
+    }
+
+    /// <summary>
+    /// Function to update the battery text
+    /// </summary>
+    /// <param name="newPercentage"></param>
+    private void UpdateBatteryText(float newPercentage)
+    {
+        Debug.Log("Battery ---: " + newPercentage);
+        // Assuming battPerText is the text component that shows the battery percentage
+        battPerText.text = Mathf.RoundToInt(newPercentage).ToString() + "%";
     }
 
     public GameObject inventoryBox;
