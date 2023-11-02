@@ -200,8 +200,8 @@ public class PlayerManagement : MonoBehaviour
                 break;
 
             case "Imager":
-                imager.increaseVision(audioManager);
-                battery.DrainBatt(500);
+                imagerManager.Modify();
+                batteryManager.DrainBatt(500);
                 break;
 
             case "ImagerCursor":
