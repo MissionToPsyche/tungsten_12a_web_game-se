@@ -2342,7 +2342,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 479078657}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2483,17 +2483,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &766869977 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6163129418042925814, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
-  m_PrefabInstance: {fileID: 1330709035}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd2ae6f3bb942a548b7a61689e141795, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &767956963
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3554,7 +3543,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolName: 
-  thrusterForce: 0.9
 --- !u!114 &1191445168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3579,11 +3567,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e43bcff56e0418b48802e922acb33133, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  copper: 0
-  iron: 0
-  nickel: 0
-  gold: 0
-  platinum: 0
 --- !u!114 &1191445181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3602,7 +3585,7 @@ MonoBehaviour:
   batteryPercent: 0
   rate: 0
   batteryDrained: 0
-  battPerText: {fileID: 0}
+  battPerText: {fileID: 766869982}
 --- !u!1 &1214452668
 GameObject:
   m_ObjectHideFlags: 0
@@ -4124,6 +4107,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 6163129418042925814, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7331055490882894279, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -4204,7 +4191,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6163129418042925814, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -5722,7 +5710,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 82528849670660265, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1191445181}
-    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
@@ -5766,3 +5753,4 @@ SceneRoots:
   - {fileID: 1457555241}
   - {fileID: 375509267}
   - {fileID: 64882992}
+  - {fileID: 766869979}
