@@ -7,14 +7,14 @@ using UnityEngine;
 /// </summary>
 public class ThrusterManager : ToolManager
 {
-    //Public Variables
-    public float thrusterForce;
+    //Private Variables
+    private float _thrusterForce;
 
     public void Initialize(PlayerManagement playerManagement)
     {
-        _playerManagement = playerManagement;
         toolName = "Thruster";
-        thrusterForce = 0.9f;
+        _playerManagement = playerManagement;
+        _thrusterForce = 0.9f;
     }
     
     /// <summary>
@@ -23,7 +23,7 @@ public class ThrusterManager : ToolManager
     /// <param name="playerCharacter"></param>
     public void ActivateThruster()
     {
-        _playerManagement.playerCharacter.velocity += new Vector2(0f, thrusterForce * Time.deltaTime * 10f); 
+        _playerManagement.playerCharacter.velocity += new Vector2(0f, _thrusterForce * Time.deltaTime * 10f); 
     }
 
     /// <summary>
@@ -31,6 +31,6 @@ public class ThrusterManager : ToolManager
     /// </summary>
     public override void Modify()
     {
-        thrusterForce += 1.0f;
+        _thrusterForce += 1.0f;
     }
 }

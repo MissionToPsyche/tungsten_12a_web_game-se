@@ -27,18 +27,18 @@ public class PlayerManagement : MonoBehaviour
     [Header("Scripts")]
     public BatteryManager batteryManager;
     public PlayerMovement playerMovement;
-    public Imager imager;
+    public ImagerManager imagerManager;
     public ElectromagnetManager electromagnetManager;
     public ThrusterManager thrusterManager;
     public GammaView gammaView;
-    private AudioManager audioManager;
+    public AudioManager audioManager;
     private TransitionManager sceneTransition;
     private ElementManager elementManagement;
     public PlayerDeath deathCon;
 
     //Booleans for the various tools
     private bool hasImager;
-    private bool hasMagnetometer;
+    private bool hasElectromagnet;
     private bool hasThrusters;
     private bool hasSpectrometer;
     private bool usingThruster; //for animation purposes
@@ -62,6 +62,8 @@ public class PlayerManagement : MonoBehaviour
         batteryManager.Initialize(this);
         electromagnetManager = GetComponent<ElectromagnetManager>();
         electromagnetManager.Initialize(this);
+        imagerManager = GetComponent<ImagerManager>();
+        imagerManager.Initialize(this);
         // ##### Object Managers ######
         elementManagement = GetComponent<ElementManager>();
         elementManagement.Initialize(this);
@@ -98,9 +100,9 @@ public class PlayerManagement : MonoBehaviour
         //Check booleans
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
         if (batteryManager.batteryDrained) {
-            imager.turnOff();
+            imagerManager.turnOff();
         } else {
-            imager.turnOn();
+            imagerManager.turnOn();
         }
 
         usingThruster = false; //default
@@ -108,7 +110,7 @@ public class PlayerManagement : MonoBehaviour
         //Handle movement
         if (!inputBlocked)
         {
-            playerMovement.handleMovement(audioManager, usingThruster);
+            playerMovement.handleMovement(usingThruster);
         }
 
         //Call the requisite tool scripts here:
@@ -127,7 +129,7 @@ public class PlayerManagement : MonoBehaviour
             gammaView.DeactivateGRS(audioManager);
         }
         //Magnetometer
-        if (hasMagnetometer && !magnetActive && Input.GetButton("Fire1") && batteryManager.batteryPercent != 0) {
+        if (hasElectromagnet && !magnetActive && Input.GetButton("Fire1") && batteryManager.batteryPercent != 0) {
             StartCoroutine(electromagnetManager.handleMagnet(audioManager));
             batteryManager.DrainBatt(500);
         }
@@ -142,10 +144,15 @@ public class PlayerManagement : MonoBehaviour
         {
             elementManagement.ModifyTool(batteryManager);
         }
-        if (Input.GetButtonDown("Electromagnet_Increase"))
+        if (hasElectromagnet && Input.GetButtonDown("Electromagnet_Increase"))
         {
             elementManagement.ModifyTool(electromagnetManager); //Button 3
         }
+        if (hasImager && Input.GetButtonDown("Imager_Increase")) 
+        {
+            elementManagement.ModifyTool(imagerManager); //Button 4
+        }
+
 
         //Inventory and Dialog Box
         if (Input.GetKeyDown("tab"))
@@ -195,7 +202,7 @@ public class PlayerManagement : MonoBehaviour
                 hasImager = true;
                 UIController.Instance.setDialogText("This is an Imager");
                 UIController.Instance.enableImagerButton();
-                imager.increaseVision(audioManager);
+                imagerManager.Modify();
                 batteryManager.DrainBatt(500);
                 break;
 
@@ -206,7 +213,7 @@ public class PlayerManagement : MonoBehaviour
                 break;
 
             case "Magnetometer":
-                hasMagnetometer = true;
+                hasElectromagnet = true;
                 UIController.Instance.setDialogText("This is a Magnetometer");
                 UIController.Instance.enableMagnetometerButton();
                 break;
