@@ -19,7 +19,8 @@ public class Battery : MonoBehaviour {
     public bool batteryDrained;
     public TMP_Text battPerText;
 
-    void Update() {
+    // uncomment to test
+    /**void Update() {
         if (Input.GetKeyDown(KeyCode.Q)) {
             DrainBatt(rate);
         }
@@ -27,7 +28,7 @@ public class Battery : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.E)) {
             ChargeBatt(rate);
         }
-    }
+    }**/
 
     // drains battery at given rate
     public void DrainBatt(float rate) {

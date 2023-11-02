@@ -25,6 +25,7 @@ public class PlayerManagement : MonoBehaviour
     //Management scripts
     [Header("Scripts")]
     public Battery battery;
+    public PlayerHealth playerHealth;
     public PlayerMovement playerMovement;
     public Imager imager;
     public ImagerCursor flashlight;
@@ -81,6 +82,10 @@ public class PlayerManagement : MonoBehaviour
         //Set up initial battery
         battery.batteryPercentage = 100;
         battery.rate = 1;
+
+        //Set up initial player health
+        playerHealth.playerHealth = 5;
+        playerHealth.amount = 1;
     }
 
     void Update()
