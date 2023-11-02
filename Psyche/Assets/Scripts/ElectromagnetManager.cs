@@ -5,11 +5,18 @@ using UnityEngine;
 /// Tool to pull the player towards metal objects
 /// </summary>
 /// Author: jmolive8
-public class Magnetometer : MonoBehaviour {
-    public PlayerManagement pManage; //use instance referance
+public class ElectromagnetManager : ToolManager {
+    //Private Variables
+    private int _magRange;
+
     public GameObject magEffect;
 
-    private int magRange = 6;
+    public void Initialize(PlayerManagement playerManagement)
+    {
+        toolName = "Electromagnet";
+        _playerManagement = playerManagement;
+        _magRange = 3;
+    }
 
     /// <summary>
     /// Activates magnetometer tool
@@ -17,7 +24,7 @@ public class Magnetometer : MonoBehaviour {
     /// <returns></returns>
     public IEnumerator handleMagnet(AudioManager audioManager)
     {
-        pManage.magnetActive = true;
+        _playerManagement.magnetActive = true;
         magEffect.SetActive(true);
         RaycastHit2D hit = new RaycastHit2D();
 
@@ -32,7 +39,7 @@ public class Magnetometer : MonoBehaviour {
             if (Input.GetAxisRaw("Vertical") > 0)
             {
                 shiftX = .25f;
-                endpoint = Vector2.up * magRange;
+                endpoint = Vector2.up * _magRange;
                 magEffect.transform.localEulerAngles = new Vector3(0,0,90);
             }
             else
@@ -40,12 +47,12 @@ public class Magnetometer : MonoBehaviour {
                 shiftY = .25f;
                 if (Input.GetAxisRaw("Horizontal") < 0) //account for last direction faced
                 {
-                    endpoint = Vector2.right * -magRange;
+                    endpoint = Vector2.right * -_magRange;
                     magEffect.transform.localEulerAngles = new Vector3(0, 0, 180);
                 }
                 else
                 {
-                    endpoint = Vector2.right * magRange;
+                    endpoint = Vector2.right * _magRange;
                     magEffect.transform.localEulerAngles = new Vector3(0, 0, 0);
                 }
             }
@@ -82,7 +89,7 @@ public class Magnetometer : MonoBehaviour {
             {
                 do
                 {
-                    if (pManage.isGrounded)
+                    if (_playerManagement.isGrounded)
                         hit.rigidbody.MovePosition(Vector2.MoveTowards(hit.transform.position, transform.position, Time.deltaTime * 40)); //stop from pushing player: set mass back to 1 when done?, remove ground check?
                     yield return null;
                 } while (Input.GetButton("Fire1"));
@@ -95,20 +102,28 @@ public class Magnetometer : MonoBehaviour {
                 else
                     pullDirection = new Vector2(hit.transform.position.x, transform.position.y);
 
-                pManage.playerCharacter.gravityScale = 0;
+                _playerManagement.playerCharacter.gravityScale = 0;
 
                 do
                 {
-                    pManage.playerCharacter.MovePosition(Vector2.MoveTowards(transform.position, pullDirection, Time.deltaTime * 40));
+                    _playerManagement.playerCharacter.MovePosition(Vector2.MoveTowards(transform.position, pullDirection, Time.deltaTime * 40));
                     yield return null;
                 } while (Input.GetButton("Fire1"));
 
-                pManage.playerCharacter.gravityScale = 1;
+                _playerManagement.playerCharacter.gravityScale = 1;
             }
         }
 
         audioManager.StopToolMagnetometer(); // stop tool sound
         magEffect.SetActive(false);
-        pManage.magnetActive = false;
+        _playerManagement.magnetActive = false;
+    }
+
+    /// <summary>
+    /// Increases the range when called
+    /// </summary>
+    public override void Modify()
+    {
+        _magRange += 3;
     }
 }

@@ -5,13 +5,13 @@ using UnityEngine;
 /// <summary>
 /// Manages the elements and their respective tracking
 /// </summary>
-public class ElementManagement : MonoBehaviour
+public class ElementManager : MonoBehaviour
 {
     //Private variables
     private PlayerManagement _playerManagement;
 
     //Public variables
-    public static ElementManagement Instance;
+    public static ElementManager Instance;
     public int copper, iron, nickel, gold, platinum;
 
     /// <summary>
@@ -67,36 +67,27 @@ public class ElementManagement : MonoBehaviour
     /// </summary>
     public void ModifyTool (ToolManager toolScript)
     {
-        if (toolScript.toolName == "Thruster")
+        switch(toolScript.toolName)
         {
-            if (copper > 0) //ensure there are enough of that element
-            {
+            case "Thruster":
                 Debug.Log("Thruster boost | Copper");
                 toolScript.Modify();
                 copper--;
-            }
-            else
-            {
-                Debug.Log("Not enough of that element...");
-            }
-        }
-        else if (toolScript.toolName == "Battery")
-        {
-            if(nickel > 0) //ensure there are enough of that element
-            {
+                break;
+            case "Battery":
                 Debug.Log("Battery Boost | Nickel");
                 toolScript.Modify();
                 nickel--;
-            }
-            else
-            {
+                break;
+            case "Electromagnet":
+                Debug.Log("Electromagnet Boost | Iron");
+                toolScript.Modify();
+                iron--;
+                break;
+            default:
                 Debug.Log("Not enough of that element...");
-            }
+                break;
         }
-        Debug.Log("\nCopper: " + copper +
-                  "\nIron: " + iron +
-                  "\nNickel: " + nickel +
-                  "\nGold: " + gold +
-                  "\nPlatinum: " + platinum);
+        Debug.Log("Copper: " + copper + " Iron: " + iron + " Nickel: " + nickel + " Gold: " + gold + " Platinum: " + platinum);
     }
 }

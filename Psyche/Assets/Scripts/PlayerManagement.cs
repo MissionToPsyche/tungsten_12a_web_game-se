@@ -28,12 +28,12 @@ public class PlayerManagement : MonoBehaviour
     public BatteryManager batteryManager;
     public PlayerMovement playerMovement;
     public Imager imager;
-    public Magnetometer magnetTool;
+    public ElectromagnetManager electromagnetManager;
     public ThrusterManager thrusterManager;
     public GammaView gammaView;
     private AudioManager audioManager;
-    private SceneTransition sceneTransition;
-    private ElementManagement elementManagement;
+    private TransitionManager sceneTransition;
+    private ElementManager elementManagement;
     public PlayerDeath deathCon;
 
     //Booleans for the various tools
@@ -60,12 +60,14 @@ public class PlayerManagement : MonoBehaviour
         thrusterManager.Initialize(this);
         batteryManager = GetComponent<BatteryManager>();
         batteryManager.Initialize(this);
-        sceneTransition = GetComponent<SceneTransition>();
-        sceneTransition.Initialize(this);
+        electromagnetManager = GetComponent<ElectromagnetManager>();
+        electromagnetManager.Initialize(this);
         // ##### Object Managers ######
-        elementManagement = GetComponent<ElementManagement>();
-        elementManagement.Initialize(this);  
+        elementManagement = GetComponent<ElementManager>();
+        elementManagement.Initialize(this);
         // ##### Miscellaneous ######
+        sceneTransition = GetComponent<TransitionManager>();
+        sceneTransition.Initialize(this);
         deathCon = GetComponent<PlayerDeath>();
         audioManager = GameObject
             .FindGameObjectWithTag("AudioSources")
@@ -126,7 +128,7 @@ public class PlayerManagement : MonoBehaviour
         }
         //Magnetometer
         if (hasMagnetometer && !magnetActive && Input.GetButton("Fire1") && batteryManager.batteryPercent != 0) {
-            StartCoroutine(magnetTool.handleMagnet(audioManager));
+            StartCoroutine(electromagnetManager.handleMagnet(audioManager));
             batteryManager.DrainBatt(500);
         }
 
@@ -139,6 +141,10 @@ public class PlayerManagement : MonoBehaviour
         if (Input.GetButtonDown("Battery_Increase")) //Button 2
         {
             elementManagement.ModifyTool(batteryManager);
+        }
+        if (Input.GetButtonDown("Electromagnet_Increase"))
+        {
+            elementManagement.ModifyTool(electromagnetManager); //Button 3
         }
 
         //Inventory and Dialog Box
