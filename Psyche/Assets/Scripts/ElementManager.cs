@@ -9,10 +9,7 @@ public class ElementManager : MonoBehaviour
 {
     //Private variables
     private PlayerManagement _playerManagement;
-
-    //Public variables
-    public static ElementManager Instance;
-    public int copper, iron, nickel, gold, platinum;
+    private int _copper, _iron, _nickel, _gold, _platinum;
 
     /// <summary>
     /// Initialize this script
@@ -21,27 +18,11 @@ public class ElementManager : MonoBehaviour
     public void Initialize(PlayerManagement playerManagement)
     {
         _playerManagement = playerManagement;
-        copper = 0;
-        iron = 0;
-        nickel = 0;
-        gold = 0;
-        platinum = 0;
-    }
-    
-    /// <summary>
-    /// Singleton check
-    /// </summary>
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        _copper = 0;
+        _iron = 0;
+        _nickel = 0;
+        _gold = 0;
+        _platinum = 0;
     }
 
     /// <summary>
@@ -50,44 +31,44 @@ public class ElementManager : MonoBehaviour
     public void ElementPickUp (string element)
     {
         if (element == "Element_Copper")
-            copper++;
+            _copper++;
         if (element == "Element_Iron")
-            iron++;
+            _iron++;
         if (element == "Element_Nickel")
-            nickel++;
+            _nickel++;
         if (element == "Element_Gold")
-            gold++;
+            _gold++;
         if (element == "Element_Platinum")
-            platinum++;
-        Debug.Log("Copper: " + copper + " Iron: " + iron + " Nickel: " + nickel + " Gold: " + gold + " Platinum: " + platinum);
+            _platinum++;
     }
 
     /// <summary>
     /// Modifies the tool when a given button is pressed
     /// </summary>
-    public void ModifyTool (ToolManager toolScript)
+    public void ModifyTool (ToolManager toolManager)
     {
-        switch(toolScript.toolName)
+        switch(toolManager.toolName)
         {
-            case "Thruster":
-                Debug.Log("Thruster boost | Copper");
-                toolScript.Modify();
-                copper--;
+            case "Thruster" when _copper > 0:
+                toolManager.Modify();
+                _copper--;
                 break;
-            case "Battery":
-                Debug.Log("Battery Boost | Nickel");
-                toolScript.Modify();
-                nickel--;
+            case "Battery" when _nickel > 0:
+                toolManager.Modify();
+                _nickel--;
                 break;
-            case "Electromagnet":
-                Debug.Log("Electromagnet Boost | Iron");
-                toolScript.Modify();
-                iron--;
+            case "Electromagnet" when _iron > 0:
+                toolManager.Modify();
+                _iron--;
+                break;
+            case "Imager" when _gold > 0:
+                toolManager.Modify();
+                _gold--;
                 break;
             default:
                 Debug.Log("Not enough of that element...");
                 break;
         }
-        Debug.Log("Copper: " + copper + " Iron: " + iron + " Nickel: " + nickel + " Gold: " + gold + " Platinum: " + platinum);
+        Debug.Log("Copper: " + _copper + " Iron: " + _iron + " Nickel: " + _nickel + " Gold: " + _gold + " Platinum: " + _platinum);
     }
 }

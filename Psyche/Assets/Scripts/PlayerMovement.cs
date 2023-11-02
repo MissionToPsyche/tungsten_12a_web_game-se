@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private float _xAxis;
     private float _yAxis; //unused for now. may use for jumping later
-    private string _currentAnimation;
+    private string currentAnimation;
     private string _newAnimation;
     private bool _isFacingRight;
     private bool _flipSprite;
@@ -40,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     /// <param name="playerCharacter"></param>
     /// <param name="isGrounded"></param>
-    public void handleMovement(AudioManager audioManager, bool usingThruster)
+    public void handleMovement(bool usingThruster)
     {
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -86,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
         if (_playerManagement.isGrounded && Input.GetButtonDown("Jump"))
         {
             _playerManagement.playerCharacter.velocity = new Vector2(_playerManagement.playerCharacter.velocity.x, 7f);
-            audioManager.PlayPlayerJump(); // play jump sound
+            _playerManagement.audioManager.PlayPlayerJump(); // play jump sound
         }
 
         //checks the direction the player is moving
@@ -118,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
 
         //if the currentAnimation that is playing is the same animation that would be playing, does nothing
         //to ensure animation does not restart
-        if (_currentAnimation == _newAnimation)
+        if (currentAnimation == _newAnimation)
         {
             return;
         }
@@ -128,7 +128,7 @@ public class PlayerMovement : MonoBehaviour
             _animator.Play(_newAnimation);
 
             //set the current animation state
-            _currentAnimation = _newAnimation;
+            currentAnimation = _newAnimation;
         }
 
     }

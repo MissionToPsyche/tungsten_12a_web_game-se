@@ -39,21 +39,19 @@ public class TransitionManager : MonoBehaviour
             switch(sceneName)
             {
                 case "SceneTransition_Home":
-                    SceneManager.LoadScene("SampleScene"); 
-                    break;
+                    SceneManager.LoadScene("SampleScene");              break; //Home
                 case "SceneTransition_Joshua":
-                    SceneManager.LoadScene("DeveloperScene_Joshua");
-                    break;
+                    SceneManager.LoadScene("DeveloperScene_Joshua");    break; //Josh
                 case "SceneTransition_Dhalia":
-                    SceneManager.LoadScene("DeveloperScene_Dhalia"); break;
+                    SceneManager.LoadScene("DeveloperScene_Dhalia");    break; //Dhalia
                 case "SceneTransition_Bryant":
-                    SceneManager.LoadScene("DeveloperScene_Bryant"); break;
+                    SceneManager.LoadScene("DeveloperScene_Bryant");    break; //Bryant
                 case "SceneTransition_Matt":
-                    SceneManager.LoadScene("DeveloperScene_Matt"); break;
+                    SceneManager.LoadScene("DeveloperScene_Matt");      break; //Matt
                 case "SceneTransition_James":
-                    SceneManager.LoadScene("DeveloperScene_James"); break;
+                    SceneManager.LoadScene("DeveloperScene_James");     break; //James
                 default:
-                    Debug.Log("Invalid Scene Transition"); break;
+                    Debug.Log("Invalid Scene Transition");              break; //Default
             }   
         }
     }
