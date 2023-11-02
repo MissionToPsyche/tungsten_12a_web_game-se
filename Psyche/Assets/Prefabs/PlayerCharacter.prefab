@@ -20,7 +20,6 @@ GameObject:
   - component: {fileID: 8966456805578203647}
   - component: {fileID: 4004592847061855459}
   - component: {fileID: 6830239466903384475}
-  - component: {fileID: 6653233046487156157}
   - component: {fileID: 1777309154900150215}
   - component: {fileID: 7978704021431596244}
   m_Layer: 0
@@ -193,12 +192,14 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   isGrounded: 0
-  battery: {fileID: 0}
+  batteryManager: {fileID: 0}
   playerMovement: {fileID: 7454889652593822882}
-  imager: {fileID: 2031395883439144302}
+  imagerManager: {fileID: 0}
+  electromagnetManager: {fileID: 0}
+  thrusterManager: {fileID: 0}
   flashlight: {fileID: 1897821581455681017}
-  magnetTool: {fileID: 5506379765075815446}
   gammaView: {fileID: 4691425001880923315}
+  audioManager: {fileID: 0}
   deathCon: {fileID: 0}
   magnetActive: 0
   inputBlocked: 0
@@ -226,10 +227,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07d825c06d903f741a5349c051bf5d4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toolName: 
   imager: {fileID: 4567901035931106489}
-  flashlight: {fileID: 4681648833962158228}
-  rangeIncrease: 0.5
-  imagerCounter: {fileID: 0}
+  _rangeIncrease: 0
 --- !u!114 &4691425001880923315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,7 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8206ff74d192b874187abf217bf57ec9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pManage: {fileID: 7911676450372591580}
+  toolName: 
   magEffect: {fileID: 6830663132286641818}
 --- !u!114 &8966456805578203647
 MonoBehaviour:
@@ -284,7 +284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 803067f3d4100c74c8ff18ba48d08dc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrusterForce: 0.9
+  toolName: 
 --- !u!95 &6830239466903384475
 Animator:
   serializedVersion: 5
@@ -306,19 +306,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &6653233046487156157
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 82528849670660265}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 803067f3d4100c74c8ff18ba48d08dc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  thrusterForce: 0.9
 --- !u!114 &1777309154900150215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,11 +330,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e43bcff56e0418b48802e922acb33133, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  copper: 0
-  iron: 0
-  nickel: 0
-  gold: 0
-  silicon: 0
 --- !u!1 &1184040049580488845
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,8 +11,6 @@ public class UIController : MonoBehaviour
 {
     [HideInInspector] public static UIController Instance;
 
-    [SerializeField] public TMP_Text battPerText;
-
     /// <summary>
     /// When transitioning between scenes, ensures UI state remains
     /// </summary>
@@ -22,7 +20,7 @@ public class UIController : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(this.gameObject);
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -49,7 +47,7 @@ public class UIController : MonoBehaviour
     {
         Debug.Log("Battery ---: " + newPercentage);
         // Assuming battPerText is the text component that shows the battery percentage
-        battPerText.text = Mathf.RoundToInt(newPercentage).ToString() + "%";
+        PlayerManagement.Instance.batteryManager.battPerText.text = Mathf.RoundToInt(newPercentage).ToString() + "%";
     }
 
     public GameObject inventoryBox;

@@ -31,8 +31,8 @@ public class BatteryManager : ToolManager {
     /// <param name="playerManagement"></param>
     public void Initialize(PlayerManagement playerManagement)
     {
-        _playerManagement = playerManagement;
         toolName = "Battery";
+        _playerManagement = playerManagement;
         maxCapacity = 100f;
         batteryLevel = maxCapacity;
         batteryPercent = batteryLevel / maxCapacity * 100f;
@@ -58,7 +58,6 @@ public class BatteryManager : ToolManager {
             batteryDrained = true;
         }
         onBatteryPercentageChanged?.Invoke(batteryPercent);
-        //UpdateSceneText();
         Debug.Log("Battery: " + batteryLevel + "/" + maxCapacity);
     }
 
@@ -71,7 +70,6 @@ public class BatteryManager : ToolManager {
             batteryDrained = false;
         }
         onBatteryPercentageChanged?.Invoke(batteryPercent);
-        //UpdateSceneText();
         Debug.Log("Battery: " + batteryLevel + "/" + maxCapacity);
     }
 
