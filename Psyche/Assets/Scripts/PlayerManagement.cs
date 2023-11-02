@@ -108,12 +108,6 @@ public class PlayerManagement : MonoBehaviour
 
         usingThruster = false; //default
 
-        //Handle movement
-        if (!inputBlocked)
-        {
-            playerMovement.handleMovement(usingThruster);
-        }
-
         //Call the requisite tool scripts here:
         //Thruster
         if (hasThrusters && Input.GetButton("Jump") && batteryManager.batteryPercent != 0) {
@@ -135,6 +129,11 @@ public class PlayerManagement : MonoBehaviour
             batteryManager.DrainBatt(500);
         }
 
+        //Handle movement
+        if (!inputBlocked)
+        {
+            playerMovement.handleMovement(usingThruster);
+        }
 
         //Modify the tools
         if (hasThrusters && Input.GetButtonDown("Thruster_Increase")) //Button 1
