@@ -65,25 +65,38 @@ public class ElementManagement : MonoBehaviour
     /// <summary>
     /// Modifies the tool when a given button is pressed
     /// </summary>
-    public void ModifyTool (string toolName)
+    public void ModifyTool (ToolManager toolScript)
     {
-        if (toolName == "Thruster")
+        if (toolScript.toolName == "Thruster")
         {
-            if (copper > 0)
+            if (copper > 0) //ensure there are enough of that element
             {
-                Debug.Log("Thruster boost | Copper: " + copper);
-                _playerManagement.thruster.thrusterForce += 1;
+                Debug.Log("Thruster boost | Copper");
+                toolScript.Modify();
                 copper--;
             }
             else
             {
-                Debug.Log("Not enough of that element..." +
-                    "\nCopper: " + copper + 
-                    "\nIron: " + iron + 
-                    "\nNickel: " + nickel +
-                    "\nGold: " + gold +
-                    "\nPlatinum: " + platinum);
+                Debug.Log("Not enough of that element...");
             }
         }
+        else if (toolScript.toolName == "Battery")
+        {
+            if(nickel > 0) //ensure there are enough of that element
+            {
+                Debug.Log("Battery Boost | Nickel");
+                toolScript.Modify();
+                nickel--;
+            }
+            else
+            {
+                Debug.Log("Not enough of that element...");
+            }
+        }
+        Debug.Log("\nCopper: " + copper +
+                  "\nIron: " + iron +
+                  "\nNickel: " + nickel +
+                  "\nGold: " + gold +
+                  "\nPlatinum: " + platinum);
     }
 }
