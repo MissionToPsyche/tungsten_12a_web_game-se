@@ -2326,7 +2326,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 766869979}
-  - component: {fileID: 766869977}
   - component: {fileID: 766869983}
   - component: {fileID: 766869982}
   m_Layer: 0
@@ -2336,25 +2335,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &766869977
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 766869976}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd2ae6f3bb942a548b7a61689e141795, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  toolName: 
-  batteryLevel: 0
-  maxCapacity: 0
-  batteryPercent: 0
-  rate: 1000
-  batteryDrained: 0
-  battPerText: {fileID: 766869982}
 --- !u!224 &766869979
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5853,7 +5833,7 @@ PrefabInstance:
     - target: {fileID: 7911676450372591580, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: battery
       value: 
-      objectReference: {fileID: 766869977}
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4062955869878964537, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
     m_RemovedGameObjects: []
