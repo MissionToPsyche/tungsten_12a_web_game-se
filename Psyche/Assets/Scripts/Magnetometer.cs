@@ -10,9 +10,12 @@ public class Magnetometer : MonoBehaviour {
 
     private Transform hitBoxRotator;
 
+    BoxCollider2D test;
+
     private void Start()
     {
         hitBoxRotator = magHitBox.transform.parent;
+        test = GetComponent<BoxCollider2D>();
     }
 
     /// <summary>
@@ -21,6 +24,7 @@ public class Magnetometer : MonoBehaviour {
     /// <returns></returns>
     public IEnumerator handleMagnet(AudioManager audioManager)
     {
+        PlayerManagement.Instance.playerCharacter.velocity = Vector2.zero;
         PlayerManagement.Instance.magnetActive = true;
         hitBoxRotator.gameObject.SetActive(true);
         Collider2D hit, target = null;
@@ -54,12 +58,13 @@ public class Magnetometer : MonoBehaviour {
                     {
                         //audioManager.PlayToolMagnetometer(); // play tool sound
                         PlayerManagement.Instance.playerCharacter.gravityScale = 0;
+                        //PlayerManagement.Instance.beingPulled = true;
                     }
                     target = hit;
                 }
             }
 
-            if (target != null)
+            if (target != null && !test.IsTouching(target) /*Vector2.Distance(transform.position, target.transform.position) >= 1.5*/) //spazing, hit.IsTouching
                 PlayerManagement.Instance.playerCharacter.MovePosition(Vector2.MoveTowards(transform.position, target.transform.position, Time.deltaTime * 40));
 
             yield return null;

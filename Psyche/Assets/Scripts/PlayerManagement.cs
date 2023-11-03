@@ -95,35 +95,42 @@ public class PlayerManagement : MonoBehaviour
 
         usingThruster = false; //default
 
-        //Call the requisite tool scripts here:
-        //Thruster
-        if (hasThrusters && Input.GetButton("Jump") && battery.batteryPercentage != 0) {
-            thruster.activateThruster(playerCharacter);
-            usingThruster = true;
-            battery.DrainBatt(1);
-        }
-        //Spectrometer
-        if (hasSpectrometer && Input.GetKeyDown(KeyCode.G) && battery.batteryPercentage != 0) {
-            gammaView.ActivateGRS(audioManager);
-            battery.DrainBatt(500);
-        }
-        if (hasSpectrometer && Input.GetKeyUp(KeyCode.G)) {
-            gammaView.DeactivateGRS(audioManager);
-        }
-        //Magnetometer
-        if (hasMagnetometer && !magnetActive && Input.GetButton("Fire1") && battery.batteryPercentage != 0) {
-            StartCoroutine(magnetTool.handleMagnet(audioManager));
-            battery.DrainBatt(500);
-        }
-
+        ///Prevents player input while Inventory is open
         if (!inputBlocked)
         {
             //Handle movement
             playerMovement.handleMovement(playerCharacter, isGrounded, audioManager, usingThruster);
+
+            //Call the requisite tool scripts here:
+            //Thruster
+            if (hasThrusters && Input.GetButton("Jump") && battery.batteryPercentage != 0&& !magnetActive)
+            {
+                thruster.activateThruster(playerCharacter);
+                usingThruster = true;
+                battery.DrainBatt(1);
+            }
+
+            //Spectrometer
+            if (hasSpectrometer && Input.GetKeyDown(KeyCode.G) && battery.batteryPercentage != 0)
+            {
+                gammaView.ActivateGRS(audioManager);
+                battery.DrainBatt(500);
+            }
+            if (hasSpectrometer && Input.GetKeyUp(KeyCode.G))
+            {
+                gammaView.DeactivateGRS(audioManager);
+            }
+
+            //Magnetometer
+            if (hasMagnetometer && !magnetActive && Input.GetButton("Fire1") && battery.batteryPercentage != 0)
+            {
+                StartCoroutine(magnetTool.handleMagnet(audioManager));
+                battery.DrainBatt(500);
+            }
         }
 
-        //Inventory and Dialog Box
-        if (Input.GetKeyDown("tab"))
+        //Inventory and Dialog Box. Does not open if Spectrometer is active
+        if (Input.GetKeyDown("tab") && !Input.GetKey(KeyCode.G))
             UIController.Instance.handleUI();
     }
 
