@@ -23,56 +23,50 @@ public class Magnetometer : MonoBehaviour {
     {
         PlayerManagement.Instance.magnetActive = true;
         hitBoxRotator.gameObject.SetActive(true);
-        Collider2D hit;
+        Collider2D hit, target = null;
+        float curGrav = PlayerManagement.Instance.playerCharacter.gravityScale;
 
         do
         {
+            /**
+             * Finds angle between player center and mouse position
+             */
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector3 direction = mousePosition - hitBoxRotator.position;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             hitBoxRotator.eulerAngles = new Vector3(0, 0, angle);
-            hit = Physics2D.OverlapBox(magHitBox.transform.position, magHitBox.transform.lossyScale, angle, 1 << 7);
+
+            hit = Physics2D.OverlapBox(magHitBox.transform.position, magHitBox.transform.lossyScale, angle, 1 << 14);
+            if (hit != null)
+            {
+                if (hit.attachedRigidbody != null)
+                {
+                    hit.attachedRigidbody.velocity = Vector2.zero;
+                    hit.attachedRigidbody.angularVelocity = 0;
+                    hit.attachedRigidbody.MovePosition(Vector2.MoveTowards(hit.transform.position, transform.position, Time.deltaTime * 40)); //stop from pushing player: set mass back to 1 when done?
+                }
+                else if (hit != target)
+                {
+                    /**
+                     * Ensures audio and gravity are only changed on the first iron object hit
+                     */
+                    if (target == null)
+                    {
+                        //audioManager.PlayToolMagnetometer(); // play tool sound
+                        PlayerManagement.Instance.playerCharacter.gravityScale = 0;
+                    }
+                    target = hit;
+                }
+            }
+
+            if (target != null)
+                PlayerManagement.Instance.playerCharacter.MovePosition(Vector2.MoveTowards(transform.position, target.transform.position, Time.deltaTime * 40));
 
             yield return null;
-        } while (Input.GetButton("Fire1") && hit == null);
-
-        /**
-         * Pulls the player towards the hit metal object and disables gravity
-         */
-        if (Input.GetButton("Fire1"))
-        {
-            //audioManager.PlayToolMagnetometer(); // play tool sound
-
-            //if (hit.rigidbody != null)
-            //{
-            //    do
-            //    {
-            //        if (PlayerManagement.Instance.isGrounded)
-            //            hit.rigidbody.MovePosition(Vector2.MoveTowards(hit.transform.position, transform.position, Time.deltaTime * 40)); //stop from pushing player: set mass back to 1 when done?, remove ground check?
-            //        yield return null;
-            //    } while (Input.GetButton("Fire1"));
-            //}
-            //else
-            //{
-            //    Vector2 pullDirection;
-            //    if (Input.GetAxisRaw("Vertical") > 0)
-            //        pullDirection = new Vector2(transform.position.x, hit.transform.position.y);
-            //    else
-            //        pullDirection = new Vector2(hit.transform.position.x, transform.position.y);
-
-            //    PlayerManagement.Instance.playerCharacter.gravityScale = 0;
-
-            //    do
-            //    {
-            //        PlayerManagement.Instance.playerCharacter.MovePosition(Vector2.MoveTowards(transform.position, pullDirection, Time.deltaTime * 40));
-            //        yield return null;
-            //    } while (Input.GetButton("Fire1"));
-
-            //    PlayerManagement.Instance.playerCharacter.gravityScale = 1;
-            //}
-        }
+        } while (Input.GetButton("Fire1"));
 
         //audioManager.StopToolMagnetometer(); // stop tool sound
+        PlayerManagement.Instance.playerCharacter.gravityScale = curGrav;
         hitBoxRotator.gameObject.SetActive(false);
         PlayerManagement.Instance.magnetActive = false;
     }
