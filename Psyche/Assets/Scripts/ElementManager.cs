@@ -8,8 +8,8 @@ using UnityEngine;
 public class ElementManager : MonoBehaviour
 {
     //Private variables
+    [SerializeField] private int _copper, _iron, _nickel, _gold, _platinum;
     private PlayerManagement _playerManagement;
-    private int _copper, _iron, _nickel, _gold, _platinum;
 
     /// <summary>
     /// Initialize this script
