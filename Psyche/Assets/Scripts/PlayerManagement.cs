@@ -57,10 +57,10 @@ public class PlayerManagement : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
         playerMovement.Initialize(this);
         // ##### Tool Managers #####
-        thrusterManager = GetComponent<ThrusterManager>();
-        thrusterManager.Initialize(this);
         batteryManager = GetComponent<BatteryManager>();
         batteryManager.Initialize(this);
+        thrusterManager = GetComponent<ThrusterManager>();
+        thrusterManager.Initialize(this);
         electromagnetManager = GetComponent<ElectromagnetManager>();
         electromagnetManager.Initialize(this);
         imagerManager = GetComponent<ImagerManager>();
@@ -68,13 +68,14 @@ public class PlayerManagement : MonoBehaviour
         // ##### Object Managers ######
         elementManagement = GetComponent<ElementManager>();
         elementManagement.Initialize(this);
+        audioManager = GameObject
+            .FindGameObjectWithTag("AudioSources")
+            .GetComponent<AudioManager>();
         // ##### Miscellaneous ######
         sceneTransition = GetComponent<TransitionManager>();
         sceneTransition.Initialize(this);
         deathCon = GetComponent<PlayerDeath>();
-        audioManager = GameObject
-            .FindGameObjectWithTag("AudioSources")
-            .GetComponent<AudioManager>();
+        
 
         //Use singleton to ensure no duplicates are created
         if (Instance == null)
@@ -199,12 +200,13 @@ public class PlayerManagement : MonoBehaviour
                 break;
 
             case "Imager":
+                //hasImager = true;
                 imagerManager.Modify();
                 batteryManager.DrainBatt(500);
                 break;
 
             case "ImagerCursor":
-                //hasImager = true; //eliminate warnings until used
+                hasImager = true; //eliminate warnings until used
                 UIController.Instance.setDialogText("This is an Imager");
                 UIController.Instance.enableImagerButton();
                 imagerManager.Modify();
