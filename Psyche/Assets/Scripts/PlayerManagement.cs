@@ -81,6 +81,9 @@ public class PlayerManagement : MonoBehaviour
         //Set up initial battery
         battery.batteryPercentage = 100;
         battery.rate = 1;
+
+        //Testing purposes
+        hasThrusters = true;
     }
 
     void Update()
