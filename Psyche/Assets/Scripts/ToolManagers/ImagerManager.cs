@@ -14,11 +14,12 @@ using UnityEngine;
 /// </summary>
 public class ImagerManager : ToolManager
 {
-    //The player's imager which is being increased
-    [SerializeField] private UnityEngine.Rendering.Universal.Light2D imager;
-    
     //Private Variables
-    [SerializeField] private float _rangeIncrease; //Increases imager field
+    [SerializeField] private UnityEngine.Rendering.Universal.Light2D _imager; //The player's imager - Not initialized through code
+    [SerializeField] private UnityEngine.Rendering.Universal.Light2D _flashlight; //The cursor's imager - Not initialized through code
+    [SerializeField] private float _rangeIncrease; //The amount to increase the vision field
+    [SerializeField] private ImagerCounter _imagerCounter; //Not initialized though code
+    
 
     /// <summary>
     /// Initializes this script
@@ -28,7 +29,7 @@ public class ImagerManager : ToolManager
     {
         toolName = "Imager";
         _playerManagement = playerManagement;
-        _rangeIncrease = 2f;
+        _rangeIncrease = 0.5f;
     }
 
     /// <summary>
@@ -36,7 +37,7 @@ public class ImagerManager : ToolManager
     /// </summary>
     public void turnOff()
     {
-        imager.intensity = 0;
+        _imager.intensity = 0;
     }
 
     /// <summary>
@@ -44,7 +45,7 @@ public class ImagerManager : ToolManager
     /// </summary>
     public void turnOn()
     {
-        imager.intensity = 1;
+        _imager.intensity = 1;
     }
 
     /// <summary>
@@ -52,8 +53,13 @@ public class ImagerManager : ToolManager
     /// </summary>
     public override void Modify()
     {
-        imager.pointLightInnerRadius += _rangeIncrease;
-        imager.pointLightOuterRadius += _rangeIncrease;
+        //Increase imager radius
+        _imager.pointLightInnerRadius += _rangeIncrease;
+        _imager.pointLightOuterRadius += _rangeIncrease;
+        //Increase cursor radius
+        _flashlight.pointLightInnerRadius += _rangeIncrease;
+        _flashlight.pointLightOuterRadius += _rangeIncrease;
         _playerManagement.audioManager.PlayToolImager(); // play tool sound
+        _imagerCounter.updateImagerCount(); 
     }
 }
