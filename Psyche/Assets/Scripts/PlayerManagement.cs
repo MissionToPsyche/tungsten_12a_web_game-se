@@ -72,6 +72,7 @@ public class PlayerManagement : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
         thruster = GetComponent<Thruster>();
         deathCon = GetComponent<PlayerDeath>();
+        deathCon.playerHealth = playerHealth;
         audioManager = GameObject
             .FindGameObjectWithTag("AudioSources")
             .GetComponent<AudioManager>();
@@ -82,10 +83,12 @@ public class PlayerManagement : MonoBehaviour
         //Set up initial battery
         battery.batteryPercentage = 100;
         battery.rate = 1;
+        battery.UpdateSceneText();
 
         //Set up initial player health
         playerHealth.playerHealth = 5;
         playerHealth.amount = 1;
+        playerHealth.UpdateSceneText();
     }
 
     void Update()

@@ -103,7 +103,7 @@ public class UIController : MonoBehaviour
             confirmBoxText.transform.parent.gameObject.SetActive(false);
             inventoryBox.SetActive(false);
             PlayerManagement.Instance.inputBlocked = false;
-            PlayerManagement.Instance.deathCon.Die();
+            PlayerManagement.Instance.deathCon.GetHurt();
         }
         ///If Title Screen button opened the Confirmation Box
         else
