@@ -2553,7 +2553,7 @@ GameObject:
   - component: {fileID: 3240746905583605884}
   m_Layer: 5
   m_Name: UI
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2571,11 +2571,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2463416301115720225}
+  - {fileID: 4413514654640783859}
+  - {fileID: 397801036126539278}
   - {fileID: 5396688408340484251}
   - {fileID: 6083342132013930646}
   - {fileID: 6738946301917806760}
-  - {fileID: 397801036126539278}
-  - {fileID: 4413514654640783859}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2658,7 +2658,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b8b212082f40e9468704dc35221b3b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  battPerText: {fileID: 0}
   inventoryBox: {fileID: 1690373141205758407}
   dialogBox: {fileID: 2891680610041721959}
   dialogText: {fileID: 6635938548554724783}
