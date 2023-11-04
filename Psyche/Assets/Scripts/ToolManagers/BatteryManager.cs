@@ -39,7 +39,8 @@ public class BatteryManager : ToolManager {
         rate = 1;
     }
 
-    void Update() {
+    // uncomment to test
+    /*void Update() {
         if (Input.GetKeyDown(KeyCode.Q)) {
             DrainBatt(rate);
         }
@@ -47,7 +48,7 @@ public class BatteryManager : ToolManager {
         if (Input.GetKeyDown(KeyCode.E)) {
             ChargeBatt(rate);
         }
-    }
+    }*/
 
     // drains battery at given rate
     public void DrainBatt(float rate) {

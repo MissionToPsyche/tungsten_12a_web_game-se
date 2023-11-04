@@ -27,6 +27,7 @@ public class PlayerManagement : MonoBehaviour
 
     //Management scripts
     [Header("Scripts")]
+    public PlayerHealth playerHealth;
     public BatteryManager batteryManager;
     public PlayerMovement playerMovement;
     public ImagerManager imagerManager;
@@ -69,6 +70,7 @@ public class PlayerManagement : MonoBehaviour
         imagerManager = GetComponent<ImagerManager>();
         imagerManager.Initialize(this);
         // ##### Object Managers ######
+        //playerHealth.Initialize(this); <-- this initializes the script and creates a cross reference between the two
         elementManagement = GetComponent<ElementManager>();
         elementManagement.Initialize(this);
         audioManager = GameObject
@@ -96,8 +98,13 @@ public class PlayerManagement : MonoBehaviour
     /// Start() is called just before the first frame of the scene
     /// </summary>
     void Start()
-    {
-        DontDestroyOnLoad(audioManager);    
+    {   //Set up initial player health (Should be initialized through the playerhealth script instead of here)
+        playerHealth.playerHealth = 5;
+        playerHealth.amount = 1;
+        playerHealth.UpdateSceneText();
+
+        //Don't destroy audio manager (should be removed)
+        DontDestroyOnLoad(audioManager);
     }
 
     void Update()
@@ -235,7 +242,12 @@ public class PlayerManagement : MonoBehaviour
             case "Battery":
                 Debug.Log("Battery charge!");
                 batteryManager.ChargeBatt(500);
-                break;    
+                break;
+
+            case "Health":        
+                Debug.Log("Health increase!");
+                playerHealth.HealthUp(1);
+                break;
 
             default:
                 Debug.LogWarning("Tool name '" + toolName + "' not found!");
