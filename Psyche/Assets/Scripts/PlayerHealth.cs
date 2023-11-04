@@ -13,11 +13,19 @@ using UnityEngine;
 /// PlayerHealth class in which health can be tracked, increased, and decreased. 
 /// </summary>
 public class PlayerHealth : MonoBehaviour {
-
     public int playerHealth;
     public int amount;
     public bool playerHealthZero;
     public TMP_Text healthText;
+
+    //private PlayerManagement _playerManagement;
+
+    //Should initialize the script here and then run playerHealth.Initialize(this); in PlayerManagement
+    /* 
+    public void Initialize(PlayerManagement _playerManagement)
+    {
+         _playerManagement = playerManagement;
+    }*/
 
     // uncomment to test
     void Update() {
