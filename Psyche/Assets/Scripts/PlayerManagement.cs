@@ -242,7 +242,12 @@ public class PlayerManagement : MonoBehaviour
             case "Battery":
                 Debug.Log("Battery charge!");
                 batteryManager.ChargeBatt(500);
-                break;    
+                break;
+
+            case "Health":        
+                Debug.Log("Health increase!");
+                playerHealth.HealthUp(1);
+                break;
 
             default:
                 Debug.LogWarning("Tool name '" + toolName + "' not found!");
