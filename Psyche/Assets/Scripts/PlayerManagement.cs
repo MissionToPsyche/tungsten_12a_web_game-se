@@ -1,3 +1,5 @@
+// Ignore Spelling: Collider
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
@@ -13,6 +15,7 @@ public class PlayerManagement : MonoBehaviour
     //Create the playercharacter assignment
     [Header("Components")]
     public Rigidbody2D playerCharacter;
+    public BoxCollider2D playerCollider;
 
     //Set up environmental checks
     public Transform groundCheck;
@@ -24,33 +27,59 @@ public class PlayerManagement : MonoBehaviour
 
     //Management scripts
     [Header("Scripts")]
-    public Battery battery;
+    public BatteryManager batteryManager;
     public PlayerMovement playerMovement;
-    public Imager imager;
+    public ImagerManager imagerManager;
+    public EMagnetManager eMagnetManager;
+    public ThrusterManager thrusterManager;
     public ImagerCursor flashlight;
-    public Magnetometer magnetTool;
-    private Thruster thruster;
     public GammaView gammaView;
-    private AudioManager audioManager;
-    private SceneTransition sceneTransition;
-    private ElementManagement elementManagement;
+    public AudioManager audioManager;
+    private TransitionManager sceneTransition;
+    private ElementManager elementManagement;
     public PlayerDeath deathCon;
 
     //Booleans for the various tools
-    //private bool hasImager; //eliminate warnings until used
-    private bool hasMagnetometer;
+    private bool hasImager; //Eliminate if necessary
+    private bool hasEMagnet;
     private bool hasThrusters;
     private bool hasSpectrometer;
     private bool usingThruster; //for animation purposes
 
     //Booleans to prevent needless code runs
-    [HideInInspector] public bool magnetActive, inputBlocked;
+    [HideInInspector] public bool eMagnetActive, beingPulled, inputBlocked;
 
     /// <summary>
-    /// When transitioning between scenes, ensures playerstate remains
+    /// Awake() is the first function to be called in any script as it's being initialized
     /// </summary>
     public void Awake()
     {
+        //Assign and initialize scripts
+        playerCharacter = GetComponent<Rigidbody2D>();
+        playerCollider = GetComponent<BoxCollider2D>();
+        playerMovement = GetComponent<PlayerMovement>();
+        playerMovement.Initialize(this);
+        // ##### Tool Managers #####
+        batteryManager = GetComponent<BatteryManager>();
+        batteryManager.Initialize(this);
+        thrusterManager = GetComponent<ThrusterManager>();
+        thrusterManager.Initialize(this);
+        eMagnetManager = GetComponent<EMagnetManager>();
+        eMagnetManager.Initialize(this);
+        imagerManager = GetComponent<ImagerManager>();
+        imagerManager.Initialize(this);
+        // ##### Object Managers ######
+        elementManagement = GetComponent<ElementManager>();
+        elementManagement.Initialize(this);
+        audioManager = GameObject
+            .FindGameObjectWithTag("AudioSources")
+            .GetComponent<AudioManager>();
+        // ##### Miscellaneous ######
+        sceneTransition = GetComponent<TransitionManager>();
+        sceneTransition.Initialize(this);
+        deathCon = GetComponent<PlayerDeath>();
+        
+
         //Use singleton to ensure no duplicates are created
         if (Instance == null)
         {
@@ -63,67 +92,76 @@ public class PlayerManagement : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// Start() is called just before the first frame of the scene
+    /// </summary>
     void Start()
     {
-        //Assign the playerCharacter to it in-game objects
-        playerCharacter = GetComponent<Rigidbody2D>(); 
-        playerMovement = GetComponent<PlayerMovement>();
-        thruster = GetComponent<Thruster>();
-        deathCon = GetComponent<PlayerDeath>();
-        audioManager = GameObject
-            .FindGameObjectWithTag("AudioSources")
-            .GetComponent<AudioManager>();
-        sceneTransition = GetComponent<SceneTransition>();
-        elementManagement = GetComponent<ElementManagement>();
         DontDestroyOnLoad(audioManager);    
-        
-        //Set up initial battery
-        battery.batteryPercentage = 100;
-        battery.rate = 1;
     }
 
     void Update()
     {
         //Check booleans
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
-        if (battery.batteryDrained) {
-            imager.turnOff();
+        if (batteryManager.batteryDrained) {
+            imagerManager.turnOff();
         } else {
-            imager.turnOn();
+            imagerManager.turnOn();
         }
 
         usingThruster = false; //default
 
-        //Call the requisite tool scripts here:
-        //Thruster
-        if (hasThrusters && Input.GetButton("Jump") && battery.batteryPercentage != 0) {
-            thruster.activateThruster(playerCharacter);
-            usingThruster = true;
-            battery.DrainBatt(1);
-        }
-        //Spectrometer
-        if (hasSpectrometer && Input.GetKeyDown(KeyCode.G) && battery.batteryPercentage != 0) {
-            gammaView.ActivateGRS(audioManager);
-            battery.DrainBatt(500);
-        }
-        if (hasSpectrometer && Input.GetKeyUp(KeyCode.G)) {
-            gammaView.DeactivateGRS(audioManager);
-        }
-        //Magnetometer
-        if (hasMagnetometer && !magnetActive && Input.GetButton("Fire1") && battery.batteryPercentage != 0) {
-            StartCoroutine(magnetTool.handleMagnet(audioManager));
-            battery.DrainBatt(500);
-        }
-
+        ///Disables player input if Inventory is open
         if (!inputBlocked)
         {
-            //Handle movement
-            playerMovement.handleMovement(playerCharacter, isGrounded, audioManager, usingThruster);
+            //Call the requisite tool scripts here:
+            //Thruster
+            if (hasThrusters && Input.GetButton("Jump") && batteryManager.batteryPercent != 0 && !beingPulled) {
+                thrusterManager.ActivateThruster();
+                usingThruster = true;
+                batteryManager.DrainBatt(1);
+            }
+
+            //Spectrometer
+            if (hasSpectrometer && Input.GetKeyDown(KeyCode.G) && batteryManager.batteryPercent != 0) {
+                gammaView.ActivateGRS(audioManager);
+                batteryManager.DrainBatt(500);
+            }
+            if (hasSpectrometer && Input.GetKeyUp(KeyCode.G)) {
+                gammaView.DeactivateGRS(audioManager);
+            }
+
+            //ElectroMagnet
+            if (hasEMagnet && Input.GetButton("Fire1") && batteryManager.batteryPercent != 0 && !eMagnetActive) { //better bool management
+                StartCoroutine(eMagnetManager.handleEMagnet());
+                batteryManager.DrainBatt(500);
+            }
+
+            playerMovement.handleMovement(usingThruster);
         }
 
+        //Modify the tools
+        if (hasThrusters && Input.GetButtonDown("Thruster_Increase")) //Button 1
+        {
+            elementManagement.ModifyTool(thrusterManager);
+        }
+        if (Input.GetButtonDown("Battery_Increase")) //Button 2
+        {
+            elementManagement.ModifyTool(batteryManager);
+        }
+        if (hasEMagnet && Input.GetButtonDown("Electromagnet_Increase"))
+        {
+            elementManagement.ModifyTool(eMagnetManager); //Button 3
+        }
+        if (hasImager && Input.GetButtonDown("Imager_Increase")) 
+        {
+            elementManagement.ModifyTool(imagerManager); //Button 4
+        }
+
+
         //Inventory and Dialog Box
-        if (Input.GetKeyDown("tab"))
+        if (Input.GetKeyDown("tab") && !Input.GetKey(KeyCode.G))
             UIController.Instance.handleUI();
     }
 
@@ -167,16 +205,19 @@ public class PlayerManagement : MonoBehaviour
                 break;
 
             case "Imager":
-                imager.increaseVision(audioManager);
-                battery.DrainBatt(500);
+                //hasImager = true;
+                imagerManager.Modify();
+                batteryManager.DrainBatt(500);
                 break;
 
             case "ImagerCursor":
-                //hasImager = true; //eliminate warnings until used
+                hasImager = true; //eliminate warnings until used
                 UIController.Instance.setDialogText("This is an Imager");
                 UIController.Instance.enableImagerButton();
+                imagerManager.Modify();
+                batteryManager.DrainBatt(500);
                 flashlight.Update();
-                battery.DrainBatt(500);
+                batteryManager.DrainBatt(500);
                 break;
 
             case "Spectrometer":
@@ -186,14 +227,14 @@ public class PlayerManagement : MonoBehaviour
                 break;
 
             case "Magnetometer":
-                hasMagnetometer = true;
+                hasEMagnet = true;
                 UIController.Instance.setDialogText("This is a Magnetometer");
                 UIController.Instance.enableMagnetometerButton();
                 break;
 
             case "Battery":
                 Debug.Log("Battery charge!");
-                battery.ChargeBatt(500);
+                batteryManager.ChargeBatt(500);
                 break;    
 
             default:

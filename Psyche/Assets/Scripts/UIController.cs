@@ -15,6 +15,7 @@ public class UIController : MonoBehaviour
     /// </summary>
     void Awake()
     {
+        //Singleton
         if (Instance == null)
         {
             Instance = this;
@@ -24,6 +25,28 @@ public class UIController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void OnEnable()
+    {
+        PlayerManagement.Instance.batteryManager.onBatteryPercentageChanged += UpdateBatteryText;
+    }
+
+    private void OnDisable()
+    {
+        if (PlayerManagement.Instance.batteryManager != null)
+            PlayerManagement.Instance.batteryManager.onBatteryPercentageChanged -= UpdateBatteryText;
+    }
+
+    /// <summary>
+    /// Function to update the battery text
+    /// </summary>
+    /// <param name="newPercentage"></param>
+    private void UpdateBatteryText(float newPercentage)
+    {
+        Debug.Log("Battery ---: " + newPercentage);
+        // Assuming battPerText is the text component that shows the battery percentage
+        PlayerManagement.Instance.batteryManager.battPerText.text = Mathf.RoundToInt(newPercentage).ToString() + "%";
     }
 
     public GameObject inventoryBox;
@@ -69,7 +92,6 @@ public class UIController : MonoBehaviour
     public void enableThrusterButton() { thrusterButton.SetActive(true); }
 
     public void openImagerLink() { Application.OpenURL("https://www.jpl.nasa.gov/images/pia24894-psyches-imager-in-progress"); }
-
     public void openMagnetometerLink() { Application.OpenURL("https://psyche.asu.edu/gallery/meet-nasas-psyche-team-who-will-measure-the-asteroids-magnetic-field/"); }
 
     private bool shouldRespawn;
