@@ -20,6 +20,9 @@ public class PlayerDeath : MonoBehaviour
     //Initial character location when level first begins
     private Vector3 startPoint;
 
+    //Initial player health
+    public PlayerHealth playerHealth;
+
     //Initialize respawn point and set starting location
     private void Start()
     {
@@ -32,7 +35,7 @@ public class PlayerDeath : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Hazard"))
         {
-            Die();
+            GetHurt();
         }
     }
 
@@ -45,14 +48,18 @@ public class PlayerDeath : MonoBehaviour
         }
     }
 
-    //Respawn character to last checkpoint when player dies
-    private void Die()
+    //Respawn character to last checkpoint when player gets hurt
+    public void GetHurt()
     {
-        if (startPoint.Equals(respawnPoint))
+        Debug.Log("Ouch!");
+        playerHealth.HealthDown(1);
+        if (playerHealth.playerHealth == 0) {
+            Debug.Log("Game should end here.....");
+        }
+        else if (startPoint.Equals(respawnPoint))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
         transform.position = respawnPoint;
     }
-
 }

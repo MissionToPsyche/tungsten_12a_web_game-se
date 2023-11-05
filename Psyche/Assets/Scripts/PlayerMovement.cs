@@ -8,15 +8,17 @@ using UnityEngine;
 ///</summary>
 public class PlayerMovement : MonoBehaviour
 {
-    private Animator animator;
-    private SpriteRenderer spriteRenderer;
-    private float xAxis;
-    private float yAxis; //unused for now. may use for jumping later
+    //Private Variables
+    private PlayerManagement _playerManagement;
+    private Animator _animator;
+    private SpriteRenderer _spriteRenderer;
+    private float _xAxis;
+    private float _yAxis; //unused for now. may use for jumping later
     private string currentAnimation;
-    private string newAnimation;
-    private bool isFacingRight;
-    private bool flipSprite;
-    private Vector2 walkVelocity;
+    private string _newAnimation;
+    private bool _isFacingRight;
+    private bool _flipSprite;
+    private Vector2 _walkVelocity;
 
     //Animation states
     const string PLAYER_IDLE = "player_idle";
@@ -25,63 +27,78 @@ public class PlayerMovement : MonoBehaviour
     const string PLAYER_THRUSTER = "player_thruster"; //unused for now. will add later
 
     /// <summary>
+    /// Initializes the script
+    /// </summary>
+    /// <param name="playerManagement"></param>
+    public void Initialize(PlayerManagement playerManagement)
+    {
+        _playerManagement = playerManagement;
+    }
+
+    /// <summary>
     /// Handles the movement and animations of the player.
     /// </summary>
     /// <param name="playerCharacter"></param>
     /// <param name="isGrounded"></param>
-    public void handleMovement(Rigidbody2D playerCharacter, bool isGrounded)
+    public void handleMovement(bool usingThruster)
     {
-        animator = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        flipSprite = true;
-
+        _animator = GetComponent<Animator>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _flipSprite = true;
+        
         //Horizontal Movement
-        xAxis = Input.GetAxisRaw("Horizontal");
-        walkVelocity = new Vector2(xAxis * 7f, playerCharacter.velocity.y);
-        playerCharacter.velocity = walkVelocity;
+        _xAxis = Input.GetAxisRaw("Horizontal");
+        _walkVelocity = new Vector2(_xAxis * 7f, _playerManagement.playerCharacter.velocity.y);
+        _playerManagement.playerCharacter.velocity = _walkVelocity;
 
         //if the player is grounded, then either the walk animation or idle animation will play
-        if (isGrounded)
+        if (_playerManagement.isGrounded && !_playerManagement.beingPulled)
         {
             //if the player is moving left or right
-            if (xAxis != 0) 
+            if (_xAxis != 0) 
             {
-                newAnimation = PLAYER_WALK;
+                _newAnimation = PLAYER_WALK;
             }
+
             //if the player is not moving
             else
             {
-                newAnimation = PLAYER_IDLE;
+                _newAnimation = PLAYER_IDLE;
             }
         }
 
         //if the player is in the air; will be edited later to add thruster option
         else
         {
-            newAnimation = PLAYER_JUMP;
+            if (usingThruster)
+            {
+                _newAnimation = PLAYER_THRUSTER;
+            }
+
+            else
+            {
+                _newAnimation = PLAYER_JUMP;
+            }
+            
         }
 
         //Vertical "jump" only if player is on the ground
-        if (isGrounded && Input.GetButtonDown("Jump"))
+        if (_playerManagement.isGrounded && !_playerManagement.beingPulled && Input.GetButtonDown("Jump"))
         {
-            playerCharacter.velocity = new Vector2(playerCharacter.velocity.x, 7f);
-            //Plays jump sound
-            /**AudioManager audioManager = GameObject
-                .FindGameObjectWithTag("AudioSources")
-                .GetComponent<AudioManager>();
-            audioManager.PlayPlayerJump();**/
+            _playerManagement.playerCharacter.velocity = new Vector2(_playerManagement.playerCharacter.velocity.x, 7f);
+            _playerManagement.audioManager.PlayPlayerJump(); // play jump sound
         }
 
         //checks the direction the player is moving
-        if (flipSprite)
+        if (_flipSprite)
         {
-            if (xAxis < 0) //if moving right
+            if (_xAxis < 0) //if moving right
             {
-                isFacingRight = false;
+                _isFacingRight = false;
             }
-            else if (xAxis > 0) //if moving left
+            else if (_xAxis > 0) //if moving left
             {
-                isFacingRight = true;
+                _isFacingRight = true;
             }
             else
             { 
@@ -90,28 +107,28 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //flips the sprite based on direction the character is facing
-        if (isFacingRight)
+        if (_isFacingRight)
         {
-            spriteRenderer.flipX = false;
+            _spriteRenderer.flipX = false;
         }
         else
         {
-            spriteRenderer.flipX = true;
+            _spriteRenderer.flipX = true;
         }
 
         //if the currentAnimation that is playing is the same animation that would be playing, does nothing
         //to ensure animation does not restart
-        if (currentAnimation == newAnimation)
+        if (currentAnimation == _newAnimation)
         {
             return;
         }
         else
         {
             //play the new animation
-            animator.Play(newAnimation);
+            _animator.Play(_newAnimation);
 
             //set the current animation state
-            currentAnimation = newAnimation;
+            currentAnimation = _newAnimation;
         }
 
     }

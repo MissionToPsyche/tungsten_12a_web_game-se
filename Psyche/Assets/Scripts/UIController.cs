@@ -3,14 +3,56 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// Functions for the inventory and dialogue box. Script is a component of the UI gameobject
+/// Functions for the inventory and dialog box. Script is a component of the UI gameobject
 /// </summary>
 /// Author: jmolive8
 public class UIController : MonoBehaviour
 {
+    [HideInInspector] public static UIController Instance;
+
+    /// <summary>
+    /// When transitioning between scenes, ensures UI state remains
+    /// </summary>
+    void Awake()
+    {
+        //Singleton
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnEnable()
+    {
+        PlayerManagement.Instance.batteryManager.onBatteryPercentageChanged += UpdateBatteryText;
+    }
+
+    private void OnDisable()
+    {
+        if (PlayerManagement.Instance.batteryManager != null)
+            PlayerManagement.Instance.batteryManager.onBatteryPercentageChanged -= UpdateBatteryText;
+    }
+
+    /// <summary>
+    /// Function to update the battery text
+    /// </summary>
+    /// <param name="newPercentage"></param>
+    private void UpdateBatteryText(float newPercentage)
+    {
+        Debug.Log("Battery ---: " + newPercentage);
+        // Assuming battPerText is the text component that shows the battery percentage
+        PlayerManagement.Instance.batteryManager.battPerText.text = Mathf.RoundToInt(newPercentage).ToString() + "%";
+    }
+
     public GameObject inventoryBox;
-    public GameObject dialogueBox;
-    public TMP_Text dialogueText;
+    public GameObject dialogBox;
+    public TMP_Text dialogText;
+    public TMP_Text confirmBoxText;
 
     [Header("Buttons")]
     public GameObject imagerButton;
@@ -19,24 +61,29 @@ public class UIController : MonoBehaviour
     public GameObject thrusterButton;
 
     /// <summary>
-    /// Closes Dialogue Box if it is open. If not opens Inventory
+    /// Closes Dialog Box if it is open. If not opens Inventory
     /// </summary>
     public void handleUI()
     {
-        if (dialogueBox.activeInHierarchy)
-            dialogueBox.SetActive(false);
+        if (dialogBox.activeInHierarchy)
+            dialogBox.SetActive(false);
         else
-            inventoryBox.SetActive(!inventoryBox.activeInHierarchy);
+        {
+            bool invToggle = !inventoryBox.activeInHierarchy;
+            PlayerManagement.Instance.inputBlocked = invToggle;
+            Cursor.visible = invToggle;
+            inventoryBox.SetActive(invToggle);
+        }
     }
 
     /// <summary>
-    /// Sets text of Dialogue Box and opens it
+    /// Sets text of Dialog Box and opens it
     /// </summary>
     /// <param name="text"></param>
-    public void setDialogueText(string text)
+    public void setDialogText(string text)
     {
-        dialogueText.SetText(text);
-        dialogueBox.SetActive(true);
+        dialogText.SetText(text);
+        dialogBox.SetActive(true);
     }
 
     public void enableImagerButton() { imagerButton.SetActive(true); }
@@ -44,11 +91,50 @@ public class UIController : MonoBehaviour
     public void enableMagnetometerButton() { magnetometerButton.SetActive(true); }
     public void enableThrusterButton() { thrusterButton.SetActive(true); }
 
+    public void openImagerLink() { Application.OpenURL("https://www.jpl.nasa.gov/images/pia24894-psyches-imager-in-progress"); }
+    public void openMagnetometerLink() { Application.OpenURL("https://psyche.asu.edu/gallery/meet-nasas-psyche-team-who-will-measure-the-asteroids-magnetic-field/"); }
+
+    private bool shouldRespawn;
     /// <summary>
-    /// Title Screen button functionality
+    /// When Respawn/Title Screen button is clicked activates Confirmation Box and sets behavior for Yes button
     /// </summary>
-    public void QuitGame()
+    /// <param name="respawn"></param>
+    public void handleConfirmBox(bool respawn)
     {
-        SceneManager.LoadScene("Title_Screen");
+        shouldRespawn = respawn;
+        if (shouldRespawn)
+        {
+            confirmBoxText.SetText("Are you sure you want return to the last checkpoint?");
+            confirmBoxText.transform.parent.gameObject.SetActive(true);
+        }
+        else
+        {
+            confirmBoxText.SetText("Are you sure you want to quit to the title screen?");
+            confirmBoxText.transform.parent.gameObject.SetActive(true);
+        }
+    }
+
+    /// <summary>
+    /// Handles behavior when Yes button is clicked on Confirmation Box
+    /// </summary>
+    public void handleYesClicked()
+    {
+        ///If Respawn button opened the Confirmation Box
+        if (shouldRespawn)
+        {
+            confirmBoxText.transform.parent.gameObject.SetActive(false);
+            inventoryBox.SetActive(false);
+            PlayerManagement.Instance.inputBlocked = false;
+            PlayerManagement.Instance.deathCon.GetHurt();
+        }
+        ///If Title Screen button opened the Confirmation Box
+        else
+        {
+            ///Destroys Player and UI so they do not spawn on the start screen
+            Destroy(PlayerManagement.Instance.gameObject);
+            Destroy(gameObject);
+            Cursor.visible = true;
+            SceneManager.LoadScene("Title_Screen");
+        }
     }
 }
