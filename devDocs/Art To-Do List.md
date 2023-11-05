@@ -1,26 +1,25 @@
+### Last updated: 04 November 2023
+
 # Sprites  
 ### Tools
-- Magnetometer
+- EMagnet
 - Spectrometer
 
 ### Hazards
 - None currently
 
 ### Terrain
-- Cave entrances
-    - Front layer
-    - Back layer 
+- Other caves for other rock colors, and maybe an original one
 
 ### Points of Interest
-- Potentially a battery recharge station
+- None for now
 
 ### UI
-- Battery icon for the top right of the screen to display the current battery level for the player
-    - Green battery
-    - White outline
-    - Broken into 6 chunks
+- Battery
+    - update so that the battery starts with 2 bars, then has 4, then has 6.
 
 ### Other
+- None for now
 
 # Animations
 ### Player Character
@@ -35,13 +34,10 @@
         - Walking
         - Jumping
         - Thrusters 
-- Warping
 - Damaged   
 
 ### Other
-- Checkpoint spinning animation
-- Potentially a battery recharge station w/ animation
-    - could be with the checkpoint
+- Adjust checkpoint so that it has the plus-sign shaped solar panels, with animation, and acts as a battery recharge station
 
 # Notes
 - Check official Psyche documentation for details on potential terrain and surface characteristics on the actual Psyche asteroid
