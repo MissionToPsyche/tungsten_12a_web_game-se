@@ -28,8 +28,8 @@
 - [ ] Gamestate script
 - [ ] Update elements to team names
 - [ ] Developer console with benchmark display
-- [ ] - [ ] ToolStates implemented into ToolManager abstract script to provide more refinement in allocating resource for modification of tools.  Each tool can have varying states which can be modified via the Modify() function.
-- [ ] - [ ] Relocate battPercentText variable to UIController.cs and reconfigure communication event as necessary
+- [ ] ToolStates implemented into ToolManager abstract script to provide more refinement in allocating resource for modification of tools.  Each tool can have varying states which can be modified via the Modify() function.
+- [ ] Relocate battPercentText variable to UIController.cs and reconfigure communication event as necessary
   - [ ] Make sure to assign via code rather than inspector
 
 ### Matt
