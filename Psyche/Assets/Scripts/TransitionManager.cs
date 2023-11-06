@@ -10,6 +10,8 @@ public class TransitionManager : MonoBehaviour
 {
     //Private variables
     private PlayerManagement _playerManagement;
+    private Vector2 _landingPosition;
+    private AsyncOperation _loadScene;
     
     /// <summary>
     /// Initializes this script
@@ -18,6 +20,7 @@ public class TransitionManager : MonoBehaviour
     public void Initialize(PlayerManagement playerManagement)
     {
         _playerManagement = playerManagement;
+        _landingPosition = new Vector2(-2, -4);
     }
 
     /// <summary>
@@ -38,8 +41,19 @@ public class TransitionManager : MonoBehaviour
         {
             switch(sceneName)
             {
-                case "SceneTransition_Home":
-                    SceneManager.LoadScene("SampleScene");              break; //Home
+                case "SceneTransition_Home":                                   //Home
+                    {
+                        //Turn the player off - Unused until script detached from player
+                        //_playerManagement.playerCharacter.gameObject.SetActive(false);
+                        //Make the scene load before doing anything else
+                        _loadScene = SceneManager.LoadSceneAsync("SampleScene");
+                        yield return new WaitUntil( () => _loadScene.isDone);
+                        //Place the playercharacter at the new position
+                        _playerManagement.playerCharacter.transform.position = _landingPosition;
+                        //Turn the player back on
+                        //_playerManagement.playerCharacter.gameObject.SetActive(true);
+                        break; 
+                    }
                 case "SceneTransition_Joshua":
                     SceneManager.LoadScene("DeveloperScene_Joshua");    break; //Josh
                 case "SceneTransition_Dhalia":
