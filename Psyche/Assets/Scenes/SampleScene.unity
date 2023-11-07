@@ -5018,6 +5018,10 @@ PrefabInstance:
       propertyPath: eMagHitBox
       value: 
       objectReference: {fileID: 660889171}
+    - target: {fileID: 7533449284711275220, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.11
+      objectReference: {fileID: 0}
     - target: {fileID: 7911676450372591580, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: playerHealth
       value: 
