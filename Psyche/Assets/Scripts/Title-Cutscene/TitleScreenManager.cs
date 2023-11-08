@@ -19,12 +19,11 @@ public class TitleScreenManager : MonoBehaviour {
     public static bool colorBlindMode;
 
     /// <summary>
-    /// Opens the Scene of the given name
+    /// Starts the intro cutscene
     /// </summary>
-    /// <param name="sceneName"></param>
-    public void LoadScene(string sceneName)
+    public void StartGame()
     {
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene("Intro_Cutscene");
     }
 
     /// <summary>
