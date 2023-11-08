@@ -186,12 +186,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCharacter: {fileID: 4073110612712080880}
+  playerCollider: {fileID: 0}
   groundCheck: {fileID: 6787539359732067765}
   groundCheckRadius: 0.2
   whatIsGround:
     serializedVersion: 2
     m_Bits: 16392
   isGrounded: 0
+  playerHealth: {fileID: 0}
   batteryManager: {fileID: 0}
   playerMovement: {fileID: 7454889652593822882}
   imagerManager: {fileID: 0}
@@ -202,6 +204,7 @@ MonoBehaviour:
   audioManager: {fileID: 0}
   deathCon: {fileID: 0}
   eMagnetActive: 0
+  beingPulled: 0
   inputBlocked: 0
 --- !u!114 &7454889652593822882
 MonoBehaviour:
@@ -263,7 +266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolName: 
-  magHitBox: {fileID: 2155109396161933314}
+  eMagHitBox: {fileID: 2155109396161933314}
 --- !u!114 &8966456805578203647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,6 +279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5dacd5bf9b3e07468c207e4593d48b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerHealth: {fileID: 0}
 --- !u!114 &4004592847061855459
 MonoBehaviour:
   m_ObjectHideFlags: 0
