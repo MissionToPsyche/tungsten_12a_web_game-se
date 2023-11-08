@@ -69,7 +69,7 @@ public class GammaView : MonoBehaviour {
             for (int i = 0; i < spriteRenderersList.Count; i++) {
                 if (spriteRenderersList[i] != null) {
                     spriteRenderersList[i].color = LayerColor(spriteRenderersList[i].gameObject);
-                    audioManager.PlayToolGRS();
+                    audioManager.PlayAudio(audioManager.toolGRS);
                     if (colorBlindMode) {
                         ActivateGRSnumberObjs();
                     }
@@ -85,7 +85,7 @@ public class GammaView : MonoBehaviour {
             for (int i = 0; i < spriteRenderersList.Count; i++) {
                 if (spriteRenderersList[i] != null) {
                     spriteRenderersList[i].color = origColorArray[i];
-                    audioManager.StopToolGRS();
+                    audioManager.StopAudio(audioManager.toolGRS);
                     if (colorBlindMode) {
                         DeactivateGRSnumberObjs();
                     }

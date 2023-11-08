@@ -86,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
         if (_playerManagement.isGrounded && !_playerManagement.beingPulled && Input.GetButtonDown("Jump"))
         {
             _playerManagement.playerCharacter.velocity = new Vector2(_playerManagement.playerCharacter.velocity.x, 7f);
-            _playerManagement.audioManager.PlayPlayerJump(); // play jump sound
+            _playerManagement.audioManager.PlayAudio(_playerManagement.audioManager.playerJump);
         }
 
         //checks the direction the player is moving
