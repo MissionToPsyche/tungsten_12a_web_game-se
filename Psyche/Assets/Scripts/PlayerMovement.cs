@@ -126,6 +126,11 @@ public class PlayerMovement : MonoBehaviour
         {
             //play the new animation
             _animator.Play(_newAnimation);
+            if (_newAnimation.Equals(PLAYER_THRUSTER)) {
+                _playerManagement.audioManager.PlayAudio(_playerManagement.audioManager.toolThrusters);
+            } else {
+                _playerManagement.audioManager.StopAudio(_playerManagement.audioManager.toolThrusters);
+            }
 
             //set the current animation state
             currentAnimation = _newAnimation;
