@@ -101,6 +101,9 @@ public class UIController : MonoBehaviour
     /// <param name="respawn"></param>
     public void handleConfirmBox(bool respawn)
     {
+        //Play button click sound
+        playButtonSound();
+
         shouldRespawn = respawn;
         if (shouldRespawn)
         {
@@ -119,6 +122,9 @@ public class UIController : MonoBehaviour
     /// </summary>
     public void handleYesClicked()
     {
+        //Play button click sound
+        playButtonSound();
+        
         ///If Respawn button opened the Confirmation Box
         if (shouldRespawn)
         {
@@ -136,5 +142,13 @@ public class UIController : MonoBehaviour
             Cursor.visible = true;
             SceneManager.LoadScene("Title_Screen");
         }
+    }
+
+    /// <summary>
+    /// Plays audio for button click
+    /// </summary>
+    public void playButtonSound()
+    {
+        PlayerManagement.Instance.audioManager.PlayAudio(PlayerManagement.Instance.audioManager.buttonClick);
     }
 }
