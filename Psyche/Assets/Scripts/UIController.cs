@@ -92,7 +92,9 @@ public class UIController : MonoBehaviour
     public void enableThrusterButton() { thrusterButton.SetActive(true); }
 
     public void openImagerLink() { Application.OpenURL("https://www.jpl.nasa.gov/images/pia24894-psyches-imager-in-progress"); }
+    public void openSpectrometerLink() { Application.OpenURL("https://psyche.asu.edu/gallery/meet-the-nasa-psyche-team-who-will-map-psyches-elemental-composition/"); }
     public void openMagnetometerLink() { Application.OpenURL("https://psyche.asu.edu/gallery/meet-nasas-psyche-team-who-will-measure-the-asteroids-magnetic-field/"); }
+    public void openThrusterLink() { Application.OpenURL("https://psyche.asu.edu/"); }
 
     private bool shouldRespawn;
     /// <summary>
