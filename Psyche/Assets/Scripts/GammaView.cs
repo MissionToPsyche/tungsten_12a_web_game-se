@@ -114,23 +114,32 @@ public class GammaView : MonoBehaviour {
             return defaultColor;
         } else {
             return obj.layer switch {
-                // User Layers within Unity are 3 and 6-31
-                3 =>  Color.black,  // Terrain
-                6 =>  Color.grey,   // Rock
-                7 =>  Color.grey,   // Metal
-                8 =>  Color.magenta,// Crystal
-                9 =>  Color.green,  // Grass
-                10 => Color.blue,   // FloatingPlatform
-                11 => Color.green,  // Background
-                12 => Color.blue,   // Lifeform
-                13 => Color.clear,  // Clear
-                14 => Color.grey,   // Iron
-                15 => Color.grey,   // Nickel
-                16 => Color.yellow, // Sulfur
-                17 => Color.white,  // Oxygen
-                18 => Color.cyan,   // Silicon
-                19 => Color.blue,   // Hydrogen
-                20 => Color.black,  // Carbon
+                // User Layers within Unity are 3 and 6-31                
+                3 =>  Color.green,  // Terrain
+                6 =>  Color.red,    // Titanium
+                7 =>  Color.yellow, // Iron
+                8 =>  Color.black,  // Cobalt
+                9 =>  Color.grey,   // Nickel
+                10 => Color.blue,   // Copper
+                11 => Color.gray,   // Silver
+                12 => Color.magenta,// Tungsten
+                13 => Color.white,  // Platinum
+                14 => Color.cyan,   // Gold
+                15 => Color.clear,  // Clear
+                16 => new Color(0f, 0f, 0f, 0f),
+                /** custom colors bellow to be used in future levels
+                3 =>  new Color(0f, 0f, 0f, 1f),            // Terrain
+                6 =>  new Color(0.5f, 0.5f, 0.5f, 1f),      // Titanium
+                7 =>  new Color(0.5f, 0.5f, 0.5f, 1f),      // Iron
+                8 =>  new Color(0f, 0f, 0f, 1f),            // Cobalt
+                9 =>  new Color(0.5f, 0.5f, 0.5f, 1f),      // Nickel
+                10 => new Color(0.647f, 0.165f, 0.165f, 1f),// Copper
+                11 => new Color(0f, 0.502f, 0f, 1f),        // Silver
+                12 => new Color(0f, 0f, 1f, 1f),            // Tungsten
+                13 => new Color(0f, 0f, 0f, 0f),            // Platinum
+                14 => new Color(0.5f, 0.5f, 0.5f, 1f),      // Gold
+                15 => new Color(0f, 0f, 0f, 0f),            // Clear
+                **/
                 _ => defaultColor,
             };
         }
