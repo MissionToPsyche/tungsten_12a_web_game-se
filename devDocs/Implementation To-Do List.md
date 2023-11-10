@@ -8,8 +8,8 @@
 
 ### Bryant
 
-- [ ] Thrusters need sound
-  - [ ] Move away from T key bound
+- [x] Thrusters need sound
+  - [x] Move away from T key bound
 
 ### Dhalia
 
