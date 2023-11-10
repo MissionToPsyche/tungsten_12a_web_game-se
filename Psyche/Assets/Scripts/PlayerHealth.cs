@@ -27,21 +27,10 @@ public class PlayerHealth : MonoBehaviour {
          _playerManagement = playerManagement;
     }*/
 
-    // uncomment to test
-    void Update() {
-        if (Input.GetKeyDown(KeyCode.R)) {
-            HealthDown(amount);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Y)) {
-            HealthUp(amount);
-        }
-    }
-
     // player health down by amount
     public void HealthDown(int amount) {
         playerHealth -= amount;
-        playerHealth = Mathf.Clamp(playerHealth, 0, 100); // keeps between 0-100
+        playerHealth = Mathf.Clamp(playerHealth, 0, 5); // keeps between 0-5
         if (playerHealth == 0) {
             playerHealthZero = true;
         }
@@ -52,7 +41,7 @@ public class PlayerHealth : MonoBehaviour {
     // player health up by amount
     public void HealthUp(int amount) {
         playerHealth += amount;
-        playerHealth = Mathf.Clamp(playerHealth, 0, 100); // keeps between 0-100
+        playerHealth = Mathf.Clamp(playerHealth, 0, 5); // keeps between 0-5
         if (playerHealth == 0) {
             playerHealthZero = true;
         }
