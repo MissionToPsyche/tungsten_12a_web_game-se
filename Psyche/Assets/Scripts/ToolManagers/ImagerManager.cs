@@ -59,7 +59,7 @@ public class ImagerManager : ToolManager
         //Increase cursor radius
         _flashlight.pointLightInnerRadius += _rangeIncrease;
         _flashlight.pointLightOuterRadius += _rangeIncrease;
-        _playerManagement.audioManager.PlayToolImager(); // play tool sound
+        _playerManagement.audioManager.PlayAudio(_playerManagement.audioManager.toolImager);
         _imagerCounter.updateImagerCount(); 
     }
 }

@@ -24,6 +24,9 @@ public class TitleScreenManager : MonoBehaviour {
     /// <param name="sceneName"></param>
     public void LoadScene(string sceneName)
     {
+        //Play button click sound
+        UIController.Instance.playButtonSound();
+        
         SceneManager.LoadScene(sceneName);
     }
 
@@ -33,6 +36,9 @@ public class TitleScreenManager : MonoBehaviour {
     /// <param name="_submenu"></param>
     public void OpenSubmenu(GameObject _submenu)
     {
+        //Play button click sound
+        UIController.Instance.playButtonSound();
+
         submenu = _submenu;
         gameObject.SetActive(false);
         submenu.SetActive(true);

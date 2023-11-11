@@ -1,7 +1,7 @@
 /** 
 Description: audio manager script
 Author: blopezro
-Version: 20231018
+Version: 20231107
 **/
 
 using UnityEngine.Audio;
@@ -12,63 +12,28 @@ using UnityEngine;
 /// </summary>
 public class AudioManager : MonoBehaviour {
 
-    // scene
-    [SerializeField] private AudioSource backgroundMusic;
+    // scenes
+    [SerializeField] public AudioSource backgroundMusic;
+    [SerializeField] public AudioSource buttonClick;
     
     // tools
-    [SerializeField] private AudioSource toolGRS;
-    [SerializeField] private AudioSource toolImager;
-    [SerializeField] private AudioSource toolMagnetometer;
-    [SerializeField] private AudioSource toolThrusters;
+    [SerializeField] public AudioSource toolGRS;
+    [SerializeField] public AudioSource toolImager;
+    [SerializeField] public AudioSource toolMagnetometer;
+    [SerializeField] public AudioSource toolThrusters;
     
     // player
-    [SerializeField] private AudioSource playerJump;
+    [SerializeField] public AudioSource playerJump;
+    
+    // these would be called from player management, examples:
+    // _playerManagement.audioManager.PlayAudio(_playerManagement.audioManager.toolImager);
+    // _playerManagement.audioManager.StopAudio(_playerManagement.audioManager.toolImager);
 
-    // these keys are temporary until all tools are in the same branch
-    // and can call AudioManger
-    void Update() {
-        if (Input.GetKeyDown(KeyCode.T)) { PlayToolThrusters(); }
-        if (Input.GetKeyUp(KeyCode.T)) { StopToolThrusters(); }
+    public void PlayAudio(AudioSource audioSource) {
+        audioSource.Play();
     }
 
-    public void PlayToolGRS() {
-        toolGRS.Play();
+    public void StopAudio(AudioSource audioSource) {
+        audioSource.Stop();
     }
-
-    public void StopToolGRS() {
-        toolGRS.Stop();
-    }
-
-    public void PlayToolImager() {
-        toolImager.Play();
-    }
-
-    public void StopToolImager() {
-        toolImager.Stop();
-    }
-
-    public void PlayToolMagnetometer() {
-        toolMagnetometer.Play();
-    }
-
-    public void StopToolMagnetometer() {
-        toolMagnetometer.Stop();
-    }
-
-    public void PlayToolThrusters() {
-        toolThrusters.Play();
-    }
-
-    public void StopToolThrusters() {
-        toolThrusters.Stop();
-    }
-
-    public void PlayPlayerJump() {
-        playerJump.Play();
-    }
-
-    public void StopPlayerJump() {
-        playerJump.Stop();
-    }
-
 }
