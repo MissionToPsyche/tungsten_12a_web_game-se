@@ -3,12 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Controller abstract script
+/// Controller abstract script with generalization for subclasses
 /// </summary>
 public abstract class BaseController<T> : MonoBehaviour where T : BaseController<T>
 {
+    //Allows the subclass to implement this logic without the required code
     private static T _instance;
 
+    /// <summary>
+    /// Default initialization
+    /// </summary>
+    public virtual void Initialize() { }
+
+    /// <summary>
+    /// Singleton pattern to prevent duplication
+    /// </summary>
     public static T Instance
     {
         get
@@ -19,7 +28,7 @@ public abstract class BaseController<T> : MonoBehaviour where T : BaseController
 
                 if (_instance == null)
                 {
-                    Debug.LogError("An instance of " + typeof(T) + " is needed in the scene, but there is none.");
+                    Debug.LogError($"An instance of {typeof(T)} doesn't exist!");
                 }
             }
             return _instance;
@@ -27,7 +36,7 @@ public abstract class BaseController<T> : MonoBehaviour where T : BaseController
     }
 
     /// <summary>
-    /// Virtual Awak() class
+    /// Virtual Awake() class, implements dontdestroyonload
     /// </summary>
     protected void Awake()
     {
@@ -41,6 +50,28 @@ public abstract class BaseController<T> : MonoBehaviour where T : BaseController
         {
             Destroy(gameObject);
         }
+    }
+
+    /// <summary>
+    /// Updates the controller when called
+    /// </summary>
+    public virtual void UpdateController() { }
+
+    /// <summary>
+    /// Shuts down or destroys the controller if implemented
+    /// </summary>
+    public virtual void Shutdown() { }
+
+    // Example event -- to be added upon later
+    public delegate void ControllerEvent();
+    public event ControllerEvent OnControllerUpdated;
+
+    /// <summary>
+    /// Default event invokation
+    /// </summary>
+    protected void RaiseControllerUpdatedEvent()
+    {
+        OnControllerUpdated?.Invoke();
     }
 
     /// <summary>
