@@ -1,14 +1,13 @@
 /** 
 Description: spectrometer tool gamma view script
 Author: blopezro
-Version: 20231030
+Version: 20231111
 **/
 
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 /// <summary>
 /// Gamma View script which captures all sprites of the game objects within the scene
@@ -20,8 +19,8 @@ public class GammaView : MonoBehaviour {
     public List<SpriteRenderer> spriteRenderersList; // holds all sprite renderers of game objects
     public Color[] origColorArray;                   // holds original colors of the sprite renderers
     public Color defaultColor = Color.green;         // default color of items when default layer is used
-    public List<GameObject> colorBlindModeObjects;   // text objects stored for assistance with color blindness
-    public bool colorBlindMode;                      // color blind mode 
+    public List<GameObject> colorBlindModeObjects;   // objects stored for assistance with color blindness
+    public bool colorBlindMode;                      // color blind mode boolean
 
     // subscribes to the SceneManager.sceneLoaded event
     void Awake() {
@@ -40,9 +39,10 @@ public class GammaView : MonoBehaviour {
         spriteRenderersList.Clear();
         origColorArray = new Color[0];
         colorBlindModeObjects.Clear();
-        Debug.Log("Reloaded needed data for GRS");
+        Debug.Log("GRS data cleared");
 
         sceneObjects = (GameObject[])UnityEngine.Object.FindObjectsOfType(typeof(GameObject));
+        Debug.Log("Number of scene objects captured: " + sceneObjects.Length);
         CaptureSpriteRenderers(sceneObjects);
 
         // resizes based on sprite renderers in the scene
@@ -71,7 +71,7 @@ public class GammaView : MonoBehaviour {
                     spriteRenderersList[i].color = LayerColor(spriteRenderersList[i].gameObject);
                     audioManager.PlayAudio(audioManager.toolGRS);
                     if (colorBlindMode) {
-                        ActivateGRSnumberObjs();
+                        ActivateGRSaltView();
                     }
                 }
             }
@@ -87,7 +87,7 @@ public class GammaView : MonoBehaviour {
                     spriteRenderersList[i].color = origColorArray[i];
                     audioManager.StopAudio(audioManager.toolGRS);
                     if (colorBlindMode) {
-                        DeactivateGRSnumberObjs();
+                        DeactivateGRSaltView();
                     }
                 }
             }
@@ -101,6 +101,7 @@ public class GammaView : MonoBehaviour {
                 spriteRenderersList.Add((SpriteRenderer) obj.GetComponent(typeof(SpriteRenderer)));
             }           
         }
+        Debug.Log("Number of sprite renderers captured: " + spriteRenderersList.Count);
     }
 
     // returns the game objects layer
@@ -151,7 +152,7 @@ public class GammaView : MonoBehaviour {
             // get current game object
             GameObject gameObject = spriteRenderer.gameObject;
             // get layer of game object
-            int numberToDisplay = gameObject.layer;
+            int layerNum = gameObject.layer;
 
             // create game object to display number and anchor in center
             GameObject grsNumberObject = new GameObject("GRS_ColorBlindMode");
@@ -162,7 +163,7 @@ public class GammaView : MonoBehaviour {
             colorBlindModeObjects.Add(grsNumberObject);
 
             // text properties
-            textMesh.text = numberToDisplay.ToString();
+            textMesh.text = layerNum.ToString();
             textMesh.characterSize = 0.15f;
             textMesh.fontSize = 30;
             textMesh.font = Resources.Load<Font>("");
@@ -186,20 +187,20 @@ public class GammaView : MonoBehaviour {
         }
     }
 
-    // show numbers
-    void ActivateGRSnumberObjs() {
-        foreach (GameObject numberObject in colorBlindModeObjects) {
-            if (numberObject != null) {
-                numberObject.SetActive(true);
+    // show alternative view
+    void ActivateGRSaltView() {
+        foreach (GameObject obj in colorBlindModeObjects) {
+            if (obj != null) {
+                obj.SetActive(true);
             }
         }
     }
 
-    // hide numbers
-    void DeactivateGRSnumberObjs() {
-        foreach (GameObject numberObject in colorBlindModeObjects) {
-            if (numberObject != null) {
-                numberObject.SetActive(false);
+    // hide alternative view
+    void DeactivateGRSaltView() {
+        foreach (GameObject obj in colorBlindModeObjects) {
+            if (obj != null) {
+                obj.SetActive(false);
             }
         }
     }
