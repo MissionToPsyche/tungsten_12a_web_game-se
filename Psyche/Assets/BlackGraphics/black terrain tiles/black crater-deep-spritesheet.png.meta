@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: fe3570a6f7b948343b6c020adb5b4a73
+guid: 2b668527455ff7740a9ab6dad28ca271
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -136,12 +136,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: tile-rock-dark-topleft
+      name: crater-deep-background-leftmost
       rect:
         serializedVersion: 2
-        x: 8
-        y: 168
-        width: 64
+        x: 5
+        y: 87
+        width: 29
         height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -150,19 +150,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 01cf472ef32104a458f9a68311b3b9eb
-      internalID: 1718970111
+      spriteID: 5a6bea5b22f6b3c43a75951f4bd06d3f
+      internalID: 782335808
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tile-rock-dark-top
+      name: crater-deep-background-left
       rect:
         serializedVersion: 2
-        x: 90
-        y: 168
-        width: 64
+        x: 45
+        y: 87
+        width: 32
         height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -171,19 +171,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bd42f5c92189c3d4f97edf6d8eea8bc2
-      internalID: 138910550
+      spriteID: db3ecba52e52d4e43b2cb5a617aaad7b
+      internalID: -791110803
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tile-rock-dark-topright
+      name: crater-deep-background-center
       rect:
         serializedVersion: 2
-        x: 170
-        y: 168
-        width: 64
+        x: 85
+        y: 87
+        width: 32
         height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -192,19 +192,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 927f5e2c36cfdd24cb6fb5d4ecb6139e
-      internalID: 535494164
+      spriteID: ac5cd11787a635045b153f8d25ea114d
+      internalID: -987535287
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tile-rock-dark-left
+      name: crater-deep-background-right
       rect:
         serializedVersion: 2
-        x: 8
-        y: 88
-        width: 64
+        x: 124
+        y: 87
+        width: 32
         height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -213,19 +213,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1b08eb66507344f49b8948136b9c36d3
-      internalID: -603887333
+      spriteID: 217ff44b30fb6894bb8c772c52eab37d
+      internalID: 2110468403
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tile-rock-dark-center
+      name: crater-deep-background-rightmost
       rect:
         serializedVersion: 2
-        x: 90
-        y: 88
-        width: 64
+        x: 166
+        y: 87
+        width: 29
         height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -234,20 +234,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ecf54f382930a32459b0d9ddfd46aabb
-      internalID: 869619282
+      spriteID: 463de243a1019b2478d63bbbe313681c
+      internalID: -68758333
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tile-rock-dark-right
+      name: crater-deep-topleft
       rect:
         serializedVersion: 2
-        x: 170
-        y: 88
-        width: 64
-        height: 64
+        x: 4
+        y: 44
+        width: 12
+        height: 32
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -255,20 +255,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d52b293eeeb4de949896a180de88a173
-      internalID: -1175548521
+      spriteID: ae4c6d4dccf5c4a49b7ed254967b9071
+      internalID: -1881653558
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tile-rock-dark-bottomleft
+      name: crater-deep-topright
       rect:
         serializedVersion: 2
-        x: 8
-        y: 6
-        width: 64
-        height: 64
+        x: 105
+        y: 44
+        width: 12
+        height: 32
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -276,20 +276,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4ddceeddf3204f74ea0604a45c045984
-      internalID: -1858737128
+      spriteID: 5a85594a021c085428b85d8ada32275b
+      internalID: 751147182
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tile-rock-dark-bottom
+      name: crater-deep-bottomleft
       rect:
         serializedVersion: 2
-        x: 90
-        y: 6
-        width: 64
-        height: 64
+        x: 4
+        y: 4
+        width: 32
+        height: 32
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -297,20 +297,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e8638d000dcba2a42adb851fc2a64ad5
-      internalID: 2035867568
+      spriteID: 22bd7d55d87a224428dbc40e96d18178
+      internalID: -1395525924
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tile-rock-dark-bottomright
+      name: crater-deep-bottomright
       rect:
         serializedVersion: 2
-        x: 170
-        y: 6
-        width: 64
-        height: 64
+        x: 85
+        y: 4
+        width: 32
+        height: 32
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -318,8 +318,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 26bd81aede0930b4bbd207788dde3a27
-      internalID: 14960904
+      spriteID: aba6a59993b25554693e5e7443910300
+      internalID: -168383567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crater-deep-bottom-center
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 4
+        width: 32
+        height: 3
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95d290df0e872e1449bc099ceda5dfc8
+      internalID: 447465327
       vertices: []
       indices: 
       edges: []
@@ -335,15 +356,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      tile-rock-dark-bottom: 2035867568
-      tile-rock-dark-bottomleft: -1858737128
-      tile-rock-dark-bottomright: 14960904
-      tile-rock-dark-center: 869619282
-      tile-rock-dark-left: -603887333
-      tile-rock-dark-right: -1175548521
-      tile-rock-dark-top: 138910550
-      tile-rock-dark-topleft: 1718970111
-      tile-rock-dark-topright: 535494164
+      crater-deep-background-center: -987535287
+      crater-deep-background-left: -791110803
+      crater-deep-background-leftmost: 782335808
+      crater-deep-background-right: 2110468403
+      crater-deep-background-rightmost: -68758333
+      crater-deep-bottom-center: 447465327
+      crater-deep-bottomleft: -1395525924
+      crater-deep-bottomright: -168383567
+      crater-deep-topleft: -1881653558
+      crater-deep-topright: 751147182
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
