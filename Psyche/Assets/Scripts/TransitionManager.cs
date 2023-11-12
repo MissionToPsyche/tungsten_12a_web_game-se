@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class TransitionManager : MonoBehaviour
 {
     //Private variables
-    private PlayerManagement _playerManagement;
+    private PlayerController _playerManagement;
     private Vector2 _landingPosition;
     private AsyncOperation _loadScene;
     
@@ -17,7 +17,7 @@ public class TransitionManager : MonoBehaviour
     /// Initializes this script
     /// </summary>
     /// <param name="playerManagement"></param>
-    public void Initialize(PlayerManagement playerManagement)
+    public void Initialize(PlayerController playerManagement)
     {
         _playerManagement = playerManagement;
         _landingPosition = new Vector2(-2, -4);

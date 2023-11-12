@@ -13,10 +13,14 @@ public class EMagnetManager : ToolManager {
     /// </summary>
     private Transform hitBoxRotator;
 
-    public void Initialize(PlayerManagement playerManagement)
+    public void Initialize(PlayerController playerManagement)
     {
+        //Base class varibles
         toolName = "Electromagnet";
+        toolEnabled = false;
         _playerManagement = playerManagement;
+
+        //Tool specific variables
         hitBoxRotator = eMagHitBox.transform.parent;
     }
 

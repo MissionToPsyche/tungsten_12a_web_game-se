@@ -3,14 +3,17 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using System;
+using System.Collections.Generic;
+using UnityEditor;
 
 /// <summary>
 /// Player Management script controls how the player interacts with the 
 /// system and various components.
 /// </summary>
-public class PlayerManagement : MonoBehaviour
+public class PlayerController : BaseController<PlayerController>
 {
-    [HideInInspector] public static PlayerManagement Instance; //For persistence through scenes
+    //============================================== Initialize/Updates/Destroy ==============================================
 
     //Create the playercharacter assignment
     [Header("Components")]
@@ -41,20 +44,24 @@ public class PlayerManagement : MonoBehaviour
     public PlayerDeath deathCon;
 
     //Booleans for the various tools
-    private bool hasImager; //Eliminate if necessary
-    private bool hasEMagnet;
-    private bool hasThrusters;
-    private bool hasSpectrometer;
-    private bool usingThruster; //for animation purposes
+    private Dictionary<ToolManager, bool> _toolStates;
+    private bool hasSpectrometer;                         // <--Where is the spectrometer script? Add to _toolStates
+    private bool usingThruster; //for animation purposes  // <--Implement boolean in thruster script
 
     //Booleans to prevent needless code runs
-    [HideInInspector] public bool eMagnetActive, beingPulled, inputBlocked;
+    [HideInInspector] public bool eMagnetActive, beingPulled, inputBlocked; //Create a dictionary or list to track these
 
     /// <summary>
-    /// Awake() is the first function to be called in any script as it's being initialized
+    /// Initialize the object and parent class
     /// </summary>
-    public void Awake()
+    public override void Initialize()
     {
+        //Initialize base
+        base.Initialize();
+
+        //Dictionary for tool states
+        _toolStates = new Dictionary<ToolManager, bool>();
+
         //Assign and initialize scripts
         playerCharacter = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<BoxCollider2D>();
@@ -69,6 +76,10 @@ public class PlayerManagement : MonoBehaviour
         eMagnetManager.Initialize(this);
         imagerManager = GetComponent<ImagerManager>();
         imagerManager.Initialize(this);
+        _toolStates[batteryManager] = batteryManager.toolEnabled;
+        _toolStates[thrusterManager] = thrusterManager.toolEnabled;
+        _toolStates[eMagnetManager] = eMagnetManager.toolEnabled;
+        _toolStates[imagerManager] = imagerManager.toolEnabled;
         // ##### Object Managers ######
         //playerHealth.Initialize(this); <-- this initializes the script and creates a cross reference between the two
         elementManagement = GetComponent<ElementManager>();
@@ -76,38 +87,52 @@ public class PlayerManagement : MonoBehaviour
         audioManager = GameObject
             .FindGameObjectWithTag("AudioSources")
             .GetComponent<AudioManager>();
+        audioManager.Initialize(this);
         // ##### Miscellaneous ######
         sceneTransition = GetComponent<TransitionManager>();
         sceneTransition.Initialize(this);
         deathCon = GetComponent<PlayerDeath>();
-        
-
-        //Use singleton to ensure no duplicates are created
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
     }
 
     /// <summary>
-    /// Start() is called just before the first frame of the scene
+    /// Runs when scene starts
+    ///   - Calls base.Awake()
+    ///   - Initializes script
     /// </summary>
-    void Start()
+    public void Awake()
+    {
+        base.Awake();
+        Initialize();
+    }
+
+    /// <summary>
+    /// Runs just before first frame:
+    ///   - Initializes player health (Should be moved)
+    /// </summary>
+    public void Start()
     {   //Set up initial player health (Should be initialized through the playerhealth script instead of here)
         playerHealth.playerHealth = 5;
         playerHealth.amount = 1;
         playerHealth.UpdateSceneText();
-
-        //Don't destroy audio manager (should be removed)
-        DontDestroyOnLoad(audioManager);
     }
 
-    void Update()
+    /// <summary>
+    /// Called when necessary - not every frame
+    /// </summary>
+    public override void UpdateController()
+    {
+        base.UpdateController();
+    }
+    
+    /// <summary>
+    /// Runs every frame
+    ///   - Checks player status -- sets booleans
+    ///   - Player movement handler
+    ///   - Tool use handler
+    ///   - Tool modification handler
+    ///   - Handles UI                             <------- Move to event
+    /// </summary>
+    public void Update()
     {
         //Check booleans
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
@@ -124,7 +149,7 @@ public class PlayerManagement : MonoBehaviour
         {
             //Call the requisite tool scripts here:
             //Thruster
-            if (hasThrusters && Input.GetButton("Jump") && batteryManager.batteryPercent != 0 && !beingPulled) {
+            if (_toolStates[thrusterManager] && Input.GetButton("Jump") && batteryManager.batteryPercent != 0 && !beingPulled) {
                 thrusterManager.ActivateThruster();
                 usingThruster = true;
                 batteryManager.DrainBatt(1);
@@ -140,7 +165,7 @@ public class PlayerManagement : MonoBehaviour
             }
 
             //ElectroMagnet
-            if (hasEMagnet && Input.GetButton("Fire1") && batteryManager.batteryPercent != 0 && !eMagnetActive) { //better bool management
+            if (_toolStates[eMagnetManager] && Input.GetButton("Fire1") && batteryManager.batteryPercent != 0 && !eMagnetActive) { //better bool management
                 StartCoroutine(eMagnetManager.handleEMagnet());
                 batteryManager.DrainBatt(500);
             }
@@ -149,7 +174,7 @@ public class PlayerManagement : MonoBehaviour
         }
 
         //Modify the tools
-        if (hasThrusters && Input.GetButtonDown("Thruster_Increase")) //Button 1
+        if (_toolStates[thrusterManager] && Input.GetButtonDown("Thruster_Increase")) //Button 1
         {
             elementManagement.ModifyTool(thrusterManager);
         }
@@ -157,20 +182,57 @@ public class PlayerManagement : MonoBehaviour
         {
             elementManagement.ModifyTool(batteryManager);
         }
-        if (hasEMagnet && Input.GetButtonDown("Electromagnet_Increase"))
+        if (_toolStates[eMagnetManager] && Input.GetButtonDown("Electromagnet_Increase")) //Button 3
         {
-            elementManagement.ModifyTool(eMagnetManager); //Button 3
+            elementManagement.ModifyTool(eMagnetManager); 
         }
-        if (hasImager && Input.GetButtonDown("Imager_Increase")) 
+        if (_toolStates[imagerManager] && Input.GetButtonDown("Imager_Increase"))  //Button 4
         {
-            elementManagement.ModifyTool(imagerManager); //Button 4
+            elementManagement.ModifyTool(imagerManager);
         }
 
 
-        //Inventory and Dialog Box
-        if (Input.GetKeyDown("tab") && !Input.GetKey(KeyCode.G))
+        //Inventory and Dialog Box 
+        if (Input.GetKeyDown("tab") && !Input.GetKey(KeyCode.G)) // <-- Change to getbutton and getbuttondown
             UIController.Instance.handleUI();
     }
+
+    /// <summary>
+    /// Shuts down instance when called
+    ///   - Shut down base
+    /// </summary>
+    public override void Shutdown()
+    {
+        base.Shutdown();
+    }
+
+    //======================================================== Events ========================================================
+    //Events definitions
+    public event Action<string> OnToolPickedUp;  //When tools are picked up
+
+
+    /// <summary>
+    /// Subscribes to events and activates when event triggered
+    /// - TODO!! ENABLE EVENT COMMUNICATION FOR INSTANCE CALLS
+    /// </summary>
+    private void OnEnable()
+    {
+        //Insert logic
+    }
+
+    /// <summary>
+    /// When event call is no longer active, turns off function
+    ///   - TODO!! ENABLE EVENT COMMUNICATION FOR INSTANCE CALLS
+    /// </summary>
+    private void OnDisable()
+    {
+        //Insert logic
+    }
+
+    //TODO: INSERT EVENT FUNCTIONS HERE
+
+
+    //======================================================= Triggers =======================================================
 
     /// <summary>
     /// When the player is in range of a 2d collider, it will activate this function
@@ -201,46 +263,44 @@ public class PlayerManagement : MonoBehaviour
     /// Activates tool when its pickup is collected
     /// </summary>
     /// <param name="toolName"></param>
-    public void toolPickedUp(string toolName)
+    public void ToolPickUp(string toolName)
     {
+        //Update UI controller
+        OnToolPickedUp?.Invoke(toolName);
+
+        //Other actions
         switch (toolName)
         {
             case "Thruster":
-                hasThrusters = true;
-                UIController.Instance.setDialogText("This is a Thruster");
-                UIController.Instance.enableThrusterButton();
-                break;
+                thrusterManager.EnableTool();
+                _toolStates[thrusterManager] = thrusterManager.toolEnabled;
+                 break;
 
             case "Imager":
-                //hasImager = true;
                 imagerManager.Modify();
-                batteryManager.DrainBatt(500);
                 break;
 
             case "ImagerCursor":
-                hasImager = true; //eliminate warnings until used
-                UIController.Instance.setDialogText("This is an Imager");
-                UIController.Instance.enableImagerButton();
+                imagerManager.EnableTool();
+                _toolStates[imagerManager] = imagerManager.toolEnabled;
                 imagerManager.Modify();
-                batteryManager.DrainBatt(500);
                 flashlight.Update();
-                batteryManager.DrainBatt(500);
                 break;
 
             case "Spectrometer":
+                //_toolStates[spectrometerManager] ...
                 hasSpectrometer = true;
-                UIController.Instance.setDialogText("This is a Spectrometer");
-                UIController.Instance.enableSpectrometerButton();
                 break;
 
             case "Magnetometer":
-                hasEMagnet = true;
-                UIController.Instance.setDialogText("This is a Magnetometer");
-                UIController.Instance.enableMagnetometerButton();
+                eMagnetManager.EnableTool();
+                _toolStates[eMagnetManager] = eMagnetManager.toolEnabled;
                 break;
 
             case "Battery":
                 Debug.Log("Battery charge!");
+                batteryManager.EnableTool();
+                _toolStates[batteryManager] = batteryManager.toolEnabled;
                 batteryManager.ChargeBatt(500);
                 break;
 

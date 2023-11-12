@@ -7,6 +7,8 @@ using UnityEngine;
 /// </summary>
 public abstract class BaseController<T> : MonoBehaviour where T : BaseController<T>
 {
+    //============================================== Initialize/Updates/Destroy ==============================================
+
     //Allows the subclass to implement this logic without the required code
     private static T _instance;
 
@@ -41,7 +43,7 @@ public abstract class BaseController<T> : MonoBehaviour where T : BaseController
     protected void Awake()
     {
         //Singleton to ensure only one instance exists
-        if (_instance == null)
+        if (_instance == null || _instance == this)
         {
             _instance = (T)this;
             DontDestroyOnLoad(gameObject);
@@ -54,13 +56,30 @@ public abstract class BaseController<T> : MonoBehaviour where T : BaseController
 
     /// <summary>
     /// Updates the controller when called
+    ///   - Empty
     /// </summary>
-    public virtual void UpdateController() { }
+    public virtual void UpdateController() 
+    {
+        //Insert Logic
+    }
 
     /// <summary>
     /// Shuts down or destroys the controller if implemented
     /// </summary>
-    public virtual void Shutdown() { }
+    public virtual void Shutdown() 
+    {
+        // Implement any cleanup necessary
+
+        // Destroy the instance
+        if (_instance == this)
+        {
+            _instance = null;
+            Destroy(gameObject);
+        }
+    }
+
+
+    //======================================================== Events ========================================================
 
     // Example event -- to be added upon later
     public delegate void ControllerEvent();
@@ -73,14 +92,4 @@ public abstract class BaseController<T> : MonoBehaviour where T : BaseController
     {
         OnControllerUpdated?.Invoke();
     }
-
-    /// <summary>
-    /// Base class initialization method allows for common logic across subclasses
-    /// </summary>
-    protected virtual void InitializeController()
-    {
-        
-    }
-
-
 }
