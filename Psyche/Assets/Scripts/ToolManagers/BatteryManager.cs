@@ -1,7 +1,7 @@
 /** 
 Description: battery script
 Author: blopezro
-Version: 20231020
+Version: 20231109
 **/
 
 using System.Collections;
@@ -29,8 +29,7 @@ public class BatteryManager : ToolManager {
     /// Initialize this script
     /// </summary>
     /// <param name="playerManagement"></param>
-    public void Initialize(PlayerManagement playerManagement)
-    {
+    public void Initialize(PlayerManagement playerManagement) {
         toolName = "Battery";
         _playerManagement = playerManagement;
         maxCapacity = 100f;
@@ -39,18 +38,10 @@ public class BatteryManager : ToolManager {
         rate = 1;
     }
 
-    // uncomment to test
-    /*void Update() {
-        if (Input.GetKeyDown(KeyCode.Q)) {
-            DrainBatt(rate);
-        }
-
-        if (Input.GetKeyDown(KeyCode.E)) {
-            ChargeBatt(rate);
-        }
-    }*/
-
-    // drains battery at given rate
+    /// <summary>
+    /// drains battery at given rate
+    /// </summary>
+    /// <param name="rate"></param>
     public void DrainBatt(float rate) {
         batteryLevel -= Time.deltaTime * rate;
         batteryLevel = Mathf.Clamp(batteryLevel, 0f, maxCapacity); // keeps batt level between 0-100
@@ -62,7 +53,10 @@ public class BatteryManager : ToolManager {
         Debug.Log("Battery: " + batteryLevel + "/" + maxCapacity);
     }
 
-    // charges battery at given rate
+    /// <summary>
+    /// charges battery at given rate
+    /// </summary>
+    /// <param name="rate"></param>
     public void ChargeBatt(float rate) {
         batteryLevel += Time.deltaTime * rate;        
         batteryLevel = Mathf.Clamp(batteryLevel, 0f, maxCapacity); // keeps batt level between 0-100
@@ -74,12 +68,24 @@ public class BatteryManager : ToolManager {
         Debug.Log("Battery: " + batteryLevel + "/" + maxCapacity);
     }
 
+    /// <summary>
+    /// charges battery to max capacity
+    /// </summary>
+    public void ChargeBattFull() {
+        batteryLevel += maxCapacity;        
+        batteryLevel = Mathf.Clamp(batteryLevel, 0f, maxCapacity); // keeps batt level between 0-100
+        batteryPercent = batteryLevel / maxCapacity * 100f;
+        if (batteryPercent > 0) {
+            batteryDrained = false;
+        }
+        onBatteryPercentageChanged?.Invoke(batteryPercent);
+        Debug.Log("Battery: " + batteryLevel + "/" + maxCapacity);
+    }
 
     /// <summary>
     /// Increases the max capacity when called.
     /// </summary>
-    public override void Modify()
-    {
+    public override void Modify() {
         maxCapacity += 10f;
     }
 }
