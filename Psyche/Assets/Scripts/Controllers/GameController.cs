@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameController : BaseController<GameController>
 {
     //Private variables
-    
+
 
     //Public variables
     //public DeveloperConsole developerConsole;
@@ -26,7 +26,7 @@ public class GameController : BaseController<GameController>
     /// </summary>
     void Start()
     {
-        
+
     }
 
     /// <summary>
@@ -35,7 +35,7 @@ public class GameController : BaseController<GameController>
     void Update()
     {
         //Implement update logic
-        
+
     }
 
     /// <summary>
@@ -43,7 +43,7 @@ public class GameController : BaseController<GameController>
     /// </summary>
     public override void UpdateController()
     {
-
+        //Centralized location to update controller without being ran every frame
     }
 
     /// <summary>
@@ -83,6 +83,14 @@ public class GameController : BaseController<GameController>
         }
     }
     public event Action<GameStateManager.GameState> OnGameStateChanged;
+
+
+    //Other event sends here
+
+
+    //Subscribe to events from other controllers here
+
+
 
     // Other stuff here
 }
