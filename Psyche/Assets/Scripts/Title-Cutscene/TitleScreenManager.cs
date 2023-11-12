@@ -24,7 +24,7 @@ public class TitleScreenManager : MonoBehaviour {
     public void StartGame()
     {
         //Play button click sound
-        UIController.Instance.playButtonSound();
+        //UIController.Instance.playButtonSound(); //temporarily disabled because of error
         SceneManager.LoadScene("Intro_Cutscene");
     }
 
