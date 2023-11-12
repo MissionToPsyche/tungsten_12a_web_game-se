@@ -5,10 +5,17 @@ using UnityEngine;
 public abstract class ToolManager : MonoBehaviour
 {
     //Private Variables
-    protected PlayerManagement _playerManagement;
-
+    protected PlayerController _playerManagement;
+    
     //Public variables
     public string toolName;
+    public bool toolEnabled { get; protected set; }
+
+    public void EnableTool()
+    {
+        toolEnabled = true;
+        Debug.Log("Enabled: " + toolEnabled);
+    }
 
     /// <summary>
     /// Modifies the tool when called

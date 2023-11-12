@@ -9,13 +9,13 @@ public class ElementManager : MonoBehaviour
 {
     //Private variables
     [SerializeField] private int _copper, _iron, _nickel, _gold, _platinum;
-    private PlayerManagement _playerManagement;
+    private PlayerController _playerManagement;
 
     /// <summary>
     /// Initialize this script
     /// </summary>
     /// <param name="playerManagement"></param>
-    public void Initialize(PlayerManagement playerManagement)
+    public void Initialize(PlayerController playerManagement)
     {
         _playerManagement = playerManagement;
         _copper = 0;
