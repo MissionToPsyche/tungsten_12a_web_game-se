@@ -2604,7 +2604,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -624250839
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &3745245501112353033
@@ -3104,7 +3104,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 82, y: 646}
+  m_AnchoredPosition: {x: 69, y: 680}
   m_SizeDelta: {x: 1.3538818, y: 2.479126}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8378547196468998994
@@ -3431,7 +3431,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 1358, y: 642}
+  m_AnchoredPosition: {x: 1324, y: 680}
   m_SizeDelta: {x: 1.3538818, y: 2.479126}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &8948933120183612532
@@ -3547,7 +3547,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
