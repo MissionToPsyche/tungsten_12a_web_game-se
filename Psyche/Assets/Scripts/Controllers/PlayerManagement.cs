@@ -140,7 +140,7 @@ public class PlayerManagement : MonoBehaviour
             }
 
             //ElectroMagnet
-            if (hasEMagnet && Input.GetButton("Fire1") && batteryManager.batteryPercent != 0 && !eMagnetActive) { //better bool management
+            if (hasEMagnet && Input.GetButton("Fire1") && batteryManager.batteryPercent != 0 && !eMagnetActive) {
                 StartCoroutine(eMagnetManager.handleEMagnet());
                 batteryManager.DrainBatt(500);
             }

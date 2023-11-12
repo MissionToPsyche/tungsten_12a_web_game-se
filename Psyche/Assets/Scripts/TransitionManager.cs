@@ -64,6 +64,8 @@ public class TransitionManager : MonoBehaviour
                     SceneManager.LoadScene("DeveloperScene_Matt");      break; //Matt
                 case "SceneTransition_James":
                     SceneManager.LoadScene("DeveloperScene_James");     break; //James
+                case "SceneTransition_End":
+                    UIController.Instance.EndGame(true);                break;
                 default:
                     Debug.Log("Invalid Scene Transition");              break; //Default
             }   
