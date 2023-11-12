@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: fe3570a6f7b948343b6c020adb5b4a73
+guid: 76a65e080039d544a87a6d882c014173
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 64
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -136,13 +136,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: tile-rock-dark-topleft
+      name: spike-tiny-double
       rect:
         serializedVersion: 2
         x: 8
-        y: 168
-        width: 64
-        height: 64
+        y: 48
+        width: 16
+        height: 16
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,20 +150,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 01cf472ef32104a458f9a68311b3b9eb
-      internalID: 1718970111
+      spriteID: 92bd036350957ae4d8b47c1d45e057c8
+      internalID: 1655217645
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tile-rock-dark-top
+      name: spike-tiny-single-wide
       rect:
         serializedVersion: 2
-        x: 90
-        y: 168
-        width: 64
-        height: 64
+        x: 41
+        y: 48
+        width: 15
+        height: 16
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,20 +171,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bd42f5c92189c3d4f97edf6d8eea8bc2
-      internalID: 138910550
+      spriteID: a2f81a100456b2a46a2c34cdf2f05bae
+      internalID: -31288445
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tile-rock-dark-topright
+      name: spike-tiny-single
       rect:
         serializedVersion: 2
-        x: 170
-        y: 168
-        width: 64
-        height: 64
+        x: 77
+        y: 48
+        width: 8
+        height: 16
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -192,19 +192,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 927f5e2c36cfdd24cb6fb5d4ecb6139e
-      internalID: 535494164
+      spriteID: d8c52cd42681fbb4494d7229ebf802b8
+      internalID: 798858913
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tile-rock-dark-left
+      name: spike-tall-double
       rect:
         serializedVersion: 2
-        x: 8
-        y: 88
-        width: 64
+        x: 98
+        y: 2
+        width: 29
         height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -213,19 +213,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1b08eb66507344f49b8948136b9c36d3
-      internalID: -603887333
+      spriteID: fb7ff806d4f7a9649b2a3e25dd1bf1d4
+      internalID: -309837042
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tile-rock-dark-center
+      name: spike-tall-single
       rect:
         serializedVersion: 2
-        x: 90
-        y: 88
-        width: 64
+        x: 131
+        y: 2
+        width: 27
         height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -234,20 +234,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ecf54f382930a32459b0d9ddfd46aabb
-      internalID: 869619282
+      spriteID: 0d61a2eefbd55a443a3d7b7786bc5937
+      internalID: -1663621592
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tile-rock-dark-right
+      name: spike-double
       rect:
         serializedVersion: 2
-        x: 170
-        y: 88
-        width: 64
-        height: 64
+        x: 6
+        y: 2
+        width: 18
+        height: 31
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -255,20 +255,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d52b293eeeb4de949896a180de88a173
-      internalID: -1175548521
+      spriteID: 26474a916c82d2d4881519887c0f24f3
+      internalID: -1618985613
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tile-rock-dark-bottomleft
+      name: spike-double-wide
       rect:
         serializedVersion: 2
-        x: 8
-        y: 6
-        width: 64
-        height: 64
+        x: 38
+        y: 2
+        width: 20
+        height: 31
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -276,20 +276,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4ddceeddf3204f74ea0604a45c045984
-      internalID: -1858737128
+      spriteID: 409940f5678c36d4ba3eaa6f7f2ac553
+      internalID: 1194568010
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tile-rock-dark-bottom
+      name: spike-single
       rect:
         serializedVersion: 2
-        x: 90
-        y: 6
-        width: 64
-        height: 64
+        x: 72
+        y: 2
+        width: 13
+        height: 28
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -297,29 +297,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e8638d000dcba2a42adb851fc2a64ad5
-      internalID: 2035867568
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tile-rock-dark-bottomright
-      rect:
-        serializedVersion: 2
-        x: 170
-        y: 6
-        width: 64
-        height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 26bd81aede0930b4bbd207788dde3a27
-      internalID: 14960904
+      spriteID: 97e8f5dbb4711cc4ca5a2705c8c225af
+      internalID: -1551515906
       vertices: []
       indices: 
       edges: []
@@ -335,15 +314,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      tile-rock-dark-bottom: 2035867568
-      tile-rock-dark-bottomleft: -1858737128
-      tile-rock-dark-bottomright: 14960904
-      tile-rock-dark-center: 869619282
-      tile-rock-dark-left: -603887333
-      tile-rock-dark-right: -1175548521
-      tile-rock-dark-top: 138910550
-      tile-rock-dark-topleft: 1718970111
-      tile-rock-dark-topright: 535494164
+      spike-double: -1618985613
+      spike-double-wide: 1194568010
+      spike-single: -1551515906
+      spike-tall-double: -309837042
+      spike-tall-single: -1663621592
+      spike-tiny-double: 1655217645
+      spike-tiny-single: 798858913
+      spike-tiny-single-wide: -31288445
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
