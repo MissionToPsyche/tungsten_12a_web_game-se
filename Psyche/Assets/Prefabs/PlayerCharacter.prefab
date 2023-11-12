@@ -195,7 +195,7 @@ MonoBehaviour:
     m_Bits: 16392
   isGrounded: 0
   playerHealth: {fileID: 0}
-  batteryManager: {fileID: 0}
+  batteryManager: {fileID: 3447453164145479344}
   playerMovement: {fileID: 7454889652593822882}
   imagerManager: {fileID: 0}
   eMagnetManager: {fileID: 0}
@@ -281,6 +281,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHealth: {fileID: 0}
+  batteryManager: {fileID: 0}
 --- !u!114 &4004592847061855459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -654,7 +655,7 @@ Transform:
   m_GameObject: {fileID: 2746429122550390308}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 1, z: -2.5}
+  m_LocalPosition: {x: 0, y: 0.8, z: -10}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children: []

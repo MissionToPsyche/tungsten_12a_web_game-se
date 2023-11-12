@@ -1,3 +1,5 @@
+// Ignore Spelling: Cutscene
+
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -131,17 +133,26 @@ public class UIController : MonoBehaviour
             confirmBoxText.transform.parent.gameObject.SetActive(false);
             inventoryBox.SetActive(false);
             PlayerManagement.Instance.inputBlocked = false;
-            PlayerManagement.Instance.deathCon.GetHurt();
+            PlayerManagement.Instance.deathCon.GetHurt(); //use different function
         }
         ///If Title Screen button opened the Confirmation Box
         else
-        {
-            ///Destroys Player and UI so they do not spawn on the start screen
-            Destroy(PlayerManagement.Instance.gameObject);
-            Destroy(gameObject);
-            Cursor.visible = true;
+            EndGame(false);
+    }
+
+    /// <summary>
+    /// Destroys Player and UI so they do not spawn on the start screen or cutscene
+    /// </summary>
+    /// <param name="playCutscene"></param>
+    public void EndGame(bool playCutscene) //put this function somewhere else?
+    {
+        Destroy(PlayerManagement.Instance.gameObject);
+        Destroy(gameObject);
+        Cursor.visible = true;
+        if (playCutscene)
+            SceneManager.LoadScene("Outro_Cutscene");
+        else
             SceneManager.LoadScene("Title_Screen");
-        }
     }
 
     /// <summary>
