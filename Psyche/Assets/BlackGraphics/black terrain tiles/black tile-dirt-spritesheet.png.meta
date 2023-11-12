@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: fe3570a6f7b948343b6c020adb5b4a73
+guid: 0dac6a2025527fa4e81f2569699513eb
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -136,7 +136,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: tile-rock-dark-topleft
+      name: tile-dirt-topleft
       rect:
         serializedVersion: 2
         x: 8
@@ -150,17 +150,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 01cf472ef32104a458f9a68311b3b9eb
-      internalID: 1718970111
+      spriteID: 24e799797e0dcf046a3f74ecc03434f9
+      internalID: 1413964095
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tile-rock-dark-top
+      name: tile-dirt-top
       rect:
         serializedVersion: 2
-        x: 90
+        x: 88
         y: 168
         width: 64
         height: 64
@@ -171,14 +171,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bd42f5c92189c3d4f97edf6d8eea8bc2
-      internalID: 138910550
+      spriteID: 285495d2912c9de418ef2a4fded01b7a
+      internalID: 1896867715
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tile-rock-dark-topright
+      name: tile-dirt-topright
       rect:
         serializedVersion: 2
         x: 170
@@ -192,14 +192,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 927f5e2c36cfdd24cb6fb5d4ecb6139e
-      internalID: 535494164
+      spriteID: 4ef4d11940119d548af0b2cefda94652
+      internalID: -1693071033
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tile-rock-dark-left
+      name: tile-dirt-left
       rect:
         serializedVersion: 2
         x: 8
@@ -213,17 +213,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1b08eb66507344f49b8948136b9c36d3
-      internalID: -603887333
+      spriteID: f91d22e6bdbeb1e46b2e43703a2060be
+      internalID: 278285605
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tile-rock-dark-center
+      name: tile-dirt-center
       rect:
         serializedVersion: 2
-        x: 90
+        x: 88
         y: 88
         width: 64
         height: 64
@@ -234,14 +234,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ecf54f382930a32459b0d9ddfd46aabb
-      internalID: 869619282
+      spriteID: 7039f49eb870a514797b9814962a312b
+      internalID: -949876686
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tile-rock-dark-right
+      name: tile-dirt-right
       rect:
         serializedVersion: 2
         x: 170
@@ -255,18 +255,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d52b293eeeb4de949896a180de88a173
-      internalID: -1175548521
+      spriteID: 730b44063c2c43d46833164969fe16b9
+      internalID: -488317184
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tile-rock-dark-bottomleft
+      name: tile-dirt-bottomleft
       rect:
         serializedVersion: 2
         x: 8
-        y: 6
+        y: 8
         width: 64
         height: 64
       alignment: 7
@@ -276,18 +276,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4ddceeddf3204f74ea0604a45c045984
-      internalID: -1858737128
+      spriteID: ac48dd095983bd447b5caf784dcd09ea
+      internalID: 2019862776
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tile-rock-dark-bottom
+      name: tile-dirt-bottom
       rect:
         serializedVersion: 2
-        x: 90
-        y: 6
+        x: 88
+        y: 8
         width: 64
         height: 64
       alignment: 7
@@ -297,18 +297,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e8638d000dcba2a42adb851fc2a64ad5
-      internalID: 2035867568
+      spriteID: 2c8c2f7fa29686649b2ae11738994000
+      internalID: 1765519094
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tile-rock-dark-bottomright
+      name: tile-dirt-bottomright
       rect:
         serializedVersion: 2
         x: 170
-        y: 6
+        y: 8
         width: 64
         height: 64
       alignment: 7
@@ -318,8 +318,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 26bd81aede0930b4bbd207788dde3a27
-      internalID: 14960904
+      spriteID: 0e81f3ad8c9ddf342b67e840e7f510ff
+      internalID: 197596812
       vertices: []
       indices: 
       edges: []
@@ -335,15 +335,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      tile-rock-dark-bottom: 2035867568
-      tile-rock-dark-bottomleft: -1858737128
-      tile-rock-dark-bottomright: 14960904
-      tile-rock-dark-center: 869619282
-      tile-rock-dark-left: -603887333
-      tile-rock-dark-right: -1175548521
-      tile-rock-dark-top: 138910550
-      tile-rock-dark-topleft: 1718970111
-      tile-rock-dark-topright: 535494164
+      tile-dirt-bottom: 1765519094
+      tile-dirt-bottomleft: 2019862776
+      tile-dirt-bottomright: 197596812
+      tile-dirt-center: -949876686
+      tile-dirt-left: 278285605
+      tile-dirt-right: -488317184
+      tile-dirt-top: 1896867715
+      tile-dirt-topleft: 1413964095
+      tile-dirt-topright: -1693071033
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
