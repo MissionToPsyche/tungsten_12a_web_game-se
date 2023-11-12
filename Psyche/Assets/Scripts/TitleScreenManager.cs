@@ -24,8 +24,9 @@ public class TitleScreenManager : MonoBehaviour {
     /// <param name="sceneName"></param>
     public void LoadScene(string sceneName)
     {
-        //Play button click sound
-        UIController.Instance.playButtonSound();
+
+        //Play button click sound -- Disabled until audio manager location changed
+        //UIController.Instance.playButtonSound();
         
         SceneManager.LoadScene(sceneName);
     }

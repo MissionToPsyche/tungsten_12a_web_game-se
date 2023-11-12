@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class GameController : BaseController<GameController>
 {
+    //============================================== Initialize/Updates/Destroy ==============================================
+
     //Private variables
 
 
@@ -14,12 +16,13 @@ public class GameController : BaseController<GameController>
     //public SceneManager sceneManager;
     //public AudioManager audioManager;
 
-
+    /// <summary>
+    /// Initialize the object and parent class
+    /// </summary>
     public override void Initialize()
     {
         gameStateManager = new GameStateManager(this, GameStateManager.GameState.MainMenu);
     }
-
 
     /// <summary>
     /// Called just before first frame
@@ -27,6 +30,14 @@ public class GameController : BaseController<GameController>
     void Start()
     {
 
+    }
+
+    /// <summary>
+    /// Called when necessary - not every frame
+    /// </summary>
+    public override void UpdateController()
+    {
+        base.UpdateController();
     }
 
     /// <summary>
@@ -39,20 +50,37 @@ public class GameController : BaseController<GameController>
     }
 
     /// <summary>
-    /// Controller specific update method called by other methods
-    /// </summary>
-    public override void UpdateController()
-    {
-        //Centralized location to update controller without being ran every frame
-    }
-
-    /// <summary>
     /// For shutting down and cleaning up
     /// </summary>
     public override void Shutdown()
     {
         // Perform cleanup if necessary
     }
+
+    //======================================================== Events ========================================================
+
+    /// <summary>
+    /// Subscribes to events and activates when event triggered
+    /// - TODO!! ENABLE EVENT COMMUNICATION FOR INSTANCE CALLS
+    /// </summary>
+    private void OnEnable()
+    {
+        //Insert logic
+    }
+
+    /// <summary>
+    /// When event call is no longer active, turns off function
+    ///   - TODO!! ENABLE EVENT COMMUNICATION FOR INSTANCE CALLS
+    /// </summary>
+    private void OnDisable()
+    {
+        //Insert logic
+    }
+
+    //Gamestate changed
+    public event Action<GameStateManager.GameState> OnGameStateChanged;
+
+    //======================================================= Gamestate ======================================================
 
     /// <summary>
     /// Event handling for game state changes
@@ -82,15 +110,6 @@ public class GameController : BaseController<GameController>
 
         }
     }
-    public event Action<GameStateManager.GameState> OnGameStateChanged;
-
-
-    //Other event sends here
-
-
-    //Subscribe to events from other controllers here
-
-
-
+    
     // Other stuff here
 }
