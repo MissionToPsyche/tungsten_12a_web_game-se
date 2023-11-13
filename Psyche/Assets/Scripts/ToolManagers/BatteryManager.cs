@@ -19,7 +19,6 @@ public class BatteryManager : ToolManager {
     public float batteryPercent;
     public float rate;
     public bool batteryDrained;
-    public TMP_Text battPerText;
 
     //Events to communicate to UI
     public delegate void OnBatteryPercentageChanged(float newPercentage);
@@ -29,13 +28,19 @@ public class BatteryManager : ToolManager {
     /// Initialize this script
     /// </summary>
     /// <param name="playerManagement"></param>
-    public void Initialize(PlayerManagement playerManagement) {
+    public void Initialize(PlayerController playerManagement) {
+        //Base class variables
         toolName = "Battery";
+        toolEnabled = false;
         _playerManagement = playerManagement;
+        
+
+        //Tool specific
         maxCapacity = 100f;
         batteryLevel = maxCapacity;
         batteryPercent = batteryLevel / maxCapacity * 100f;
         rate = 1;
+        batteryDrained = (batteryLevel > 0);
     }
 
     /// <summary>
@@ -50,7 +55,6 @@ public class BatteryManager : ToolManager {
             batteryDrained = true;
         }
         onBatteryPercentageChanged?.Invoke(batteryPercent);
-        Debug.Log("Battery: " + batteryLevel + "/" + maxCapacity);
     }
 
     /// <summary>
@@ -65,7 +69,6 @@ public class BatteryManager : ToolManager {
             batteryDrained = false;
         }
         onBatteryPercentageChanged?.Invoke(batteryPercent);
-        Debug.Log("Battery: " + batteryLevel + "/" + maxCapacity);
     }
 
     /// <summary>
@@ -79,7 +82,6 @@ public class BatteryManager : ToolManager {
             batteryDrained = false;
         }
         onBatteryPercentageChanged?.Invoke(batteryPercent);
-        Debug.Log("Battery: " + batteryLevel + "/" + maxCapacity);
     }
 
     /// <summary>
