@@ -1,5 +1,3 @@
-// Ignore Spelling: Collider
-
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
