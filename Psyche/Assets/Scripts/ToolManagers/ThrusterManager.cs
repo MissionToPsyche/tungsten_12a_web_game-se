@@ -10,10 +10,14 @@ public class ThrusterManager : ToolManager
     //Private Variables
     private float _thrusterForce;
 
-    public void Initialize(PlayerManagement playerManagement)
+    public void Initialize(PlayerController playerManagement)
     {
+        //Base class variables
         toolName = "Thruster";
+        toolEnabled = false;
         _playerManagement = playerManagement;
+
+        //Tool specific variables
         _thrusterForce = 0.9f;
     }
     
@@ -31,6 +35,6 @@ public class ThrusterManager : ToolManager
     /// </summary>
     public override void Modify()
     {
-        _thrusterForce += 1.0f;
+        _thrusterForce += 0.25f;
     }
 }

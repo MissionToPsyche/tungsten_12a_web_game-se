@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class TransitionManager : MonoBehaviour
 {
     //Private variables
-    private PlayerManagement _playerManagement;
+    private PlayerController _playerManagement;
     private Vector2 _landingPosition;
     private AsyncOperation _loadScene;
     
@@ -17,7 +17,7 @@ public class TransitionManager : MonoBehaviour
     /// Initializes this script
     /// </summary>
     /// <param name="playerManagement"></param>
-    public void Initialize(PlayerManagement playerManagement)
+    public void Initialize(PlayerController playerManagement)
     {
         _playerManagement = playerManagement;
         _landingPosition = new Vector2(-2, -4);
@@ -64,6 +64,8 @@ public class TransitionManager : MonoBehaviour
                     SceneManager.LoadScene("DeveloperScene_Matt");      break; //Matt
                 case "SceneTransition_James":
                     SceneManager.LoadScene("DeveloperScene_James");     break; //James
+                case "SceneTransition_End":
+                    UIController.Instance.EndGame(true);                break;
                 default:
                     Debug.Log("Invalid Scene Transition");              break; //Default
             }   
