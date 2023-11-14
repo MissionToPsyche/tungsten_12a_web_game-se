@@ -81,15 +81,12 @@ public abstract class BaseController<T> : MonoBehaviour where T : BaseController
 
     //======================================================== Events ========================================================
 
-    // Example event -- to be added upon later
-    public delegate void ControllerEvent();
-    public event ControllerEvent OnControllerUpdated;
 
     /// <summary>
     /// Default event invokation
     /// </summary>
-    protected void RaiseControllerUpdatedEvent()
+    public virtual void EventInvocation(ArrayList args)
     {
-        OnControllerUpdated?.Invoke();
+        
     }
 }

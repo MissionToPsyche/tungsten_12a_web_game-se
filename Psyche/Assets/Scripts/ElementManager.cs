@@ -26,6 +26,15 @@ public class ElementManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Interfaces with DevConsoleManagement
+    /// </summary>
+    /// <param name="commands"></param>
+    public void AddElement(string[] commands)
+    {
+
+    }
+
+    /// <summary>
     /// When the player walks over the object, pick up the object
     /// </summary>
     public void ElementPickUp (string element)
