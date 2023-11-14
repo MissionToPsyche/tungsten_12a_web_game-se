@@ -291,11 +291,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3240746905583605884}
         m_TargetAssemblyTypeName: UIController, Assembly-CSharp
-        m_MethodName: openOptionsScreen
-        m_Mode: 1
+        m_MethodName: openSubmenu
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 5624132768119358631}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -802,12 +802,12 @@ GameObject:
   - component: {fileID: 7305835799502214661}
   - component: {fileID: 1667735311786452399}
   m_Layer: 5
-  m_Name: Inventory
+  m_Name: Inventory Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6083342132013930646
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3532,15 +3532,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b8b212082f40e9468704dc35221b3b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boolTest: 0
-  inventoryScreen: {fileID: 1690373141205758407}
+  battPerText: {fileID: 6002241573994103103}
+  inventoryMenu: {fileID: 1690373141205758407}
   confirmBoxText: {fileID: 7116520113140859952}
+  optionsMenu: {fileID: 5624132768119358631}
   dialogBox: {fileID: 2891680610041721959}
   dialogText: {fileID: 6635938548554724783}
-  optionsScreen: {fileID: 5624132768119358631}
   imagerButton: {fileID: 1420831044811399160}
   spectrometerButton: {fileID: 5195088121275753458}
-  magnetometerButton: {fileID: 523221844082889564}
+  eMagnetButton: {fileID: 523221844082889564}
   thrusterButton: {fileID: 4021272432525768819}
 --- !u!1 &5624132768119358631
 GameObject:
@@ -3554,7 +3554,7 @@ GameObject:
   - component: {fileID: 151177179381038223}
   - component: {fileID: 8770079017525868098}
   m_Layer: 5
-  m_Name: Options Screen
+  m_Name: Options Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4848,14 +4848,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3240746905583605884}
         m_TargetAssemblyTypeName: UIController, Assembly-CSharp
-        m_MethodName: openImagerLink
-        m_Mode: 1
+        m_MethodName: OpenToolLink
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Imager
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &6763269975461711991
@@ -6009,14 +6009,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3240746905583605884}
         m_TargetAssemblyTypeName: UIController, Assembly-CSharp
-        m_MethodName: openMagnetometerLink
-        m_Mode: 1
+        m_MethodName: OpenToolLink
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: EMagnet
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &9188071663186705958
