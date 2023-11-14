@@ -8,7 +8,27 @@ using UnityEngine.SceneManagement;
 /// Author: jmolive8
 public class UIController : MonoBehaviour
 {
+    public bool boolTest = false;
+
     [HideInInspector] public static UIController Instance;
+
+    public GameObject inventoryScreen;
+    public TMP_Text confirmBoxText;
+
+    [Header("Dialog Box")]
+    public GameObject dialogBox;
+    public TMP_Text dialogText;
+
+    [Header("Options Screen")]
+    public GameObject optionsScreen;
+
+    [Header("Buttons")]
+    public GameObject imagerButton;
+    public GameObject spectrometerButton;
+    public GameObject magnetometerButton;
+    public GameObject thrusterButton;
+
+    private GameObject submenu;
 
     /// <summary>
     /// When transitioning between scenes, ensures UI state remains
@@ -49,17 +69,6 @@ public class UIController : MonoBehaviour
         PlayerManagement.Instance.batteryManager.battPerText.text = Mathf.RoundToInt(newPercentage).ToString() + "%";
     }
 
-    public GameObject inventoryBox;
-    public GameObject dialogBox;
-    public TMP_Text dialogText;
-    public TMP_Text confirmBoxText;
-
-    [Header("Buttons")]
-    public GameObject imagerButton;
-    public GameObject spectrometerButton;
-    public GameObject magnetometerButton;
-    public GameObject thrusterButton;
-
     /// <summary>
     /// Closes Dialog Box if it is open. If not opens Inventory
     /// </summary>
@@ -69,11 +78,45 @@ public class UIController : MonoBehaviour
             dialogBox.SetActive(false);
         else
         {
-            bool invToggle = !inventoryBox.activeInHierarchy;
-            PlayerManagement.Instance.inputBlocked = invToggle;
-            Cursor.visible = invToggle;
-            inventoryBox.SetActive(invToggle);
+            if (submenu != null)
+                closeSubmenu();
+            else if (inventoryScreen.activeInHierarchy)
+                setInventory(false);
+            else
+                setInventory(true);
         }
+    }
+
+    /// <summary>
+    /// Opens/closes the Inventory
+    /// </summary>
+    /// <param name="setActive"></param>
+    public void setInventory(bool setActive)
+    {
+        PlayerManagement.Instance.inputBlocked = setActive;
+        Cursor.visible = setActive;
+        inventoryScreen.SetActive(setActive);
+    }
+
+    /// <summary>
+    /// Opens another menu and hides the Inventory
+    /// </summary>
+    /// <param name="menu"></param>
+    private void openSubmenu(GameObject menu)
+    {
+        submenu = menu;
+        submenu.SetActive(true);
+        inventoryScreen.SetActive(false);
+    }
+
+    /// <summary>
+    /// Closes currently open submenu and returns to Inventory
+    /// </summary>
+    public void closeSubmenu()
+    {
+        submenu.SetActive(false);
+        submenu = null;
+        inventoryScreen.SetActive(true);
     }
 
     /// <summary>
@@ -106,15 +149,11 @@ public class UIController : MonoBehaviour
 
         shouldRespawn = respawn;
         if (shouldRespawn)
-        {
             confirmBoxText.SetText("Are you sure you want return to the last checkpoint?");
-            confirmBoxText.transform.parent.gameObject.SetActive(true);
-        }
         else
-        {
             confirmBoxText.SetText("Are you sure you want to quit to the title screen?");
-            confirmBoxText.transform.parent.gameObject.SetActive(true);
-        }
+
+        openSubmenu(confirmBoxText.transform.parent.gameObject);
     }
 
     /// <summary>
@@ -129,7 +168,7 @@ public class UIController : MonoBehaviour
         if (shouldRespawn)
         {
             confirmBoxText.transform.parent.gameObject.SetActive(false);
-            inventoryBox.SetActive(false);
+            inventoryScreen.SetActive(false);
             PlayerManagement.Instance.inputBlocked = false;
             PlayerManagement.Instance.deathCon.GetHurt();
         }
@@ -142,6 +181,14 @@ public class UIController : MonoBehaviour
             Cursor.visible = true;
             SceneManager.LoadScene("Title_Screen");
         }
+    }
+
+    /// <summary>
+    /// Opens option screen and syncs color blind toggle
+    /// </summary>
+    public void openOptionsScreen()
+    {
+        openSubmenu(optionsScreen);
     }
 
     /// <summary>

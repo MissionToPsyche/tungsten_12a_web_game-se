@@ -14,19 +14,14 @@ public class TitleScreenManager : MonoBehaviour {
     GameObject submenu;
 
     /// <summary>
-    /// T/F for color blind mode
-    /// </summary>
-    public static bool colorBlindMode;
-
-    /// <summary>
     /// Opens the Scene of the given name
     /// </summary>
     /// <param name="sceneName"></param>
     public void LoadScene(string sceneName)
     {
         //Play button click sound
-        UIController.Instance.playButtonSound();
-        
+        //UIController.Instance.playButtonSound(); //Prevents game from loading because UIController does not yet exist 
+
         SceneManager.LoadScene(sceneName);
     }
 
@@ -52,14 +47,5 @@ public class TitleScreenManager : MonoBehaviour {
         submenu.SetActive(false);
         submenu = null;
         gameObject.SetActive(true);
-    }
-
-    /// <summary>
-    /// Swap color blind mode
-    /// </summary>
-    /// <returns></returns>
-    public static void ChangeColorBlindMode() {
-        colorBlindMode = !colorBlindMode;
-        Debug.Log("Color Blind Mode: "+colorBlindMode);
     }
 }
