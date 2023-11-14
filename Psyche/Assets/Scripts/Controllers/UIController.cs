@@ -43,7 +43,7 @@ public class UIController : BaseController<UIController>
     ///   - Calls parent awake
     ///   - Initializes Script
     /// </summary>
-    void Awake()
+    protected override void Awake()
     {
         base.Awake();
         Initialize();
@@ -102,9 +102,8 @@ public class UIController : BaseController<UIController>
         if (PlayerController.Instance != null)
         {
             PlayerController.Instance.OnToolPickedUp -= EnableToolButton;
+            PlayerController.Instance.batteryManager.onBatteryPercentageChanged -= UpdateBatteryText;
         }
-        PlayerController.Instance.batteryManager.onBatteryPercentageChanged -= UpdateBatteryText;
-
     }
 
     /// <summary>

@@ -25,6 +25,17 @@ public class GameController : BaseController<GameController>
     }
 
     /// <summary>
+    /// Runs when scene starts
+    ///   - Calls base.Awake()
+    ///   - Initializes script
+    /// </summary>
+    protected override void Awake()
+    {
+        base.Awake();
+        Initialize();
+    }
+
+    /// <summary>
     /// Called just before first frame
     /// </summary>
     void Start()

@@ -99,7 +99,7 @@ public class PlayerController : BaseController<PlayerController>
     ///   - Calls base.Awake()
     ///   - Initializes script
     /// </summary>
-    public void Awake()
+    protected override void Awake()
     {
         base.Awake();
         Initialize();
