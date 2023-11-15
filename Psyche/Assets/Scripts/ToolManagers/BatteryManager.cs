@@ -50,7 +50,7 @@ public class BatteryManager : ToolManager {
             batteryDrained = true;
         }
         onBatteryPercentageChanged?.Invoke(batteryPercent);
-        Debug.Log("Battery: " + batteryLevel + "/" + maxCapacity);
+        //Debug.Log("Battery: " + batteryLevel + "/" + maxCapacity);
     }
 
     /// <summary>
@@ -65,7 +65,7 @@ public class BatteryManager : ToolManager {
             batteryDrained = false;
         }
         onBatteryPercentageChanged?.Invoke(batteryPercent);
-        Debug.Log("Battery: " + batteryLevel + "/" + maxCapacity);
+        //Debug.Log("Battery: " + batteryLevel + "/" + maxCapacity);
     }
 
     /// <summary>
@@ -79,7 +79,7 @@ public class BatteryManager : ToolManager {
             batteryDrained = false;
         }
         onBatteryPercentageChanged?.Invoke(batteryPercent);
-        Debug.Log("Battery: " + batteryLevel + "/" + maxCapacity);
+        //Debug.Log("Battery: " + batteryLevel + "/" + maxCapacity);
     }
 
     /// <summary>

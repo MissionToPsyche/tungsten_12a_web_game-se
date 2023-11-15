@@ -240,12 +240,12 @@ public class PlayerManagement : MonoBehaviour
                 break;
 
             case "Battery":
-                Debug.Log("Battery charge!");
+                //Debug.Log("Battery charge!");
                 batteryManager.ChargeBatt(500);
                 break;
 
             case "Health":        
-                Debug.Log("Health increase!");
+                //Debug.Log("Health increase!");
                 playerHealth.HealthUp(1);
                 break;
 
