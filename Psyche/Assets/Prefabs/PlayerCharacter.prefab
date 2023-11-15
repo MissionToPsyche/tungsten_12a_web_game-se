@@ -20,7 +20,6 @@ GameObject:
   - component: {fileID: 8966456805578203647}
   - component: {fileID: 4004592847061855459}
   - component: {fileID: 1777309154900150215}
-  - component: {fileID: 7978704021431596244}
   - component: {fileID: 3447453164145479344}
   - component: {fileID: 6541638013253857405}
   m_Layer: 0
@@ -196,8 +195,8 @@ MonoBehaviour:
     m_Bits: 16392
   isGrounded: 0
   playerHealth: {fileID: 0}
-  batteryManager: {fileID: 3447453164145479344}
-  playerMovement: {fileID: 7454889652593822882}
+  batteryManager: {fileID: 0}
+  playerMovement: {fileID: 0}
   imagerManager: {fileID: 0}
   eMagnetManager: {fileID: 0}
   thrusterManager: {fileID: 0}
@@ -308,23 +307,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b085ee54004e2b24e8e60d3d5c7795a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7978704021431596244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 82528849670660265}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e43bcff56e0418b48802e922acb33133, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _copper: 0
-  _iron: 0
-  _nickel: 0
-  _gold: 0
-  _platinum: 0
 --- !u!114 &3447453164145479344
 MonoBehaviour:
   m_ObjectHideFlags: 0

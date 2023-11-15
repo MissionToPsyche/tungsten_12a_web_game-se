@@ -1,6 +1,8 @@
 using TMPro;
+using UnityEditor.EditorTools;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 /// <summary>
 /// Functions for the inventory and dialog box. Script is a component of the UI gameobject
@@ -106,10 +108,12 @@ public class UIController : BaseController<UIController>
             case "Thruster":
                 setDialogText("This is a Thruster");
                 thrusterButton.SetActive(true);
+                thrusterSection.SetActive(true);
                 break;
             case "ImagerCursor":
                 setDialogText("This is an Imager");
                 imagerButton.SetActive(true);
+                imagerSection.SetActive(true);
                 break;
             case "Spectrometer":
                 setDialogText("This is a Spectrometer");
@@ -118,6 +122,7 @@ public class UIController : BaseController<UIController>
             case "Magnetometer":
                 setDialogText("This is an ElectroMagnet");
                 eMagnetButton.SetActive(true);
+                eMagnetSection.SetActive(true);
                 break;
             default:
                 Debug.LogWarning("Incorrect tool name passed: " + toolName);
@@ -169,7 +174,6 @@ public class UIController : BaseController<UIController>
 
 
     //========================================================== UI ==========================================================
-
     //UI Components
     public TMP_Text battPerText;
 
@@ -295,7 +299,7 @@ public class UIController : BaseController<UIController>
     /// Destroys Player and UI so they do not spawn on the start screen or cutscene
     /// </summary>
     /// <param name="playCutscene"></param>
-    public void EndGame(bool playCutscene) //put this function somewhere else?
+    public void EndGame(bool playCutscene)
     {
         Destroy(PlayerController.Instance.gameObject);
         Destroy(gameObject);
@@ -304,5 +308,122 @@ public class UIController : BaseController<UIController>
             SceneManager.LoadScene("Outro_Cutscene");
         else
             SceneManager.LoadScene("Title_Screen");
+    }
+
+
+
+
+    //========================================================== Upgrades Menu ==========================================================
+    [Header("Upgrades Menu")]
+    public TMP_Text copperAmount;
+    public TMP_Text ironAmount;
+    public TMP_Text nickelAmount;
+    public TMP_Text goldAmount;
+    public TMP_Text platinumAmount;
+    public TMP_Text errorText;
+    public GameObject thrusterSection;
+    public GameObject eMagnetSection;
+    public GameObject imagerSection;
+
+    private int _copper, _iron, _nickel, _gold, _platinum;
+
+    /// <summary>
+    /// Modifies the tool when its upgrade button is pressed
+    /// </summary>
+    public void upgradeTool(string toolName)
+    {
+        if (toolName == "Thruster")
+        {
+            if (_copper > 0)
+            {
+                _copper--;
+                copperAmount.SetText(_copper.ToString());
+                errorText.gameObject.SetActive(false);
+                PlayerController.Instance.thrusterManager.Modify();
+            }
+            else
+            {
+                errorText.gameObject.SetActive(true);
+                errorText.SetText("Not enough copper!");
+            }
+        }
+        else if (toolName == "Electromagnet")
+        {
+            if (_iron > 0)
+            {
+                _iron--;
+                ironAmount.SetText(_iron.ToString());
+                errorText.gameObject.SetActive(false);
+                PlayerController.Instance.eMagnetManager.Modify();
+            }
+            else
+            {
+                errorText.gameObject.SetActive(true);
+                errorText.SetText("Not enough iron!");
+            }
+        }
+        else if (toolName == "Battery")
+        {
+            if (_nickel > 0)
+            {
+                _nickel--;
+                nickelAmount.SetText(_nickel.ToString());
+                errorText.gameObject.SetActive(false);
+                PlayerController.Instance.batteryManager.Modify();
+            }
+            else
+            {
+                errorText.gameObject.SetActive(true);
+                errorText.SetText("Not enough nickel!");
+            }
+        }
+        else if (toolName == "Imager")
+        {
+            if (_gold > 0)
+            {
+                _gold--;
+                goldAmount.SetText(_gold.ToString());
+                errorText.gameObject.SetActive(false);
+                PlayerController.Instance.imagerManager.Modify();
+            }
+            else
+            {
+                errorText.gameObject.SetActive(true);
+                errorText.SetText("Not enough gold!");
+            }
+        }
+    }
+
+    /// <summary>
+    /// When the player walks over the object, pick up the object
+    /// </summary>
+    public void elementPickUp(string element)
+    {
+        switch (element)
+        {
+            case "Element_Copper":
+                _copper++;
+                copperAmount.SetText(_copper.ToString());
+                break;
+            case "Element_Iron":
+                _iron++;
+                ironAmount.SetText(_iron.ToString());
+                break;
+            case "Element_Nickel":
+                _nickel++;
+                nickelAmount.SetText(_nickel.ToString());
+                break;
+            case "Element_Gold":
+                _gold++;
+                goldAmount.SetText(_gold.ToString());
+                break;
+            case "Element_Platinum":
+                _platinum++;
+                platinumAmount.SetText(_platinum.ToString());
+                break;
+            default:
+                Debug.Log("Element type not implemented");
+                break;
+        }
     }
 }
