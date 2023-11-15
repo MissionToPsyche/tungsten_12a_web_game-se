@@ -44,7 +44,7 @@ public class UIController : MonoBehaviour
     /// <param name="newPercentage"></param>
     private void UpdateBatteryText(float newPercentage)
     {
-        Debug.Log("Battery ---: " + newPercentage);
+        //Debug.Log("Battery ---: " + newPercentage);
         // Assuming battPerText is the text component that shows the battery percentage
         PlayerManagement.Instance.batteryManager.battPerText.text = Mathf.RoundToInt(newPercentage).ToString() + "%";
     }
