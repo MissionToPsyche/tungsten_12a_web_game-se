@@ -20,6 +20,7 @@
 - [ ] Pause during falls and mid jump
 - [ ] Pause in front of caves disables entrance
 - [ ] Respawn button to correct scene
+- [ ] Rework element system/upgrade menu to run on seperate sript
 
 ### Joshua
 
