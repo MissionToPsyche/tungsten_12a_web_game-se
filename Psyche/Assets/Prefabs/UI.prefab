@@ -2663,9 +2663,10 @@ MonoBehaviour:
   dialogBox: {fileID: 2891680610041721959}
   dialogText: {fileID: 6635938548554724783}
   confirmBoxText: {fileID: 7116520113140859952}
+  battPerText: {fileID: 6002241573994103103}
   imagerButton: {fileID: 1420831044811399160}
   spectrometerButton: {fileID: 5195088121275753458}
-  magnetometerButton: {fileID: 523221844082889564}
+  eMagnetButton: {fileID: 523221844082889564}
   thrusterButton: {fileID: 4021272432525768819}
 --- !u!1 &5798328280135250163
 GameObject:
@@ -3896,14 +3897,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3240746905583605884}
         m_TargetAssemblyTypeName: UIController, Assembly-CSharp
-        m_MethodName: openImagerLink
-        m_Mode: 1
+        m_MethodName: OpenToolLink
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Imager
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &6763269975461711991
@@ -5057,13 +5058,13 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3240746905583605884}
         m_TargetAssemblyTypeName: UIController, Assembly-CSharp
-        m_MethodName: openMagnetometerLink
-        m_Mode: 1
+        m_MethodName: OpenToolLink
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: EMagnet
           m_BoolArgument: 0
         m_CallState: 2
