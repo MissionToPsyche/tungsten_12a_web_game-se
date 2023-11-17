@@ -15,6 +15,9 @@ public class PlayerController : BaseController<PlayerController>
 {
     //============================================== Initialize/Updates/Destroy ==============================================
 
+    //TEMPORARY <-----------------------------------------REMOVE WHEN NO LONGER NECESSARY
+    GameController gameController;
+
     //Create the playercharacter assignment
     [Header("Components")]
     public Rigidbody2D playerCharacter;
@@ -40,7 +43,7 @@ public class PlayerController : BaseController<PlayerController>
     public GammaView gammaView;
     public AudioManager audioManager;
     private TransitionManager sceneTransition;
-    private ElementManager elementManagement;
+    public ElementManager elementManagement;
     public PlayerDeath deathCon;
 
     //Booleans for the various tools
@@ -58,6 +61,9 @@ public class PlayerController : BaseController<PlayerController>
     {
         //Initialize base
         base.Initialize();
+
+        //TEMPORARY <-----------------------------------------REMOVE WHEN NO LONGER NECESSARY
+        gameController = FindAnyObjectByType<GameController>();
 
         //Dictionary for tool states
         _toolStates = new Dictionary<ToolManager, bool>();
@@ -99,7 +105,7 @@ public class PlayerController : BaseController<PlayerController>
     ///   - Calls base.Awake()
     ///   - Initializes script
     /// </summary>
-    public void Awake()
+    protected override void Awake()
     {
         base.Awake();
         Initialize();
@@ -191,7 +197,6 @@ public class PlayerController : BaseController<PlayerController>
             elementManagement.ModifyTool(imagerManager);
         }
 
-
         //Inventory and Dialog Box 
         if (Input.GetKeyDown("tab") && !Input.GetKey(KeyCode.G)) // <-- Change to getbutton and getbuttondown
             UIController.Instance.handleUI();
@@ -209,6 +214,9 @@ public class PlayerController : BaseController<PlayerController>
     //======================================================== Events ========================================================
     //Events definitions
     public event Action<string> OnToolPickedUp;  //When tools are picked up
+    public event Action<ArrayList> OnUpdatePlayerToUI;
+    public event Action<ArrayList> OnUpdatePlayerToGame;
+    
 
 
     /// <summary>
@@ -265,8 +273,11 @@ public class PlayerController : BaseController<PlayerController>
     /// <param name="toolName"></param>
     public void ToolPickUp(string toolName)
     {
-        //Update UI controller
-        OnToolPickedUp?.Invoke(toolName);
+        if(toolName != "Battery" || toolName != "Health")
+        {
+            //Update UI controller
+            OnToolPickedUp?.Invoke(toolName);
+        }
 
         //Other actions
         switch (toolName)
