@@ -22,6 +22,7 @@
 - [ ] Pause in front of caves disables entrance
 - [ ] Respawn button to correct scene
 - [ ] Rework element system/upgrade menu to run on seperate sript
+- [ ] player can get stuck moving when inventory is openned
 
 ### Joshua
 
