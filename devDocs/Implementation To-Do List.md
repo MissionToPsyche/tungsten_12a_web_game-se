@@ -4,7 +4,6 @@
 - [ ] Battery image expands with capacity so percentage does not lower with capacity gains
   - [ ] Each bar could represent 25 capacity and maybe the ToolStates could be capacities of 50, 100, 150?  Maybe more?
 - [ ] Implement new Magnetometer
-- [ ] Implement UI scaling for various window sizes
 
 
 ### Bryant
@@ -27,6 +26,7 @@
 - [ ] move TmepGameManager code to GameController
 - [ ] Fix battery / health pickup warning
 - [ ] button input names
+- [ ] Implement UI scaling for various window sizes
 
 ### Joshua
 
