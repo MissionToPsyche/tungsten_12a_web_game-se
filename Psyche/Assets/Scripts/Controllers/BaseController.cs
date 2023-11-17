@@ -30,7 +30,7 @@ public abstract class BaseController<T> : MonoBehaviour where T : BaseController
 
                 if (_instance == null)
                 {
-                    Debug.LogError($"An instance of {typeof(T)} doesn't exist!");
+                    //Debug.LogError($"An instance of {typeof(T)} doesn't exist!");
                 }
             }
             return _instance;
@@ -40,7 +40,7 @@ public abstract class BaseController<T> : MonoBehaviour where T : BaseController
     /// <summary>
     /// Virtual Awake() class, implements dontdestroyonload
     /// </summary>
-    protected void Awake()
+    protected virtual void Awake()
     {
         //Singleton to ensure only one instance exists
         if (_instance == null || _instance == this)
@@ -81,15 +81,12 @@ public abstract class BaseController<T> : MonoBehaviour where T : BaseController
 
     //======================================================== Events ========================================================
 
-    // Example event -- to be added upon later
-    public delegate void ControllerEvent();
-    public event ControllerEvent OnControllerUpdated;
 
     /// <summary>
     /// Default event invokation
     /// </summary>
-    protected void RaiseControllerUpdatedEvent()
+    public virtual void EventInvocation(ArrayList args)
     {
-        OnControllerUpdated?.Invoke();
+        
     }
 }
