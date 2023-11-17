@@ -4089,10 +4089,10 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'IRL:
 
-    
 
-    Psyche''s electric Hall thrusters use xenon ions to
-    propel the spacecraft. Solar electric propulsion efficiently powers the thrusters.'
+
+    Psyche''s electric Hall thrusters use xenon ions to propel
+    the spacecraft. Solar electric propulsion efficiently powers the thrusters.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4631,11 +4631,11 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'In Game:
 
-    
 
-    Hold spacebar on your way up for a boost, or hold
-    spacebar on your way down to slow your fall. You can use the movement keys to
-    direct your trajectory.'
+
+    Hold spacebar on your way up for a boost, or hold spacebar
+    on your way down to slow your fall. You can use the movement keys to direct your
+    trajectory.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8997,9 +8997,9 @@ RectTransform:
   - {fileID: 7580804800236736988}
   m_Father: {fileID: 7997685303497926764}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 625, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 625, y: -285}
   m_SizeDelta: {x: 170, y: 570}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6567678311124529271
@@ -11804,7 +11804,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Imager
+          m_StringArgument: Thruster
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &9044356025472657033
