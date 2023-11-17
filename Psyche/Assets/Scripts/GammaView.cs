@@ -24,15 +24,12 @@ public class GammaView : MonoBehaviour {
     public Camera mainCamera;                        // scene camera used to only load objects within view
     public LayerMask scanLayer = -1;                 // set to -1 to include all layers
 
-    // set camera and subscribe to the SceneManager.sceneLoaded event
+    // subscribes to the SceneManager.sceneLoaded event
     void Awake() {
-        if (mainCamera == null) {
-            mainCamera = Camera.main;
-        }
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    // unsubscribe from event to prevent memory loss
+    // unsubscribes from event to prevent memory loss
     void OnDestroy() {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
@@ -45,6 +42,11 @@ public class GammaView : MonoBehaviour {
         origColorArray = new Color[0];
         colorBlindModeObjects.Clear();
         Debug.Log("GRS data cleared");
+
+        // sets main camera for use during objects in view capture
+        if (mainCamera == null) {
+            mainCamera = Camera.main;
+        }
 
         // capture all objects in scene
         //GameObject[] gameObjectsArray = UnityEngine.Object.FindObjectsOfType<GameObject>();
@@ -72,7 +74,8 @@ public class GammaView : MonoBehaviour {
         }
     }
 
-    // capture only objects within the cameras view
+    // capture only game objects within the cameras view,
+    // these objects must have collider components in order to be detected 
     List<GameObject> CaptureObjectsInView() {
         List<GameObject> objectsInView = new List<GameObject>();
         Collider2D[] colliders = Physics2D.OverlapAreaAll(GetBottomLeft(), GetTopRight(), scanLayer);
