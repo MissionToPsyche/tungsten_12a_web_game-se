@@ -1,7 +1,7 @@
 /** 
 Description: spectrometer tool gamma view script
 Author: blopezro
-Version: 20231111
+Version: 20231116
 **/
 
 using System;
@@ -15,19 +15,24 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class GammaView : MonoBehaviour {
 
-    public GameObject[] sceneObjects;                // holds all current game objects in the scene
+    public List<GameObject> sceneObjects;            // holds all current game objects in the scene
     public List<SpriteRenderer> spriteRenderersList; // holds all sprite renderers of game objects
     public Color[] origColorArray;                   // holds original colors of the sprite renderers
     public Color defaultColor = Color.green;         // default color of items when default layer is used
     public List<GameObject> colorBlindModeObjects;   // objects stored for assistance with color blindness
     public bool colorBlindMode;                      // color blind mode boolean
+    public Camera mainCamera;                        // scene camera used to only load objects within view
+    public LayerMask scanLayer = -1;                 // set to -1 to include all layers
 
-    // subscribes to the SceneManager.sceneLoaded event
+    // set camera and subscribe to the SceneManager.sceneLoaded event
     void Awake() {
+        if (mainCamera == null) {
+            mainCamera = Camera.main;
+        }
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    // unsubscribes from event to prevent memory loss
+    // unsubscribe from event to prevent memory loss
     void OnDestroy() {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
@@ -35,14 +40,19 @@ public class GammaView : MonoBehaviour {
     // runs each time a new scene is loaded
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
         // clears and empties out items before use in the scene
-        sceneObjects = new GameObject[0];
+        sceneObjects.Clear();
         spriteRenderersList.Clear();
         origColorArray = new Color[0];
         colorBlindModeObjects.Clear();
         Debug.Log("GRS data cleared");
 
-        sceneObjects = (GameObject[])UnityEngine.Object.FindObjectsOfType(typeof(GameObject));
-        Debug.Log("Number of scene objects captured: " + sceneObjects.Length);
+        // capture all objects in scene
+        //GameObject[] gameObjectsArray = UnityEngine.Object.FindObjectsOfType<GameObject>();
+        //sceneObjects = new List<GameObject>(gameObjectsArray);
+
+        // capture only objects within cameras view in scene
+        sceneObjects = CaptureObjectsInView();
+        Debug.Log("Number of scene objects captured: " + sceneObjects.Count);
         CaptureSpriteRenderers(sceneObjects);
 
         // resizes based on sprite renderers in the scene
@@ -60,6 +70,42 @@ public class GammaView : MonoBehaviour {
                 ApplyColorBlindModifications(spriteRenderer);
             }
         }
+    }
+
+    // capture only objects within the cameras view
+    List<GameObject> CaptureObjectsInView() {
+        List<GameObject> objectsInView = new List<GameObject>();
+        Collider2D[] colliders = Physics2D.OverlapAreaAll(GetBottomLeft(), GetTopRight(), scanLayer);
+
+        foreach (Collider2D collider in colliders) {
+            GameObject obj = collider.gameObject;
+            // check if the object is within the camera's viewport
+            if (IsObjectInView(obj)) {
+                // add the object to the list for scanning or processing
+                objectsInView.Add(obj);
+            }
+        }
+        return objectsInView;
+    }
+
+    // checks if obj is within bounds
+    bool IsObjectInView(GameObject obj) {
+        Bounds bounds = obj.GetComponent<Collider2D>().bounds;
+        Vector3 objectPosition = bounds.center;
+        Vector3 screenPoint = mainCamera.WorldToViewportPoint(objectPosition);
+        return screenPoint.x >= 0 && screenPoint.x <= 1 && screenPoint.y >= 0 && screenPoint.y <= 1;
+    }
+
+    // gets bottom left of camera box
+    Vector2 GetBottomLeft() {
+        Vector3 bottomLeft = mainCamera.ViewportToWorldPoint(Vector3.zero);
+        return new Vector2(bottomLeft.x, bottomLeft.y);
+    }
+
+    // gets top right of camera box
+    Vector2 GetTopRight() {
+        Vector3 topRight = mainCamera.ViewportToWorldPoint(Vector3.one);
+        return new Vector2(topRight.x, topRight.y);
     }
 
     // activates gamma ray spectrometer
@@ -95,7 +141,7 @@ public class GammaView : MonoBehaviour {
     }
 
     // adds to the list the sprite renderers from the game objects in the scene
-    void CaptureSpriteRenderers(GameObject[] sceneObjects) {
+    void CaptureSpriteRenderers(List<GameObject> sceneObjects) {
         foreach (GameObject obj in sceneObjects) {
             if (obj.GetComponent(typeof(SpriteRenderer))) {
                 spriteRenderersList.Add((SpriteRenderer) obj.GetComponent(typeof(SpriteRenderer)));
