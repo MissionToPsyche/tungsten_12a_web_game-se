@@ -16,11 +16,18 @@ public abstract class ToolManager : MonoBehaviour
 
     public bool toolEnabled { get; protected set; }
 
-    public void EnableTool()
+    /// <summary>
+    /// Enables the tool
+    /// </summary>
+    public void Enable()
     {
         toolEnabled = true;
-        Debug.Log("Enabled: " + toolEnabled);
     }
+
+    /// <summary>
+    /// Used for tool activation
+    /// </summary>
+    public abstract void Activate();
 
     /// <summary>
     /// Class-specific implementation to update local variables
@@ -34,6 +41,7 @@ public abstract class ToolManager : MonoBehaviour
     {
         if (!levelRequirements.ContainsKey(level + 1))
         {
+            Debug.Log("Not Upgraded yo");
             return false; //Level out of scope
         }
         //foreach (var requirement in levelRequirements[level + 1])
@@ -51,7 +59,7 @@ public abstract class ToolManager : MonoBehaviour
                 "UI", "None", "ToolUpgradeInterface", levelRequirements[level],
         };
         _playerController.SendMessage(args);
-       
+        
         //Notify success
         return true;
     }

@@ -55,6 +55,14 @@ public class EMagnetManager : ToolManager {
     }
 
     /// <summary>
+    /// Activates the electromagnet
+    /// </summary>
+    public override void Activate()
+    {
+        StartCoroutine(handleEMagnet());
+    }
+
+    /// <summary>
     /// Activates EMagnet tool
     /// </summary>
     /// <returns></returns>

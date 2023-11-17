@@ -110,7 +110,7 @@ public class BatteryManager : ToolManager {
     /// <summary>
     /// charges battery to max capacity
     /// </summary>
-    public void ChargeBattFull() {
+    public override void Activate() {
         batteryLevel += maxCapacity;        
         batteryLevel = Mathf.Clamp(batteryLevel, 0f, maxCapacity); // keeps batt level between 0-100
         batteryPercent = batteryLevel / maxCapacity * 100f;

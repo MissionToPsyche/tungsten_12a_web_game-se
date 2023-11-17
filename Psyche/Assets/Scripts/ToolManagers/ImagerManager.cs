@@ -16,6 +16,7 @@ public class ImagerManager : ToolManager
 {
     //Private Variables
     [SerializeField] private UnityEngine.Rendering.Universal.Light2D _imager; //The player's imager - Not initialized through code
+    [SerializeField] private bool _active;
     [SerializeField] private UnityEngine.Rendering.Universal.Light2D _flashlight; //The cursor's imager - Not initialized through code
     [SerializeField] private float _rangeIncrease; //The amount to increase the vision field
     [SerializeField] private ImagerCounter _imagerCounter; //Not initialized though code
@@ -63,22 +64,23 @@ public class ImagerManager : ToolManager
 
         //Tool specific variables
         _rangeIncrease = 0.5f;
-    }
-
-    /// <summary>
-    /// Turns off light
-    /// </summary>
-    public void turnOff()
-    {
-        _imager.intensity = 0;
+        _active = false;
     }
 
     /// <summary>
     /// Turns on light
     /// </summary>
-    public void turnOn()
+    public override void Activate()
     {
-        _imager.intensity = 1;
+        _active = !_playerController.batteryManager.batteryDrained;
+        if(_active)
+        {
+            _imager.intensity = 1;
+        } 
+        else
+        {
+            _imager.intensity = 0;
+        }
     }
 
     /// <summary>

@@ -10,12 +10,16 @@ public class ThrusterManager : ToolManager
     //Private Variables
     private float _thrusterForce;
 
-    public void Initialize(PlayerController playerManagement)
+    /// <summary>
+    /// Initializes the tool
+    /// </summary>
+    /// <param name="playerController"></param>
+    public void Initialize(PlayerController playerController)
     {
         //Base class variables
         toolName = "Thruster";
         toolEnabled = false;
-        _playerController = playerManagement;
+        _playerController = playerController;
         level = 0;
         levelRequirements = new Dictionary<int, Dictionary<string, int>>()
         {
@@ -54,11 +58,14 @@ public class ThrusterManager : ToolManager
     /// Activates the thruster applying a vertical force
     /// </summary>
     /// <param name="playerCharacter"></param>
-    public void ActivateThruster()
+    public override void Activate()
     {
         _playerController.playerCharacter.velocity += new Vector2(0f, _thrusterForce * Time.deltaTime * 10f); 
     }
 
+    /// <summary>
+    /// Increases thruster force
+    /// </summary>
     protected override void UpgradeTool()
     {
         _thrusterForce += 0.25f;
