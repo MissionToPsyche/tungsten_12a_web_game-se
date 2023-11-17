@@ -122,7 +122,7 @@ public class PlayerController : BaseController<PlayerController>
     /// </summary>
     public override void UpdateController()
     {
-        base.UpdateController();
+        //Insert Logic
     }
     
     /// <summary>
@@ -189,11 +189,63 @@ public class PlayerController : BaseController<PlayerController>
     }
 
     //======================================================== Events ========================================================
+    
     //Events definitions
-    public event Action<string> OnToolPickedUp;  //When tools are picked up
     public event Action<ArrayList> OnUpdatePlayerToUI;
     public event Action<ArrayList> OnUpdatePlayerToGame;
-    
+
+    /// <summary>
+    /// Invokes events for this and any subclasses.
+    /// - Takes in an arraylist -- Requirements:
+    ///   - ArrayList[0] = destination
+    ///   - ArrayList[1] = sub-destination ('None' if Controller)
+    ///   - ArrayList[2] = source
+    /// </summary>
+    /// <param name="args"></param>
+    public override void SendMessage(ArrayList args)
+    {
+        string destination = args[0].ToString();
+        args.RemoveAt(0);
+
+        //Send out events depending on the invokee
+        switch (destination)
+        {
+            case "UI":
+                OnUpdatePlayerToUI?.Invoke(args);
+                break;
+            case "Player":
+                OnUpdatePlayerToUI.Invoke(args);
+                break;
+            default:
+                Debug.Log("Incorrect invocation in GameController");
+                break;
+        }
+    }
+
+    /// <summary>
+    /// Processes any event passed to this class
+    /// Requirements:
+    ///   - ArrayList[0] = sub-destination ('None' if Controller)
+    ///   - ArrayList[1] = source
+    /// </summary>
+    /// <param name="args"></param>
+    protected override void ReceiveMessage(ArrayList args)
+    {
+        string subdestination = args[0].ToString();
+        args.RemoveAt(0);
+
+        switch (subdestination)
+        {
+            case "None":
+                string source = args[0].ToString();
+                args.RemoveAt(0);
+                //Process command
+                break;
+            default:
+                Debug.Log("Incorrect subdestination -- GameController");
+                break;
+        }
+    }
 
 
     /// <summary>
@@ -202,7 +254,8 @@ public class PlayerController : BaseController<PlayerController>
     /// </summary>
     private void OnEnable()
     {
-        //Insert logic
+        GameController.Instance.OnUpdateGameToPlayer += ReceiveMessage;
+        UIController.Instance.OnUpdateUIToPlayer += ReceiveMessage;
     }
 
     /// <summary>
@@ -211,7 +264,14 @@ public class PlayerController : BaseController<PlayerController>
     /// </summary>
     private void OnDisable()
     {
-        //Insert logic
+        if(GameController.Instance != null)
+        {
+            GameController.Instance.OnUpdateGameToPlayer -= ReceiveMessage;
+        }
+        if(UIController.Instance != null)
+        {
+            UIController.Instance.OnUpdateUIToPlayer -= ReceiveMessage;
+        }
     }
 
     //TODO: INSERT EVENT FUNCTIONS HERE
@@ -252,8 +312,10 @@ public class PlayerController : BaseController<PlayerController>
     {
         if(toolName != "Battery" || toolName != "Health")
         {
-            //Update UI controller
-            OnToolPickedUp?.Invoke(toolName);
+            ArrayList args = new ArrayList {
+                "UI", "None", "EnableTool", toolName, 
+            };
+            SendMessage(args);
         }
 
         //Other actions

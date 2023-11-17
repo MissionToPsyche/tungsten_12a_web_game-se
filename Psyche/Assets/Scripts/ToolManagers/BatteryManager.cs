@@ -27,12 +27,12 @@ public class BatteryManager : ToolManager {
     /// <summary>
     /// Initialize this script
     /// </summary>
-    /// <param name="playerManagement"></param>
-    public void Initialize(PlayerController playerManagement) {
+    /// <param name="playerController"></param>
+    public void Initialize(PlayerController playerController) {
         //Base class variables
         toolName = "Battery";
         toolEnabled = false;
-        _playerManagement = playerManagement;
+        _playerController = playerController;
         
 
         //Tool specific
@@ -54,7 +54,11 @@ public class BatteryManager : ToolManager {
         if (batteryPercent == 0) {
             batteryDrained = true;
         }
-        onBatteryPercentageChanged?.Invoke(batteryPercent);
+        //Create package to send
+        ArrayList args = new ArrayList {
+                "UI", "None", "BatteryManager", Mathf.RoundToInt(batteryPercent),
+        };
+        _playerController.SendMessage(args);
     }
 
     /// <summary>
@@ -68,7 +72,11 @@ public class BatteryManager : ToolManager {
         if (batteryPercent > 0) {
             batteryDrained = false;
         }
-        onBatteryPercentageChanged?.Invoke(batteryPercent);
+        //Create package to send
+        ArrayList args = new ArrayList {
+                "UI", "None", "BatteryManager", Mathf.RoundToInt(batteryPercent),
+        };
+        _playerController.SendMessage(args);
     }
 
     /// <summary>
@@ -81,7 +89,11 @@ public class BatteryManager : ToolManager {
         if (batteryPercent > 0) {
             batteryDrained = false;
         }
-        onBatteryPercentageChanged?.Invoke(batteryPercent);
+        //Create package to send
+        ArrayList args = new ArrayList {
+                "UI", "None", "BatteryManager", Mathf.RoundToInt(batteryPercent),
+        };
+        _playerController.SendMessage(args);
     }
 
     /// <summary>

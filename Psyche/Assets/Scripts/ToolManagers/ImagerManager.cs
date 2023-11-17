@@ -30,7 +30,7 @@ public class ImagerManager : ToolManager
         //Base class variables
         toolName = "Imager";
         toolEnabled = false;
-        _playerManagement = playerManagement;
+        _playerController = playerManagement;
 
         //Tool specific variables
         _rangeIncrease = 0.5f;
@@ -63,7 +63,7 @@ public class ImagerManager : ToolManager
         //Increase cursor radius
         _flashlight.pointLightInnerRadius += _rangeIncrease;
         _flashlight.pointLightOuterRadius += _rangeIncrease;
-        _playerManagement.audioManager.PlayAudio(_playerManagement.audioManager.toolImager);
+        _playerController.audioManager.PlayAudio(_playerController.audioManager.toolImager);
         _imagerCounter.updateImagerCount(); 
     }
 }
