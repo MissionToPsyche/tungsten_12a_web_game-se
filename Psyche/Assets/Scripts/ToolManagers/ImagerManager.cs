@@ -31,6 +31,35 @@ public class ImagerManager : ToolManager
         toolName = "Imager";
         toolEnabled = false;
         _playerController = playerManagement;
+        level = 0;
+        levelRequirements = new Dictionary<int, Dictionary<string, int>>()
+        {
+            {  1, new Dictionary<string, int>()
+                {
+                    { "copper", 0 }, { "iron", 0 }, { "nickel", 0 }, { "gold", 1 }, { "titanium", 0 }
+                }
+            },
+            {  2, new Dictionary<string, int>()
+                {
+                    { "copper", 0 }, { "iron", 0 } , { "nickel", 0 } , { "gold", 2 }, { "titanium", 0 }
+                }
+            },
+            {  3, new Dictionary<string, int>()
+                {
+                    { "copper", 0 } , { "iron", 0 } , { "nickel", 0 } , { "gold", 3 }, { "titanium", 0 }
+                }
+            },
+            {  4, new Dictionary<string, int>()
+                {
+                    { "copper", 0 } , { "iron", 0 } , { "nickel", 0 } , { "gold", 4 }, { "titanium", 0 }
+                }
+            },
+            {  5, new Dictionary<string, int>()
+                {
+                    { "copper", 0 } ,   { "iron", 0 } , { "nickel", 0 } , { "gold", 5 }, { "titanium", 0 }
+                }
+            },
+        };
 
         //Tool specific variables
         _rangeIncrease = 0.5f;
@@ -55,7 +84,7 @@ public class ImagerManager : ToolManager
     /// <summary>
     /// Increases the range when called
     /// </summary>
-    public override void Modify()
+    protected override void UpgradeTool()
     {
         //Increase imager radius
         _imager.pointLightInnerRadius += _rangeIncrease;

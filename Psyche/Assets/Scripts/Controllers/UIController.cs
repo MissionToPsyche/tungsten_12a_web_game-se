@@ -487,7 +487,7 @@ public class UIController : BaseController<UIController>
     public GameObject eMagnetSection;
     public GameObject imagerSection;
 
-    private int _copper, _iron, _nickel, _gold, _platinum;
+    public int _copper, _iron, _nickel, _gold, _platinum; //temporary public
 
     /// <summary>
     /// Modifies the tool when its upgrade button is pressed

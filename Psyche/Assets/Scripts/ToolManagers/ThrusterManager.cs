@@ -16,6 +16,35 @@ public class ThrusterManager : ToolManager
         toolName = "Thruster";
         toolEnabled = false;
         _playerController = playerManagement;
+        level = 0;
+        levelRequirements = new Dictionary<int, Dictionary<string, int>>()
+        {
+            {  1, new Dictionary<string, int>()
+                {
+                    { "copper", 1 }, { "iron", 0 }, { "nickel", 0 }, { "gold", 0 }, { "titanium", 0 }
+                }
+            },
+            {  2, new Dictionary<string, int>()
+                {
+                    { "copper", 2 }, { "iron", 0 }, { "nickel", 0 }, { "gold", 0 }, { "titanium", 0 }
+                }
+            },
+            {  3, new Dictionary<string, int>()
+                {
+                    { "copper", 3 }, { "iron", 0 }, { "nickel", 0 }, { "gold", 0 }, { "titanium", 0 }
+                }
+            },
+            {  4, new Dictionary<string, int>()
+                {
+                    { "copper", 4 }, { "iron", 0 }, { "nickel", 0 }, { "gold", 0 }, { "titanium", 0 }
+                }
+            },
+            {  5, new Dictionary<string, int>()
+                {
+                    { "copper", 5 }, { "iron", 0 }, { "nickel", 0 }, { "gold", 0 }, { "titanium", 0 }
+                }
+            },
+        };
 
         //Tool specific variables
         _thrusterForce = 0.9f;
@@ -30,11 +59,10 @@ public class ThrusterManager : ToolManager
         _playerController.playerCharacter.velocity += new Vector2(0f, _thrusterForce * Time.deltaTime * 10f); 
     }
 
-    /// <summary>
-    /// Increases the thruster force when called
-    /// </summary>
-    public override void Modify()
+    protected override void UpgradeTool()
     {
         _thrusterForce += 0.25f;
     }
+
+
 }

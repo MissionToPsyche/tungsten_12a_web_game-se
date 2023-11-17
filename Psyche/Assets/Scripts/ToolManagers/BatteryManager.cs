@@ -33,7 +33,35 @@ public class BatteryManager : ToolManager {
         toolName = "Battery";
         toolEnabled = false;
         _playerController = playerController;
-        
+        level = 0;
+        levelRequirements = new Dictionary<int, Dictionary<string, int>>()
+        {
+            {  1, new Dictionary<string, int>()
+                {
+                    { "copper", 0 }, { "iron", 0 }, { "nickel", 1 }, { "gold", 0 }, { "titanium", 0 }
+                }
+            },
+            {  2, new Dictionary<string, int>()
+                {
+                    { "copper", 0 }, { "iron", 0 } , { "nickel", 2 }, { "gold", 0 }, { "titanium", 0 }
+                }
+            },
+            {  3, new Dictionary<string, int>()
+                {
+                    { "copper", 0 } , { "iron", 0 } , { "nickel", 3 }, { "gold", 0 }, { "titanium", 0 }
+                }
+            },
+            {  4, new Dictionary<string, int>()
+                {
+                    { "copper", 0 } , { "iron", 0 } , { "nickel", 4 }, { "gold", 0 }, { "titanium", 0 }
+                }
+            },
+            {  5, new Dictionary<string, int>()
+                {
+                    { "copper", 0 } ,   { "iron", 0 } , { "nickel", 5 }, { "gold", 0 }, { "titanium", 0 }
+                }
+            },
+        };
 
         //Tool specific
         maxCapacity = 100f;
@@ -99,7 +127,7 @@ public class BatteryManager : ToolManager {
     /// <summary>
     /// Increases the max capacity when called.
     /// </summary>
-    public override void Modify() {
+    protected override void UpgradeTool() {
         maxCapacity += 10f;
     }
 }
