@@ -3193,6 +3193,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2438906403932383019, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Thruster
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981160259302064503, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: m_Name
+      value: Thruster Image
+      objectReference: {fileID: 0}
     - target: {fileID: 3240746905583605884, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
       propertyPath: battPerText
       value: 
@@ -3201,6 +3209,18 @@ PrefabInstance:
       propertyPath: eMagnetButton
       value: 
       objectReference: {fileID: 2041358319}
+    - target: {fileID: 3582403596110484301, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 340
+      objectReference: {fileID: 0}
+    - target: {fileID: 4844029570185069083, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: m_text
+      value: 'IRL:
+
+
+        Psyche''s electric Hall thrusters use xenon ions to
+        propel the spacecraft. Solar electric propulsion efficiently powers the thrusters.'
+      objectReference: {fileID: 0}
     - target: {fileID: 5172690812288988953, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
       propertyPath: m_Camera
       value: 
@@ -3209,6 +3229,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 5929750244331734234, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7d7b5c5283ebb494c9adcb8615a81fe7, type: 3}
     - target: {fileID: 6084449246347653844, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 5
@@ -3220,6 +3244,15 @@ PrefabInstance:
     - target: {fileID: 6084449246347653844, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: EMagnet
+      objectReference: {fileID: 0}
+    - target: {fileID: 6332434116300167117, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: m_text
+      value: 'In Game:
+
+
+        Hold spacebar on your way up for a boost, or hold
+        spacebar on your way down to slow your fall. You can use the movement keys
+        to direct your trajectory.'
       objectReference: {fileID: 0}
     - target: {fileID: 6750115145157865743, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
