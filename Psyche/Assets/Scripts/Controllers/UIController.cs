@@ -2,10 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.EditorTools;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 /// <summary>
 /// Functions for the inventory and dialog box. Script is a component of the UI gameobject
@@ -14,19 +12,6 @@ using UnityEngine.UI;
 public class UIController : BaseController<UIController>
 {
     //============================================== Initialize/Updates/Destroy ==============================================
-
-    //UI Components
-    public GameObject inventoryBox;
-    public GameObject dialogBox;
-    public TMP_Text dialogText;
-    public TMP_Text confirmBoxText;
-    public TMP_Text battPerText;
-
-    [Header("Buttons")]
-    public GameObject imagerButton;
-    public GameObject spectrometerButton;
-    public GameObject eMagnetButton;
-    public GameObject thrusterButton;
 
     //DevConsole
     private GameObject _devConsolePanel;
@@ -319,38 +304,6 @@ public class UIController : BaseController<UIController>
         }
     }
 
-    //========================================================== UI ==========================================================
-
-
-
-    /// <summary>
-    /// Closes Dialog Box if it is open. If not opens Inventory
-    /// </summary>
-    public void handleUI()
-    {
-        if (dialogBox.activeInHierarchy)
-            dialogBox.SetActive(false);
-        else
-        {
-            bool invToggle = !inventoryBox.activeInHierarchy;
-            PlayerController.Instance.inputBlocked = invToggle;
-            Cursor.visible = invToggle;
-            inventoryBox.SetActive(invToggle);
-        }
-    }
-
-    /// <summary>
-    /// Sets text of Dialog Box and opens it
-    /// </summary>
-    /// <param name="text"></param>
-    public void setDialogText(string text)
-    {
-        dialogText.SetText(text);
-        dialogBox.SetActive(true);
-    }
-
-
-
     /// <summary>
     /// Opens the link to the nasa information page when the tool image is clicked in the UI.
     ///   - TODO: UPDATE EMAGNET AND DECOUPLE FROM MAGNETOMETER
@@ -371,15 +324,6 @@ public class UIController : BaseController<UIController>
                 break;
 
         }
-    }
-
-    /// <summary>
-    /// Function to update the battery text     ///TODO: Relocate battpertext to UIController object
-    /// </summary>
-    /// <param name="newPercentage"></param>
-    private void UpdateBatteryText(float newPercentage)
-    {
-        battPerText.text = Mathf.RoundToInt(newPercentage).ToString() + "%";
     }
 
     /// <summary>
