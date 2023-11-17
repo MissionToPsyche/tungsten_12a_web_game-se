@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -19,6 +20,35 @@ public class EMagnetManager : ToolManager {
         toolName = "Electromagnet";
         toolEnabled = false;
         _playerController = playerManagement;
+        level = 0;
+        levelRequirements = new Dictionary<int, Dictionary<string, int>>()
+        {
+            {  1, new Dictionary<string, int>()
+                {
+                    { "copper", 0 }, { "iron", 1 }, { "nickel", 0 }, { "gold", 0 }, { "titanium", 0 }
+                }
+            },
+            {  2, new Dictionary<string, int>()
+                {
+                    { "copper", 0 }, { "iron", 2 }, { "nickel", 0 }, { "gold", 0 }, { "titanium", 0 }
+                }
+            },
+            {  3, new Dictionary<string, int>()
+                {
+                    { "copper", 0 } , { "iron", 3 }, { "nickel", 0 }, { "gold", 0 }, { "titanium", 0 }
+                }
+            },
+            {  4, new Dictionary<string, int>()
+                {
+                    { "copper", 0 } , { "iron", 4 }, { "nickel", 0 }, { "gold", 0 }, { "titanium", 0 }
+                }
+            },
+            {  5, new Dictionary<string, int>()
+                {
+                    { "copper", 0 } , { "iron", 5 }, { "nickel", 0 }, { "gold", 0 }, { "titanium", 0 }
+                }
+            },
+        };
 
         //Tool specific variables
         hitBoxRotator = eMagHitBox.transform.parent;
@@ -96,7 +126,7 @@ public class EMagnetManager : ToolManager {
     /// <summary>
     /// Increases length of EMagnet Hit Box to increase hit range
     /// </summary>
-    public override void Modify()
+    protected override void UpgradeTool()
     {
         eMagHitBox.transform.localScale += new Vector3(0.5f, 0, 0);
         eMagHitBox.transform.localPosition += new Vector3(0.25f, 0, 0);
