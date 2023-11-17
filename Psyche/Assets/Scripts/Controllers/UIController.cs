@@ -81,7 +81,7 @@ public class UIController : BaseController<UIController>
     /// </summary>
     public override void UpdateController()
     {
-        base.UpdateController();
+        //Insert Logic
     }
 
     /// <summary>
@@ -108,7 +108,7 @@ public class UIController : BaseController<UIController>
             ArrayList commands = new ArrayList { "Game", "DeveloperConsole", "UI" };
             commands.AddRange(_devConsoleInput.text.ToLower().Split(" "));
             //Process the command
-            EventInvocation(commands);
+            SendMessage(commands);
             _devConsoleInput.text = "";
             _devConsoleInput.ActivateInputField();
         }
@@ -136,11 +136,10 @@ public class UIController : BaseController<UIController>
     ///   - ArrayList[1] = source
     /// </summary>
     /// <param name="args"></param>
-    public override void EventInvocation(ArrayList args)
+    public override void SendMessage(ArrayList args)
     {
         string destination = args[0].ToString();
         args.RemoveAt(0);
-        base.EventInvocation(args);  //even necessary?
 
         //Send out events depending on the invokee
         switch (destination)
@@ -157,34 +156,6 @@ public class UIController : BaseController<UIController>
         }
     }
 
-
-    /// <summary>
-    /// Subscribes to events and activates when event triggered
-    /// </summary>
-    private void OnEnable()
-    {
-        GameController.Instance.OnUpdateGameToUI += ProcessEvent;
-        PlayerController.Instance.OnToolPickedUp += EnableToolButton; //To be removed
-        PlayerController.Instance.batteryManager.onBatteryPercentageChanged += UpdateBatteryText; //To be removed
-    }
-
-    /// <summary>
-    /// When event call is no longer active, turns off function
-    ///   - TODO!! ENABLE EVENT COMMUNICATION FOR INSTANCE CALLS
-    /// </summary>
-    private void OnDisable()
-    {
-        if (PlayerController.Instance != null)
-        {
-            PlayerController.Instance.OnToolPickedUp -= EnableToolButton; 
-            PlayerController.Instance.batteryManager.onBatteryPercentageChanged -= UpdateBatteryText;
-        }
-        if(GameController.Instance != null)
-        {
-            GameController.Instance.OnUpdateGameToUI -= ProcessEvent;
-        }
-    }
-
     /// <summary>
     /// Processes any event passed to this class
     /// Requirements:
@@ -192,23 +163,27 @@ public class UIController : BaseController<UIController>
     ///   - ArrayList[1] = source
     /// </summary>
     /// <param name="args"></param>
-    private void ProcessEvent(ArrayList args)
+    protected override void ReceiveMessage(ArrayList args)
     {
-        string subdestination = args[0].ToString(); //Unused, but for future cases
-        string source = args[1].ToString();
-        args.RemoveAt(0);
+        string subdestination = args[0].ToString();
         args.RemoveAt(0);
 
-        switch(subdestination)
+        switch (subdestination)
         {
             case "None":
+                string source = args[0].ToString();
+                args.RemoveAt(0);
+
                 switch (source)
                 {
                     case "DeveloperConsole":
                         ProcessDevConsole(args);
                         break;
-                    case "BatteryMangaer":
-                        //Implement
+                    case "BatteryManager":
+                        UpdateBatteryText(args);
+                        break;
+                    case "EnableTool":
+                        EnableToolButton(args);
                         break;
                     default:
                         Debug.Log("Incorrect source provided -- UI ProcessEvent");
@@ -219,20 +194,41 @@ public class UIController : BaseController<UIController>
                 Debug.Log("Incorrect subdestination -- UI ProcessEvent");
                 break;
         }
-
     }
 
 
+    /// <summary>
+    /// Subscribes to events and activates when event triggered
+    /// </summary>
+    private void OnEnable()
+    {
+        GameController.Instance.OnUpdateGameToUI += ReceiveMessage;
+        PlayerController.Instance.OnUpdatePlayerToUI += ReceiveMessage;
+    }
 
-
+    /// <summary>
+    /// When event call is no longer active, turns off function
+    ///   - TODO!! ENABLE EVENT COMMUNICATION FOR INSTANCE CALLS
+    /// </summary>
+    private void OnDisable()
+    {
+        if (PlayerController.Instance != null)
+        {
+            PlayerController.Instance.OnUpdatePlayerToUI -= EnableToolButton; 
+        }
+        if(GameController.Instance != null)
+        {
+            GameController.Instance.OnUpdateGameToUI -= ReceiveMessage;
+        }
+    }
 
     /// <summary>
     /// When called, will enable the tool button
     /// </summary>
     /// <param name="toolName"></param>
-    public void EnableToolButton(string toolName)
+    public void EnableToolButton(ArrayList args)
     {
-        switch (toolName)
+        switch (args[0].ToString())
         {
             case "Thruster":
                 setDialogText("This is a Thruster");
@@ -254,7 +250,7 @@ public class UIController : BaseController<UIController>
                 eMagnetSection.SetActive(true);
                 break;
             default:
-                Debug.LogWarning("Incorrect tool name passed: " + toolName);
+                Debug.LogWarning("Incorrect tool name passed: " + args[0].ToString());
                 break;
         }
     }
@@ -263,9 +259,9 @@ public class UIController : BaseController<UIController>
     /// Function to update the battery text     ///TODO: Relocate battpertext to UIController object
     /// </summary>
     /// <param name="newPercentage"></param>
-    private void UpdateBatteryText(float newPercentage)
+    private void UpdateBatteryText(ArrayList args)
     {
-        battPerText.text = Mathf.RoundToInt(newPercentage).ToString() + "%";
+        battPerText.text = args[0].ToString() + "%";
     }
 
     /// <summary>
@@ -336,8 +332,6 @@ public class UIController : BaseController<UIController>
     {
         PlayerController.Instance.audioManager.PlayAudio(PlayerController.Instance.audioManager.buttonClick);
     }
-
-
 
 
 

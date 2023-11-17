@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class ToolManager : MonoBehaviour
 {
     //Private Variables
-    protected PlayerController _playerManagement;
+    protected PlayerController _playerController;
     
     //Public variables
     public string toolName;

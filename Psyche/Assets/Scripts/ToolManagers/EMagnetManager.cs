@@ -18,7 +18,7 @@ public class EMagnetManager : ToolManager {
         //Base class varibles
         toolName = "Electromagnet";
         toolEnabled = false;
-        _playerManagement = playerManagement;
+        _playerController = playerManagement;
 
         //Tool specific variables
         hitBoxRotator = eMagHitBox.transform.parent;
@@ -30,11 +30,11 @@ public class EMagnetManager : ToolManager {
     /// <returns></returns>
     public IEnumerator handleEMagnet()
     {
-        _playerManagement.audioManager.PlayAudio(_playerManagement.audioManager.toolMagnetometer);
-        _playerManagement.eMagnetActive = true;
+        _playerController.audioManager.PlayAudio(_playerController.audioManager.toolMagnetometer);
+        _playerController.eMagnetActive = true;
         hitBoxRotator.gameObject.SetActive(true);
         Collider2D hit, target = null;
-        float curGrav = _playerManagement.playerCharacter.gravityScale;
+        float curGrav = _playerController.playerCharacter.gravityScale;
 
         do
         {
@@ -57,7 +57,7 @@ public class EMagnetManager : ToolManager {
                 {
                     hit.attachedRigidbody.velocity = Vector2.zero;
                     hit.attachedRigidbody.angularVelocity = 0;
-                    if (!_playerManagement.playerCollider.IsTouching(hit))
+                    if (!_playerController.playerCollider.IsTouching(hit))
                         hit.attachedRigidbody.MovePosition(Vector2.MoveTowards(hit.transform.position, transform.position, Time.deltaTime * 40));
                 }
                 ///If new Iron Vein hit
@@ -68,11 +68,11 @@ public class EMagnetManager : ToolManager {
                      */
                     if (target == null)
                     {
-                        _playerManagement.beingPulled = true;
-                        _playerManagement.playerCharacter.gravityScale = 0;
+                        _playerController.beingPulled = true;
+                        _playerController.playerCharacter.gravityScale = 0;
                     }
 
-                    _playerManagement.playerCharacter.velocity = Vector2.zero;
+                    _playerController.playerCharacter.velocity = Vector2.zero;
                     target = hit;
                 }
             }
@@ -81,16 +81,16 @@ public class EMagnetManager : ToolManager {
              * Pulls Player towards most recently hit Iron Vein
              */
             if (target != null)
-                _playerManagement.playerCharacter.MovePosition(Vector2.MoveTowards(transform.position, target.transform.position, Time.deltaTime * 40));
+                _playerController.playerCharacter.MovePosition(Vector2.MoveTowards(transform.position, target.transform.position, Time.deltaTime * 40));
 
             yield return null;
         } while (Input.GetButton("Fire1"));
 
-        _playerManagement.audioManager.StopAudio(_playerManagement.audioManager.toolMagnetometer);
-        _playerManagement.playerCharacter.gravityScale = curGrav;
+        _playerController.audioManager.StopAudio(_playerController.audioManager.toolMagnetometer);
+        _playerController.playerCharacter.gravityScale = curGrav;
         hitBoxRotator.gameObject.SetActive(false);
-        _playerManagement.eMagnetActive = false;
-        _playerManagement.beingPulled = false;
+        _playerController.eMagnetActive = false;
+        _playerController.beingPulled = false;
     }
 
     /// <summary>

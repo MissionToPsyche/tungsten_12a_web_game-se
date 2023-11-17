@@ -15,7 +15,7 @@ public class ThrusterManager : ToolManager
         //Base class variables
         toolName = "Thruster";
         toolEnabled = false;
-        _playerManagement = playerManagement;
+        _playerController = playerManagement;
 
         //Tool specific variables
         _thrusterForce = 0.9f;
@@ -27,7 +27,7 @@ public class ThrusterManager : ToolManager
     /// <param name="playerCharacter"></param>
     public void ActivateThruster()
     {
-        _playerManagement.playerCharacter.velocity += new Vector2(0f, _thrusterForce * Time.deltaTime * 10f); 
+        _playerController.playerCharacter.velocity += new Vector2(0f, _thrusterForce * Time.deltaTime * 10f); 
     }
 
     /// <summary>
