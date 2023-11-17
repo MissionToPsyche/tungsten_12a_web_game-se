@@ -20,7 +20,7 @@ public class AudioManager : MonoBehaviour {
     // tools
     [SerializeField] public AudioSource toolGRS;
     [SerializeField] public AudioSource toolImager;
-    [SerializeField] public AudioSource toolMagnetometer;
+    [SerializeField] public AudioSource toolEMagnet;
     [SerializeField] public AudioSource toolThrusters;
     
     // player
