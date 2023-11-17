@@ -25,10 +25,14 @@ public class ImagerManager : ToolManager
     /// Initializes this script
     /// </summary>
     /// <param name="playerManagement"></param>
-    public void Initialize(PlayerManagement playerManagement)
+    public void Initialize(PlayerController playerManagement)
     {
+        //Base class variables
         toolName = "Imager";
+        toolEnabled = false;
         _playerManagement = playerManagement;
+
+        //Tool specific variables
         _rangeIncrease = 0.5f;
     }
 

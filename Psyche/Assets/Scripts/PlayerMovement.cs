@@ -9,7 +9,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     //Private Variables
-    private PlayerManagement _playerManagement;
+    private PlayerController _playerManagement;
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
     private float _xAxis;
@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
     /// Initializes the script
     /// </summary>
     /// <param name="playerManagement"></param>
-    public void Initialize(PlayerManagement playerManagement)
+    public void Initialize(PlayerController playerManagement)
     {
         _playerManagement = playerManagement;
     }
