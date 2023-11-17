@@ -137,11 +137,7 @@ public class PlayerController : BaseController<PlayerController>
     {
         //Check booleans
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
-        if (batteryManager.batteryDrained) {
-            imagerManager.turnOff();
-        } else {
-            imagerManager.turnOn();
-        }
+        imagerManager.Activate();
 
         usingThruster = false; //default
 
@@ -151,7 +147,7 @@ public class PlayerController : BaseController<PlayerController>
             //Call the requisite tool scripts here:
             //Thruster
             if (_toolStates[thrusterManager] && Input.GetButton("Jump") && batteryManager.batteryPercent != 0 && !beingPulled) {
-                thrusterManager.ActivateThruster();
+                thrusterManager.Activate();
                 usingThruster = true;
                 batteryManager.DrainBatt(1);
             }
@@ -167,7 +163,7 @@ public class PlayerController : BaseController<PlayerController>
 
             //ElectroMagnet
             if (_toolStates[eMagnetManager] && Input.GetButton("Fire1") && batteryManager.batteryPercent != 0 && !eMagnetActive) {
-                StartCoroutine(eMagnetManager.handleEMagnet());
+                eMagnetManager.Activate();
                 batteryManager.DrainBatt(500);
             }
 
@@ -322,7 +318,7 @@ public class PlayerController : BaseController<PlayerController>
         switch (toolName)
         {
             case "Thruster":
-                thrusterManager.EnableTool();
+                thrusterManager.Enable();
                 _toolStates[thrusterManager] = thrusterManager.toolEnabled;
                  break;
 
@@ -331,7 +327,7 @@ public class PlayerController : BaseController<PlayerController>
                 break;
 
             case "ImagerCursor":
-                imagerManager.EnableTool();
+                imagerManager.Enable();
                 _toolStates[imagerManager] = imagerManager.toolEnabled;
                 imagerManager.Modify();
                 flashlight.Update();
@@ -343,13 +339,13 @@ public class PlayerController : BaseController<PlayerController>
                 break;
 
             case "Magnetometer":
-                eMagnetManager.EnableTool();
+                eMagnetManager.Enable();
                 _toolStates[eMagnetManager] = eMagnetManager.toolEnabled;
                 break;
 
             case "Battery":
                 Debug.Log("Battery charge!");
-                batteryManager.EnableTool();
+                batteryManager.Enable();
                 _toolStates[batteryManager] = batteryManager.toolEnabled;
                 batteryManager.ChargeBatt(500);
                 break;
