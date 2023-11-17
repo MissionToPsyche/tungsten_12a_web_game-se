@@ -11,7 +11,7 @@ public class GameController : BaseController<GameController>
 
 
     //Public variables
-    //public DeveloperConsole developerConsole;
+    public DeveloperConsole developerConsole;
     public GameStateManager gameStateManager;
     //public SceneManager sceneManager;
     //public AudioManager audioManager;
@@ -21,7 +21,20 @@ public class GameController : BaseController<GameController>
     /// </summary>
     public override void Initialize()
     {
+        developerConsole = GetComponent<DeveloperConsole>();
+        developerConsole.Initialize(this);
         gameStateManager = new GameStateManager(this, GameStateManager.GameState.MainMenu);
+    }
+
+    /// <summary>
+    /// Runs when scene starts
+    ///   - Calls base.Awake()
+    ///   - Initializes script
+    /// </summary>
+    protected override void Awake()
+    {
+        base.Awake();
+        Initialize();
     }
 
     /// <summary>
@@ -54,10 +67,46 @@ public class GameController : BaseController<GameController>
     /// </summary>
     public override void Shutdown()
     {
-        // Perform cleanup if necessary
+        base.Shutdown();
     }
 
     //======================================================== Events ========================================================
+
+    //Event Definitions
+    public event Action<ArrayList> OnUpdateGameToUI;
+    public event Action<ArrayList> OnUpdateGameToPlayer;
+    //Gamestate changed
+    public event Action<GameStateManager.GameState> OnGameStateChanged;
+
+    /// <summary>
+    /// Invokes events for this and any subclasses.
+    /// - Takes in an arraylist -- Requirements:
+    ///   - ArrayList[0] = destination
+    ///   - ArrayList[1] = sub-destination ('None' if Controller)
+    ///   - ArrayList[2] = source
+    /// </summary>
+    /// <param name="args"></param>
+    public override void EventInvocation(ArrayList args)
+    {
+        string destination = args[0].ToString();
+        args.RemoveAt(0);
+        base.EventInvocation(args);  //even necessary?
+        
+        //Send out events depending on the invokee
+        switch (destination)
+        {
+            case "UI":
+                OnUpdateGameToUI?.Invoke(args);
+                break;
+            case "Player":
+                OnUpdateGameToPlayer.Invoke(args);
+                break;
+            default:
+                Debug.Log("Incorrect invocation in GameController");
+                break;
+        }
+    }
+
 
     /// <summary>
     /// Subscribes to events and activates when event triggered
@@ -65,7 +114,7 @@ public class GameController : BaseController<GameController>
     /// </summary>
     private void OnEnable()
     {
-        //Insert logic
+        UIController.Instance.OnUpdateUIToGame += ProcessEvent;
     }
 
     /// <summary>
@@ -74,11 +123,41 @@ public class GameController : BaseController<GameController>
     /// </summary>
     private void OnDisable()
     {
-        //Insert logic
+        if(UIController.Instance)
+        {
+            UIController.Instance.OnUpdateUIToGame -= ProcessEvent;
+        }
     }
 
-    //Gamestate changed
-    public event Action<GameStateManager.GameState> OnGameStateChanged;
+    /// <summary>
+    /// Processes any event passed to this class
+    /// Requirements:
+    ///   - ArrayList[0] = sub-destination ('None' if Controller)
+    ///   - ArrayList[1] = source
+    /// </summary>
+    /// <param name="args"></param>
+    private void ProcessEvent(ArrayList args)
+    {
+        string subdestination = args[0].ToString();
+        args.RemoveAt(0);
+
+        switch(subdestination)
+        {
+            case "None":
+                string source = args[0].ToString();
+                args.RemoveAt(0);
+                //Process command
+                break;
+            case "DeveloperConsole":
+                developerConsole.IntakeEvents(args); 
+                break;
+            default:
+                Debug.Log("Incorrect subdestination -- GameController");
+                break;
+        }
+    }
+
+    
 
     //======================================================= Gamestate ======================================================
 
