@@ -273,8 +273,11 @@ public class PlayerController : BaseController<PlayerController>
     /// <param name="toolName"></param>
     public void ToolPickUp(string toolName)
     {
-        //Update UI controller
-        OnToolPickedUp?.Invoke(toolName);
+        if(toolName != "Battery" || toolName != "Health")
+        {
+            //Update UI controller
+            OnToolPickedUp?.Invoke(toolName);
+        }
 
         //Other actions
         switch (toolName)
