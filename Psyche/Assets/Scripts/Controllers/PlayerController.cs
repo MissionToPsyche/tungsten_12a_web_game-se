@@ -1,5 +1,3 @@
-// Ignore Spelling: Collider
-
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
@@ -43,7 +41,6 @@ public class PlayerController : BaseController<PlayerController>
     public GammaView gammaView;
     public AudioManager audioManager;
     private TransitionManager sceneTransition;
-    public ElementManager elementManagement;
     public PlayerDeath deathCon;
 
     //Booleans for the various tools
@@ -88,8 +85,6 @@ public class PlayerController : BaseController<PlayerController>
         _toolStates[imagerManager] = imagerManager.toolEnabled;
         // ##### Object Managers ######
         //playerHealth.Initialize(this); <-- this initializes the script and creates a cross reference between the two
-        elementManagement = GetComponent<ElementManager>();
-        elementManagement.Initialize(this);
         audioManager = GameObject
             .FindGameObjectWithTag("AudioSources")
             .GetComponent<AudioManager>();
@@ -179,24 +174,6 @@ public class PlayerController : BaseController<PlayerController>
             playerMovement.handleMovement(usingThruster);
         }
 
-        //Modify the tools
-        if (_toolStates[thrusterManager] && Input.GetButtonDown("Thruster_Increase")) //Button 1
-        {
-            elementManagement.ModifyTool(thrusterManager);
-        }
-        if (Input.GetButtonDown("Battery_Increase")) //Button 2
-        {
-            elementManagement.ModifyTool(batteryManager);
-        }
-        if (_toolStates[eMagnetManager] && Input.GetButtonDown("Electromagnet_Increase")) //Button 3
-        {
-            elementManagement.ModifyTool(eMagnetManager); 
-        }
-        if (_toolStates[imagerManager] && Input.GetButtonDown("Imager_Increase"))  //Button 4
-        {
-            elementManagement.ModifyTool(imagerManager);
-        }
-
         //Inventory and Dialog Box 
         if (Input.GetKeyDown("tab") && !Input.GetKey(KeyCode.G)) // <-- Change to getbutton and getbuttondown
             UIController.Instance.handleUI();
@@ -262,7 +239,7 @@ public class PlayerController : BaseController<PlayerController>
     {
         if (other.tag == "Element") //for picking up the elements
         {
-            elementManagement.ElementPickUp(other.name); //pick up the element
+            UIController.Instance.elementPickUp(other.name); //pick up the element
             Destroy(other.gameObject); //remove the element from the screen
         }
     }
