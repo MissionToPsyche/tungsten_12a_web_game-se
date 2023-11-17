@@ -12,6 +12,7 @@ using UnityEngine;
 /// </summary>
 public class AudioManager : MonoBehaviour {
 
+
     // scenes
     [SerializeField] public AudioSource backgroundMusic;
     [SerializeField] public AudioSource buttonClick;
@@ -24,10 +25,18 @@ public class AudioManager : MonoBehaviour {
     
     // player
     [SerializeField] public AudioSource playerJump;
-    
+
+    //Private linker
+    private PlayerController _playerController;
+
     // these would be called from player management, examples:
     // _playerManagement.audioManager.PlayAudio(_playerManagement.audioManager.toolImager);
     // _playerManagement.audioManager.StopAudio(_playerManagement.audioManager.toolImager);
+
+    public void Initialize(PlayerController playerController)
+    {
+        _playerController = playerController;
+    }
 
     public void PlayAudio(AudioSource audioSource) {
         audioSource.Play();
