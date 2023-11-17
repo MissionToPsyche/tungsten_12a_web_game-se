@@ -316,6 +316,9 @@ public class UIController : BaseController<UIController>
             case "Imager":
                 Application.OpenURL("https://www.jpl.nasa.gov/images/pia24894-psyches-imager-in-progress");
                 break;
+            case "Thruster":
+                Application.OpenURL("https://psyche.asu.edu/2018/01/19/electric-thrusters-psyche-spacecraft-work/");
+                break;
             case "EMagnet":
                 Application.OpenURL("https://psyche.asu.edu/gallery/meet-nasas-psyche-team-who-will-measure-the-asteroids-magnetic-field/");
                 break;
