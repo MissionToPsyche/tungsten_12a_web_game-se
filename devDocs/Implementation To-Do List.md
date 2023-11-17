@@ -24,6 +24,7 @@
 - [ ] Rework element system/upgrade menu to run on seperate sript
 - [ ] Display tool upgrade limits on upgrades ui
 - [ ] player can get stuck moving when inventory is openned
+- [ ] move TmepGameManager code to GameController
 
 ### Joshua
 
