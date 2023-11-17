@@ -25,6 +25,8 @@
 - [ ] Display tool upgrade limits on upgrades ui
 - [ ] player can get stuck moving when inventory is openned
 - [ ] move TmepGameManager code to GameController
+- [ ] Fix battery / health pickup warning
+- [ ] button input names
 
 ### Joshua
 
