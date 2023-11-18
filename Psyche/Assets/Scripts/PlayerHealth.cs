@@ -35,7 +35,7 @@ public class PlayerHealth : MonoBehaviour {
             playerHealthZero = true;
         }
         UpdateSceneText();
-        Debug.Log("Player Health: "+playerHealth);
+        //Debug.Log("Player Health: "+playerHealth);
     }
 
     // player health up by amount
@@ -46,7 +46,7 @@ public class PlayerHealth : MonoBehaviour {
             playerHealthZero = true;
         }
         UpdateSceneText();
-        Debug.Log("Player Health: "+playerHealth);
+        //Debug.Log("Player Health: "+playerHealth);
     }
 
     // update text for scene
