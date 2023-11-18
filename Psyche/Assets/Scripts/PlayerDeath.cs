@@ -40,13 +40,13 @@ public class PlayerDeath : MonoBehaviour {
             int checkpointID = collision.gameObject.GetInstanceID();
             //Check if this checkpoint has been reached before
             if (reachedCheckpoints.Contains(checkpointID)) {
-                Debug.Log("Already reached this checkpoint!");
+                //Debug.Log("Already reached this checkpoint!");
             } else {
                 //Add the checkpoint ID to the HashSet
                 reachedCheckpoints.Add(checkpointID);
                 respawnPoint = transform.position;
-                Debug.Log("#### Checkpoint captured: " + respawnPoint + " ####");
-                Debug.Log("Checkpoint ID: " + checkpointID);
+                //Debug.Log("#### Checkpoint captured: " + respawnPoint + " ####");
+                //Debug.Log("Checkpoint ID: " + checkpointID);
                 //Recharge health and battery
                 playerHealth.HealthUp(100);
                 gameObject.GetComponent<BatteryManager>().Activate();
@@ -56,10 +56,10 @@ public class PlayerDeath : MonoBehaviour {
 
     //Respawn character to last checkpoint when player gets hurt
     public void GetHurt() {
-        Debug.Log("Ouch!");
+        //Debug.Log("Ouch!");
         playerHealth.HealthDown(1);
         if (playerHealth.playerHealth == 0) {
-            Debug.Log("Game should end here.....");
+            //Debug.Log("Game should rest to checkpoint here.....");
         } else if (startPoint.Equals(respawnPoint)) {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
