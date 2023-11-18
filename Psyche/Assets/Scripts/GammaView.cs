@@ -1,14 +1,13 @@
 /** 
 Description: spectrometer tool gamma view script
 Author: blopezro
-Version: 20231030
+Version: 20231117
 **/
 
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 /// <summary>
 /// Gamma View script which captures all sprites of the game objects within the scene
@@ -16,13 +15,20 @@ using UnityEngine.UI;
 /// </summary>
 public class GammaView : MonoBehaviour {
 
-    public GameObject[] sceneObjects;                // holds all current game objects in the scene
+    public List<GameObject> sceneObjects;            // holds all current game objects in the scene
     public List<SpriteRenderer> spriteRenderersList; // holds all sprite renderers of game objects
     public Color[] origColorArray;                   // holds original colors of the sprite renderers
     public Color defaultColor = Color.green;         // default color of items when default layer is used
-    public List<GameObject> colorBlindModeObjects;   // text objects stored for assistance with color blindness
-    public bool colorBlindMode;                      // color blind mode 
+    public List<GameObject> colorBlindModeObjects;   // objects stored for assistance with color blindness
+    public bool colorBlindMode;                      // color blind mode boolean
+    public Camera mainCamera;                        // scene camera used to only load objects within view
+    public LayerMask scanLayer = -1;                 // set to -1 to include all layers
 
+    // commenting out Awake() and OnDestroy() as these were previously used
+    // with OnSceneLoaded(Scene scene, LoadSceneMode mode) which loaded objects
+    // during scene load, objects are now loaded at the activation of the GRS
+    // through Initialize()  
+/**
     // subscribes to the SceneManager.sceneLoaded event
     void Awake() {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -35,14 +41,19 @@ public class GammaView : MonoBehaviour {
 
     // runs each time a new scene is loaded
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
-        // clears and empties out items before use in the scene
-        sceneObjects = new GameObject[0];
-        spriteRenderersList.Clear();
-        origColorArray = new Color[0];
-        colorBlindModeObjects.Clear();
-        Debug.Log("Reloaded needed data for GRS");
+**/ 
+    void Initialize() {
+        // sets main camera for use during objects in view capture
+        if (mainCamera == null) {
+            mainCamera = Camera.main;
+        }
 
-        sceneObjects = (GameObject[])UnityEngine.Object.FindObjectsOfType(typeof(GameObject));
+        // capture all objects in scene
+        //GameObject[] gameObjectsArray = UnityEngine.Object.FindObjectsOfType<GameObject>();
+        //sceneObjects = new List<GameObject>(gameObjectsArray);
+
+        // capture only objects within cameras view in scene
+        sceneObjects = CaptureObjectsInView();
         CaptureSpriteRenderers(sceneObjects);
 
         // resizes based on sprite renderers in the scene
@@ -62,8 +73,47 @@ public class GammaView : MonoBehaviour {
         }
     }
 
+    // capture only game objects within the cameras view,
+    // these objects must have collider components in order to be detected 
+    List<GameObject> CaptureObjectsInView() {
+        List<GameObject> objectsInView = new List<GameObject>();
+        Collider2D[] colliders = Physics2D.OverlapAreaAll(GetBottomLeft(), GetTopRight(), scanLayer);
+
+        foreach (Collider2D collider in colliders) {
+            GameObject obj = collider.gameObject;
+            // check if the object is within the camera's viewport
+            if (IsObjectInView(obj)) {
+                // add the object to the list for scanning or processing
+                objectsInView.Add(obj);
+            }
+        }
+        return objectsInView;
+    }
+
+    // checks if obj is within bounds
+    bool IsObjectInView(GameObject obj) {
+        Bounds bounds = obj.GetComponent<Collider2D>().bounds;
+        Vector3 objectPosition = bounds.center;
+        Vector3 screenPoint = mainCamera.WorldToViewportPoint(objectPosition);
+        return screenPoint.x >= 0 && screenPoint.x <= 1 && screenPoint.y >= 0 && screenPoint.y <= 1;
+    }
+
+    // gets bottom left of camera box
+    Vector2 GetBottomLeft() {
+        Vector3 bottomLeft = mainCamera.ViewportToWorldPoint(Vector3.zero);
+        return new Vector2(bottomLeft.x, bottomLeft.y);
+    }
+
+    // gets top right of camera box
+    Vector2 GetTopRight() {
+        Vector3 topRight = mainCamera.ViewportToWorldPoint(Vector3.one);
+        return new Vector2(topRight.x, topRight.y);
+    }
+
     // activates gamma ray spectrometer
     public void ActivateGRS(AudioManager audioManager) {
+        Initialize(); 
+        DebugReportLog(); // can comment out when not needed
         // shows new color
         if (Input.GetKeyDown(KeyCode.G)) {
             for (int i = 0; i < spriteRenderersList.Count; i++) {
@@ -71,7 +121,7 @@ public class GammaView : MonoBehaviour {
                     spriteRenderersList[i].color = LayerColor(spriteRenderersList[i].gameObject);
                     audioManager.PlayAudio(audioManager.toolGRS);
                     if (colorBlindMode) {
-                        ActivateGRSnumberObjs();
+                        ActivateGRSaltView();
                     }
                 }
             }
@@ -87,15 +137,17 @@ public class GammaView : MonoBehaviour {
                     spriteRenderersList[i].color = origColorArray[i];
                     audioManager.StopAudio(audioManager.toolGRS);
                     if (colorBlindMode) {
-                        DeactivateGRSnumberObjs();
+                        DeactivateGRSaltView();
                     }
                 }
             }
         }
+        DeInitialize();
+        DebugReportLog(); // can comment out when not needed
     }
 
     // adds to the list the sprite renderers from the game objects in the scene
-    void CaptureSpriteRenderers(GameObject[] sceneObjects) {
+    void CaptureSpriteRenderers(List<GameObject> sceneObjects) {
         foreach (GameObject obj in sceneObjects) {
             if (obj.GetComponent(typeof(SpriteRenderer))) {
                 spriteRenderersList.Add((SpriteRenderer) obj.GetComponent(typeof(SpriteRenderer)));
@@ -151,7 +203,7 @@ public class GammaView : MonoBehaviour {
             // get current game object
             GameObject gameObject = spriteRenderer.gameObject;
             // get layer of game object
-            int numberToDisplay = gameObject.layer;
+            int layerNum = gameObject.layer;
 
             // create game object to display number and anchor in center
             GameObject grsNumberObject = new GameObject("GRS_ColorBlindMode");
@@ -162,7 +214,7 @@ public class GammaView : MonoBehaviour {
             colorBlindModeObjects.Add(grsNumberObject);
 
             // text properties
-            textMesh.text = numberToDisplay.ToString();
+            textMesh.text = layerNum.ToString();
             textMesh.characterSize = 0.15f;
             textMesh.fontSize = 30;
             textMesh.font = Resources.Load<Font>("");
@@ -186,22 +238,36 @@ public class GammaView : MonoBehaviour {
         }
     }
 
-    // show numbers
-    void ActivateGRSnumberObjs() {
-        foreach (GameObject numberObject in colorBlindModeObjects) {
-            if (numberObject != null) {
-                numberObject.SetActive(true);
+    // show alternative view
+    void ActivateGRSaltView() {
+        foreach (GameObject obj in colorBlindModeObjects) {
+            if (obj != null) {
+                obj.SetActive(true);
             }
         }
     }
 
-    // hide numbers
-    void DeactivateGRSnumberObjs() {
-        foreach (GameObject numberObject in colorBlindModeObjects) {
-            if (numberObject != null) {
-                numberObject.SetActive(false);
+    // hide alternative view
+    void DeactivateGRSaltView() {
+        foreach (GameObject obj in colorBlindModeObjects) {
+            if (obj != null) {
+                obj.SetActive(false);
             }
         }
+    }
+
+    // reports list and array sizes
+    void DebugReportLog() {
+        Debug.Log("Objects captured, Sprite renderers captured, Orig color array length, Colorblind objects: "
+        +sceneObjects.Count+", "+spriteRenderersList.Count+", "+origColorArray.Length+", "+colorBlindModeObjects.Count);
+    }
+
+    // used to clear out lists and arrays
+    void DeInitialize() {
+        sceneObjects.Clear();
+        spriteRenderersList.Clear();
+        origColorArray = new Color[0];
+        colorBlindModeObjects.Clear();
     }
 
 }
