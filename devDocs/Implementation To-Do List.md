@@ -23,9 +23,9 @@
 - [ ] Rework element system/upgrade menu to run on seperate sript
 - [ ] Display tool upgrade limits on upgrades ui
 - [ ] player can get stuck moving when inventory is openned
-- [ ] move TmepGameManager code to GameController
+- [ ] move TempGameManager code to GameController
 - [ ] Fix battery / health pickup warning
-- [ ] button input names
+- [ ] getbutton input names
 - [ ] Implement UI scaling for various window sizes
 - [ ] Slight dialog box optimisation
 
