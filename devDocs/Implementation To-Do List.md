@@ -27,6 +27,7 @@
 - [ ] Fix battery / health pickup warning
 - [ ] button input names
 - [ ] Implement UI scaling for various window sizes
+- [ ] Slight dialog box optimisation
 
 ### Joshua
 
