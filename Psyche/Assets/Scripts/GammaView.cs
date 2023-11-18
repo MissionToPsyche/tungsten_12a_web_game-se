@@ -1,7 +1,7 @@
 /** 
 Description: spectrometer tool gamma view script
 Author: blopezro
-Version: 20231116
+Version: 20231117
 **/
 
 using System;
@@ -24,6 +24,11 @@ public class GammaView : MonoBehaviour {
     public Camera mainCamera;                        // scene camera used to only load objects within view
     public LayerMask scanLayer = -1;                 // set to -1 to include all layers
 
+    // commenting out Awake() and OnDestroy() as these were previously used
+    // with OnSceneLoaded(Scene scene, LoadSceneMode mode) which loaded objects
+    // during scene load, objects are now loaded at the activation of the GRS
+    // through Initialize()  
+/**
     // subscribes to the SceneManager.sceneLoaded event
     void Awake() {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -36,13 +41,8 @@ public class GammaView : MonoBehaviour {
 
     // runs each time a new scene is loaded
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
-        // clears and empties out items before use in the scene
-        sceneObjects.Clear();
-        spriteRenderersList.Clear();
-        origColorArray = new Color[0];
-        colorBlindModeObjects.Clear();
-        Debug.Log("GRS data cleared");
-
+**/ 
+    void Initialize() {
         // sets main camera for use during objects in view capture
         if (mainCamera == null) {
             mainCamera = Camera.main;
@@ -54,7 +54,6 @@ public class GammaView : MonoBehaviour {
 
         // capture only objects within cameras view in scene
         sceneObjects = CaptureObjectsInView();
-        Debug.Log("Number of scene objects captured: " + sceneObjects.Count);
         CaptureSpriteRenderers(sceneObjects);
 
         // resizes based on sprite renderers in the scene
@@ -113,6 +112,8 @@ public class GammaView : MonoBehaviour {
 
     // activates gamma ray spectrometer
     public void ActivateGRS(AudioManager audioManager) {
+        Initialize(); 
+        DebugReportLog(); // can comment out when not needed
         // shows new color
         if (Input.GetKeyDown(KeyCode.G)) {
             for (int i = 0; i < spriteRenderersList.Count; i++) {
@@ -141,6 +142,8 @@ public class GammaView : MonoBehaviour {
                 }
             }
         }
+        DeInitialize();
+        DebugReportLog(); // can comment out when not needed
     }
 
     // adds to the list the sprite renderers from the game objects in the scene
@@ -150,7 +153,6 @@ public class GammaView : MonoBehaviour {
                 spriteRenderersList.Add((SpriteRenderer) obj.GetComponent(typeof(SpriteRenderer)));
             }           
         }
-        Debug.Log("Number of sprite renderers captured: " + spriteRenderersList.Count);
     }
 
     // returns the game objects layer
@@ -252,6 +254,20 @@ public class GammaView : MonoBehaviour {
                 obj.SetActive(false);
             }
         }
+    }
+
+    // reports list and array sizes
+    void DebugReportLog() {
+        Debug.Log("Objects captured, Sprite renderers captured, Orig color array length, Colorblind objects: "
+        +sceneObjects.Count+", "+spriteRenderersList.Count+", "+origColorArray.Length+", "+colorBlindModeObjects.Count);
+    }
+
+    // used to clear out lists and arrays
+    void DeInitialize() {
+        sceneObjects.Clear();
+        spriteRenderersList.Clear();
+        origColorArray = new Color[0];
+        colorBlindModeObjects.Clear();
     }
 
 }
