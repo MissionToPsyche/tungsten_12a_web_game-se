@@ -48,7 +48,9 @@
 
 ### Matt
 - [x] Create doc branch
-- [ ] readme
+- [x] readme
 - [ ] Use event to communicate player and ui for imager counter
 - [ ] Reset tools on death before checkpoint
+- [ ] Make cave entrances bigger
+- [ ] Change cave teleport locations
 
