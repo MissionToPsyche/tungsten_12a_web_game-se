@@ -18,16 +18,21 @@
 ### James
 
 - [ ] Pause during falls and mid jump
-- [ ] Pause in front of caves disables entrance
-- [ ] Respawn button to correct scene
-- [ ] Rework element system/upgrade menu to run on seperate sript
-- [ ] Display tool upgrade limits on upgrades ui
 - [ ] player can get stuck moving when inventory is openned
+- [ ] Pause in front of caves disables entrance
+      
+- [ ] Respawn button to correct scene
+      
+- [ ] Rework element system/upgrade menu to run on seperate script
+- [ ] Display tool upgrade limits on upgrades ui
+      
 - [ ] move TempGameManager code to GameController
+      
 - [ ] Fix battery / health pickup warning
 - [ ] getbutton input names
-- [ ] Implement UI scaling for various window sizes
 - [ ] Slight dialog box optimisation
+      
+- [ ] Implement UI scaling for various window sizes
 
 ### Joshua
 
