@@ -9,7 +9,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     //Private Variables
-    private PlayerManagement _playerManagement;
+    private PlayerController _playerManagement;
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
     private float _xAxis;
@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
     /// Initializes the script
     /// </summary>
     /// <param name="playerManagement"></param>
-    public void Initialize(PlayerManagement playerManagement)
+    public void Initialize(PlayerController playerManagement)
     {
         _playerManagement = playerManagement;
     }
@@ -86,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
         if (_playerManagement.isGrounded && !_playerManagement.beingPulled && Input.GetButtonDown("Jump"))
         {
             _playerManagement.playerCharacter.velocity = new Vector2(_playerManagement.playerCharacter.velocity.x, 7f);
-            _playerManagement.audioManager.PlayPlayerJump(); // play jump sound
+            _playerManagement.audioManager.PlayAudio(_playerManagement.audioManager.playerJump);
         }
 
         //checks the direction the player is moving
@@ -126,6 +126,11 @@ public class PlayerMovement : MonoBehaviour
         {
             //play the new animation
             _animator.Play(_newAnimation);
+            if (_newAnimation.Equals(PLAYER_THRUSTER)) {
+                _playerManagement.audioManager.PlayAudio(_playerManagement.audioManager.toolThrusters);
+            } else {
+                _playerManagement.audioManager.StopAudio(_playerManagement.audioManager.toolThrusters);
+            }
 
             //set the current animation state
             currentAnimation = _newAnimation;
