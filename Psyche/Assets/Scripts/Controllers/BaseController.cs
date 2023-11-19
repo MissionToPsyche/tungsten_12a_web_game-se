@@ -58,10 +58,7 @@ public abstract class BaseController<T> : MonoBehaviour where T : BaseController
     /// Updates the controller when called
     ///   - Empty
     /// </summary>
-    public virtual void UpdateController() 
-    {
-        //Insert Logic
-    }
+    public abstract void UpdateController();
 
     /// <summary>
     /// Shuts down or destroys the controller if implemented
@@ -85,8 +82,7 @@ public abstract class BaseController<T> : MonoBehaviour where T : BaseController
     /// <summary>
     /// Default event invokation
     /// </summary>
-    public virtual void EventInvocation(ArrayList args)
-    {
-        
-    }
+    public abstract void SendMessage(ArrayList args);
+
+    protected abstract void ReceiveMessage(ArrayList args);
 }
