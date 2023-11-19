@@ -695,7 +695,7 @@ MonoBehaviour:
   buttonClick: {fileID: 2607266026247796242}
   toolGRS: {fileID: 4865449824313960382}
   toolImager: {fileID: 7499777817660809251}
-  toolMagnetometer: {fileID: 8697921962840599155}
+  toolEMagnet: {fileID: 8697921962840599155}
   toolThrusters: {fileID: 4952495706873234069}
   playerJump: {fileID: 3255265804980814519}
 --- !u!1 &7050517347784413412
@@ -709,7 +709,7 @@ GameObject:
   - component: {fileID: 7003889521423954836}
   - component: {fileID: 8697921962840599155}
   m_Layer: 0
-  m_Name: tool_Magnetometer
+  m_Name: tool_EMagnet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
