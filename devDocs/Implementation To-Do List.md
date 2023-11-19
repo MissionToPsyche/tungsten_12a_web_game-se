@@ -33,6 +33,8 @@
 - [ ] Slight dialog box optimisation
       
 - [ ] Implement UI scaling for various window sizes
+      
+- [ ] Fix Magnet level lighting
 
 ### Joshua
 
