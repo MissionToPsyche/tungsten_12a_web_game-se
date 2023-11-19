@@ -33,6 +33,7 @@
 - [ ] Slight dialog box optimisation
       
 - [ ] Implement UI scaling for various window sizes
+- [ ] UI is behind terrain
       
 - [ ] Fix Magnet level lighting
 
