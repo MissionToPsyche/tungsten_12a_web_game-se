@@ -68,8 +68,8 @@ public class EMagnetManager : ToolManager {
     /// <returns></returns>
     public IEnumerator handleEMagnet()
     {
-        _playerManagement.audioManager.PlayAudio(_playerManagement.audioManager.toolEMagnet);
-        _playerManagement.eMagnetActive = true;
+        _playerController.audioManager.PlayAudio(_playerController.audioManager.toolEMagnet);
+        _playerController.eMagnetActive = true;
         hitBoxRotator.gameObject.SetActive(true);
         Collider2D hit, target = null;
         float curGrav = _playerController.playerCharacter.gravityScale;
@@ -124,8 +124,8 @@ public class EMagnetManager : ToolManager {
             yield return null;
         } while (Input.GetButton("Fire1"));
 
-        _playerManagement.audioManager.StopAudio(_playerManagement.audioManager.toolEMagnet);
-        _playerManagement.playerCharacter.gravityScale = curGrav;
+        _playerController.audioManager.StopAudio(_playerController.audioManager.toolEMagnet);
+        _playerController.playerCharacter.gravityScale = curGrav;
         hitBoxRotator.gameObject.SetActive(false);
         _playerController.eMagnetActive = false;
         _playerController.beingPulled = false;
