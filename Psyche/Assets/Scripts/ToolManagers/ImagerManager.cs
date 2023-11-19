@@ -16,6 +16,7 @@ public class ImagerManager : ToolManager
 {
     //Private Variables
     [SerializeField] private UnityEngine.Rendering.Universal.Light2D _imager; //The player's imager - Not initialized through code
+    [SerializeField] private bool _active;
     [SerializeField] private UnityEngine.Rendering.Universal.Light2D _flashlight; //The cursor's imager - Not initialized through code
     [SerializeField] private float _rangeIncrease; //The amount to increase the vision field
     [SerializeField] private ImagerCounter _imagerCounter; //Not initialized though code
@@ -25,33 +26,67 @@ public class ImagerManager : ToolManager
     /// Initializes this script
     /// </summary>
     /// <param name="playerManagement"></param>
-    public void Initialize(PlayerManagement playerManagement)
+    public void Initialize(PlayerController playerManagement)
     {
+        //Base class variables
         toolName = "Imager";
-        _playerManagement = playerManagement;
-        _rangeIncrease = 0.5f;
-    }
+        toolEnabled = false;
+        _playerController = playerManagement;
+        level = 0;
+        levelRequirements = new Dictionary<int, Dictionary<string, int>>()
+        {
+            {  1, new Dictionary<string, int>()
+                {
+                    { "copper", 0 }, { "iron", 0 }, { "nickel", 0 }, { "gold", 1 }, { "titanium", 0 }
+                }
+            },
+            {  2, new Dictionary<string, int>()
+                {
+                    { "copper", 0 }, { "iron", 0 } , { "nickel", 0 } , { "gold", 2 }, { "titanium", 0 }
+                }
+            },
+            {  3, new Dictionary<string, int>()
+                {
+                    { "copper", 0 } , { "iron", 0 } , { "nickel", 0 } , { "gold", 3 }, { "titanium", 0 }
+                }
+            },
+            {  4, new Dictionary<string, int>()
+                {
+                    { "copper", 0 } , { "iron", 0 } , { "nickel", 0 } , { "gold", 4 }, { "titanium", 0 }
+                }
+            },
+            {  5, new Dictionary<string, int>()
+                {
+                    { "copper", 0 } ,   { "iron", 0 } , { "nickel", 0 } , { "gold", 5 }, { "titanium", 0 }
+                }
+            },
+        };
 
-    /// <summary>
-    /// Turns off light
-    /// </summary>
-    public void turnOff()
-    {
-        _imager.intensity = 0;
+        //Tool specific variables
+        _rangeIncrease = 0.5f;
+        _active = false;
     }
 
     /// <summary>
     /// Turns on light
     /// </summary>
-    public void turnOn()
+    public override void Activate()
     {
-        _imager.intensity = 1;
+        _active = !_playerController.batteryManager.batteryDrained;
+        if(_active)
+        {
+            _imager.intensity = 1;
+        } 
+        else
+        {
+            _imager.intensity = 0;
+        }
     }
 
     /// <summary>
     /// Increases the range when called
     /// </summary>
-    public override void Modify()
+    protected override void UpgradeTool()
     {
         //Increase imager radius
         _imager.pointLightInnerRadius += _rangeIncrease;
@@ -59,7 +94,7 @@ public class ImagerManager : ToolManager
         //Increase cursor radius
         _flashlight.pointLightInnerRadius += _rangeIncrease;
         _flashlight.pointLightOuterRadius += _rangeIncrease;
-        _playerManagement.audioManager.PlayToolImager(); // play tool sound
+        _playerController.audioManager.PlayAudio(_playerController.audioManager.toolImager);
         _imagerCounter.updateImagerCount(); 
     }
 }
