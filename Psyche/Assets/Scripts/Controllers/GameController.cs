@@ -50,7 +50,7 @@ public class GameController : BaseController<GameController>
     /// </summary>
     public override void UpdateController()
     {
-        base.UpdateController();
+        //Insert Logic
     }
 
     /// <summary>
@@ -86,11 +86,10 @@ public class GameController : BaseController<GameController>
     ///   - ArrayList[2] = source
     /// </summary>
     /// <param name="args"></param>
-    public override void EventInvocation(ArrayList args)
+    public override void SendMessage(ArrayList args)
     {
         string destination = args[0].ToString();
         args.RemoveAt(0);
-        base.EventInvocation(args);  //even necessary?
         
         //Send out events depending on the invokee
         switch (destination)
@@ -107,6 +106,34 @@ public class GameController : BaseController<GameController>
         }
     }
 
+    /// <summary>
+    /// Processes any event passed to this class
+    /// Requirements:
+    ///   - ArrayList[0] = sub-destination ('None' if Controller)
+    ///   - ArrayList[1] = source
+    /// </summary>
+    /// <param name="args"></param>
+    protected override void ReceiveMessage(ArrayList args)
+    {
+        string subdestination = args[0].ToString();
+        args.RemoveAt(0);
+
+        switch (subdestination)
+        {
+            case "None":
+                string source = args[0].ToString();
+                args.RemoveAt(0);
+                //Process command
+                break;
+            case "DeveloperConsole":
+                developerConsole.IntakeEvents(args);
+                break;
+            default:
+                Debug.Log("Incorrect subdestination -- GameController");
+                break;
+        }
+    }
+
 
     /// <summary>
     /// Subscribes to events and activates when event triggered
@@ -114,7 +141,8 @@ public class GameController : BaseController<GameController>
     /// </summary>
     private void OnEnable()
     {
-        UIController.Instance.OnUpdateUIToGame += ProcessEvent;
+        UIController.Instance.OnUpdateUIToGame += ReceiveMessage;
+        PlayerController.Instance.OnUpdatePlayerToGame += ReceiveMessage;
     }
 
     /// <summary>
@@ -125,35 +153,11 @@ public class GameController : BaseController<GameController>
     {
         if(UIController.Instance)
         {
-            UIController.Instance.OnUpdateUIToGame -= ProcessEvent;
+            UIController.Instance.OnUpdateUIToGame -= ReceiveMessage;
         }
-    }
-
-    /// <summary>
-    /// Processes any event passed to this class
-    /// Requirements:
-    ///   - ArrayList[0] = sub-destination ('None' if Controller)
-    ///   - ArrayList[1] = source
-    /// </summary>
-    /// <param name="args"></param>
-    private void ProcessEvent(ArrayList args)
-    {
-        string subdestination = args[0].ToString();
-        args.RemoveAt(0);
-
-        switch(subdestination)
+        if(PlayerController.Instance)
         {
-            case "None":
-                string source = args[0].ToString();
-                args.RemoveAt(0);
-                //Process command
-                break;
-            case "DeveloperConsole":
-                developerConsole.IntakeEvents(args); 
-                break;
-            default:
-                Debug.Log("Incorrect subdestination -- GameController");
-                break;
+            PlayerController.Instance.OnUpdatePlayerToGame -= ReceiveMessage;
         }
     }
 
