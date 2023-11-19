@@ -47,7 +47,7 @@ public class DeveloperConsole : MonoBehaviour
                 "UI", "None", "DeveloperConsole", "update", CalculateFPS().ToString() 
             };
             //Send the message
-            _gameController.EventInvocation(args);
+            _gameController.SendMessage(args);
             _updateTimer = _updateTimerDefault; //reset back to default;
         }
     }
@@ -96,7 +96,7 @@ public class DeveloperConsole : MonoBehaviour
     {
         string[] package = { "UI", "None", "DeveloperConsole" }; //receiver address
         commands.InsertRange(0, package);
-        _gameController.EventInvocation(commands);  //send to event emitter in controller class
+        _gameController.SendMessage(commands);  //send to event emitter in controller class
     }
 
     /// <summary>
