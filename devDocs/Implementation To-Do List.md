@@ -20,6 +20,7 @@
 - [ ] Pause during falls and mid jump
 - [ ] player can get stuck moving when inventory is openned
 - [ ] Pause in front of caves disables entrance
+- [ ] Player sprite child object, center player
       
 - [ ] Respawn button to correct scene
       
