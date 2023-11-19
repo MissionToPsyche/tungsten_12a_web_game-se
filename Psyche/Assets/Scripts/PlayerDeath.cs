@@ -49,7 +49,7 @@ public class PlayerDeath : MonoBehaviour {
                 //Debug.Log("Checkpoint ID: " + checkpointID);
                 //Recharge health and battery
                 playerHealth.HealthUp(100);
-                gameObject.GetComponent<BatteryManager>().ChargeBattFull();
+                gameObject.GetComponent<BatteryManager>().Activate();
             }
         }
     }

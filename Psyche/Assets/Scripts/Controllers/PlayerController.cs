@@ -122,7 +122,7 @@ public class PlayerController : BaseController<PlayerController>
     /// </summary>
     public override void UpdateController()
     {
-        base.UpdateController();
+        //Insert Logic
     }
     
     /// <summary>
@@ -137,11 +137,7 @@ public class PlayerController : BaseController<PlayerController>
     {
         //Check booleans
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
-        if (batteryManager.batteryDrained) {
-            imagerManager.turnOff();
-        } else {
-            imagerManager.turnOn();
-        }
+        imagerManager.Activate();
 
         usingThruster = false; //default
 
@@ -151,7 +147,7 @@ public class PlayerController : BaseController<PlayerController>
             //Call the requisite tool scripts here:
             //Thruster
             if (_toolStates[thrusterManager] && Input.GetButton("Jump") && batteryManager.batteryPercent != 0 && !beingPulled) {
-                thrusterManager.ActivateThruster();
+                thrusterManager.Activate();
                 usingThruster = true;
                 batteryManager.DrainBatt(1);
             }
@@ -167,7 +163,7 @@ public class PlayerController : BaseController<PlayerController>
 
             //ElectroMagnet
             if (_toolStates[eMagnetManager] && Input.GetButton("Fire1") && batteryManager.batteryPercent != 0 && !eMagnetActive) {
-                StartCoroutine(eMagnetManager.handleEMagnet());
+                eMagnetManager.Activate();
                 batteryManager.DrainBatt(500);
             }
 
@@ -189,11 +185,63 @@ public class PlayerController : BaseController<PlayerController>
     }
 
     //======================================================== Events ========================================================
+    
     //Events definitions
-    public event Action<string> OnToolPickedUp;  //When tools are picked up
     public event Action<ArrayList> OnUpdatePlayerToUI;
     public event Action<ArrayList> OnUpdatePlayerToGame;
-    
+
+    /// <summary>
+    /// Invokes events for this and any subclasses.
+    /// - Takes in an arraylist -- Requirements:
+    ///   - ArrayList[0] = destination
+    ///   - ArrayList[1] = sub-destination ('None' if Controller)
+    ///   - ArrayList[2] = source
+    /// </summary>
+    /// <param name="args"></param>
+    public override void SendMessage(ArrayList args)
+    {
+        string destination = args[0].ToString();
+        args.RemoveAt(0);
+
+        //Send out events depending on the invokee
+        switch (destination)
+        {
+            case "UI":
+                OnUpdatePlayerToUI?.Invoke(args);
+                break;
+            case "Player":
+                OnUpdatePlayerToUI.Invoke(args);
+                break;
+            default:
+                Debug.Log("Incorrect invocation in GameController");
+                break;
+        }
+    }
+
+    /// <summary>
+    /// Processes any event passed to this class
+    /// Requirements:
+    ///   - ArrayList[0] = sub-destination ('None' if Controller)
+    ///   - ArrayList[1] = source
+    /// </summary>
+    /// <param name="args"></param>
+    protected override void ReceiveMessage(ArrayList args)
+    {
+        string subdestination = args[0].ToString();
+        args.RemoveAt(0);
+
+        switch (subdestination)
+        {
+            case "None":
+                string source = args[0].ToString();
+                args.RemoveAt(0);
+                //Process command
+                break;
+            default:
+                Debug.Log("Incorrect subdestination -- GameController");
+                break;
+        }
+    }
 
 
     /// <summary>
@@ -202,7 +250,8 @@ public class PlayerController : BaseController<PlayerController>
     /// </summary>
     private void OnEnable()
     {
-        //Insert logic
+        GameController.Instance.OnUpdateGameToPlayer += ReceiveMessage;
+        UIController.Instance.OnUpdateUIToPlayer += ReceiveMessage;
     }
 
     /// <summary>
@@ -211,7 +260,14 @@ public class PlayerController : BaseController<PlayerController>
     /// </summary>
     private void OnDisable()
     {
-        //Insert logic
+        if(GameController.Instance != null)
+        {
+            GameController.Instance.OnUpdateGameToPlayer -= ReceiveMessage;
+        }
+        if(UIController.Instance != null)
+        {
+            UIController.Instance.OnUpdateUIToPlayer -= ReceiveMessage;
+        }
     }
 
     //TODO: INSERT EVENT FUNCTIONS HERE
@@ -252,15 +308,17 @@ public class PlayerController : BaseController<PlayerController>
     {
         if(toolName != "Battery" || toolName != "Health")
         {
-            //Update UI controller
-            OnToolPickedUp?.Invoke(toolName);
+            ArrayList args = new ArrayList {
+                "UI", "None", "EnableTool", toolName, 
+            };
+            SendMessage(args);
         }
 
         //Other actions
         switch (toolName)
         {
             case "Thruster":
-                thrusterManager.EnableTool();
+                thrusterManager.Enable();
                 _toolStates[thrusterManager] = thrusterManager.toolEnabled;
                  break;
 
@@ -269,7 +327,7 @@ public class PlayerController : BaseController<PlayerController>
                 break;
 
             case "ImagerCursor":
-                imagerManager.EnableTool();
+                imagerManager.Enable();
                 _toolStates[imagerManager] = imagerManager.toolEnabled;
                 imagerManager.Modify();
                 flashlight.Update();
@@ -281,13 +339,13 @@ public class PlayerController : BaseController<PlayerController>
                 break;
 
             case "Magnetometer":
-                eMagnetManager.EnableTool();
+                eMagnetManager.Enable();
                 _toolStates[eMagnetManager] = eMagnetManager.toolEnabled;
                 break;
 
             case "Battery":
                 Debug.Log("Battery charge!");
-                batteryManager.EnableTool();
+                batteryManager.Enable();
                 _toolStates[batteryManager] = batteryManager.toolEnabled;
                 batteryManager.ChargeBatt(500);
                 break;
