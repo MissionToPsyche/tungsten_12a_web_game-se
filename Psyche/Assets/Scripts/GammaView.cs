@@ -1,13 +1,12 @@
 /** 
 Description: spectrometer tool gamma view script
 Author: blopezro
-Version: 20231117
+Version: 20231118
 **/
 
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Gamma View script which captures all sprites of the game objects within the scene
@@ -74,13 +73,13 @@ public class GammaView : MonoBehaviour {
     }
 
     // capture only game objects within the cameras view,
-    // these objects must have collider components in order to be detected 
+    // these objects must have sprite renderer components in order to be detected 
     List<GameObject> CaptureObjectsInView() {
         List<GameObject> objectsInView = new List<GameObject>();
-        Collider2D[] colliders = Physics2D.OverlapAreaAll(GetBottomLeft(), GetTopRight(), scanLayer);
+        SpriteRenderer[] sprites = FindObjectsOfType<SpriteRenderer>();
 
-        foreach (Collider2D collider in colliders) {
-            GameObject obj = collider.gameObject;
+        foreach (SpriteRenderer sprite in sprites) {
+            GameObject obj = sprite.gameObject;
             // check if the object is within the camera's viewport
             if (IsObjectInView(obj)) {
                 // add the object to the list for scanning or processing
@@ -92,22 +91,10 @@ public class GammaView : MonoBehaviour {
 
     // checks if obj is within bounds
     bool IsObjectInView(GameObject obj) {
-        Bounds bounds = obj.GetComponent<Collider2D>().bounds;
+        Bounds bounds = obj.GetComponent<SpriteRenderer>().bounds;
         Vector3 objectPosition = bounds.center;
         Vector3 screenPoint = mainCamera.WorldToViewportPoint(objectPosition);
         return screenPoint.x >= 0 && screenPoint.x <= 1 && screenPoint.y >= 0 && screenPoint.y <= 1;
-    }
-
-    // gets bottom left of camera box
-    Vector2 GetBottomLeft() {
-        Vector3 bottomLeft = mainCamera.ViewportToWorldPoint(Vector3.zero);
-        return new Vector2(bottomLeft.x, bottomLeft.y);
-    }
-
-    // gets top right of camera box
-    Vector2 GetTopRight() {
-        Vector3 topRight = mainCamera.ViewportToWorldPoint(Vector3.one);
-        return new Vector2(topRight.x, topRight.y);
     }
 
     // activates gamma ray spectrometer
