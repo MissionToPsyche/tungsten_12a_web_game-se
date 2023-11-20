@@ -22,9 +22,7 @@
 - [ ] Pause in front of caves disables entrance
 - [ ] Player sprite child object, center player
       
-- [ ] Respawn button to correct scene
-      
-- [ ] Rework element system/upgrade menu to run on seperate script
+- [ ] Rework upgrade menu to run on seperate script
 - [ ] Display tool upgrade limits on upgrades ui
       
 - [ ] move TempGameManager code to GameController
@@ -34,7 +32,6 @@
 - [ ] Slight dialog box optimisation
       
 - [ ] Implement UI scaling for various window sizes
-- [ ] UI is behind terrain
       
 - [ ] Fix Magnet level lighting
 
