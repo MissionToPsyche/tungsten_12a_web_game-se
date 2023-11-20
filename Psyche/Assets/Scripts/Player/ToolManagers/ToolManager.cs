@@ -41,19 +41,27 @@ public abstract class ToolManager : MonoBehaviour
     {
         if (!levelRequirements.ContainsKey(level + 1))
         {
-            Debug.Log("Not Upgraded yo");
             return false; //Level out of scope
         }
-        //foreach (var requirement in levelRequirements[level + 1])
-        //{
-            //if (inventory.get_resource_amount(requirement) < requirement.Value)
-            //{
-            //    return false;
-            //}
-        //}
+        //Confirm the number of required elements exists
+        foreach (var requirement in levelRequirements[level + 1])
+        {
+            if (_playerController.inventoryManager.CheckElement(requirement.Key) < requirement.Value)
+            {
+                return false;
+            }
+        }
+        //Remove the required elements
+        foreach (var requirement in levelRequirements[level + 1])
+        {
+            if(requirement.Value > 0) //No need to activate underlying code if this isn't met
+            {
+                _playerController.inventoryManager.RemoveElement(requirement.Key, requirement.Value);
+            }
+        }
         //Upgrade the tool
         level++;
-        UpgradeTool(); //<-- Maybe have another dictionary which holds different values per level
+        UpgradeTool();
         //Create package to send to UI to upgrade interface
         ArrayList args = new ArrayList {
                 "UI", "None", "ToolUpgradeInterface", levelRequirements[level],
