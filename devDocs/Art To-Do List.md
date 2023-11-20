@@ -1,4 +1,4 @@
-### Last updated: 18 November 2023
+### Last updated: 19 November 2023
 
 # Sprites  
 ### Tools
@@ -8,6 +8,8 @@
 
 ### Terrain
 - Rocks/other objects for objects to be behind
+- Platforms
+  - As a tileset, and half the size of the normal tileset
 
 ### Points of Interest
 - None for now
