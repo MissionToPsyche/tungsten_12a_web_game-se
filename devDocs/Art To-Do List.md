@@ -39,7 +39,8 @@
         - Walking
         - Jumping
         - Thrusters 
-- Entering/Exiting caves   
+- Entering/Exiting caves
+- Moving construction objects 
 
 ### Other
 - Electromagnet beam
