@@ -345,7 +345,6 @@ public class UIController : BaseController<UIController>
     public GameObject optionsMenu;
 
     [Header("Dialog Box")]
-    public GameObject dialogBox;
     public TMP_Text dialogText;
 
     [Header("Buttons")]
@@ -362,8 +361,8 @@ public class UIController : BaseController<UIController>
     /// </summary>
     public void handleUI()
     {
-        if (dialogBox.activeInHierarchy)
-            dialogBox.SetActive(false);
+        if (dialogText.transform.parent.gameObject.activeInHierarchy)
+            dialogText.transform.parent.gameObject.SetActive(false);
         else
         {
             if (curSubmenu != null)
@@ -414,7 +413,7 @@ public class UIController : BaseController<UIController>
     public void setDialogText(string text)
     {
         dialogText.SetText(text);
-        dialogBox.SetActive(true);
+        dialogText.transform.parent.gameObject.SetActive(true);
     }
 
     private bool shouldRespawn;
