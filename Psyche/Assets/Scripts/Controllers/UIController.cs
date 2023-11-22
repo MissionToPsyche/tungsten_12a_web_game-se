@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static UnityEngine.Rendering.DebugUI;
 
 /// <summary>
 /// Functions for the inventory and dialog box. Script is a component of the UI gameobject
@@ -167,6 +168,7 @@ public class UIController : BaseController<UIController>
     {
         string subdestination = args[0].ToString();
         args.RemoveAt(0);
+        string directive;
 
         switch (subdestination)
         {
@@ -182,11 +184,19 @@ public class UIController : BaseController<UIController>
                     case "BatteryManager":
                         UpdateBatteryText(args);
                         break;
-                    case "ToolUpgradeInterface":
-                        //TODO
+                    case "ToolManager":
+                        directive = args[0].ToString();
+                        args.RemoveAt(0);
+
+                        switch(directive)
+                        {
+                            case "ToolUpgradeResponse":
+                                ToolUpgradeResponse(args);
+                                break;
+                        }
                         break;
                     case "InventoryManager":
-                        string directive = args[0].ToString();
+                        directive = args[0].ToString();
                         args.RemoveAt(0);
                         switch(directive)
                         {
@@ -512,47 +522,45 @@ public class UIController : BaseController<UIController>
     /// </summary>
     public void UpgradeInterface(string toolName)
     {
-        bool can_modify = false;
+        //Send message to Inventory Manager
+        ArrayList args = new ArrayList {
+                "Player", "None", "UI", "tool_upgrade", toolName,
+        };
+        //Send the message
+        SendMessage(args);
+    }
+
+    public void ToolUpgradeResponse(ArrayList args)
+    {
+        bool upgradeSuccess = (bool)args[0];
+        string toolName = args[1].ToString();
+        Dictionary<string, int> levelRequirements = (Dictionary<string, int>)args[2];
+
+        Debug.Log(upgradeSuccess + " " + toolName + " " + levelRequirements.ToString());
+
+        switch(toolName.ToLower())
+        {
+            case "thruster":
+
+                break;
+            case "battery":
+
+                break;
+            case "imager":
+
+                break;
+            case "electromagnet":
+
+                break;
+            default:
+                break;
+        }
         if (toolName == "Thruster")
         {
-            can_modify = PlayerController.Instance.thrusterManager.Modify();  //Turn into a message
-            if(!can_modify)
+            if (!upgradeSuccess)
             {
                 errorText.SetText("Not enough copper!");
                 errorText.gameObject.SetActive(true);
-                return;
-            }
-            errorText.gameObject.SetActive(false);
-        }
-        else if (toolName == "Electromagnet")
-        {
-            can_modify = PlayerController.Instance.eMagnetManager.Modify();
-            if(!can_modify)
-            {
-                errorText.gameObject.SetActive(true);
-                errorText.SetText("Not enough iron!");
-                return;
-            }
-            errorText.gameObject.SetActive(false);
-        }
-        else if (toolName == "Battery")
-        {
-            can_modify = PlayerController.Instance.batteryManager.Modify();
-            if (!can_modify)
-            {
-                errorText.gameObject.SetActive(true);
-                errorText.SetText("Not enough nickel!");
-                return;
-            }
-            errorText.gameObject.SetActive(false);
-        }
-        else if (toolName == "Imager")
-        {
-            can_modify = PlayerController.Instance.imagerManager.Modify();
-            if (!can_modify)
-            {
-                errorText.gameObject.SetActive(true);
-                errorText.SetText("Not enough gold!");
                 return;
             }
             errorText.gameObject.SetActive(false);

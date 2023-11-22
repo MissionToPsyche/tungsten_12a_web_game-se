@@ -227,7 +227,38 @@ public class PlayerController : BaseController<PlayerController>
             case "None":
                 string source = args[0].ToString();
                 args.RemoveAt(0);
-                //Process command
+                
+                switch(source)
+                {
+                    case "UI":
+                        string directive = args[0].ToString();
+                        args.RemoveAt(0);
+                        
+                        switch(directive)
+                        {
+                            case "tool_upgrade":
+                                string toolName = args[0].ToString();
+                                args.RemoveAt(0);
+
+                                switch(toolName.ToLower())
+                                {
+                                    case "battery":
+                                        batteryManager.Modify();
+                                        break;
+                                    case "thruster":
+                                        thrusterManager.Modify();
+                                        break;
+                                    case "electromagnet":
+                                        eMagnetManager.Modify();
+                                        break;
+                                    case "imager":
+                                        imagerManager.Modify();
+                                        break;
+                                }
+                                break;
+                        }
+                        break;
+                }
                 break;
             default:
                 Debug.Log("Incorrect subdestination -- GameController");

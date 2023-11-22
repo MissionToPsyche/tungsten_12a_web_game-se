@@ -37,26 +37,30 @@ public abstract class ToolManager : MonoBehaviour
     /// <summary>
     /// Modifies the tool when called
     /// </summary>
-    public bool Modify()
+    public void Modify()
     {
-        if (!levelRequirements.ContainsKey(level + 1))
+        Debug.Log("boop");
+        bool upgraded = true;
+        if (levelRequirements.ContainsKey(level + 1))
         {
-            return false; //Level out of scope
-        }
-        //Confirm the number of required elements exists
-        foreach (var requirement in levelRequirements[level + 1])
-        {
-            if (_playerController.inventoryManager.CheckElement(requirement.Key) < requirement.Value)
+            foreach (var requirement in levelRequirements[level + 1])
             {
-                return false;
+                if (_playerController.inventoryManager.CheckElement(requirement.Key) < requirement.Value)
+                {
+                    upgraded = false;
+                }
             }
         }
-        //Remove the required elements
-        foreach (var requirement in levelRequirements[level + 1])
+        //Confirm the number of required elements exists
+        if (upgraded)
         {
-            if(requirement.Value > 0) //No need to activate underlying code if this isn't met
+            //Remove the required elements
+            foreach (var requirement in levelRequirements[level + 1])
             {
-                _playerController.inventoryManager.RemoveElement(requirement.Key, requirement.Value);
+                if (requirement.Value > 0) //No need to activate underlying code if this isn't met
+                {
+                    _playerController.inventoryManager.RemoveElement(requirement.Key, requirement.Value);
+                }
             }
         }
         //Upgrade the tool
@@ -64,11 +68,8 @@ public abstract class ToolManager : MonoBehaviour
         UpgradeTool();
         //Create package to send to UI to upgrade interface
         ArrayList args = new ArrayList {
-                "UI", "None", "ToolUpgradeInterface", levelRequirements[level],
+                "UI", "None", "ToolManager", "ToolUpgradeResponse", upgraded, toolName, levelRequirements[level],
         };
         _playerController.SendMessage(args);
-        
-        //Notify success
-        return true;
     }
 }
