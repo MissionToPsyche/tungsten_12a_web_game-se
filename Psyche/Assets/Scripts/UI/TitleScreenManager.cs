@@ -17,7 +17,7 @@ public class TitleScreenManager : MonoBehaviour {
     public void startGame()
     {
         //Play button click sound
-        //UIController.Instance.playButtonSound(); //Prevents game from loading because UIController does not yet exist 
+        GameController.Instance.audioManager.buttonClick.Play();
 
         SceneManager.LoadScene("Intro_Cutscene");
     }
