@@ -29,7 +29,7 @@ public class TitleScreenManager : MonoBehaviour {
     public void openSubmenu(GameObject submenu)
     {
         //Play button click sound
-        UIController.Instance.playButtonSound();
+        GameController.Instance.audioManager.buttonClick.Play();
 
         curSubmenu = submenu;
         mainMenu.SetActive(false);
