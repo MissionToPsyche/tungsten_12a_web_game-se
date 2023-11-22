@@ -98,7 +98,7 @@ public class GammaView : MonoBehaviour {
     }
 
     // activates gamma ray spectrometer
-    public void ActivateGRS(AudioManager audioManager) {
+    public void ActivateGRS() {
         Initialize(); 
         DebugReportLog(); // can comment out when not needed
         // shows new color
@@ -106,7 +106,7 @@ public class GammaView : MonoBehaviour {
             for (int i = 0; i < spriteRenderersList.Count; i++) {
                 if (spriteRenderersList[i] != null) {
                     spriteRenderersList[i].color = LayerColor(spriteRenderersList[i].gameObject);
-                    audioManager.PlayAudio(audioManager.toolGRS);
+                    GameController.Instance.audioManager.toolGRS.Play();
                     if (colorBlindMode) {
                         ActivateGRSaltView();
                     }
@@ -116,13 +116,13 @@ public class GammaView : MonoBehaviour {
     }
 
     // deactivates gamma ray spectrometer
-    public void DeactivateGRS(AudioManager audioManager) {
+    public void DeactivateGRS() {
         // reverts to original color
         if (Input.GetKeyUp(KeyCode.G)) {
             for (int i = 0; i < spriteRenderersList.Count; i++) {
                 if (spriteRenderersList[i] != null) {
                     spriteRenderersList[i].color = origColorArray[i];
-                    audioManager.StopAudio(audioManager.toolGRS);
+                    GameController.Instance.audioManager.toolGRS.Stop();
                     if (colorBlindMode) {
                         DeactivateGRSaltView();
                     }

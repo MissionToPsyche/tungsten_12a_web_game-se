@@ -39,7 +39,6 @@ public class PlayerController : BaseController<PlayerController>
     public ThrusterManager thrusterManager;
     public ImagerCursor flashlight;
     public GammaView gammaView;
-    public AudioManager audioManager;
     private TransitionManager sceneTransition;
     public PlayerDeath deathCon;
 
@@ -85,10 +84,6 @@ public class PlayerController : BaseController<PlayerController>
         _toolStates[imagerManager] = imagerManager.toolEnabled;
         // ##### Object Managers ######
         //playerHealth.Initialize(this); <-- this initializes the script and creates a cross reference between the two
-        audioManager = GameObject
-            .FindGameObjectWithTag("AudioSources")
-            .GetComponent<AudioManager>();
-        audioManager.Initialize(this);
         // ##### Miscellaneous ######
         sceneTransition = GetComponent<TransitionManager>();
         sceneTransition.Initialize(this);
@@ -154,11 +149,11 @@ public class PlayerController : BaseController<PlayerController>
 
             //Spectrometer
             if (hasSpectrometer && Input.GetKeyDown(KeyCode.G) && batteryManager.batteryPercent != 0) {
-                gammaView.ActivateGRS(audioManager);
+                gammaView.ActivateGRS();
                 batteryManager.DrainBatt(500);
             }
             if (hasSpectrometer && Input.GetKeyUp(KeyCode.G)) {
-                gammaView.DeactivateGRS(audioManager);
+                gammaView.DeactivateGRS();
             }
 
             //ElectroMagnet
