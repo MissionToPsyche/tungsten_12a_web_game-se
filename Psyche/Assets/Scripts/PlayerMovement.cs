@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -19,6 +20,8 @@ public class PlayerMovement : MonoBehaviour
     private bool _isFacingRight;
     private bool _flipSprite;
     private Vector2 _walkVelocity;
+    [SerializeField] private CinemachineVirtualCamera _virtualCameraR;
+    [SerializeField] private CinemachineVirtualCamera _virtualCameraL;
 
     //Animation states
     const string PLAYER_IDLE = "player_idle";
@@ -50,6 +53,8 @@ public class PlayerMovement : MonoBehaviour
         _xAxis = Input.GetAxisRaw("Horizontal");
         _walkVelocity = new Vector2(_xAxis * 7f, _playerManagement.playerCharacter.velocity.y);
         _playerManagement.playerCharacter.velocity = _walkVelocity;
+
+        //biasCamera();
 
         //if the player is grounded, then either the walk animation or idle animation will play
         if (_playerManagement.isGrounded && !_playerManagement.beingPulled)
@@ -137,4 +142,21 @@ public class PlayerMovement : MonoBehaviour
         }
 
     }
+
+    /// <summary>
+    /// Bias the camera in the direction the player is facing
+    /// </summary>
+    public void Update()
+    {
+        if (_isFacingRight)
+        {
+            _virtualCameraL.Priority = 0;
+            _virtualCameraR.Priority = 10;
+        } else
+        {
+            _virtualCameraL.Priority = 10;
+            _virtualCameraR.Priority = 0;
+        }
+    }
+
 }

@@ -1238,6 +1238,17 @@ Transform:
   - {fileID: 459037628}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &515264559 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8030321537339340884, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+  m_PrefabInstance: {fileID: 3172487196972866785}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &618933097
 GameObject:
   m_ObjectHideFlags: 0
@@ -10296,6 +10307,17 @@ Transform:
   - {fileID: 1834760035}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1764364769 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9155241973715927046, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+  m_PrefabInstance: {fileID: 3172487196972866785}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1822034794
 GameObject:
   m_ObjectHideFlags: 0
@@ -11241,18 +11263,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4822381043481428571, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.625
+    - target: {fileID: 3300130321492112133, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: m_Name
+      value: Virtual Camera Right
       objectReference: {fileID: 0}
     - target: {fileID: 4822381043481428571, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -2.5
+      propertyPath: m_LocalPosition.x
+      value: -0.3125
       objectReference: {fileID: 0}
+    - target: {fileID: 7454889652593822882, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: _virtualCameraL
+      value: 
+      objectReference: {fileID: 1764364769}
+    - target: {fileID: 7454889652593822882, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: _virtualCameraR
+      value: 
+      objectReference: {fileID: 515264559}
     - target: {fileID: 7911676450372591580, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: playerHealth
       value: 
       objectReference: {fileID: 905260923}
+    - target: {fileID: 8030321537339340884, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: m_Priority
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8030321537339340884, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: m_StandbyUpdate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8966456805578203647, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: playerHealth
       value: 
