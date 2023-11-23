@@ -1,35 +1,30 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Manages the transitions between scenes
 /// </summary>
-public class TransitionManager : MonoBehaviour
-{
+public class TransitionManager : MonoBehaviour {
     //Private variables
     private PlayerController _playerManagement;
-    private Vector2 _landingPosition;
-    private AsyncOperation _loadScene;
+    private Vector3 _landingPosition;
+    private GameObject _transitionObject;
     
     /// <summary>
     /// Initializes this script
     /// </summary>
     /// <param name="playerManagement"></param>
-    public void Initialize(PlayerController playerManagement)
-    {
+    public void Initialize(PlayerController playerManagement) {
         _playerManagement = playerManagement;
-        _landingPosition = new Vector2(-2, -4);
     }
 
     /// <summary>
     /// Transitions the player to the respective scene if the necessary parameters are met
     /// </summary>
-    /// <param name="sceneName"></param>
+    /// <param name="travelToSceneName"></param>
     /// <returns></returns>
-    public IEnumerator CheckTransition(string sceneName)
-    {
+    public IEnumerator CheckTransition(string travelToSceneName) {
         //Polling rate
         yield return new WaitForSeconds(0.1f);
 
@@ -37,38 +32,70 @@ public class TransitionManager : MonoBehaviour
         float verticalAxis = Input.GetAxis("Vertical");
 
         //If a positive vertical button is pressed (w or up), then transition
-        if (Input.GetButton("Vertical") && verticalAxis > 0)
-        {
-            switch(sceneName)
-            {
-                case "SceneTransition_Home":                                   //Home
-                    {
-                        //Turn the player off - Unused until script detached from player
-                        //_playerManagement.playerCharacter.gameObject.SetActive(false);
-                        //Make the scene load before doing anything else
-                        _loadScene = SceneManager.LoadSceneAsync("SampleScene");
-                        yield return new WaitUntil( () => _loadScene.isDone);
-                        //Place the playercharacter at the new position
-                        _playerManagement.playerCharacter.transform.position = _landingPosition;
-                        //Turn the player back on
-                        //_playerManagement.playerCharacter.gameObject.SetActive(true);
-                        break; 
-                    }
-                case "SceneTransition_Joshua":
-                    SceneManager.LoadScene("DeveloperScene_Joshua");    break; //Josh
-                case "SceneTransition_Dhalia":
-                    SceneManager.LoadScene("DeveloperScene_Dhalia");    break; //Dhalia
-                case "SceneTransition_Bryant":
-                    SceneManager.LoadScene("DeveloperScene_Bryant");    break; //Bryant
-                case "SceneTransition_Matt":
-                    SceneManager.LoadScene("DeveloperScene_Matt");      break; //Matt
-                case "SceneTransition_James":
-                    SceneManager.LoadScene("DeveloperScene_James");     break; //James
+        if (Input.GetButton("Vertical") && verticalAxis > 0) {
+            switch(travelToSceneName) {
+                case "Tool_Intro_Thruster":
+                case "Tool_Intro_GRS":
+                case "Tool_Intro_Imager":
+                case "Tool_Intro_eMagnet":
+                    RepositionPlayer(travelToSceneName, verticalAxis);
+                    break;
+
+                case "SceneTransition_Back": // return back to previous scene
+                    // in work     
+
                 case "SceneTransition_Game_End":
-                    UIController.Instance.EndGame(true);                break;
+                    UIController.Instance.EndGame(true);
+                    break;
+
                 default:
-                    Debug.Log("Invalid Scene Transition");              break; //Default
-            }   
+                    Debug.Log("Invalid Scene Transition");
+                    break;
+            }
         }
     }
+
+    /// <summary>
+    /// Repositions player on transition to new scene based on game object with TransitionObjectIn tag
+    /// </summary>
+    public void RepositionPlayer(string travelToSceneName, float verticalAxis) {
+    if (verticalAxis > 0) {
+        Debug.Log("travelToSceneName: "+travelToSceneName);
+        SceneManager.LoadScene(travelToSceneName, LoadSceneMode.Single);
+        Scene travelToScene = SceneManager.GetSceneByName(travelToSceneName);
+
+        if (travelToScene.IsValid()) {
+            if (!travelToScene.isLoaded) {
+                SceneManager.LoadScene(travelToSceneName, LoadSceneMode.Single);
+                Debug.Log(travelToSceneName+" loaded");
+            }
+
+            Debug.Log("Finding TransitionObjectIn");
+            GameObject[] travelToSceneGameObjects = travelToScene.GetRootGameObjects();
+            foreach (GameObject obj in travelToSceneGameObjects) {
+                if (obj.CompareTag("TransitionObjectIn")) {
+                    _transitionObject = obj;
+                    _landingPosition = _transitionObject.transform.position;
+                    _playerManagement.playerCharacter.transform.position = _landingPosition;
+                    return; // Exit method after repositioning
+                }
+            }
+            Debug.LogError("TransitionObjectIn not found in the scene");
+        } else {
+            Debug.LogError("travelToScene ("+travelToScene.name+") is not valid");
+        }
+    }
+}
+
+     // Callback for scene loading
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+        RepositionPlayer(scene.name, 1.0f); // Assuming the transition is triggered with a positive vertical axis
+        SceneManager.sceneLoaded -= OnSceneLoaded; // Remove the callback once repositioning is done
+    }
+
+    public void LoadSceneWithCallback(string sceneName) {
+        SceneManager.sceneLoaded += OnSceneLoaded; // Add the callback
+        SceneManager.LoadScene(sceneName);
+    }
+
 }
