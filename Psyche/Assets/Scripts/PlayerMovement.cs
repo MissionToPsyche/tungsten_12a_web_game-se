@@ -54,8 +54,6 @@ public class PlayerMovement : MonoBehaviour
         _walkVelocity = new Vector2(_xAxis * 7f, _playerManagement.playerCharacter.velocity.y);
         _playerManagement.playerCharacter.velocity = _walkVelocity;
 
-        //biasCamera();
-
         //if the player is grounded, then either the walk animation or idle animation will play
         if (_playerManagement.isGrounded && !_playerManagement.beingPulled)
         {
