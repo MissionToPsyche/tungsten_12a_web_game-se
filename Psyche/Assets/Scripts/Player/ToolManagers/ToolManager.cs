@@ -22,6 +22,10 @@ public abstract class ToolManager : MonoBehaviour
     public void Enable()
     {
         toolEnabled = true;
+        //Create package to send to UI to upgrade interface
+        ArrayList args = new ArrayList {
+                "UI", "None", "ToolManager", "ToolInfo", "info", false, levelRequirements[level+1],
+        };
     }
 
     /// <summary>
@@ -39,7 +43,11 @@ public abstract class ToolManager : MonoBehaviour
     /// </summary>
     public void Modify()
     {
-        Debug.Log("boop");
+        //Create package to send to UI to upgrade interface
+        ArrayList args = new ArrayList {
+                "UI", "None", "ToolManager", "ToolInfo", "upgrade",
+        };
+
         bool upgraded = true;
         if (levelRequirements.ContainsKey(level + 1))
         {
@@ -51,6 +59,8 @@ public abstract class ToolManager : MonoBehaviour
                 }
             }
         }
+        args.Add(upgraded);
+        args.Add(toolName);
         //Confirm the number of required elements exists
         if (upgraded)
         {
@@ -62,14 +72,14 @@ public abstract class ToolManager : MonoBehaviour
                     _playerController.inventoryManager.RemoveElement(requirement.Key, requirement.Value);
                 }
             }
+            //Upgrade the tool
+            level++;
+            UpgradeTool();
+            args.Add(levelRequirements[level]);
+        } else
+        {
+            args.Add(levelRequirements[level + 1]);
         }
-        //Upgrade the tool
-        level++;
-        UpgradeTool();
-        //Create package to send to UI to upgrade interface
-        ArrayList args = new ArrayList {
-                "UI", "None", "ToolManager", "ToolUpgradeResponse", upgraded, toolName, levelRequirements[level],
-        };
         _playerController.SendMessage(args);
     }
 }

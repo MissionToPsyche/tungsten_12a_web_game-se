@@ -190,8 +190,8 @@ public class UIController : BaseController<UIController>
 
                         switch(directive)
                         {
-                            case "ToolUpgradeResponse":
-                                ToolUpgradeResponse(args);
+                            case "ToolInfo":
+                                ToolInfoGather(args);
                                 break;
                         }
                         break;
@@ -530,40 +530,84 @@ public class UIController : BaseController<UIController>
         SendMessage(args);
     }
 
-    public void ToolUpgradeResponse(ArrayList args)
+    /// <summary>
+    /// Gathers the info and is called when info is being passed or if an upgrade is being requested
+    ///     - Check ToolManager for when this is called but any of the specific toolmanagers (like battery)
+    ///       if you want to see what their respective dictionaries of level requirements contains
+    ///     - Dictionary contains a list of elements and their required values
+    /// </summary>
+    /// <param name="args"></param>
+    public void ToolInfoGather(ArrayList args)
     {
-        bool upgradeSuccess = (bool)args[0];
-        string toolName = args[1].ToString();
-        Dictionary<string, int> levelRequirements = (Dictionary<string, int>)args[2];
+        //passes upgrade or info
+        string directive = args[0].ToString().ToLower();
+        //Whether the upgrade was successful
+        bool upgradeSuccess = (bool)args[1];
+        //Toolname
+        string toolName = args[2].ToString().ToLower();
+        //Dictionary that contains everything required for the tool's next level requirements - see any toolmanager
+        Dictionary<string, int> levelRequirements = (Dictionary<string, int>)args[3];
 
-        Debug.Log(upgradeSuccess + " " + toolName + " " + levelRequirements.ToString());
-
-        switch(toolName.ToLower())
+        switch(directive)
         {
-            case "thruster":
+            case "upgrade":
+                if (!upgradeSuccess)
+                {
+                    string requirement_display = "Must Have: ";
+                    foreach (var requirement in levelRequirements)
+                    {
+                        if (requirement.Value > 0)
+                        {
+                            requirement_display += requirement.Key + " " + requirement.Value + ",";
+                        }
+                    }
+                    errorText.SetText(requirement_display);
+                    errorText.gameObject.SetActive(true);
+                    return;
+                }
+                switch (toolName.ToLower())
+                {
+                    case "thruster":
+                        errorText.gameObject.SetActive(false);
+                        break;
+                    case "battery":
 
+                        errorText.gameObject.SetActive(false);
+                        break;
+                    case "imager":
+
+                        errorText.gameObject.SetActive(false);
+                        break;
+                    case "electromagnet":
+                        errorText.gameObject.SetActive(false);
+                        break;
+                    default:
+                        break;
+                }
                 break;
-            case "battery":
+            case "info":
+                switch (toolName.ToLower())
+                {
+                    case "thruster":
+                        errorText.gameObject.SetActive(false);
+                        break;
+                    case "battery":
 
-                break;
-            case "imager":
+                        errorText.gameObject.SetActive(false);
+                        break;
+                    case "imager":
 
-                break;
-            case "electromagnet":
-
+                        errorText.gameObject.SetActive(false);
+                        break;
+                    case "electromagnet":
+                        errorText.gameObject.SetActive(false);
+                        break;
+                    default:
+                        break;
+                }
                 break;
             default:
                 break;
-        }
-        if (toolName == "Thruster")
-        {
-            if (!upgradeSuccess)
-            {
-                errorText.SetText("Not enough copper!");
-                errorText.gameObject.SetActive(true);
-                return;
-            }
-            errorText.gameObject.SetActive(false);
         }
     }
 
