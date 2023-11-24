@@ -232,7 +232,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolName: 
+  level: 0
   _imager: {fileID: 4567901035931106489}
+  _active: 0
   _flashlight: {fileID: 4681648833962158228}
   _rangeIncrease: 0
   _imagerCounter: {fileID: 0}
@@ -271,6 +273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolName: 
+  level: 0
   eMagHitBox: {fileID: 2155109396161933314}
 --- !u!114 &8966456805578203647
 MonoBehaviour:
@@ -299,6 +302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolName: 
+  level: 0
 --- !u!114 &1777309154900150215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,6 +328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolName: 
+  level: 0
   batteryLevel: 0
   maxCapacity: 0
   batteryPercent: 0
@@ -402,7 +407,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 00000000c76f616629b0cada
+  m_ApplyToSortingLayers: 0000000029b0cadac76f616693b48571531254bfcfddb5a575901468
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0

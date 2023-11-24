@@ -9,7 +9,7 @@ public class IntroController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("EMagnet"))
         {
             switch (curScreen)
             {
