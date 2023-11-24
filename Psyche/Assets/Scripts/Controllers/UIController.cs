@@ -216,7 +216,7 @@ public class UIController : BaseController<UIController>
         {
             PlayerController.Instance.OnUpdatePlayerToUI -= EnableToolButton; 
         }
-        if(GameController.Instance != null)
+        if (GameController.Instance != null)
         {
             GameController.Instance.OnUpdateGameToUI -= ReceiveMessage;
         }

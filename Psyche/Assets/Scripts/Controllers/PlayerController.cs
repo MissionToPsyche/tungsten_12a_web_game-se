@@ -1,9 +1,7 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using System.Collections;
 using System;
 using System.Collections.Generic;
-using UnityEditor;
 
 /// <summary>
 /// Player Management script controls how the player interacts with the 
@@ -162,7 +160,7 @@ public class PlayerController : BaseController<PlayerController>
             }
 
             //ElectroMagnet
-            if (_toolStates[eMagnetManager] && Input.GetButton("Fire1") && batteryManager.batteryPercent != 0 && !eMagnetActive) {
+            if (_toolStates[eMagnetManager] && Input.GetButton("EMagnet") && batteryManager.batteryPercent != 0 && !eMagnetActive) {
                 eMagnetManager.Activate();
                 batteryManager.DrainBatt(500);
             }
@@ -171,7 +169,7 @@ public class PlayerController : BaseController<PlayerController>
         }
 
         //Inventory and Dialog Box 
-        if (Input.GetKeyDown("tab") && !Input.GetKey(KeyCode.G)) // <-- Change to getbutton and getbuttondown
+        if (Input.GetButtonDown("Inventory") && !Input.GetKey(KeyCode.G)) // <-- Change to getbutton
             UIController.Instance.handleUI();
     }
 
