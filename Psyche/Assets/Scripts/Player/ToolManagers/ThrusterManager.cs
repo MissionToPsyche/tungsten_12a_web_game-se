@@ -9,6 +9,25 @@ public class ThrusterManager : ToolManager
 {
     //Private Variables
     private float _thrusterForce;
+    [SerializeField] private float limit = 4;
+    private float duration;
+    private bool working = true;
+
+    /// <summary>
+    /// Countdown timer
+    /// </summary>
+    private void Update()
+    {
+        if (duration > 0)
+        {
+            duration--;
+            working = true;
+        } else
+        {
+            duration = 0;
+            working = false;
+        }
+    }
 
     /// <summary>
     /// Initializes the tool
@@ -55,12 +74,18 @@ public class ThrusterManager : ToolManager
     }
     
     /// <summary>
-    /// Activates the thruster applying a vertical force
+    /// Activates the thruster applying a vertical force if time remains on timer
     /// </summary>
     /// <param name="playerCharacter"></param>
     public override void Activate()
     {
-        _playerController.playerCharacter.velocity += new Vector2(0f, _thrusterForce * Time.deltaTime * 10f); 
+        if (working)
+        {
+            _playerController.playerCharacter.velocity += new Vector2(0f, _thrusterForce * Time.deltaTime * 10f);
+        } else
+        {
+            duration = limit;
+        }
     }
 
     /// <summary>
