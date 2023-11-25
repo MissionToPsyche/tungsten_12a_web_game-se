@@ -6475,7 +6475,7 @@ GameObject:
   - component: {fileID: 543096651}
   m_Layer: 0
   m_Name: cave_entrance
-  m_TagString: TransitionObject
+  m_TagString: TransitionObjectOut
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6519,7 +6519,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1717661639
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 2
   m_Sprite: {fileID: 241931249, guid: 497fccd2c88f16e4386959a43a87aa08, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -6779,7 +6779,7 @@ GameObject:
   - component: {fileID: 1379859910}
   m_Layer: 0
   m_Name: cave_entrance
-  m_TagString: TransitionObject
+  m_TagString: TransitionObjectIn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
