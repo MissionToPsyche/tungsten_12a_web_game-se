@@ -7,6 +7,8 @@ Version: 20231124
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Gamma View script which captures all sprites of the game objects within the scene
@@ -22,6 +24,32 @@ public class GammaView : MonoBehaviour {
     public bool colorBlindMode;                      // color blind mode boolean
     public Camera mainCamera;                        // scene camera used to only load objects within view
     public LayerMask scanLayer = -1;                 // set to -1 to include all layers
+    public Light2D sceneLight;                       // light in the current scene
+    public float origSceneLightIntensity;            // light intensity
+
+    /// <summary>
+    /// Subscribes to the SceneManager.sceneLoaded event
+    /// </summary>
+    void Awake() {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    /// <summary>
+    /// Unsubscribes from event to prevent memory loss
+    /// </summary>
+    void OnDestroy() {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    /// <summary>
+    /// Runs each time a new scene is loaded
+    /// </summary>
+    /// <param name="scene"></param>
+    /// <param name="mode"></param>
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+        sceneLight = GameObject.FindGameObjectWithTag("SceneLight").GetComponent<Light2D>();
+        origSceneLightIntensity = sceneLight.intensity;
+    }
 
     /// <summary>
     /// Objects loaded at the activation of the GRS
@@ -86,35 +114,53 @@ public class GammaView : MonoBehaviour {
     }
 
     /// <summary>
-    /// Activates gamma ray spectrometer
+    /// Activates gamma ray spectrometer and shows new color
     /// </summary>
     public void ActivateGRS() {
         Initialize(); 
         //DebugReportLog(); // can comment out when not needed
-        // shows new color
             for (int i = 0; i < spriteRenderersList.Count; i++) {
                 if (spriteRenderersList[i] != null) {
                     spriteRenderersList[i].color = LayerColor(spriteRenderersList[i].gameObject);
                     GameController.Instance.audioManager.toolGRS.Play();
                     if (colorBlindMode) { ActivateGRSaltView(); }
+                    if (!sceneLight.intensity.Equals(1)) {
+                        TurnOnSceneLight();
+                    }
                 }
             }
     }
 
     /// <summary>
-    /// Deactivates gamma ray spectrometer
+    /// Deactivates gamma ray spectrometer and reverts to original color
     /// </summary>
     public void DeactivateGRS() {
-        // reverts to original color
             for (int i = 0; i < spriteRenderersList.Count; i++) {
                 if (spriteRenderersList[i] != null) {
                     spriteRenderersList[i].color = origColorArray[i];
                     GameController.Instance.audioManager.toolGRS.Stop();
                     if (colorBlindMode) { DeactivateGRSaltView(); }
+                    if (!sceneLight.intensity.Equals(origSceneLightIntensity)) {
+                        RevertSceneLight();
+                    }
                 }
             }
         DeInitialize();
         //DebugReportLog(); // can comment out when not needed
+    }
+
+    /// <summary>
+    /// Turns on the scene light
+    /// </summary>
+    void TurnOnSceneLight() {
+        sceneLight.intensity = 1;
+    }
+
+    /// <summary>
+    /// Reverts the scene light to original intensity
+    /// </summary>
+    void RevertSceneLight() {
+        sceneLight.intensity = origSceneLightIntensity;
     }
 
     /// <summary>
@@ -161,7 +207,7 @@ public class GammaView : MonoBehaviour {
                 14 => Color.cyan,   // Gold
                 15 => Color.clear,  // Clear
                 16 => new Color(0f, 0f, 0f, 0f),
-                /** custom colors bellow to be used in future levels
+                /** custom colors below to be used in future levels
                 3 =>  new Color(0f, 0f, 0f, 1f),            // Terrain
                 6 =>  new Color(0.5f, 0.5f, 0.5f, 1f),      // Titanium
                 7 =>  new Color(0.5f, 0.5f, 0.5f, 1f),      // Iron
