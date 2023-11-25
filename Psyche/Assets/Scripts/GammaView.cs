@@ -1,7 +1,7 @@
 /** 
 Description: spectrometer tool gamma view script
 Author: blopezro
-Version: 20231118
+Version: 20231124
 **/
 
 using System;
@@ -10,7 +10,7 @@ using UnityEngine;
 
 /// <summary>
 /// Gamma View script which captures all sprites of the game objects within the scene
-/// and changes their colors based on the layer assigned to the game objects.
+/// and changes their colors based on the layer assigned to the game objects
 /// </summary>
 public class GammaView : MonoBehaviour {
 
@@ -23,33 +23,14 @@ public class GammaView : MonoBehaviour {
     public Camera mainCamera;                        // scene camera used to only load objects within view
     public LayerMask scanLayer = -1;                 // set to -1 to include all layers
 
-    // commenting out Awake() and OnDestroy() as these were previously used
-    // with OnSceneLoaded(Scene scene, LoadSceneMode mode) which loaded objects
-    // during scene load, objects are now loaded at the activation of the GRS
-    // through Initialize()  
-/**
-    // subscribes to the SceneManager.sceneLoaded event
-    void Awake() {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    // unsubscribes from event to prevent memory loss
-    void OnDestroy() {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-    // runs each time a new scene is loaded
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
-**/ 
+    /// <summary>
+    /// Objects loaded at the activation of the GRS
+    /// </summary>
     void Initialize() {
         // sets main camera for use during objects in view capture
         if (mainCamera == null) {
             mainCamera = Camera.main;
         }
-
-        // capture all objects in scene
-        //GameObject[] gameObjectsArray = UnityEngine.Object.FindObjectsOfType<GameObject>();
-        //sceneObjects = new List<GameObject>(gameObjectsArray);
 
         // capture only objects within cameras view in scene
         sceneObjects = CaptureObjectsInView();
@@ -72,8 +53,11 @@ public class GammaView : MonoBehaviour {
         }
     }
 
-    // capture only game objects within the cameras view,
-    // these objects must have sprite renderer components in order to be detected 
+    /// <summary>
+    /// Capture only game objects within the cameras view, these objects must 
+    /// have sprite renderer components in order to be detected 
+    /// </summary>
+    /// <returns></returns>
     List<GameObject> CaptureObjectsInView() {
         List<GameObject> objectsInView = new List<GameObject>();
         SpriteRenderer[] sprites = FindObjectsOfType<SpriteRenderer>();
@@ -89,7 +73,11 @@ public class GammaView : MonoBehaviour {
         return objectsInView;
     }
 
-    // checks if obj is within bounds
+    /// <summary>
+    /// Checks if obj is within bounds
+    /// </summary>
+    /// <param name="obj"></param>
+    /// <returns></returns>
     bool IsObjectInView(GameObject obj) {
         Bounds bounds = obj.GetComponent<SpriteRenderer>().bounds;
         Vector3 objectPosition = bounds.center;
@@ -97,7 +85,9 @@ public class GammaView : MonoBehaviour {
         return screenPoint.x >= 0 && screenPoint.x <= 1 && screenPoint.y >= 0 && screenPoint.y <= 1;
     }
 
-    // activates gamma ray spectrometer
+    /// <summary>
+    /// Activates gamma ray spectrometer
+    /// </summary>
     public void ActivateGRS() {
         Initialize(); 
         //DebugReportLog(); // can comment out when not needed
@@ -106,30 +96,31 @@ public class GammaView : MonoBehaviour {
                 if (spriteRenderersList[i] != null) {
                     spriteRenderersList[i].color = LayerColor(spriteRenderersList[i].gameObject);
                     GameController.Instance.audioManager.toolGRS.Play();
-                    if (colorBlindMode) {
-                        ActivateGRSaltView();
-                    }
+                    if (colorBlindMode) { ActivateGRSaltView(); }
                 }
             }
     }
 
-    // deactivates gamma ray spectrometer
+    /// <summary>
+    /// Deactivates gamma ray spectrometer
+    /// </summary>
     public void DeactivateGRS() {
         // reverts to original color
             for (int i = 0; i < spriteRenderersList.Count; i++) {
                 if (spriteRenderersList[i] != null) {
                     spriteRenderersList[i].color = origColorArray[i];
                     GameController.Instance.audioManager.toolGRS.Stop();
-                    if (colorBlindMode) {
-                        DeactivateGRSaltView();
-                    }
+                    if (colorBlindMode) { DeactivateGRSaltView(); }
                 }
             }
         DeInitialize();
         //DebugReportLog(); // can comment out when not needed
     }
 
-    // adds to the list the sprite renderers from the game objects in the scene
+    /// <summary>
+    /// Adds to the list the sprite renderers from the game objects in the scene
+    /// </summary>
+    /// <param name="sceneObjects"></param>
     void CaptureSpriteRenderers(List<GameObject> sceneObjects) {
         foreach (GameObject obj in sceneObjects) {
             if (obj.GetComponent(typeof(SpriteRenderer))) {
@@ -138,12 +129,20 @@ public class GammaView : MonoBehaviour {
         }
     }
 
-    // returns the game objects layer
+    /// <summary>
+    /// Returns the game objects layer
+    /// </summary>
+    /// <param name="obj"></param>
+    /// <returns></returns>
     int GetLayer(GameObject obj) {
         return obj.layer;
     }
 
-    // returns set color for the layer
+    /// <summary>
+    /// Returns set color for the layer
+    /// </summary>
+    /// <param name="obj"></param>
+    /// <returns></returns>
     Color LayerColor(GameObject obj) {
         if (colorBlindMode) {
             return defaultColor;
@@ -180,7 +179,10 @@ public class GammaView : MonoBehaviour {
         }
     }
 
-    // modifies game object properties to assist with color blind players
+    /// <summary>
+    /// Modifies game object properties to assist with color blind players
+    /// </summary>
+    /// <param name="spriteRenderer"></param>
     void ApplyColorBlindModifications(SpriteRenderer spriteRenderer) {
         if (colorBlindMode) {
             // get current game object
@@ -221,7 +223,9 @@ public class GammaView : MonoBehaviour {
         }
     }
 
-    // show alternative view
+    /// <summary>
+    /// Show alternative view
+    /// </summary>
     void ActivateGRSaltView() {
         foreach (GameObject obj in colorBlindModeObjects) {
             if (obj != null) {
@@ -230,7 +234,9 @@ public class GammaView : MonoBehaviour {
         }
     }
 
-    // hide alternative view
+    /// <summary>
+    /// Hide alternative view
+    /// </summary>
     void DeactivateGRSaltView() {
         foreach (GameObject obj in colorBlindModeObjects) {
             if (obj != null) {
@@ -239,13 +245,17 @@ public class GammaView : MonoBehaviour {
         }
     }
 
-    // reports list and array sizes
+    /// <summary>
+    /// Reports list and array sizes
+    /// </summary>
     void DebugReportLog() {
         Debug.Log("Objects captured, Sprite renderers captured, Orig color array length, Colorblind objects: "
         +sceneObjects.Count+", "+spriteRenderersList.Count+", "+origColorArray.Length+", "+colorBlindModeObjects.Count);
     }
 
-    // used to clear out lists and arrays
+    /// <summary>
+    /// Used to clear out lists and arrays
+    /// </summary>
     void DeInitialize() {
         sceneObjects.Clear();
         spriteRenderersList.Clear();
