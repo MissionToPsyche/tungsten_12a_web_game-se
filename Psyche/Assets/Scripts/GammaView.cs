@@ -100,9 +100,8 @@ public class GammaView : MonoBehaviour {
     // activates gamma ray spectrometer
     public void ActivateGRS() {
         Initialize(); 
-        DebugReportLog(); // can comment out when not needed
+        //DebugReportLog(); // can comment out when not needed
         // shows new color
-        if (Input.GetKeyDown(KeyCode.G)) {
             for (int i = 0; i < spriteRenderersList.Count; i++) {
                 if (spriteRenderersList[i] != null) {
                     spriteRenderersList[i].color = LayerColor(spriteRenderersList[i].gameObject);
@@ -112,13 +111,11 @@ public class GammaView : MonoBehaviour {
                     }
                 }
             }
-        }
     }
 
     // deactivates gamma ray spectrometer
     public void DeactivateGRS() {
         // reverts to original color
-        if (Input.GetKeyUp(KeyCode.G)) {
             for (int i = 0; i < spriteRenderersList.Count; i++) {
                 if (spriteRenderersList[i] != null) {
                     spriteRenderersList[i].color = origColorArray[i];
@@ -128,9 +125,8 @@ public class GammaView : MonoBehaviour {
                     }
                 }
             }
-        }
         DeInitialize();
-        DebugReportLog(); // can comment out when not needed
+        //DebugReportLog(); // can comment out when not needed
     }
 
     // adds to the list the sprite renderers from the game objects in the scene

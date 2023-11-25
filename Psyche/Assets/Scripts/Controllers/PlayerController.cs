@@ -148,11 +148,11 @@ public class PlayerController : BaseController<PlayerController>
             }
 
             //Spectrometer
-            if (hasSpectrometer && Input.GetKeyDown(KeyCode.G) && batteryManager.batteryPercent != 0) {
+            if (hasSpectrometer && Input.GetButtonDown("FireGRS") && batteryManager.batteryPercent != 0) {
                 gammaView.ActivateGRS();
                 batteryManager.DrainBatt(500);
             }
-            if (hasSpectrometer && Input.GetKeyUp(KeyCode.G)) {
+            if (hasSpectrometer && Input.GetButtonUp("FireGRS")) {
                 gammaView.DeactivateGRS();
             }
 
