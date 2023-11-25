@@ -9772,7 +9772,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3116750142191387961, guid: 5864da62f3707884fb92d363727b8ad3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.15
       objectReference: {fileID: 0}
     - target: {fileID: 5768475563091067799, guid: 5864da62f3707884fb92d363727b8ad3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10660,7 +10660,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 995811371968160440, guid: bb70dda2381a19a4d9494d0682285173, type: 3}
       propertyPath: m_TagString
-      value: TransitionObject
+      value: TransitionObjectIn
       objectReference: {fileID: 0}
     - target: {fileID: 5326902916078061250, guid: bb70dda2381a19a4d9494d0682285173, type: 3}
       propertyPath: m_LocalPosition.z
