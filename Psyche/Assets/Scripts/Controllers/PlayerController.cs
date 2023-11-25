@@ -276,7 +276,7 @@ public class PlayerController : BaseController<PlayerController>
     /// <param name="other"></param>
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.tag == "TransitionObject") //for Transition objects
+        if (other.tag == "TransitionObject" || other.tag ==  "TransitionObjectIn") //for Transition objects
         {
             StartCoroutine(sceneTransition.CheckTransition(other.name));
         }

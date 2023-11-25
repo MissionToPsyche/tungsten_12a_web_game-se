@@ -12,6 +12,8 @@ public class TransitionManager : MonoBehaviour {
     private Vector3 _landingPosition;
     private bool transition = false;
     private String _travelToSceneName;
+    private String _currScene;
+    private String _prevScene;
     
     /// <summary>
     /// Initializes this script
@@ -41,19 +43,22 @@ public class TransitionManager : MonoBehaviour {
                 case "Tool_Intro_Imager":
                 case "Tool_Intro_eMagnet":
                     _travelToSceneName = travelToSceneName;
+                    _prevScene = _currScene;
                     SceneManager.LoadScene(travelToSceneName);
                     transition = true;
                     break;
 
                 case "SceneTransition_Back": // return back to previous scene
-                    // in work     
+                    SceneManager.LoadScene(_prevScene);
+                    transition = true;
+                    break;
 
                 case "SceneTransition_Game_End":
                     UIController.Instance.EndGame(true);
                     break;
 
                 default:
-                    Debug.Log("Invalid Scene Transition");
+                    Debug.LogError("Invalid Scene Transition");
                     break;
             }
         }
@@ -79,9 +84,13 @@ public class TransitionManager : MonoBehaviour {
     /// <param name="scene"></param>
     /// <param name="mode"></param>
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+        _currScene = scene.name;
         if (transition) {
             RepositionPlayer(_travelToSceneName);
         }
+        //Debug.Log("_currScene: "+_currScene);
+        //Debug.Log("_prevScene: "+_prevScene);
+        transition = false;
     }
 
     /// <summary>
