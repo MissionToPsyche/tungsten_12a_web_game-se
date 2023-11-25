@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,7 +10,8 @@ public class TransitionManager : MonoBehaviour {
     //Private variables
     private PlayerController _playerManagement;
     private Vector3 _landingPosition;
-    private GameObject _transitionObject;
+    private bool transition = false;
+    private String _travelToSceneName;
     
     /// <summary>
     /// Initializes this script
@@ -38,7 +40,9 @@ public class TransitionManager : MonoBehaviour {
                 case "Tool_Intro_GRS":
                 case "Tool_Intro_Imager":
                 case "Tool_Intro_eMagnet":
-                    RepositionPlayer(travelToSceneName, verticalAxis);
+                    _travelToSceneName = travelToSceneName;
+                    SceneManager.LoadScene(travelToSceneName);
+                    transition = true;
                     break;
 
                 case "SceneTransition_Back": // return back to previous scene
@@ -56,46 +60,57 @@ public class TransitionManager : MonoBehaviour {
     }
 
     /// <summary>
-    /// Repositions player on transition to new scene based on game object with TransitionObjectIn tag
+    /// Subscribes to the SceneManager.sceneLoaded event
     /// </summary>
-    public void RepositionPlayer(string travelToSceneName, float verticalAxis) {
-    if (verticalAxis > 0) {
-        Debug.Log("travelToSceneName: "+travelToSceneName);
-        SceneManager.LoadScene(travelToSceneName, LoadSceneMode.Single);
-        Scene travelToScene = SceneManager.GetSceneByName(travelToSceneName);
+    void Awake() {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
 
-        if (travelToScene.IsValid()) {
-            if (!travelToScene.isLoaded) {
-                SceneManager.LoadScene(travelToSceneName, LoadSceneMode.Single);
-                Debug.Log(travelToSceneName+" loaded");
-            }
+    /// <summary>
+    /// Unsubscribes from event to prevent memory loss
+    /// </summary>
+    void OnDestroy() {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
 
-            Debug.Log("Finding TransitionObjectIn");
-            GameObject[] travelToSceneGameObjects = travelToScene.GetRootGameObjects();
-            foreach (GameObject obj in travelToSceneGameObjects) {
-                if (obj.CompareTag("TransitionObjectIn")) {
-                    _transitionObject = obj;
-                    _landingPosition = _transitionObject.transform.position;
-                    _playerManagement.playerCharacter.transform.position = _landingPosition;
-                    return; // Exit method after repositioning
-                }
-            }
-            Debug.LogError("TransitionObjectIn not found in the scene");
-        } else {
-            Debug.LogError("travelToScene ("+travelToScene.name+") is not valid");
+    /// <summary>
+    /// Runs each time a new scene is loaded
+    /// </summary>
+    /// <param name="scene"></param>
+    /// <param name="mode"></param>
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+        if (transition) {
+            RepositionPlayer(_travelToSceneName);
         }
     }
-}
 
-     // Callback for scene loading
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
-        RepositionPlayer(scene.name, 1.0f); // Assuming the transition is triggered with a positive vertical axis
-        SceneManager.sceneLoaded -= OnSceneLoaded; // Remove the callback once repositioning is done
+    /// <summary>
+    /// Repositions player based on landing position 
+    /// </summary>
+    /// <param name="travelToSceneName"></param>
+    public void RepositionPlayer(string travelToSceneName) {
+        _landingPosition = GetTransitionObjectPosition(travelToSceneName);
+        _playerManagement.playerCharacter.transform.position = _landingPosition;
     }
 
-    public void LoadSceneWithCallback(string sceneName) {
-        SceneManager.sceneLoaded += OnSceneLoaded; // Add the callback
-        SceneManager.LoadScene(sceneName);
+    /// <summary>
+    /// Gets the position of the tagged game object
+    /// </summary>
+    /// <param name="sceneName"></param>
+    /// <returns></returns>
+    public Vector3 GetTransitionObjectPosition(string sceneName) {
+        Scene scene = SceneManager.GetSceneByName(sceneName);
+        if (scene.isLoaded) {
+            GameObject obj = GameObject.FindGameObjectWithTag("TransitionObjectIn");
+                if (obj != null) {
+                    return obj.transform.position;
+                } else {
+                    Debug.LogWarning("TransitionObjectIn not found.");
+                }
+        } else {
+            Debug.LogWarning("Scene "+sceneName+" is not loaded.");
+        }
+        return Vector3.zero;
     }
 
 }
