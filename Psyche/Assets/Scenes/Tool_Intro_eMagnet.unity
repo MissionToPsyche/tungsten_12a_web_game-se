@@ -1131,6 +1131,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8141202243502783788, guid: c0e5c13361191ab40bade2057130be11, type: 3}
+      propertyPath: m_TagString
+      value: TransitionObjectOut
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4165,6 +4169,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6637048253070341769, guid: d034daabee3098a44897465587ded2a6, type: 3}
+      propertyPath: m_TagString
+      value: TransitionObjectOut
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4332,6 +4340,10 @@ PrefabInstance:
     - target: {fileID: 7218361251706796660, guid: c0e5c13361191ab40bade2057130be11, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8141202243502783788, guid: c0e5c13361191ab40bade2057130be11, type: 3}
+      propertyPath: m_TagString
+      value: TransitionObjectOut
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4662,7 +4674,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3819917830518120280, guid: c0e5c13361191ab40bade2057130be11, type: 3}
       propertyPath: m_TagString
-      value: TransitionObjectIn
+      value: TransitionObject
       objectReference: {fileID: 0}
     - target: {fileID: 7218361251706796660, guid: c0e5c13361191ab40bade2057130be11, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4703,6 +4715,10 @@ PrefabInstance:
     - target: {fileID: 7218361251706796660, guid: c0e5c13361191ab40bade2057130be11, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8141202243502783788, guid: c0e5c13361191ab40bade2057130be11, type: 3}
+      propertyPath: m_TagString
+      value: TransitionObjectIn
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
