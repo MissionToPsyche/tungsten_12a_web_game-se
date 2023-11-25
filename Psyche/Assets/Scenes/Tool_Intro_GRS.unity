@@ -3224,7 +3224,7 @@ GameObject:
   - component: {fileID: 805402534}
   m_Layer: 0
   m_Name: Cave - GRS
-  m_TagString: Untagged
+  m_TagString: TransitionObjectIn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12784,7 +12784,7 @@ GameObject:
   - component: {fileID: 1840208120}
   m_Layer: 0
   m_Name: SceneTransition_Matt
-  m_TagString: TransitionObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
