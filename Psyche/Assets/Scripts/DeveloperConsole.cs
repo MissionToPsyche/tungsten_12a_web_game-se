@@ -105,7 +105,9 @@ public class DeveloperConsole : MonoBehaviour
     /// <param name="commands"></param>
     private void HandleSet(ArrayList commands)
     {
-        Debug.Log("Currently under development in DeveloperConsole");
+        string[] package = { "Player", "InventoryManager", "DeveloperConsole" };
+        commands.InsertRange(0, package);
+        _gameController.SendMessage(commands);
     }
 
     /// <summary>
