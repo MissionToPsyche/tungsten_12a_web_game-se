@@ -111,7 +111,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -450, y: 245}
+  m_AnchoredPosition: {x: -4, y: 72}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3797810778881482369
@@ -985,7 +985,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -471, y: 261}
+  m_AnchoredPosition: {x: -25, y: 88}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6807056530026565865
@@ -5176,7 +5176,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3240746905583605884}
         m_TargetAssemblyTypeName: UIController, Assembly-CSharp
-        m_MethodName: upgradeTool
+        m_MethodName: UpgradeInterface
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5727,7 +5727,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3240746905583605884}
         m_TargetAssemblyTypeName: UIController, Assembly-CSharp
-        m_MethodName: upgradeTool
+        m_MethodName: UpgradeInterface
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7353,7 +7353,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3240746905583605884}
         m_TargetAssemblyTypeName: UIController, Assembly-CSharp
-        m_MethodName: upgradeTool
+        m_MethodName: UpgradeInterface
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7507,11 +7507,6 @@ MonoBehaviour:
   thrusterSection: {fileID: 4605990206910752052}
   eMagnetSection: {fileID: 3082051012571230317}
   imagerSection: {fileID: 2258920317905871370}
-  _copper: 0
-  _iron: 0
-  _nickel: 0
-  _gold: 0
-  _platinum: 0
 --- !u!1 &5624132768119358631
 GameObject:
   m_ObjectHideFlags: 0
@@ -8383,7 +8378,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 5
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8694,7 +8689,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 100%
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -10289,7 +10284,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -467, y: 247}
+  m_AnchoredPosition: {x: -20.999996, y: 74.000015}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4236572199183733699
@@ -10854,7 +10849,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3240746905583605884}
         m_TargetAssemblyTypeName: UIController, Assembly-CSharp
-        m_MethodName: upgradeTool
+        m_MethodName: UpgradeInterface
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
