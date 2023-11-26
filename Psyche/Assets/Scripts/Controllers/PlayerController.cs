@@ -37,7 +37,6 @@ public class PlayerController : BaseController<PlayerController>
     public ThrusterManager thrusterManager;
     public ImagerCursor flashlight;
     public GammaView gammaView;
-    public AudioManager audioManager;
     private TransitionManager sceneTransition;
     public PlayerDeath deathCon;
     public InventoryManager inventoryManager;
@@ -75,10 +74,6 @@ public class PlayerController : BaseController<PlayerController>
         imagerManager.Initialize(this);
         // ##### Object Managers ######
         //playerHealth.Initialize(this); <-- this initializes the script and creates a cross reference between the two
-        audioManager = GameObject
-            .FindGameObjectWithTag("AudioSources")
-            .GetComponent<AudioManager>();
-        audioManager.Initialize(this);
         // ##### Miscellaneous ######
         sceneTransition = GetComponent<TransitionManager>();
         sceneTransition.Initialize(this);
@@ -145,12 +140,12 @@ public class PlayerController : BaseController<PlayerController>
             }
 
             //Spectrometer
-            if (inventoryManager.CheckTool("spectrometer") && Input.GetKeyDown(KeyCode.G) && batteryManager.batteryPercent != 0) {
-                gammaView.ActivateGRS(audioManager);
+            if (inventoryManager.CheckTool("spectrometer") && Input.GetButtonDown("FireGRS") && batteryManager.batteryPercent != 0) {
+                gammaView.ActivateGRS();
                 batteryManager.DrainBatt(500);
             }
-            if (inventoryManager.CheckTool("spectrometer") && Input.GetKeyUp(KeyCode.G)) {
-                gammaView.DeactivateGRS(audioManager);
+            if (inventoryManager.CheckTool("spectrometer") && Input.GetButtonUp("FireGRS")) {
+                gammaView.DeactivateGRS();
             }
 
             //ElectroMagnet
@@ -304,7 +299,7 @@ public class PlayerController : BaseController<PlayerController>
     /// <param name="other"></param>
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.tag == "TransitionObject") //for Transition objects
+        if (other.tag == "TransitionObject" || other.tag ==  "TransitionObjectIn") //for Transition objects
         {
             StartCoroutine(sceneTransition.CheckTransition(other.name));
         }

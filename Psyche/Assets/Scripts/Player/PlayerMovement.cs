@@ -86,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
         if (_playerManagement.isGrounded && !_playerManagement.beingPulled && Input.GetButtonDown("Jump"))
         {
             _playerManagement.playerCharacter.velocity = new Vector2(_playerManagement.playerCharacter.velocity.x, 7f);
-            _playerManagement.audioManager.PlayAudio(_playerManagement.audioManager.playerJump);
+            GameController.Instance.audioManager.playerJump.Play();
         }
 
         //checks the direction the player is moving
@@ -127,9 +127,9 @@ public class PlayerMovement : MonoBehaviour
             //play the new animation
             _animator.Play(_newAnimation);
             if (_newAnimation.Equals(PLAYER_THRUSTER)) {
-                _playerManagement.audioManager.PlayAudio(_playerManagement.audioManager.toolThrusters);
+                GameController.Instance.audioManager.toolThrusters.Play();
             } else {
-                _playerManagement.audioManager.StopAudio(_playerManagement.audioManager.toolThrusters);
+                GameController.Instance.audioManager.toolThrusters.Stop();
             }
 
             //set the current animation state

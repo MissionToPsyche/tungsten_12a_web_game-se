@@ -360,7 +360,7 @@ public class UIController : BaseController<UIController>
     /// </summary>
     public void playButtonSound()
     {
-        PlayerController.Instance.audioManager.PlayAudio(PlayerController.Instance.audioManager.buttonClick);
+        GameController.Instance.audioManager.buttonClick.Play();
     }
 
 
@@ -422,6 +422,8 @@ public class UIController : BaseController<UIController>
     /// <param name="menu"></param>
     public void openSubmenu(GameObject menu)
     {
+        //Play button click sound
+        playButtonSound();
         curSubmenu = menu;
         curSubmenu.SetActive(true);
         inventoryMenu.SetActive(false);
