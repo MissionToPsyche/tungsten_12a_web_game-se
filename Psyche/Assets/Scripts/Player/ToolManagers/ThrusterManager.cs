@@ -44,27 +44,27 @@ public class ThrusterManager : ToolManager
         {
             {  1, new Dictionary<string, int>()
                 {
-                    { "copper", 1 }, { "iron", 0 }, { "nickel", 0 }, { "gold", 0 }, { "titanium", 0 }
+                    { "element_copper", 1 }, { "element_iron", 0 }, { "element_nickel", 0 }, { "element_gold", 0 }, { "element_platinum", 0 }
                 }
             },
             {  2, new Dictionary<string, int>()
                 {
-                    { "copper", 2 }, { "iron", 0 }, { "nickel", 0 }, { "gold", 0 }, { "titanium", 0 }
+                    { "element_copper", 2 } , { "element_iron", 0 } , { "element_nickel", 0 } , { "element_gold", 0 }, { "element_platinum", 0 }
                 }
             },
             {  3, new Dictionary<string, int>()
                 {
-                    { "copper", 3 }, { "iron", 0 }, { "nickel", 0 }, { "gold", 0 }, { "titanium", 0 }
+                    { "element_copper", 3 } , { "element_iron", 0 } , { "element_nickel", 0 } , { "element_gold", 0 }, { "element_platinum", 0 }
                 }
             },
             {  4, new Dictionary<string, int>()
                 {
-                    { "copper", 4 }, { "iron", 0 }, { "nickel", 0 }, { "gold", 0 }, { "titanium", 0 }
+                    { "element_copper", 4 } , { "element_iron", 0 } , { "element_nickel", 0 } , { "element_gold", 0 }, { "element_platinum", 0 }
                 }
             },
             {  5, new Dictionary<string, int>()
                 {
-                    { "copper", 5 }, { "iron", 0 }, { "nickel", 0 }, { "gold", 0 }, { "titanium", 0 }
+                    { "element_copper", 5 } , { "element_iron", 0 } , { "element_nickel", 0 } , { "element_gold", 0 }, { "element_platinum", 0 }
                 }
             },
         };
