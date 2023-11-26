@@ -1,9 +1,7 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using System.Collections;
 using System;
 using System.Collections.Generic;
-using UnityEditor;
 
 /// <summary>
 /// Player Management script controls how the player interacts with the 
@@ -41,10 +39,9 @@ public class PlayerController : BaseController<PlayerController>
     public GammaView gammaView;
     private TransitionManager sceneTransition;
     public PlayerDeath deathCon;
+    public InventoryManager inventoryManager;
 
     //Booleans for the various tools
-    private Dictionary<ToolManager, bool> _toolStates;
-    private bool hasSpectrometer;                         // <--Where is the spectrometer script? Add to _toolStates
     private bool usingThruster; //for animation purposes  // <--Implement boolean in thruster script
 
     //Booleans to prevent needless code runs
@@ -61,9 +58,6 @@ public class PlayerController : BaseController<PlayerController>
         //TEMPORARY <-----------------------------------------REMOVE WHEN NO LONGER NECESSARY
         gameController = FindAnyObjectByType<GameController>();
 
-        //Dictionary for tool states
-        _toolStates = new Dictionary<ToolManager, bool>();
-
         //Assign and initialize scripts
         playerCharacter = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<BoxCollider2D>();
@@ -78,16 +72,14 @@ public class PlayerController : BaseController<PlayerController>
         eMagnetManager.Initialize(this);
         imagerManager = GetComponent<ImagerManager>();
         imagerManager.Initialize(this);
-        _toolStates[batteryManager] = batteryManager.toolEnabled;
-        _toolStates[thrusterManager] = thrusterManager.toolEnabled;
-        _toolStates[eMagnetManager] = eMagnetManager.toolEnabled;
-        _toolStates[imagerManager] = imagerManager.toolEnabled;
         // ##### Object Managers ######
         //playerHealth.Initialize(this); <-- this initializes the script and creates a cross reference between the two
         // ##### Miscellaneous ######
         sceneTransition = GetComponent<TransitionManager>();
         sceneTransition.Initialize(this);
         deathCon = GetComponent<PlayerDeath>();
+        inventoryManager = GetComponent<InventoryManager>();
+        inventoryManager.Initialize(this);
     }
 
     /// <summary>
@@ -141,23 +133,23 @@ public class PlayerController : BaseController<PlayerController>
         {
             //Call the requisite tool scripts here:
             //Thruster
-            if (_toolStates[thrusterManager] && Input.GetButton("Jump") && batteryManager.batteryPercent != 0 && !beingPulled) {
+            if (inventoryManager.CheckTool("thruster") && Input.GetButton("Jump") && batteryManager.batteryPercent != 0 && !beingPulled) {
                 thrusterManager.Activate();
                 usingThruster = true;
                 batteryManager.DrainBatt(1);
             }
 
             //Spectrometer
-            if (hasSpectrometer && Input.GetButtonDown("FireGRS") && batteryManager.batteryPercent != 0) {
+            if (inventoryManager.CheckTool("spectrometer") && Input.GetButtonDown("FireGRS") && batteryManager.batteryPercent != 0) {
                 gammaView.ActivateGRS();
                 batteryManager.DrainBatt(500);
             }
-            if (hasSpectrometer && Input.GetButtonUp("FireGRS")) {
+            if (inventoryManager.CheckTool("spectrometer") && Input.GetButtonUp("FireGRS")) {
                 gammaView.DeactivateGRS();
             }
 
             //ElectroMagnet
-            if (_toolStates[eMagnetManager] && Input.GetButton("Fire1") && batteryManager.batteryPercent != 0 && !eMagnetActive) {
+            if (inventoryManager.CheckTool("electromagnet") && Input.GetButton("Fire1") && batteryManager.batteryPercent != 0 && !eMagnetActive) {
                 eMagnetManager.Activate();
                 batteryManager.DrainBatt(500);
             }
@@ -230,7 +222,38 @@ public class PlayerController : BaseController<PlayerController>
             case "None":
                 string source = args[0].ToString();
                 args.RemoveAt(0);
-                //Process command
+                
+                switch(source)
+                {
+                    case "UI":
+                        string directive = args[0].ToString();
+                        args.RemoveAt(0);
+                        
+                        switch(directive)
+                        {
+                            case "tool_upgrade":
+                                string toolName = args[0].ToString();
+                                args.RemoveAt(0);
+
+                                switch(toolName.ToLower())
+                                {
+                                    case "battery":
+                                        batteryManager.Modify();
+                                        break;
+                                    case "thruster":
+                                        thrusterManager.Modify();
+                                        break;
+                                    case "electromagnet":
+                                        eMagnetManager.Modify();
+                                        break;
+                                    case "imager":
+                                        imagerManager.Modify();
+                                        break;
+                                }
+                                break;
+                        }
+                        break;
+                }
                 break;
             default:
                 Debug.Log("Incorrect subdestination -- GameController");
@@ -290,9 +313,15 @@ public class PlayerController : BaseController<PlayerController>
     {
         if (other.tag == "Element") //for picking up the elements
         {
-            UIController.Instance.elementPickUp(other.name); //pick up the element
+            inventoryManager.AddElement(other.name, 1);
             Destroy(other.gameObject); //remove the element from the screen
         }
+        /*
+        if (other.tag == "Tool")
+        {
+            ToolPickUp(other.name);
+            Destroy(other.gameObject);
+        }*/
     }
 
     /// <summary>
@@ -301,47 +330,38 @@ public class PlayerController : BaseController<PlayerController>
     /// <param name="toolName"></param>
     public void ToolPickUp(string toolName)
     {
-        if(toolName != "Battery" || toolName != "Health")
-        {
-            ArrayList args = new ArrayList {
-                "UI", "None", "EnableTool", toolName, 
-            };
-            SendMessage(args);
-        }
-
         //Other actions
         switch (toolName)
         {
             case "Thruster":
                 thrusterManager.Enable();
-                _toolStates[thrusterManager] = thrusterManager.toolEnabled;
-                 break;
+                inventoryManager.SetTool(toolName, true);
+                break;
 
             case "Imager":
                 imagerManager.Modify();
+                inventoryManager.SetTool(toolName, true);
                 break;
 
             case "ImagerCursor":
                 imagerManager.Enable();
-                _toolStates[imagerManager] = imagerManager.toolEnabled;
                 imagerManager.Modify();
                 flashlight.Update();
                 break;
 
             case "Spectrometer":
-                //_toolStates[spectrometerManager] ...
-                hasSpectrometer = true;
+                inventoryManager.SetTool(toolName, true);
                 break;
 
-            case "Magnetometer":
+            case "ElectroMagnet":
                 eMagnetManager.Enable();
-                _toolStates[eMagnetManager] = eMagnetManager.toolEnabled;
+                inventoryManager.SetTool(toolName, true);
                 break;
 
             case "Battery":
                 Debug.Log("Battery charge!");
                 batteryManager.Enable();
-                _toolStates[batteryManager] = batteryManager.toolEnabled;
+                inventoryManager.SetTool(toolName, true);
                 batteryManager.ChargeBatt(500);
                 break;
 
