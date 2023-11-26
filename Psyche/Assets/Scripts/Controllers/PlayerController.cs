@@ -253,6 +253,10 @@ public class PlayerController : BaseController<PlayerController>
                                 break;
                         }
                         break;
+                    case "DeveloperConsole":
+                        string item = args[0].ToString();
+                        //Set up for whether tool/element is passed
+                        break;
                 }
                 break;
             default:
