@@ -1,9 +1,10 @@
 /** 
 Description: player death script
-Author: mcmyers4, blopezro
+Author: mcmyers4, blopezro, dnguye99
 Version: 20231109
 **/
 
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -17,6 +18,7 @@ public class PlayerDeath : MonoBehaviour {
     private Vector3 startPoint;           //Initial character location when level first begins
     public PlayerHealth playerHealth;     //Initial player health
     public BatteryManager batteryManager; //Initial battery
+    private PlayerMovement playerMovement; //communication with player movement script for warp animation
     public HashSet<int> reachedCheckpoints = new HashSet<int>(); //Stores unique IDs of checkpoints
 
     //Initialize respawn point and set starting location
@@ -60,9 +62,35 @@ public class PlayerDeath : MonoBehaviour {
         playerHealth.HealthDown(1);
         if (playerHealth.playerHealth == 0) {
             //Debug.Log("Game should rest to checkpoint here.....");
-        } else if (startPoint.Equals(respawnPoint)) {
+        }
+
+        //start the warping animation
+        StartCoroutine(Warp());
+    }
+
+    /// <summary>
+    /// This co-routine forces the game to wait for the player's warping
+    /// animation to complete before continuing on.
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator Warp()
+    {
+        //tell the PlayerMovement script the player should be warping
+        gameObject.GetComponent<PlayerMovement>().setWarp();
+
+        //wait for the animation to be completed
+        yield return new WaitForSeconds(1.2f);
+
+        //check if the player is at the starting point
+        if (startPoint.Equals(respawnPoint))
+        {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+
+        //move the player to their respawn point
         transform.position = respawnPoint;
+
+        //tell the PlayerMovement script the player is no longer warping
+        gameObject.GetComponent<PlayerMovement>().setWarp();
     }
 }
