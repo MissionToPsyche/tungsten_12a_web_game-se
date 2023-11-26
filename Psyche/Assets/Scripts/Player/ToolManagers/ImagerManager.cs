@@ -37,27 +37,27 @@ public class ImagerManager : ToolManager
         {
             {  1, new Dictionary<string, int>()
                 {
-                    { "copper", 0 }, { "iron", 0 }, { "nickel", 0 }, { "gold", 1 }, { "titanium", 0 }
+                    { "element_copper", 0 }, { "element_iron", 0 }, { "element_nickel", 0 }, { "element_gold", 1 }, { "element_platinum", 0 }
                 }
             },
             {  2, new Dictionary<string, int>()
                 {
-                    { "copper", 0 }, { "iron", 0 } , { "nickel", 0 } , { "gold", 2 }, { "titanium", 0 }
+                    { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 0 } , { "element_gold", 2 }, { "element_platinum", 0 }
                 }
             },
             {  3, new Dictionary<string, int>()
                 {
-                    { "copper", 0 } , { "iron", 0 } , { "nickel", 0 } , { "gold", 3 }, { "titanium", 0 }
+                    { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 0 } , { "element_gold", 3 }, { "element_platinum", 0 }
                 }
             },
             {  4, new Dictionary<string, int>()
                 {
-                    { "copper", 0 } , { "iron", 0 } , { "nickel", 0 } , { "gold", 4 }, { "titanium", 0 }
+                    { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 0 } , { "element_gold", 4 }, { "element_platinum", 0 }
                 }
             },
             {  5, new Dictionary<string, int>()
                 {
-                    { "copper", 0 } ,   { "iron", 0 } , { "nickel", 0 } , { "gold", 5 }, { "titanium", 0 }
+                    { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 0 } , { "element_gold", 5 }, { "element_platinum", 0 }
                 }
             },
         };
