@@ -9337,21 +9337,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1972633787189536873, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: UpgradeInterface
-      objectReference: {fileID: 0}
-    - target: {fileID: 2653299708417437385, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: UpgradeInterface
-      objectReference: {fileID: 0}
     - target: {fileID: 5172690812288988953, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1592308040}
     - target: {fileID: 5206272030992973708, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -466.99994
+      value: -21
+      objectReference: {fileID: 0}
+    - target: {fileID: 5206272030992973708, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 74
       objectReference: {fileID: 0}
     - target: {fileID: 5589539797666701746, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
       propertyPath: m_Name
@@ -9436,22 +9432,6 @@ PrefabInstance:
     - target: {fileID: 7331055490882894279, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7476074613433242852, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -449.99994
-      objectReference: {fileID: 0}
-    - target: {fileID: 8082112102102137882, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -470.99994
-      objectReference: {fileID: 0}
-    - target: {fileID: 8152841716844042409, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: UpgradeInterface
-      objectReference: {fileID: 0}
-    - target: {fileID: 9127255448157054250, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: UpgradeInterface
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
