@@ -8,10 +8,13 @@ TagManager:
   - Hazard
   - Checkpoint
   - AudioSources
-  - TransitionObject
   - Element
   - UI
   - UI_Battery
+  - TransitionObject
+  - TransitionObjectIn
+  - TransitionObjectOut
+  - SceneLight
   layers:
   - Default
   - TransparentFX
