@@ -38,27 +38,27 @@ public class BatteryManager : ToolManager {
         {
             {  1, new Dictionary<string, int>()
                 {
-                    { "copper", 0 }, { "iron", 0 }, { "nickel", 1 }, { "gold", 0 }, { "titanium", 0 }
+                    { "element_copper", 0 }, { "element_iron", 0 }, { "element_nickel", 1 }, { "element_gold", 0 }, { "element_platinum", 0 }
                 }
             },
             {  2, new Dictionary<string, int>()
                 {
-                    { "copper", 0 }, { "iron", 0 } , { "nickel", 2 }, { "gold", 0 }, { "titanium", 0 }
+                    { "element_copper", 0 }, { "element_iron", 0 } , { "element_nickel", 2 }, { "element_gold", 0 }, { "element_platinum", 0 }
                 }
             },
             {  3, new Dictionary<string, int>()
                 {
-                    { "copper", 0 } , { "iron", 0 } , { "nickel", 3 }, { "gold", 0 }, { "titanium", 0 }
+                    { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 3 }, { "element_gold", 0 }, { "element_platinum", 0 }
                 }
             },
             {  4, new Dictionary<string, int>()
                 {
-                    { "copper", 0 } , { "iron", 0 } , { "nickel", 4 }, { "gold", 0 }, { "titanium", 0 }
+                    { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 4 } , { "element_gold", 0 } , { "element_platinum", 0 }
                 }
             },
             {  5, new Dictionary<string, int>()
                 {
-                    { "copper", 0 } ,   { "iron", 0 } , { "nickel", 5 }, { "gold", 0 }, { "titanium", 0 }
+                    { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 5 } , { "element_gold", 0 } , { "element_platinum", 0 }
                 }
             },
         };
