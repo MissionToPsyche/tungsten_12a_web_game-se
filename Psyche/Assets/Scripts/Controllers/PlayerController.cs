@@ -158,7 +158,7 @@ public class PlayerController : BaseController<PlayerController>
         }
 
         //Inventory and Dialog Box 
-        if (Input.GetButtonDown("Inventory") && !Input.GetKey(KeyCode.G)) // <-- Change to getbutton
+        if (Input.GetButtonDown("Inventory") && !Input.GetButtonDown("FireGRS"))
             UIController.Instance.handleUI();
     }
 
@@ -359,14 +359,12 @@ public class PlayerController : BaseController<PlayerController>
                 break;
 
             case "Battery":
-                Debug.Log("Battery charge!");
                 batteryManager.Enable();
                 inventoryManager.SetTool(toolName, true);
                 batteryManager.ChargeBatt(500);
                 break;
 
-            case "Health":        
-                Debug.Log("Health increase!");
+            case "Health":
                 playerHealth.HealthUp(1);
                 break;
 
