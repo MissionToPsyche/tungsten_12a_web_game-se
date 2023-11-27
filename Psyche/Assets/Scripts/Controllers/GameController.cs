@@ -13,7 +13,7 @@ public class GameController : BaseController<GameController>
     public DeveloperConsole developerConsole;
     public GameStateManager gameStateManager;
     //public SceneManager sceneManager;
-    //public AudioManager audioManager;
+    public AudioManager audioManager;
 
     /// <summary>
     /// Initialize the object and parent class
@@ -23,6 +23,7 @@ public class GameController : BaseController<GameController>
         developerConsole = GetComponent<DeveloperConsole>();
         developerConsole.Initialize(this);
         gameStateManager = new GameStateManager(this, GameStateManager.GameState.MainMenu);
+        audioManager = GameObject.FindGameObjectWithTag("AudioSources").GetComponent<AudioManager>();
     }
 
     /// <summary>
