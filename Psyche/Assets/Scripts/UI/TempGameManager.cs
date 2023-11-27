@@ -13,6 +13,9 @@ public class TempGameManager : MonoBehaviour
     /// </summary>
     public static bool colorBlindMode;
 
+    // temp audio manager
+    public AudioManager tempAudioManager;
+
     /// <summary>
     /// When transitioning between scenes, ensures TempGameManager state remains
     /// </summary>
@@ -22,6 +25,7 @@ public class TempGameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            tempAudioManager = GameObject.FindGameObjectWithTag("AudioSources").GetComponent<AudioManager>();
         }
         else
         {
