@@ -32,7 +32,7 @@ public class IntroController : MonoBehaviour
                     break;
 
                 default:
-                    SceneManager.LoadScene("SampleScene");
+                    SceneManager.LoadScene("Landing_Scene");
                     break;
             }
         }
