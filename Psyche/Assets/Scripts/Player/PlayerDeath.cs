@@ -18,7 +18,6 @@ public class PlayerDeath : MonoBehaviour {
     private Vector3 startPoint;           //Initial character location when level first begins
     public PlayerHealth playerHealth;     //Initial player health
     public BatteryManager batteryManager; //Initial battery
-    private PlayerMovement playerMovement; //communication with player movement script for warp animation
     public HashSet<int> reachedCheckpoints = new HashSet<int>(); //Stores unique IDs of checkpoints
 
     //Initialize respawn point and set starting location
@@ -75,6 +74,9 @@ public class PlayerDeath : MonoBehaviour {
     /// <returns></returns>
     public IEnumerator Warp()
     {
+        //block player controls
+        PlayerController.Instance.inputBlocked = true;
+
         //tell the PlayerMovement script the player should be warping
         gameObject.GetComponent<PlayerMovement>().setWarp();
 
@@ -92,5 +94,8 @@ public class PlayerDeath : MonoBehaviour {
 
         //tell the PlayerMovement script the player is no longer warping
         gameObject.GetComponent<PlayerMovement>().setWarp();
+
+        //unblock player controls
+        PlayerController.Instance.inputBlocked = false;
     }
 }
