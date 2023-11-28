@@ -22,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _walkVelocity;
     [SerializeField] private CinemachineVirtualCamera _virtualCameraR;
     [SerializeField] private CinemachineVirtualCamera _virtualCameraL;
+    [SerializeField] private CinemachineVirtualCamera _virtualCameraLowR;
+    [SerializeField] private CinemachineVirtualCamera _virtualCameraLowL;
 
     //Animation states
     const string PLAYER_IDLE = "player_idle";
@@ -139,22 +141,44 @@ public class PlayerMovement : MonoBehaviour
             currentAnimation = _newAnimation;
         }
 
-    }
-
-    /// <summary>
-    /// Bias the camera in the direction the player is facing
-    /// </summary>
-    public void Update()
-    {
+        /// <summary>
+        /// Bias the camera in the direction the player is facing (left or right).
+        /// Show more below the player if the player is in the air.
+        /// </summary>
         if (_isFacingRight)
         {
-            _virtualCameraL.Priority = 0;
-            _virtualCameraR.Priority = 10;
-        } else
-        {
-            _virtualCameraL.Priority = 10;
-            _virtualCameraR.Priority = 0;
+            if (!_playerManagement.isGrounded)
+            {
+                _virtualCameraLowR.Priority = 10;
+                _virtualCameraLowL.Priority = 0;
+                _virtualCameraL.Priority = 0;
+                _virtualCameraR.Priority = 0;
+            }
+            else
+            {
+                _virtualCameraR.Priority = 10;
+                _virtualCameraLowR.Priority = 0;
+                _virtualCameraLowL.Priority = 0;
+                _virtualCameraL.Priority = 0;
+            }
         }
-    }
+        else
+        {
+            if (!_playerManagement.isGrounded)
+            {
+                _virtualCameraLowL.Priority = 10;
+                _virtualCameraLowR.Priority = 0;
+                _virtualCameraL.Priority = 0;
+                _virtualCameraR.Priority = 0;
+            }
+            else
+            {
+                _virtualCameraL.Priority = 10;
+                _virtualCameraLowR.Priority = 0;
+                _virtualCameraLowL.Priority = 0;
+                _virtualCameraR.Priority = 0;
+            }
+        }
 
+    }
 }
