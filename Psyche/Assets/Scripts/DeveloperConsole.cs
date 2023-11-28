@@ -44,7 +44,7 @@ public class DeveloperConsole : MonoBehaviour
         {
             //create package to sender
             ArrayList args = new ArrayList { 
-                "UI", "None", "DeveloperConsole", "update", CalculateFPS().ToString() 
+                "UI", "None", "DeveloperConsole", "update", CalculateFPS().ToString(),  CalculateCPU().ToString(),
             };
             //Send the message
             _gameController.SendMessage(args);
@@ -118,5 +118,14 @@ public class DeveloperConsole : MonoBehaviour
     private double CalculateFPS()
     {
         return Math.Round(1.0f / Time.unscaledDeltaTime);
+    }
+
+    /// <summary>
+    /// Calculates the ms per frame to show general CPU usage
+    /// </summary>
+    /// <returns></returns>
+    private double CalculateCPU()
+    {
+        return Math.Round(Time.unscaledDeltaTime, 4);
     }
 }
