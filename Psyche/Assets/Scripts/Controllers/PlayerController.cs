@@ -158,7 +158,7 @@ public class PlayerController : BaseController<PlayerController>
         }
 
         //Inventory and Dialog Box 
-        if (Input.GetButtonDown("Inventory") && !Input.GetButtonDown("FireGRS"))
+        if (Input.GetButtonDown("Inventory") && !Input.GetButton("FireGRS"))
             UIController.Instance.handleUI();
     }
 

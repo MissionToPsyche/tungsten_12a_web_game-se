@@ -15,6 +15,8 @@ public class GameController : BaseController<GameController>
     //public SceneManager sceneManager;
     public AudioManager audioManager;
 
+    public bool colorBlindMode;
+
     /// <summary>
     /// Initialize the object and parent class
     /// </summary>
@@ -193,6 +195,15 @@ public class GameController : BaseController<GameController>
 
         }
     }
-    
+
     // Other stuff here
+
+    /// <summary>
+    /// Swap color blind mode
+    /// </summary>
+    /// <returns></returns>
+    public void ChangeColorBlindMode(bool mode)
+    {
+        colorBlindMode = mode;
+    }
 }
