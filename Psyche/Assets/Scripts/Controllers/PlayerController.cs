@@ -149,7 +149,7 @@ public class PlayerController : BaseController<PlayerController>
             }
 
             //ElectroMagnet
-            if (inventoryManager.CheckTool("electromagnet") && Input.GetButton("Fire1") && batteryManager.batteryPercent != 0 && !eMagnetActive) {
+            if (inventoryManager.CheckTool("electromagnet") && Input.GetButton("EMagnet") && batteryManager.batteryPercent != 0 && !eMagnetActive) {
                 eMagnetManager.Activate();
                 batteryManager.DrainBatt(500);
             }
@@ -158,7 +158,7 @@ public class PlayerController : BaseController<PlayerController>
         }
 
         //Inventory and Dialog Box 
-        if (Input.GetKeyDown("tab") && !Input.GetKey(KeyCode.G)) // <-- Change to getbutton and getbuttondown
+        if (Input.GetButtonDown("Inventory") && !Input.GetButton("FireGRS"))
             UIController.Instance.handleUI();
     }
 
@@ -359,14 +359,12 @@ public class PlayerController : BaseController<PlayerController>
                 break;
 
             case "Battery":
-                Debug.Log("Battery charge!");
                 batteryManager.Enable();
                 inventoryManager.SetTool(toolName, true);
                 batteryManager.ChargeBatt(500);
                 break;
 
-            case "Health":        
-                Debug.Log("Health increase!");
+            case "Health":
                 playerHealth.HealthUp(1);
                 break;
 
