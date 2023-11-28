@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static UnityEngine.Rendering.DebugUI;
 
 /// <summary>
 /// Functions for the inventory and dialog box. Script is a component of the UI gameobject
@@ -167,6 +168,7 @@ public class UIController : BaseController<UIController>
     {
         string subdestination = args[0].ToString();
         args.RemoveAt(0);
+        string directive;
 
         switch (subdestination)
         {
@@ -182,11 +184,32 @@ public class UIController : BaseController<UIController>
                     case "BatteryManager":
                         UpdateBatteryText(args);
                         break;
-                    case "EnableTool":
-                        EnableToolButton(args);
+                    case "ToolManager":
+                        directive = args[0].ToString();
+                        args.RemoveAt(0);
+
+                        switch(directive)
+                        {
+                            case "ToolInfo":
+                                ToolInfoGather(args);
+                                break;
+                        }
+                        break;
+                    case "InventoryManager":
+                        directive = args[0].ToString();
+                        args.RemoveAt(0);
+                        switch(directive)
+                        {
+                            case "element_update":
+                                ElementUpdate(args);
+                                break;
+                            case "tool_update":
+                                EnableToolButton(args);
+                                break;
+                        }
                         break;
                     default:
-                        Debug.Log("Incorrect source provided -- UI ProcessEvent");
+                        Debug.Log("Incorrect source provided: " + source  + " -- UI ProcessEvent");
                         break;
                 }
                 break;
@@ -228,29 +251,36 @@ public class UIController : BaseController<UIController>
     /// <param name="toolName"></param>
     public void EnableToolButton(ArrayList args)
     {
-        switch (args[0].ToString())
+        string toolName = args[0].ToString();
+        bool value = (bool)args[1];
+        if(toolName == "battery" || toolName == "health")
         {
-            case "Thruster":
+            return;
+        }
+
+        switch (toolName)
+        {
+            case "thruster":
                 setDialogText("This is a Thruster");
                 thrusterButton.SetActive(true);
                 thrusterSection.SetActive(true);
                 break;
-            case "ImagerCursor":
+            case "imager":
                 setDialogText("This is an Imager");
                 imagerButton.SetActive(true);
                 imagerSection.SetActive(true);
                 break;
-            case "Spectrometer":
+            case "spectrometer":
                 setDialogText("This is a Spectrometer");
                 spectrometerButton.SetActive(true);
                 break;
-            case "Magnetometer":
+            case "electromagnet":
                 setDialogText("This is an ElectroMagnet");
                 eMagnetButton.SetActive(true);
                 eMagnetSection.SetActive(true);
                 break;
             default:
-                Debug.LogWarning("Incorrect tool name passed: " + args[0].ToString());
+                Debug.Log("Incorrect tool name passed: " + args[0].ToString());
                 break;
         }
     }
@@ -330,7 +360,7 @@ public class UIController : BaseController<UIController>
     /// </summary>
     public void playButtonSound()
     {
-        PlayerController.Instance.audioManager.PlayAudio(PlayerController.Instance.audioManager.buttonClick);
+        GameController.Instance.audioManager.buttonClick.Play();
     }
 
 
@@ -345,7 +375,6 @@ public class UIController : BaseController<UIController>
     public GameObject optionsMenu;
 
     [Header("Dialog Box")]
-    public GameObject dialogBox;
     public TMP_Text dialogText;
 
     [Header("Buttons")]
@@ -362,8 +391,8 @@ public class UIController : BaseController<UIController>
     /// </summary>
     public void handleUI()
     {
-        if (dialogBox.activeInHierarchy)
-            dialogBox.SetActive(false);
+        if (dialogText.transform.parent.gameObject.activeInHierarchy)
+            dialogText.transform.parent.gameObject.SetActive(false);
         else
         {
             if (curSubmenu != null)
@@ -392,6 +421,8 @@ public class UIController : BaseController<UIController>
     /// <param name="menu"></param>
     public void openSubmenu(GameObject menu)
     {
+        //Play button click sound
+        playButtonSound();
         curSubmenu = menu;
         curSubmenu.SetActive(true);
         inventoryMenu.SetActive(false);
@@ -414,7 +445,7 @@ public class UIController : BaseController<UIController>
     public void setDialogText(string text)
     {
         dialogText.SetText(text);
-        dialogBox.SetActive(true);
+        dialogText.transform.parent.gameObject.SetActive(true);
     }
 
     private bool shouldRespawn;
@@ -487,101 +518,124 @@ public class UIController : BaseController<UIController>
     public GameObject eMagnetSection;
     public GameObject imagerSection;
 
-    public int _copper, _iron, _nickel, _gold, _platinum; //temporary public
-
     /// <summary>
     /// Modifies the tool when its upgrade button is pressed
     /// </summary>
-    public void upgradeTool(string toolName)
+    public void UpgradeInterface(string toolName)
     {
-        if (toolName == "Thruster")
+        //Send message to Inventory Manager
+        ArrayList args = new ArrayList {
+                "Player", "None", "UI", "tool_upgrade", toolName,
+        };
+        //Send the message
+        SendMessage(args);
+    }
+
+    /// <summary>
+    /// Gathers the info and is called when info is being passed or if an upgrade is being requested
+    ///     - Check ToolManager for when this is called but any of the specific toolmanagers (like battery)
+    ///       if you want to see what their respective dictionaries of level requirements contains
+    ///     - Dictionary contains a list of elements and their required values
+    /// </summary>
+    /// <param name="args"></param>
+    public void ToolInfoGather(ArrayList args)
+    {
+        //passes upgrade or info
+        string directive = args[0].ToString().ToLower();
+        //Whether the upgrade was successful
+        bool upgradeSuccess = (bool)args[1];
+        //Toolname
+        string toolName = args[2].ToString().ToLower();
+        //Dictionary that contains everything required for the tool's next level requirements - see any toolmanager
+        Dictionary<string, int> levelRequirements = (Dictionary<string, int>)args[3];
+
+        switch(directive)
         {
-            if (_copper > 0)
-            {
-                _copper--;
-                copperAmount.SetText(_copper.ToString());
-                errorText.gameObject.SetActive(false);
-                PlayerController.Instance.thrusterManager.Modify();
-            }
-            else
-            {
-                errorText.gameObject.SetActive(true);
-                errorText.SetText("Not enough copper!");
-            }
-        }
-        else if (toolName == "Electromagnet")
-        {
-            if (_iron > 0)
-            {
-                _iron--;
-                ironAmount.SetText(_iron.ToString());
-                errorText.gameObject.SetActive(false);
-                PlayerController.Instance.eMagnetManager.Modify();
-            }
-            else
-            {
-                errorText.gameObject.SetActive(true);
-                errorText.SetText("Not enough iron!");
-            }
-        }
-        else if (toolName == "Battery")
-        {
-            if (_nickel > 0)
-            {
-                _nickel--;
-                nickelAmount.SetText(_nickel.ToString());
-                errorText.gameObject.SetActive(false);
-                PlayerController.Instance.batteryManager.Modify();
-            }
-            else
-            {
-                errorText.gameObject.SetActive(true);
-                errorText.SetText("Not enough nickel!");
-            }
-        }
-        else if (toolName == "Imager")
-        {
-            if (_gold > 0)
-            {
-                _gold--;
-                goldAmount.SetText(_gold.ToString());
-                errorText.gameObject.SetActive(false);
-                PlayerController.Instance.imagerManager.Modify();
-            }
-            else
-            {
-                errorText.gameObject.SetActive(true);
-                errorText.SetText("Not enough gold!");
-            }
+            case "upgrade":
+                if (!upgradeSuccess)
+                {
+                    string requirement_display = "Must Have: ";
+                    foreach (var requirement in levelRequirements)
+                    {
+                        if (requirement.Value > 0)
+                        {
+                            requirement_display += requirement.Key + " " + requirement.Value + ",";
+                        }
+                    }
+                    errorText.SetText(requirement_display);
+                    errorText.gameObject.SetActive(true);
+                    return;
+                }
+                switch (toolName.ToLower())
+                {
+                    case "thruster":
+                        errorText.gameObject.SetActive(false);
+                        break;
+                    case "battery":
+
+                        errorText.gameObject.SetActive(false);
+                        break;
+                    case "imager":
+
+                        errorText.gameObject.SetActive(false);
+                        break;
+                    case "electromagnet":
+                        errorText.gameObject.SetActive(false);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case "info":
+                switch (toolName.ToLower())
+                {
+                    case "thruster":
+                        errorText.gameObject.SetActive(false);
+                        break;
+                    case "battery":
+
+                        errorText.gameObject.SetActive(false);
+                        break;
+                    case "imager":
+
+                        errorText.gameObject.SetActive(false);
+                        break;
+                    case "electromagnet":
+                        errorText.gameObject.SetActive(false);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            default:
+                break;
         }
     }
 
     /// <summary>
     /// When the player walks over the object, pick up the object
     /// </summary>
-    public void elementPickUp(string element)
+    public void ElementUpdate(ArrayList args)
     {
+        string element = args[0].ToString().ToLower();
+        string value = args[1].ToString();
+
         switch (element)
         {
-            case "Element_Copper":
-                _copper++;
-                copperAmount.SetText(_copper.ToString());
+            case "element_copper":
+                copperAmount.SetText(value);
                 break;
-            case "Element_Iron":
-                _iron++;
-                ironAmount.SetText(_iron.ToString());
+            case "element_iron":
+                ironAmount.SetText(value);
                 break;
-            case "Element_Nickel":
-                _nickel++;
-                nickelAmount.SetText(_nickel.ToString());
+            case "element_nickel":
+                nickelAmount.SetText(value);
                 break;
-            case "Element_Gold":
-                _gold++;
-                goldAmount.SetText(_gold.ToString());
+            case "element_gold":
+                goldAmount.SetText(value);
                 break;
-            case "Element_Platinum":
-                _platinum++;
-                platinumAmount.SetText(_platinum.ToString());
+            case "element_platinum":
+                platinumAmount.SetText(value);
                 break;
             default:
                 Debug.Log("Element type not implemented");
