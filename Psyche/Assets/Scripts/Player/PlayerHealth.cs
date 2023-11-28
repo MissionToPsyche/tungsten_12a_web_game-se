@@ -17,6 +17,9 @@ public class PlayerHealth : MonoBehaviour {
     public int amount;
     public bool playerHealthZero;
     public TMP_Text healthText;
+    public Sprite healthSpriteNormal;
+    public Sprite healthSpriteDamaged;
+    public Sprite healthSpriteCritical;
 
     //private PlayerManagement _playerManagement;
 
@@ -34,7 +37,7 @@ public class PlayerHealth : MonoBehaviour {
         if (playerHealth == 0) {
             playerHealthZero = true;
         }
-        UpdateSceneText();
+        UpdateScene();
         //Debug.Log("Player Health: "+playerHealth);
     }
 
@@ -45,13 +48,24 @@ public class PlayerHealth : MonoBehaviour {
         if (playerHealth == 0) {
             playerHealthZero = true;
         }
-        UpdateSceneText();
+        UpdateScene();
         //Debug.Log("Player Health: "+playerHealth);
     }
 
     // update text for scene
-    public void UpdateSceneText() {
+    public void UpdateScene() {
         healthText.text = playerHealth.ToString();
+        switch (healthText.text) {
+            case "5": case "4":
+                gameObject.GetComponent<SpriteRenderer>().sprite = healthSpriteNormal;
+                break;
+            case "3": case "2":
+                gameObject.GetComponent<SpriteRenderer>().sprite = healthSpriteDamaged;
+                break;
+            case "1": case "0":
+                gameObject.GetComponent<SpriteRenderer>().sprite = healthSpriteCritical;
+                break;    
+        }
     }
 
 }
