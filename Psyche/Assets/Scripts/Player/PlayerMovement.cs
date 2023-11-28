@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 ///<summary>
@@ -38,16 +35,17 @@ public class PlayerMovement : MonoBehaviour
     /// <summary>
     /// Handles the movement and animations of the player.
     /// </summary>
-    /// <param name="playerCharacter"></param>
-    /// <param name="isGrounded"></param>
     public void handleMovement(bool usingThruster)
     {
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _flipSprite = true;
-        
+
         //Horizontal Movement
-        _xAxis = Input.GetAxisRaw("Horizontal");
+        if (!_playerManagement.inputBlocked)
+            _xAxis = Input.GetAxisRaw("Horizontal");
+        else
+            _xAxis = 0;
         _walkVelocity = new Vector2(_xAxis * 7f, _playerManagement.playerCharacter.velocity.y);
         _playerManagement.playerCharacter.velocity = _walkVelocity;
 
@@ -55,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
         if (_playerManagement.isGrounded && !_playerManagement.beingPulled)
         {
             //if the player is moving left or right
-            if (_xAxis != 0) 
+            if (_xAxis != 0)
             {
                 _newAnimation = PLAYER_WALK;
             }
@@ -83,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Vertical "jump" only if player is on the ground
-        if (_playerManagement.isGrounded && !_playerManagement.beingPulled && Input.GetButtonDown("Jump"))
+        if (!_playerManagement.inputBlocked && !_playerManagement.beingPulled && _playerManagement.isGrounded && Input.GetButtonDown("Jump"))
         {
             _playerManagement.playerCharacter.velocity = new Vector2(_playerManagement.playerCharacter.velocity.x, 7f);
             GameController.Instance.audioManager.playerJump.Play();
@@ -99,10 +97,6 @@ public class PlayerMovement : MonoBehaviour
             else if (_xAxis > 0) //if moving left
             {
                 _isFacingRight = true;
-            }
-            else
-            { 
-                //nothing. whichever way it's currently facing will be the same
             }
         }
 
