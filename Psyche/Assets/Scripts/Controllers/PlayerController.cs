@@ -45,7 +45,7 @@ public class PlayerController : BaseController<PlayerController>
     private bool usingThruster; //for animation purposes  // <--Implement boolean in thruster script
 
     //Booleans to prevent needless code runs
-    [HideInInspector] public bool eMagnetActive, beingPulled, inputBlocked; //Create a dictionary or list to track these
+    [HideInInspector] public bool eMagnetActive, beingPulled, inputBlocked, beingWarped; //Create a dictionary or list to track these
 
     /// <summary>
     /// Initialize the object and parent class
@@ -126,7 +126,8 @@ public class PlayerController : BaseController<PlayerController>
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
         imagerManager.Activate();
 
-        usingThruster = false; //default
+        //default states
+        usingThruster = false;
 
         ///Disables player input if Inventory is open
         if (!inputBlocked)
@@ -154,8 +155,13 @@ public class PlayerController : BaseController<PlayerController>
                 batteryManager.DrainBatt(500);
             }
 
-            playerMovement.handleMovement(usingThruster);
+            playerMovement.handleMovement(usingThruster, beingWarped);
+
         }
+
+        //needed to ensure the warping animation plays even when input is blocked
+        if (beingWarped)
+            playerMovement.handleMovement(usingThruster, beingWarped);
 
         //Inventory and Dialog Box 
         if (Input.GetButtonDown("Inventory") && !Input.GetButton("FireGRS"))
