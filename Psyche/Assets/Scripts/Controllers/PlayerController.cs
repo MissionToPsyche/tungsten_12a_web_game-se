@@ -259,8 +259,11 @@ public class PlayerController : BaseController<PlayerController>
                         break;
                 }
                 break;
+            case "InventoryManager":
+                inventoryManager.ReceiveMessage(args);
+                break;
             default:
-                Debug.Log("Incorrect subdestination -- GameController");
+                Debug.Log("Incorrect subdestination -- PlayerController");
                 break;
         }
     }

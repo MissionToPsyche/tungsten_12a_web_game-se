@@ -101,6 +101,7 @@ public class DeveloperConsole : MonoBehaviour
 
     /// <summary>
     /// Handles setting variable values
+    /// - set [tool/item] [value]
     /// </summary>
     /// <param name="commands"></param>
     private void HandleSet(ArrayList commands)
