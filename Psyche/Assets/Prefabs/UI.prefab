@@ -8457,6 +8457,9 @@ MonoBehaviour:
   amount: 0
   playerHealthZero: 0
   healthText: {fileID: 4913807385749006362}
+  healthSpriteNormal: {fileID: -831315000, guid: 4ae77b5d770386442a7ad2647db65b8b, type: 3}
+  healthSpriteDamaged: {fileID: 2053673110, guid: 4ae77b5d770386442a7ad2647db65b8b, type: 3}
+  healthSpriteCritical: {fileID: -2113561379, guid: 4ae77b5d770386442a7ad2647db65b8b, type: 3}
 --- !u!1 &6351006551061871135
 GameObject:
   m_ObjectHideFlags: 0
@@ -8798,6 +8801,13 @@ MonoBehaviour:
   batteryPercent: 0
   rate: 0
   batteryDrained: 0
+  batterySprite6: {fileID: 231044240, guid: 95f5ab7703bd6f349b506610baa6faa9, type: 3}
+  batterySprite5: {fileID: -2090482627, guid: 95f5ab7703bd6f349b506610baa6faa9, type: 3}
+  batterySprite4: {fileID: -943899848, guid: 95f5ab7703bd6f349b506610baa6faa9, type: 3}
+  batterySprite3: {fileID: -549937431, guid: 95f5ab7703bd6f349b506610baa6faa9, type: 3}
+  batterySprite2: {fileID: -39812770, guid: 95f5ab7703bd6f349b506610baa6faa9, type: 3}
+  batterySprite1: {fileID: 88227712, guid: 95f5ab7703bd6f349b506610baa6faa9, type: 3}
+  batterySprite0: {fileID: -797366915, guid: 95f5ab7703bd6f349b506610baa6faa9, type: 3}
 --- !u!1 &6452691331412099040
 GameObject:
   m_ObjectHideFlags: 0
