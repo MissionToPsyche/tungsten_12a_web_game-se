@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections;
 using System;
-using System.Collections.Generic;
 
 /// <summary>
 /// Player Management script controls how the player interacts with the 
@@ -153,9 +152,9 @@ public class PlayerController : BaseController<PlayerController>
                 eMagnetManager.Activate();
                 batteryManager.DrainBatt(500);
             }
-
-            playerMovement.handleMovement(usingThruster);
         }
+
+        playerMovement.handleMovement(usingThruster);
 
         //Inventory and Dialog Box 
         if (Input.GetButtonDown("Inventory") && !Input.GetButton("FireGRS"))
