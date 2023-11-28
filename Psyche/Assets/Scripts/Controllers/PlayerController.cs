@@ -101,7 +101,7 @@ public class PlayerController : BaseController<PlayerController>
     {   //Set up initial player health (Should be initialized through the playerhealth script instead of here)
         playerHealth.playerHealth = 5;
         playerHealth.amount = 1;
-        playerHealth.UpdateSceneText();
+        playerHealth.UpdateScene();
     }
 
     /// <summary>
