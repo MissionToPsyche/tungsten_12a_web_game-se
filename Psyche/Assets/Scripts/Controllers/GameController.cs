@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameController : BaseController<GameController>
@@ -15,6 +14,8 @@ public class GameController : BaseController<GameController>
     public GameStateManager gameStateManager;
     //public SceneManager sceneManager;
     public AudioManager audioManager;
+
+    public bool colorBlindMode;
 
     /// <summary>
     /// Initialize the object and parent class
@@ -194,6 +195,15 @@ public class GameController : BaseController<GameController>
 
         }
     }
-    
+
     // Other stuff here
+
+    /// <summary>
+    /// Swap color blind mode
+    /// </summary>
+    /// <returns></returns>
+    public void ChangeColorBlindMode(bool mode)
+    {
+        colorBlindMode = mode;
+    }
 }
