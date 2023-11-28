@@ -23,7 +23,6 @@ public class PlayerMovement : MonoBehaviour
     private string _newAnimation;
     private bool _isFacingRight;
     private bool _flipSprite;
-    private bool _isWarping;
     private Vector2 _walkVelocity;
 
     //Animation states
@@ -47,26 +46,27 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     /// <param name="playerCharacter"></param>
     /// <param name="isGrounded"></param>
-    public void handleMovement(bool usingThruster)
+    public void handleMovement(bool usingThruster, bool beingWarped)
     {
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _flipSprite = true;
-        
-        //Horizontal Movement
-        _xAxis = Input.GetAxisRaw("Horizontal");
-        _walkVelocity = new Vector2(_xAxis * 7f, _playerManagement.playerCharacter.velocity.y);
-        _playerManagement.playerCharacter.velocity = _walkVelocity;
 
-        // warping takes precedent over every other animation
-        if (_isWarping)
+        // warping takes precedent over every other animation, and blocks players movement
+        if (beingWarped)
         {
+            _playerManagement.playerCharacter.velocity = new Vector2(0,0);
             _newAnimation = PLAYER_WARP;
         }
 
         //checks for the player's behavior to determine which animation to play
         else
         {
+            //Horizontal movement
+            _xAxis = Input.GetAxisRaw("Horizontal");
+            _walkVelocity = new Vector2(_xAxis * 7f, _playerManagement.playerCharacter.velocity.y);
+            _playerManagement.playerCharacter.velocity = _walkVelocity;
+
             //if the player is grounded, then either the walk animation or idle animation will play
             if (_playerManagement.isGrounded && !_playerManagement.beingPulled)
             {
@@ -97,13 +97,14 @@ public class PlayerMovement : MonoBehaviour
                 }
 
             }
-        }
 
-        //Vertical "jump" only if player is on the ground
-        if (_playerManagement.isGrounded && !_playerManagement.beingPulled && Input.GetButtonDown("Jump"))
-        {
-            _playerManagement.playerCharacter.velocity = new Vector2(_playerManagement.playerCharacter.velocity.x, 7f);
-            GameController.Instance.audioManager.playerJump.Play();
+            //Vertical "jump" only if player is on the ground
+            if (_playerManagement.isGrounded && !_playerManagement.beingPulled && Input.GetButtonDown("Jump"))
+            {
+                _playerManagement.playerCharacter.velocity = new Vector2(_playerManagement.playerCharacter.velocity.x, 7f);
+                GameController.Instance.audioManager.playerJump.Play();
+            }
+
         }
 
         //checks the direction the player is moving
@@ -151,22 +152,6 @@ public class PlayerMovement : MonoBehaviour
 
             //set the current animation state
             _currentAnimation = _newAnimation;
-        }
-    }
-
-    /// <summary>
-    /// Used by PlayerDeath to set whether the player is warping or not.
-    /// The timer for the animation is in PlayerDeath.
-    /// </summary>
-    public void setWarp()
-    {
-        if (_isWarping)
-        {
-            _isWarping = false;
-        }
-        else
-        {
-            _isWarping = true;
         }
     }
 }

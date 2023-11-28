@@ -61,10 +61,12 @@ public class PlayerDeath : MonoBehaviour {
         playerHealth.HealthDown(1);
         if (playerHealth.playerHealth == 0) {
             //Debug.Log("Game should rest to checkpoint here.....");
-        }
 
-        //start the warping animation
-        StartCoroutine(Warp());
+            //start the warping animation
+            StartCoroutine(Warp());
+            //reset the player's health to 5
+            playerHealth.HealthUp(5);
+        }
     }
 
     /// <summary>
@@ -76,9 +78,7 @@ public class PlayerDeath : MonoBehaviour {
     {
         //block player controls
         PlayerController.Instance.inputBlocked = true;
-
-        //tell the PlayerMovement script the player should be warping
-        gameObject.GetComponent<PlayerMovement>().setWarp();
+        PlayerController.Instance.beingWarped = true;
 
         //wait for the animation to be completed
         yield return new WaitForSeconds(1.2f);
@@ -92,10 +92,8 @@ public class PlayerDeath : MonoBehaviour {
         //move the player to their respawn point
         transform.position = respawnPoint;
 
-        //tell the PlayerMovement script the player is no longer warping
-        gameObject.GetComponent<PlayerMovement>().setWarp();
-
         //unblock player controls
         PlayerController.Instance.inputBlocked = false;
+        PlayerController.Instance.beingWarped = false;
     }
 }
