@@ -300,24 +300,31 @@ public class UIController : BaseController<UIController>
     /// <param name="args"></param>
     private void ProcessDevConsole(ArrayList args)
     {
-
         switch (args[0].ToString())
         {
             case "update":
-                if(_devConsoleFPSPanel.activeSelf)
+                Debug.Log(args[2].ToString());
+                if (_devConsoleFPSPanel.activeSelf)
                 {
                     _devConsoleText["DevConsoleFPS"].text = "FPS: " + args[1].ToString();
-                }       
+                }
+                if(_devConsoleResourcePanel.activeSelf)
+                {
+                    _devConsoleText["DevConsoleResourceMonitor"].text = "CPU: " + args[2].ToString() + "ms\n" +
+                                                                        "RAM: ";
+                }
                 break;
             case "toggle":
-                switch(args[1])
+                switch(args[1].ToString())
                 {
                     case "fps":
                         _devConsoleFPSPanel.SetActive(!_devConsoleFPSPanel.activeSelf);
                         _devConsoleText["DevConsoleFPS"].text = "FPS";
                         break;
                     case "resource_monitor":
-                        _devConsoleResourcePanel.SetActive(_devConsoleResourcePanel.activeSelf);
+                        
+                        _devConsoleResourcePanel.SetActive(!_devConsoleResourcePanel.activeSelf);
+                        _devConsoleText["DevConsoleResourceMonitor"].text = "Loading...";
                         break;
                     default:
                         Debug.Log("Invalid command");
