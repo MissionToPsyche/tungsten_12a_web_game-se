@@ -1,8 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading;
 using UnityEngine;
+using Unity.Profiling;
 
 public class DeveloperConsole : MonoBehaviour
 {
@@ -11,6 +14,15 @@ public class DeveloperConsole : MonoBehaviour
     private Dictionary<string, Action<ArrayList>> _commandRegistry; //stores commands
     private float _updateTimerDefault;
     private float _updateTimer;
+    private int _processorCount;
+    private float _cpuUsage;
+    private Thread _cpuThread;
+    private ProfilerRecorder _totalUsedMemory;
+    private ProfilerRecorder _mainThread;
+    private Queue<double> _frameTimes;
+    private const int _frameSampleSize = 100;
+
+    
 
     //Events Declaration
     public event Action<string> OnDevConsoleUIUpdate;  //dev console updates UI
@@ -30,6 +42,20 @@ public class DeveloperConsole : MonoBehaviour
         };
         _updateTimerDefault = 0.5f;  //every 1/2 second
         _updateTimer = _updateTimerDefault;
+        _cpuUsage = 0f;
+        _cpuThread = new Thread(MaintainQueue);
+        _processorCount = SystemInfo.processorCount;
+        _totalUsedMemory = ProfilerRecorder.StartNew(ProfilerCategory.Memory, "Total Used Memory");
+        _mainThread = ProfilerRecorder.StartNew(ProfilerCategory.Internal, "Main Thread");
+        _frameTimes = new Queue<double>();
+
+        _cpuThread.Start();
+    }
+
+    private void OnDestroy()
+    {
+        _cpuThread?.Abort();
+        _totalUsedMemory.Dispose();
     }
 
     /// <summary>
@@ -37,18 +63,20 @@ public class DeveloperConsole : MonoBehaviour
     /// </summary>
     private void Update()
     {
+        _frameTimes.Enqueue(_mainThread.LastValue);
         //Update once every _updateTimerDefault seconds
         _updateTimer -= Time.deltaTime;
 
         if (_updateTimer <= 0f)
         {
             //create package to sender
-            ArrayList args = new ArrayList { 
-                "UI", "None", "DeveloperConsole", "update", CalculateFPS().ToString(),  CalculateCPU().ToString(),
+            ArrayList args = new ArrayList {
+                "UI", "None", "DeveloperConsole", "update",
+                CalculateFPS().ToString(),  Math.Round(CalculateCPU()).ToString(), CalculateRAM(),
             };
             //Send the message
             _gameController.SendMessage(args);
-            _updateTimer = _updateTimerDefault; //reset back to default;
+            _updateTimer = _updateTimerDefault; //reset back to default
         }
     }
 
@@ -69,7 +97,7 @@ public class DeveloperConsole : MonoBehaviour
                 HandleCommands(args); 
                 break;
             default:
-                Debug.Log("Incorrect source -- DevConsole");
+                UnityEngine.Debug.Log("Incorrect source -- DevConsole");
                 break;
         }
     }
@@ -82,7 +110,7 @@ public class DeveloperConsole : MonoBehaviour
     {
         if (!_commandRegistry.ContainsKey(commands[0].ToString()))
         {
-            Debug.Log("Incorrect command passed to console -- DevConsole");
+            UnityEngine.Debug.Log("Incorrect command passed to console -- DevConsole");
             return;
         }
         _commandRegistry[commands[0].ToString()].Invoke(commands);
@@ -118,6 +146,15 @@ public class DeveloperConsole : MonoBehaviour
     private double CalculateFPS()
     {
         return Math.Round(1.0f / Time.unscaledDeltaTime);
+        
+    }
+
+    private void MaintainQueue()
+    {
+        while(_frameTimes.Count > _frameSampleSize)
+        {
+            _frameTimes.Dequeue();
+        }
     }
 
     /// <summary>
@@ -126,6 +163,15 @@ public class DeveloperConsole : MonoBehaviour
     /// <returns></returns>
     private double CalculateCPU()
     {
-        return Math.Round(Time.unscaledDeltaTime, 4);
+        return ((_frameTimes.Average() / TimeSpan.TicksPerMillisecond) / 1000) * _processorCount * 2;
+    }
+
+    /// <summary>
+    /// Calculates RAM usage and returns in MB
+    /// </summary>
+    /// <returns></returns>
+    private double CalculateRAM()
+    {
+        return Math.Round((_totalUsedMemory.LastValueAsDouble / (1024 * 1024)), 2);
     }
 }

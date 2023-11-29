@@ -303,15 +303,14 @@ public class UIController : BaseController<UIController>
         switch (args[0].ToString())
         {
             case "update":
-                Debug.Log(args[2].ToString());
                 if (_devConsoleFPSPanel.activeSelf)
                 {
                     _devConsoleText["DevConsoleFPS"].text = "FPS: " + args[1].ToString();
                 }
                 if(_devConsoleResourcePanel.activeSelf)
                 {
-                    _devConsoleText["DevConsoleResourceMonitor"].text = "CPU: " + args[2].ToString() + "ms\n" +
-                                                                        "RAM: ";
+                    _devConsoleText["DevConsoleResourceMonitor"].text = "CPU: " + args[2].ToString() + "%\n" +
+                                                                        "RAM: " + args[3].ToString() + "MB";
                 }
                 break;
             case "toggle":
