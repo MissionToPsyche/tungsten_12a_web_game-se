@@ -208,6 +208,7 @@ MonoBehaviour:
   eMagnetActive: 0
   beingPulled: 0
   inputBlocked: 0
+  beingWarped: 0
 --- !u!114 &7454889652593822882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -427,7 +428,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 00000000c76f616629b0cada
+  m_ApplyToSortingLayers: 0000000029b0cadac76f616693b48571531254bfcfddb5a575901468
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -702,7 +703,7 @@ Transform:
   m_GameObject: {fileID: 2746429122550390308}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.25, y: 0.375, z: -2.5}
+  m_LocalPosition: {x: -0.25, y: 0.625, z: -2.5}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -857,9 +858,10 @@ GameObject:
   - component: {fileID: 4318120916778828067}
   - component: {fileID: 6681150815620771670}
   - component: {fileID: 7835552510031621523}
+  - component: {fileID: 8717720623438440928}
   m_Layer: 0
   m_Name: Virtual Camera Lower Right
-  m_TagString: Untagged
+  m_TagString: VirtualCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -946,6 +948,21 @@ MonoBehaviour:
   m_Offset: {x: 1, y: -1, z: 0}
   m_ApplyAfter: 1
   m_PreserveComposition: 0
+--- !u!114 &8717720623438440928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3277319507839146222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f453f694addf4275988fac205bc91968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BoundingShape2D: {fileID: 0}
+  m_Damping: 0.5
+  m_MaxWindowSize: -1
 --- !u!1 &3411147457334915318
 GameObject:
   m_ObjectHideFlags: 0
@@ -958,9 +975,10 @@ GameObject:
   - component: {fileID: 9155241973715927046}
   - component: {fileID: 195643539868456656}
   - component: {fileID: 4632037651711389708}
+  - component: {fileID: 3223081988913854855}
   m_Layer: 0
   m_Name: Virtual Camera Left
-  m_TagString: Untagged
+  m_TagString: VirtualCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1047,6 +1065,21 @@ MonoBehaviour:
   m_Offset: {x: -1, y: 0, z: 0}
   m_ApplyAfter: 1
   m_PreserveComposition: 0
+--- !u!114 &3223081988913854855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3411147457334915318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f453f694addf4275988fac205bc91968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BoundingShape2D: {fileID: 0}
+  m_Damping: 0.5
+  m_MaxWindowSize: -1
 --- !u!1 &4827309388759259119
 GameObject:
   m_ObjectHideFlags: 0
@@ -1178,9 +1211,10 @@ GameObject:
   - component: {fileID: 4193794722220228110}
   - component: {fileID: 1531225396097169070}
   - component: {fileID: 3255749507534675208}
+  - component: {fileID: 3895818665434327867}
   m_Layer: 0
   m_Name: Virtual Camera Right
-  m_TagString: Untagged
+  m_TagString: VirtualCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1267,6 +1301,21 @@ MonoBehaviour:
   m_Offset: {x: 1, y: 0, z: 0}
   m_ApplyAfter: 1
   m_PreserveComposition: 0
+--- !u!114 &3895818665434327867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5700309934708913256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f453f694addf4275988fac205bc91968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BoundingShape2D: {fileID: 0}
+  m_Damping: 0.5
+  m_MaxWindowSize: -1
 --- !u!1 &6216640581431131562
 GameObject:
   m_ObjectHideFlags: 0
@@ -1487,9 +1536,10 @@ GameObject:
   - component: {fileID: 7221161961607019793}
   - component: {fileID: 2079353194211281249}
   - component: {fileID: 5056005245032131226}
+  - component: {fileID: 1706930555000162427}
   m_Layer: 0
   m_Name: Virtual Camera Lower Left
-  m_TagString: Untagged
+  m_TagString: VirtualCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1576,6 +1626,21 @@ MonoBehaviour:
   m_Offset: {x: -1, y: -1, z: 0}
   m_ApplyAfter: 1
   m_PreserveComposition: 0
+--- !u!114 &1706930555000162427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7275083810297286146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f453f694addf4275988fac205bc91968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BoundingShape2D: {fileID: 0}
+  m_Damping: 0.5
+  m_MaxWindowSize: -1
 --- !u!1 &9160192121413016504
 GameObject:
   m_ObjectHideFlags: 0
