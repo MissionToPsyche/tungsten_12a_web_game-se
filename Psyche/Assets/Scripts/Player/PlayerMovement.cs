@@ -1,7 +1,16 @@
+/**
+ * Description: makes changes to the player's current position, velocity, behavior, and animations.
+ * Authors:
+ * Version: 20231106
+ */
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 ///<summary>
-///PlayerMovement is a script which makes changes to the player's current position, velocity, and behavior
+///PlayerMovement is a script which 
 ///</summary>
 public class PlayerMovement : MonoBehaviour
 {
@@ -10,8 +19,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
     private float _xAxis;
-    private float _yAxis; //unused for now. may use for jumping later
-    private string currentAnimation;
+    private string _currentAnimation;
     private string _newAnimation;
     private bool _isFacingRight;
     private bool _flipSprite;
@@ -21,7 +29,8 @@ public class PlayerMovement : MonoBehaviour
     const string PLAYER_IDLE = "player_idle";
     const string PLAYER_WALK = "player_walk";
     const string PLAYER_JUMP = "player_jump";
-    const string PLAYER_THRUSTER = "player_thruster"; //unused for now. will add later
+    const string PLAYER_THRUSTER = "player_thruster";
+    const string PLAYER_WARP = "player_warp";
 
     /// <summary>
     /// Initializes the script
@@ -37,54 +46,65 @@ public class PlayerMovement : MonoBehaviour
     /// <summary>
     /// Handles the movement and animations of the player.
     /// </summary>
-    public void handleMovement(bool usingThruster)
+    public void handleMovement(bool usingThruster, bool beingWarped)
     {
         _flipSprite = true;
 
-        //Horizontal Movement
-        if (!_playerManagement.inputBlocked)
-            _xAxis = Input.GetAxisRaw("Horizontal");
-        else
-            _xAxis = 0;
-        _walkVelocity = new Vector2(_xAxis * 7f, _playerManagement.playerCharacter.velocity.y);
-        _playerManagement.playerCharacter.velocity = _walkVelocity;
-
-        //if the player is grounded, then either the walk animation or idle animation will play
-        if (_playerManagement.isGrounded && !_playerManagement.beingPulled)
+        // warping takes precedent over every other animation, and blocks players movement
+        if (beingWarped)
         {
-            //if the player is moving left or right
-            if (_xAxis != 0)
-            {
-                _newAnimation = PLAYER_WALK;
-            }
-
-            //if the player is not moving
-            else
-            {
-                _newAnimation = PLAYER_IDLE;
-            }
+            _playerManagement.playerCharacter.velocity = new Vector2(0,0);
+            _newAnimation = PLAYER_WARP;
         }
 
-        //if the player is in the air; will be edited later to add thruster option
+        //checks for the player's behavior to determine which animation to play
         else
         {
-            if (usingThruster)
+            //Horizontal movement
+            if (!_playerManagement.inputBlocked)
+                _xAxis = Input.GetAxisRaw("Horizontal");
+            else
+                _xAxis = 0;
+            _walkVelocity = new Vector2(_xAxis * 7f, _playerManagement.playerCharacter.velocity.y);
+            _playerManagement.playerCharacter.velocity = _walkVelocity;
+
+            //if the player is grounded, then either the walk animation or idle animation will play
+            if (_playerManagement.isGrounded && !_playerManagement.beingPulled)
             {
-                _newAnimation = PLAYER_THRUSTER;
+                //if the player is moving left or right
+                if (_xAxis != 0)
+                {
+                    _newAnimation = PLAYER_WALK;
+                }
+
+                //if the player is not moving
+                else
+                {
+                    _newAnimation = PLAYER_IDLE;
+                }
             }
 
+            //if the player is in the air
             else
             {
-                _newAnimation = PLAYER_JUMP;
-            }
-            
-        }
+                if (usingThruster)
+                {
+                    _newAnimation = PLAYER_THRUSTER;
+                }
 
-        //Vertical "jump" only if player is on the ground
-        if (!_playerManagement.inputBlocked && !_playerManagement.beingPulled && _playerManagement.isGrounded && Input.GetButtonDown("Jump"))
-        {
-            _playerManagement.playerCharacter.velocity = new Vector2(_playerManagement.playerCharacter.velocity.x, 7f);
-            GameController.Instance.audioManager.playerJump.Play();
+                else
+                {
+                    _newAnimation = PLAYER_JUMP;
+                }
+
+            }
+
+            //Vertical "jump" only if player is on the ground
+            if (!_playerManagement.inputBlocked && !_playerManagement.beingPulled && _playerManagement.isGrounded && Input.GetButtonDown("Jump"))
+            {
+                _playerManagement.playerCharacter.velocity = new Vector2(_playerManagement.playerCharacter.velocity.x, 7f);
+                GameController.Instance.audioManager.playerJump.Play();
+            }
         }
 
         //checks the direction the player is moving
@@ -112,7 +132,7 @@ public class PlayerMovement : MonoBehaviour
 
         //if the currentAnimation that is playing is the same animation that would be playing, does nothing
         //to ensure animation does not restart
-        if (currentAnimation == _newAnimation)
+        if (_currentAnimation == _newAnimation)
         {
             return;
         }
@@ -127,8 +147,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
             //set the current animation state
-            currentAnimation = _newAnimation;
+            _currentAnimation = _newAnimation;
         }
-
     }
 }
