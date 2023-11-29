@@ -486,7 +486,7 @@ public class UIController : BaseController<UIController>
             confirmBoxText.transform.parent.gameObject.SetActive(false);
             inventoryMenu.SetActive(false);
             PlayerController.Instance.inputBlocked = false;
-            PlayerController.Instance.deathCon.GetHurt(); //use different function
+            StartCoroutine(PlayerController.Instance.deathCon.Warp());
         }
         ///If Title Screen button opened the Confirmation Box
         else
