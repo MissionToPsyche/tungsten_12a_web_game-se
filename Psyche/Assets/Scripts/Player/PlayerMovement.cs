@@ -30,6 +30,8 @@ public class PlayerMovement : MonoBehaviour
     public void Initialize(PlayerController playerManagement)
     {
         _playerManagement = playerManagement;
+        _animator = GetComponentInChildren<Animator>();
+        _spriteRenderer = _animator.gameObject.GetComponent<SpriteRenderer>();
     }
 
     /// <summary>
@@ -37,8 +39,6 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     public void handleMovement(bool usingThruster)
     {
-        _animator = GetComponent<Animator>();
-        _spriteRenderer = GetComponent<SpriteRenderer>();
         _flipSprite = true;
 
         //Horizontal Movement
