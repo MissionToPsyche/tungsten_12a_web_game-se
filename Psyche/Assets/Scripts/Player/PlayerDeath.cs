@@ -1,9 +1,10 @@
 /** 
 Description: player death script
-Author: mcmyers4, blopezro
+Author: mcmyers4, blopezro, dnguye99
 Version: 20231109
 **/
 
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -60,9 +61,39 @@ public class PlayerDeath : MonoBehaviour {
         playerHealth.HealthDown(1);
         if (playerHealth.playerHealth == 0) {
             //Debug.Log("Game should rest to checkpoint here.....");
-        } else if (startPoint.Equals(respawnPoint)) {
+
+            //start the warping animation
+            StartCoroutine(Warp());
+            //reset the player's health to 5
+            playerHealth.HealthUp(5);
+        }
+    }
+
+    /// <summary>
+    /// This co-routine forces the game to wait for the player's warping
+    /// animation to complete before continuing on.
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator Warp()
+    {
+        //block player controls
+        PlayerController.Instance.inputBlocked = true;
+        PlayerController.Instance.beingWarped = true;
+
+        //wait for the animation to be completed
+        yield return new WaitForSeconds(1.2f);
+
+        //check if the player is at the starting point
+        if (startPoint.Equals(respawnPoint))
+        {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+
+        //move the player to their respawn point
         transform.position = respawnPoint;
+
+        //unblock player controls
+        PlayerController.Instance.inputBlocked = false;
+        PlayerController.Instance.beingWarped = false;
     }
 }
