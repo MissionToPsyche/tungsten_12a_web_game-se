@@ -1,3 +1,4 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -39,6 +40,29 @@ public class TransitionManager : MonoBehaviour {
         if (Input.GetButton("Vertical") && verticalAxis > 0) {
             switch(travelToSceneName) {
                 case "Tool_Intro_Thruster":
+                    _travelToSceneName = travelToSceneName;
+                    _prevScene = _currScene;
+                    SceneManager.LoadScene(travelToSceneName);
+                    transition = true;
+                    GameObject[] vcs = GameObject.FindGameObjectsWithTag("VirtualCamera");
+                    //BoxCollider2D bounds = FindObjectOfType<BoxCollider2D>();
+                    //GameObject boundary = GameObject.FindGameObjectWithTag("Boundary");
+                    //Collider2D bounds = FindObjectOfType<CompositeCollider2D>();
+                    //Collider2D bounds = Collider2D.FindGameObjectWithTag("Boundary");
+                    //CompositeCollider2D bounds = FindObjectOfType<CompositeCollider2D>();
+                    foreach (GameObject vc in vcs)
+                    {
+                        //Debug.Log(bounds);
+                        vc.GetComponent<CinemachineConfiner2D>().InvalidateCache();
+                        vc.GetComponent<CinemachineConfiner2D>().m_BoundingShape2D = null;
+                        Debug.Log(GameObject.FindGameObjectWithTag("Boundary").GetComponent<BoxCollider2D>());
+                        vc.GetComponent<CinemachineConfiner2D>().m_BoundingShape2D = GameObject.FindGameObjectWithTag("Boundary").GetComponent<BoxCollider2D>();
+                        //Debug.Log(vc.GetComponent<CinemachineConfiner2D>().m_BoundingShape2D.GetType());
+                        //Debug.Log(boundary);
+                        //Collider2D shape = vc.GetComponent<CinemachineConfiner2D>().m_BoundingShape2D;
+                        //shape.Equals(bounds);
+                    }
+                    break;
                 case "Tool_Intro_GRS":
                 case "Tool_Intro_Imager":
                 case "Tool_Intro_eMagnet":
