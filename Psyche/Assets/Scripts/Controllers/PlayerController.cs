@@ -37,7 +37,7 @@ public class PlayerController : BaseController<PlayerController>
     public ThrusterManager thrusterManager;
     public ImagerCursor flashlight;
     public GammaView gammaView;
-    private TransitionManager sceneTransition;
+    private SceneManager sceneTransition;
     public PlayerDeath deathCon;
     public InventoryManager inventoryManager;
 
@@ -75,8 +75,8 @@ public class PlayerController : BaseController<PlayerController>
         // ##### Object Managers ######
         //playerHealth.Initialize(this); <-- this initializes the script and creates a cross reference between the two
         // ##### Miscellaneous ######
-        sceneTransition = GetComponent<TransitionManager>();
-        sceneTransition.Initialize(this);
+        //sceneTransition = GetComponent<SceneManager>();
+        //sceneTransition.Initialize(this);
         deathCon = GetComponent<PlayerDeath>();
         inventoryManager = GetComponent<InventoryManager>();
         inventoryManager.Initialize(this);
@@ -202,8 +202,8 @@ public class PlayerController : BaseController<PlayerController>
             case "UI":
                 OnUpdatePlayerToUI?.Invoke(args);
                 break;
-            case "Player":
-                OnUpdatePlayerToUI.Invoke(args);
+            case "Game":
+                OnUpdatePlayerToGame?.Invoke(args);
                 break;
             default:
                 Debug.Log("Incorrect invocation in GameController");
@@ -307,7 +307,10 @@ public class PlayerController : BaseController<PlayerController>
     {
         if (other.tag == "TransitionObject" || other.tag ==  "TransitionObjectIn") //for Transition objects
         {
-            StartCoroutine(sceneTransition.CheckTransition(other.name));
+            ArrayList args = new ArrayList { 
+                "Game", "SceneManager", "PlayerController", other.name 
+            };
+            SendMessage(args);
         }
     }
 
