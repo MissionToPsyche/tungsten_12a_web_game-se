@@ -45,7 +45,7 @@ public class PlayerController : BaseController<PlayerController>
     private bool usingThruster; //for animation purposes  // <--Implement boolean in thruster script
 
     //Booleans to prevent needless code runs
-    [HideInInspector] public bool eMagnetActive, beingPulled, inputBlocked; //Create a dictionary or list to track these
+    [HideInInspector] public bool eMagnetActive, beingPulled, inputBlocked, beingWarped; //Create a dictionary or list to track these
 
     /// <summary>
     /// Initialize the object and parent class
@@ -126,7 +126,8 @@ public class PlayerController : BaseController<PlayerController>
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
         imagerManager.Activate();
 
-        usingThruster = false; //default
+        //default states
+        usingThruster = false;
 
         ///Disables player input if Inventory is open
         if (!inputBlocked)
@@ -149,16 +150,21 @@ public class PlayerController : BaseController<PlayerController>
             }
 
             //ElectroMagnet
-            if (inventoryManager.CheckTool("electromagnet") && Input.GetButton("Fire1") && batteryManager.batteryPercent != 0 && !eMagnetActive) {
+            if (inventoryManager.CheckTool("electromagnet") && Input.GetButton("EMagnet") && batteryManager.batteryPercent != 0 && !eMagnetActive) {
                 eMagnetManager.Activate();
                 batteryManager.DrainBatt(500);
             }
 
-            playerMovement.handleMovement(usingThruster);
+            playerMovement.handleMovement(usingThruster, beingWarped);
+
         }
 
+        //needed to ensure the warping animation plays even when input is blocked
+        if (beingWarped)
+            playerMovement.handleMovement(usingThruster, beingWarped);
+
         //Inventory and Dialog Box 
-        if (Input.GetKeyDown("tab") && !Input.GetKey(KeyCode.G)) // <-- Change to getbutton and getbuttondown
+        if (Input.GetButtonDown("Inventory") && !Input.GetButton("FireGRS"))
             UIController.Instance.handleUI();
     }
 
@@ -359,14 +365,12 @@ public class PlayerController : BaseController<PlayerController>
                 break;
 
             case "Battery":
-                Debug.Log("Battery charge!");
                 batteryManager.Enable();
                 inventoryManager.SetTool(toolName, true);
                 batteryManager.ChargeBatt(500);
                 break;
 
-            case "Health":        
-                Debug.Log("Health increase!");
+            case "Health":
                 playerHealth.HealthUp(1);
                 break;
 

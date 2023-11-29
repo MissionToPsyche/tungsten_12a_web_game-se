@@ -10837,6 +10837,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   developerConsole: {fileID: 0}
   audioManager: {fileID: 0}
+  colorBlindMode: 0
 --- !u!4 &2144772172
 Transform:
   m_ObjectHideFlags: 0
@@ -11035,29 +11036,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4601762421013657611, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
-      propertyPath: m_LookaheadTime
-      value: 0.1
+    - target: {fileID: 4567901035931106489, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.size
+      value: 7
       objectReference: {fileID: 0}
-    - target: {fileID: 4601762421013657611, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
-      propertyPath: m_CenterOnActivate
-      value: 0
+    - target: {fileID: 4567901035931106489, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[1]
+      value: -624250839
       objectReference: {fileID: 0}
-    - target: {fileID: 4822381043481428571, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.25
+    - target: {fileID: 4567901035931106489, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[2]
+      value: 1717661639
       objectReference: {fileID: 0}
-    - target: {fileID: 4822381043481428571, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.625
+    - target: {fileID: 4567901035931106489, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[3]
+      value: 1904587923
       objectReference: {fileID: 0}
-    - target: {fileID: 6149005925202055111, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
-      propertyPath: m_LookaheadTime
-      value: 0.1
+    - target: {fileID: 4567901035931106489, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[4]
+      value: -1085009325
       objectReference: {fileID: 0}
-    - target: {fileID: 6149005925202055111, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
-      propertyPath: m_CenterOnActivate
-      value: 0
+    - target: {fileID: 4567901035931106489, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[5]
+      value: -1514807857
+      objectReference: {fileID: 0}
+    - target: {fileID: 4567901035931106489, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[6]
+      value: 1746178165
       objectReference: {fileID: 0}
     - target: {fileID: 7911676450372591580, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: playerHealth
