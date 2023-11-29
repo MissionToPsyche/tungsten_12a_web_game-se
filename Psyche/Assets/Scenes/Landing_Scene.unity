@@ -10816,6 +10816,7 @@ GameObject:
   - component: {fileID: 2144772172}
   - component: {fileID: 2144772171}
   - component: {fileID: 2144772173}
+  - component: {fileID: 2144772174}
   m_Layer: 0
   m_Name: TemporaryGameController
   m_TagString: Untagged
@@ -10836,6 +10837,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   developerConsole: {fileID: 0}
+  sceneManager: {fileID: 0}
   audioManager: {fileID: 0}
   colorBlindMode: 0
 --- !u!4 &2144772172
@@ -10864,6 +10866,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 280ac3698bbd7dd439b4d196d163d1ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2144772174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144772170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65cb6108c22eff341826590df75aaa2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &191254793707458796
@@ -11063,6 +11077,14 @@ PrefabInstance:
     - target: {fileID: 4567901035931106489, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: m_ApplyToSortingLayers.Array.data[6]
       value: 1746178165
+      objectReference: {fileID: 0}
+    - target: {fileID: 4822381043481428571, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4822381043481428571, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.625
       objectReference: {fileID: 0}
     - target: {fileID: 7911676450372591580, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: playerHealth

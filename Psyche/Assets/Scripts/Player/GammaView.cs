@@ -31,14 +31,14 @@ public class GammaView : MonoBehaviour {
     /// Subscribes to the SceneManager.sceneLoaded event
     /// </summary>
     void Awake() {
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     /// <summary>
     /// Unsubscribes from event to prevent memory loss
     /// </summary>
     void OnDestroy() {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     /// <summary>

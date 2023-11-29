@@ -498,9 +498,9 @@ public class UIController : BaseController<UIController>
         Destroy(gameObject);
         Cursor.visible = true;
         if (playCutscene)
-            SceneManager.LoadScene("Outro_Cutscene");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Outro_Cutscene");
         else
-            SceneManager.LoadScene("Title_Screen");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Title_Screen");
     }
 
 
