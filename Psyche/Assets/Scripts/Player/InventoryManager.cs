@@ -41,11 +41,6 @@ public class InventoryManager : MonoBehaviour
 
     public void ReceiveMessage(ArrayList args)
     {
-        int i = 0;
-        foreach(var arg in args)
-        {
-            Debug.Log(i++ + " " + arg.ToString());
-        }
         string item = args[2].ToString().ToLower();
         if(_tools.ContainsKey(item))
         {
