@@ -239,7 +239,7 @@ public class UIController : BaseController<UIController>
         {
             PlayerController.Instance.OnUpdatePlayerToUI -= EnableToolButton; 
         }
-        if(GameController.Instance != null)
+        if (GameController.Instance != null)
         {
             GameController.Instance.OnUpdateGameToUI -= ReceiveMessage;
         }
@@ -511,7 +511,7 @@ public class UIController : BaseController<UIController>
             confirmBoxText.transform.parent.gameObject.SetActive(false);
             inventoryMenu.SetActive(false);
             PlayerController.Instance.inputBlocked = false;
-            PlayerController.Instance.deathCon.GetHurt(); //use different function
+            StartCoroutine(PlayerController.Instance.deathCon.Warp());
         }
         ///If Title Screen button opened the Confirmation Box
         else

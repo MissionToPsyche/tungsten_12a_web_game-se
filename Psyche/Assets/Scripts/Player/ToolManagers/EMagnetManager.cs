@@ -122,7 +122,7 @@ public class EMagnetManager : ToolManager {
                 _playerController.playerCharacter.MovePosition(Vector2.MoveTowards(transform.position, target.transform.position, Time.deltaTime * 40));
 
             yield return null;
-        } while (Input.GetButton("Fire1"));
+        } while (Input.GetButton("EMagnet"));
 
         GameController.Instance.audioManager.toolEMagnet.Stop();
         _playerController.playerCharacter.gravityScale = curGrav;
