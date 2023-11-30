@@ -1,3 +1,4 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -39,6 +40,22 @@ public class TransitionManager : MonoBehaviour {
         if (Input.GetButton("Vertical") && verticalAxis > 0) {
             switch(travelToSceneName) {
                 case "Tool_Intro_Thruster":
+                    _travelToSceneName = travelToSceneName;
+                    _prevScene = _currScene;
+                    SceneManager.LoadScene(travelToSceneName);
+                    transition = true;
+                    yield return new WaitForSeconds(0.5f);
+                    GameObject[] vcs = GameObject.FindGameObjectsWithTag("VirtualCamera");
+                    GameObject bounds;
+                    CompositeCollider2D shape;
+                    foreach (GameObject vc in vcs)
+                    {
+                        vc.GetComponent<CinemachineConfiner2D>().InvalidateCache();
+                        bounds = GameObject.FindGameObjectWithTag("Boundary");
+                        shape = bounds.GetComponent<CompositeCollider2D>();
+                        vc.GetComponent<CinemachineConfiner2D>().m_BoundingShape2D = shape;
+                    }
+                    break;
                 case "Tool_Intro_GRS":
                 case "Tool_Intro_Imager":
                 case "Tool_Intro_eMagnet":
