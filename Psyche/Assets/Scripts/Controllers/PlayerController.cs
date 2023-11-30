@@ -124,7 +124,7 @@ public class PlayerController : BaseController<PlayerController>
     {
         //Check booleans
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
-        imagerManager.Activate();
+        //imagerManager.Activate();
 
         //default states
         usingThruster = false;
@@ -344,14 +344,15 @@ public class PlayerController : BaseController<PlayerController>
                 inventoryManager.SetTool(toolName, true);
                 break;
 
-            case "Imager":
+            /*case "Imager":
                 imagerManager.Modify();
                 inventoryManager.SetTool(toolName, true);
-                break;
+                break;*/
 
-            case "ImagerCursor":
+            case "Imager":
                 imagerManager.Enable();
-                imagerManager.Modify();
+                //imagerManager.Modify();
+                inventoryManager.SetTool("Imager", true);
                 flashlight.Update();
                 break;
 
