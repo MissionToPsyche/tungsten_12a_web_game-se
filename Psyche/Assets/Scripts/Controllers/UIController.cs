@@ -355,6 +355,12 @@ public class UIController : BaseController<UIController>
     {
         switch (toolName)
         {
+            case "Spectrometer1":
+                Application.OpenURL("https://psyche.asu.edu/gallery/meet-the-nasa-psyche-team-who-will-map-psyches-elemental-composition/");
+                break;
+            case "Spectrometer2":
+                Application.OpenURL("https://www.jpl.nasa.gov/images/pia24892-psyches-gamma-ray-and-neutron-spectrometer-up-close");
+                break;    
             case "Imager":
                 Application.OpenURL("https://www.jpl.nasa.gov/images/pia24894-psyches-imager-in-progress");
                 break;
