@@ -182,7 +182,7 @@ public class UIController : BaseController<UIController>
                         ProcessDevConsole(args);
                         break;
                     case "BatteryManager":
-                        UpdateBatteryText(args);
+                        UpdateBattery(args);
                         break;
                     case "ToolManager":
                         directive = args[0].ToString();
@@ -289,9 +289,25 @@ public class UIController : BaseController<UIController>
     /// Function to update the battery text     ///TODO: Relocate battpertext to UIController object
     /// </summary>
     /// <param name="newPercentage"></param>
-    private void UpdateBatteryText(ArrayList args)
+    private void UpdateBattery(ArrayList args)
     {
         battPerText.text = args[0].ToString() + "%";
+        switch (float.Parse(args[0].ToString())) {
+            case > 83.35f:
+                activeBattSpriteRenderer.sprite = batterySprite6; break;
+            case > 66.68f:
+                activeBattSpriteRenderer.sprite = batterySprite5; break;
+            case > 50.01f:                
+                activeBattSpriteRenderer.sprite = batterySprite4; break;
+            case > 33.34f:                
+                activeBattSpriteRenderer.sprite = batterySprite3; break;
+            case > 16.67f:                
+                activeBattSpriteRenderer.sprite = batterySprite2; break;
+            case > 0f:                
+                activeBattSpriteRenderer.sprite = batterySprite1; break;
+            case <= 0f:            
+                activeBattSpriteRenderer.sprite = batterySprite0; break;
+        }
     }
 
     /// <summary>
@@ -368,6 +384,14 @@ public class UIController : BaseController<UIController>
     //========================================================== UI ==========================================================
     //UI Components
     public TMP_Text battPerText;
+    public SpriteRenderer activeBattSpriteRenderer;
+    public Sprite batterySprite6;
+    public Sprite batterySprite5;
+    public Sprite batterySprite4;
+    public Sprite batterySprite3;
+    public Sprite batterySprite2;
+    public Sprite batterySprite1;
+    public Sprite batterySprite0;
 
     [Header("Inventory Menus")]
     public GameObject inventoryMenu;
