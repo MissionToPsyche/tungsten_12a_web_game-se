@@ -134,7 +134,8 @@ public class UIController : BaseController<UIController>
     /// Invokes events for this and any subclasses.
     /// - Takes in an arraylist -- Requirements:
     ///   - ArrayList[0] = destination
-    ///   - ArrayList[1] = source
+    ///   - ArrayList[1] = subdesination
+    ///   - ArrayList[2] = source
     /// </summary>
     /// <param name="args"></param>
     public override void SendMessage(ArrayList args)
@@ -263,12 +264,12 @@ public class UIController : BaseController<UIController>
             case "thruster":
                 setDialogText("This is a Thruster");
                 thrusterButton.SetActive(true);
-                thrusterSection.SetActive(true);
+                thrusterLevel.transform.parent.gameObject.SetActive(true);
                 break;
             case "imager":
                 setDialogText("This is an Imager");
                 imagerButton.SetActive(true);
-                imagerSection.SetActive(true);
+                imagerLevel.transform.parent.gameObject.SetActive(true);
                 break;
             case "spectrometer":
                 setDialogText("This is a Spectrometer");
@@ -277,7 +278,7 @@ public class UIController : BaseController<UIController>
             case "electromagnet":
                 setDialogText("This is an ElectroMagnet");
                 eMagnetButton.SetActive(true);
-                eMagnetSection.SetActive(true);
+                eMagnetLevel.transform.parent.gameObject.SetActive(true);
                 break;
             default:
                 Debug.Log("Incorrect tool name passed: " + args[0].ToString());
@@ -508,15 +509,20 @@ public class UIController : BaseController<UIController>
 
     //========================================================== Upgrades Menu ==========================================================
     [Header("Upgrades Menu")]
+    public TMP_Text errorText;
+
+    [Header("Element Amounts")]
     public TMP_Text copperAmount;
     public TMP_Text ironAmount;
     public TMP_Text nickelAmount;
     public TMP_Text goldAmount;
     public TMP_Text platinumAmount;
-    public TMP_Text errorText;
-    public GameObject thrusterSection;
-    public GameObject eMagnetSection;
-    public GameObject imagerSection;
+
+    [Header("Tool Levels")]
+    public TMP_Text thrusterLevel;
+    public TMP_Text eMagnetLevel;
+    public TMP_Text batteryLevel;
+    public TMP_Text imagerLevel;
 
     /// <summary>
     /// Modifies the tool when its upgrade button is pressed
@@ -548,14 +554,15 @@ public class UIController : BaseController<UIController>
         string toolName = args[2].ToString().ToLower();
         //Dictionary that contains everything required for the tool's next level requirements - see any toolmanager
         Dictionary<string, int> levelRequirements = (Dictionary<string, int>)args[3];
+        string level = args[4].ToString();
 
-        switch(directive)
+        switch (directive)
         {
             case "upgrade":
                 if (!upgradeSuccess)
                 {
                     string requirement_display = "Must Have: ";
-                    foreach (var requirement in levelRequirements)
+                    foreach (var requirement in levelRequirements) //level requirements loop
                     {
                         if (requirement.Value > 0)
                         {
@@ -569,17 +576,19 @@ public class UIController : BaseController<UIController>
                 switch (toolName.ToLower())
                 {
                     case "thruster":
+                        thrusterLevel.SetText(level);
                         errorText.gameObject.SetActive(false);
                         break;
                     case "battery":
-
+                        batteryLevel.SetText(level);
                         errorText.gameObject.SetActive(false);
                         break;
                     case "imager":
-
+                        imagerLevel.SetText(level);
                         errorText.gameObject.SetActive(false);
                         break;
                     case "electromagnet":
+                        eMagnetLevel.SetText(level);
                         errorText.gameObject.SetActive(false);
                         break;
                     default:
