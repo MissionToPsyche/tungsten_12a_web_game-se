@@ -2,6 +2,7 @@ using Cinemachine;
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 /// <summary>
@@ -45,19 +46,17 @@ public class TransitionManager : MonoBehaviour {
                     SceneManager.LoadScene(travelToSceneName);
                     transition = true;
                     yield return new WaitForSeconds(0.5f);
-                    GameObject[] vcs = GameObject.FindGameObjectsWithTag("VirtualCamera");
-                    GameObject bounds;
-                    CompositeCollider2D shape;
-                    foreach (GameObject vc in vcs)
-                    {
-                        vc.GetComponent<CinemachineConfiner2D>().InvalidateCache();
-                        bounds = GameObject.FindGameObjectWithTag("Boundary");
-                        shape = bounds.GetComponent<CompositeCollider2D>();
-                        vc.GetComponent<CinemachineConfiner2D>().m_BoundingShape2D = shape;
-                    }
+                    loadCameraBounds();
                     break;
                 case "Tool_Intro_GRS":
                 case "Tool_Intro_Imager":
+                    _travelToSceneName = travelToSceneName;
+                    _prevScene = _currScene;
+                    SceneManager.LoadScene(travelToSceneName);
+                    transition = true;
+                    yield return new WaitForSeconds(0.5f);
+                    loadCameraBounds();
+                    break;
                 case "Tool_Intro_eMagnet":
                     _travelToSceneName = travelToSceneName;
                     _prevScene = _currScene;
@@ -78,6 +77,23 @@ public class TransitionManager : MonoBehaviour {
                     Debug.LogError("Invalid Scene Transition");
                     break;
             }
+        }
+    }
+
+    /// <summary>
+    /// Finds and passes the boundary of the newly loaded scene to each of the game's cameras
+    /// </summary>
+    private void loadCameraBounds()
+    {
+        GameObject[] vcs = GameObject.FindGameObjectsWithTag("VirtualCamera");
+        GameObject bounds;
+        CompositeCollider2D shape;
+        foreach (GameObject vc in vcs)
+        {
+            vc.GetComponent<CinemachineConfiner2D>().InvalidateCache();
+            bounds = GameObject.FindGameObjectWithTag("Boundary");
+            shape = bounds.GetComponent<CompositeCollider2D>();
+            vc.GetComponent<CinemachineConfiner2D>().m_BoundingShape2D = shape;
         }
     }
 
