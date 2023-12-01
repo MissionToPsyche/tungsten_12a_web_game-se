@@ -11,38 +11,38 @@ PrefabInstance:
     - target: {fileID: 909618470094357323, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 91b8dcd8b97f858439485b63a6278b62, type: 3}
+      objectReference: {fileID: 21300000, guid: 4c2693f2bdc704e49b013e27a8a14a2d, type: 3}
     - target: {fileID: 1733599726157441985, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_Size.x
-      value: 3.0521703
+      value: 0.6043255
       objectReference: {fileID: 0}
     - target: {fileID: 1733599726157441985, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_Size.y
-      value: 2.7687392
+      value: 0.28918046
       objectReference: {fileID: 0}
     - target: {fileID: 1733599726157441985, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_Offset.x
-      value: -0.023619413
+      value: 0.003659755
       objectReference: {fileID: 0}
     - target: {fileID: 1733599726157441985, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_Offset.y
-      value: 0.11809629
+      value: -0.0014211237
       objectReference: {fileID: 0}
     - target: {fileID: 1733599726157441985, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 4.8
+      value: 0.55
       objectReference: {fileID: 0}
     - target: {fileID: 1733599726157441985, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 4.8
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 3971640087115632001, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3971640087115632001, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3971640087115632001, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_LocalPosition.x
@@ -90,7 +90,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7775450262555123965, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_Name
-      value: Flashligh Pickup
+      value: Flashlight Pickup
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
