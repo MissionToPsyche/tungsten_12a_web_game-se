@@ -396,7 +396,7 @@ GameObject:
   - component: {fileID: 1049168680}
   m_Layer: 0
   m_Name: SceneTransition_Home
-  m_TagString: TransitionObject
+  m_TagString: TransitionObjectOut
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -961,7 +961,7 @@ GameObject:
   - component: {fileID: 1888149421}
   m_Layer: 0
   m_Name: SceneTransition_Home
-  m_TagString: TransitionObject
+  m_TagString: TransitionObjectIn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

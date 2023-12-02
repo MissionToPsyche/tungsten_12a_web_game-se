@@ -9,7 +9,7 @@ public class IntroController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("EMagnet"))
         {
             switch (curScreen)
             {
@@ -32,7 +32,7 @@ public class IntroController : MonoBehaviour
                     break;
 
                 default:
-                    SceneManager.LoadScene("SampleScene");
+                    SceneManager.LoadScene("Landing_Scene");
                     break;
             }
         }
