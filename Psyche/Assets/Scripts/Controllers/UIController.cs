@@ -524,6 +524,12 @@ public class UIController : BaseController<UIController>
     public TMP_Text batteryLevel;
     public TMP_Text imagerLevel;
 
+    [Header("Element Requirements")]
+    public TMP_Text thrusterRequirements;
+    public TMP_Text eMagnetRequirements;
+    public TMP_Text batteryRequirements;
+    public TMP_Text imagerRequirements;
+
     /// <summary>
     /// Modifies the tool when its upgrade button is pressed
     /// </summary>
@@ -562,7 +568,7 @@ public class UIController : BaseController<UIController>
                 if (!upgradeSuccess)
                 {
                     string requirement_display = "Must Have: ";
-                    foreach (var requirement in levelRequirements) //level requirements loop
+                    foreach (var requirement in levelRequirements)
                     {
                         if (requirement.Value > 0)
                         {
@@ -573,23 +579,25 @@ public class UIController : BaseController<UIController>
                     errorText.gameObject.SetActive(true);
                     return;
                 }
-                switch (toolName.ToLower())
+
+                errorText.gameObject.SetActive(false);
+                switch (toolName.ToLower()) //rework to show all element requirements?
                 {
                     case "thruster":
                         thrusterLevel.SetText(level);
-                        errorText.gameObject.SetActive(false);
+                        thrusterRequirements.SetText(levelRequirements["element_copper"].ToString());
                         break;
                     case "battery":
                         batteryLevel.SetText(level);
-                        errorText.gameObject.SetActive(false);
+                        batteryRequirements.SetText(levelRequirements["element_nickel"].ToString());
                         break;
                     case "imager":
                         imagerLevel.SetText(level);
-                        errorText.gameObject.SetActive(false);
+                        imagerRequirements.SetText(levelRequirements["element_gold"].ToString());
                         break;
                     case "electromagnet":
                         eMagnetLevel.SetText(level);
-                        errorText.gameObject.SetActive(false);
+                        eMagnetRequirements.SetText(levelRequirements["element_iron"].ToString());
                         break;
                     default:
                         break;

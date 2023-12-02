@@ -3619,7 +3619,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 468.75, y: -285}
+  m_AnchoredPosition: {x: 312.5, y: -285}
   m_SizeDelta: {x: 170, y: 570}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3204133284085276742
@@ -8047,6 +8047,10 @@ MonoBehaviour:
   eMagnetLevel: {fileID: 1577842087899084286}
   batteryLevel: {fileID: 7554948863508418226}
   imagerLevel: {fileID: 5685298712442208865}
+  thrusterRequirements: {fileID: 4326942267384956618}
+  eMagnetRequirements: {fileID: 8039770426350262856}
+  batteryRequirements: {fileID: 2516465357859620473}
+  imagerRequirements: {fileID: 326645107015006666}
 --- !u!1 &5624132768119358631
 GameObject:
   m_ObjectHideFlags: 0
