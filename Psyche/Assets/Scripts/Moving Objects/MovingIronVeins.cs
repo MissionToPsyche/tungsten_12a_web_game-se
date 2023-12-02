@@ -1,7 +1,8 @@
 using UnityEngine;
 
-public class MovingHazard : MonoBehaviour //add more comments
+public class MovingIronVeins : MonoBehaviour //add more comments
 {
+    [SerializeField] private GameObject ironVein;
     [SerializeField] private Transform[] pointPositions;
     [SerializeField] private float moveSpeed;
 
@@ -17,17 +18,20 @@ public class MovingHazard : MonoBehaviour //add more comments
             points[i] = pointPositions[i].position;
         }
 
-        transform.position = points[0];
+        ironVein.transform.position = points[0];
     }
 
     void Update()
     {
-        transform.position = Vector2.MoveTowards(transform.position, points[pointsIndex], moveSpeed * Time.deltaTime);
+        ironVein.transform.position = Vector2.MoveTowards(ironVein.transform.position, points[pointsIndex], moveSpeed * Time.deltaTime);
 
-        if ((Vector2)transform.position == points[pointsIndex])
+        if ((Vector2)ironVein.transform.position == points[pointsIndex])
             pointsIndex++;
 
         if (pointsIndex == points.Length)
-            pointsIndex = 0;
+        {
+            ironVein.transform.position = points[0];
+            pointsIndex = 1;
+        }
     }
 }
