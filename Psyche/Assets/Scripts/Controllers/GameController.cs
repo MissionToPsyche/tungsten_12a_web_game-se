@@ -143,8 +143,8 @@ public class GameController : BaseController<GameController>
     /// </summary>
     private void OnEnable()
     {
-        UIController.Instance.OnUpdateUIToGame += ReceiveMessage;
-        PlayerController.Instance.OnUpdatePlayerToGame += ReceiveMessage;
+        UIController.Instance.OnUpdateUIToGame += ReceiveMessage;           //<-- These will cause issues for the time being if start from TitleScreen
+        PlayerController.Instance.OnUpdatePlayerToGame += ReceiveMessage;   // It also breaks things attached to this object from Title Screen
     }
 
     /// <summary>
