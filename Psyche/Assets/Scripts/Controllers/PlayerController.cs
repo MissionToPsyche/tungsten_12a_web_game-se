@@ -259,10 +259,17 @@ public class PlayerController : BaseController<PlayerController>
                                 break;
                         }
                         break;
+                    case "DeveloperConsole":
+                        string item = args[0].ToString();
+                        //Set up for whether tool/element is passed
+                        break;
                 }
                 break;
+            case "InventoryManager":
+                inventoryManager.ReceiveMessage(args);
+                break;
             default:
-                Debug.Log("Incorrect subdestination -- GameController");
+                Debug.Log("Incorrect subdestination -- PlayerController");
                 break;
         }
     }
