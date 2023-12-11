@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections;
 using System;
-using System.Collections.Generic;
 
 /// <summary>
 /// Player Management script controls how the player interacts with the 
@@ -154,14 +153,13 @@ public class PlayerController : BaseController<PlayerController>
                 eMagnetManager.Activate();
                 batteryManager.DrainBatt(500);
             }
-
-            playerMovement.handleMovement(usingThruster, beingWarped);
-
         }
 
-        //needed to ensure the warping animation plays even when input is blocked
-        if (beingWarped)
-            playerMovement.handleMovement(usingThruster, beingWarped);
+        playerMovement.handleMovement(usingThruster, beingWarped);
+
+        // //needed to ensure the warping animation plays even when input is blocked
+        // if (beingWarped)
+        //     playerMovement.handleMovement(usingThruster, beingWarped);
 
         //Inventory and Dialog Box 
         if (Input.GetButtonDown("Inventory") && !Input.GetButton("FireGRS"))
