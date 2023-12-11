@@ -404,7 +404,12 @@ public class UIController : BaseController<UIController>
             if (curSubmenu != null)
                 closeSubmenu();
             else if (inventoryMenu.activeInHierarchy)
+            {
+                ///enables and disables player collider to deal with being unable to go through doors after opening inventory
+                PlayerController.Instance.playerCollider.enabled = false;
                 setInventory(false);
+                PlayerController.Instance.playerCollider.enabled = true;
+            }
             else
                 setInventory(true);
         }
