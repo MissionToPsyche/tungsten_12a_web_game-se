@@ -12,7 +12,7 @@ public class GameController : BaseController<GameController>
     //Public variables
     public DeveloperConsole developerConsole;
     public GameStateManager gameStateManager;
-    //public SceneManager sceneManager;
+    public SceneManager sceneManager;
     public AudioManager audioManager;
 
     public bool colorBlindMode;
@@ -26,6 +26,8 @@ public class GameController : BaseController<GameController>
         developerConsole.Initialize(this);
         gameStateManager = new GameStateManager(this, GameStateManager.GameState.MainMenu);
         audioManager = GameObject.FindGameObjectWithTag("AudioSources").GetComponent<AudioManager>();
+        sceneManager = GetComponent<SceneManager>();
+        sceneManager.Initialize(this);
     }
 
     /// <summary>
@@ -129,6 +131,9 @@ public class GameController : BaseController<GameController>
                 break;
             case "DeveloperConsole":
                 developerConsole.IntakeEvents(args);
+                break;
+            case "SceneManager":
+                StartCoroutine(sceneManager.CheckTransition(args[1].ToString()));
                 break;
             default:
                 Debug.Log("Incorrect subdestination -- GameController");
