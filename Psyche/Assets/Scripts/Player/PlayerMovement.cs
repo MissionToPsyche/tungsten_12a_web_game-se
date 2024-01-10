@@ -38,17 +38,15 @@ public class PlayerMovement : MonoBehaviour
     public void Initialize(PlayerController playerManagement)
     {
         _playerManagement = playerManagement;
+        _animator = GetComponentInChildren<Animator>();
+        _spriteRenderer = _animator.gameObject.GetComponent<SpriteRenderer>();
     }
 
     /// <summary>
     /// Handles the movement and animations of the player.
     /// </summary>
-    /// <param name="playerCharacter"></param>
-    /// <param name="isGrounded"></param>
     public void handleMovement(bool usingThruster, bool beingWarped)
     {
-        _animator = GetComponent<Animator>();
-        _spriteRenderer = GetComponent<SpriteRenderer>();
         _flipSprite = true;
 
         // warping takes precedent over every other animation, and blocks players movement
@@ -62,7 +60,10 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             //Horizontal movement
-            _xAxis = Input.GetAxisRaw("Horizontal");
+            if (!_playerManagement.inputBlocked)
+                _xAxis = Input.GetAxisRaw("Horizontal");
+            else
+                _xAxis = 0;
             _walkVelocity = new Vector2(_xAxis * 7f, _playerManagement.playerCharacter.velocity.y);
             _playerManagement.playerCharacter.velocity = _walkVelocity;
 
@@ -98,12 +99,11 @@ public class PlayerMovement : MonoBehaviour
             }
 
             //Vertical "jump" only if player is on the ground
-            if (_playerManagement.isGrounded && !_playerManagement.beingPulled && Input.GetButtonDown("Jump"))
+            if (!_playerManagement.inputBlocked && !_playerManagement.beingPulled && _playerManagement.isGrounded && Input.GetButtonDown("Jump"))
             {
                 _playerManagement.playerCharacter.velocity = new Vector2(_playerManagement.playerCharacter.velocity.x, 7f);
                 GameController.Instance.audioManager.playerJump.Play();
             }
-
         }
 
         //checks the direction the player is moving
@@ -116,10 +116,6 @@ public class PlayerMovement : MonoBehaviour
             else if (_xAxis > 0) //if moving left
             {
                 _isFacingRight = true;
-            }
-            else
-            { 
-                //nothing. whichever way it's currently facing will be the same
             }
         }
 
