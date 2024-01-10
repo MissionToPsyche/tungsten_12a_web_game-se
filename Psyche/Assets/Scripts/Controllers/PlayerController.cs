@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections;
 using System;
-using System.Collections.Generic;
 
 /// <summary>
 /// Player Management script controls how the player interacts with the 
@@ -101,7 +100,7 @@ public class PlayerController : BaseController<PlayerController>
     {   //Set up initial player health (Should be initialized through the playerhealth script instead of here)
         playerHealth.playerHealth = 5;
         playerHealth.amount = 1;
-        playerHealth.UpdateSceneText();
+        playerHealth.UpdateScene();
     }
 
     /// <summary>
@@ -154,14 +153,13 @@ public class PlayerController : BaseController<PlayerController>
                 eMagnetManager.Activate();
                 batteryManager.DrainBatt(500);
             }
-
-            playerMovement.handleMovement(usingThruster, beingWarped);
-
         }
 
-        //needed to ensure the warping animation plays even when input is blocked
-        if (beingWarped)
-            playerMovement.handleMovement(usingThruster, beingWarped);
+        playerMovement.handleMovement(usingThruster, beingWarped);
+
+        // //needed to ensure the warping animation plays even when input is blocked
+        // if (beingWarped)
+        //     playerMovement.handleMovement(usingThruster, beingWarped);
 
         //Inventory and Dialog Box 
         if (Input.GetButtonDown("Inventory") && !Input.GetButton("FireGRS"))
@@ -259,10 +257,17 @@ public class PlayerController : BaseController<PlayerController>
                                 break;
                         }
                         break;
+                    case "DeveloperConsole":
+                        string item = args[0].ToString();
+                        //Set up for whether tool/element is passed
+                        break;
                 }
                 break;
+            case "InventoryManager":
+                inventoryManager.ReceiveMessage(args);
+                break;
             default:
-                Debug.Log("Incorrect subdestination -- GameController");
+                Debug.Log("Incorrect subdestination -- PlayerController");
                 break;
         }
     }

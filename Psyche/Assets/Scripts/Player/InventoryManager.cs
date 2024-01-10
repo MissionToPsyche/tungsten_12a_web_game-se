@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
 
@@ -36,6 +37,23 @@ public class InventoryManager : MonoBehaviour
             { "element_gold", 0 },
             { "element_platinum", 0 },
         };
+    }
+
+    public void ReceiveMessage(ArrayList args)
+    {
+        string item = args[2].ToString().ToLower();
+        if(_tools.ContainsKey(item))
+        {
+            SetTool(item, bool.Parse(args[3].ToString()));
+        } 
+        else if (_elements.ContainsKey(item))
+        {
+            SetElement(item, int.Parse(args[3].ToString())) ;
+        }
+        else
+        {
+            Debug.Log("Incorrect item name passed -- InventoryManager");
+        }
     }
 
     /// <summary>
