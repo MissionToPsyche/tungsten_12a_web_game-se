@@ -5,6 +5,6 @@ public class OutroController : MonoBehaviour
 {
     public void QuitGame()
     {
-        SceneManager.LoadScene("Title_Screen");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Title_Screen");
     }
 }

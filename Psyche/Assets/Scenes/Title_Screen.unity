@@ -1162,7 +1162,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0e5cf764854e6b4c97604068d9814b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  developerConsole: {fileID: 527361053}
+  developerConsole: {fileID: 0}
+  sceneManager: {fileID: 0}
   audioManager: {fileID: 1773880520}
   colorBlindMode: 0
 --- !u!4 &527361052
@@ -1190,7 +1191,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 527361050}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 280ac3698bbd7dd439b4d196d163d1ee, type: 3}
+  m_Script: {fileID: 11500000, guid: 65cb6108c22eff341826590df75aaa2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &806676436

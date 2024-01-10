@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// Manages the transitions between scenes
 /// </summary>
-public class TransitionManager : MonoBehaviour {
+public class SceneManager : MonoBehaviour {
     //Private variables
-    private PlayerController _playerManagement;
+    private GameController _gameController;
     private Vector3 _landingPosition;
     private bool transition = false;
     private String _travelToSceneName;
@@ -19,8 +19,8 @@ public class TransitionManager : MonoBehaviour {
     /// Initializes this script
     /// </summary>
     /// <param name="playerManagement"></param>
-    public void Initialize(PlayerController playerManagement) {
-        _playerManagement = playerManagement;
+    public void Initialize(GameController gameController) {
+        _gameController = gameController;
     }
 
     /// <summary>
@@ -44,12 +44,12 @@ public class TransitionManager : MonoBehaviour {
                 case "Tool_Intro_eMagnet":
                     _travelToSceneName = travelToSceneName;
                     _prevScene = _currScene;
-                    SceneManager.LoadScene(travelToSceneName);
+                    UnityEngine.SceneManagement.SceneManager.LoadScene(travelToSceneName);
                     transition = true;
                     break;
 
                 case "SceneTransition_Back": // return back to previous scene
-                    SceneManager.LoadScene(_prevScene);
+                    UnityEngine.SceneManagement.SceneManager.LoadScene(_prevScene);
                     transition = true;
                     break;
 
@@ -68,14 +68,14 @@ public class TransitionManager : MonoBehaviour {
     /// Subscribes to the SceneManager.sceneLoaded event
     /// </summary>
     void Awake() {
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     /// <summary>
     /// Unsubscribes from event to prevent memory loss
     /// </summary>
     void OnDestroy() {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     /// <summary>
@@ -99,7 +99,7 @@ public class TransitionManager : MonoBehaviour {
     /// <param name="travelToSceneName"></param>
     public void RepositionPlayer(string travelToSceneName) {
         _landingPosition = GetTransitionObjectPosition(travelToSceneName);
-        _playerManagement.playerCharacter.transform.position = _landingPosition;
+        PlayerController.Instance.playerCharacter.transform.position = _landingPosition;
     }
 
     /// <summary>
@@ -108,7 +108,7 @@ public class TransitionManager : MonoBehaviour {
     /// <param name="sceneName"></param>
     /// <returns></returns>
     public Vector3 GetTransitionObjectPosition(string sceneName) {
-        Scene scene = SceneManager.GetSceneByName(sceneName);
+        Scene scene = UnityEngine.SceneManagement.SceneManager.GetSceneByName(sceneName);
         if (scene.isLoaded) {
             GameObject obj = GameObject.FindGameObjectWithTag("TransitionObjectIn");
                 if (obj != null) {
