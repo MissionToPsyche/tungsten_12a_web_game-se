@@ -15,11 +15,11 @@ using UnityEngine;
 public class ImagerManager : ToolManager
 {
     //Private Variables
-    [SerializeField] private UnityEngine.Rendering.Universal.Light2D _imager; //The player's imager - Not initialized through code
+    [SerializeField] private UnityEngine.Rendering.Universal.Light2D _playerlight; //The player's imager - Not initialized through code
     [SerializeField] private bool _active;
     [SerializeField] private UnityEngine.Rendering.Universal.Light2D _flashlight; //The cursor's imager - Not initialized through code
-    [SerializeField] private float _rangeIncrease; //The amount to increase the vision field
-    [SerializeField] private ImagerCounter _imagerCounter; //Not initialized though code
+    [SerializeField] private float _radiusIncrease; //The amount to increase the vision field
+    [SerializeField] private ImagerCounter _imagerPickupCounter; //Not initialized though code
     
 
     /// <summary>
@@ -63,7 +63,7 @@ public class ImagerManager : ToolManager
         };
 
         //Tool specific variables
-        _rangeIncrease = 0.5f;
+        _radiusIncrease = 0.5f;
         _active = false;
     }
 
@@ -75,11 +75,11 @@ public class ImagerManager : ToolManager
         _active = !_playerController.batteryManager.batteryDrained;
         if(_active)
         {
-            _imager.intensity = 1;
+            _playerlight.intensity = 1;
         } 
         else
         {
-            _imager.intensity = 0;
+            _playerlight.intensity = 0;
         }
     }
 
@@ -89,13 +89,13 @@ public class ImagerManager : ToolManager
     protected override void UpgradeTool()
     {
         //Increase imager radius
-        _imager.pointLightInnerRadius += _rangeIncrease;
-        _imager.pointLightOuterRadius += _rangeIncrease;
+        _playerlight.pointLightInnerRadius += _radiusIncrease;
+        _playerlight.pointLightOuterRadius += _radiusIncrease;
         //Increase cursor radius
-        _flashlight.pointLightInnerRadius += _rangeIncrease;
-        _flashlight.pointLightOuterRadius += _rangeIncrease;
+        _flashlight.pointLightInnerRadius += _radiusIncrease;
+        _flashlight.pointLightOuterRadius += _radiusIncrease;
         GameController.Instance.audioManager.PlayAudio(
             GameController.Instance.audioManager.toolImager);
-        _imagerCounter.updateImagerCount(); 
+        _imagerPickupCounter.updateImagerCount();
     }
 }
