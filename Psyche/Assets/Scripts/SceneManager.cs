@@ -13,7 +13,6 @@ public class SceneManager : MonoBehaviour {
     private bool transition = false;
     private String _travelToSceneName;
     private String _currScene;
-    private String _prevScene;
     
     /// <summary>
     /// Initializes this script
@@ -38,18 +37,13 @@ public class SceneManager : MonoBehaviour {
         //If a positive vertical button is pressed (w or up), then transition
         if (Input.GetButton("Vertical") && verticalAxis > 0) {
             switch(travelToSceneName) {
+                case "Landing_Scene":
                 case "Tool_Intro_Thruster":
                 case "Tool_Intro_GRS":
                 case "Tool_Intro_Imager":
                 case "Tool_Intro_eMagnet":
                     _travelToSceneName = travelToSceneName;
-                    _prevScene = _currScene;
                     UnityEngine.SceneManagement.SceneManager.LoadScene(travelToSceneName);
-                    transition = true;
-                    break;
-
-                case "SceneTransition_Back": // return back to previous scene
-                    UnityEngine.SceneManagement.SceneManager.LoadScene(_prevScene);
                     transition = true;
                     break;
 
