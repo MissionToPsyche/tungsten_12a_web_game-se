@@ -1142,6 +1142,7 @@ GameObject:
   m_Component:
   - component: {fileID: 527361052}
   - component: {fileID: 527361051}
+  - component: {fileID: 527361053}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -1162,6 +1163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   developerConsole: {fileID: 0}
+  sceneManager: {fileID: 0}
   audioManager: {fileID: 1773880520}
   colorBlindMode: 0
 --- !u!4 &527361052
@@ -1180,6 +1182,18 @@ Transform:
   - {fileID: 1773880519}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &527361053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 527361050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65cb6108c22eff341826590df75aaa2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &806676436
 GameObject:
   m_ObjectHideFlags: 0

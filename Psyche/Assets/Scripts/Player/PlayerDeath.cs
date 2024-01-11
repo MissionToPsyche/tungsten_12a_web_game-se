@@ -86,7 +86,7 @@ public class PlayerDeath : MonoBehaviour {
         //check if the player is at the starting point
         if (startPoint.Equals(respawnPoint))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
         }
 
         //move the player to their respawn point
