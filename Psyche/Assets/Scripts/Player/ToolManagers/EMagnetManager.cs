@@ -96,7 +96,7 @@ public class EMagnetManager : ToolManager {
                     hit.attachedRigidbody.velocity = Vector2.zero;
                     hit.attachedRigidbody.angularVelocity = 0;
                     if (!_playerController.playerCollider.IsTouching(hit))
-                        hit.attachedRigidbody.MovePosition(Vector2.MoveTowards(hit.transform.position, transform.position, Time.deltaTime * 40));
+                        hit.attachedRigidbody.MovePosition(Vector2.MoveTowards(hit.transform.position, transform.position, Time.deltaTime * 20));
                 }
                 ///If new Iron Vein hit
                 else if (hit != target)
@@ -119,7 +119,7 @@ public class EMagnetManager : ToolManager {
              * Pulls Player towards most recently hit Iron Vein
              */
             if (target != null)
-                _playerController.playerCharacter.MovePosition(Vector2.MoveTowards(transform.position, target.transform.position, Time.deltaTime * 40));
+                _playerController.playerCharacter.MovePosition(Vector2.MoveTowards(transform.position, target.transform.position, Time.deltaTime * 20));
 
             yield return null;
         } while (Input.GetButton("EMagnet"));

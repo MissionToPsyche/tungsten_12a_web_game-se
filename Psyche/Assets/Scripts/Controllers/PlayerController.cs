@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections;
 using System;
-using System.Collections.Generic;
 
 /// <summary>
 /// Player Management script controls how the player interacts with the 
@@ -37,7 +36,7 @@ public class PlayerController : BaseController<PlayerController>
     public ThrusterManager thrusterManager;
     public ImagerCursor flashlight;
     public GammaView gammaView;
-    private TransitionManager sceneTransition;
+    private SceneManager sceneTransition;
     public PlayerDeath deathCon;
     public InventoryManager inventoryManager;
 
@@ -75,8 +74,8 @@ public class PlayerController : BaseController<PlayerController>
         // ##### Object Managers ######
         //playerHealth.Initialize(this); <-- this initializes the script and creates a cross reference between the two
         // ##### Miscellaneous ######
-        sceneTransition = GetComponent<TransitionManager>();
-        sceneTransition.Initialize(this);
+        //sceneTransition = GetComponent<SceneManager>();
+        //sceneTransition.Initialize(this);
         deathCon = GetComponent<PlayerDeath>();
         inventoryManager = GetComponent<InventoryManager>();
         inventoryManager.Initialize(this);
@@ -101,7 +100,7 @@ public class PlayerController : BaseController<PlayerController>
     {   //Set up initial player health (Should be initialized through the playerhealth script instead of here)
         playerHealth.playerHealth = 5;
         playerHealth.amount = 1;
-        playerHealth.UpdateSceneText();
+        playerHealth.UpdateScene();
     }
 
     /// <summary>
@@ -154,14 +153,13 @@ public class PlayerController : BaseController<PlayerController>
                 eMagnetManager.Activate();
                 batteryManager.DrainBatt(500);
             }
-
-            playerMovement.handleMovement(usingThruster, beingWarped);
-
         }
 
-        //needed to ensure the warping animation plays even when input is blocked
-        if (beingWarped)
-            playerMovement.handleMovement(usingThruster, beingWarped);
+        playerMovement.handleMovement(usingThruster, beingWarped);
+
+        // //needed to ensure the warping animation plays even when input is blocked
+        // if (beingWarped)
+        //     playerMovement.handleMovement(usingThruster, beingWarped);
 
         //Inventory and Dialog Box 
         if (Input.GetButtonDown("Inventory") && !Input.GetButton("FireGRS"))
@@ -202,8 +200,8 @@ public class PlayerController : BaseController<PlayerController>
             case "UI":
                 OnUpdatePlayerToUI?.Invoke(args);
                 break;
-            case "Player":
-                OnUpdatePlayerToUI.Invoke(args);
+            case "Game":
+                OnUpdatePlayerToGame?.Invoke(args);
                 break;
             default:
                 Debug.Log("Incorrect invocation in GameController");
@@ -259,10 +257,17 @@ public class PlayerController : BaseController<PlayerController>
                                 break;
                         }
                         break;
+                    case "DeveloperConsole":
+                        string item = args[0].ToString();
+                        //Set up for whether tool/element is passed
+                        break;
                 }
                 break;
+            case "InventoryManager":
+                inventoryManager.ReceiveMessage(args);
+                break;
             default:
-                Debug.Log("Incorrect subdestination -- GameController");
+                Debug.Log("Incorrect subdestination -- PlayerController");
                 break;
         }
     }
@@ -307,7 +312,10 @@ public class PlayerController : BaseController<PlayerController>
     {
         if (other.tag == "TransitionObject" || other.tag ==  "TransitionObjectIn") //for Transition objects
         {
-            StartCoroutine(sceneTransition.CheckTransition(other.name));
+            ArrayList args = new ArrayList { 
+                "Game", "SceneManager", "PlayerController", other.name 
+            };
+            SendMessage(args);
         }
     }
 

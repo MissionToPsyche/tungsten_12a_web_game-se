@@ -183,7 +183,7 @@ public class UIController : BaseController<UIController>
                         ProcessDevConsole(args);
                         break;
                     case "BatteryManager":
-                        UpdateBatteryText(args);
+                        UpdateBattery(args);
                         break;
                     case "ToolManager":
                         directive = args[0].ToString();
@@ -290,9 +290,25 @@ public class UIController : BaseController<UIController>
     /// Function to update the battery text     ///TODO: Relocate battpertext to UIController object
     /// </summary>
     /// <param name="newPercentage"></param>
-    private void UpdateBatteryText(ArrayList args)
+    private void UpdateBattery(ArrayList args)
     {
         battPerText.text = args[0].ToString() + "%";
+        switch (float.Parse(args[0].ToString())) {
+            case > 83.35f:
+                activeBattSpriteRenderer.sprite = batterySprite6; break;
+            case > 66.68f:
+                activeBattSpriteRenderer.sprite = batterySprite5; break;
+            case > 50.01f:                
+                activeBattSpriteRenderer.sprite = batterySprite4; break;
+            case > 33.34f:                
+                activeBattSpriteRenderer.sprite = batterySprite3; break;
+            case > 16.67f:                
+                activeBattSpriteRenderer.sprite = batterySprite2; break;
+            case > 0f:                
+                activeBattSpriteRenderer.sprite = batterySprite1; break;
+            case <= 0f:            
+                activeBattSpriteRenderer.sprite = batterySprite0; break;
+        }
     }
 
     /// <summary>
@@ -301,24 +317,30 @@ public class UIController : BaseController<UIController>
     /// <param name="args"></param>
     private void ProcessDevConsole(ArrayList args)
     {
-
         switch (args[0].ToString())
         {
             case "update":
-                if(_devConsoleFPSPanel.activeSelf)
+                if (_devConsoleFPSPanel.activeSelf)
                 {
                     _devConsoleText["DevConsoleFPS"].text = "FPS: " + args[1].ToString();
-                }       
+                }
+                if(_devConsoleResourcePanel.activeSelf)
+                {
+                    _devConsoleText["DevConsoleResourceMonitor"].text = "CPU: " + args[2].ToString() + "%\n" +
+                                                                        "RAM: " + args[3].ToString() + "MB";
+                }
                 break;
             case "toggle":
-                switch(args[1])
+                switch(args[1].ToString())
                 {
                     case "fps":
                         _devConsoleFPSPanel.SetActive(!_devConsoleFPSPanel.activeSelf);
                         _devConsoleText["DevConsoleFPS"].text = "FPS";
                         break;
                     case "resource_monitor":
-                        _devConsoleResourcePanel.SetActive(_devConsoleResourcePanel.activeSelf);
+                        
+                        _devConsoleResourcePanel.SetActive(!_devConsoleResourcePanel.activeSelf);
+                        _devConsoleText["DevConsoleResourceMonitor"].text = "Loading...";
                         break;
                     default:
                         Debug.Log("Invalid command");
@@ -340,6 +362,12 @@ public class UIController : BaseController<UIController>
     {
         switch (toolName)
         {
+            case "Spectrometer1":
+                Application.OpenURL("https://psyche.asu.edu/gallery/meet-the-nasa-psyche-team-who-will-map-psyches-elemental-composition/");
+                break;
+            case "Spectrometer2":
+                Application.OpenURL("https://www.jpl.nasa.gov/images/pia24892-psyches-gamma-ray-and-neutron-spectrometer-up-close");
+                break;    
             case "Imager":
                 Application.OpenURL("https://www.jpl.nasa.gov/images/pia24894-psyches-imager-in-progress");
                 break;
@@ -369,6 +397,14 @@ public class UIController : BaseController<UIController>
     //========================================================== UI ==========================================================
     //UI Components
     public TMP_Text battPerText;
+    public SpriteRenderer activeBattSpriteRenderer;
+    public Sprite batterySprite6;
+    public Sprite batterySprite5;
+    public Sprite batterySprite4;
+    public Sprite batterySprite3;
+    public Sprite batterySprite2;
+    public Sprite batterySprite1;
+    public Sprite batterySprite0;
 
     [Header("Inventory Menus")]
     public GameObject inventoryMenu;
@@ -399,7 +435,12 @@ public class UIController : BaseController<UIController>
             if (curSubmenu != null)
                 closeSubmenu();
             else if (inventoryMenu.activeInHierarchy)
+            {
+                ///enables and disables player collider to deal with being unable to go through doors after opening inventory
+                PlayerController.Instance.playerCollider.enabled = false;
                 setInventory(false);
+                PlayerController.Instance.playerCollider.enabled = true;
+            }
             else
                 setInventory(true);
         }
@@ -499,9 +540,9 @@ public class UIController : BaseController<UIController>
         Destroy(gameObject);
         Cursor.visible = true;
         if (playCutscene)
-            SceneManager.LoadScene("Outro_Cutscene");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Outro_Cutscene");
         else
-            SceneManager.LoadScene("Title_Screen");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Title_Screen");
     }
 
 
