@@ -32,7 +32,7 @@ public class IntroController : MonoBehaviour
                     break;
 
                 default:
-                    SceneManager.LoadScene("Landing_Scene");
+                    UnityEngine.SceneManagement.SceneManager.LoadScene("Landing_Scene");
                     break;
             }
         }
