@@ -10902,11 +10902,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4822381043481428571, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.25
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 4822381043481428571, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.625
+      value: 0.375
       objectReference: {fileID: 0}
     - target: {fileID: 7911676450372591580, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: playerHealth
@@ -10916,7 +10916,8 @@ PrefabInstance:
       propertyPath: playerHealth
       value: 
       objectReference: {fileID: 905260923}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1777309154900150215, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
