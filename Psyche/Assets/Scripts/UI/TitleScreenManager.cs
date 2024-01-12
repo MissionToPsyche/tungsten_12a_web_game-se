@@ -19,7 +19,7 @@ public class TitleScreenManager : MonoBehaviour {
         //Play button click sound
         GameController.Instance.audioManager.buttonClick.Play();
 
-        SceneManager.LoadScene("Intro_Cutscene");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Intro_Cutscene");
     }
 
     /// <summary>

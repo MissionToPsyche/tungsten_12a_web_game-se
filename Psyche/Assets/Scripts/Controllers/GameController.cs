@@ -12,7 +12,7 @@ public class GameController : BaseController<GameController>
     //Public variables
     public DeveloperConsole developerConsole;
     public GameStateManager gameStateManager;
-    //public SceneManager sceneManager;
+    public SceneManager sceneManager;
     public AudioManager audioManager;
 
     public bool colorBlindMode;
@@ -26,6 +26,8 @@ public class GameController : BaseController<GameController>
         developerConsole.Initialize(this);
         gameStateManager = new GameStateManager(this, GameStateManager.GameState.MainMenu);
         audioManager = GameObject.FindGameObjectWithTag("AudioSources").GetComponent<AudioManager>();
+        sceneManager = GetComponent<SceneManager>();
+        sceneManager.Initialize(this);
     }
 
     /// <summary>
@@ -130,6 +132,9 @@ public class GameController : BaseController<GameController>
             case "DeveloperConsole":
                 developerConsole.IntakeEvents(args);
                 break;
+            case "SceneManager":
+                StartCoroutine(sceneManager.CheckTransition(args[1].ToString()));
+                break;
             default:
                 Debug.Log("Incorrect subdestination -- GameController");
                 break;
@@ -143,8 +148,8 @@ public class GameController : BaseController<GameController>
     /// </summary>
     private void OnEnable()
     {
-        UIController.Instance.OnUpdateUIToGame += ReceiveMessage;
-        PlayerController.Instance.OnUpdatePlayerToGame += ReceiveMessage;
+        UIController.Instance.OnUpdateUIToGame += ReceiveMessage;           //<-- These will cause issues for the time being if start from TitleScreen
+        PlayerController.Instance.OnUpdatePlayerToGame += ReceiveMessage;   // It also breaks things attached to this object from Title Screen
     }
 
     /// <summary>
