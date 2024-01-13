@@ -19,7 +19,7 @@ public class ImagerManager : ToolManager
     [SerializeField] private bool _active;
     [SerializeField] private UnityEngine.Rendering.Universal.Light2D _flashlight; //The cursor's imager - Not initialized through code
     [SerializeField] private float _radiusIncrease; //The amount to increase the vision field
-    [SerializeField] private ImagerCounter _imagerPickupCounter; //Not initialized though code
+    [SerializeField] private ImagerPickupCounter _imagerPickupCounter; //Not initialized though code
     
 
     /// <summary>
