@@ -75,11 +75,12 @@ public abstract class ToolManager : MonoBehaviour
             //Upgrade the tool
             level++;
             UpgradeTool();
-            args.Add(levelRequirements[level]);
+            args.Add(levelRequirements[level + 1]);
         } else
         {
             args.Add(levelRequirements[level + 1]);
         }
+        args.Add(level + 1);
         _playerController.SendMessage(args);
     }
 }

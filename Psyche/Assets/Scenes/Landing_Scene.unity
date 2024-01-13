@@ -915,11 +915,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!212 &498039448 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 5170621815784714003, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
-  m_PrefabInstance: {fileID: 1330709035}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &507573170
 GameObject:
   m_ObjectHideFlags: 0
@@ -9217,58 +9212,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1075673732955288979, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 55.51535
-      objectReference: {fileID: 0}
-    - target: {fileID: 1690373141205758407, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2097449482166454848, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 175.39001
-      objectReference: {fileID: 0}
-    - target: {fileID: 3037107638376048935, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 5.7084045
-      objectReference: {fileID: 0}
-    - target: {fileID: 3240746905583605884, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
-      propertyPath: batterySprite0
-      value: 
-      objectReference: {fileID: -797366915, guid: 95f5ab7703bd6f349b506610baa6faa9, type: 3}
-    - target: {fileID: 3240746905583605884, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
-      propertyPath: batterySprite1
-      value: 
-      objectReference: {fileID: 88227712, guid: 95f5ab7703bd6f349b506610baa6faa9, type: 3}
-    - target: {fileID: 3240746905583605884, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
-      propertyPath: batterySprite2
-      value: 
-      objectReference: {fileID: -39812770, guid: 95f5ab7703bd6f349b506610baa6faa9, type: 3}
-    - target: {fileID: 3240746905583605884, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
-      propertyPath: batterySprite3
-      value: 
-      objectReference: {fileID: -549937431, guid: 95f5ab7703bd6f349b506610baa6faa9, type: 3}
-    - target: {fileID: 3240746905583605884, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
-      propertyPath: batterySprite4
-      value: 
-      objectReference: {fileID: -943899848, guid: 95f5ab7703bd6f349b506610baa6faa9, type: 3}
-    - target: {fileID: 3240746905583605884, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
-      propertyPath: batterySprite5
-      value: 
-      objectReference: {fileID: -2090482627, guid: 95f5ab7703bd6f349b506610baa6faa9, type: 3}
-    - target: {fileID: 3240746905583605884, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
-      propertyPath: batterySprite6
-      value: 
-      objectReference: {fileID: 231044240, guid: 95f5ab7703bd6f349b506610baa6faa9, type: 3}
-    - target: {fileID: 3240746905583605884, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
-      propertyPath: batterySpriteActive
-      value: 
-      objectReference: {fileID: 498039448}
-    - target: {fileID: 3240746905583605884, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
-      propertyPath: activeBattSpriteRenderer
-      value: 
-      objectReference: {fileID: 498039448}
     - target: {fileID: 5172690812288988953, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
       propertyPath: m_Camera
       value: 
@@ -9276,10 +9219,6 @@ PrefabInstance:
     - target: {fileID: 5589539797666701746, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
       propertyPath: m_Name
       value: UI
-      objectReference: {fileID: 0}
-    - target: {fileID: 5589539797666701746, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7331055490882894279, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
       propertyPath: m_Pivot.x
@@ -10872,41 +10811,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4567901035931106489, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
-      propertyPath: m_ApplyToSortingLayers.Array.size
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4567901035931106489, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
-      propertyPath: m_ApplyToSortingLayers.Array.data[1]
-      value: -624250839
-      objectReference: {fileID: 0}
-    - target: {fileID: 4567901035931106489, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
-      propertyPath: m_ApplyToSortingLayers.Array.data[2]
-      value: 1717661639
-      objectReference: {fileID: 0}
-    - target: {fileID: 4567901035931106489, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
-      propertyPath: m_ApplyToSortingLayers.Array.data[3]
-      value: 1904587923
-      objectReference: {fileID: 0}
-    - target: {fileID: 4567901035931106489, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
-      propertyPath: m_ApplyToSortingLayers.Array.data[4]
-      value: -1085009325
-      objectReference: {fileID: 0}
-    - target: {fileID: 4567901035931106489, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
-      propertyPath: m_ApplyToSortingLayers.Array.data[5]
-      value: -1514807857
-      objectReference: {fileID: 0}
-    - target: {fileID: 4567901035931106489, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
-      propertyPath: m_ApplyToSortingLayers.Array.data[6]
-      value: 1746178165
-      objectReference: {fileID: 0}
     - target: {fileID: 4822381043481428571, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.25
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 4822381043481428571, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.625
+      value: 0.375
       objectReference: {fileID: 0}
     - target: {fileID: 7911676450372591580, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: playerHealth
@@ -10916,7 +10827,8 @@ PrefabInstance:
       propertyPath: playerHealth
       value: 
       objectReference: {fileID: 905260923}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1777309154900150215, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
