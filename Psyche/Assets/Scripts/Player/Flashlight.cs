@@ -12,7 +12,7 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// Imager tool script to enable light that follows mouse cursor.
 /// </summary>
-public class ImagerCursor : MonoBehaviour
+public class Flashlight : MonoBehaviour
 {
     //Mouse cursor location
     Vector3 cursorPoint;

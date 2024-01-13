@@ -34,7 +34,7 @@ public class PlayerController : BaseController<PlayerController>
     public ImagerManager imagerManager;
     public EMagnetManager eMagnetManager;
     public ThrusterManager thrusterManager;
-    public ImagerCursor flashlight;
+    public Flashlight flashlight;
     public GammaView gammaView;
     private SceneManager sceneTransition;
     public PlayerDeath deathCon;
