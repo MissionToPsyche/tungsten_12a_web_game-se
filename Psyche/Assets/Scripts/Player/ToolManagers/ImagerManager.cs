@@ -18,6 +18,8 @@ public class ImagerManager : ToolManager
     [SerializeField] private UnityEngine.Rendering.Universal.Light2D _playerlight; //The player's imager - Not initialized through code
     [SerializeField] private bool _active;
     [SerializeField] private UnityEngine.Rendering.Universal.Light2D _flashlight; //The cursor's imager - Not initialized through code
+    Vector3 cursorPoint; //Mouse cursor location
+    public float speed = 1f; //Speed to match cursor
     [SerializeField] private float _radiusIncrease; //The amount to increase the vision field
     [SerializeField] private ImagerPickupCounter _imagerPickupCounter; //Not initialized though code
     
@@ -32,6 +34,7 @@ public class ImagerManager : ToolManager
         toolName = "Imager";
         toolEnabled = false;
         _playerController = playerManagement;
+        _flashlight.intensity = 0f;
         level = 0;
         levelRequirements = new Dictionary<int, Dictionary<string, int>>()
         {
@@ -72,14 +75,15 @@ public class ImagerManager : ToolManager
     /// </summary>
     public override void Activate()
     {
+        //_flashlight.intensity = 1;
         _active = !_playerController.batteryManager.batteryDrained;
-        if(_active)
+        if (_active)
         {
-            _playerlight.intensity = 1;
-        } 
+            _flashlight.intensity = 1;
+        }
         else
         {
-            _playerlight.intensity = 0;
+            _flashlight.intensity = 0;
         }
     }
 
@@ -97,5 +101,12 @@ public class ImagerManager : ToolManager
         GameController.Instance.audioManager.PlayAudio(
             GameController.Instance.audioManager.toolImager);
         _imagerPickupCounter.updateImagerCount();
+    }
+
+    public void updateFlashlightPosition()
+    {
+        cursorPoint = Input.mousePosition;
+        cursorPoint.z = speed;
+        _flashlight.transform.position = Camera.main.ScreenToWorldPoint(cursorPoint);
     }
 }
