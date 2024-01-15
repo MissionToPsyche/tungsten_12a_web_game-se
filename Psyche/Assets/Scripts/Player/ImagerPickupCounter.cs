@@ -12,18 +12,18 @@ using UnityEngine;
 /// <summary>
 /// Imager counter script to track imager pickups on screen.
 /// </summary>
-public class ImagerCounter : MonoBehaviour
+public class ImagerPickupCounter : MonoBehaviour
 {
     //Imager counter text
-    public TMP_Text imagerCountText;
-    public int imagerCount = 0;
+    public TMP_Text imagerPickupCounterText;
+    public int imagerPickupCount = 0;
 
     /// <summary>
     /// Increment imager counter
     /// </summary>
     public void updateImagerCount()
     {
-        imagerCount++;
-        imagerCountText.text = "Imagers Found: " + imagerCount.ToString();
+        imagerPickupCount++;
+        imagerPickupCounterText.text = "Imagers Found: " + imagerPickupCount.ToString();
     }
 }
