@@ -129,6 +129,7 @@ public class UIController : BaseController<UIController>
     //Events Declarations
     public event Action<ArrayList> OnUpdateUIToGame;
     public event Action<ArrayList> OnUpdateUIToPlayer;
+    public event Action<ArrayList> OnUpdateInventoryUpdate;
 
     /// <summary>
     /// Invokes events for this and any subclasses.
@@ -165,7 +166,7 @@ public class UIController : BaseController<UIController>
     ///   - ArrayList[1] = source
     /// </summary>
     /// <param name="args"></param>
-    protected override void ReceiveMessage(ArrayList args)
+    protected override void ReceiveMessage(ArrayList args) /////////////////////////////////////////////////////////////////////////////
     {
         string subdestination = args[0].ToString();
         args.RemoveAt(0);
@@ -185,7 +186,7 @@ public class UIController : BaseController<UIController>
                     case "BatteryManager":
                         UpdateBattery(args);
                         break;
-                    case "ToolManager":
+                    case "ToolManager": /////////////////////////////////////////////////////////////////////////////
                         directive = args[0].ToString();
                         args.RemoveAt(0);
 
@@ -238,7 +239,9 @@ public class UIController : BaseController<UIController>
     {
         if (PlayerController.Instance != null)
         {
-            PlayerController.Instance.OnUpdatePlayerToUI -= EnableToolButton; 
+            PlayerController.Instance.OnUpdatePlayerToUI -= EnableToolButton;
+            //PlayerController.Instance.inventoryManager.OnUpdateInventoryElement -= //Insert correct function here
+            //PlayerController.Instance.inventoryManager.OnUpdateInventoryTool -= //Insert correct function here
         }
         if (GameController.Instance != null)
         {
@@ -591,7 +594,7 @@ public class UIController : BaseController<UIController>
     ///     - Dictionary contains a list of elements and their required values
     /// </summary>
     /// <param name="args"></param>
-    public void ToolInfoGather(ArrayList args)
+    public void ToolInfoGather(ArrayList args) /////////////////////////////////////////////////////////////////////////////
     {
         //passes upgrade or info
         string directive = args[0].ToString().ToLower();
@@ -673,7 +676,7 @@ public class UIController : BaseController<UIController>
     /// <summary>
     /// When the player walks over the object, pick up the object
     /// </summary>
-    public void ElementUpdate(ArrayList args)
+    public void ElementUpdate(ArrayList args) /////////////////////////////////////////////////////////////////////////////
     {
         string element = args[0].ToString().ToLower();
         string value = args[1].ToString();
