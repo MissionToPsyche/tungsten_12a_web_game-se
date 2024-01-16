@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 8710560225024395914}
   - component: {fileID: 2993995735064445650}
   - component: {fileID: 9080445027714383988}
+  - component: {fileID: 7489194191876710497}
   m_Layer: 14
-  m_Name: Iron Vein
+  m_Name: Moving Iron Vein
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -130,3 +131,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &7489194191876710497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3325924169283356502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f4ce2fd8730c9640b3e9f463490a470, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  belt: {fileID: 0}
