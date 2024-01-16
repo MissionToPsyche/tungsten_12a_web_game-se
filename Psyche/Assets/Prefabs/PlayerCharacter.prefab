@@ -147,7 +147,6 @@ MonoBehaviour:
   imagerManager: {fileID: 0}
   eMagnetManager: {fileID: 0}
   thrusterManager: {fileID: 0}
-  flashlight: {fileID: 1897821581455681017}
   gammaView: {fileID: 4691425001880923315}
   deathCon: {fileID: 0}
   inventoryManager: {fileID: 0}
@@ -185,11 +184,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toolName: 
   level: 0
-  _imager: {fileID: 4567901035931106489}
+  _playerlight: {fileID: 4567901035931106489}
   _active: 0
   _flashlight: {fileID: 4681648833962158228}
-  _rangeIncrease: 0
-  _imagerCounter: {fileID: 0}
+  speed: 1
+  _radiusIncrease: 0
+  _imagerPickupCounter: {fileID: 0}
 --- !u!114 &4691425001880923315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -465,7 +465,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6652720313966552362}
   - component: {fileID: 4681648833962158228}
-  - component: {fileID: 1897821581455681017}
   m_Layer: 0
   m_Name: Flashlight
   m_TagString: Untagged
@@ -538,20 +537,6 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
---- !u!114 &1897821581455681017
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2279942290040403682}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2c9a678888960f4fb9ba1712bfbf23d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 1
-  flashlight: {fileID: 4681648833962158228}
 --- !u!1 &2521884741136995062
 GameObject:
   m_ObjectHideFlags: 0
