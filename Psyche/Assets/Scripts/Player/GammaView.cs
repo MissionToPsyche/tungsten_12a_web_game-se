@@ -22,7 +22,6 @@ public class GammaView : MonoBehaviour {
     public Color defaultColor = Color.green;         // default color of items when default layer is used
     public List<GameObject> colorBlindModeObjects;   // objects stored for assistance with color blindness
     public bool colorBlindMode;                      // color blind mode boolean
-    public bool debugOn = false;                     // debug toggle for debug reporting
     public Camera mainCamera;                        // scene camera used to only load objects within view
     public LayerMask scanLayer = -1;                 // set to -1 to include all layers
     public Light2D sceneLight;                       // light in the current scene
@@ -126,7 +125,7 @@ public class GammaView : MonoBehaviour {
     /// Activates gamma ray spectrometer and shows new color
     /// </summary>
     public void ActivateGRS() {
-        Initialize(); if (debugOn) { DebugReportLog(); }
+        Initialize(); //DebugReportLog();
         for (int i = 0; i < spriteRenderersList.Count; i++) {
             if (spriteRenderersList[i] != null) {
                 spriteRenderersList[i].color = LayerColor(spriteRenderersList[i].gameObject);
@@ -157,7 +156,7 @@ public class GammaView : MonoBehaviour {
                 }
             }
         }
-        DeInitialize(); if (debugOn) { DebugReportLog(); }
+        DeInitialize(); //DebugReportLog();
     }
 
     /// <summary>
