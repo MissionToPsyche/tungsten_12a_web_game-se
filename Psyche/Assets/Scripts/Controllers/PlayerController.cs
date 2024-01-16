@@ -145,12 +145,9 @@ public class PlayerController : BaseController<PlayerController>
             }
 
             //Spectrometer
-            if (inventoryManager.CheckTool("spectrometer") && Input.GetButtonDown("FireGRS") && batteryManager.batteryPercent != 0) {
+            if (inventoryManager.CheckTool("spectrometer") && Input.GetButton("FireGRS") && batteryManager.batteryPercent != 0) {
                 gammaView.ActivateGRS();
-                batteryManager.DrainBatt(500);
-            }
-            if (inventoryManager.CheckTool("spectrometer") && Input.GetButtonUp("FireGRS")) {
-                gammaView.DeactivateGRS();
+                batteryManager.DrainBatt(2);
             }
 
             //ElectroMagnet
