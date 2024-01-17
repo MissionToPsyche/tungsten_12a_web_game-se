@@ -1,3 +1,4 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -38,9 +39,38 @@ public class SceneManager : MonoBehaviour {
         if (Input.GetButton("Vertical") && verticalAxis > 0) {
             switch(travelToSceneName) {
                 case "Landing_Scene":
+                    _travelToSceneName = travelToSceneName;
+                    UnityEngine.SceneManagement.SceneManager.LoadScene(travelToSceneName);
+                    transition = true;
+                    break;
                 case "Tool_Intro_Thruster":
+                    _travelToSceneName = travelToSceneName;
+                    //_prevScene = _currScene;
+                    //SceneManager.LoadScene(travelToSceneName);
+                    UnityEngine.SceneManagement.SceneManager.LoadScene(travelToSceneName);
+                    transition = true;
+                    yield return new WaitForSeconds(0.5f);
+                    GameObject[] vcs = GameObject.FindGameObjectsWithTag("VirtualCamera");
+                    GameObject bounds;
+                    CompositeCollider2D shape;
+                    foreach (GameObject vc in vcs)
+                    {
+                        vc.GetComponent<CinemachineConfiner2D>().InvalidateCache();
+                        bounds = GameObject.FindGameObjectWithTag("Boundary");
+                        shape = bounds.GetComponent<CompositeCollider2D>();
+                        vc.GetComponent<CinemachineConfiner2D>().m_BoundingShape2D = shape;
+                    }
+                    break;
                 case "Tool_Intro_GRS":
+                    _travelToSceneName = travelToSceneName;
+                    UnityEngine.SceneManagement.SceneManager.LoadScene(travelToSceneName);
+                    transition = true;
+                    break;
                 case "Tool_Intro_Imager":
+                    _travelToSceneName = travelToSceneName;
+                    UnityEngine.SceneManagement.SceneManager.LoadScene(travelToSceneName);
+                    transition = true;
+                    break;
                 case "Tool_Intro_eMagnet":
                     _travelToSceneName = travelToSceneName;
                     UnityEngine.SceneManagement.SceneManager.LoadScene(travelToSceneName);
