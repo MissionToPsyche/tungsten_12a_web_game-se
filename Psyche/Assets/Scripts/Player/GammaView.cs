@@ -1,7 +1,7 @@
 /** 
 Description: spectrometer tool gamma view script
 Author: blopezro
-Version: 20231124
+Version: 20240115
 **/
 
 using System;
@@ -26,7 +26,7 @@ public class GammaView : MonoBehaviour {
     public LayerMask scanLayer = -1;                 // set to -1 to include all layers
     public Light2D sceneLight;                       // light in the current scene
     public float origSceneLightIntensity;            // light intensity
-
+    
     /// <summary>
     /// Subscribes to the SceneManager.sceneLoaded event
     /// </summary>
@@ -52,6 +52,14 @@ public class GammaView : MonoBehaviour {
     }
 
     /// <summary>
+    /// Checks every frame to see if GRS tool is active and 
+    /// if it's not will ensure it's deactivated 
+    /// </summary>
+    private void Update() {
+        DeactivateGRS();
+    }
+
+    /// <summary>
     /// Objects loaded at the activation of the GRS
     /// </summary>
     void Initialize() {
@@ -69,7 +77,7 @@ public class GammaView : MonoBehaviour {
         
         // captures original colors of sprites
         for (int i = 0; i < spriteRenderersList.Count; i++) {
-                origColorArray[i] = spriteRenderersList[i].color;
+            origColorArray[i] = spriteRenderersList[i].color;
         }
 
         // apply modifications to sprites when color blind mode is enabled
@@ -117,36 +125,38 @@ public class GammaView : MonoBehaviour {
     /// Activates gamma ray spectrometer and shows new color
     /// </summary>
     public void ActivateGRS() {
-        Initialize(); 
-        //DebugReportLog(); // can comment out when not needed
-            for (int i = 0; i < spriteRenderersList.Count; i++) {
-                if (spriteRenderersList[i] != null) {
-                    spriteRenderersList[i].color = LayerColor(spriteRenderersList[i].gameObject);
+        Initialize(); //DebugReportLog();
+        for (int i = 0; i < spriteRenderersList.Count; i++) {
+            if (spriteRenderersList[i] != null) {
+                spriteRenderersList[i].color = LayerColor(spriteRenderersList[i].gameObject);
+                if (Input.GetButtonDown("FireGRS")) {
                     GameController.Instance.audioManager.toolGRS.Play();
-                    if (colorBlindMode) { ActivateGRSaltView(); }
-                    if (!sceneLight.intensity.Equals(1)) {
-                        TurnOnSceneLight();
-                    }
+                }
+                if (colorBlindMode) { ActivateGRSaltView(); }
+                if (!sceneLight.intensity.Equals(1)) {
+                    TurnOnSceneLight();
                 }
             }
+        }
     }
 
     /// <summary>
     /// Deactivates gamma ray spectrometer and reverts to original color
     /// </summary>
     public void DeactivateGRS() {
-            for (int i = 0; i < spriteRenderersList.Count; i++) {
-                if (spriteRenderersList[i] != null) {
-                    spriteRenderersList[i].color = origColorArray[i];
+        for (int i = 0; i < spriteRenderersList.Count; i++) {
+            if (spriteRenderersList[i] != null) {
+                spriteRenderersList[i].color = origColorArray[i];
+                if (Input.GetButtonUp("FireGRS")) {
                     GameController.Instance.audioManager.toolGRS.Stop();
-                    if (colorBlindMode) { DeactivateGRSaltView(); }
-                    if (!sceneLight.intensity.Equals(origSceneLightIntensity)) {
-                        RevertSceneLight();
-                    }
+                }
+                if (colorBlindMode) { DeactivateGRSaltView(); }
+                if (!sceneLight.intensity.Equals(origSceneLightIntensity)) {
+                    RevertSceneLight();
                 }
             }
-        DeInitialize();
-        //DebugReportLog(); // can comment out when not needed
+        }
+        DeInitialize(); //DebugReportLog();
     }
 
     /// <summary>
