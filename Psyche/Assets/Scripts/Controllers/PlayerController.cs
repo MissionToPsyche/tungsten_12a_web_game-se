@@ -43,7 +43,7 @@ public class PlayerController : BaseController<PlayerController>
     private bool usingThruster; //for animation purposes  // <--Implement boolean in thruster script
 
     //Booleans to prevent needless code runs
-    [HideInInspector] public bool eMagnetActive, beingPulled, inputBlocked, beingWarped; //Create a dictionary or list to track these
+    [HideInInspector] public bool eMagnetActive, beingPulled, inputBlocked, beingWarped, enteringCave, exitingCave; //Create a dictionary or list to track these
 
     /// <summary>
     /// Initialize the object and parent class
@@ -157,11 +157,7 @@ public class PlayerController : BaseController<PlayerController>
             }
         }
 
-        playerMovement.handleMovement(usingThruster, beingWarped);
-
-        // //needed to ensure the warping animation plays even when input is blocked
-        // if (beingWarped)
-        //     playerMovement.handleMovement(usingThruster, beingWarped);
+        playerMovement.handleMovement(usingThruster, beingWarped, enteringCave, exitingCave);
 
         //Inventory and Dialog Box 
         if (Input.GetButtonDown("Inventory") && !Input.GetButton("FireGRS"))

@@ -36,26 +36,60 @@ public class SceneManager : MonoBehaviour {
 
         //If a positive vertical button is pressed (w or up), then transition
         if (Input.GetButton("Vertical") && verticalAxis > 0) {
-            switch(travelToSceneName) {
-                case "Landing_Scene":
-                case "Tool_Intro_Thruster":
-                case "Tool_Intro_GRS":
-                case "Tool_Intro_Imager":
-                case "Tool_Intro_eMagnet":
-                    _travelToSceneName = travelToSceneName;
-                    UnityEngine.SceneManagement.SceneManager.LoadScene(travelToSceneName);
-                    transition = true;
-                    break;
-
-                case "SceneTransition_Game_End":
-                    UIController.Instance.EndGame(true);
-                    break;
-
-                default:
-                    Debug.LogError("Invalid Scene Transition");
-                    break;
-            }
+            StartCoroutine(EnterCave(travelToSceneName));
         }
+    }
+
+    /// <summary>
+    /// Executes the animation for the player entering the cave, then transitions the scene,
+    /// then does the animation for the player exiting the cave.
+    /// </summary>
+    /// <param name="travelToSceneName"></param>
+    /// <returns></returns>
+    public IEnumerator EnterCave(string travelToSceneName)
+    {
+        //block player controls
+        PlayerController.Instance.inputBlocked = true;
+        PlayerController.Instance.enteringCave = true;
+
+        //wait for the animation to be completed
+        yield return new WaitForSeconds(0.5f);
+
+        //unblock player controls
+        PlayerController.Instance.inputBlocked = false;
+        PlayerController.Instance.enteringCave = false;
+
+        switch (travelToSceneName)
+        {
+            case "Landing_Scene":
+            case "Tool_Intro_Thruster":
+            case "Tool_Intro_GRS":
+            case "Tool_Intro_Imager":
+            case "Tool_Intro_eMagnet":
+                _travelToSceneName = travelToSceneName;
+                UnityEngine.SceneManagement.SceneManager.LoadScene(travelToSceneName);
+                transition = true;
+                break;
+
+            case "SceneTransition_Game_End":
+                UIController.Instance.EndGame(true);
+                break;
+
+            default:
+                Debug.LogError("Invalid Scene Transition");
+                break;
+        }
+
+        //block player controls
+        PlayerController.Instance.inputBlocked = true;
+        PlayerController.Instance.exitingCave = true;
+
+        //wait for the animation to be completed
+        yield return new WaitForSeconds(0.5f);
+
+        //unblock player controls
+        PlayerController.Instance.inputBlocked = false;
+        PlayerController.Instance.exitingCave = false;
     }
 
     /// <summary>
