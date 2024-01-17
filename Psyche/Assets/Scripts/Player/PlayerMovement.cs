@@ -30,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     const string PLAYER_JUMP = "player_jump";
     const string PLAYER_THRUSTER = "player_thruster";
     const string PLAYER_WARP = "player_warp";
+    const string ENTERING_CAVE = "player_entering_cave";
 
     /// <summary>
     /// Initializes the script
@@ -45,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
     /// <summary>
     /// Handles the movement and animations of the player.
     /// </summary>
-    public void handleMovement(bool usingThruster, bool beingWarped)
+    public void handleMovement(bool usingThruster, bool beingWarped, bool enteringCave, bool exitingCave)
     {
         _flipSprite = true;
 
@@ -56,6 +57,17 @@ public class PlayerMovement : MonoBehaviour
             _newAnimation = PLAYER_WARP;
         }
 
+        else if (enteringCave)
+        {
+            _playerManagement.playerCharacter.velocity = new Vector2(0, 0);
+            _newAnimation = ENTERING_CAVE;
+        }
+
+        else if (exitingCave)
+        {
+            _playerManagement.playerCharacter.velocity = new Vector2(0, 0);
+            _newAnimation = PLAYER_WALK;
+        }
         //checks for the player's behavior to determine which animation to play
         else
         {
@@ -137,6 +149,8 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            //TODO need to set alpha faders for entering and exiting cave -Dhalia
+
             //play the new animation
             _animator.Play(_newAnimation);
             if (_newAnimation.Equals(PLAYER_THRUSTER)) {
