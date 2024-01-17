@@ -34,7 +34,6 @@ public class PlayerController : BaseController<PlayerController>
     public ImagerManager imagerManager;
     public EMagnetManager eMagnetManager;
     public ThrusterManager thrusterManager;
-    public ImagerCursor flashlight;
     public GammaView gammaView;
     private SceneManager sceneTransition;
     public PlayerDeath deathCon;
@@ -79,6 +78,8 @@ public class PlayerController : BaseController<PlayerController>
         deathCon = GetComponent<PlayerDeath>();
         inventoryManager = GetComponent<InventoryManager>();
         inventoryManager.Initialize(this);
+
+        Cursor.visible = false;
     }
 
     /// <summary>
@@ -123,7 +124,6 @@ public class PlayerController : BaseController<PlayerController>
     {
         //Check booleans
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
-        imagerManager.Activate();
 
         //default states
         usingThruster = false;
@@ -139,13 +139,15 @@ public class PlayerController : BaseController<PlayerController>
                 batteryManager.DrainBatt(1);
             }
 
-            //Spectrometer
-            if (inventoryManager.CheckTool("spectrometer") && Input.GetButtonDown("FireGRS") && batteryManager.batteryPercent != 0) {
-                gammaView.ActivateGRS();
-                batteryManager.DrainBatt(500);
+            //Imager
+            if (inventoryManager.CheckTool("imager") && batteryManager.batteryPercent != 0) {
+                imagerManager.updateFlashlightPosition();
             }
-            if (inventoryManager.CheckTool("spectrometer") && Input.GetButtonUp("FireGRS")) {
-                gammaView.DeactivateGRS();
+
+            //Spectrometer
+            if (inventoryManager.CheckTool("spectrometer") && Input.GetButton("FireGRS") && batteryManager.batteryPercent != 0) {
+                gammaView.ActivateGRS();
+                batteryManager.DrainBatt(2);
             }
 
             //ElectroMagnet
@@ -353,14 +355,9 @@ public class PlayerController : BaseController<PlayerController>
                 break;
 
             case "Imager":
-                imagerManager.Modify();
-                inventoryManager.SetTool(toolName, true);
-                break;
-
-            case "ImagerCursor":
                 imagerManager.Enable();
-                imagerManager.Modify();
-                flashlight.Update();
+                imagerManager.Activate();
+                inventoryManager.SetTool(toolName, true);
                 break;
 
             case "Spectrometer":
