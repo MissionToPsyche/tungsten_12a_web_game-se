@@ -6,6 +6,8 @@ Version: 20231107
 
 using UnityEngine.Audio;
 using UnityEngine;
+using UnityEditor.UI;
+using UnityEditor.Rendering;
 
 /// <summary>
 /// AudioManager class which handles all audio within game.
@@ -44,5 +46,9 @@ public class AudioManager : MonoBehaviour {
 
     public void StopAudio(AudioSource audioSource) {
         audioSource.Stop();
+    }
+
+    public void ToggleAudioMute(AudioSource audioSource) {
+        audioSource.mute = !audioSource.mute;
     }
 }
