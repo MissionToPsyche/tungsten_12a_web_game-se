@@ -211,4 +211,13 @@ public class GameController : BaseController<GameController>
     {
         colorBlindMode = mode;
     }
+
+    /// <summary>
+    /// Toggles background audio mute
+    /// </summary>
+    /// <returns></returns>
+    public void ToggleBackgroundAudioMute()
+    {
+        audioManager.ToggleAudioMute(audioManager.backgroundMusic);
+    }
 }
