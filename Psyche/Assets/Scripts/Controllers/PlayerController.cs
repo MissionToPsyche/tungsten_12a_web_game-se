@@ -355,6 +355,7 @@ public class PlayerController : BaseController<PlayerController>
                 break;
 
             case "Imager":
+                Debug.Log("in imager case");
                 imagerManager.Enable();
                 imagerManager.Activate();
                 inventoryManager.SetTool(toolName, true);

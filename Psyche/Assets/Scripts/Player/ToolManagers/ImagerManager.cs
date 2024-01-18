@@ -105,6 +105,7 @@ public class ImagerManager : ToolManager
 
     public void updateFlashlightPosition()
     {
+        _flashlight.intensity = 1;
         cursorPoint = Input.mousePosition;
         cursorPoint.z = speed;
         _flashlight.transform.position = Camera.main.ScreenToWorldPoint(cursorPoint);
