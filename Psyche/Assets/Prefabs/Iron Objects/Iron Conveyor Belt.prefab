@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 669455269291958044}
   m_Layer: 0
-  m_Name: GameObject (3)
+  m_Name: Point (3)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -41,9 +41,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4853230935331172745}
   m_Layer: 0
-  m_Name: GameObject (2)
+  m_Name: Point (2)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -107,15 +107,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3db0380f3de95443b5476612405b40e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movingIronVeinPrefab: {fileID: 7489194191876710497, guid: e18d337335567194e924164f258888cb, type: 3}
+  ironVeinPrefab: {fileID: 3325924169283356502, guid: 19f702046084e434a88c0831d88bd428, type: 3}
   pointPositions:
   - {fileID: 6026638863559812178}
   - {fileID: 5924832904225188675}
   - {fileID: 4853230935331172745}
   - {fileID: 669455269291958044}
-  points: []
   moveSpeed: 2.5
-  numOfIrons: 1
+  spacingBetweenIrons: 2
+  numOfIrons: 3
 --- !u!1 &6386638763202518592
 GameObject:
   m_ObjectHideFlags: 0
@@ -126,9 +126,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6026638863559812178}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Point
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -192,9 +192,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5924832904225188675}
   m_Layer: 0
-  m_Name: GameObject (1)
+  m_Name: Point (1)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
