@@ -6,6 +6,7 @@ Version: 20240115
 
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
@@ -23,7 +24,6 @@ public class GammaView : MonoBehaviour {
     public List<GameObject> colorBlindModeObjects;   // objects stored for assistance with color blindness
     public bool colorBlindMode;                      // color blind mode boolean
     public Camera mainCamera;                        // scene camera used to only load objects within view
-    public LayerMask scanLayer = -1;                 // set to -1 to include all layers
     public Light2D sceneLight;                       // light in the current scene
     public float origSceneLightIntensity;            // light intensity
     
@@ -101,7 +101,8 @@ public class GammaView : MonoBehaviour {
         foreach (SpriteRenderer sprite in sprites) {
             GameObject obj = sprite.gameObject;
             // check if the object is within the camera's viewport
-            if (IsObjectInView(obj)) {
+            // and that it does not have layer 5 (UI) or 16 (GRNS_Ignore)
+            if (IsObjectInView(obj) && !obj.layer.Equals(5)) {
                 // add the object to the list for scanning or processing
                 objectsInView.Add(obj);
             }
@@ -200,8 +201,12 @@ public class GammaView : MonoBehaviour {
     /// <param name="obj"></param>
     /// <returns></returns>
     Color LayerColor(GameObject obj) {
+        // if colorblind mode return clear or default color
         if (colorBlindMode) {
-            return defaultColor;
+            return obj.layer switch {
+                15 => Color.clear,
+                _ => defaultColor,
+            };
         } else {
             return obj.layer switch {
                 // User Layers within Unity are 3 and 6-31                
@@ -216,7 +221,6 @@ public class GammaView : MonoBehaviour {
                 13 => Color.white,  // Platinum
                 14 => Color.cyan,   // Gold
                 15 => Color.clear,  // Clear
-                16 => new Color(0f, 0f, 0f, 0f),
                 /** custom colors below to be used in future levels
                 3 =>  new Color(0f, 0f, 0f, 1f),            // Terrain
                 6 =>  new Color(0.5f, 0.5f, 0.5f, 1f),      // Titanium
@@ -254,8 +258,11 @@ public class GammaView : MonoBehaviour {
             grsNumberObject.SetActive(false);
             colorBlindModeObjects.Add(grsNumberObject);
 
-            // text properties
-            textMesh.text = layerNum.ToString();
+            // text properties based on layer number
+            textMesh.text = layerNum switch {
+                0 or 15 => "",            // default (0) or clear (15) layer numbers
+                _ => layerNum.ToString(), // else displays number
+            };
             textMesh.characterSize = 0.15f;
             textMesh.fontSize = 30;
             textMesh.font = Resources.Load<Font>("");
