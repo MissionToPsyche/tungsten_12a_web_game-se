@@ -1,7 +1,7 @@
 /** 
 Description: spectrometer tool gamma view script
 Author: blopezro
-Version: 20240115
+Version: 20240118
 **/
 
 using System;
@@ -10,6 +10,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
+using UnityEngine.Tilemaps;
 
 /// <summary>
 /// Gamma View script which captures all sprites of the game objects within the scene
@@ -26,6 +27,7 @@ public class GammaView : MonoBehaviour {
     public Camera mainCamera;                        // scene camera used to only load objects within view
     public Light2D sceneLight;                       // light in the current scene
     public float origSceneLightIntensity;            // light intensity
+    public Tilemap sceneTilemap;                     // tilemap (terrain component) in scene
     
     /// <summary>
     /// Subscribes to the SceneManager.sceneLoaded event
@@ -48,6 +50,7 @@ public class GammaView : MonoBehaviour {
     /// <param name="mode"></param>
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
         sceneLight = GameObject.FindGameObjectWithTag("SceneLight").GetComponent<Light2D>();
+        sceneTilemap = GameObject.FindGameObjectWithTag("Terrain").GetComponent<Tilemap>();
         origSceneLightIntensity = sceneLight.intensity;
     }
 
@@ -132,6 +135,7 @@ public class GammaView : MonoBehaviour {
                 spriteRenderersList[i].color = LayerColor(spriteRenderersList[i].gameObject);
                 if (Input.GetButtonDown("FireGRS")) {
                     GameController.Instance.audioManager.toolGRS.Play();
+                    ToggleTerrainColor(); // placed in here so it runs one time
                 }
                 if (colorBlindMode) { ActivateGRSaltView(); }
                 if (!sceneLight.intensity.Equals(1)) {
@@ -150,6 +154,7 @@ public class GammaView : MonoBehaviour {
                 spriteRenderersList[i].color = origColorArray[i];
                 if (Input.GetButtonUp("FireGRS")) {
                     GameController.Instance.audioManager.toolGRS.Stop();
+                    ToggleTerrainColor(); // placed in here so it runs one time
                 }
                 if (colorBlindMode) { DeactivateGRSaltView(); }
                 if (!sceneLight.intensity.Equals(origSceneLightIntensity)) {
@@ -324,6 +329,19 @@ public class GammaView : MonoBehaviour {
         spriteRenderersList.Clear();
         origColorArray = new Color[0];
         colorBlindModeObjects.Clear();
+    }
+
+    /**** below in work ****/
+
+    /// <summary>
+    /// Used to toggle color of tilemap (terrain)
+    /// </summary>
+    void ToggleTerrainColor() {
+        if (sceneTilemap != null) {
+            // swaps values
+            (sceneTilemap.color, defaultColor) = 
+            (defaultColor, sceneTilemap.color);
+        }
     }
 
 }
