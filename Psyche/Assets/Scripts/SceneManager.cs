@@ -36,7 +36,28 @@ public class SceneManager : MonoBehaviour {
 
         //If a positive vertical button is pressed (w or up), then transition
         if (Input.GetButton("Vertical") && verticalAxis > 0) {
-            StartCoroutine(EnterCave(travelToSceneName));
+            //StartCoroutine(EnterCave(travelToSceneName)); <--currently unrefined -Dhalia
+
+            switch (travelToSceneName)
+            {
+                case "Landing_Scene":
+                case "Tool_Intro_Thruster":
+                case "Tool_Intro_GRS":
+                case "Tool_Intro_Imager":
+                case "Tool_Intro_eMagnet":
+                    _travelToSceneName = travelToSceneName;
+                    UnityEngine.SceneManagement.SceneManager.LoadScene(travelToSceneName);
+                    transition = true;
+                    break;
+
+                case "SceneTransition_Game_End":
+                    UIController.Instance.EndGame(true);
+                    break;
+
+                default:
+                    Debug.LogError("Invalid Scene Transition");
+                    break;
+            }
         }
     }
 
