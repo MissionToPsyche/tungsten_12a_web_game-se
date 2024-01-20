@@ -1,7 +1,7 @@
 /** 
 Description: spectrometer tool gamma view script
 Author: blopezro
-Version: 20240118
+Version: 20240119
 **/
 
 using System;
@@ -18,16 +18,19 @@ using UnityEngine.Tilemaps;
 /// </summary>
 public class GammaView : MonoBehaviour {
 
+    /* arrays and lists that hold data of the grns */
     public List<GameObject> sceneObjects;            // holds all current game objects in the scene
     public List<SpriteRenderer> spriteRenderersList; // holds all sprite renderers of game objects
     public Color[] origColorArray;                   // holds original colors of the sprite renderers
-    public Color defaultColor = Color.green;         // default color of items when default layer is used
-    public List<GameObject> colorBlindModeObjects;   // objects stored for assistance with color blindness
-    public bool colorBlindMode;                      // color blind mode boolean
+    public List<GameObject> colorBlindModeObjects;   // holds objects stored for assistance with color blindness
+    /* other variables */
+    public Color defaultColor = Color.green;         // default color to use when default layer is used
+    public bool colorBlindMode;                      // color blind mode boolean    
     public Camera mainCamera;                        // scene camera used to only load objects within view
     public Light2D sceneLight;                       // light in the current scene
-    public float origSceneLightIntensity;            // light intensity
-    public Tilemap sceneTilemap;                     // tilemap (terrain component) in scene
+    public float origSceneLightIntensity;            // light intensity of the scene
+    public Tilemap sceneTilemap;                     // tilemap (terrain component) in current scene
+    public Color origSceneTilemapColor;              // terrain color of the scene
     
     /// <summary>
     /// Subscribes to the SceneManager.sceneLoaded event
@@ -52,6 +55,7 @@ public class GammaView : MonoBehaviour {
         sceneLight = GameObject.FindGameObjectWithTag("SceneLight").GetComponent<Light2D>();
         sceneTilemap = GameObject.FindGameObjectWithTag("Terrain").GetComponent<Tilemap>();
         origSceneLightIntensity = sceneLight.intensity;
+        origSceneTilemapColor = sceneTilemap.color;
     }
 
     /// <summary>
@@ -135,7 +139,7 @@ public class GammaView : MonoBehaviour {
                 spriteRenderersList[i].color = LayerColor(spriteRenderersList[i].gameObject);
                 if (Input.GetButtonDown("FireGRS")) {
                     GameController.Instance.audioManager.toolGRS.Play();
-                    ToggleTerrainColor(); // placed in here so it runs one time
+                    ChangeTerrainColor(); // placed in here so it runs one time
                 }
                 if (colorBlindMode) { ActivateGRSaltView(); }
                 if (!sceneLight.intensity.Equals(1)) {
@@ -154,7 +158,7 @@ public class GammaView : MonoBehaviour {
                 spriteRenderersList[i].color = origColorArray[i];
                 if (Input.GetButtonUp("FireGRS")) {
                     GameController.Instance.audioManager.toolGRS.Stop();
-                    ToggleTerrainColor(); // placed in here so it runs one time
+                    RevertTerrainColor(); // placed in here so it runs one time
                 }
                 if (colorBlindMode) { DeactivateGRSaltView(); }
                 if (!sceneLight.intensity.Equals(origSceneLightIntensity)) {
@@ -331,16 +335,21 @@ public class GammaView : MonoBehaviour {
         colorBlindModeObjects.Clear();
     }
 
-    /**** below in work ****/
+    /// <summary>
+    /// Changes the color of the terrain
+    /// </summary>
+    void ChangeTerrainColor() {
+        if (sceneTilemap != null) {
+            sceneTilemap.color = defaultColor;
+        }
+    }
 
     /// <summary>
-    /// Used to toggle color of tilemap (terrain)
+    /// Reverts the color of the terrain
     /// </summary>
-    void ToggleTerrainColor() {
+    void RevertTerrainColor() {
         if (sceneTilemap != null) {
-            // swaps values
-            (sceneTilemap.color, defaultColor) = 
-            (defaultColor, sceneTilemap.color);
+            sceneTilemap.color = origSceneTilemapColor;
         }
     }
 
