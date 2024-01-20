@@ -119,7 +119,16 @@ public class EMagnetManager : ToolManager {
              * Pulls Player towards most recently hit Iron Vein
              */
             if (target != null)
-                _playerController.playerCharacter.MovePosition(Vector2.MoveTowards(transform.position, target.transform.position, Time.deltaTime * 20));
+            {
+                if (target.gameObject.activeInHierarchy)
+                    _playerController.playerCharacter.MovePosition(Vector2.MoveTowards(transform.position, target.transform.position, Time.deltaTime * 20));
+                else
+                {
+                    _playerController.beingPulled = false;
+                    _playerController.playerCharacter.gravityScale = curGrav;
+                    target = null;
+                }
+            }
 
             yield return null;
         } while (Input.GetButton("EMagnet"));
