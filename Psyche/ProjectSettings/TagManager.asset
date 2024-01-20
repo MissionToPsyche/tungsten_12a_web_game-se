@@ -15,6 +15,7 @@ TagManager:
   - TransitionObjectIn
   - TransitionObjectOut
   - SceneLight
+  - Terrain
   layers:
   - Default
   - TransparentFX
@@ -32,7 +33,7 @@ TagManager:
   - Platinum
   - Gold
   - Clear
-  - new color
+  - GRNS_Ignore
   - 
   - 
   - 
