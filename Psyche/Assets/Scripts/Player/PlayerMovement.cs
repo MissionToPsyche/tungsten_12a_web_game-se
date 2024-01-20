@@ -64,6 +64,7 @@ public class PlayerMovement : MonoBehaviour
                 _xAxis = Input.GetAxisRaw("Horizontal");
             else
                 _xAxis = 0;
+
             _walkVelocity = new Vector2(_xAxis * 7f, _playerManagement.playerCharacter.velocity.y);
             _playerManagement.playerCharacter.velocity = _walkVelocity;
 

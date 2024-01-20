@@ -123,7 +123,11 @@ public class PlayerController : BaseController<PlayerController>
     public void Update()
     {
         //Check booleans
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
+        //isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
+        if (Physics2D.Linecast(transform.position, groundCheck.position, 1 << whatIsGround))
+            isGrounded = true;
+        else
+            isGrounded = false;
 
         //default states
         usingThruster = false;
@@ -158,10 +162,6 @@ public class PlayerController : BaseController<PlayerController>
         }
 
         playerMovement.handleMovement(usingThruster, beingWarped);
-
-        // //needed to ensure the warping animation plays even when input is blocked
-        // if (beingWarped)
-        //     playerMovement.handleMovement(usingThruster, beingWarped);
 
         //Inventory and Dialog Box 
         if (Input.GetButtonDown("Inventory") && !Input.GetButton("FireGRS"))
