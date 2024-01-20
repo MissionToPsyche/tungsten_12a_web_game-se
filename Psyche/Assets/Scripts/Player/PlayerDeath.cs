@@ -1,13 +1,12 @@
-/** 
-Description: player death script
-Author: mcmyers4, blopezro, dnguye99
-Version: 20231109
-**/
+/*
+ * Description: Player Loss and Reset
+ * Authors: mcmyers4, blopezro, dnguye99asu
+ * Version: 20240119
+ */
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Player death script to handle hazard interactions and respawn attempts.
@@ -20,21 +19,29 @@ public class PlayerDeath : MonoBehaviour {
     public BatteryManager batteryManager; //Initial battery
     public HashSet<int> reachedCheckpoints = new HashSet<int>(); //Stores unique IDs of checkpoints
 
-    //Initialize respawn point and set starting location
+    /// <summary>
+    /// Initialize respawn point and set starting location.
+    /// </summary>
     private void Start() {
         startPoint = transform.position;
         respawnPoint = transform.position;
     }
 
-    //Player touches hazard object
+    /// <summary>
+    /// Player touches hazard object.
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.CompareTag("Hazard")) {
             GetHurt();
         }
     }
 
-    //Updates respawn location once a checkpoint has been touched
-    //Additionally recharges health and battery
+    /// <summary>
+    /// Updates respawn location once a checkpoint has been touched.
+    /// Additionally recharges health and battery.
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.CompareTag("Checkpoint")) {
             //ID of the checkpoint
@@ -55,7 +62,10 @@ public class PlayerDeath : MonoBehaviour {
         }
     }
 
-    //Respawn character to last checkpoint when player gets hurt
+    /// <summary>
+    /// Lose health on contacts with hazards.
+    /// Respawn character if no health remains.
+    /// </summary>
     public void GetHurt() {
         //Debug.Log("Ouch!");
         playerHealth.HealthDown(1);
