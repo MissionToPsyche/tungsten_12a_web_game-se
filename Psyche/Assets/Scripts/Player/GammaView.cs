@@ -1,7 +1,7 @@
 /** 
 Description: spectrometer tool gamma view script
 Author: blopezro
-Version: 20240115
+Version: 20240119
 **/
 
 using System;
@@ -10,6 +10,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
+using UnityEngine.Tilemaps;
 
 /// <summary>
 /// Gamma View script which captures all sprites of the game objects within the scene
@@ -17,15 +18,19 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class GammaView : MonoBehaviour {
 
+    /* arrays and lists that hold data of the grns */
     public List<GameObject> sceneObjects;            // holds all current game objects in the scene
     public List<SpriteRenderer> spriteRenderersList; // holds all sprite renderers of game objects
     public Color[] origColorArray;                   // holds original colors of the sprite renderers
-    public Color defaultColor = Color.green;         // default color of items when default layer is used
-    public List<GameObject> colorBlindModeObjects;   // objects stored for assistance with color blindness
-    public bool colorBlindMode;                      // color blind mode boolean
+    public List<GameObject> colorBlindModeObjects;   // holds objects stored for assistance with color blindness
+    /* other variables */
+    public Color defaultColor = Color.green;         // default color to use when default layer is used
+    public bool colorBlindMode;                      // color blind mode boolean    
     public Camera mainCamera;                        // scene camera used to only load objects within view
     public Light2D sceneLight;                       // light in the current scene
-    public float origSceneLightIntensity;            // light intensity
+    public float origSceneLightIntensity;            // light intensity of the scene
+    public Tilemap sceneTilemap;                     // tilemap (terrain component) in current scene
+    public Color origSceneTilemapColor;              // terrain color of the scene
     
     /// <summary>
     /// Subscribes to the SceneManager.sceneLoaded event
@@ -48,7 +53,9 @@ public class GammaView : MonoBehaviour {
     /// <param name="mode"></param>
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
         sceneLight = GameObject.FindGameObjectWithTag("SceneLight").GetComponent<Light2D>();
+        sceneTilemap = GameObject.FindGameObjectWithTag("Terrain").GetComponent<Tilemap>();
         origSceneLightIntensity = sceneLight.intensity;
+        origSceneTilemapColor = sceneTilemap.color;
     }
 
     /// <summary>
@@ -132,6 +139,7 @@ public class GammaView : MonoBehaviour {
                 spriteRenderersList[i].color = LayerColor(spriteRenderersList[i].gameObject);
                 if (Input.GetButtonDown("FireGRS")) {
                     GameController.Instance.audioManager.toolGRS.Play();
+                    ChangeTerrainColor(); // placed in here so it runs one time
                 }
                 if (colorBlindMode) { ActivateGRSaltView(); }
                 if (!sceneLight.intensity.Equals(1)) {
@@ -150,6 +158,7 @@ public class GammaView : MonoBehaviour {
                 spriteRenderersList[i].color = origColorArray[i];
                 if (Input.GetButtonUp("FireGRS")) {
                     GameController.Instance.audioManager.toolGRS.Stop();
+                    RevertTerrainColor(); // placed in here so it runs one time
                 }
                 if (colorBlindMode) { DeactivateGRSaltView(); }
                 if (!sceneLight.intensity.Equals(origSceneLightIntensity)) {
@@ -324,6 +333,24 @@ public class GammaView : MonoBehaviour {
         spriteRenderersList.Clear();
         origColorArray = new Color[0];
         colorBlindModeObjects.Clear();
+    }
+
+    /// <summary>
+    /// Changes the color of the terrain
+    /// </summary>
+    void ChangeTerrainColor() {
+        if (sceneTilemap != null) {
+            sceneTilemap.color = defaultColor;
+        }
+    }
+
+    /// <summary>
+    /// Reverts the color of the terrain
+    /// </summary>
+    void RevertTerrainColor() {
+        if (sceneTilemap != null) {
+            sceneTilemap.color = origSceneTilemapColor;
+        }
     }
 
 }
