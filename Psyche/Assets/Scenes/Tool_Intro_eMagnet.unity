@@ -845,7 +845,7 @@ GameObject:
   - component: {fileID: 1317522933}
   m_Layer: 3
   m_Name: Terrain
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3586,7 +3586,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4227662088350087803, guid: 15fd2b5ec1408e24ab4f8ee917000aaa, type: 3}
       propertyPath: m_Name
-      value: Moving Iron Veins
+      value: Iron Conveyor Belt
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3656,10 +3656,10 @@ SceneRoots:
   m_Roots:
   - {fileID: 273656767}
   - {fileID: 1083428616}
+  - {fileID: 1602182509}
+  - {fileID: 728382689}
   - {fileID: 2101460782}
   - {fileID: 695880064}
   - {fileID: 268549570}
   - {fileID: 8477071468673583271}
   - {fileID: 8311609980718384896}
-  - {fileID: 1602182509}
-  - {fileID: 728382689}
