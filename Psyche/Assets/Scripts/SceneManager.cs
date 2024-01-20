@@ -38,39 +38,26 @@ public class SceneManager : MonoBehaviour {
 
         //If a positive vertical button is pressed (w or up), then transition
         if (Input.GetButton("Vertical") && verticalAxis > 0) {
-            switch(travelToSceneName) {
+            switch (travelToSceneName)
+            {
                 case "Landing_Scene":
-                    _travelToSceneName = travelToSceneName;
-                    UnityEngine.SceneManagement.SceneManager.LoadScene(travelToSceneName);
-                    transition = true;
+                    travelToScene(travelToSceneName);
                     break;
                 case "Tool_Intro_Thruster":
-                    _travelToSceneName = travelToSceneName;
-                    //_prevScene = _currScene;
-                    //SceneManager.LoadScene(travelToSceneName);
-                    UnityEngine.SceneManagement.SceneManager.LoadScene(travelToSceneName);
-                    transition = true;
+                    travelToScene(travelToSceneName);
                     yield return new WaitForSeconds(0.5f);
                     loadCameraBounds();
                     break;
                 case "Tool_Intro_GRS":
-                    _travelToSceneName = travelToSceneName;
-                    UnityEngine.SceneManagement.SceneManager.LoadScene(travelToSceneName);
-                    transition = true;
+                    travelToScene(travelToSceneName);
                     break;
                 case "Tool_Intro_Imager":
-                    _travelToSceneName = travelToSceneName;
-                    //_prevScene = _currScene;
-                    //SceneManager.LoadScene(travelToSceneName);
-                    UnityEngine.SceneManagement.SceneManager.LoadScene(travelToSceneName);
-                    transition = true;
+                    travelToScene(travelToSceneName);
                     yield return new WaitForSeconds(0.5f);
                     loadCameraBounds();
                     break;
                 case "Tool_Intro_eMagnet":
-                    _travelToSceneName = travelToSceneName;
-                    UnityEngine.SceneManagement.SceneManager.LoadScene(travelToSceneName);
-                    transition = true;
+                    travelToScene(travelToSceneName);
                     break;
 
                 case "SceneTransition_Game_End":
@@ -82,6 +69,13 @@ public class SceneManager : MonoBehaviour {
                     break;
             }
         }
+    }
+
+    private void travelToScene(string travelToSceneName)
+    {
+        _travelToSceneName = travelToSceneName;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(travelToSceneName);
+        transition = true;
     }
 
     /// <summary>

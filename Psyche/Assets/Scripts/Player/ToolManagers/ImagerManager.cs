@@ -21,8 +21,6 @@ public class ImagerManager : ToolManager
     Vector3 cursorPoint; //Mouse cursor location
     public float speed = 1f; //Speed to match cursor
     [SerializeField] private float _radiusIncrease; //The amount to increase the vision field
-    [SerializeField] private ImagerPickupCounter _imagerPickupCounter; //Not initialized though code
-    
 
     /// <summary>
     /// Initializes this script
@@ -100,7 +98,6 @@ public class ImagerManager : ToolManager
         _flashlight.pointLightOuterRadius += _radiusIncrease;
         GameController.Instance.audioManager.PlayAudio(
             GameController.Instance.audioManager.toolImager);
-        _imagerPickupCounter.updateImagerCount();
     }
 
     public void updateFlashlightPosition()
