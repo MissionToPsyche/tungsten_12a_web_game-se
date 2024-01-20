@@ -124,6 +124,9 @@ public class EMagnetManager : ToolManager {
                     _playerController.playerCharacter.MovePosition(Vector2.MoveTowards(transform.position, target.transform.position, Time.deltaTime * 20));
                 else
                 {
+                    /**
+                     * Stops pulling the player if the most recently hit Iron Vein has disappeared
+                     */
                     _playerController.beingPulled = false;
                     _playerController.playerCharacter.gravityScale = curGrav;
                     target = null;
