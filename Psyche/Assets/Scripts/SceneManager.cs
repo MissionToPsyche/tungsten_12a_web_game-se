@@ -1,6 +1,8 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 /// <summary>
@@ -36,15 +38,26 @@ public class SceneManager : MonoBehaviour {
 
         //If a positive vertical button is pressed (w or up), then transition
         if (Input.GetButton("Vertical") && verticalAxis > 0) {
-            switch(travelToSceneName) {
+            switch (travelToSceneName)
+            {
                 case "Landing_Scene":
+                    travelToScene(travelToSceneName);
+                    break;
                 case "Tool_Intro_Thruster":
+                    travelToScene(travelToSceneName);
+                    yield return new WaitForSeconds(0.5f);
+                    loadCameraBounds();
+                    break;
                 case "Tool_Intro_GRS":
+                    travelToScene(travelToSceneName);
+                    break;
                 case "Tool_Intro_Imager":
+                    travelToScene(travelToSceneName);
+                    yield return new WaitForSeconds(0.5f);
+                    loadCameraBounds();
+                    break;
                 case "Tool_Intro_eMagnet":
-                    _travelToSceneName = travelToSceneName;
-                    UnityEngine.SceneManagement.SceneManager.LoadScene(travelToSceneName);
-                    transition = true;
+                    travelToScene(travelToSceneName);
                     break;
 
                 case "SceneTransition_Game_End":
@@ -55,6 +68,30 @@ public class SceneManager : MonoBehaviour {
                     Debug.LogError("Invalid Scene Transition");
                     break;
             }
+        }
+    }
+
+    private void travelToScene(string travelToSceneName)
+    {
+        _travelToSceneName = travelToSceneName;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(travelToSceneName);
+        transition = true;
+    }
+
+    /// <summary>
+    /// Finds and passes the boundary of the newly loaded scene to each of the game's cameras
+    /// </summary>
+    private void loadCameraBounds()
+    {
+        GameObject[] vcs = GameObject.FindGameObjectsWithTag("VirtualCamera");
+        GameObject bounds;
+        CompositeCollider2D shape;
+        foreach (GameObject vc in vcs)
+        {
+            vc.GetComponent<CinemachineConfiner2D>().InvalidateCache();
+            bounds = GameObject.FindGameObjectWithTag("Boundary");
+            shape = bounds.GetComponent<CompositeCollider2D>();
+            vc.GetComponent<CinemachineConfiner2D>().m_BoundingShape2D = shape;
         }
     }
 

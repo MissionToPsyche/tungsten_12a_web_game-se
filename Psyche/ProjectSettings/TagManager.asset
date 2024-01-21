@@ -16,6 +16,8 @@ TagManager:
   - TransitionObjectOut
   - SceneLight
   - Terrain
+  - VirtualCamera
+  - Boundary
   layers:
   - Default
   - TransparentFX
