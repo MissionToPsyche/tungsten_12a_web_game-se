@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameController : BaseController<GameController>
@@ -13,8 +12,10 @@ public class GameController : BaseController<GameController>
     //Public variables
     public DeveloperConsole developerConsole;
     public GameStateManager gameStateManager;
-    //public SceneManager sceneManager;
-    //public AudioManager audioManager;
+    public SceneManager sceneManager;
+    public AudioManager audioManager;
+
+    public bool colorBlindMode;
 
     /// <summary>
     /// Initialize the object and parent class
@@ -24,6 +25,9 @@ public class GameController : BaseController<GameController>
         developerConsole = GetComponent<DeveloperConsole>();
         developerConsole.Initialize(this);
         gameStateManager = new GameStateManager(this, GameStateManager.GameState.MainMenu);
+        audioManager = GameObject.FindGameObjectWithTag("AudioSources").GetComponent<AudioManager>();
+        sceneManager = GetComponent<SceneManager>();
+        sceneManager.Initialize(this);
     }
 
     /// <summary>
@@ -128,6 +132,9 @@ public class GameController : BaseController<GameController>
             case "DeveloperConsole":
                 developerConsole.IntakeEvents(args);
                 break;
+            case "SceneManager":
+                StartCoroutine(sceneManager.CheckTransition(args[1].ToString()));
+                break;
             default:
                 Debug.Log("Incorrect subdestination -- GameController");
                 break;
@@ -141,8 +148,8 @@ public class GameController : BaseController<GameController>
     /// </summary>
     private void OnEnable()
     {
-        UIController.Instance.OnUpdateUIToGame += ReceiveMessage;
-        PlayerController.Instance.OnUpdatePlayerToGame += ReceiveMessage;
+        UIController.Instance.OnUpdateUIToGame += ReceiveMessage;           //<-- These will cause issues for the time being if start from TitleScreen
+        PlayerController.Instance.OnUpdatePlayerToGame += ReceiveMessage;   // It also breaks things attached to this object from Title Screen
     }
 
     /// <summary>
@@ -193,6 +200,24 @@ public class GameController : BaseController<GameController>
 
         }
     }
-    
+
     // Other stuff here
+
+    /// <summary>
+    /// Swap color blind mode
+    /// </summary>
+    /// <returns></returns>
+    public void ChangeColorBlindMode(bool mode)
+    {
+        colorBlindMode = mode;
+    }
+
+    /// <summary>
+    /// Toggles background audio mute
+    /// </summary>
+    /// <returns></returns>
+    public void ToggleBackgroundAudioMute()
+    {
+        audioManager.ToggleAudioMute(audioManager.backgroundMusic);
+    }
 }
