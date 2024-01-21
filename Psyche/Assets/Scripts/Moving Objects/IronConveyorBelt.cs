@@ -1,6 +1,10 @@
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// Code for Conveyor Belt that has Iron Veins moving along it for the player to use the ElectroMagnet on
+/// </summary>
+/// Author: jmolive8
 public class IronConveyorBelt : MonoBehaviour
 {
     public GameObject ironVeinPrefab;
@@ -24,6 +28,9 @@ public class IronConveyorBelt : MonoBehaviour
         StartCoroutine(spawnIron());
     }
 
+    /// <summary>
+    /// Spawns the specified number of Iron Veins with a delay to ensure there is space between them while they are moving
+    /// </summary>
     private IEnumerator spawnIron()
     {
         for (int i = 0; i < numOfIrons; i++)
@@ -33,6 +40,9 @@ public class IronConveyorBelt : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Handles moving Iron Veins along the Belt's path
+    /// </summary>
     private IEnumerator moveIron(GameObject vein)
     {
         int pointsIndex = 1;
@@ -41,18 +51,26 @@ public class IronConveyorBelt : MonoBehaviour
         {
             vein.transform.position = Vector2.MoveTowards(vein.transform.position, points[pointsIndex], moveSpeed * Time.deltaTime);
 
+            /**
+             * Sets the next target position when current target is reached
+             */
             if ((Vector2)vein.transform.position == points[pointsIndex])
+            {
                 pointsIndex++;
 
-            if (pointsIndex == points.Length)
-            {
-                vein.SetActive(false);
+                /**
+                 * When final position reached makes Iron Vein disappear for a few seconds and reappear at the first position
+                 */
+                if (pointsIndex == points.Length)
+                {
+                    vein.SetActive(false);
 
-                yield return spawnDelay;
+                    yield return spawnDelay;
 
-                vein.transform.position = points[0];
-                pointsIndex = 1;
-                vein.SetActive(true);
+                    vein.transform.position = points[0];
+                    pointsIndex = 1;
+                    vein.SetActive(true);
+                }
             }
 
             yield return null;
