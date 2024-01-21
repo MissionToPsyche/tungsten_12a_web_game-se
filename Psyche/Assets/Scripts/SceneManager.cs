@@ -1,8 +1,13 @@
+/*
+ * Description: Scene Transitions
+ * Authors: joshbenn, blopezro, mcmyers4
+ * Version: 20240119
+ */
+
 using Cinemachine;
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 /// <summary>
@@ -71,6 +76,12 @@ public class SceneManager : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Loads scene to be transitioned to.
+    /// </summary>
+    /// <param name="travelToSceneName">
+    /// Name of the scene that the character to travelling to.
+    /// </param>
     private void travelToScene(string travelToSceneName)
     {
         _travelToSceneName = travelToSceneName;
@@ -79,13 +90,17 @@ public class SceneManager : MonoBehaviour {
     }
 
     /// <summary>
-    /// Finds and passes the boundary of the newly loaded scene to each of the game's cameras
+    /// Finds and passes the unique boundary of the newly loaded scene to each of the game's cameras.
     /// </summary>
+    /// Needs a WaitForSeconds() before being called so the scene can fully load, or else
+    /// will try to find the camera bounds of the previous scene.
     private void loadCameraBounds()
     {
+        //array of the virtual cameras attached to the player
         GameObject[] vcs = GameObject.FindGameObjectsWithTag("VirtualCamera");
         GameObject bounds;
         CompositeCollider2D shape;
+        //loops through and assigns the boundary to each of the virtual cameras
         foreach (GameObject vc in vcs)
         {
             vc.GetComponent<CinemachineConfiner2D>().InvalidateCache();

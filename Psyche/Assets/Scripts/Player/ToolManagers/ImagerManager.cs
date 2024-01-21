@@ -1,16 +1,16 @@
-/** 
-Description: imager tool script
-Author: mcmyers4
-Version: 20231028
-**/
+/*
+ * Description: Multispectral Imager Tool
+ * Authors: mcmyers4
+ * Version: 20240119
+ */
 
-using JetBrains.Annotations;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Imager tool script increases field of vision with every additional imager pick up.
+/// Imager tool script with spotlight surrounding the character
+/// and a spotlight that follows the user's mouse cursor
+/// with the ability to increase the radius of each spotlight.
 /// </summary>
 public class ImagerManager : ToolManager
 {
@@ -69,11 +69,11 @@ public class ImagerManager : ToolManager
     }
 
     /// <summary>
-    /// Turns on light
+    /// Inherited,
+    /// currently not in use
     /// </summary>
     public override void Activate()
     {
-        //_flashlight.intensity = 1;
         _active = !_playerController.batteryManager.batteryDrained;
         if (_active)
         {
@@ -86,20 +86,24 @@ public class ImagerManager : ToolManager
     }
 
     /// <summary>
-    /// Increases the range when called
+    /// Increases the radius of both playerlight and flashlight when called
     /// </summary>
     protected override void UpgradeTool()
     {
-        //Increase imager radius
+        //Increase player's spotlight radius
         _playerlight.pointLightInnerRadius += _radiusIncrease;
         _playerlight.pointLightOuterRadius += _radiusIncrease;
-        //Increase cursor radius
+        //Increase cursor's spotlight radius
         _flashlight.pointLightInnerRadius += _radiusIncrease;
         _flashlight.pointLightOuterRadius += _radiusIncrease;
         GameController.Instance.audioManager.PlayAudio(
             GameController.Instance.audioManager.toolImager);
     }
 
+    /// <summary>
+    /// Turns on flashlight.
+    /// Flashlight tracks and then moves to user's mouse cursor.
+    /// </summary>
     public void updateFlashlightPosition()
     {
         _flashlight.intensity = 1;
