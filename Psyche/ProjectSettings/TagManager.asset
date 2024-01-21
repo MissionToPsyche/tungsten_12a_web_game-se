@@ -8,10 +8,16 @@ TagManager:
   - Hazard
   - Checkpoint
   - AudioSources
-  - TransitionObject
   - Element
   - UI
   - UI_Battery
+  - TransitionObject
+  - TransitionObjectIn
+  - TransitionObjectOut
+  - SceneLight
+  - Terrain
+  - VirtualCamera
+  - Boundary
   layers:
   - Default
   - TransparentFX
@@ -29,7 +35,7 @@ TagManager:
   - Platinum
   - Gold
   - Clear
-  - new color
+  - GRNS_Ignore
   - 
   - 
   - 
