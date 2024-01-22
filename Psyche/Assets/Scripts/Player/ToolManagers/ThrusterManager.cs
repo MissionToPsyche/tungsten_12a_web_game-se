@@ -1,4 +1,9 @@
-using System.Collections;
+/*
+ * Description: Electric Hall Thruster Tool
+ * Authors: joshbenn, mcmyers4
+ * Version: 20240119
+ */
+
 using System.Collections.Generic;
 using UnityEngine;
 
