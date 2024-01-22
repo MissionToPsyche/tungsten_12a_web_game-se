@@ -1,7 +1,7 @@
 # Tool Upgrades by Level (expected upgrades at the end of the level)
 ## Intro Levels
 ### Imager Level (1)
--Magnetometer/EMag: N/A
+-EMagnet: N/A
 
 -Imager: 1
 
@@ -10,7 +10,7 @@
 -Thruster: N/A
 
 ### Spectrometer Level (2)
--Magnetometer/EMag: N/A
+-EMagnet: N/A
 
 -Imager: 2
 
@@ -18,8 +18,8 @@
 
 -Thruster: N/A
 
-### Magnetometer/EMagnet Level (3)
--Magnetometer/EMag: 1
+### EMagnet Level (3)
+-EMagnet: 1
 
 -Imager: 3
 
@@ -28,7 +28,7 @@
 -Thruster: N/A
 
 ### Thruster Level (4)
--Magnetometer/EMag: 1
+-EMagnet: 1
 
 -Imager: 4
 
@@ -38,7 +38,7 @@
 
 ## Combo Levels
 ### Combo Level 1 (5)
--Magnetometer/EMag: 1
+-EMagnet: 1
 
 -Imager: 4
 
