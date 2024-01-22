@@ -1,3 +1,9 @@
+/*
+ * Description: Player Character
+ * Authors: joshbenn, blopezro, mcmyers4, jmolive8, dnguye99asu
+ * Version: 20240119
+ */
+
 using UnityEngine;
 using System.Collections;
 using System;
@@ -78,7 +84,7 @@ public class PlayerController : BaseController<PlayerController>
         deathCon = GetComponent<PlayerDeath>();
         inventoryManager = GetComponent<InventoryManager>();
         inventoryManager.Initialize(this);
-
+        //hides mouse cursor
         Cursor.visible = false;
     }
 
@@ -141,6 +147,7 @@ public class PlayerController : BaseController<PlayerController>
 
             //Imager
             if (inventoryManager.CheckTool("imager") && batteryManager.batteryPercent != 0) {
+                //flashlight functionality
                 imagerManager.updateFlashlightPosition();
             }
 
@@ -352,7 +359,6 @@ public class PlayerController : BaseController<PlayerController>
 
             case "Imager":
                 imagerManager.Enable();
-                imagerManager.Activate();
                 inventoryManager.SetTool(toolName, true);
                 break;
 
