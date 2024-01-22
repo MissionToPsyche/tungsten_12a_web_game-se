@@ -7,40 +7,23 @@
 - None currently
 
 ### Terrain
-- Rocks/other objects for objects to be behind
-- Platforms
-  - As a tileset, and half the size of the normal tileset
+- None currently
 
 ### Points of Interest
 - None for now
 
 ### UI
-- Battery
-    - update so that the battery starts with 2 bars, then has 4, then has 6.
+- None
 
 ### Other
 - Elements
-- Movable object for the iron
-- An iron texture
 - Crashed spaceship
-- More Backgrounds
 - intro/outro scene
 
 # Animations
 ### Player Character
-- Holding tools
-    - Spectrometer
-        - Idle
-        - Walking
-        - Jumping
-        - Thrusters
-    - Magnetometer
-        - Idle
-        - Walking
-        - Jumping
-        - Thrusters 
-- Entering/Exiting caves
-- Moving construction objects 
+- Entering/Exiting caves (complete implementation)
+- Moving construction objects (conveyor belt, potentiall multi-sprite with animation)
 
 ### Other
 - Electromagnet beam
