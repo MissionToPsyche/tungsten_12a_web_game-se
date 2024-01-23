@@ -94,7 +94,7 @@ public class SceneManager : MonoBehaviour {
     /// </summary>
     /// Needs a WaitForSeconds() before being called so the scene can fully load, or else
     /// will try to find the camera bounds of the previous scene.
-    private void loadCameraBounds()
+    public void loadCameraBounds()
     {
         //array of the virtual cameras attached to the player
         GameObject[] vcs = GameObject.FindGameObjectsWithTag("VirtualCamera");
