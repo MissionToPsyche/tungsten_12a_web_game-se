@@ -131,6 +131,12 @@ public class PlayerController : BaseController<PlayerController>
         //Check booleans
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
 
+        //Max cap for fall rate
+        float maxFallVelocity = -10.0f;
+        if (playerCharacter.velocity.y < maxFallVelocity) {
+            playerCharacter.velocity = new Vector2(playerCharacter.velocity.x, maxFallVelocity);
+        }
+
         //default states
         usingThruster = false;
 
