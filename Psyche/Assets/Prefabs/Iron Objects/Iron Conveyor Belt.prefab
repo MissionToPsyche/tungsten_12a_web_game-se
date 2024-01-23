@@ -108,11 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ironVeinPrefab: {fileID: 3325924169283356502, guid: 19f702046084e434a88c0831d88bd428, type: 3}
-  pointPositions:
-  - {fileID: 6026638863559812178}
-  - {fileID: 5924832904225188675}
-  - {fileID: 4853230935331172745}
-  - {fileID: 669455269291958044}
+  pointsObject: {fileID: 6881837900786384127}
   moveSpeed: 2.5
   spacingBetweenIrons: 2
   numOfIrons: 3
