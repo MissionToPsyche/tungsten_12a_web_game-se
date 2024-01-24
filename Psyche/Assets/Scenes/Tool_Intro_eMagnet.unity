@@ -551,6 +551,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Iron Vein (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3325924169283356502, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.36
