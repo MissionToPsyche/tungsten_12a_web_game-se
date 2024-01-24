@@ -133,7 +133,7 @@ public class GameController : BaseController<GameController>
                 developerConsole.IntakeEvents(args);
                 break;
             case "SceneManager":
-                StartCoroutine(sceneManager.CheckTransition(args[1].ToString()));
+                StartCoroutine(sceneManager.CheckTransition(args[1].ToString(), args[2].ToString()));
                 break;
             default:
                 Debug.Log("Incorrect subdestination -- GameController");
