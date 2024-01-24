@@ -6,8 +6,8 @@ using UnityEngine;
 /// Author: jmolive8
 public class MovingHazard : MonoBehaviour
 {
-    [SerializeField] private Transform[] pointPositions;
-    [SerializeField] private float moveSpeed;
+    public Transform pointsObject;
+    public float moveSpeed;
 
     private Vector2[] points;
 
@@ -15,10 +15,12 @@ public class MovingHazard : MonoBehaviour
 
     void Start()
     {
-        points = new Vector2[pointPositions.Length];
-        for (int i = 0; i < pointPositions.Length; i++)
+        points = new Vector2[pointsObject.childCount];
+        int i = 0;
+        foreach (Transform child in pointsObject)
         {
-            points[i] = pointPositions[i].position;
+            points[i] = child.position;
+            i++;
         }
 
         transform.position = points[0];
