@@ -229,6 +229,8 @@ public class UIController : BaseController<UIController>
     {
         GameController.Instance.OnUpdateGameToUI += ReceiveMessage;
         PlayerController.Instance.OnUpdatePlayerToUI += ReceiveMessage;
+        PlayerController.Instance.inventoryManager.OnUpdateInventoryElement += ElementUpdate;
+        PlayerController.Instance.inventoryManager.OnUpdateInventoryTool += EnableToolButton;
     }
 
     /// <summary>
@@ -676,7 +678,7 @@ public class UIController : BaseController<UIController>
     /// <summary>
     /// When the player walks over the object, pick up the object
     /// </summary>
-    public void ElementUpdate(ArrayList args) /////////////////////////////////////////////////////////////////////////////
+    public void ElementUpdate(ArrayList args)
     {
         string element = args[0].ToString().ToLower();
         string value = args[1].ToString();
