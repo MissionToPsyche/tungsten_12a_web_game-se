@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4364914062602311851}
   m_Layer: 0
-  m_Name: GameObject (1)
+  m_Name: Point (1)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -74,9 +74,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1689736828567770833}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Point
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -215,7 +215,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 165dd0d92b1242243ac84762db3d1e12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointPositions:
-  - {fileID: 1689736828567770833}
-  - {fileID: 4364914062602311851}
+  pointsObject: {fileID: 5107281147881149891}
   moveSpeed: 2.5

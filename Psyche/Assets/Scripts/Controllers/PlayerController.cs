@@ -1,3 +1,9 @@
+/*
+ * Description: Player Character
+ * Authors: joshbenn, blopezro, mcmyers4, jmolive8, dnguye99asu
+ * Version: 20240119
+ */
+
 using UnityEngine;
 using System.Collections;
 using System;
@@ -43,7 +49,7 @@ public class PlayerController : BaseController<PlayerController>
     private bool usingThruster; //for animation purposes  // <--Implement boolean in thruster script
 
     //Booleans to prevent needless code runs
-    [HideInInspector] public bool eMagnetActive, beingPulled, inputBlocked, beingWarped; //Create a dictionary or list to track these
+    [HideInInspector] public bool eMagnetActive, beingPulled, inputBlocked, beingWarped, enteringCave, exitingCave; //Create a dictionary or list to track these
 
     /// <summary>
     /// Initialize the object and parent class
@@ -78,7 +84,7 @@ public class PlayerController : BaseController<PlayerController>
         deathCon = GetComponent<PlayerDeath>();
         inventoryManager = GetComponent<InventoryManager>();
         inventoryManager.Initialize(this);
-
+        //hides mouse cursor
         Cursor.visible = false;
     }
 
@@ -141,16 +147,14 @@ public class PlayerController : BaseController<PlayerController>
 
             //Imager
             if (inventoryManager.CheckTool("imager") && batteryManager.batteryPercent != 0) {
+                //flashlight functionality
                 imagerManager.updateFlashlightPosition();
             }
 
             //Spectrometer
-            if (inventoryManager.CheckTool("spectrometer") && Input.GetButtonDown("FireGRS") && batteryManager.batteryPercent != 0) {
+            if (inventoryManager.CheckTool("spectrometer") && Input.GetButton("FireGRS") && batteryManager.batteryPercent != 0) {
                 gammaView.ActivateGRS();
-                batteryManager.DrainBatt(500);
-            }
-            if (inventoryManager.CheckTool("spectrometer") && Input.GetButtonUp("FireGRS")) {
-                gammaView.DeactivateGRS();
+                batteryManager.DrainBatt(2);
             }
 
             //ElectroMagnet
@@ -160,11 +164,7 @@ public class PlayerController : BaseController<PlayerController>
             }
         }
 
-        playerMovement.handleMovement(usingThruster, beingWarped);
-
-        // //needed to ensure the warping animation plays even when input is blocked
-        // if (beingWarped)
-        //     playerMovement.handleMovement(usingThruster, beingWarped);
+        playerMovement.handleMovement(usingThruster, beingWarped, enteringCave, exitingCave);
 
         //Inventory and Dialog Box 
         if (Input.GetButtonDown("Inventory") && !Input.GetButton("FireGRS"))
@@ -359,7 +359,6 @@ public class PlayerController : BaseController<PlayerController>
 
             case "Imager":
                 imagerManager.Enable();
-                imagerManager.Activate();
                 inventoryManager.SetTool(toolName, true);
                 break;
 

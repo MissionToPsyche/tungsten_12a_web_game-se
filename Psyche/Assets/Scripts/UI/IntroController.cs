@@ -1,12 +1,18 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Basic Intro Cutscene that shows a series of images
+/// </summary>
+/// Author: jmolive8
 public class IntroController : MonoBehaviour
 {
     public GameObject intro1, intro2, intro3, intro4;
 
     int curScreen = 1;
 
+    /// <summary>
+    /// Shows next screen on Left Click
+    /// </summary>
     void Update()
     {
         if (Input.GetButtonDown("EMagnet"))
