@@ -96,12 +96,10 @@ public class InventoryManager : MonoBehaviour
         }
         _tools[toolName] = value;
 
-        //Send message to UI /////////////////////////////////////////////////////////////////////////////
-        ArrayList args = new ArrayList {
-                "UI", "None", "InventoryManager", "tool_update", toolName, value,
-            };
+        //Send message to UI
+        ArrayList args = new ArrayList { toolName, value };
         //Send the message
-        _playerController.SendMessage(args);
+        OnUpdateInventoryTool.Invoke(args);
     }
 
     /// <summary>
@@ -138,12 +136,9 @@ public class InventoryManager : MonoBehaviour
         }
         _elements[element] += amount;
 
-        //Send message to UI /////////////////////////////////////////////////////////////////////////////
-        ArrayList args = new ArrayList {
-                "UI", "None", "InventoryManager", "element_update", element, _elements[element],
-            };
+        ArrayList args = new ArrayList { element, _elements[element] };
         //Send the message
-        _playerController.SendMessage(args);
+        OnUpdateInventoryElement.Invoke(args);
     }
 
     /// <summary>
@@ -163,12 +158,10 @@ public class InventoryManager : MonoBehaviour
         }
         _elements[element] -= amount;
 
-        //Send message to UI /////////////////////////////////////////////////////////////////////////////
-        ArrayList args = new ArrayList {
-                "UI", "None", "InventoryManager", "element_update", element, _elements[element],
-            };
+        //Send message to UI
+        ArrayList args = new ArrayList { element, _elements[element] };
         //Send the message
-        _playerController.SendMessage(args);
+        OnUpdateInventoryElement.Invoke(args);
     }
 
     /// <summary>
@@ -188,12 +181,10 @@ public class InventoryManager : MonoBehaviour
         }
         _elements[element] = amount;
 
-        //Send message to UI /////////////////////////////////////////////////////////////////////////////
-        ArrayList args = new ArrayList {
-                "UI", "None", "InventoryManager", "element_update", element, _elements[element],
-            };
+        //Send message to UI
+        ArrayList args = new ArrayList { element, _elements[element] };
         //Send the message
-        _playerController.SendMessage(args);
+        OnUpdateInventoryElement.Invoke(args);
     }
 
     /// <summary>
