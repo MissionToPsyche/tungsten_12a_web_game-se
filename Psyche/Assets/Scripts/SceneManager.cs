@@ -47,6 +47,8 @@ public class SceneManager : MonoBehaviour {
             {
                 case "Landing_Scene":
                     travelToScene(travelToSceneName);
+                    yield return new WaitForSeconds(0.5f);
+                    loadCameraBounds();
                     break;
                 case "Tool_Intro_Thruster":
                     travelToScene(travelToSceneName);
@@ -55,6 +57,8 @@ public class SceneManager : MonoBehaviour {
                     break;
                 case "Tool_Intro_GRS":
                     travelToScene(travelToSceneName);
+                    yield return new WaitForSeconds(0.5f);
+                    loadCameraBounds();
                     break;
                 case "Tool_Intro_Imager":
                     travelToScene(travelToSceneName);
@@ -63,6 +67,8 @@ public class SceneManager : MonoBehaviour {
                     break;
                 case "Tool_Intro_eMagnet":
                     travelToScene(travelToSceneName);
+                    yield return new WaitForSeconds(0.5f);
+                    loadCameraBounds();
                     break;
 
                 case "SceneTransition_Game_End":
@@ -94,7 +100,7 @@ public class SceneManager : MonoBehaviour {
     /// </summary>
     /// Needs a WaitForSeconds() before being called so the scene can fully load, or else
     /// will try to find the camera bounds of the previous scene.
-    public void loadCameraBounds()
+    private void loadCameraBounds()
     {
         //array of the virtual cameras attached to the player
         GameObject[] vcs = GameObject.FindGameObjectsWithTag("VirtualCamera");
