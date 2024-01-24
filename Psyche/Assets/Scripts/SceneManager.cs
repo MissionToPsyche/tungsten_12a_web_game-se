@@ -1,3 +1,10 @@
+/*
+ * Description: Scene Transitions
+ * Authors: joshbenn, blopezro, mcmyers4
+ * Version: 20240119
+ */
+
+using Cinemachine;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -36,15 +43,26 @@ public class SceneManager : MonoBehaviour {
 
         //If a positive vertical button is pressed (w or up), then transition
         if (Input.GetButton("Vertical") && verticalAxis > 0) {
-            switch(travelToSceneName) {
+            switch (travelToSceneName)
+            {
                 case "Landing_Scene":
+                    travelToScene(travelToSceneName);
+                    break;
                 case "Tool_Intro_Thruster":
+                    travelToScene(travelToSceneName);
+                    yield return new WaitForSeconds(0.5f);
+                    loadCameraBounds();
+                    break;
                 case "Tool_Intro_GRS":
+                    travelToScene(travelToSceneName);
+                    break;
                 case "Tool_Intro_Imager":
+                    travelToScene(travelToSceneName);
+                    yield return new WaitForSeconds(0.5f);
+                    loadCameraBounds();
+                    break;
                 case "Tool_Intro_eMagnet":
-                    _travelToSceneName = travelToSceneName;
-                    UnityEngine.SceneManagement.SceneManager.LoadScene(travelToSceneName);
-                    transition = true;
+                    travelToScene(travelToSceneName);
                     break;
 
                 case "SceneTransition_Game_End":
@@ -55,6 +73,40 @@ public class SceneManager : MonoBehaviour {
                     Debug.LogError("Invalid Scene Transition");
                     break;
             }
+        }
+    }
+
+    /// <summary>
+    /// Loads scene to be transitioned to.
+    /// </summary>
+    /// <param name="travelToSceneName">
+    /// Name of the scene that the character to travelling to.
+    /// </param>
+    private void travelToScene(string travelToSceneName)
+    {
+        _travelToSceneName = travelToSceneName;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(travelToSceneName);
+        transition = true;
+    }
+
+    /// <summary>
+    /// Finds and passes the unique boundary of the newly loaded scene to each of the game's cameras.
+    /// </summary>
+    /// Needs a WaitForSeconds() before being called so the scene can fully load, or else
+    /// will try to find the camera bounds of the previous scene.
+    private void loadCameraBounds()
+    {
+        //array of the virtual cameras attached to the player
+        GameObject[] vcs = GameObject.FindGameObjectsWithTag("VirtualCamera");
+        GameObject bounds;
+        CompositeCollider2D shape;
+        //loops through and assigns the boundary to each of the virtual cameras
+        foreach (GameObject vc in vcs)
+        {
+            vc.GetComponent<CinemachineConfiner2D>().InvalidateCache();
+            bounds = GameObject.FindGameObjectWithTag("Boundary");
+            shape = bounds.GetComponent<CompositeCollider2D>();
+            vc.GetComponent<CinemachineConfiner2D>().m_BoundingShape2D = shape;
         }
     }
 

@@ -1,7 +1,10 @@
+/*
+ * Description: Character Movement
+ * Authors: joshbenn, blopezro, mcmyers4, jmolive8, dnguye99asu
+ * Version: 20240119
+ */
+
 using Cinemachine;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 ///<summary>
@@ -19,9 +22,13 @@ public class PlayerMovement : MonoBehaviour
     private bool _isFacingRight;
     private bool _flipSprite;
     private Vector2 _walkVelocity;
+    //A Camera to bias right when player is looking right
     [SerializeField] private CinemachineVirtualCamera _virtualCameraR;
+    //A Camera to bias left when player is looking left
     [SerializeField] private CinemachineVirtualCamera _virtualCameraL;
+    //A Camera to bias lower right when player is in the air and looking right
     [SerializeField] private CinemachineVirtualCamera _virtualCameraLowR;
+    //A Camera to bias lower left when player is in the air and looking left
     [SerializeField] private CinemachineVirtualCamera _virtualCameraLowL;
 
     //Animation states
@@ -30,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
     const string PLAYER_JUMP = "player_jump";
     const string PLAYER_THRUSTER = "player_thruster";
     const string PLAYER_WARP = "player_warp";
+    const string ENTERING_CAVE = "player_entering_cave";
 
     /// <summary>
     /// Initializes the script
@@ -45,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
     /// <summary>
     /// Handles the movement and animations of the player.
     /// </summary>
-    public void handleMovement(bool usingThruster, bool beingWarped)
+    public void handleMovement(bool usingThruster, bool beingWarped, bool enteringCave, bool exitingCave)
     {
         _flipSprite = true;
 
@@ -56,6 +64,17 @@ public class PlayerMovement : MonoBehaviour
             _newAnimation = PLAYER_WARP;
         }
 
+        else if (enteringCave)
+        {
+            _playerManagement.playerCharacter.velocity = new Vector2(0, 0);
+            _newAnimation = ENTERING_CAVE;
+        }
+
+        else if (exitingCave)
+        {
+            _playerManagement.playerCharacter.velocity = new Vector2(0, 0);
+            _newAnimation = PLAYER_WALK;
+        }
         //checks for the player's behavior to determine which animation to play
         else
         {
@@ -137,6 +156,8 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            //TODO need to set alpha faders for entering and exiting cave -Dhalia
+
             //play the new animation
             _animator.Play(_newAnimation);
             if (_newAnimation.Equals(PLAYER_THRUSTER)) {
@@ -155,6 +176,7 @@ public class PlayerMovement : MonoBehaviour
         /// </summary>
         if (_isFacingRight)
         {
+            //Player is looking right and in the air.
             if (!_playerManagement.isGrounded)
             {
                 _virtualCameraLowR.Priority = 10;
@@ -162,6 +184,7 @@ public class PlayerMovement : MonoBehaviour
                 _virtualCameraL.Priority = 0;
                 _virtualCameraR.Priority = 0;
             }
+            //Player is looking right and on the ground.
             else
             {
                 _virtualCameraR.Priority = 10;
@@ -172,6 +195,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            //Player is looking left and in the air.
             if (!_playerManagement.isGrounded)
             {
                 _virtualCameraLowL.Priority = 10;
@@ -179,6 +203,7 @@ public class PlayerMovement : MonoBehaviour
                 _virtualCameraL.Priority = 0;
                 _virtualCameraR.Priority = 0;
             }
+            //Player is looking right and on the ground.
             else
             {
                 _virtualCameraL.Priority = 10;
