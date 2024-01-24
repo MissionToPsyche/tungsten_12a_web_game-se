@@ -19,7 +19,7 @@ public class SceneManager : MonoBehaviour {
     private Vector3 _landingPosition;
     private bool transition = false;
     private String _travelToSceneName;
-    private String _currScene;
+    private String _directionTag;
     
     /// <summary>
     /// Initializes this script
@@ -33,8 +33,11 @@ public class SceneManager : MonoBehaviour {
     /// Transitions the player to the respective scene if the necessary parameters are met
     /// </summary>
     /// <param name="travelToSceneName"></param>
+    /// <param name="tag"></param>
     /// <returns></returns>
-    public IEnumerator CheckTransition(string travelToSceneName) {
+    public IEnumerator CheckTransition(string travelToSceneName, string directionTag) {
+        _directionTag = directionTag;
+
         //Polling rate
         yield return new WaitForSeconds(0.1f);
 
@@ -80,7 +83,7 @@ public class SceneManager : MonoBehaviour {
     /// Loads scene to be transitioned to.
     /// </summary>
     /// <param name="travelToSceneName">
-    /// Name of the scene that the character to travelling to.
+    /// Name of the scene that the character to traveling to.
     /// </param>
     private void travelToScene(string travelToSceneName)
     {
@@ -130,12 +133,9 @@ public class SceneManager : MonoBehaviour {
     /// <param name="scene"></param>
     /// <param name="mode"></param>
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
-        _currScene = scene.name;
         if (transition) {
             RepositionPlayer(_travelToSceneName);
         }
-        //Debug.Log("_currScene: "+_currScene);
-        //Debug.Log("_prevScene: "+_prevScene);
         transition = false;
     }
 
@@ -156,11 +156,15 @@ public class SceneManager : MonoBehaviour {
     public Vector3 GetTransitionObjectPosition(string sceneName) {
         Scene scene = UnityEngine.SceneManagement.SceneManager.GetSceneByName(sceneName);
         if (scene.isLoaded) {
-            GameObject obj = GameObject.FindGameObjectWithTag("TransitionObjectIn");
+            String tag = "TransitionObjectIn";
+            if (_directionTag == tag) {
+                tag = "TransitionObjectOut";
+            }
+            GameObject obj = GameObject.FindGameObjectWithTag(tag);
                 if (obj != null) {
                     return obj.transform.position;
                 } else {
-                    Debug.LogWarning("TransitionObjectIn not found.");
+                    Debug.LogWarning(tag+" not found.");
                 }
         } else {
             Debug.LogWarning("Scene "+sceneName+" is not loaded.");
