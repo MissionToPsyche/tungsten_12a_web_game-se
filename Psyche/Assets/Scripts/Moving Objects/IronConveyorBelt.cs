@@ -8,7 +8,7 @@ using UnityEngine;
 public class IronConveyorBelt : MonoBehaviour
 {
     public GameObject ironVeinPrefab;
-    public Transform[] pointPositions;
+    public Transform pointsObject;
 
     public float moveSpeed = 2.5f, spacingBetweenIrons = 2;
     public int numOfIrons = 3;
@@ -19,10 +19,13 @@ public class IronConveyorBelt : MonoBehaviour
     void Start()
     {
         spawnDelay = new WaitForSeconds(spacingBetweenIrons);
-        points = new Vector2[pointPositions.Length];
-        for (int i = 0; i < pointPositions.Length; i++)
+
+        points = new Vector2[pointsObject.childCount];
+        int i = 0;
+        foreach (Transform child in pointsObject)
         {
-            points[i] = pointPositions[i].position;
+            points[i] = child.position;
+            i++;
         }
 
         StartCoroutine(spawnIron());
@@ -35,7 +38,7 @@ public class IronConveyorBelt : MonoBehaviour
     {
         for (int i = 0; i < numOfIrons; i++)
         {
-            StartCoroutine(moveIron(Instantiate(ironVeinPrefab, pointPositions[0])));
+            StartCoroutine(moveIron(Instantiate(ironVeinPrefab, pointsObject.GetChild(0))));
             yield return spawnDelay;
         }
     }
