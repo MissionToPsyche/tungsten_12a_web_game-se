@@ -50,6 +50,8 @@ public class SceneManager : MonoBehaviour {
             {
                 case "Landing_Scene":
                     travelToScene(travelToSceneName);
+                    yield return new WaitForSeconds(0.5f);
+                    loadCameraBounds();
                     break;
                 case "Tool_Intro_Thruster":
                     travelToScene(travelToSceneName);
@@ -58,6 +60,8 @@ public class SceneManager : MonoBehaviour {
                     break;
                 case "Tool_Intro_GRS":
                     travelToScene(travelToSceneName);
+                    yield return new WaitForSeconds(0.5f);
+                    loadCameraBounds();
                     break;
                 case "Tool_Intro_Imager":
                     travelToScene(travelToSceneName);
@@ -66,6 +70,8 @@ public class SceneManager : MonoBehaviour {
                     break;
                 case "Tool_Intro_eMagnet":
                     travelToScene(travelToSceneName);
+                    yield return new WaitForSeconds(0.5f);
+                    loadCameraBounds();
                     break;
 
                 case "SceneTransition_Game_End":
