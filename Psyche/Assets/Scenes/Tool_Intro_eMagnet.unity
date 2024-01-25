@@ -433,17 +433,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: ElectroMagnet Pickup Variant
       objectReference: {fileID: 0}
-    - target: {fileID: 2169323038436950894, guid: 6f065834d363ff44b81d9cda2988a82a, type: 3}
-      propertyPath: toolName
-      value: ElectroMagnet
-      objectReference: {fileID: 0}
     - target: {fileID: 5608750381463216694, guid: 6f065834d363ff44b81d9cda2988a82a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.2
+      value: 3.8
       objectReference: {fileID: 0}
     - target: {fileID: 5608750381463216694, guid: 6f065834d363ff44b81d9cda2988a82a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.39
+      value: -4.37
       objectReference: {fileID: 0}
     - target: {fileID: 5608750381463216694, guid: 6f065834d363ff44b81d9cda2988a82a, type: 3}
       propertyPath: m_LocalPosition.z
