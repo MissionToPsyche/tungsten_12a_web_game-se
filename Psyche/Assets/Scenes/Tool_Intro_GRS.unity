@@ -4330,18 +4330,6 @@ PrefabInstance:
       value: Spectrometer Pickup Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6969730462459996994, guid: 05c40341d3492f241a8ea868ffb11cef, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.1041183
-      objectReference: {fileID: 0}
-    - target: {fileID: 6969730462459996994, guid: 05c40341d3492f241a8ea868ffb11cef, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2.1041183
-      objectReference: {fileID: 0}
-    - target: {fileID: 6969730462459996994, guid: 05c40341d3492f241a8ea868ffb11cef, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2.1041183
-      objectReference: {fileID: 0}
-    - target: {fileID: 6969730462459996994, guid: 05c40341d3492f241a8ea868ffb11cef, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
