@@ -77,7 +77,7 @@ public class PlayerDeath : MonoBehaviour {
     public void GetHurt(int dmg) {
         //Debug.Log("Ouch!");
         playerHealth.HealthDown(dmg);
-        if (playerHealth.playerHealth == 0) {
+        if (playerHealth.playerHealth <= 0) {
             //Debug.Log("Game should rest to checkpoint here.....");
 
             //start the warping animation
