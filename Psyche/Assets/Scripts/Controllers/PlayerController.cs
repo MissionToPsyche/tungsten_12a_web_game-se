@@ -89,7 +89,7 @@ public class PlayerController : BaseController<PlayerController>
         Cursor.visible = false;
 
         //groundcheck
-        groundCheckSize = new Vector2(0.798f, 0.1f);
+        groundCheckSize = new Vector2(0.785f, 0.1f);
     }
 
     /// <summary>
