@@ -1,7 +1,7 @@
 /** 
 Description: spectrometer tool gamma view script
 Author: blopezro
-Version: 20240119
+Version: 20240125
 **/
 
 using System;
@@ -29,6 +29,7 @@ public class GammaView : MonoBehaviour {
     public Camera mainCamera;                        // scene camera used to only load objects within view
     public Light2D sceneLight;                       // light in the current scene
     public float origSceneLightIntensity;            // light intensity of the scene
+    public bool grnsControlsSceneLight = false;      // boolean to set if grns will influence scene light
     public Tilemap sceneTilemap;                     // tilemap (terrain component) in current scene
     public Color origSceneTilemapColor;              // terrain color of the scene
     
@@ -142,7 +143,7 @@ public class GammaView : MonoBehaviour {
                     ChangeTerrainColor(); // placed in here so it runs one time
                 }
                 if (colorBlindMode) { ActivateGRSaltView(); }
-                if (!sceneLight.intensity.Equals(1)) {
+                if (!sceneLight.intensity.Equals(1) && grnsControlsSceneLight) {
                     TurnOnSceneLight();
                 }
             }
@@ -161,7 +162,7 @@ public class GammaView : MonoBehaviour {
                     RevertTerrainColor(); // placed in here so it runs one time
                 }
                 if (colorBlindMode) { DeactivateGRSaltView(); }
-                if (!sceneLight.intensity.Equals(origSceneLightIntensity)) {
+                if (!sceneLight.intensity.Equals(origSceneLightIntensity) && grnsControlsSceneLight) {
                     RevertSceneLight();
                 }
             }

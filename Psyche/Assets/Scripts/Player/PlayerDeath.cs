@@ -4,6 +4,7 @@
  * Version: 20240119
  */
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -96,7 +97,12 @@ public class PlayerDeath : MonoBehaviour {
         //check if the player is at the starting point
         if (startPoint.Equals(respawnPoint))
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+            //UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+            //changed so that camera bounds would load on player repawn
+            ArrayList args = new ArrayList {
+                "Game", "SceneManager", "PlayerController", UnityEngine.SceneManagement.SceneManager.GetActiveScene().name
+            };
+            PlayerController.Instance.SendMessage(args);
         }
 
         //move the player to their respawn point
