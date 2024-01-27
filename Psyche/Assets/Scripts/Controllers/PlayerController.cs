@@ -135,6 +135,12 @@ public class PlayerController : BaseController<PlayerController>
         //Check booleans
         isGrounded = checkGrounded();
 
+        //Max cap for fall rate
+        float maxFallVelocity = -10.0f;
+        if (playerCharacter.velocity.y < maxFallVelocity) {
+            playerCharacter.velocity = new Vector2(playerCharacter.velocity.x, maxFallVelocity);
+        }
+
         //default states
         usingThruster = false;
 
@@ -319,10 +325,10 @@ public class PlayerController : BaseController<PlayerController>
     /// <param name="other"></param>
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.tag == "TransitionObject" || other.tag ==  "TransitionObjectIn") //for Transition objects
+        if (other.tag == "TransitionObjectIn" || other.tag ==  "TransitionObjectOut") //for Transition objects
         {
             ArrayList args = new ArrayList { 
-                "Game", "SceneManager", "PlayerController", other.name 
+                "Game", "SceneManager", "PlayerController", other.name, other.tag 
             };
             SendMessage(args);
         }
