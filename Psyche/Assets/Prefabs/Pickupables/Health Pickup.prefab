@@ -11,34 +11,34 @@ PrefabInstance:
     - target: {fileID: 909618470094357323, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 1535906679059638393, guid: 1ddc9afd21fec77489b1248d18f31b68, type: 3}
+      objectReference: {fileID: 21300000, guid: c0983e9cd3e43894fbd092ada6dd3a04, type: 3}
     - target: {fileID: 1733599726157441985, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_Size.x
-      value: 0.25
+      value: 0.24
       objectReference: {fileID: 0}
     - target: {fileID: 1733599726157441985, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_Size.y
-      value: 0.25
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1733599726157441985, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 0.32
+      value: 0.22
       objectReference: {fileID: 0}
     - target: {fileID: 1733599726157441985, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 0.32
+      value: 0.17
       objectReference: {fileID: 0}
     - target: {fileID: 3971640087115632001, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_LocalScale.x
-      value: 4.094731
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 3971640087115632001, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_LocalScale.y
-      value: 4.094731
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 3971640087115632001, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_LocalScale.z
-      value: 4.094731
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3971640087115632001, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_LocalPosition.x
@@ -46,7 +46,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3971640087115632001, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.21
       objectReference: {fileID: 0}
     - target: {fileID: 3971640087115632001, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_LocalPosition.z
@@ -58,15 +58,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3971640087115632001, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3971640087115632001, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3971640087115632001, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3971640087115632001, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -86,7 +86,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7775450262555123965, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_Name
-      value: Health Pickup Variant
+      value: Health Pickup
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
