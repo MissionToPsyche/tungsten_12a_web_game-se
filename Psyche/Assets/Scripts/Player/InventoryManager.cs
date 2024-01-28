@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 /// <summary>
 /// Manages the inventory and all items within it
