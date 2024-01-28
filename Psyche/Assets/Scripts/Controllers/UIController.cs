@@ -265,6 +265,7 @@ public class UIController : BaseController<UIController>
                 setDialogText("This is a Thruster");
                 thrusterButton.SetActive(true);
                 thrusterLevel.transform.parent.gameObject.SetActive(true);
+                thrusterIcon.SetActive(true);
                 break;
             case "imager":
                 setDialogText("This is an Imager");
@@ -274,11 +275,13 @@ public class UIController : BaseController<UIController>
             case "spectrometer":
                 setDialogText("This is a Spectrometer\n\n Press G Key to activate");
                 spectrometerButton.SetActive(true);
+                GRNSIcon.SetActive(true);
                 break;
             case "electromagnet":
                 setDialogText("This is an ElectroMagnet");
                 eMagnetButton.SetActive(true);
                 eMagnetLevel.transform.parent.gameObject.SetActive(true);
+                eMagnetIcon.SetActive(true);
                 break;
             default:
                 Debug.Log("Incorrect tool name passed: " + args[0].ToString());
@@ -419,6 +422,11 @@ public class UIController : BaseController<UIController>
     public GameObject spectrometerButton;
     public GameObject eMagnetButton;
     public GameObject thrusterButton;
+
+    [Header("Overlay Icons")]
+    public GameObject GRNSIcon;
+    public GameObject eMagnetIcon;
+    public GameObject thrusterIcon;
 
     //Variables
     private GameObject curSubmenu;
