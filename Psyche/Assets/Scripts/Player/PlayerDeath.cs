@@ -4,6 +4,7 @@
  * Version: 20240119
  */
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,8 +33,15 @@ public class PlayerDeath : MonoBehaviour {
     /// </summary>
     /// <param name="collision"></param>
     private void OnCollisionEnter2D(Collision2D collision) {
+            //regular hazards do 1 damage
         if (collision.gameObject.CompareTag("Hazard")) {
-            GetHurt();
+            GetHurt(1);
+        }
+
+        //spikes do full damage
+        else if (collision.gameObject.CompareTag("Spikes"))
+        {
+            GetHurt(playerHealth.playerHealth);
         }
     }
 
@@ -66,10 +74,10 @@ public class PlayerDeath : MonoBehaviour {
     /// Lose health on contacts with hazards.
     /// Respawn character if no health remains.
     /// </summary>
-    public void GetHurt() {
+    public void GetHurt(int dmg) {
         //Debug.Log("Ouch!");
-        playerHealth.HealthDown(1);
-        if (playerHealth.playerHealth == 0) {
+        playerHealth.HealthDown(dmg);
+        if (playerHealth.playerHealth <= 0) {
             //Debug.Log("Game should rest to checkpoint here.....");
 
             //start the warping animation
@@ -96,7 +104,12 @@ public class PlayerDeath : MonoBehaviour {
         //check if the player is at the starting point
         if (startPoint.Equals(respawnPoint))
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+            //UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+            //changed so that camera bounds would load on player repawn
+            ArrayList args = new ArrayList {
+                "Game", "SceneManager", "PlayerController", UnityEngine.SceneManagement.SceneManager.GetActiveScene().name
+            };
+            PlayerController.Instance.SendMessage(args);
         }
 
         //move the player to their respawn point
