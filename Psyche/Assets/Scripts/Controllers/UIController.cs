@@ -278,7 +278,7 @@ public class UIController : BaseController<UIController>
                 imagerLevel.transform.parent.gameObject.SetActive(true);
                 break;
             case "spectrometer":
-                setDialogText("This is a Spectrometer\n\n Press G Key to activate");
+                setDialogText("This is a Spectrometer\n\n Right-Click to activate");
                 spectrometerButton.SetActive(true);
                 break;
             case "electromagnet":
