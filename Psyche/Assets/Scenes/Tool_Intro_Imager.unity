@@ -13379,14 +13379,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4321779371337106951, guid: c3459c583f34bbf49be52ea0ad5df946, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4321779371337106951, guid: c3459c583f34bbf49be52ea0ad5df946, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4321779371337106951, guid: c3459c583f34bbf49be52ea0ad5df946, type: 3}
       propertyPath: m_LocalPosition.x
       value: 22.05
       objectReference: {fileID: 0}
@@ -13426,25 +13418,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4407231617382294546, guid: c3459c583f34bbf49be52ea0ad5df946, type: 3}
-      propertyPath: m_PointLightInnerRadius
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4407231617382294546, guid: c3459c583f34bbf49be52ea0ad5df946, type: 3}
-      propertyPath: m_PointLightOuterRadius
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 7423023160452361083, guid: c3459c583f34bbf49be52ea0ad5df946, type: 3}
       propertyPath: m_Name
-      value: Flashlight Pickup Variant
-      objectReference: {fileID: 0}
-    - target: {fileID: 7423023160452361083, guid: c3459c583f34bbf49be52ea0ad5df946, type: 3}
-      propertyPath: m_TagString
-      value: Imager
-      objectReference: {fileID: 0}
-    - target: {fileID: 7509392284283070303, guid: c3459c583f34bbf49be52ea0ad5df946, type: 3}
-      propertyPath: toolName
-      value: Imager
+      value: Imager Pickup Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
