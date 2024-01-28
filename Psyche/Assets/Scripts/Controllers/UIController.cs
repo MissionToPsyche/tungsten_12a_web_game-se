@@ -130,6 +130,7 @@ public class UIController : BaseController<UIController>
     public event Action<ArrayList> OnUpdateUIToGame;
     public event Action<ArrayList> OnUpdateUIToPlayer;
     public event Action<ArrayList> OnUpdateInventoryUpdate;
+    public event Action<ArrayList> OnUpdateToolModify;
 
     /// <summary>
     /// Invokes events for this and any subclasses.
@@ -581,12 +582,9 @@ public class UIController : BaseController<UIController>
     /// </summary>
     public void UpgradeInterface(string toolName)
     {
-        //Send message to Inventory Manager
-        ArrayList args = new ArrayList {
-                "Player", "None", "UI", "tool_upgrade", toolName,
-        };
+        ArrayList args = new ArrayList { toolName };
         //Send the message
-        SendMessage(args);
+        OnUpdateToolModify(args);
     }
 
     /// <summary>
