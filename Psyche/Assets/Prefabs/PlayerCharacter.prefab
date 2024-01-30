@@ -212,6 +212,7 @@ MonoBehaviour:
   mainCamera: {fileID: 0}
   sceneLight: {fileID: 0}
   origSceneLightIntensity: 0
+  grnsControlsSceneLight: 0
   sceneTilemap: {fileID: 0}
   origSceneTilemapColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &5506379765075815446
@@ -601,7 +602,7 @@ Transform:
   m_GameObject: {fileID: 2746429122550390308}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.25, y: 0.625, z: -2.5}
+  m_LocalPosition: {x: 0.24999565, y: 0.576635, z: -2.5}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
