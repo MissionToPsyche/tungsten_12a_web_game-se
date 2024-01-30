@@ -129,6 +129,8 @@ public class UIController : BaseController<UIController>
     //Events Declarations
     public event Action<ArrayList> OnUpdateUIToGame;
     public event Action<ArrayList> OnUpdateUIToPlayer;
+    public event Action<ArrayList> OnUpdateInventoryUpdate;
+    public event Action<ArrayList> OnUpdateToolModify;
 
     /// <summary>
     /// Invokes events for this and any subclasses.
@@ -165,7 +167,7 @@ public class UIController : BaseController<UIController>
     ///   - ArrayList[1] = source
     /// </summary>
     /// <param name="args"></param>
-    protected override void ReceiveMessage(ArrayList args)
+    protected override void ReceiveMessage(ArrayList args) /////////////////////////////////////////////////////////////////////////////
     {
         string subdestination = args[0].ToString();
         args.RemoveAt(0);
@@ -185,7 +187,7 @@ public class UIController : BaseController<UIController>
                     case "BatteryManager":
                         UpdateBattery(args);
                         break;
-                    case "ToolManager":
+                    case "ToolManager": /////////////////////////////////////////////////////////////////////////////
                         directive = args[0].ToString();
                         args.RemoveAt(0);
 
@@ -228,6 +230,8 @@ public class UIController : BaseController<UIController>
     {
         GameController.Instance.OnUpdateGameToUI += ReceiveMessage;
         PlayerController.Instance.OnUpdatePlayerToUI += ReceiveMessage;
+        PlayerController.Instance.inventoryManager.OnUpdateInventoryElement += ElementUpdate;
+        PlayerController.Instance.inventoryManager.OnUpdateInventoryTool += EnableToolButton;
     }
 
     /// <summary>
@@ -238,7 +242,9 @@ public class UIController : BaseController<UIController>
     {
         if (PlayerController.Instance != null)
         {
-            PlayerController.Instance.OnUpdatePlayerToUI -= EnableToolButton; 
+            PlayerController.Instance.OnUpdatePlayerToUI -= EnableToolButton;
+            //PlayerController.Instance.inventoryManager.OnUpdateInventoryElement -= //Insert correct function here
+            //PlayerController.Instance.inventoryManager.OnUpdateInventoryTool -= //Insert correct function here
         }
         if (GameController.Instance != null)
         {
@@ -584,12 +590,9 @@ public class UIController : BaseController<UIController>
     /// </summary>
     public void UpgradeInterface(string toolName)
     {
-        //Send message to Inventory Manager
-        ArrayList args = new ArrayList {
-                "Player", "None", "UI", "tool_upgrade", toolName,
-        };
+        ArrayList args = new ArrayList { toolName };
         //Send the message
-        SendMessage(args);
+        OnUpdateToolModify(args);
     }
 
     /// <summary>
@@ -599,7 +602,7 @@ public class UIController : BaseController<UIController>
     ///     - Dictionary contains a list of elements and their required values
     /// </summary>
     /// <param name="args"></param>
-    public void ToolInfoGather(ArrayList args)
+    public void ToolInfoGather(ArrayList args) /////////////////////////////////////////////////////////////////////////////
     {
         //passes upgrade or info
         string directive = args[0].ToString().ToLower();
