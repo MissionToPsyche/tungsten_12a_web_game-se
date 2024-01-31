@@ -50,27 +50,32 @@ public class SceneManager : MonoBehaviour {
             {
                 case "Landing_Scene":
                     travelToScene(travelToSceneName);
-                    yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSeconds(0.1f);
+                    loadBackground();
                     loadCameraBounds();
                     break;
                 case "Tool_Intro_Thruster":
                     travelToScene(travelToSceneName);
-                    yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSeconds(0.1f);
+                    loadBackground();
                     loadCameraBounds();
                     break;
                 case "Tool_Intro_GRS":
                     travelToScene(travelToSceneName);
-                    yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSeconds(0.1f);
+                    loadBackground();
                     loadCameraBounds();
                     break;
                 case "Tool_Intro_Imager":
                     travelToScene(travelToSceneName);
-                    yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSeconds(0.1f);
+                    loadBackground();
                     loadCameraBounds();
                     break;
                 case "Tool_Intro_eMagnet":
                     travelToScene(travelToSceneName);
-                    yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSeconds(0.1f);
+                    loadBackground();
                     loadCameraBounds();
                     break;
 
@@ -117,6 +122,23 @@ public class SceneManager : MonoBehaviour {
             shape = bounds.GetComponent<CompositeCollider2D>();
             vc.GetComponent<CinemachineConfiner2D>().m_BoundingShape2D = shape;
         }
+    }
+
+    /// <summary>
+    /// Finds the main camera after a scene has been loaded. Then connects the camera as the
+    /// background image's "parent" so that it always follows the camera.
+    /// Called before loadCameraBounds() when transitioning scenes.
+    /// </summary>
+    private void loadBackground()
+    {
+        GameObject background = GameObject.FindGameObjectWithTag("Background");
+        //background.SetActive(false);
+        Canvas canvas = background.GetComponent<Canvas>();
+
+        canvas.planeDistance = 100;
+        canvas.worldCamera = Camera.main;
+        //background.SetActive(true);
+        
     }
 
     /// <summary>
