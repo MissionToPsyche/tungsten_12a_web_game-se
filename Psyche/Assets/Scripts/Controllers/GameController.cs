@@ -206,6 +206,7 @@ public class GameController : BaseController<GameController>
     /// <summary>
     /// Swap color blind mode
     /// </summary>
+    /// <returns></returns>
     public void ChangeColorBlindMode(bool mode)
     {
         colorBlindMode = mode;
@@ -214,6 +215,7 @@ public class GameController : BaseController<GameController>
     /// <summary>
     /// Toggles background audio mute
     /// </summary>
+    /// <returns></returns>
     public void ToggleBackgroundAudioMute()
     {
         audioManager.ToggleAudioMute(audioManager.backgroundMusic);

@@ -1,7 +1,8 @@
 using System.Collections;
-using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 /// <summary>
 /// Manages the inventory and all items within it
@@ -11,10 +12,6 @@ public class InventoryManager : MonoBehaviour
     private PlayerController _playerController;
     private Dictionary<string, bool> _tools;
     private Dictionary<string, int> _elements;
-
-    // Events
-    public event Action<ArrayList> OnUpdateInventoryTool;
-    public event Action<ArrayList> OnUpdateInventoryElement;
 
     /// <summary>
     /// Initialize the class and set up base dictionaries
@@ -41,26 +38,8 @@ public class InventoryManager : MonoBehaviour
             { "element_platinum", 0 },
         };
     }
-    /// <summary>
-    /// Subscribes to events and activates when event triggered
-    /// </summary>
-    private void OnEnable()
-    {
-        //UIController.Instance.OnUpdateInventoryUpdate += //Insert Correct function here
-    }
 
-    /// <summary>
-    /// When event call is no longer active, turns off function
-    /// </summary>
-    private void OnDisable()
-    {
-        if (UIController.Instance != null)
-        {
-            //UIController.Instance.OnUpdateInventoryUpdate += //Insert Correct function here
-        }
-    }
-
-    public void ReceiveMessage(ArrayList args)  /////////////////////////////////////////////////////////////////////////////
+    public void ReceiveMessage(ArrayList args)
     {
         string item = args[2].ToString().ToLower();
         if(_tools.ContainsKey(item))
@@ -93,11 +72,12 @@ public class InventoryManager : MonoBehaviour
             return;
         }
         _tools[toolName] = value;
-
         //Send message to UI
-        ArrayList args = new ArrayList { toolName, value };
+        ArrayList args = new ArrayList {
+                "UI", "None", "InventoryManager", "tool_update", toolName, value,
+            };
         //Send the message
-        OnUpdateInventoryTool.Invoke(args);
+        _playerController.SendMessage(args);
     }
 
     /// <summary>
@@ -133,10 +113,12 @@ public class InventoryManager : MonoBehaviour
             return;
         }
         _elements[element] += amount;
-
-        ArrayList args = new ArrayList { element, _elements[element] };
+        //Send message to UI
+        ArrayList args = new ArrayList {
+                "UI", "None", "InventoryManager", "element_update", element, _elements[element],
+            };
         //Send the message
-        OnUpdateInventoryElement.Invoke(args);
+        _playerController.SendMessage(args);
     }
 
     /// <summary>
@@ -155,11 +137,12 @@ public class InventoryManager : MonoBehaviour
             return;
         }
         _elements[element] -= amount;
-
         //Send message to UI
-        ArrayList args = new ArrayList { element, _elements[element] };
+        ArrayList args = new ArrayList {
+                "UI", "None", "InventoryManager", "element_update", element, _elements[element],
+            };
         //Send the message
-        OnUpdateInventoryElement.Invoke(args);
+        _playerController.SendMessage(args);
     }
 
     /// <summary>
@@ -178,11 +161,12 @@ public class InventoryManager : MonoBehaviour
             return;
         }
         _elements[element] = amount;
-
         //Send message to UI
-        ArrayList args = new ArrayList { element, _elements[element] };
+        ArrayList args = new ArrayList {
+                "UI", "None", "InventoryManager", "element_update", element, _elements[element],
+            };
         //Send the message
-        OnUpdateInventoryElement.Invoke(args);
+        _playerController.SendMessage(args);
     }
 
     /// <summary>
@@ -190,7 +174,7 @@ public class InventoryManager : MonoBehaviour
     /// </summary>
     /// <param name="element"></param>
     /// <returns></returns>
-    public int CheckElement(string element) /////////////////////////////////////////////////////////////////////////////
+    public int CheckElement(string element)
     {
         //Standardize lower case
         element = element.ToLower();

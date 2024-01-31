@@ -33,15 +33,8 @@ public class PlayerDeath : MonoBehaviour {
     /// </summary>
     /// <param name="collision"></param>
     private void OnCollisionEnter2D(Collision2D collision) {
-            //regular hazards do 1 damage
         if (collision.gameObject.CompareTag("Hazard")) {
-            GetHurt(1);
-        }
-
-        //spikes do full damage
-        else if (collision.gameObject.CompareTag("Spikes"))
-        {
-            GetHurt(playerHealth.playerHealth);
+            GetHurt();
         }
     }
 
@@ -74,10 +67,10 @@ public class PlayerDeath : MonoBehaviour {
     /// Lose health on contacts with hazards.
     /// Respawn character if no health remains.
     /// </summary>
-    public void GetHurt(int dmg) {
+    public void GetHurt() {
         //Debug.Log("Ouch!");
-        playerHealth.HealthDown(dmg);
-        if (playerHealth.playerHealth <= 0) {
+        playerHealth.HealthDown(1);
+        if (playerHealth.playerHealth == 0) {
             //Debug.Log("Game should rest to checkpoint here.....");
 
             //start the warping animation
