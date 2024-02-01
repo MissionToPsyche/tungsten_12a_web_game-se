@@ -11055,6 +11055,54 @@ PrefabInstance:
       propertyPath: m_BoundingShape2D
       value: 
       objectReference: {fileID: 1195215623}
+    - target: {fileID: 4567901035931106489, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: m_FalloffIntensity
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4567901035931106489, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: m_PointLightInnerRadius
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4681648833962158228, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: m_PointLightInnerRadius
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4681648833962158228, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4681648833962158228, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[1]
+      value: -624250839
+      objectReference: {fileID: 0}
+    - target: {fileID: 4681648833962158228, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[2]
+      value: 1717661639
+      objectReference: {fileID: 0}
+    - target: {fileID: 4681648833962158228, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[3]
+      value: 1904587923
+      objectReference: {fileID: 0}
+    - target: {fileID: 4681648833962158228, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[4]
+      value: -1085009325
+      objectReference: {fileID: 0}
+    - target: {fileID: 4681648833962158228, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[5]
+      value: -1514807857
+      objectReference: {fileID: 0}
+    - target: {fileID: 4681648833962158228, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[6]
+      value: 1746178165
+      objectReference: {fileID: 0}
+    - target: {fileID: 4822381043481428571, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4822381043481428571, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.625
+      objectReference: {fileID: 0}
     - target: {fileID: 7911676450372591580, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: playerHealth
       value: 

@@ -274,7 +274,7 @@ public class UIController : BaseController<UIController>
                 thrusterIcon.SetActive(true);
                 break;
             case "imager":
-                setDialogText("This is an Imager");
+                setDialogText("This is an Imager\n\n It will automatically follow your mouse");
                 imagerButton.SetActive(true);
                 imagerLevel.transform.parent.gameObject.SetActive(true);
                 break;
