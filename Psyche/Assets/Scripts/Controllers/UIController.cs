@@ -629,7 +629,30 @@ public class UIController : BaseController<UIController>
                     {
                         if (requirement.Value > 0)
                         {
-                            requirement_display += requirement.Key + " " + requirement.Value + ",";
+                            string name;
+                            switch (requirement.Key)
+                            {
+                                case "element_copper":
+                                    name = "Copper";
+                                    break;
+                                case "element_iron":
+                                    name = "Iron";
+                                    break;
+                                case "element_nickel":
+                                    name = "Nickel";
+                                    break;
+                                case "element_gold":
+                                    name = "Gold";
+                                    break;
+                                case "element_platinum":
+                                    name = "Platinum";
+                                    break;
+                                default:
+                                    name = requirement.Key;
+                                    break;
+                            }
+
+                            requirement_display += name + " " + requirement.Value + "  ";
                         }
                     }
                     errorText.SetText(requirement_display);
@@ -638,7 +661,7 @@ public class UIController : BaseController<UIController>
                 }
 
                 errorText.gameObject.SetActive(false);
-                switch (toolName.ToLower()) //rework to show all element requirements?
+                switch (toolName.ToLower())
                 {
                     case "thruster":
                         thrusterLevel.SetText(level);
