@@ -38,17 +38,17 @@ public class ImagerManager : ToolManager
         {
             {  1, new Dictionary<string, int>()
                 {
-                    { "element_copper", 0 }, { "element_iron", 0 }, { "element_nickel", 0 }, { "element_gold", 1 }, { "element_platinum", 0 }
+                    { "element_copper", 0 }, { "element_iron", 0 }, { "element_nickel", 0 }, { "element_gold", 2 }, { "element_platinum", 0 }
                 }
             },
             {  2, new Dictionary<string, int>()
                 {
-                    { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 0 } , { "element_gold", 2 }, { "element_platinum", 0 }
+                    { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 0 } , { "element_gold", 4 }, { "element_platinum", 0 }
                 }
             },
             {  3, new Dictionary<string, int>()
                 {
-                    { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 0 } , { "element_gold", 3 }, { "element_platinum", 0 }
+                    { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 0 } , { "element_gold", 4 }, { "element_platinum", 0 }
                 }
             },
             {  4, new Dictionary<string, int>()
@@ -58,13 +58,13 @@ public class ImagerManager : ToolManager
             },
             {  5, new Dictionary<string, int>()
                 {
-                    { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 0 } , { "element_gold", 5 }, { "element_platinum", 0 }
+                    { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 0 } , { "element_gold", 4 }, { "element_platinum", 0 }
                 }
             },
         };
 
         //Tool specific variables
-        _radiusIncrease = 0.5f;
+        _radiusIncrease = 1f;
         _active = false;
     }
 
@@ -91,10 +91,10 @@ public class ImagerManager : ToolManager
     protected override void UpgradeTool()
     {
         //Increase player's spotlight radius
-        _playerlight.pointLightInnerRadius += _radiusIncrease;
+        //_playerlight.pointLightInnerRadius += _radiusIncrease;
         _playerlight.pointLightOuterRadius += _radiusIncrease;
         //Increase cursor's spotlight radius
-        _flashlight.pointLightInnerRadius += _radiusIncrease;
+        //_flashlight.pointLightInnerRadius += _radiusIncrease;
         _flashlight.pointLightOuterRadius += _radiusIncrease;
         GameController.Instance.audioManager.PlayAudio(
             GameController.Instance.audioManager.toolImager);
