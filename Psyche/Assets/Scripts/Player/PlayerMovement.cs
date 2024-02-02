@@ -6,6 +6,7 @@
 
 using Cinemachine;
 using UnityEngine;
+using System.Collections;
 
 ///<summary>
 ///PlayerMovement is a script which 
@@ -17,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
     private float _xAxis;
+    private float alphaVal;
+    private Color color;
     private string _currentAnimation;
     private string _newAnimation;
     private bool _isFacingRight;
@@ -48,6 +51,8 @@ public class PlayerMovement : MonoBehaviour
         _playerManagement = playerManagement;
         _animator = GetComponentInChildren<Animator>();
         _spriteRenderer = _animator.gameObject.GetComponent<SpriteRenderer>();
+        alphaVal = _spriteRenderer.color.a;
+        color = _spriteRenderer.color;
     }
 
     /// <summary>
@@ -56,6 +61,12 @@ public class PlayerMovement : MonoBehaviour
     public void handleMovement(bool usingThruster, bool beingWarped, bool enteringCave, bool exitingCave)
     {
         _flipSprite = true;
+
+        //set opacity to 100%
+        alphaVal = 1;
+        color.a = alphaVal;
+        //put 100% opacity back into the sprite
+        _spriteRenderer.color = color;
 
         // warping takes precedent over every other animation, and blocks players movement
         if (beingWarped)
@@ -156,8 +167,6 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            //TODO need to set alpha faders for entering and exiting cave -Dhalia
-
             //play the new animation
             _animator.Play(_newAnimation);
             if (_newAnimation.Equals(PLAYER_THRUSTER)) {
@@ -168,6 +177,11 @@ public class PlayerMovement : MonoBehaviour
 
             //set the current animation state
             _currentAnimation = _newAnimation;
+
+            if (enteringCave)
+            {
+                StartCoroutine(FadeOut());
+            }
         }
 
         /// <summary>
@@ -212,7 +226,19 @@ public class PlayerMovement : MonoBehaviour
                 _virtualCameraR.Priority = 0;
             }
         }
+    }
 
+    private IEnumerator FadeOut()
+    {
+
+        while (_spriteRenderer.color.a > 0)
+        {
+            alphaVal -= 0.25f;
+            color.a = alphaVal;
+            _spriteRenderer.color = color;
+
+            yield return new WaitForSeconds(0.01f); // update interval
+        }
     }
 }
 

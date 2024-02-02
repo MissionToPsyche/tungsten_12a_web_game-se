@@ -46,6 +46,12 @@ public class SceneManager : MonoBehaviour {
 
         //If a positive vertical button is pressed (w or up), then transition
         if (Input.GetButton("Vertical") && verticalAxis > 0) {
+
+            //for the cave animation
+            PlayerController.Instance.inputBlocked = true;
+            PlayerController.Instance.enteringCave = true;
+            yield return new WaitForSeconds(0.5f);
+
             switch (travelToSceneName)
             {
                 case "Landing_Scene":
@@ -87,6 +93,10 @@ public class SceneManager : MonoBehaviour {
                     Debug.LogError("Invalid Scene Transition");
                     break;
             }
+
+            //return to default conditions
+            PlayerController.Instance.inputBlocked = false;
+            PlayerController.Instance.enteringCave = false;
         }
     }
 
