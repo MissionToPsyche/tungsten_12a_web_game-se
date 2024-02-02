@@ -268,13 +268,13 @@ public class UIController : BaseController<UIController>
         switch (toolName)
         {
             case "thruster":
-                setDialogText("This is a Thruster");
+                setDialogText("This is a Thruster\n\n Hold spacebar to activate");
                 thrusterButton.SetActive(true);
                 thrusterLevel.transform.parent.gameObject.SetActive(true);
                 thrusterIcon.SetActive(true);
                 break;
             case "imager":
-                setDialogText("This is an Imager");
+                setDialogText("This is an Imager\n\n It will automatically follow your mouse");
                 imagerButton.SetActive(true);
                 imagerLevel.transform.parent.gameObject.SetActive(true);
                 break;
