@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using static UnityEngine.Rendering.DebugUI;
 
 /// <summary>
 /// Functions for the inventory and dialog box. Script is a component of the UI gameobject
@@ -580,10 +578,17 @@ public class UIController : BaseController<UIController>
     public TMP_Text imagerLevel;
 
     [Header("Element Requirements")]
-    public TMP_Text thrusterRequirements;
-    public TMP_Text eMagnetRequirements;
-    public TMP_Text batteryRequirements;
-    public TMP_Text imagerRequirements;
+    public GameObject thrusterRequirementsList;
+    public GameObject eMagnetRequirementsList;
+    public GameObject batteryRequirementsList;
+    public GameObject imagerRequirementsList;
+
+    [Header("Element Requirement Prefabs")]
+    public GameObject copperRequirement;
+    public GameObject ironRequirement;
+    public GameObject nickelRequirement;
+    public GameObject goldRequirement;
+    public GameObject platinumRequirement;
 
     /// <summary>
     /// Modifies the tool when its upgrade button is pressed
@@ -624,7 +629,30 @@ public class UIController : BaseController<UIController>
                     {
                         if (requirement.Value > 0)
                         {
-                            requirement_display += requirement.Key + " " + requirement.Value + ",";
+                            string name;
+                            switch (requirement.Key)
+                            {
+                                case "element_copper":
+                                    name = "Copper";
+                                    break;
+                                case "element_iron":
+                                    name = "Iron";
+                                    break;
+                                case "element_nickel":
+                                    name = "Nickel";
+                                    break;
+                                case "element_gold":
+                                    name = "Gold";
+                                    break;
+                                case "element_platinum":
+                                    name = "Platinum";
+                                    break;
+                                default:
+                                    name = requirement.Key;
+                                    break;
+                            }
+
+                            requirement_display += name + " " + requirement.Value + "  ";
                         }
                     }
                     errorText.SetText(requirement_display);
@@ -633,28 +661,29 @@ public class UIController : BaseController<UIController>
                 }
 
                 errorText.gameObject.SetActive(false);
-                switch (toolName.ToLower()) //rework to show all element requirements?
+                switch (toolName.ToLower())
                 {
                     case "thruster":
                         thrusterLevel.SetText(level);
-                        thrusterRequirements.SetText(levelRequirements["element_copper"].ToString());
+                        UpdateRequirements(levelRequirements, thrusterRequirementsList.transform);
                         break;
                     case "battery":
                         batteryLevel.SetText(level);
-                        batteryRequirements.SetText(levelRequirements["element_nickel"].ToString());
+                        UpdateRequirements(levelRequirements, batteryRequirementsList.transform);
                         break;
                     case "imager":
                         imagerLevel.SetText(level);
-                        imagerRequirements.SetText(levelRequirements["element_gold"].ToString());
+                        UpdateRequirements(levelRequirements, imagerRequirementsList.transform);
                         break;
                     case "electromagnet":
                         eMagnetLevel.SetText(level);
-                        eMagnetRequirements.SetText(levelRequirements["element_iron"].ToString());
+                        UpdateRequirements(levelRequirements, eMagnetRequirementsList.transform);
                         break;
                     default:
                         break;
                 }
                 break;
+
             case "info":
                 switch (toolName.ToLower())
                 {
@@ -662,11 +691,9 @@ public class UIController : BaseController<UIController>
                         errorText.gameObject.SetActive(false);
                         break;
                     case "battery":
-
                         errorText.gameObject.SetActive(false);
                         break;
                     case "imager":
-
                         errorText.gameObject.SetActive(false);
                         break;
                     case "electromagnet":
@@ -676,9 +703,41 @@ public class UIController : BaseController<UIController>
                         break;
                 }
                 break;
+
             default:
                 break;
         }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    private void UpdateRequirements(Dictionary<string, int> levelRequirements, Transform requirementsArea)
+    {
+        foreach (Transform child in requirementsArea)
+        {
+            Destroy(child.gameObject);
+        }
+
+        int amount = levelRequirements["element_copper"];
+        if (amount > 0)
+            Instantiate(copperRequirement, requirementsArea).GetComponentInChildren<TMP_Text>().SetText(amount.ToString());
+
+        amount = levelRequirements["element_iron"];
+        if (amount > 0)
+            Instantiate(ironRequirement, requirementsArea).GetComponentInChildren<TMP_Text>().SetText(amount.ToString());
+
+        amount = levelRequirements["element_nickel"];
+        if (amount > 0)
+            Instantiate(nickelRequirement, requirementsArea).GetComponentInChildren<TMP_Text>().SetText(amount.ToString());
+
+        amount = levelRequirements["element_gold"];
+        if (amount > 0)
+            Instantiate(goldRequirement, requirementsArea).GetComponentInChildren<TMP_Text>().SetText(amount.ToString());
+
+        amount = levelRequirements["element_platinum"];
+        if (amount > 0)
+            Instantiate(platinumRequirement, requirementsArea).GetComponentInChildren<TMP_Text>().SetText(amount.ToString());
     }
 
     /// <summary>
