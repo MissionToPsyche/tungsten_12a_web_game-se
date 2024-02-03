@@ -81,6 +81,7 @@ public class SceneManager : MonoBehaviour {
                 case "Tool_Comb_1":
                     travelToScene(travelToSceneName);
                     yield return new WaitForSeconds(0.5f);
+                    loadBackground();
                     loadCameraBounds();
                     break;    
 
