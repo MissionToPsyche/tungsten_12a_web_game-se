@@ -130,7 +130,6 @@ public class SceneManager : MonoBehaviour {
     /// </summary>
     private void loadBackground()
     {
-
         GameObject background = GameObject.FindGameObjectWithTag("Background");
         Canvas canvas = background.GetComponent<Canvas>();
 
