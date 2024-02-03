@@ -1,7 +1,7 @@
 /*
  * Description: Player Loss and Reset
  * Authors: mcmyers4, blopezro, dnguye99asu
- * Version: 20240119
+ * Version: 20240130
  */
 
 using System;
@@ -35,14 +35,31 @@ public class PlayerDeath : MonoBehaviour {
     private void OnCollisionEnter2D(Collision2D collision) {
             //regular hazards do 1 damage
         if (collision.gameObject.CompareTag("Hazard")) {
+
+            // Calculate kickback direction based on hazard position relative to the player
+            Vector2 kickbackDirection = new Vector2(-5f, 5f).normalized;
+            ApplyKickback(kickbackDirection);            
+            
             GetHurt(1);
         }
 
         //spikes do full damage
-        else if (collision.gameObject.CompareTag("Spikes"))
-        {
+        else if (collision.gameObject.CompareTag("Spikes")) {
             GetHurt(playerHealth.playerHealth);
         }
+    }
+
+    /// <summary>
+    /// Applies a kickback force to the player character
+    /// </summary>
+    /// <param name="kickbackDirection"></param>
+    private void ApplyKickback(Vector2 kickbackDirection) {
+        float kickbackForce = 3.5f;
+        //Debug.Log($"Before kickback, velocity: {PlayerController.Instance.playerCharacter.velocity}");
+        PlayerController.Instance.playerCharacter.AddForce(
+            kickbackDirection * kickbackForce, ForceMode2D.Impulse
+        );
+        //Debug.Log($"After kickback, velocity: {PlayerController.Instance.playerCharacter.velocity}");
     }
 
     /// <summary>
@@ -92,8 +109,7 @@ public class PlayerDeath : MonoBehaviour {
     /// animation to complete before continuing on.
     /// </summary>
     /// <returns></returns>
-    public IEnumerator Warp()
-    {
+    public IEnumerator Warp() {
         //block player controls
         PlayerController.Instance.inputBlocked = true;
         PlayerController.Instance.beingWarped = true;
@@ -102,8 +118,7 @@ public class PlayerDeath : MonoBehaviour {
         yield return new WaitForSeconds(1.2f);
 
         //check if the player is at the starting point
-        if (startPoint.Equals(respawnPoint))
-        {
+        if (startPoint.Equals(respawnPoint)) {
             //UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
             //changed so that camera bounds would load on player repawn
             ArrayList args = new ArrayList {
