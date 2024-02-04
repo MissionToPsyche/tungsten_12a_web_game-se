@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using Unity.IO.LowLevel.Unsafe;
+using UnityEngine;
 
-/// <summary>
+/// <summary> 
 /// Base class for SceneStates to be based on.
 /// -- Implements the methods: LoadState(), SaveState(), and SetObjectState()\
 /// -- Objects are trackd via Dictionaries.  Key: `string` = Object's name || Value: `object` = tracked object state
@@ -22,7 +21,8 @@ public abstract class BaseState
     /// </summary>
     public BaseState() { }
 
-    protected abstract short Match(string obj);
+    public abstract short Match(string obj);
+    public abstract string Match(short obj);
 
     /// <summary>
     /// Holds the default game state for the scene, allowing for a state reset
@@ -63,16 +63,14 @@ public abstract class BaseState
             {
                 _savedState[pair.Key] = pair.Value;
             }
+            //Debug.Log($"Object {Match(pair.Key)} saved with value {pair.Value}");
         }
     }
 
     /// <summary>
     /// Loads the saved state into the scene
     /// </summary>
-    public Dictionary<short, object> LoadState() 
-    {
-        return _savedState;
-    }
+    public abstract void LoadState();
 
     /// <summary>
     /// Sets the state of an object in the scene
@@ -81,12 +79,14 @@ public abstract class BaseState
     /// <param name="value"></param>
     public void SetObjectState(string key, object value)
     {
+        //Debug.Log($"Passed in: {key}, {value}");
         short matched_key = Match(key);
         if (matched_key == -1) 
         {
-            Debug.WriteLine("No match found for the provided key");
+            Debug.Log("No match found for the provided key");
             return;
         }
         _sceneState[matched_key] = value;
+        //Debug.Log($"After: {matched_key}, {_sceneState[matched_key]}");
     }
 }

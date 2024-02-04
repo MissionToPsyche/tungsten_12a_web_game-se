@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SocialPlatforms;
 
 
 /// <summary>
@@ -28,17 +27,29 @@ public class Tool_Intro_eMagnetState : BaseState
     /// </summary>
     /// <param name="obj"></param>
     /// <returns></returns>
-    protected override short Match(string obj)
+    public override short Match(string obj)
     {
         switch (obj)
         {
-            case "Electromagnet Pickup Variant": return (short)SceneObject.ELECTRO_MAGNET_PICKUP_VARIANT;
+            case "ElectroMagnet": return (short)SceneObject.ELECTRO_MAGNET_PICKUP_VARIANT;
             case "Checkpoint 0": return (short)SceneObject.CHECKPOINT_0;
             case "Checkpoint 1": return (short)SceneObject.CHECKPOINT_1;
             case "Iron Moveable": return (short)SceneObject.IRON_MOVEABLE;
             case "Basic Moving Hazard": return (short)SceneObject.BASIC_MOVING_HAZARD;
         }
         return -1;
+    }
+
+    public override string Match(short obj) {
+        switch (obj)
+        {
+            case (short)SceneObject.ELECTRO_MAGNET_PICKUP_VARIANT: return "ElectroMagnet";
+            case (short)SceneObject.CHECKPOINT_0: return "Checkpoint 0";               
+            case (short)SceneObject.CHECKPOINT_1: return "Checkpoint 1";               
+            case (short)SceneObject.IRON_MOVEABLE: return "Iron Moveable";              
+            case (short)SceneObject.BASIC_MOVING_HAZARD: return "Basic Moving Hazard";
+        }
+        return "";
     }
 
     /// <summary>
@@ -57,5 +68,62 @@ public class Tool_Intro_eMagnetState : BaseState
         };
         LoadDefaultState();
         SaveState();
+    }
+
+    public override void LoadState()
+    {
+        
+        foreach (var pair in _savedState)
+        {
+            string objectName = Match(pair.Key);
+            switch (pair.Key)
+            {
+                case (short)SceneObject.ELECTRO_MAGNET_PICKUP_VARIANT:
+                    { // Specifying scope for use of `var value` && `var targetObject`
+                        var value = (bool)pair.Value;
+                        
+                        // Remove the object if it's already been picked up
+                        if (!value)
+                        {
+                            var targetObject = GameObject.Find(objectName);
+                            if (targetObject == null)
+                            {
+                                Debug.LogError($"Object {objectName} does not exist");
+                                return;
+                            }
+
+                            targetObject.SetActive(value);
+                        }
+                    }
+                    break;
+
+                case (short)SceneObject.CHECKPOINT_0:
+                    {
+                        var value = (bool)pair.Value;
+                        var targetObject = GameObject.Find(objectName);
+                    }
+                    break;
+                case (short)SceneObject.CHECKPOINT_1:
+                    {
+                        var value = (bool)pair.Value;
+                        var targetObject = GameObject.Find(objectName);
+                    }
+                    break;
+                case (short)SceneObject.IRON_MOVEABLE:
+                    {
+                        var value = (Vector3)pair.Value;
+                        var targetObject = GameObject.Find(objectName);
+                        targetObject.transform.position = value;
+                    }
+                    break;
+                case (short)SceneObject.BASIC_MOVING_HAZARD:
+                    {
+                        var value = (Vector3)pair.Value;
+                        var targetObject = GameObject.Find(objectName);
+                        targetObject.transform.position = value;
+                    }
+                    break;
+            }
+        }
     }
 }
