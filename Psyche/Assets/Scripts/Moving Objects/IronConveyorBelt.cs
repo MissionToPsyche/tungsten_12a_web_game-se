@@ -38,7 +38,9 @@ public class IronConveyorBelt : MonoBehaviour
     {
         for (int i = 0; i < numOfIrons; i++)
         {
-            StartCoroutine(moveIron(Instantiate(ironVeinPrefab, pointsObject.GetChild(0))));
+            GameObject vein = Instantiate(ironVeinPrefab, transform);
+            vein.transform.position = points[0];
+            StartCoroutine(moveIron(vein));
             yield return spawnDelay;
         }
     }
