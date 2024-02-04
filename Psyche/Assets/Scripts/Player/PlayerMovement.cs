@@ -177,11 +177,6 @@ public class PlayerMovement : MonoBehaviour
 
             //set the current animation state
             _currentAnimation = _newAnimation;
-
-            if (enteringCave)
-            {
-                StartCoroutine(FadeOut());
-            }
         }
 
         /// <summary>
@@ -228,6 +223,11 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Fade out Coroutine for the sprite when entering/exiting cave.
+    /// Currently not implemented.
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator FadeOut()
     {
 
