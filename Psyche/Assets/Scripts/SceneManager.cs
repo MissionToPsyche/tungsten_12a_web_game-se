@@ -47,48 +47,34 @@ public class SceneManager : MonoBehaviour {
         //If a positive vertical button is pressed (w or up), then transition
         if (Input.GetButton("Vertical") && verticalAxis > 0) {
 
-            //for the cave animation
-            PlayerController.Instance.inputBlocked = true;
-            PlayerController.Instance.enteringCave = true;
-            yield return new WaitForSeconds(0.5f);
-
             switch (travelToSceneName)
             {
                 case "Landing_Scene":
-                    travelToScene(travelToSceneName);
-                    yield return new WaitForSeconds(0.1f);
-                    loadBackground();
-                    loadCameraBounds();
-                    break;
                 case "Tool_Intro_Thruster":
-                    travelToScene(travelToSceneName);
-                    yield return new WaitForSeconds(0.1f);
-                    loadBackground();
-                    loadCameraBounds();
-                    break;
                 case "Tool_Intro_GRS":
-                    travelToScene(travelToSceneName);
-                    yield return new WaitForSeconds(0.1f);
-                    loadBackground();
-                    loadCameraBounds();
-                    break;
                 case "Tool_Intro_Imager":
-                    travelToScene(travelToSceneName);
-                    yield return new WaitForSeconds(0.1f);
-                    loadBackground();
-                    loadCameraBounds();
-                    break;
                 case "Tool_Intro_eMagnet":
+                case "Tool_Comb_1":
+                   /*
+                    //for the cave animation
+                    PlayerController.Instance.inputBlocked = true;
+                    PlayerController.Instance.enteringCave = true;
+                    yield return new WaitForSeconds(0.2f);
+                   */
+
+                    //load up the new scene
                     travelToScene(travelToSceneName);
                     yield return new WaitForSeconds(0.1f);
+
+                    //load camera and background
                     loadBackground();
                     loadCameraBounds();
-                    break;
-                case "Tool_Comb_1":
-                    travelToScene(travelToSceneName);
-                    yield return new WaitForSeconds(0.5f);
-                    loadBackground();
-                    loadCameraBounds();
+
+                    /*
+                    //return to default conditions for the player controls
+                    PlayerController.Instance.inputBlocked = false;
+                    PlayerController.Instance.enteringCave = false;
+                    */
                     break;    
 
                 case "Combo_2":
@@ -105,10 +91,6 @@ public class SceneManager : MonoBehaviour {
                     Debug.LogError("Invalid Scene Transition");
                     break;
             }
-
-            //return to default conditions
-            PlayerController.Instance.inputBlocked = false;
-            PlayerController.Instance.enteringCave = false;
         }
     }
 
