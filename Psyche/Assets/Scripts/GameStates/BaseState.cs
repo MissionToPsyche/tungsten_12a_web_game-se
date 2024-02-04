@@ -1,25 +1,36 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using Unity.IO.LowLevel.Unsafe;
 
-
-public class BaseState
+/// <summary>
+/// Base class for SceneStates to be based on.
+/// -- Implements the methods: LoadState(), SaveState(), and SetObjectState()\
+/// -- Objects are trackd via Dictionaries.  Key: `string` = Object's name || Value: `object` = tracked object state
+///     -- For all `bool` items, `true` means the item can be picked up or the item has yet to be activated (such as checkpoints)
+///     -- For all positions, these can be tracked via a vector
+/// </summary>
+public abstract class BaseState
 {
     //Use C#'s <object> type to store generic values (bool, int, etc.)
-    protected Dictionary<string, object> _defaultState;
-    protected Dictionary<string, object> _sceneState;
-    protected Dictionary<string, object> _savedState;
+    protected Dictionary<short, object> _defaultState;
+    protected Dictionary<short, object> _sceneState;
+    protected Dictionary<short, object> _savedState;
 
     /// <summary>
-    /// Create the base class
+    /// Create the base class -- Unnecessary in this current iteration
     /// </summary>
     public BaseState() { }
 
+    protected abstract short Match(string obj);
+
     /// <summary>
     /// Holds the default game state for the scene, allowing for a state reset
+    /// -- Values are cloned over so they aren't passed by referenced and then modified at a later time
     /// </summary>
     public void LoadDefaultState() 
     {
-        _sceneState = new Dictionary<string, object>();
+        _sceneState = new Dictionary<short, object>();
 
         foreach (var pair in _defaultState)
         {
@@ -36,10 +47,11 @@ public class BaseState
 
     /// <summary>
     /// Saves the current state of the scene
+    /// -- Values are cloned over so they aren't passed by referenced and then modified at a later time
     /// </summary>
     public void SaveState() 
     {
-        _savedState = new Dictionary<string, object>();
+        _savedState = new Dictionary<short, object>();
 
         foreach (var pair in _sceneState)
         {
@@ -57,15 +69,24 @@ public class BaseState
     /// <summary>
     /// Loads the saved state into the scene
     /// </summary>
-    public virtual void LoadState() { }
+    public Dictionary<short, object> LoadState() 
+    {
+        return _savedState;
+    }
 
     /// <summary>
     /// Sets the state of an object in the scene
     /// </summary>
     /// <param name="key"></param>
     /// <param name="value"></param>
-    public void SetObjectState(string key, object value) 
+    public void SetObjectState(string key, object value)
     {
-        _sceneState[key] = value;
+        short matched_key = Match(key);
+        if (matched_key == -1) 
+        {
+            Debug.WriteLine("No match found for the provided key");
+            return;
+        }
+        _sceneState[matched_key] = value;
     }
 }
