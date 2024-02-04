@@ -46,6 +46,18 @@ public class SceneManager : MonoBehaviour {
 
         //If a positive vertical button is pressed (w or up), then transition
         if (Input.GetButton("Vertical") && verticalAxis > 0) {
+            yield return new WaitForSeconds(0.1f);
+
+            //for the cave animation
+            PlayerController.Instance.inputBlocked = true;
+            PlayerController.Instance.enteringCave = true;
+
+            yield return new WaitForSeconds(0.4f);
+
+            //for the cave animation
+            PlayerController.Instance.inputBlocked = false;
+            PlayerController.Instance.enteringCave = false;
+            
 
             switch (travelToSceneName)
             {
@@ -55,26 +67,13 @@ public class SceneManager : MonoBehaviour {
                 case "Tool_Intro_Imager":
                 case "Tool_Intro_eMagnet":
                 case "Tool_Comb_1":
-                   /*
-                    //for the cave animation
-                    PlayerController.Instance.inputBlocked = true;
-                    PlayerController.Instance.enteringCave = true;
-                    yield return new WaitForSeconds(0.2f);
-                   */
-
                     //load up the new scene
                     travelToScene(travelToSceneName);
-                    yield return new WaitForSeconds(0.1f);
+                    yield return new WaitForSeconds(0.5f);
 
                     //load camera and background
                     loadBackground();
                     loadCameraBounds();
-
-                    /*
-                    //return to default conditions for the player controls
-                    PlayerController.Instance.inputBlocked = false;
-                    PlayerController.Instance.enteringCave = false;
-                    */
                     break;    
 
                 case "Combo_2":

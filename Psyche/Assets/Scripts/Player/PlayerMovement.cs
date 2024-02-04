@@ -9,7 +9,8 @@ using UnityEngine;
 using System.Collections;
 
 ///<summary>
-///PlayerMovement is a script which 
+///PlayerMovement is a script which controls the animations of the player, their velocities
+///in various states, when sound effects play, and how the camera follows the player.
 ///</summary>
 public class PlayerMovement : MonoBehaviour
 {
