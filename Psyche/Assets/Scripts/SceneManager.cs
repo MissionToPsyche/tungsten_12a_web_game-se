@@ -85,6 +85,12 @@ public class SceneManager : MonoBehaviour {
                     loadCameraBounds();
                     break;    
 
+                case "Combo_2":
+                    travelToScene(travelToSceneName);
+                    yield return new WaitForSeconds(0.5f);
+                    loadCameraBounds();
+                    break;
+
                 case "SceneTransition_Game_End":
                     UIController.Instance.EndGame(true);
                     break;
