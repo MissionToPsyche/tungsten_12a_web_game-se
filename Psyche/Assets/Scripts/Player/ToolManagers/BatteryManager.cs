@@ -6,7 +6,6 @@ Version: 20231109
 
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 /// <summary>
@@ -43,7 +42,7 @@ public class BatteryManager : ToolManager {
             },
             {  2, new Dictionary<string, int>()
                 {
-                    { "element_copper", 0 }, { "element_iron", 0 } , { "element_nickel", 2 }, { "element_gold", 0 }, { "element_platinum", 0 }
+                    { "element_copper", 0 }, { "element_iron", 0 }, { "element_nickel", 2 }, { "element_gold", 0 }, { "element_platinum", 0 }
                 }
             },
             {  3, new Dictionary<string, int>()

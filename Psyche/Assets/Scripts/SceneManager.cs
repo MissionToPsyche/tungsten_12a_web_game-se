@@ -50,25 +50,42 @@ public class SceneManager : MonoBehaviour {
             {
                 case "Landing_Scene":
                     travelToScene(travelToSceneName);
-                    yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSeconds(0.1f);
+                    loadBackground();
                     loadCameraBounds();
                     break;
                 case "Tool_Intro_Thruster":
                     travelToScene(travelToSceneName);
-                    yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSeconds(0.1f);
+                    loadBackground();
                     loadCameraBounds();
                     break;
                 case "Tool_Intro_GRS":
                     travelToScene(travelToSceneName);
-                    yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSeconds(0.1f);
+                    loadBackground();
                     loadCameraBounds();
                     break;
                 case "Tool_Intro_Imager":
                     travelToScene(travelToSceneName);
-                    yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSeconds(0.1f);
+                    loadBackground();
                     loadCameraBounds();
                     break;
                 case "Tool_Intro_eMagnet":
+                    travelToScene(travelToSceneName);
+                    yield return new WaitForSeconds(0.1f);
+                    loadBackground();
+                    loadCameraBounds();
+                    break;
+                case "Tool_Comb_1":
+                    travelToScene(travelToSceneName);
+                    yield return new WaitForSeconds(0.5f);
+                    loadBackground();
+                    loadCameraBounds();
+                    break;    
+
+                case "Combo_2":
                     travelToScene(travelToSceneName);
                     yield return new WaitForSeconds(0.5f);
                     loadCameraBounds();
@@ -117,6 +134,20 @@ public class SceneManager : MonoBehaviour {
             shape = bounds.GetComponent<CompositeCollider2D>();
             vc.GetComponent<CinemachineConfiner2D>().m_BoundingShape2D = shape;
         }
+    }
+
+    /// <summary>
+    /// Finds the main camera after loading into a scene and connects the
+    /// background to the camera. Thus, the background always follows the camera.
+    /// </summary>
+    private void loadBackground()
+    {
+
+        GameObject background = GameObject.FindGameObjectWithTag("Background");
+        Canvas canvas = background.GetComponent<Canvas>();
+
+        canvas.planeDistance = 100;
+        canvas.worldCamera = Camera.main;
     }
 
     /// <summary>
