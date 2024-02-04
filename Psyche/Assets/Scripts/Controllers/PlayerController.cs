@@ -89,7 +89,7 @@ public class PlayerController : BaseController<PlayerController>
         Cursor.visible = false;
 
         //groundcheck
-        groundCheckSize = new Vector2(0.798f, 0.1f);
+        groundCheckSize = new Vector2(0.785f, 0.1f);
     }
 
     /// <summary>
@@ -224,6 +224,26 @@ public class PlayerController : BaseController<PlayerController>
         }
     }
 
+    void ModifyTool(ArrayList args)
+    {
+        string toolName = args[0].ToString();
+        switch (toolName.ToLower())
+        {
+            case "battery":
+                batteryManager.Modify();
+                break;
+            case "thruster":
+                thrusterManager.Modify();
+                break;
+            case "electromagnet":
+                eMagnetManager.Modify();
+                break;
+            case "imager":
+                imagerManager.Modify();
+                break;
+        }
+    }
+
     /// <summary>
     /// Processes any event passed to this class
     /// Requirements:
@@ -244,34 +264,6 @@ public class PlayerController : BaseController<PlayerController>
                 
                 switch(source)
                 {
-                    case "UI":
-                        string directive = args[0].ToString();
-                        args.RemoveAt(0);
-                        
-                        switch(directive)
-                        {
-                            case "tool_upgrade":
-                                string toolName = args[0].ToString();
-                                args.RemoveAt(0);
-
-                                switch(toolName.ToLower())
-                                {
-                                    case "battery":
-                                        batteryManager.Modify();
-                                        break;
-                                    case "thruster":
-                                        thrusterManager.Modify();
-                                        break;
-                                    case "electromagnet":
-                                        eMagnetManager.Modify();
-                                        break;
-                                    case "imager":
-                                        imagerManager.Modify();
-                                        break;
-                                }
-                                break;
-                        }
-                        break;
                     case "DeveloperConsole":
                         string item = args[0].ToString();
                         //Set up for whether tool/element is passed
@@ -296,6 +288,7 @@ public class PlayerController : BaseController<PlayerController>
     {
         GameController.Instance.OnUpdateGameToPlayer += ReceiveMessage;
         UIController.Instance.OnUpdateUIToPlayer += ReceiveMessage;
+        UIController.Instance.OnUpdateToolModify += ModifyTool;
     }
 
     /// <summary>
