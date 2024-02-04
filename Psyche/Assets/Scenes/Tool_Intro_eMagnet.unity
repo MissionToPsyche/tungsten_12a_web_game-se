@@ -855,7 +855,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1238388252371177290, guid: 6f065834d363ff44b81d9cda2988a82a, type: 3}
       propertyPath: m_Name
-      value: ElectroMagnet Pickup Variant
+      value: ElectroMagnet
+      objectReference: {fileID: 0}
+    - target: {fileID: 1238388252371177290, guid: 6f065834d363ff44b81d9cda2988a82a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5608750381463216694, guid: 6f065834d363ff44b81d9cda2988a82a, type: 3}
       propertyPath: m_LocalPosition.x

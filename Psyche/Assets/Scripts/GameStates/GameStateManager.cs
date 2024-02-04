@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
+using UnityEngine;
 
 public class GameStateManager 
 {
@@ -84,15 +84,24 @@ public class GameStateManager
     /// Takes in a GameState and Scene then uses that information to call LoadState() for that scene.
     /// -- LoadState() returns a dictionary of every tracked object and its latest saved state
     /// 
-    /// 
-    /// -- TODO: Complete this implementation by using the dictinary to set values within the scene
     /// </summary>
     /// <param name="gameState"></param>
     /// <param name="scene"></param>
     public void LoadSceneState(GameState gameState, Scene scene)
     {
-        Dictionary<short, object> sceneState = _gameStateToScene[gameState][scene].LoadState();
-        // Load the state somehow
+        var stateManager = _gameStateToScene[gameState];
+        stateManager[scene].LoadState();
     }
 
+    public void SaveSceneState(GameState gameState, Scene scene)
+    {
+        var stateManager = _gameStateToScene[gameState];
+        stateManager[scene].SaveState();
+    }
+
+    public void SetObjectState(GameState gameState, Scene scene, string key, object value)
+    {
+        var stateManager = _gameStateToScene[gameState];
+        stateManager[scene].SetObjectState(key, value);
+    }
 }
