@@ -1,9 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading;
 using UnityEngine;
 using Unity.Profiling;
 
@@ -11,22 +8,69 @@ public class DeveloperConsole : MonoBehaviour
 {
     //Private variables
     private GameController _gameController;
-    private Dictionary<string, Action<ArrayList>> _commandRegistry; //stores commands
+    private Dictionary<DevConsoleCommand, Action<ArrayList>> _commandRegistry; //stores commands
     private float _updateTimerDefault;
     private float _updateTimer;
-    private int _processorCount;
-    private float _cpuUsage;
-    private Thread _cpuThread;
     private ProfilerRecorder _totalUsedMemory;
-    private ProfilerRecorder _mainThread;
-    private Queue<double> _frameTimes;
-    private const int _frameSampleSize = 100;
-
-    
 
     //Events Declaration
-    public event Action<string> OnDevConsoleUIUpdate;  //dev console updates UI
-    public event Action<string, string> OnDevConsolePlayerSet; //player controller changes
+    public event Action<ArrayList>      OnDevConsoleUIUpdate;       // Updating the UI communication
+    public event Action<string, string> OnDevConsolePlayerSet; // Player controller changes
+    public event Action<ArrayList> OnDevConsoleSceneSet;       // Setting the scene
+
+    // Enum for Commands
+    public enum DevConsoleCommand
+    {
+        TOGGLE,  // For Updating UI Controller && Intaking commands
+        SET,     // Intaking command
+        UPDATE,  // For Updating the UIController
+
+        FPS,
+        RESOURCE_MONITOR,
+
+        ERROR,
+    }
+
+    /// <summary>
+    /// For translating between the given command (enum / short) and its respective string
+    /// </summary>
+    /// <param name="command"></param>
+    /// <returns></returns>
+    public string Match(DevConsoleCommand command)
+    {
+        switch (command)
+        {
+            case DevConsoleCommand.TOGGLE:              return "toggle";
+            case DevConsoleCommand.SET:                 return "set";
+            case DevConsoleCommand.UPDATE:              return "update";
+                    
+            case DevConsoleCommand.FPS:                 return "fps";
+            case DevConsoleCommand.RESOURCE_MONITOR:    return "resource_monitor";
+
+            default: return null;
+        }
+    }
+
+    /// <summary>
+    /// For translating between the given command (string) and its respective enum / short
+    /// </summary>
+    /// <param name="command"></param>
+    /// <returns></returns>
+    public DevConsoleCommand Match(string command)
+    {
+        switch (command.ToLower())
+        {
+            case "toggle":              return DevConsoleCommand.TOGGLE;
+            case "set":                 return DevConsoleCommand.SET;
+            case "update":              return DevConsoleCommand.UPDATE;
+
+            case "fps":                 return DevConsoleCommand.FPS;
+            case "resource_monitor":    return DevConsoleCommand.RESOURCE_MONITOR;
+
+            default:                    return DevConsoleCommand.ERROR;
+        }
+    }
+
 
     /// <summary>
     /// Creates the script
@@ -35,26 +79,18 @@ public class DeveloperConsole : MonoBehaviour
     public void Initialize(GameController gameController)
     {
         _gameController = gameController;
-        _commandRegistry = new Dictionary<string, Action<ArrayList>>()
+        _commandRegistry = new Dictionary<DevConsoleCommand, Action<ArrayList>>()
         {
-            { "toggle", HandleToggle },
-            { "set", HandleSet },
+            { DevConsoleCommand.TOGGLE, HandleToggle },
+            { DevConsoleCommand.SET, HandleSet },
         };
         _updateTimerDefault = 0.5f;  //every 1/2 second
         _updateTimer = _updateTimerDefault;
-        _cpuUsage = 0f;
-        _cpuThread = new Thread(MaintainQueue);
-        _processorCount = SystemInfo.processorCount;
         _totalUsedMemory = ProfilerRecorder.StartNew(ProfilerCategory.Memory, "Total Used Memory");
-        _mainThread = ProfilerRecorder.StartNew(ProfilerCategory.Internal, "Main Thread");
-        _frameTimes = new Queue<double>();
-
-        _cpuThread.Start();
     }
 
     private void OnDestroy()
     {
-        _cpuThread?.Abort();
         _totalUsedMemory.Dispose();
     }
 
@@ -63,7 +99,6 @@ public class DeveloperConsole : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        _frameTimes.Enqueue(_mainThread.LastValue);
         //Update once every _updateTimerDefault seconds
         _updateTimer -= Time.deltaTime;
 
@@ -71,15 +106,26 @@ public class DeveloperConsole : MonoBehaviour
         {
             //create package to sender
             ArrayList args = new ArrayList {
-                "UI", "None", "DeveloperConsole", "update",
-                CalculateFPS().ToString(),  Math.Round(CalculateCPU()).ToString(), CalculateRAM(),
+                DevConsoleCommand.UPDATE, CalculateFPS().ToString(),  CalculateRAM(),
             };
             //Send the message
-            _gameController.SendMessage(args);
+            OnDevConsoleUIUpdate(args);
             _updateTimer = _updateTimerDefault; //reset back to default
         }
     }
 
+    private void OnEnable()
+    {
+        UIController.Instance.OnUpdateUIToDevConsole += HandleCommands;
+    }
+
+    private void OnDisable()
+    {
+        if (UIController.Instance != null)
+        {
+            UIController.Instance.OnUpdateUIToDevConsole -= HandleCommands;
+        }
+    }
 
     /// <summary>
     /// General Event intake manager
@@ -108,12 +154,14 @@ public class DeveloperConsole : MonoBehaviour
     /// <param name="commands"></param>
     public void HandleCommands(ArrayList commands)
     {
-        if (!_commandRegistry.ContainsKey(commands[0].ToString()))
+        var command = Match(commands[0].ToString());
+
+        if (command == DevConsoleCommand.ERROR)
         {
             UnityEngine.Debug.Log("Incorrect command passed to console -- DevConsole");
             return;
         }
-        _commandRegistry[commands[0].ToString()].Invoke(commands);
+        _commandRegistry[command].Invoke(commands);
     }
 
     /// <summary>
@@ -122,9 +170,7 @@ public class DeveloperConsole : MonoBehaviour
     /// <param name="commands"></param>
     private void HandleToggle(ArrayList commands)
     {
-        string[] package = { "UI", "None", "DeveloperConsole" }; //receiver address
-        commands.InsertRange(0, package);
-        _gameController.SendMessage(commands);  //send to event emitter in controller class
+        OnDevConsoleUIUpdate(commands);  //send to event emitter in controller class
     }
 
     /// <summary>
@@ -134,7 +180,7 @@ public class DeveloperConsole : MonoBehaviour
     /// <param name="commands"></param>
     private void HandleSet(ArrayList commands)
     {
-        string[] package = { "Player", "InventoryManager", "DeveloperConsole" };
+        string[] package = { "Player", "InventoryManager", "DeveloperConsole" };           ///////////// Update this
         commands.InsertRange(0, package);
         _gameController.SendMessage(commands);
     }
@@ -146,24 +192,6 @@ public class DeveloperConsole : MonoBehaviour
     private double CalculateFPS()
     {
         return Math.Round(1.0f / Time.unscaledDeltaTime);
-        
-    }
-
-    private void MaintainQueue()
-    {
-        while(_frameTimes.Count > _frameSampleSize)
-        {
-            _frameTimes.Dequeue();
-        }
-    }
-
-    /// <summary>
-    /// Calculates the ms per frame to show general CPU usage
-    /// </summary>
-    /// <returns></returns>
-    private double CalculateCPU()
-    {
-        return ((_frameTimes.Average() / TimeSpan.TicksPerMillisecond) / 1000) * _processorCount * 2;
     }
 
     /// <summary>
