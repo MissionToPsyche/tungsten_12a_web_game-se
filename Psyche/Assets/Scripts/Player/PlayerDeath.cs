@@ -97,10 +97,8 @@ public class PlayerDeath : MonoBehaviour {
         if (playerHealth.playerHealth <= 0) {
             //Debug.Log("Game should rest to checkpoint here.....");
 
-            //start the warping animation
+            //start the warping animation & reset player's heath & battery
             StartCoroutine(Warp());
-            //reset the player's health to 5
-            playerHealth.HealthUp(5);
         }
     }
 
@@ -129,6 +127,9 @@ public class PlayerDeath : MonoBehaviour {
 
         //move the player to their respawn point
         transform.position = respawnPoint;
+
+        playerHealth.HealthUp(100);
+        gameObject.GetComponent<BatteryManager>().Activate();
 
         //unblock player controls
         PlayerController.Instance.inputBlocked = false;
