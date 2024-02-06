@@ -104,10 +104,10 @@ public class UIController : BaseController<UIController>
         if (_devConsolePanel.activeSelf && Input.GetButtonDown("Submit"))
         {
             //Take in the commands from the input box
-            ArrayList commands = new ArrayList { "Game", "DeveloperConsole", "UI" };
+            ArrayList commands = new ArrayList();
             commands.AddRange(_devConsoleInput.text.ToLower().Split(" "));
             //Process the command
-            SendMessage(commands);
+            OnUpdateUIToDevConsole.Invoke(commands);
             _devConsoleInput.text = "";
             _devConsoleInput.ActivateInputField();
         }
@@ -128,7 +128,9 @@ public class UIController : BaseController<UIController>
     public event Action<ArrayList> OnUpdateUIToGame;
     public event Action<ArrayList> OnUpdateUIToPlayer;
     public event Action<ArrayList> OnUpdateInventoryUpdate;
-    public event Action<ArrayList> OnUpdateToolModify;
+    public event Action<ArrayList> OnUpdateToolModify;      // Send Tool Modification requests to Inventory
+
+    public event Action<ArrayList> OnUpdateUIToDevConsole;  // Send dev input commands to DevConsole
 
     /// <summary>
     /// Invokes events for this and any subclasses.
@@ -230,6 +232,9 @@ public class UIController : BaseController<UIController>
         PlayerController.Instance.OnUpdatePlayerToUI += ReceiveMessage;
         PlayerController.Instance.inventoryManager.OnUpdateInventoryElement += ElementUpdate;
         PlayerController.Instance.inventoryManager.OnUpdateInventoryTool += EnableToolButton;
+
+        // Process events from DevConsole
+        GameController.Instance.developerConsole.OnDevConsoleUIUpdate += ProcessDevConsole;
     }
 
     /// <summary>
@@ -324,27 +329,30 @@ public class UIController : BaseController<UIController>
     /// <param name="args"></param>
     private void ProcessDevConsole(ArrayList args)
     {
-        switch (args[0].ToString())
+        var command = GameController.Instance.developerConsole.Match(args[0].ToString());
+
+        switch (command)
         {
-            case "update":
+            case DeveloperConsole.DevConsoleCommand.UPDATE:
                 if (_devConsoleFPSPanel.activeSelf)
                 {
                     _devConsoleText["DevConsoleFPS"].text = "FPS: " + args[1].ToString();
                 }
                 if(_devConsoleResourcePanel.activeSelf)
                 {
-                    _devConsoleText["DevConsoleResourceMonitor"].text = "CPU: " + args[2].ToString() + "%\n" +
-                                                                        "RAM: " + args[3].ToString() + "MB";
+                    _devConsoleText["DevConsoleResourceMonitor"].text = "RAM: " + args[2].ToString() + "MB";
                 }
                 break;
-            case "toggle":
-                switch(args[1].ToString())
+            case DeveloperConsole.DevConsoleCommand.TOGGLE:
+                var sub_command = GameController.Instance.developerConsole.Match(args[1].ToString());
+                Debug.Log($"{sub_command} -- {args[1].ToString()}");
+                switch (sub_command)
                 {
-                    case "fps":
+                    case DeveloperConsole.DevConsoleCommand.FPS:
                         _devConsoleFPSPanel.SetActive(!_devConsoleFPSPanel.activeSelf);
                         _devConsoleText["DevConsoleFPS"].text = "FPS";
                         break;
-                    case "resource_monitor":
+                    case DeveloperConsole.DevConsoleCommand.RESOURCE_MONITOR:
                         
                         _devConsoleResourcePanel.SetActive(!_devConsoleResourcePanel.activeSelf);
                         _devConsoleText["DevConsoleResourceMonitor"].text = "Loading...";

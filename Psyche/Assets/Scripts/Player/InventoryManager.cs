@@ -2,19 +2,96 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Diagnostics.Tracing;
 
 /// <summary>
 /// Manages the inventory and all items within it
 /// </summary>
 public class InventoryManager : MonoBehaviour
-{
+{ 
     private PlayerController _playerController;
     private Dictionary<string, bool> _tools;
+    private Dictionary<Tool, bool> _tools2;
     private Dictionary<string, int> _elements;
+    private Dictionary<Element, int> _elements2;
 
     // Events
     public event Action<ArrayList> OnUpdateInventoryTool;
     public event Action<ArrayList> OnUpdateInventoryElement;
+
+    public enum Element
+    {
+        COPPER,
+        IRON,
+        NICKEL,
+        GOLD,
+        TUNGSTEN,
+
+        None,
+    }
+
+    public Element MatchElements(string element)
+    {
+        return element.ToLower() switch
+        {
+            "copper"    or "element_copper"     => Element.COPPER,
+            "iron"      or "element_iron"       => Element.IRON,
+            "nickel"    or "element_nickel"     => Element.NICKEL,
+            "gold"      or "element_gold"       => Element.GOLD,
+            "tungsten"  or "element_tungsten"   => Element.TUNGSTEN,
+            _                                   => Element.None
+        };
+    }
+    public string MatchElements(Element element)
+    {
+        return element switch
+        {
+            Element.COPPER      => "element_copper",
+            Element.IRON        => "element_iron",
+            Element.NICKEL      => "element_nickel",
+            Element.GOLD        => "element_gold",
+            Element.TUNGSTEN    => "element_tungsten",
+            _                   => null
+        };
+    }
+
+    public enum Tool
+    {
+        IMAGER,
+        BATTERY,
+        SPECTROMETER,
+        THRUSTER,
+        ELECTROMAGNET,
+        // MAGNETOMETER,
+
+        None,
+    }
+
+    public Tool MatchTool(string tool)
+    {
+        return tool.ToLower() switch
+        {
+            "imager"        => Tool.IMAGER,
+            "battery"       => Tool.BATTERY,
+            "spectrometer"  => Tool.SPECTROMETER,
+            "thruster"      => Tool.THRUSTER,
+            "electromagnet" => Tool.ELECTROMAGNET,
+            _               => Tool.None,
+        };
+    }
+
+    public string MatchTool(Tool tool)
+    {
+        return tool switch
+        {
+            Tool.IMAGER         => "imager",
+            Tool.BATTERY        => "battery",
+            Tool.SPECTROMETER   => "spectrometer",
+            Tool.THRUSTER       => "thruster",
+            Tool.ELECTROMAGNET  => "electromagnet",
+            _                   => null,
+        };
+    }
 
     /// <summary>
     /// Initialize the class and set up base dictionaries
@@ -25,20 +102,36 @@ public class InventoryManager : MonoBehaviour
         _playerController = playerController;
         _tools = new Dictionary<string, bool>()
         {
-            { "battery", false },
-            { "imager", false },
-            { "spectrometer", false },
-            { "thruster", false },
-            { "electromagnet", false },
-            { "magnetometer", false },
+            { "imager",         false },
+            { "battery",        false },
+            { "spectrometer",   false },
+            { "thruster",       false },
+            { "electromagnet",  false },
+            { "magnetometer",   false },
+        };
+        _tools2 = new Dictionary<Tool, bool>()
+        {
+            { Tool.IMAGER,          false },
+            { Tool.BATTERY,         false },
+            { Tool.SPECTROMETER,    false },
+            { Tool.THRUSTER,        false },
+            { Tool.ELECTROMAGNET,   false },
         };
         _elements = new Dictionary<string, int>()
         {
-            { "element_copper", 0 },
-            { "element_iron", 0 },
-            { "element_nickel", 0 },
-            { "element_gold", 0 },
-            { "element_platinum", 0 },
+            { "element_copper",     0 },
+            { "element_iron",       0 },
+            { "element_nickel",     0 },
+            { "element_gold",       0 },
+            { "element_platinum",   0 },
+        };
+        _elements2 = new Dictionary<Element, int>()
+        {
+            { Element.COPPER,     0 },
+            { Element.IRON,       0 },
+            { Element.NICKEL,     0 },
+            { Element.GOLD,       0 },
+            { Element.TUNGSTEN,   0 },
         };
     }
     /// <summary>
@@ -75,6 +168,17 @@ public class InventoryManager : MonoBehaviour
         {
             Debug.Log("Incorrect item name passed -- InventoryManager");
         }
+    }
+
+    public void SetTool(Tool tool, bool value) // New version that uses enums in place of strings
+    {
+        if (tool == Tool.None) return;
+        _tools2[tool] = value;
+        // Temporary translation layer until old version is removed
+        _tools[MatchTool(tool)] = value;
+
+        ArrayList args = new ArrayList { MatchTool(tool), value };
+        OnUpdateInventoryTool.Invoke(args);
     }
 
     /// <summary>
