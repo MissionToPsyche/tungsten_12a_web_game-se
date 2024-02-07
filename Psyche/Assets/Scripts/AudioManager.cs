@@ -26,6 +26,7 @@ public class AudioManager : MonoBehaviour {
     [SerializeField] public AudioSource toolEMagnet;
     [SerializeField] public AudioSource toolThrusters;
     [SerializeField] public AudioSource playerJump;
+    [SerializeField] public AudioSource playerHurt;
     public List<AudioSource> sfxAudioSources;
     
     //////////////////////////////////////////////////
@@ -44,6 +45,7 @@ public class AudioManager : MonoBehaviour {
         sfxAudioSources.Add(toolEMagnet);
         sfxAudioSources.Add(toolThrusters);
         sfxAudioSources.Add(playerJump);
+        sfxAudioSources.Add(playerHurt);
     }
 
     /// <summary>

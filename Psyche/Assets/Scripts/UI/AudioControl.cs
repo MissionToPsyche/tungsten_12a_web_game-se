@@ -15,6 +15,7 @@ public class AudioControl : MonoBehaviour {
 
     public void setUiVolume() {
         GameController.Instance.audioManager.SetAudioVolumeForAllUi(slider.value);
+        // todo: add example play of sound
     }
 
     public void setMusicVolume() {
@@ -23,5 +24,6 @@ public class AudioControl : MonoBehaviour {
 
     public void setSfxVolume() {
         GameController.Instance.audioManager.SetAudioVolumeForAllSfx(slider.value);
+        // todo: add example play of sound
     }
 }

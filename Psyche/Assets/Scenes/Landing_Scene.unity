@@ -7904,10 +7904,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2144772172}
     m_Modifications:
-    - target: {fileID: 2607266026247796242, guid: a8e002363ddfe6b4c808eff8789167be, type: 3}
-      propertyPath: m_Volume
-      value: 0.25
-      objectReference: {fileID: 0}
     - target: {fileID: 6130675941628599890, guid: a8e002363ddfe6b4c808eff8789167be, type: 3}
       propertyPath: m_Name
       value: AudioSources
@@ -10880,11 +10876,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4822381043481428571, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.25
+      value: 0.24999937
       objectReference: {fileID: 0}
     - target: {fileID: 4822381043481428571, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.625
+      value: 0.576635
       objectReference: {fileID: 0}
     - target: {fileID: 6787539359732067765, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10898,18 +10894,6 @@ PrefabInstance:
       propertyPath: playerHealth
       value: 
       objectReference: {fileID: 905260923}
-    - target: {fileID: 7911676450372591580, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
-      propertyPath: groundCheckSize.x
-      value: 0.798
-      objectReference: {fileID: 0}
-    - target: {fileID: 7911676450372591580, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
-      propertyPath: groundCheckSize.y
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7911676450372591580, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
-      propertyPath: groundCastDistance
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7927103040186434401, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: m_BoundingShape2D
       value: 
