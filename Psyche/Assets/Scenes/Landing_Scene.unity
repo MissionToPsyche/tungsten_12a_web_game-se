@@ -10704,10 +10704,30 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.625
       objectReference: {fileID: 0}
+    - target: {fileID: 6787539359732067765, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.002
+      objectReference: {fileID: 0}
+    - target: {fileID: 7221161961607019793, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: m_Transitions.m_InheritPosition
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7911676450372591580, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: playerHealth
       value: 
       objectReference: {fileID: 905260923}
+    - target: {fileID: 7911676450372591580, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: groundCheckSize.x
+      value: 0.798
+      objectReference: {fileID: 0}
+    - target: {fileID: 7911676450372591580, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: groundCheckSize.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7911676450372591580, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: groundCastDistance
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7927103040186434401, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: m_BoundingShape2D
       value: 
