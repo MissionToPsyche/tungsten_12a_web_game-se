@@ -26,8 +26,9 @@ public class PlayerController : BaseController<PlayerController>
 
     //Set up environmental checks
     public Transform groundCheck;
-    public float groundCheckRadius = 0.2f;
+    public Vector2 groundCheckSize;
     public LayerMask whatIsGround;
+    public float groundCastDistance;
 
     //Booleans for environmental checks
     [HideInInspector] public bool isGrounded;
@@ -86,6 +87,9 @@ public class PlayerController : BaseController<PlayerController>
         inventoryManager.Initialize(this);
         //hides mouse cursor
         Cursor.visible = false;
+
+        //groundcheck
+        groundCheckSize = new Vector2(0.785f, 0.1f);
     }
 
     /// <summary>
@@ -129,7 +133,7 @@ public class PlayerController : BaseController<PlayerController>
     public void Update()
     {
         //Check booleans
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
+        isGrounded = checkGrounded();
 
         //Max cap for fall rate
         float maxFallVelocity = -10.0f;
@@ -384,5 +388,26 @@ public class PlayerController : BaseController<PlayerController>
                 Debug.LogWarning("Tool name '" + toolName + "' not found!");
                 break;
         }
+    }
+
+    /// <summary>
+    /// Creates a cast from the groundcheck box object, attached to the player, pointing down.
+    /// If it detects a ground object, then it returns true. If not, then false.
+    /// </summary>
+    /// <returns></returns>
+    public bool checkGrounded()
+    {
+        if (Physics2D.BoxCast(groundCheck.position, groundCheckSize, 0, -groundCheck.up, groundCastDistance, whatIsGround))
+            return true;
+        else
+            return false;
+    }
+
+    /// <summary>
+    /// For debugging purposes. This draws a box to show where the ground check is/how far the cast is.
+    /// </summary>
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireCube(groundCheck.position - groundCheck.up * groundCastDistance, groundCheckSize);
     }
 }
