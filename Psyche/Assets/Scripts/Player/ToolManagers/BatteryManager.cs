@@ -1,7 +1,7 @@
 /** 
 Description: battery script
-Author: blopezro
-Version: 20231109
+Author: blopezro, mcmyers
+Version: 20240206
 **/
 
 using System.Collections;
@@ -97,6 +97,26 @@ public class BatteryManager : ToolManager {
         batteryLevel = Mathf.Clamp(batteryLevel, 0f, maxCapacity); // keeps batt level between 0-100
         batteryPercent = batteryLevel / maxCapacity * 100f;
         if (batteryPercent > 0) {
+            batteryDrained = false;
+        }
+        //Create package to send
+        ArrayList args = new ArrayList {
+                "UI", "None", "BatteryManager", Mathf.RoundToInt(batteryPercent),
+        };
+        _playerController.SendMessage(args);
+    }
+
+    /// <summary>
+    /// passively recharges battery at given rate
+    /// </summary>
+    /// <param name="rate"></param>
+    public void PassiveBatt(float rate)
+    {
+        batteryLevel += rate/1000 ;
+        batteryLevel = Mathf.Clamp(batteryLevel, 0f, maxCapacity); // keeps batt level between 0-100
+        batteryPercent = batteryLevel / maxCapacity * 100f;
+        if (batteryPercent > 0)
+        {
             batteryDrained = false;
         }
         //Create package to send
