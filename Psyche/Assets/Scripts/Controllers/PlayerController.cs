@@ -362,6 +362,11 @@ public class PlayerController : BaseController<PlayerController>
         //Other actions
         switch (toolName)
         {
+            case "SolarPanel":
+                batteryManager.Enable();
+                inventoryManager.SetTool("Battery", true);
+                break;
+
             case "Thruster":
                 thrusterManager.Enable();
                 inventoryManager.SetTool(toolName, true);
@@ -382,8 +387,8 @@ public class PlayerController : BaseController<PlayerController>
                 break;
 
             case "Battery":
-                batteryManager.Enable();
-                inventoryManager.SetTool(toolName, true);
+                //batteryManager.Enable();
+                //inventoryManager.SetTool(toolName, true);
                 batteryManager.ChargeBatt(500);
                 break;
 
