@@ -263,35 +263,46 @@ public class UIController : BaseController<UIController>
     {
         string toolName = args[0].ToString();
         bool value = (bool)args[1];
-        if(toolName == "battery" || toolName == "health")
+        if(toolName == "health")
         {
             return;
         }
 
         switch (toolName)
         {
+            case "battery":
+                setDialogText("'This is an Solar Panel'\n\nYour battery will automatically charge");
+                solarPanelButton.SetActive(true);
+                batteryLevel.transform.parent.gameObject.SetActive(true);
+                batteryIndicator.SetActive(true);
+                break;
+
             case "thruster":
                 setDialogText("This is a Thruster\n\n Hold spacebar to activate");
                 thrusterButton.SetActive(true);
                 thrusterLevel.transform.parent.gameObject.SetActive(true);
                 thrusterIcon.SetActive(true);
                 break;
+
             case "imager":
                 setDialogText("This is an Imager\n\n It will automatically follow your mouse");
                 imagerButton.SetActive(true);
                 imagerLevel.transform.parent.gameObject.SetActive(true);
                 break;
+
             case "spectrometer":
                 setDialogText("This is a Spectrometer\n\n Right-Click to activate");
                 spectrometerButton.SetActive(true);
                 GRNSIcon.SetActive(true);
                 break;
+
             case "electromagnet":
                 setDialogText("This is an ElectroMagnet");
                 eMagnetButton.SetActive(true);
                 eMagnetLevel.transform.parent.gameObject.SetActive(true);
                 eMagnetIcon.SetActive(true);
                 break;
+
             default:
                 Debug.Log("Incorrect tool name passed: " + args[0].ToString());
                 break;
@@ -430,6 +441,7 @@ public class UIController : BaseController<UIController>
     public TMP_Text dialogText;
 
     [Header("Buttons")]
+    public GameObject solarPanelButton;
     public GameObject imagerButton;
     public GameObject spectrometerButton;
     public GameObject eMagnetButton;
@@ -439,6 +451,7 @@ public class UIController : BaseController<UIController>
     public GameObject GRNSIcon;
     public GameObject eMagnetIcon;
     public GameObject thrusterIcon;
+    public GameObject batteryIndicator;
 
     //Variables
     private GameObject curSubmenu;

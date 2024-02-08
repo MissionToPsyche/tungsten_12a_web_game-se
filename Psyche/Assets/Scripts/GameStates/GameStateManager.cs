@@ -1,10 +1,11 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 public class GameStateManager 
 {
     //Private variables
     private GameController _gameController;
-    private Dictionary<GameState, Dictionary<SceneState, BaseState>> _gameStateToScene;
+    private Dictionary<GameState, Dictionary<Scene, BaseState>> _gameStateToScene;
 
     // Public variables
     public GameState currentState { get; private set; } //state of the game
@@ -15,27 +16,27 @@ public class GameStateManager
         currentState = state;
 
         //Expand upon later
-        _gameStateToScene = new Dictionary<GameState, Dictionary<SceneState, BaseState>>()
+        _gameStateToScene = new Dictionary<GameState, Dictionary<Scene, BaseState>>()
         {
             //MainMenu state mappings
-            { GameState.MainMenu, new Dictionary<SceneState, BaseState>() {
+            { GameState.MainMenu, new Dictionary<Scene, BaseState>() {
                 /*{ SceneState.Title_Screen, new MainMenuState() },*/
             } },
 
             //InGame state mappings
-            { GameState.InGame, new Dictionary<SceneState, BaseState>() {
+            { GameState.InGame, new Dictionary<Scene, BaseState>() {
                 /*{ SceneState.Intro_Cutscene, new IntroCutsceneState() },
                 { SceneState.Landing_Scene, new LandingSceneState() },*/
-                { SceneState.Tool_Intro_eMagnet, new Tool_Intro_eMagnetState() },
+                { Scene.Tool_Intro_eMagnet, new Tool_Intro_eMagnetState() },
             } },
 
             //Paused state mappings
-            { GameState.Paused, new Dictionary<SceneState, BaseState>() {
+            { GameState.Paused, new Dictionary<Scene, BaseState>() {
                 // Add mappings for Paused scenes if applicable
             } },
 
             //GameOver state mappings
-            { GameState.GameOver, new Dictionary<SceneState, BaseState>() {
+            { GameState.GameOver, new Dictionary<Scene, BaseState>() {
                 // Add mappings for GameOver scenes if applicable
             } }
         };
@@ -55,9 +56,19 @@ public class GameStateManager
     }
 
     /// <summary>
+    /// Changes the state of the game
+    /// </summary>
+    /// <param name="state"></param>
+    public void ChangeGameState(GameState state)
+    {
+        currentState = state;
+        _gameController.HandleGameStateEvent(currentState);
+    }
+
+    /// <summary>
     /// Used to map the state of the game to the respective scenestate
     /// </summary>
-    public enum SceneState
+    public enum Scene
     {
         Title_Screen,
         Intro_Cutscene,
@@ -70,12 +81,27 @@ public class GameStateManager
     }
 
     /// <summary>
-    /// Changes the state of the game
+    /// Takes in a GameState and Scene then uses that information to call LoadState() for that scene.
+    /// -- LoadState() returns a dictionary of every tracked object and its latest saved state
+    /// 
     /// </summary>
-    /// <param name="state"></param>
-    public void ChangeGameState(GameState state)
+    /// <param name="gameState"></param>
+    /// <param name="scene"></param>
+    public void LoadSceneState(GameState gameState, Scene scene)
     {
-        currentState = state;
-        _gameController.HandleGameStateEvent(currentState);
+        var stateManager = _gameStateToScene[gameState];
+        stateManager[scene].LoadState();
+    }
+
+    public void SaveSceneState(GameState gameState, Scene scene)
+    {
+        var stateManager = _gameStateToScene[gameState];
+        stateManager[scene].SaveState();
+    }
+
+    public void SetObjectState(GameState gameState, Scene scene, string key, object value)
+    {
+        var stateManager = _gameStateToScene[gameState];
+        stateManager[scene].SetObjectState(key, value);
     }
 }
