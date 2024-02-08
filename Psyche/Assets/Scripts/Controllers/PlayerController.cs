@@ -382,6 +382,8 @@ public class PlayerController : BaseController<PlayerController>
                 break;
 
             case "ElectroMagnet":
+                // Temporary - Find a better way to handle this
+                gameController.gameStateManager.SetObjectState(GameStateManager.GameState.InGame, GameStateManager.Scene.Tool_Intro_eMagnet, toolName, false);
                 eMagnetManager.Enable();
                 inventoryManager.SetTool(toolName, true);
                 break;

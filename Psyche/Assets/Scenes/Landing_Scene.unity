@@ -8257,6 +8257,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 2082557525}
     m_Modifications:
     - target: {fileID: 3440210093687682689, guid: 5864da62f3707884fb92d363727b8ad3, type: 3}
+      propertyPath: m_Name
+      value: Tool_Intro_Imager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3440210093687682689, guid: 5864da62f3707884fb92d363727b8ad3, type: 3}
       propertyPath: m_TagString
       value: TransitionObjectOut
       objectReference: {fileID: 0}
@@ -10519,7 +10523,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2144772170}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65cb6108c22eff341826590df75aaa2a, type: 3}
+  m_Script: {fileID: 11500000, guid: 20939742c2bb1b144945dc2b8dde111c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &191254793707458796
