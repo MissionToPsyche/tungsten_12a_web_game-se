@@ -75,6 +75,7 @@ public class SceneManager : MonoBehaviour {
                 case "Tool_Intro_eMagnet":
                     travelToScene(travelToSceneName);
                     yield return new WaitForSeconds(0.1f);
+                    _gameController.gameStateManager.LoadSceneState(GameStateManager.GameState.InGame, GameStateManager.Scene.Tool_Intro_eMagnet);
                     loadBackground();
                     loadCameraBounds();
                     break;
@@ -142,7 +143,6 @@ public class SceneManager : MonoBehaviour {
     /// </summary>
     private void loadBackground()
     {
-
         GameObject background = GameObject.FindGameObjectWithTag("Background");
         Canvas canvas = background.GetComponent<Canvas>();
 
