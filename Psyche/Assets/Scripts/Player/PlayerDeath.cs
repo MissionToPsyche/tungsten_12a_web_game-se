@@ -41,6 +41,7 @@ public class PlayerDeath : MonoBehaviour {
             ApplyKickback(kickbackDirection);            
             
             GetHurt(1);
+            GameController.Instance.audioManager.playerHurt.Play();
         }
 
         //spikes do full damage
