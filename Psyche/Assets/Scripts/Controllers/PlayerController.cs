@@ -1,7 +1,7 @@
 /*
  * Description: Player Character
  * Authors: joshbenn, blopezro, mcmyers4, jmolive8, dnguye99asu
- * Version: 20240119
+ * Version: 20240206
  */
 
 using UnityEngine;
@@ -171,6 +171,13 @@ public class PlayerController : BaseController<PlayerController>
             if (inventoryManager.CheckTool("electromagnet") && Input.GetButton("EMagnet") && batteryManager.batteryPercent != 0 && !eMagnetActive) {
                 eMagnetManager.Activate();
                 batteryManager.DrainBatt(500);
+            }
+
+            //Passive Battery
+            //if (inventoryManager.CheckTool("battery") && !Input.GetButton("Jump") && !Input.GetButton("FireGRS") && !Input.GetButton("EMagnet") && batteryManager.batteryPercent != 100 && !eMagnetActive && !beingPulled && !usingThruster)
+            if (!Input.GetButton("Jump") && !Input.GetButton("FireGRS") && !Input.GetButton("EMagnet") && batteryManager.batteryPercent != 100 && !eMagnetActive && !beingPulled && !usingThruster)
+            {
+                batteryManager.PassiveBatt(1);
             }
         }
 
@@ -355,6 +362,11 @@ public class PlayerController : BaseController<PlayerController>
         //Other actions
         switch (toolName)
         {
+            case "SolarPanel":
+                batteryManager.Enable();
+                inventoryManager.SetTool("Battery", true);
+                break;
+
             case "Thruster":
                 thrusterManager.Enable();
                 inventoryManager.SetTool(toolName, true);
@@ -370,13 +382,15 @@ public class PlayerController : BaseController<PlayerController>
                 break;
 
             case "ElectroMagnet":
+                // Temporary - Find a better way to handle this
+                gameController.gameStateManager.SetObjectState(GameStateManager.GameState.InGame, GameStateManager.Scene.Tool_Intro_eMagnet, toolName, false);
                 eMagnetManager.Enable();
                 inventoryManager.SetTool(toolName, true);
                 break;
 
             case "Battery":
-                batteryManager.Enable();
-                inventoryManager.SetTool(toolName, true);
+                //batteryManager.Enable();
+                //inventoryManager.SetTool(toolName, true);
                 batteryManager.ChargeBatt(500);
                 break;
 
