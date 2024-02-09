@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4042798757603998212}
   - component: {fileID: 861394648536733674}
   - component: {fileID: 1927975774331564742}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Element_Tungsten
   m_TagString: Element
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.008973949, y: -0.02692245}
+  m_Offset: {x: 0.0013104975, y: -0.009059489}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -128,5 +128,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.39820862, y: 0.39574274}
+  m_Size: {x: 0.33650208, y: 0.31238186}
   m_EdgeRadius: 0
