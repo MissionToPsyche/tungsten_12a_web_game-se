@@ -38,7 +38,7 @@ public class InventoryManager : MonoBehaviour
             { "element_iron", 0 },
             { "element_nickel", 0 },
             { "element_gold", 0 },
-            { "element_platinum", 0 },
+            { "element_tungsten", 0 },
         };
     }
     /// <summary>
