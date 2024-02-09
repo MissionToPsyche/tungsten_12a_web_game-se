@@ -218,18 +218,13 @@ public class DeveloperConsole : MonoBehaviour
 
                     // Scene Manipulation
                     case DevConsoleCommand.SCENE:
-                        foreach (var c in commands)
-                        {
-                            Debug.Log($"{c}");
-                        }
-                        // Adhoc, convert the scene to enum then back to string
+                        // Adhoc, convert the scene to enum then back to string until transitioned over to enum passing
                         string scene = GameController.Instance.gameStateManager.MatchScene(GameController.Instance.gameStateManager.MatchScene(commands[2].ToString()));
-                        Debug.Log($"{scene} {commands[1]}");
                         GameController.Instance.sceneManager.devControl = true;
 
                         StartCoroutine(GameController.Instance.sceneManager.CheckTransition(
                             scene,
-                            (commands.Count <= 3) ? "TransitionObjectOut" : commands[3].ToString().ToLower() switch
+                            (commands.Count <= 3) ? "TransitionObjectIn" : commands[3].ToString().ToLower() switch
                         {
                             "out" => "TransitionObjectOut",
                             _ => "TransitionObjectIn"
@@ -243,7 +238,12 @@ public class DeveloperConsole : MonoBehaviour
                 }
                 break;
             default:
-                Debug.Log("Incorrect command passed to console -- DevConsole");
+                Debug.Log(
+                    "Incorrect command passed to console -- DevConsole\n" + 
+                    "Commands:\n" +
+                    "\tset <type> <item> <optional: value> || e.g. `set scene thruster` or `set element copper 15`" +
+                    "\ttoggle <console_item> <value>       || e.g. `toggle fps on`"
+                    );
                 break;
         }
     }

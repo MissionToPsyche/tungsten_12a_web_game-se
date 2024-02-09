@@ -95,8 +95,8 @@ public class UIController : BaseController<UIController>
             _devConsolePanel.SetActive(!_devConsolePanel.activeSelf); //shows panel
             PlayerController.Instance.inputBlocked = _devConsolePanel.activeSelf; //blocks movement
             _devConsoleText["DevConsoleMenu"].text = "Choices:\n" +
-                "toggle [arg]\t\tExample: toggle fps  --or--  toggle resource_monitor\n" +
-                "set [arg] [value]";
+                "toggle <arg>\t\tExample: toggle fps  --or--  toggle resource_monitor\n" +
+                "set <type> <arg> [value]";
             _devConsoleInput.ActivateInputField();
         }
 
