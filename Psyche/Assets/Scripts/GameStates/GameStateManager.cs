@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -52,8 +51,9 @@ public class GameStateManager
     {
         MainMenu,
         InGame,
-        Paused,
         GameOver,
+
+        None,
     }
 
     /// <summary>
