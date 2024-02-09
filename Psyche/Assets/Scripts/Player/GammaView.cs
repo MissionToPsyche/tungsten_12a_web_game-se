@@ -95,6 +95,9 @@ public class GammaView : MonoBehaviour {
                 ApplyColorBlindModifications(spriteRenderer);
             }
         }
+
+        // changes terrain color
+        ChangeTerrainColor();
     }
 
     /// <summary>
@@ -140,7 +143,6 @@ public class GammaView : MonoBehaviour {
                 spriteRenderersList[i].color = LayerColor(spriteRenderersList[i].gameObject);
                 if (Input.GetButtonDown("FireGRS")) {
                     GameController.Instance.audioManager.toolGRS.Play();
-                    ChangeTerrainColor(); // placed in here so it runs one time
                 }
                 if (colorBlindMode) { ActivateGRSaltView(); }
                 if (!sceneLight.intensity.Equals(1) && grnsControlsSceneLight) {
@@ -159,7 +161,6 @@ public class GammaView : MonoBehaviour {
                 spriteRenderersList[i].color = origColorArray[i];
                 if (Input.GetButtonUp("FireGRS")) {
                     GameController.Instance.audioManager.toolGRS.Stop();
-                    RevertTerrainColor(); // placed in here so it runs one time
                 }
                 if (colorBlindMode) { DeactivateGRSaltView(); }
                 if (!sceneLight.intensity.Equals(origSceneLightIntensity) && grnsControlsSceneLight) {
@@ -334,6 +335,7 @@ public class GammaView : MonoBehaviour {
         spriteRenderersList.Clear();
         origColorArray = new Color[0];
         colorBlindModeObjects.Clear();
+        RevertTerrainColor();
     }
 
     /// <summary>
