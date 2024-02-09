@@ -194,11 +194,21 @@ public class SceneManager : MonoBehaviour {
     public Vector3 GetTransitionObjectPosition(string sceneName) {
         Scene scene = UnityEngine.SceneManagement.SceneManager.GetSceneByName(sceneName);
         if (scene.isLoaded) {
+            // Ignore if devconsole
+            if (devControl)
+            {
+                devControl = false;
+                GameObject o = GameObject.FindGameObjectWithTag(_directionTag);
+                if (o != null)
+                {
+                    return o.transform.position;
+                }
+            }
+
             String tag = "TransitionObjectIn";
-            if (_directionTag == tag && !devControl) {
+            if (_directionTag == tag) {
                 tag = "TransitionObjectOut";
             }
-            devControl = false;
             GameObject obj = GameObject.FindGameObjectWithTag(tag);
                 if (obj != null) {
                     return obj.transform.position;
