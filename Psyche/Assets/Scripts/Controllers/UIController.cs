@@ -637,7 +637,7 @@ public class UIController : BaseController<UIController>
         //Toolname
         string toolName = args[2].ToString().ToLower();
         //Dictionary that contains everything required for the tool's next level requirements - see any toolmanager
-        Dictionary<string, int> levelRequirements = (Dictionary<string, int>)args[3];
+        Dictionary<string, ushort> levelRequirements = (Dictionary<string, ushort>)args[3];
         string level = args[4].ToString();
 
         switch (directive)
@@ -733,7 +733,7 @@ public class UIController : BaseController<UIController>
     /// <summary>
     /// 
     /// </summary>
-    private void UpdateRequirements(Dictionary<string, int> levelRequirements, Transform requirementsArea)
+    private void UpdateRequirements(Dictionary<string, ushort> levelRequirements, Transform requirementsArea)
     {
         foreach (Transform child in requirementsArea)
         {

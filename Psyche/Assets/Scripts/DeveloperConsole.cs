@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Profiling;
+using Unity.VisualScripting;
 
 public class DeveloperConsole : MonoBehaviour
 {
     //Private variables
     private GameController _gameController;
-    private Dictionary<DevConsoleCommand, Action<ArrayList>> _commandRegistry; //stores commands
     private float _updateTimerDefault;
     private float _updateTimer;
     private ProfilerRecorder _totalUsedMemory;
@@ -16,7 +16,7 @@ public class DeveloperConsole : MonoBehaviour
     //Events Declaration
     public event Action<ArrayList>      OnDevConsoleUIUpdate;       // Updating the UI communication
     public event Action<string, string> OnDevConsolePlayerSet; // Player controller changes
-    public event Action<ArrayList> OnDevConsoleSceneSet;       // Setting the scene
+    public event Action<ArrayList>      OnDevConsoleSceneSet;       // Setting the scene
 
     // Enum for Commands
     public enum DevConsoleCommand
@@ -24,6 +24,10 @@ public class DeveloperConsole : MonoBehaviour
         TOGGLE,  // For Updating UI Controller && Intaking commands
         SET,     // Intaking command
         UPDATE,  // For Updating the UIController
+
+        SCENE,
+        ELEMENT,
+        TOOL,
 
         FPS,
         RESOURCE_MONITOR,
@@ -43,6 +47,11 @@ public class DeveloperConsole : MonoBehaviour
             case DevConsoleCommand.TOGGLE:              return "toggle";
             case DevConsoleCommand.SET:                 return "set";
             case DevConsoleCommand.UPDATE:              return "update";
+
+            case DevConsoleCommand.SCENE:               return "scene";
+            case DevConsoleCommand.ELEMENT:             return "element";
+            case DevConsoleCommand.TOOL:                return "tool";
+
                     
             case DevConsoleCommand.FPS:                 return "fps";
             case DevConsoleCommand.RESOURCE_MONITOR:    return "resource_monitor";
@@ -64,6 +73,10 @@ public class DeveloperConsole : MonoBehaviour
             case "set":                 return DevConsoleCommand.SET;
             case "update":              return DevConsoleCommand.UPDATE;
 
+            case "scene":               return DevConsoleCommand.SCENE;
+            case "element":             return DevConsoleCommand.ELEMENT;
+            case "tool":                return DevConsoleCommand.TOOL;
+
             case "fps":                 return DevConsoleCommand.FPS;
             case "resource_monitor":    return DevConsoleCommand.RESOURCE_MONITOR;
 
@@ -79,11 +92,6 @@ public class DeveloperConsole : MonoBehaviour
     public void Initialize(GameController gameController)
     {
         _gameController = gameController;
-        _commandRegistry = new Dictionary<DevConsoleCommand, Action<ArrayList>>()
-        {
-            { DevConsoleCommand.TOGGLE, HandleToggle },
-            { DevConsoleCommand.SET, HandleSet },
-        };
         _updateTimerDefault = 0.5f;  //every 1/2 second
         _updateTimer = _updateTimerDefault;
         _totalUsedMemory = ProfilerRecorder.StartNew(ProfilerCategory.Memory, "Total Used Memory");
@@ -128,61 +136,116 @@ public class DeveloperConsole : MonoBehaviour
     }
 
     /// <summary>
-    /// General Event intake manager
-    /// - args[0] = source
-    /// </summary>
-    /// <param name="args"></param>
-    public void IntakeEvents(ArrayList args)
-    {
-        string source = args[0].ToString();
-        args.RemoveAt(0);
-
-        switch(source)
-        {
-            case "UI":
-                HandleCommands(args); 
-                break;
-            default:
-                UnityEngine.Debug.Log("Incorrect source -- DevConsole");
-                break;
-        }
-    }
-
-    /// <summary>
     /// Processes commands
     /// </summary>
     /// <param name="commands"></param>
     public void HandleCommands(ArrayList commands)
     {
         var command = Match(commands[0].ToString());
-
-        if (command == DevConsoleCommand.ERROR)
+        
+        switch (command)
         {
-            UnityEngine.Debug.Log("Incorrect command passed to console -- DevConsole");
-            return;
+            case DevConsoleCommand.TOGGLE:
+                OnDevConsoleUIUpdate(commands);
+                break;
+            case DevConsoleCommand.SET:
+                var sub_command = Match(commands[1].ToString());
+                switch (sub_command)
+                {
+                    // Element Manipulation
+                    case DevConsoleCommand.ELEMENT:
+                        // Check for a valid element being passed
+                        var element = PlayerController.Instance.inventoryManager.MatchElement(commands[2].ToString());
+                        if (element == InventoryManager.Element.None)
+                        {
+                            Debug.Log($"Invalid element name: {commands[2]}");
+                            return;
+                        }
+
+                        // Check for a valid amount being passed
+                        ushort amount;
+                        if (!ushort.TryParse(commands[3].ToString(), out amount))
+                        {
+                            Debug.Log($"Invalid amount provided: {commands[3]}");
+                            return;
+                        }
+                        PlayerController.Instance.inventoryManager.SetElement(element, amount);
+                        break;
+
+
+                    // Tool Manipulation
+                    case DevConsoleCommand.TOOL:
+                        // Check for valid tool being passed
+                        var tool = PlayerController.Instance.inventoryManager.MatchTool(commands[2].ToString());
+                        if (tool == InventoryManager.Tool.None)
+                        {
+                            Debug.Log($"Invalid tool name {commands[2]}");
+                            return;
+                        }
+
+                        // Check for valid value being passed
+                        bool value;
+                        if (!bool.TryParse(commands[3].ToString(), out value))
+                        {
+                            Debug.Log($"Invalid value passed {commands[3]}");
+                            return;
+                        }
+                        // Update the Inventory Manager
+                        PlayerController.Instance.inventoryManager.SetTool(tool, true);
+
+                        // Update the specific tool itself
+                        switch (tool)
+                        {
+                            case InventoryManager.Tool.SPECTROMETER:
+                                // Currently nothing to do here
+                                break;
+                            case InventoryManager.Tool.BATTERY:
+                                PlayerController.Instance.batteryManager.toolEnabled = value;
+                                break;
+                            case InventoryManager.Tool.THRUSTER:
+                                PlayerController.Instance.thrusterManager.toolEnabled = value;
+                                break;
+                            case InventoryManager.Tool.ELECTROMAGNET:
+                                PlayerController.Instance.eMagnetManager.toolEnabled = value;
+                                PlayerController.Instance.eMagnetActive = value;
+                                break;
+                            default:
+                                Debug.Log($"You somehow broke existence -- DeveloperConsole: {tool}");
+                                break;
+                        }
+                        break;
+
+
+                    // Scene Manipulation
+                    case DevConsoleCommand.SCENE:
+                        foreach (var c in commands)
+                        {
+                            Debug.Log($"{c}");
+                        }
+                        // Adhoc, convert the scene to enum then back to string
+                        string scene = GameController.Instance.gameStateManager.MatchScene(GameController.Instance.gameStateManager.MatchScene(commands[2].ToString()));
+                        Debug.Log($"{scene} {commands[1]}");
+                        GameController.Instance.sceneManager.devControl = true;
+
+                        StartCoroutine(GameController.Instance.sceneManager.CheckTransition(
+                            scene,
+                            (commands.Count <= 3) ? "TransitionObjectOut" : commands[3].ToString().ToLower() switch
+                        {
+                            "out" => "TransitionObjectOut",
+                            _ => "TransitionObjectIn"
+                        }));
+                        break;
+                    default:
+                        Debug.Log(
+                            $"Incorrect command passed {commands[1]}\n" + 
+                            "Please ensure the correct syntax is used: `set <type> <item> <optional: value>`");
+                        break;
+                }
+                break;
+            default:
+                Debug.Log("Incorrect command passed to console -- DevConsole");
+                break;
         }
-        _commandRegistry[command].Invoke(commands);
-    }
-
-    /// <summary>
-    /// Handles toggling UI components on and off
-    /// </summary>
-    /// <param name="commands"></param>
-    private void HandleToggle(ArrayList commands)
-    {
-        OnDevConsoleUIUpdate(commands);  //send to event emitter in controller class
-    }
-
-    /// <summary>
-    /// Handles setting variable values
-    /// - set [tool/item] [value]
-    /// </summary>
-    /// <param name="commands"></param>
-    private void HandleSet(ArrayList commands)
-    {
-        string[] package = { "Player", "InventoryManager", "DeveloperConsole" };           ///////////// Update this
-        commands.InsertRange(0, package);
-        _gameController.SendMessage(commands);
     }
 
     /// <summary>
