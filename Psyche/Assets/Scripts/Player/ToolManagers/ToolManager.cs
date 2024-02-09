@@ -12,9 +12,9 @@ public abstract class ToolManager : MonoBehaviour
 
     //Tool State
     public int level;
-    public Dictionary<int, Dictionary<string, int>> levelRequirements;
+    public Dictionary<int, Dictionary<string, ushort>> levelRequirements;
 
-    public bool toolEnabled { get; protected set; }
+    public bool toolEnabled;
 
     /// <summary>
     /// Enables the tool
