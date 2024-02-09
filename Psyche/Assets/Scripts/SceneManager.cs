@@ -37,7 +37,6 @@ public class SceneManager : MonoBehaviour {
     /// <param name="tag"></param>
     /// <returns></returns>
     public IEnumerator CheckTransition(string travelToSceneName, string directionTag) {
-        Debug.Log($"{travelToSceneName} -- {directionTag}");
         _directionTag = directionTag;
 
         //Polling rate
@@ -102,7 +101,6 @@ public class SceneManager : MonoBehaviour {
                     Debug.LogError("Invalid Scene Transition");
                     break;
             }
-            devControl = false;
         }
     }
 
@@ -197,9 +195,10 @@ public class SceneManager : MonoBehaviour {
         Scene scene = UnityEngine.SceneManagement.SceneManager.GetSceneByName(sceneName);
         if (scene.isLoaded) {
             String tag = "TransitionObjectIn";
-            if (_directionTag == tag) {
+            if (_directionTag == tag && !devControl) {
                 tag = "TransitionObjectOut";
             }
+            devControl = false;
             GameObject obj = GameObject.FindGameObjectWithTag(tag);
                 if (obj != null) {
                     return obj.transform.position;
