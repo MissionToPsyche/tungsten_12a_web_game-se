@@ -37,7 +37,7 @@ public class BatteryManager : ToolManager {
         {
             {  1, new Dictionary<string, int>()
                 {
-                    { "element_copper", 0 }, { "element_iron", 0 }, { "element_nickel", 1 }, { "element_gold", 0 }, { "element_tungsten", 0 }
+                    { "element_copper", 0 }, { "element_iron", 0 }, { "element_nickel", 2 }, { "element_gold", 0 }, { "element_tungsten", 0 }
                 }
             },
             {  2, new Dictionary<string, int>()

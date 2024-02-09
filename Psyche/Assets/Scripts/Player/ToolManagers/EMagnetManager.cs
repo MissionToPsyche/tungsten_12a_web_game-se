@@ -25,7 +25,7 @@ public class EMagnetManager : ToolManager {
         {
             {  1, new Dictionary<string, int>()
                 {
-                    { "element_copper", 0 }, { "element_iron", 1 }, { "element_nickel", 0 }, { "element_gold", 0 }, { "element_tungsten", 0 }
+                    { "element_copper", 0 }, { "element_iron", 2 }, { "element_nickel", 0 }, { "element_gold", 0 }, { "element_tungsten", 0 }
                 }
             },
             {  2, new Dictionary<string, int>()
