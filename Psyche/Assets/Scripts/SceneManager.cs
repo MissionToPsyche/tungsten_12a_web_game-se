@@ -18,8 +18,9 @@ public class SceneManager : MonoBehaviour {
     private GameController _gameController;
     private Vector3 _landingPosition;
     private bool transition = false;
-    private String _travelToSceneName;
-    private String _directionTag;
+    private string _travelToSceneName;
+    private string _directionTag;
+    public bool devControl = false;
     
     /// <summary>
     /// Initializes this script
@@ -45,7 +46,7 @@ public class SceneManager : MonoBehaviour {
         float verticalAxis = Input.GetAxis("Vertical");
 
         //If a positive vertical button is pressed (w or up), then transition
-        if (Input.GetButton("Vertical") && verticalAxis > 0) {
+        if ((Input.GetButton("Vertical") && verticalAxis > 0) || devControl) {
             switch (travelToSceneName)
             {
                 case "Landing_Scene":
@@ -193,6 +194,17 @@ public class SceneManager : MonoBehaviour {
     public Vector3 GetTransitionObjectPosition(string sceneName) {
         Scene scene = UnityEngine.SceneManagement.SceneManager.GetSceneByName(sceneName);
         if (scene.isLoaded) {
+            // Ignore if devconsole
+            if (devControl)
+            {
+                devControl = false;
+                GameObject o = GameObject.FindGameObjectWithTag(_directionTag);
+                if (o != null)
+                {
+                    return o.transform.position;
+                }
+            }
+
             String tag = "TransitionObjectIn";
             if (_directionTag == tag) {
                 tag = "TransitionObjectOut";
