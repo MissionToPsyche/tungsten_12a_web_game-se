@@ -51,8 +51,9 @@ public class GameStateManager
     {
         MainMenu,
         InGame,
-        Paused,
         GameOver,
+
+        None,
     }
 
     /// <summary>
@@ -78,6 +79,40 @@ public class GameStateManager
         Tool_Intro_GRS,
         Tool_Intro_Imager,
         Tool_Intro_Thruster,
+
+        None,
+    }
+
+    public string MatchScene(Scene scene)
+    {
+        return scene switch
+        {
+            Scene.Title_Screen          => "Title_Screen",
+            Scene.Intro_Cutscene        => "Intro_Cutscene",
+            Scene.Outro_Cutscene        => "Outro_Cutscene",
+            Scene.Landing_Scene         => "Landing_Scene",
+            Scene.Tool_Intro_eMagnet    => "Tool_Intro_eMagnet",
+            Scene.Tool_Intro_GRS        => "Tool_Intro_GRS",
+            Scene.Tool_Intro_Imager     => "Tool_Intro_Imager",
+            Scene.Tool_Intro_Thruster   => "Tool_Intro_Thruster",
+            _                           => null
+        };
+    }
+
+    public Scene MatchScene(string scene)
+    {
+        return scene.ToLower() switch
+        {
+            "title_screen"        or "title"    => Scene.Title_Screen,
+            "intro_cutscene"      or "intro"    => Scene.Intro_Cutscene,
+            "outro_cutscene"      or "outro"    => Scene.Outro_Cutscene,
+            "landing_scene"       or "landing"  => Scene.Landing_Scene,
+            "tool_intro_emagnet"  or "emagnet"  => Scene.Tool_Intro_eMagnet,
+            "tool_intro_grs"      or "grs"      => Scene.Tool_Intro_GRS,
+            "tool_intro_imager"   or "imager"   => Scene.Tool_Intro_Imager,
+            "tool_intro_thruster" or "thruster" => Scene.Tool_Intro_Thruster,
+            _                                   => Scene.None,
+        };
     }
 
     /// <summary>

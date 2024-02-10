@@ -359,6 +359,8 @@ public class PlayerController : BaseController<PlayerController>
     /// <param name="toolName"></param>
     public void ToolPickUp(string toolName)
     {
+        // Transition to this at some point
+        var tool = inventoryManager.MatchTool(toolName);
         //Other actions
         switch (toolName)
         {

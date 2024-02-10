@@ -129,9 +129,6 @@ public class GameController : BaseController<GameController>
                 args.RemoveAt(0);
                 //Process command
                 break;
-            case "DeveloperConsole":
-                developerConsole.IntakeEvents(args);
-                break;
             case "SceneManager":
                 StartCoroutine(sceneManager.CheckTransition(args[1].ToString(), args[2].ToString()));
                 break;
