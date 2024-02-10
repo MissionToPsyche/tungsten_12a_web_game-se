@@ -40,7 +40,8 @@ public class GammaView : MonoBehaviour {
     public Color origSceneBackgroundColor;           // background color of the scene
     /* other variables */
     public Color defaultColor = Color.green;         // default color to use when default layer is used
-    public bool colorBlindMode;                      // color blind mode boolean    
+    public bool colorBlindMode;                      // color blind mode boolean
+    public bool colorBlindModeNames = true;          // boolean to set if color blind mode will set layer name vice number
     public Camera mainCamera;                        // scene camera used to only load objects within view
     
     /// <summary>
@@ -283,8 +284,9 @@ public class GammaView : MonoBehaviour {
 
             // text properties based on layer number
             textMesh.text = layerNum switch {
-                0 or 15 => "",             // default (0) or clear (15) layer numbers are ignored
-                _ => layerName.ToString(), // else displays text, choice of number or name
+                0 or 15 => "", // default (0) or clear (15) layer numbers are ignored
+                // else displays text based on bool? true:false
+                _ => colorBlindModeNames? layerName.ToString():layerNum.ToString(),
             };
             textMesh.characterSize = 0.15f;
             textMesh.fontSize = 30;
