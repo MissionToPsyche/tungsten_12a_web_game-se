@@ -25,27 +25,27 @@ public class EMagnetManager : ToolManager {
         {
             {  1, new Dictionary<string, ushort>()
                 {
-                    { "element_copper", 0 }, { "element_iron", 2 }, { "element_nickel", 0 }, { "element_gold", 0 }, { "element_platinum", 0 }
+                    { "element_copper", 0 }, { "element_iron", 2 }, { "element_nickel", 0 }, { "element_gold", 0 }, { "element_tungsten", 0 }
                 }
             },
             {  2, new Dictionary<string, ushort>()
                 {
-                    { "element_copper", 0 }, { "element_iron", 2 }, { "element_nickel", 0 }, { "element_gold", 0 }, { "element_platinum", 0 }
+                    { "element_copper", 0 }, { "element_iron", 2 }, { "element_nickel", 0 }, { "element_gold", 0 }, { "element_tungsten", 0 }
                 }
             },
             {  3, new Dictionary<string, ushort>()
                 {
-                    { "element_copper", 0 } , { "element_iron", 3 }, { "element_nickel", 0 }, { "element_gold", 0 }, { "element_platinum", 0 }
+                    { "element_copper", 0 } , { "element_iron", 3 }, { "element_nickel", 0 }, { "element_gold", 0 }, { "element_tungsten", 0 }
                 }
             },
             {  4, new Dictionary<string, ushort>()
                 {
-                    { "element_copper", 0 } , { "element_iron", 4 }, { "element_nickel", 0 }, { "element_gold", 0 }, { "element_platinum", 0 }
+                    { "element_copper", 0 } , { "element_iron", 4 }, { "element_nickel", 0 }, { "element_gold", 0 }, { "element_tungsten", 0 }
                 }
             },
             {  5, new Dictionary<string, ushort>()
                 {
-                    { "element_copper", 0 } , { "element_iron", 5 } , { "element_nickel", 0 } , { "element_gold", 0 }, { "element_platinum", 0 }
+                    { "element_copper", 0 } , { "element_iron", 5 } , { "element_nickel", 0 } , { "element_gold", 0 }, { "element_tungsten", 0 }
                 }
             },
         };
