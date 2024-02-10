@@ -1,7 +1,7 @@
 /** 
 Description: spectrometer tool gamma view script
 Author: blopezro
-Version: 20240125
+Version: 20240209
 **/
 
 using System;
@@ -23,15 +23,20 @@ public class GammaView : MonoBehaviour {
     public List<SpriteRenderer> spriteRenderersList; // holds all sprite renderers of game objects
     public Color[] origColorArray;                   // holds original colors of the sprite renderers
     public List<GameObject> colorBlindModeObjects;   // holds objects stored for assistance with color blindness
+    /* scene light */
+    public Light2D sceneLight;                       // light in the current scene
+    public float origSceneLightIntensity;            // light intensity of the scene
+    public bool grnsControlsSceneLight = false;      // boolean to set if grns will influence scene light    
+    /* scene terrain */
+    public Tilemap sceneTilemap;                     // tilemap (terrain component) in current scene
+    public Color origSceneTilemapColor;              // terrain color of the scene
+    /* scene background image */
+    public SpriteRenderer sceneBackground;           // background image in current scene
+    public Color origSceneBackgroundColor;           // background color of the scene
     /* other variables */
     public Color defaultColor = Color.green;         // default color to use when default layer is used
     public bool colorBlindMode;                      // color blind mode boolean    
     public Camera mainCamera;                        // scene camera used to only load objects within view
-    public Light2D sceneLight;                       // light in the current scene
-    public float origSceneLightIntensity;            // light intensity of the scene
-    public bool grnsControlsSceneLight = false;      // boolean to set if grns will influence scene light
-    public Tilemap sceneTilemap;                     // tilemap (terrain component) in current scene
-    public Color origSceneTilemapColor;              // terrain color of the scene
     
     /// <summary>
     /// Subscribes to the SceneManager.sceneLoaded event
@@ -55,8 +60,10 @@ public class GammaView : MonoBehaviour {
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
         sceneLight = GameObject.FindGameObjectWithTag("SceneLight").GetComponent<Light2D>();
         sceneTilemap = GameObject.FindGameObjectWithTag("Terrain").GetComponent<Tilemap>();
+        sceneBackground = GameObject.FindGameObjectWithTag("Background").GetComponent<SpriteRenderer>();
         origSceneLightIntensity = sceneLight.intensity;
         origSceneTilemapColor = sceneTilemap.color;
+        origSceneBackgroundColor = sceneBackground.color;
     }
 
     /// <summary>
@@ -96,8 +103,8 @@ public class GammaView : MonoBehaviour {
             }
         }
 
-        // changes terrain color
-        ChangeTerrainColor();
+        // changes terrain and background color
+        ChangeTerrainAndBackgroundColor();
     }
 
     /// <summary>
@@ -335,24 +342,30 @@ public class GammaView : MonoBehaviour {
         spriteRenderersList.Clear();
         origColorArray = new Color[0];
         colorBlindModeObjects.Clear();
-        RevertTerrainColor();
+        RevertTerrainAndBackgroundColor();
     }
 
     /// <summary>
-    /// Changes the color of the terrain
+    /// Changes the color of the terrain and background
     /// </summary>
-    void ChangeTerrainColor() {
+    void ChangeTerrainAndBackgroundColor() {
         if (sceneTilemap != null) {
             sceneTilemap.color = defaultColor;
+        }
+        if (sceneBackground != null) {
+            sceneBackground.color = defaultColor;
         }
     }
 
     /// <summary>
-    /// Reverts the color of the terrain
+    /// Reverts the color of the terrain and background
     /// </summary>
-    void RevertTerrainColor() {
+    void RevertTerrainAndBackgroundColor() {
         if (sceneTilemap != null) {
             sceneTilemap.color = origSceneTilemapColor;
+        }
+        if (sceneBackground != null) {
+            sceneBackground.color = origSceneBackgroundColor;
         }
     }
 
