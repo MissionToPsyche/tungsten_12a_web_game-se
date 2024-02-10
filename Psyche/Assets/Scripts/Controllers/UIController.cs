@@ -95,8 +95,8 @@ public class UIController : BaseController<UIController>
             _devConsolePanel.SetActive(!_devConsolePanel.activeSelf); //shows panel
             PlayerController.Instance.inputBlocked = _devConsolePanel.activeSelf; //blocks movement
             _devConsoleText["DevConsoleMenu"].text = "Choices:\n" +
-                "toggle [arg]\t\tExample: toggle fps  --or--  toggle resource_monitor\n" +
-                "set [arg] [value]";
+                "toggle <arg>\t\tExample: toggle fps  --or--  toggle resource_monitor\n" +
+                "set <type> <arg> [value]";
             _devConsoleInput.ActivateInputField();
         }
 
@@ -104,10 +104,10 @@ public class UIController : BaseController<UIController>
         if (_devConsolePanel.activeSelf && Input.GetButtonDown("Submit"))
         {
             //Take in the commands from the input box
-            ArrayList commands = new ArrayList { "Game", "DeveloperConsole", "UI" };
+            ArrayList commands = new ArrayList();
             commands.AddRange(_devConsoleInput.text.ToLower().Split(" "));
             //Process the command
-            SendMessage(commands);
+            OnUpdateUIToDevConsole.Invoke(commands);
             _devConsoleInput.text = "";
             _devConsoleInput.ActivateInputField();
         }
@@ -128,7 +128,9 @@ public class UIController : BaseController<UIController>
     public event Action<ArrayList> OnUpdateUIToGame;
     public event Action<ArrayList> OnUpdateUIToPlayer;
     public event Action<ArrayList> OnUpdateInventoryUpdate;
-    public event Action<ArrayList> OnUpdateToolModify;
+    public event Action<ArrayList> OnUpdateToolModify;      // Send Tool Modification requests to Inventory
+
+    public event Action<ArrayList> OnUpdateUIToDevConsole;  // Send dev input commands to DevConsole
 
     /// <summary>
     /// Invokes events for this and any subclasses.
@@ -230,6 +232,9 @@ public class UIController : BaseController<UIController>
         PlayerController.Instance.OnUpdatePlayerToUI += ReceiveMessage;
         PlayerController.Instance.inventoryManager.OnUpdateInventoryElement += ElementUpdate;
         PlayerController.Instance.inventoryManager.OnUpdateInventoryTool += EnableToolButton;
+
+        // Process events from DevConsole
+        GameController.Instance.developerConsole.OnDevConsoleUIUpdate += ProcessDevConsole;
     }
 
     /// <summary>
@@ -335,27 +340,30 @@ public class UIController : BaseController<UIController>
     /// <param name="args"></param>
     private void ProcessDevConsole(ArrayList args)
     {
-        switch (args[0].ToString())
+        var command = GameController.Instance.developerConsole.Match(args[0].ToString());
+
+        switch (command)
         {
-            case "update":
+            case DeveloperConsole.DevConsoleCommand.UPDATE:
                 if (_devConsoleFPSPanel.activeSelf)
                 {
                     _devConsoleText["DevConsoleFPS"].text = "FPS: " + args[1].ToString();
                 }
                 if(_devConsoleResourcePanel.activeSelf)
                 {
-                    _devConsoleText["DevConsoleResourceMonitor"].text = "CPU: " + args[2].ToString() + "%\n" +
-                                                                        "RAM: " + args[3].ToString() + "MB";
+                    _devConsoleText["DevConsoleResourceMonitor"].text = "RAM: " + args[2].ToString() + "MB";
                 }
                 break;
-            case "toggle":
-                switch(args[1].ToString())
+            case DeveloperConsole.DevConsoleCommand.TOGGLE:
+                var sub_command = GameController.Instance.developerConsole.Match(args[1].ToString());
+                Debug.Log($"{sub_command} -- {args[1].ToString()}");
+                switch (sub_command)
                 {
-                    case "fps":
+                    case DeveloperConsole.DevConsoleCommand.FPS:
                         _devConsoleFPSPanel.SetActive(!_devConsoleFPSPanel.activeSelf);
                         _devConsoleText["DevConsoleFPS"].text = "FPS";
                         break;
-                    case "resource_monitor":
+                    case DeveloperConsole.DevConsoleCommand.RESOURCE_MONITOR:
                         
                         _devConsoleResourcePanel.SetActive(!_devConsoleResourcePanel.activeSelf);
                         _devConsoleText["DevConsoleResourceMonitor"].text = "Loading...";
@@ -582,7 +590,7 @@ public class UIController : BaseController<UIController>
     public TMP_Text ironAmount;
     public TMP_Text nickelAmount;
     public TMP_Text goldAmount;
-    public TMP_Text platinumAmount;
+    public TMP_Text tungstenAmount;
 
     [Header("Tool Levels")]
     public TMP_Text thrusterLevel;
@@ -601,7 +609,7 @@ public class UIController : BaseController<UIController>
     public GameObject ironRequirement;
     public GameObject nickelRequirement;
     public GameObject goldRequirement;
-    public GameObject platinumRequirement;
+    public GameObject tungstenRequirement;
 
     /// <summary>
     /// Modifies the tool when its upgrade button is pressed
@@ -629,7 +637,7 @@ public class UIController : BaseController<UIController>
         //Toolname
         string toolName = args[2].ToString().ToLower();
         //Dictionary that contains everything required for the tool's next level requirements - see any toolmanager
-        Dictionary<string, int> levelRequirements = (Dictionary<string, int>)args[3];
+        Dictionary<string, ushort> levelRequirements = (Dictionary<string, ushort>)args[3];
         string level = args[4].ToString();
 
         switch (directive)
@@ -657,8 +665,8 @@ public class UIController : BaseController<UIController>
                                 case "element_gold":
                                     name = "Gold";
                                     break;
-                                case "element_platinum":
-                                    name = "Platinum";
+                                case "element_tungsten":
+                                    name = "Tungsten";
                                     break;
                                 default:
                                     name = requirement.Key;
@@ -725,7 +733,7 @@ public class UIController : BaseController<UIController>
     /// <summary>
     /// 
     /// </summary>
-    private void UpdateRequirements(Dictionary<string, int> levelRequirements, Transform requirementsArea)
+    private void UpdateRequirements(Dictionary<string, ushort> levelRequirements, Transform requirementsArea)
     {
         foreach (Transform child in requirementsArea)
         {
@@ -748,9 +756,9 @@ public class UIController : BaseController<UIController>
         if (amount > 0)
             Instantiate(goldRequirement, requirementsArea).GetComponentInChildren<TMP_Text>().SetText(amount.ToString());
 
-        amount = levelRequirements["element_platinum"];
+        amount = levelRequirements["element_tungsten"];
         if (amount > 0)
-            Instantiate(platinumRequirement, requirementsArea).GetComponentInChildren<TMP_Text>().SetText(amount.ToString());
+            Instantiate(tungstenRequirement, requirementsArea).GetComponentInChildren<TMP_Text>().SetText(amount.ToString());
     }
 
     /// <summary>
@@ -775,8 +783,8 @@ public class UIController : BaseController<UIController>
             case "element_gold":
                 goldAmount.SetText(value);
                 break;
-            case "element_platinum":
-                platinumAmount.SetText(value);
+            case "element_tungsten":
+                tungstenAmount.SetText(value);
                 break;
             default:
                 Debug.Log("Element type not implemented");
