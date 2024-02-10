@@ -297,14 +297,14 @@ public class GammaView : MonoBehaviour {
     public void SetTextMeshProperties(TextMesh textMesh, int layerNum, String layerName) {
         // text properties based on layer number
         textMesh.text = layerNum switch {
-            0 or 15 => "", // default (0) or clear (15) layer numbers are ignored
+            <= 5 or >= 15 => "", // layers to ignore for labeling
             // else displays text based on bool? true:false
             _ => colorBlindModeNames? layerName.ToString():layerNum.ToString(),
         };
         textMesh.characterSize = 0.15f;
         textMesh.fontSize = 30;
         textMesh.font = Resources.Load<Font>("");
-        textMesh.color = Color.white;
+        textMesh.color = Color.red;
         textMesh.anchor = TextAnchor.MiddleCenter;
     }
 
@@ -314,12 +314,13 @@ public class GammaView : MonoBehaviour {
     /// <param name="grsTextObject"></param>
     /// <param name="spriteRenderer"></param>
     public void SetTextObjProperties(GameObject grsTextObject, SpriteRenderer spriteRenderer) {
-        // position the text object at the center of the object and set parent
-        grsTextObject.transform.position = spriteRenderer.transform.position;
+        // set the text object as a child of the sprite renderer
         grsTextObject.transform.parent = spriteRenderer.transform;
-
+        // position at the center and rotate 45 degrees
+        grsTextObject.transform.position = spriteRenderer.transform.position;
+        grsTextObject.transform.Rotate(new Vector3(0,0,45));
         // set sorting layer and order to view text in front of game object
-        grsTextObject.GetComponent<Renderer>().sortingLayerName = "Foreground";
+        grsTextObject.GetComponent<Renderer>().sortingLayerName = "UI";
         grsTextObject.GetComponent<Renderer>().sortingOrder = 1;
     }
 
