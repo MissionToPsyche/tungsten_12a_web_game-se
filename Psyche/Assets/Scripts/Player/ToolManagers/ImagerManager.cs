@@ -34,29 +34,29 @@ public class ImagerManager : ToolManager
         _playerController = playerManagement;
         _flashlight.intensity = 0f;
         level = 0;
-        levelRequirements = new Dictionary<int, Dictionary<string, int>>()
+        levelRequirements = new Dictionary<int, Dictionary<string, ushort>>()
         {
-            {  1, new Dictionary<string, int>()
+            {  1, new Dictionary<string, ushort>()
                 {
                     { "element_copper", 0 }, { "element_iron", 0 }, { "element_nickel", 0 }, { "element_gold", 2 }, { "element_platinum", 0 }
                 }
             },
-            {  2, new Dictionary<string, int>()
+            {  2, new Dictionary<string, ushort>()
                 {
                     { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 0 } , { "element_gold", 4 }, { "element_platinum", 0 }
                 }
             },
-            {  3, new Dictionary<string, int>()
+            {  3, new Dictionary<string, ushort>()
                 {
                     { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 0 } , { "element_gold", 4 }, { "element_platinum", 0 }
                 }
             },
-            {  4, new Dictionary<string, int>()
+            {  4, new Dictionary<string, ushort>()
                 {
                     { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 0 } , { "element_gold", 4 }, { "element_platinum", 0 }
                 }
             },
-            {  5, new Dictionary<string, int>()
+            {  5, new Dictionary<string, ushort>()
                 {
                     { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 0 } , { "element_gold", 4 }, { "element_platinum", 0 }
                 }
