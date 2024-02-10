@@ -24,7 +24,7 @@ public class GameController : BaseController<GameController>
     {
         developerConsole = GetComponent<DeveloperConsole>();
         developerConsole.Initialize(this);
-        gameStateManager = new GameStateManager(this, GameStateManager.GameState.MainMenu);
+        gameStateManager = new GameStateManager(this, GameStateManager.GameState.MainMenu, GameStateManager.Scene.Title_Screen);
         audioManager = GameObject.FindGameObjectWithTag("AudioSources").GetComponent<AudioManager>();
         sceneManager = GetComponent<SceneManager>();
         sceneManager.Initialize(this);
@@ -184,12 +184,6 @@ public class GameController : BaseController<GameController>
                 break;
             case GameStateManager.GameState.InGame:
                 // Update pause logic
-                break;
-            case GameStateManager.GameState.Paused:
-                // Pause Logic
-                break;
-            case GameStateManager.GameState.GameOver:
-                // GameOver Logic
                 break;
             default:
                 Debug.LogError("Game in unknown state!");
