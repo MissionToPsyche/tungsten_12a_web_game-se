@@ -590,7 +590,7 @@ public class UIController : BaseController<UIController>
     public TMP_Text ironAmount;
     public TMP_Text nickelAmount;
     public TMP_Text goldAmount;
-    public TMP_Text platinumAmount;
+    public TMP_Text tungstenAmount;
 
     [Header("Tool Levels")]
     public TMP_Text thrusterLevel;
@@ -609,7 +609,7 @@ public class UIController : BaseController<UIController>
     public GameObject ironRequirement;
     public GameObject nickelRequirement;
     public GameObject goldRequirement;
-    public GameObject platinumRequirement;
+    public GameObject tungstenRequirement;
 
     /// <summary>
     /// Modifies the tool when its upgrade button is pressed
@@ -665,8 +665,8 @@ public class UIController : BaseController<UIController>
                                 case "element_gold":
                                     name = "Gold";
                                     break;
-                                case "element_platinum":
-                                    name = "Platinum";
+                                case "element_tungsten":
+                                    name = "Tungsten";
                                     break;
                                 default:
                                     name = requirement.Key;
@@ -756,9 +756,9 @@ public class UIController : BaseController<UIController>
         if (amount > 0)
             Instantiate(goldRequirement, requirementsArea).GetComponentInChildren<TMP_Text>().SetText(amount.ToString());
 
-        amount = levelRequirements["element_platinum"];
+        amount = levelRequirements["element_tungsten"];
         if (amount > 0)
-            Instantiate(platinumRequirement, requirementsArea).GetComponentInChildren<TMP_Text>().SetText(amount.ToString());
+            Instantiate(tungstenRequirement, requirementsArea).GetComponentInChildren<TMP_Text>().SetText(amount.ToString());
     }
 
     /// <summary>
@@ -783,8 +783,8 @@ public class UIController : BaseController<UIController>
             case "element_gold":
                 goldAmount.SetText(value);
                 break;
-            case "element_platinum":
-                platinumAmount.SetText(value);
+            case "element_tungsten":
+                tungstenAmount.SetText(value);
                 break;
             default:
                 Debug.Log("Element type not implemented");
