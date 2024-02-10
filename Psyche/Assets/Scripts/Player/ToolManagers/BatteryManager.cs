@@ -33,29 +33,29 @@ public class BatteryManager : ToolManager {
         toolEnabled = false;
         _playerController = playerController;
         level = 0;
-        levelRequirements = new Dictionary<int, Dictionary<string, int>>()
+        levelRequirements = new Dictionary<int, Dictionary<string, ushort>>()
         {
-            {  1, new Dictionary<string, int>()
+            {  1, new Dictionary<string, ushort>()
                 {
                     { "element_copper", 0 }, { "element_iron", 0 }, { "element_nickel", 2 }, { "element_gold", 0 }, { "element_platinum", 0 }
                 }
             },
-            {  2, new Dictionary<string, int>()
+            {  2, new Dictionary<string, ushort>()
                 {
                     { "element_copper", 0 }, { "element_iron", 0 }, { "element_nickel", 2 }, { "element_gold", 0 }, { "element_platinum", 0 }
                 }
             },
-            {  3, new Dictionary<string, int>()
+            {  3, new Dictionary<string, ushort>()
                 {
                     { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 3 }, { "element_gold", 0 }, { "element_platinum", 0 }
                 }
             },
-            {  4, new Dictionary<string, int>()
+            {  4, new Dictionary<string, ushort>()
                 {
                     { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 4 } , { "element_gold", 0 } , { "element_platinum", 0 }
                 }
             },
-            {  5, new Dictionary<string, int>()
+            {  5, new Dictionary<string, ushort>()
                 {
                     { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 5 } , { "element_gold", 0 } , { "element_platinum", 0 }
                 }
