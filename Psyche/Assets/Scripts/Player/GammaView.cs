@@ -1,12 +1,17 @@
 /** 
 Description: spectrometer tool gamma view script
 Author: blopezro
-Version: 20240209
+Version: 20240210
+**/
+
+/**
+Notes:
+grs/GRS (gamma ray spectrometer) and grns/GRNS
+(gamma ray neutron spectrometer) refer to the same thing
 **/
 
 using System;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
@@ -259,27 +264,27 @@ public class GammaView : MonoBehaviour {
 
     /// <summary>
     /// Modifies game object properties to assist with color blind players
+    /// by displaying the layers text vice a new color
     /// </summary>
     /// <param name="spriteRenderer"></param>
     void ApplyColorBlindModifications(SpriteRenderer spriteRenderer) {
         if (colorBlindMode) {
-            // get current game object
-            GameObject gameObject = spriteRenderer.gameObject;
-            // get layer of game object
-            int layerNum = gameObject.layer;
+            GameObject gameObject = spriteRenderer.gameObject;      // get current game object
+            int layerNum = gameObject.layer;                        // get layer number of game object
+            string layerName = LayerMask.LayerToName(layerNum);     // get layer name of game object
 
-            // create game object to display number and anchor in center
-            GameObject grsNumberObject = new GameObject("GRS_ColorBlindMode");
-            TextMesh textMesh = grsNumberObject.AddComponent<TextMesh>();
+            // create game object to display text and anchor in center
+            GameObject grsTextObject = new GameObject("GRS_ColorBlindMode");
+            TextMesh textMesh = grsTextObject.AddComponent<TextMesh>();
             
             // initially set to false until GRS is activated
-            grsNumberObject.SetActive(false);
-            colorBlindModeObjects.Add(grsNumberObject);
+            grsTextObject.SetActive(false);
+            colorBlindModeObjects.Add(grsTextObject);
 
             // text properties based on layer number
             textMesh.text = layerNum switch {
-                0 or 15 => "",            // default (0) or clear (15) layer numbers
-                _ => layerNum.ToString(), // else displays number
+                0 or 15 => "",             // default (0) or clear (15) layer numbers are ignored
+                _ => layerName.ToString(), // else displays text, choice of number or name
             };
             textMesh.characterSize = 0.15f;
             textMesh.fontSize = 30;
@@ -287,19 +292,19 @@ public class GammaView : MonoBehaviour {
             textMesh.color = Color.white;
             textMesh.anchor = TextAnchor.MiddleCenter;
 
-            // position the number object at the center of the object and set parent
-            grsNumberObject.transform.position = spriteRenderer.transform.position;
-            grsNumberObject.transform.parent = spriteRenderer.transform;
+            // position the text object at the center of the object and set parent
+            grsTextObject.transform.position = spriteRenderer.transform.position;
+            grsTextObject.transform.parent = spriteRenderer.transform;
 
             // set sorting layer and order to view text in front of game object
-            grsNumberObject.GetComponent<Renderer>().sortingLayerName = "Foreground";
-            grsNumberObject.GetComponent<Renderer>().sortingOrder = 1;
+            grsTextObject.GetComponent<Renderer>().sortingLayerName = "Foreground";
+            grsTextObject.GetComponent<Renderer>().sortingOrder = 1;
         } else {
-            // destroy number object if created
-            GameObject numberObject = spriteRenderer.transform.Find("GRS_ColorBlindMode").gameObject;
-            if (numberObject != null) {
-                colorBlindModeObjects.Remove(numberObject);
-                Destroy(numberObject);
+            // destroy color blind object if created
+            GameObject colorBlindObject = spriteRenderer.transform.Find("GRS_ColorBlindMode").gameObject;
+            if (colorBlindObject != null) {
+                colorBlindModeObjects.Remove(colorBlindObject);
+                Destroy(colorBlindObject);
             }
         }
     }
