@@ -285,13 +285,6 @@ public class GammaView : MonoBehaviour {
             // set the text and game object properties
             SetTextMeshProperties(textMesh, layerNum, layerName);
             SetTextObjProperties(grsTextObject, spriteRenderer);
-        } else {
-            // destroy color blind object if created
-            GameObject colorBlindObject = spriteRenderer.transform.Find("GRS_ColorBlindMode").gameObject;
-            if (colorBlindObject != null) {
-                colorBlindModeObjects.Remove(colorBlindObject);
-                Destroy(colorBlindObject);
-            }
         }
     }
 
@@ -342,12 +335,13 @@ public class GammaView : MonoBehaviour {
     }
 
     /// <summary>
-    /// Hide alternative view
+    /// Hide alternative view and additionally destroy game object
     /// </summary>
     void DeactivateGRSaltView() {
         foreach (GameObject obj in colorBlindModeObjects) {
             if (obj != null) {
                 obj.SetActive(false);
+                Destroy(obj);
             }
         }
     }
