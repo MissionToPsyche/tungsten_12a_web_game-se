@@ -39,68 +39,78 @@ public class SceneManager : MonoBehaviour {
     public IEnumerator CheckTransition(string travelToSceneName, string directionTag) {
         _directionTag = directionTag;
 
-        //Polling rate
+        // Polling rate
         yield return new WaitForSeconds(0.1f);
 
-        //Get the axis (positive or negative) for vertical buttons
+        // Get the axis (positive or negative) for vertical buttons
         float verticalAxis = Input.GetAxis("Vertical");
+
+        // Cross reference scene
+        GameStateManager.Scene scene = _gameController.gameStateManager.MatchScene(travelToSceneName);
+        if (scene == GameStateManager.Scene.None)
+        {
+            Debug.LogError("Invalid Scene Transition");
+        }
 
         //If a positive vertical button is pressed (w or up), then transition
         if ((Input.GetButton("Vertical") && verticalAxis > 0) || devControl) {
-            switch (travelToSceneName)
-            {
-                case "Landing_Scene":
-                    travelToScene(travelToSceneName);
-                    yield return new WaitForSeconds(0.1f);
-                    loadBackground();
-                    loadCameraBounds();
-                    break;
-                case "Tool_Intro_Thruster":
-                    travelToScene(travelToSceneName);
-                    yield return new WaitForSeconds(0.1f);
-                    loadBackground();
-                    loadCameraBounds();
-                    break;
-                case "Tool_Intro_GRS":
-                    travelToScene(travelToSceneName);
-                    yield return new WaitForSeconds(0.1f);
-                    loadBackground();
-                    loadCameraBounds();
-                    break;
-                case "Tool_Intro_Imager":
-                    travelToScene(travelToSceneName);
-                    yield return new WaitForSeconds(0.1f);
-                    loadBackground();
-                    loadCameraBounds();
-                    break;
-                case "Tool_Intro_eMagnet":
-                    travelToScene(travelToSceneName);
-                    yield return new WaitForSeconds(0.1f);
-                    _gameController.gameStateManager.LoadSceneState(GameStateManager.GameState.InGame, GameStateManager.Scene.Tool_Intro_eMagnet);
-                    loadBackground();
-                    loadCameraBounds();
-                    break;
-                case "Tool_Comb_1":
-                    travelToScene(travelToSceneName);
-                    yield return new WaitForSeconds(0.5f);
-                    loadBackground();
-                    loadCameraBounds();
-                    break;    
-
-                case "Combo_2":
-                    travelToScene(travelToSceneName);
-                    yield return new WaitForSeconds(0.5f);
-                    loadCameraBounds();
-                    break;
-
-                case "SceneTransition_Game_End":
-                    UIController.Instance.EndGame(true);
-                    break;
-
-                default:
-                    Debug.LogError("Invalid Scene Transition");
-                    break;
-            }
+            //if (scene == GameStateManager.Scene.)
+            travelToScene(travelToSceneName);
+            yield return new WaitForSeconds(0.1f);
+            _gameController.gameStateManager.SetScene(scene);
+            loadBackground();
+            loadCameraBounds();
+            //switch (travelToSceneName)
+            //{
+            //    case "Landing_Scene":
+            //        
+            //        break;
+            //    case "Tool_Intro_Thruster":
+            //        travelToScene(travelToSceneName);
+            //        yield return new WaitForSeconds(0.1f);
+            //        loadBackground();
+            //        loadCameraBounds();
+            //        break;
+            //    case "Tool_Intro_GRS":
+            //        travelToScene(travelToSceneName);
+            //        yield return new WaitForSeconds(0.1f);
+            //        loadBackground();
+            //        loadCameraBounds();
+            //        break;
+            //    case "Tool_Intro_Imager":
+            //        travelToScene(travelToSceneName);
+            //        yield return new WaitForSeconds(0.1f);
+            //        loadBackground();
+            //        loadCameraBounds();
+            //        break;
+            //    case "Tool_Intro_eMagnet":
+            //        travelToScene(travelToSceneName);
+            //        yield return new WaitForSeconds(0.1f);
+            //        _gameController.gameStateManager.LoadSceneState(GameStateManager.GameState.InGame, GameStateManager.Scene.Tool_Intro_eMagnet);
+            //        loadBackground();
+            //        loadCameraBounds();
+            //        break;
+            //    case "Tool_Comb_1":
+            //        travelToScene(travelToSceneName);
+            //        yield return new WaitForSeconds(0.5f);
+            //        loadBackground();
+            //        loadCameraBounds();
+            //        break;    
+            //
+            //    case "Combo_2":
+            //        travelToScene(travelToSceneName);
+            //        yield return new WaitForSeconds(0.5f);
+            //        loadCameraBounds();
+            //        break;
+            //
+            //    case "SceneTransition_Game_End":
+            //        UIController.Instance.EndGame(true);
+            //        break;
+            //
+            //    default:
+            //        Debug.LogError("Invalid Scene Transition");
+            //        break;
+            //}
         }
     }
 
