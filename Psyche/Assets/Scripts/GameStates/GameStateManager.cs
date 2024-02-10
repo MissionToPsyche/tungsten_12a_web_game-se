@@ -52,7 +52,7 @@ public class GameStateManager
         MainMenu,
         InGame,
         GameOver,
-
+        Paused,
         None,
     }
 
