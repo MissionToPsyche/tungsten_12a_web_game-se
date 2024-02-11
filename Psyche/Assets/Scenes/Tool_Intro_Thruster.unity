@@ -1347,6 +1347,10 @@ PrefabInstance:
       value: Cave In
       objectReference: {fileID: 0}
     - target: {fileID: 3207364841169034938, guid: da500e8a41a4ecb4a8ddae5e4385a3e1, type: 3}
+      propertyPath: m_Name
+      value: Tool_Intro_eMagnet Out
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207364841169034938, guid: da500e8a41a4ecb4a8ddae5e4385a3e1, type: 3}
       propertyPath: m_TagString
       value: TransitionObjectIn
       objectReference: {fileID: 0}
@@ -59375,7 +59379,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4177737924768369505, guid: 10a784b2e24e2ff4fb82ba9c1791fe76, type: 3}
       propertyPath: m_Name
-      value: Tool_Comb_1
+      value: Tool_Comb_1 In
       objectReference: {fileID: 0}
     - target: {fileID: 4177737924768369505, guid: 10a784b2e24e2ff4fb82ba9c1791fe76, type: 3}
       propertyPath: m_TagString
@@ -95636,6 +95640,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1575675500177537652, guid: 272590fd23b29da478aae608d2af136b, type: 3}
       propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1575675500177537652, guid: 272590fd23b29da478aae608d2af136b, type: 3}
+      propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5589539797666701746, guid: 272590fd23b29da478aae608d2af136b, type: 3}
