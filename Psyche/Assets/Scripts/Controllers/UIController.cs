@@ -465,7 +465,7 @@ public class UIController : BaseController<UIController>
     /// <summary>
     /// Handles behavior when Yes button is clicked on Confirmation Box
     /// </summary>
-    public void HandleYesClicked()
+    public void handleYesClicked()
     {
         //Play button click sound
         playButtonSound();
