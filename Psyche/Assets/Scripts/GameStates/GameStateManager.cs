@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class GameStateManager 
+public class GameStateManager : MonoBehaviour
 {
     //Private variables
     private GameController _gameController;
@@ -11,11 +12,11 @@ public class GameStateManager
     public GameState currentState { get; private set; } //state of the game
     public Scene currentScene { get; private set; }     // Current scene of the game
 
-    public GameStateManager(GameController gameController, GameState state, Scene scene)
+    public void Initialize(GameController gameController, string scene)
     {
         _gameController = gameController;
-        currentState = state;
-        currentScene = scene;
+        currentScene = MatchScene(scene);
+        SetScene(currentScene);
 
         //Expand upon later
         _gameStateToScene = new Dictionary<GameState, Dictionary<Scene, BaseState>>()
@@ -32,6 +33,27 @@ public class GameStateManager
                 { Scene.Tool_Intro_eMagnet, new Tool_Intro_eMagnetState() },
             } },
         };
+    }
+
+    public void LoadPlayer()
+    {
+        PlayerController.Instance.SetObjectState += SetObjectState;
+    }
+
+    public void OnEnable()
+    {
+        if (PlayerController.Instance != null)
+        {
+            LoadPlayer();
+        }
+    }
+
+    public void OnDisable()
+    {
+        if (PlayerController.Instance != null)
+        {
+            PlayerController.Instance.SetObjectState -= SetObjectState;
+        }
     }
 
 
@@ -51,7 +73,7 @@ public class GameStateManager
     /// Changes the state of the game
     /// </summary>
     /// <param name="state"></param>
-    public void ChangeGameState(GameState state)
+    public void SetGameState(GameState state)
     {
         currentState = state;
         _gameController.HandleGameStateEvent(currentState);
@@ -112,9 +134,9 @@ public class GameStateManager
             "tool_intro_grs"            or "grs"      => Scene.Tool_Intro_GRS,
             "tool_intro_imager"         or "imager"   => Scene.Tool_Intro_Imager,
             "tool_intro_thruster"       or "thruster" => Scene.Tool_Intro_Thruster,
-            "Tool_Comb_1"               or "combo1"   => Scene.Tool_Combo_1,
-            "Combo_2"                   or "combo2"   => Scene.Tool_Combo_2,
-            "SceneTransition_Game_End"  or "end"      => Scene.SceneTransition_Game_End,
+            "tool_comb_1"               or "combo1"   => Scene.Tool_Combo_1,
+            "combo_2"                   or "combo2"   => Scene.Tool_Combo_2,
+            "scenetransition_game_end"  or "end"      => Scene.SceneTransition_Game_End,
             _                                         => Scene.None,
         };
     }
@@ -135,11 +157,11 @@ public class GameStateManager
         switch (scene)
         {
             case Scene.Title_Screen or Scene.Intro_Cutscene or Scene.Outro_Cutscene or Scene.SceneTransition_Game_End:
-                ChangeGameState(GameState.MainMenu);
+                SetGameState(GameState.MainMenu);
                 break;
             
             default:
-                ChangeGameState(GameState.InGame);
+                SetGameState(GameState.InGame);
                 break;
             
         }
@@ -154,7 +176,6 @@ public class GameStateManager
             }
             LoadSceneState();
         }
-
     }
 
     /// <summary>

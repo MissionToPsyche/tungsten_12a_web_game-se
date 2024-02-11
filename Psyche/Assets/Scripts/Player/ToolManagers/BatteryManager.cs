@@ -4,6 +4,7 @@ Author: blopezro, mcmyers
 Version: 20240206
 **/
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,11 +18,10 @@ public class BatteryManager : ToolManager {
     public float maxCapacity;
     public float batteryPercent;
     public float rate;
-    public bool batteryDrained;
+    public bool  batteryDrained;
 
     //Events to communicate to UI
-    public delegate void OnBatteryPercentageChanged(float newPercentage);
-    public event OnBatteryPercentageChanged onBatteryPercentageChanged;
+    public event Action<float> OnBatteryPercentageChanged;
 
     /// <summary>
     /// Initialize this script
@@ -81,11 +81,7 @@ public class BatteryManager : ToolManager {
         if (batteryPercent == 0) {
             batteryDrained = true;
         }
-        //Create package to send
-        ArrayList args = new ArrayList {
-                "UI", "None", "BatteryManager", Mathf.RoundToInt(batteryPercent),
-        };
-        _playerController.SendMessage(args);
+        OnBatteryPercentageChanged?.Invoke(Mathf.RoundToInt(batteryPercent));
     }
 
     /// <summary>
@@ -99,11 +95,7 @@ public class BatteryManager : ToolManager {
         if (batteryPercent > 0) {
             batteryDrained = false;
         }
-        //Create package to send
-        ArrayList args = new ArrayList {
-                "UI", "None", "BatteryManager", Mathf.RoundToInt(batteryPercent),
-        };
-        _playerController.SendMessage(args);
+        OnBatteryPercentageChanged?.Invoke(Mathf.RoundToInt(batteryPercent));
     }
 
     /// <summary>
@@ -119,11 +111,7 @@ public class BatteryManager : ToolManager {
         {
             batteryDrained = false;
         }
-        //Create package to send
-        ArrayList args = new ArrayList {
-                "UI", "None", "BatteryManager", Mathf.RoundToInt(batteryPercent),
-        };
-        _playerController.SendMessage(args);
+        OnBatteryPercentageChanged?.Invoke(Mathf.RoundToInt(batteryPercent));
     }
 
     /// <summary>
@@ -136,11 +124,7 @@ public class BatteryManager : ToolManager {
         if (batteryPercent > 0) {
             batteryDrained = false;
         }
-        //Create package to send
-        ArrayList args = new ArrayList {
-                "UI", "None", "BatteryManager", Mathf.RoundToInt(batteryPercent),
-        };
-        _playerController.SendMessage(args);
+        OnBatteryPercentageChanged?.Invoke(Mathf.RoundToInt(batteryPercent));
     }
 
     /// <summary>
