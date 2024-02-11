@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 6340417874888935764}
   - component: {fileID: 3900557350980222055}
   m_Layer: 5
-  m_Name: Platinum Requirement
+  m_Name: Tungsten Requirement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -193,14 +193,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.74509805, g: 0.74509805, b: 0.7137255, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2135585597343286014, guid: 5aa8b770bc43046bc8d993d0d5b7f4a5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3d75b6fd428fc9748b00f9f66e5578fa, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
