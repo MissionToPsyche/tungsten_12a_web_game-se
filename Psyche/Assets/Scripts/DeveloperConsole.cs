@@ -1,9 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading;
 using UnityEngine;
 using Unity.Profiling;
 
@@ -11,22 +8,95 @@ public class DeveloperConsole : MonoBehaviour
 {
     //Private variables
     private GameController _gameController;
-    private Dictionary<string, Action<ArrayList>> _commandRegistry; //stores commands
     private float _updateTimerDefault;
     private float _updateTimer;
-    private int _processorCount;
-    private float _cpuUsage;
-    private Thread _cpuThread;
     private ProfilerRecorder _totalUsedMemory;
-    private ProfilerRecorder _mainThread;
-    private Queue<double> _frameTimes;
-    private const int _frameSampleSize = 100;
-
-    
 
     //Events Declaration
-    public event Action<string> OnDevConsoleUIUpdate;  //dev console updates UI
-    public event Action<string, string> OnDevConsolePlayerSet; //player controller changes
+    private Dictionary<EventSource, bool> _eventSubscriptions = new Dictionary<EventSource, bool>
+    {
+        { EventSource.UI, false },
+    };
+    private Dictionary<DevConsoleCommand, bool> _toggledElements = new Dictionary<DevConsoleCommand, bool>()
+    {
+        { DevConsoleCommand.FPS, false }, { DevConsoleCommand.RESOURCE_MONITOR, false },
+    };
+    public event Action<ArrayList>                          OnDevConsoleUIUpdate;               // Updating the UI communication
+    public event Action<InventoryManager.Element, ushort>   OnDevConsoleInventorySetElement;    // Inventory changes -- Element
+    public event Action<InventoryManager.Tool, bool>        OnDevConsoleInventorySetTool;       // Inventory Changes -- Tool
+    public event Action<string>                             OnDevConsoleTransition;             // Transition scenes
+
+    private enum EventSource
+    {
+        UI,
+    }
+
+    // Enum for Commands
+    public enum DevConsoleCommand
+    {
+        TOGGLE,             // For Updating UI Controller && Intaking commands
+        SET,                // Intaking command
+        UPDATE,             // For Updating the UIController
+
+        SCENE,              // Changing the scene
+        ELEMENT,            // Setting the element amount
+        TOOL,               // Enabling or disabling a tool
+
+        FPS,                // Toggle FPS on and off
+        RESOURCE_MONITOR,   // Resource monitor
+
+        ERROR,              // Invalid command passed
+    }
+
+    /// <summary>
+    /// For translating between the given command (enum / short) and its respective string
+    /// </summary>
+    /// <param name="command"></param>
+    /// <returns></returns>
+    public string Match(DevConsoleCommand command)
+    {
+        switch (command)
+        {
+            case DevConsoleCommand.TOGGLE:              return "toggle";
+            case DevConsoleCommand.SET:                 return "set";
+            case DevConsoleCommand.UPDATE:              return "update";
+
+            case DevConsoleCommand.SCENE:               return "scene";
+            case DevConsoleCommand.ELEMENT:             return "element";
+            case DevConsoleCommand.TOOL:                return "tool";
+
+                    
+            case DevConsoleCommand.FPS:                 return "fps";
+            case DevConsoleCommand.RESOURCE_MONITOR:    return "resource_monitor";
+
+            default: return null;
+        }
+    }
+
+    /// <summary>
+    /// For translating between the given command (string) and its respective enum / short
+    /// </summary>
+    /// <param name="command"></param>
+    /// <returns></returns>
+    public DevConsoleCommand Match(string command)
+    {
+        switch (command.ToLower())
+        {
+            case "toggle":              return DevConsoleCommand.TOGGLE;
+            case "set":                 return DevConsoleCommand.SET;
+            case "update":              return DevConsoleCommand.UPDATE;
+
+            case "scene":               return DevConsoleCommand.SCENE;
+            case "element":             return DevConsoleCommand.ELEMENT;
+            case "tool":                return DevConsoleCommand.TOOL;
+
+            case "fps":                 return DevConsoleCommand.FPS;
+            case "resource_monitor":    return DevConsoleCommand.RESOURCE_MONITOR;
+
+            default:                    return DevConsoleCommand.ERROR;
+        }
+    }
+
 
     /// <summary>
     /// Creates the script
@@ -35,26 +105,20 @@ public class DeveloperConsole : MonoBehaviour
     public void Initialize(GameController gameController)
     {
         _gameController = gameController;
-        _commandRegistry = new Dictionary<string, Action<ArrayList>>()
-        {
-            { "toggle", HandleToggle },
-            { "set", HandleSet },
-        };
+        
+        // FPS timer
         _updateTimerDefault = 0.5f;  //every 1/2 second
         _updateTimer = _updateTimerDefault;
-        _cpuUsage = 0f;
-        _cpuThread = new Thread(MaintainQueue);
-        _processorCount = SystemInfo.processorCount;
+        
+        // RAM tracker
         _totalUsedMemory = ProfilerRecorder.StartNew(ProfilerCategory.Memory, "Total Used Memory");
-        _mainThread = ProfilerRecorder.StartNew(ProfilerCategory.Internal, "Main Thread");
-        _frameTimes = new Queue<double>();
-
-        _cpuThread.Start();
+        
+        // Load the event messaging
+        _gameController.sceneTransitionManager.LoadDevConsole();
     }
 
     private void OnDestroy()
     {
-        _cpuThread?.Abort();
         _totalUsedMemory.Dispose();
     }
 
@@ -63,42 +127,51 @@ public class DeveloperConsole : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        _frameTimes.Enqueue(_mainThread.LastValue);
-        //Update once every _updateTimerDefault seconds
-        _updateTimer -= Time.deltaTime;
-
-        if (_updateTimer <= 0f)
+        // Load the UI events when active
+        if (!_eventSubscriptions[EventSource.UI] && UIController.Instance != null)
         {
-            //create package to sender
-            ArrayList args = new ArrayList {
-                "UI", "None", "DeveloperConsole", "update",
-                CalculateFPS().ToString(),  Math.Round(CalculateCPU()).ToString(), CalculateRAM(),
-            };
-            //Send the message
-            _gameController.SendMessage(args);
-            _updateTimer = _updateTimerDefault; //reset back to default
+            LoadUI();
         }
+        // Only perform calculations if necessary
+        if (_eventSubscriptions[EventSource.UI]) 
+        {
+            //Update once every _updateTimerDefault seconds
+            _updateTimer -= Time.deltaTime;
+            if (_updateTimer <= 0f)
+            {
+                double fps = (_toggledElements[DevConsoleCommand.FPS]) ? CalculateFPS() : 0.0f;
+                double ram = (_toggledElements[DevConsoleCommand.RESOURCE_MONITOR]) ? CalculateRAM() : 0.0f;
+                //create package to sender
+                ArrayList args = new ArrayList {
+                    DevConsoleCommand.UPDATE, fps,  ram,
+                };
+                //Send the message
+                OnDevConsoleUIUpdate?.Invoke(args);
+                _updateTimer = _updateTimerDefault; //reset back to default
+            }
+        }
+        
+
+        
     }
 
+    /// <summary>
+    /// Load the UI-based events
+    /// </summary>
+    private void LoadUI()
+    {
+        UIController.Instance.OnUpdateUIToDevConsole += HandleCommands;
+        _eventSubscriptions[EventSource.UI] = true;
+    }
 
     /// <summary>
-    /// General Event intake manager
-    /// - args[0] = source
+    /// Upon disable, unsubscribe to all events
     /// </summary>
-    /// <param name="args"></param>
-    public void IntakeEvents(ArrayList args)
+    private void OnDisable()
     {
-        string source = args[0].ToString();
-        args.RemoveAt(0);
-
-        switch(source)
+        if (UIController.Instance != null)
         {
-            case "UI":
-                HandleCommands(args); 
-                break;
-            default:
-                UnityEngine.Debug.Log("Incorrect source -- DevConsole");
-                break;
+            UIController.Instance.OnUpdateUIToDevConsole -= HandleCommands;
         }
     }
 
@@ -108,35 +181,112 @@ public class DeveloperConsole : MonoBehaviour
     /// <param name="commands"></param>
     public void HandleCommands(ArrayList commands)
     {
-        if (!_commandRegistry.ContainsKey(commands[0].ToString()))
+        var command = Match(commands[0].ToString());
+        
+        switch (command)
         {
-            UnityEngine.Debug.Log("Incorrect command passed to console -- DevConsole");
-            return;
+            case DevConsoleCommand.TOGGLE:
+                // Update the currently toggled item(s)
+                DevConsoleCommand item = Match(commands[1].ToString());
+                if (item == DevConsoleCommand.FPS || item == DevConsoleCommand.RESOURCE_MONITOR)
+                {
+                    _toggledElements[item] = !_toggledElements[item];
+                }
+
+                // Update the UI console
+                OnDevConsoleUIUpdate?.Invoke(commands);
+                break;
+            case DevConsoleCommand.SET:
+                var sub_command = Match(commands[1].ToString());
+                switch (sub_command)
+                {
+                    // Element Manipulation
+                    case DevConsoleCommand.ELEMENT:
+                        // Check for a valid element being passed
+                        var element = PlayerController.Instance.inventoryManager.MatchElement(commands[2].ToString());
+                        if (element == InventoryManager.Element.None)
+                        {
+                            Debug.Log($"Invalid element name: {commands[2]}");
+                            return;
+                        }
+
+                        // Check for a valid amount being passed
+                        ushort amount;
+                        if (!ushort.TryParse(commands[3].ToString(), out amount))
+                        {
+                            Debug.Log($"Invalid amount provided: {commands[3]}");
+                            return;
+                        }
+                        OnDevConsoleInventorySetElement?.Invoke(element, amount); //PlayerController.Instance.inventoryManager.SetElement(element, amount);
+                        break;
+
+
+                    // Tool Manipulation
+                    case DevConsoleCommand.TOOL:
+                        // Check for valid tool being passed
+                        InventoryManager.Tool tool = PlayerController.Instance.inventoryManager.MatchTool(commands[2].ToString());
+                        if (tool == InventoryManager.Tool.None)
+                        {
+                            Debug.Log($"Invalid tool name {commands[2]}");
+                            return;
+                        }
+
+                        // Check for valid value being passed
+                        bool value;
+                        if (!bool.TryParse(commands[3].ToString(), out value))
+                        {
+                            Debug.Log($"Invalid value passed {commands[3]}");
+                            return;
+                        }
+                        // Update the Inventory Manager
+                        OnDevConsoleInventorySetTool?.Invoke(tool, true);
+
+                        // Update the specific tool itself
+                        switch (tool)
+                        {
+                            case InventoryManager.Tool.SPECTROMETER:
+                                // Currently nothing to do here
+                                break;
+                            case InventoryManager.Tool.BATTERY:
+                                PlayerController.Instance.batteryManager.toolEnabled = value;
+                                break;
+                            case InventoryManager.Tool.THRUSTER:
+                                PlayerController.Instance.thrusterManager.toolEnabled = value;
+                                break;
+                            case InventoryManager.Tool.ELECTROMAGNET:
+                                PlayerController.Instance.eMagnetManager.toolEnabled = value;
+                                PlayerController.Instance.eMagnetActive = value;
+                                break;
+                            default:
+                                Debug.Log($"You somehow broke existence -- DeveloperConsole: {tool}");
+                                break;
+                        }
+                        break;
+
+
+                    // Scene Manipulation
+                    case DevConsoleCommand.SCENE:
+                        // Adhoc, convert the scene to enum then back to string until transitioned over to enum passing
+                        string scene = GameController.Instance.gameStateManager.MatchScene(GameController.Instance.gameStateManager.MatchScene(commands[2].ToString()));
+                        GameController.Instance.sceneTransitionManager.devControl = true;
+                        OnDevConsoleTransition?.Invoke((commands.Count > 3) ? scene + " " + commands[3].ToString() : scene);
+                        break;
+                    default:
+                        Debug.Log(
+                            $"Incorrect command passed {commands[1]}\n" + 
+                            "Please ensure the correct syntax is used: `set <type> <item> <optional: value>`");
+                        break;
+                }
+                break;
+            default:
+                Debug.Log(
+                    "Incorrect command passed to console -- DevConsole\n" + 
+                    "Commands:\n" +
+                    "\tset <type> <item> <optional: value> || e.g. `set scene thruster` or `set element copper 15`" +
+                    "\ttoggle <console_item> <value>       || e.g. `toggle fps on`"
+                    );
+                break;
         }
-        _commandRegistry[commands[0].ToString()].Invoke(commands);
-    }
-
-    /// <summary>
-    /// Handles toggling UI components on and off
-    /// </summary>
-    /// <param name="commands"></param>
-    private void HandleToggle(ArrayList commands)
-    {
-        string[] package = { "UI", "None", "DeveloperConsole" }; //receiver address
-        commands.InsertRange(0, package);
-        _gameController.SendMessage(commands);  //send to event emitter in controller class
-    }
-
-    /// <summary>
-    /// Handles setting variable values
-    /// - set [tool/item] [value]
-    /// </summary>
-    /// <param name="commands"></param>
-    private void HandleSet(ArrayList commands)
-    {
-        string[] package = { "Player", "InventoryManager", "DeveloperConsole" };
-        commands.InsertRange(0, package);
-        _gameController.SendMessage(commands);
     }
 
     /// <summary>
@@ -146,24 +296,6 @@ public class DeveloperConsole : MonoBehaviour
     private double CalculateFPS()
     {
         return Math.Round(1.0f / Time.unscaledDeltaTime);
-        
-    }
-
-    private void MaintainQueue()
-    {
-        while(_frameTimes.Count > _frameSampleSize)
-        {
-            _frameTimes.Dequeue();
-        }
-    }
-
-    /// <summary>
-    /// Calculates the ms per frame to show general CPU usage
-    /// </summary>
-    /// <returns></returns>
-    private double CalculateCPU()
-    {
-        return ((_frameTimes.Average() / TimeSpan.TicksPerMillisecond) / 1000) * _processorCount * 2;
     }
 
     /// <summary>

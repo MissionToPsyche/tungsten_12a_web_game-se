@@ -70,6 +70,9 @@ public class Tool_Intro_eMagnetState : BaseState
         SaveState();
     }
 
+    /// <summary>
+    /// Loads the specific state for this scene
+    /// </summary>
     public override void LoadState()
     {
         
