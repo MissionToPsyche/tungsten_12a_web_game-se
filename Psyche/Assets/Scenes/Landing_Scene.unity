@@ -437,6 +437,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cave - GRS
       objectReference: {fileID: 0}
+    - target: {fileID: 6813600720024782082, guid: e741af7aeecf1c0448c6a06b5ba4dae9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8140704363619917703, guid: e741af7aeecf1c0448c6a06b5ba4dae9, type: 3}
       propertyPath: m_TagString
       value: TransitionObjectOut
@@ -8016,6 +8020,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cave - Thruster
       objectReference: {fileID: 0}
+    - target: {fileID: 6285789237075819869, guid: cad7e5c12c64a524a94bb572030aceb2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9057,6 +9065,7 @@ PrefabInstance:
     - target: {fileID: 5206272030992973708, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -285
+      objectReference: {fileID: 0}
     - target: {fileID: 5268035936328053855, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -9225,8 +9234,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -285
       objectReference: {fileID: 0}
-    - target: {fileID: 7762610803507589029, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
-      propertyPath: m_IsActive
     - target: {fileID: 7579651259427418555, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -9242,6 +9249,10 @@ PrefabInstance:
     - target: {fileID: 7579651259427418555, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
       propertyPath: m_Color.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7762610803507589029, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: m_IsActive
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8251493781545744649, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -9658,6 +9669,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cave - eMagnet
       objectReference: {fileID: 0}
+    - target: {fileID: 668217784143550444, guid: da500e8a41a4ecb4a8ddae5e4385a3e1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3207364841169034938, guid: da500e8a41a4ecb4a8ddae5e4385a3e1, type: 3}
       propertyPath: m_TagString
       value: TransitionObjectOut
@@ -9816,6 +9831,10 @@ PrefabInstance:
     - target: {fileID: 7538349817756258560, guid: 5864da62f3707884fb92d363727b8ad3, type: 3}
       propertyPath: m_Name
       value: Cave - Combo2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7538349817756258560, guid: 5864da62f3707884fb92d363727b8ad3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10197,6 +10216,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cave - Landing Scene
       objectReference: {fileID: 0}
+    - target: {fileID: 5666342324802452795, guid: 10a784b2e24e2ff4fb82ba9c1791fe76, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7011322653073188024, guid: 10a784b2e24e2ff4fb82ba9c1791fe76, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.147
@@ -10335,6 +10358,10 @@ PrefabInstance:
     - target: {fileID: 7538349817756258560, guid: 5864da62f3707884fb92d363727b8ad3, type: 3}
       propertyPath: m_Name
       value: Cave - Imager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7538349817756258560, guid: 5864da62f3707884fb92d363727b8ad3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10851,6 +10878,10 @@ PrefabInstance:
     - target: {fileID: 9029584228824222437, guid: 0c9f651b3c2c7c041980106d767271df, type: 3}
       propertyPath: m_Name
       value: Cave - Tool_Comb_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9029584228824222437, guid: 0c9f651b3c2c7c041980106d767271df, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
