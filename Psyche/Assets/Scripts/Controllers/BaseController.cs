@@ -74,15 +74,4 @@ public abstract class BaseController<T> : MonoBehaviour where T : BaseController
             Destroy(gameObject);
         }
     }
-
-
-    //======================================================== Events ========================================================
-
-
-    /// <summary>
-    /// Default event invokation
-    /// </summary>
-    public abstract void SendMessage(ArrayList args);
-
-    protected abstract void ReceiveMessage(ArrayList args);
 }
