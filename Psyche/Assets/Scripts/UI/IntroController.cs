@@ -40,7 +40,7 @@ public class IntroController : MonoBehaviour
                 case 4:
                     curScreen++;
                     intro4.SetActive(false);
-                    intro5.setActive(true);
+                    intro5.SetActive(true);
                     break;
                     
                 default:
