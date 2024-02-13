@@ -120,10 +120,7 @@ public class PlayerDeath : MonoBehaviour {
         if (startPoint.Equals(respawnPoint)) {
             //UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
             //changed so that camera bounds would load on player repawn
-            ArrayList args = new ArrayList {
-                "Game", "SceneManager", "PlayerController", UnityEngine.SceneManagement.SceneManager.GetActiveScene().name
-            };
-            PlayerController.Instance.SendMessage(args);
+            StartCoroutine(GameController.Instance.sceneTransitionManager.CheckTransition(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name));
         }
 
         //move the player to their respawn point
