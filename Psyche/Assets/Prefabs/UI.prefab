@@ -11181,7 +11181,7 @@ MonoBehaviour:
   ironAmount: {fileID: 6431885918900782405}
   nickelAmount: {fileID: 903025045502692378}
   goldAmount: {fileID: 8007290144947837668}
-  platinumAmount: {fileID: 5298505535930295765}
+  tungstenAmount: {fileID: 0}
   thrusterLevel: {fileID: 226551695672639381}
   eMagnetLevel: {fileID: 8814816173545063682}
   batteryLevel: {fileID: 6167591648291657674}
@@ -11194,7 +11194,7 @@ MonoBehaviour:
   ironRequirement: {fileID: 2850205873335233286, guid: 3a27aade1ce85234fbe617eee553e116, type: 3}
   nickelRequirement: {fileID: 2850205873335233286, guid: 9558605f13074444c9340ac3f9455f13, type: 3}
   goldRequirement: {fileID: 2850205873335233286, guid: d6e7842f886383142a13f3eb06f66078, type: 3}
-  platinumRequirement: {fileID: 2850205873335233286, guid: 124b62663e7d6664ebcb592ffa367a8d, type: 3}
+  tungstenRequirement: {fileID: 2850205873335233286, guid: 124b62663e7d6664ebcb592ffa367a8d, type: 3}
 --- !u!1 &5624132768119358631
 GameObject:
   m_ObjectHideFlags: 0
