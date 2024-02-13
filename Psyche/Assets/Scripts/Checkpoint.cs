@@ -40,7 +40,7 @@ public class Checkpoint : MonoBehaviour
             Scene scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
             if (scene.name == "Tool_Intro_eMagnet") 
             {
-                GameController.Instance.gameStateManager.SaveSceneState(GameStateManager.GameState.InGame, GameStateManager.Scene.Tool_Intro_eMagnet);
+                GameController.Instance.gameStateManager.SaveSceneState();
             }
         }
     }

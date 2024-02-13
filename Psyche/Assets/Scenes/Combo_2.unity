@@ -538,6 +538,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4177737924768369505, guid: 10a784b2e24e2ff4fb82ba9c1791fe76, type: 3}
+      propertyPath: m_Name
+      value: Landing_Scene In
+      objectReference: {fileID: 0}
+    - target: {fileID: 4177737924768369505, guid: 10a784b2e24e2ff4fb82ba9c1791fe76, type: 3}
       propertyPath: m_TagString
       value: TransitionObjectOut
       objectReference: {fileID: 0}
@@ -49871,6 +49875,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4177737924768369505, guid: 10a784b2e24e2ff4fb82ba9c1791fe76, type: 3}
+      propertyPath: m_Name
+      value: Landing_Scene In
+      objectReference: {fileID: 0}
     - target: {fileID: 4177737924768369505, guid: 10a784b2e24e2ff4fb82ba9c1791fe76, type: 3}
       propertyPath: m_TagString
       value: TransitionObjectIn

@@ -139,7 +139,11 @@ public class InventoryManager : MonoBehaviour
     /// </summary>
     private void OnEnable()
     {
-        //UIController.Instance.OnUpdateInventoryUpdate += //Insert Correct function here
+        if (GameController.Instance != null && GameController.Instance.developerConsole != null)
+        {
+            GameController.Instance.developerConsole.OnDevConsoleInventorySetElement += SetElement;
+            GameController.Instance.developerConsole.OnDevConsoleInventorySetTool += SetTool;
+        }
     }
 
     /// <summary>
@@ -147,26 +151,10 @@ public class InventoryManager : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        if (UIController.Instance != null)
+        if (GameController.Instance != null)
         {
-            //UIController.Instance.OnUpdateInventoryUpdate += //Insert Correct function here
-        }
-    }
-
-    public void ReceiveMessage(ArrayList args)  /////////////////////////////////////////////////////////////////////////////
-    {
-        string item = args[2].ToString().ToLower();
-        if(_tools.ContainsKey(item))
-        {
-            SetTool(item, bool.Parse(args[3].ToString()));
-        } 
-        else if (_elements.ContainsKey(item))
-        {
-            SetElement(item, ushort.Parse(args[3].ToString())) ;
-        }
-        else
-        {
-            Debug.Log("Incorrect item name passed -- InventoryManager");
+            GameController.Instance.developerConsole.OnDevConsoleInventorySetElement -= SetElement;
+            GameController.Instance.developerConsole.OnDevConsoleInventorySetTool -= SetTool;
         }
     }
 
