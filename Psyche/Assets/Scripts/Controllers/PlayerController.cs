@@ -34,6 +34,7 @@ public class PlayerController : BaseController<PlayerController>
 
     //Management scripts
     [Header("Scripts")]
+    private PlayerCollisionManager _playerCollisionManager;
     public PlayerHealth playerHealth;
     public BatteryManager batteryManager;
     public PlayerMovement playerMovement;
@@ -63,7 +64,7 @@ public class PlayerController : BaseController<PlayerController>
         playerCollider = GetComponent<BoxCollider2D>();
         playerMovement = GetComponent<PlayerMovement>();
         playerMovement.Initialize(this);
-        // ##### Tool Managers #####
+        // ##### Managers #####
         batteryManager = GetComponent<BatteryManager>();
         batteryManager.Initialize(this);
         thrusterManager = GetComponent<ThrusterManager>();
@@ -73,6 +74,8 @@ public class PlayerController : BaseController<PlayerController>
         imagerManager = GetComponent<ImagerManager>();
         imagerManager.Initialize(this);
         // ##### Object Managers ######
+        _playerCollisionManager = GetComponent<PlayerCollisionManager>();
+        _playerCollisionManager.Initialize(this);
         //playerHealth.Initialize(this); <-- this initializes the script and creates a cross reference between the two
         // ##### Miscellaneous ######
         //sceneTransition = GetComponent<SceneManager>();
