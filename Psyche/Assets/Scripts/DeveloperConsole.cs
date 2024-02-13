@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Profiling;
-using Unity.VisualScripting;
 
 public class DeveloperConsole : MonoBehaviour
 {
@@ -14,25 +13,39 @@ public class DeveloperConsole : MonoBehaviour
     private ProfilerRecorder _totalUsedMemory;
 
     //Events Declaration
-    public event Action<ArrayList>      OnDevConsoleUIUpdate;       // Updating the UI communication
-    public event Action<string, string> OnDevConsolePlayerSet; // Player controller changes
-    public event Action<ArrayList>      OnDevConsoleSceneSet;       // Setting the scene
+    private Dictionary<EventSource, bool> _eventSubscriptions = new Dictionary<EventSource, bool>
+    {
+        { EventSource.UI, false },
+    };
+    private Dictionary<DevConsoleCommand, bool> _toggledElements = new Dictionary<DevConsoleCommand, bool>()
+    {
+        { DevConsoleCommand.FPS, false }, { DevConsoleCommand.RESOURCE_MONITOR, false },
+    };
+    public event Action<ArrayList>                          OnDevConsoleUIUpdate;               // Updating the UI communication
+    public event Action<InventoryManager.Element, ushort>   OnDevConsoleInventorySetElement;    // Inventory changes -- Element
+    public event Action<InventoryManager.Tool, bool>        OnDevConsoleInventorySetTool;       // Inventory Changes -- Tool
+    public event Action<string>                             OnDevConsoleTransition;             // Transition scenes
+
+    private enum EventSource
+    {
+        UI,
+    }
 
     // Enum for Commands
     public enum DevConsoleCommand
     {
-        TOGGLE,  // For Updating UI Controller && Intaking commands
-        SET,     // Intaking command
-        UPDATE,  // For Updating the UIController
+        TOGGLE,             // For Updating UI Controller && Intaking commands
+        SET,                // Intaking command
+        UPDATE,             // For Updating the UIController
 
-        SCENE,
-        ELEMENT,
-        TOOL,
+        SCENE,              // Changing the scene
+        ELEMENT,            // Setting the element amount
+        TOOL,               // Enabling or disabling a tool
 
-        FPS,
-        RESOURCE_MONITOR,
+        FPS,                // Toggle FPS on and off
+        RESOURCE_MONITOR,   // Resource monitor
 
-        ERROR,
+        ERROR,              // Invalid command passed
     }
 
     /// <summary>
@@ -92,9 +105,16 @@ public class DeveloperConsole : MonoBehaviour
     public void Initialize(GameController gameController)
     {
         _gameController = gameController;
+        
+        // FPS timer
         _updateTimerDefault = 0.5f;  //every 1/2 second
         _updateTimer = _updateTimerDefault;
+        
+        // RAM tracker
         _totalUsedMemory = ProfilerRecorder.StartNew(ProfilerCategory.Memory, "Total Used Memory");
+        
+        // Load the event messaging
+        _gameController.sceneTransitionManager.LoadDevConsole();
     }
 
     private void OnDestroy()
@@ -107,26 +127,46 @@ public class DeveloperConsole : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        //Update once every _updateTimerDefault seconds
-        _updateTimer -= Time.deltaTime;
-
-        if (_updateTimer <= 0f)
+        // Load the UI events when active
+        if (!_eventSubscriptions[EventSource.UI] && UIController.Instance != null)
         {
-            //create package to sender
-            ArrayList args = new ArrayList {
-                DevConsoleCommand.UPDATE, CalculateFPS().ToString(),  CalculateRAM(),
-            };
-            //Send the message
-            OnDevConsoleUIUpdate(args);
-            _updateTimer = _updateTimerDefault; //reset back to default
+            LoadUI();
         }
+        // Only perform calculations if necessary
+        if (_eventSubscriptions[EventSource.UI]) 
+        {
+            //Update once every _updateTimerDefault seconds
+            _updateTimer -= Time.deltaTime;
+            if (_updateTimer <= 0f)
+            {
+                double fps = (_toggledElements[DevConsoleCommand.FPS]) ? CalculateFPS() : 0.0f;
+                double ram = (_toggledElements[DevConsoleCommand.RESOURCE_MONITOR]) ? CalculateRAM() : 0.0f;
+                //create package to sender
+                ArrayList args = new ArrayList {
+                    DevConsoleCommand.UPDATE, fps,  ram,
+                };
+                //Send the message
+                OnDevConsoleUIUpdate?.Invoke(args);
+                _updateTimer = _updateTimerDefault; //reset back to default
+            }
+        }
+        
+
+        
     }
 
-    private void OnEnable()
+    /// <summary>
+    /// Load the UI-based events
+    /// </summary>
+    private void LoadUI()
     {
         UIController.Instance.OnUpdateUIToDevConsole += HandleCommands;
+        _eventSubscriptions[EventSource.UI] = true;
     }
 
+    /// <summary>
+    /// Upon disable, unsubscribe to all events
+    /// </summary>
     private void OnDisable()
     {
         if (UIController.Instance != null)
@@ -146,7 +186,15 @@ public class DeveloperConsole : MonoBehaviour
         switch (command)
         {
             case DevConsoleCommand.TOGGLE:
-                OnDevConsoleUIUpdate(commands);
+                // Update the currently toggled item(s)
+                DevConsoleCommand item = Match(commands[1].ToString());
+                if (item == DevConsoleCommand.FPS || item == DevConsoleCommand.RESOURCE_MONITOR)
+                {
+                    _toggledElements[item] = !_toggledElements[item];
+                }
+
+                // Update the UI console
+                OnDevConsoleUIUpdate?.Invoke(commands);
                 break;
             case DevConsoleCommand.SET:
                 var sub_command = Match(commands[1].ToString());
@@ -169,14 +217,14 @@ public class DeveloperConsole : MonoBehaviour
                             Debug.Log($"Invalid amount provided: {commands[3]}");
                             return;
                         }
-                        PlayerController.Instance.inventoryManager.SetElement(element, amount);
+                        OnDevConsoleInventorySetElement?.Invoke(element, amount); //PlayerController.Instance.inventoryManager.SetElement(element, amount);
                         break;
 
 
                     // Tool Manipulation
                     case DevConsoleCommand.TOOL:
                         // Check for valid tool being passed
-                        var tool = PlayerController.Instance.inventoryManager.MatchTool(commands[2].ToString());
+                        InventoryManager.Tool tool = PlayerController.Instance.inventoryManager.MatchTool(commands[2].ToString());
                         if (tool == InventoryManager.Tool.None)
                         {
                             Debug.Log($"Invalid tool name {commands[2]}");
@@ -191,7 +239,7 @@ public class DeveloperConsole : MonoBehaviour
                             return;
                         }
                         // Update the Inventory Manager
-                        PlayerController.Instance.inventoryManager.SetTool(tool, true);
+                        OnDevConsoleInventorySetTool?.Invoke(tool, true);
 
                         // Update the specific tool itself
                         switch (tool)
@@ -220,15 +268,8 @@ public class DeveloperConsole : MonoBehaviour
                     case DevConsoleCommand.SCENE:
                         // Adhoc, convert the scene to enum then back to string until transitioned over to enum passing
                         string scene = GameController.Instance.gameStateManager.MatchScene(GameController.Instance.gameStateManager.MatchScene(commands[2].ToString()));
-                        GameController.Instance.sceneManager.devControl = true;
-
-                        StartCoroutine(GameController.Instance.sceneManager.CheckTransition(
-                            scene,
-                            (commands.Count <= 3) ? "TransitionObjectIn" : commands[3].ToString().ToLower() switch
-                        {
-                            "out" => "TransitionObjectOut",
-                            _ => "TransitionObjectIn"
-                        }));
+                        GameController.Instance.sceneTransitionManager.devControl = true;
+                        OnDevConsoleTransition?.Invoke((commands.Count > 3) ? scene + " " + commands[3].ToString() : scene);
                         break;
                     default:
                         Debug.Log(

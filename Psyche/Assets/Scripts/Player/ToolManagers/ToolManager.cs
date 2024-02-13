@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,15 @@ public abstract class ToolManager : MonoBehaviour
 
     public bool toolEnabled;
 
+    public enum ToolDirective
+    {
+        Upgrade, 
+        Info,
+    }
+
+    // Events
+    public event Action<ToolDirective, bool, string, Dictionary<string, ushort>, int> ToolManagerUpdate;
+
     /// <summary>
     /// Enables the tool
     /// </summary>
@@ -26,6 +36,7 @@ public abstract class ToolManager : MonoBehaviour
         ArrayList args = new ArrayList {
                 "UI", "None", "ToolManager", "ToolInfo", "info", false, levelRequirements[level+1],
         };
+        ToolManagerUpdate?.Invoke(ToolDirective.Info, false, toolName, levelRequirements[level + 1], level + 1);
     }
 
     /// <summary>
@@ -43,6 +54,7 @@ public abstract class ToolManager : MonoBehaviour
     /// </summary>
     public void Modify()
     {
+        //int newLevel = level + 1;
         //Create package to send to UI to upgrade interface
         ArrayList args = new ArrayList {
                 "UI", "None", "ToolManager", "ToolInfo", "upgrade",
@@ -59,8 +71,8 @@ public abstract class ToolManager : MonoBehaviour
                 }
             }
         }
-        args.Add(upgraded);
-        args.Add(toolName);
+        //args.Add(upgraded);
+        //args.Add(toolName);
         //Confirm the number of required elements exists
         if (upgraded)
         {
@@ -75,12 +87,13 @@ public abstract class ToolManager : MonoBehaviour
             //Upgrade the tool
             level++;
             UpgradeTool();
-            args.Add(levelRequirements[level + 1]);
+            //args.Add(levelRequirements[newLevel]);
         } else
         {
-            args.Add(levelRequirements[level + 1]);
+            //args.Add(levelRequirements[newLevel]);
         }
-        args.Add(level + 1);
-        _playerController.SendMessage(args);
+        //args.Add(level + 1);
+        ToolManagerUpdate?.Invoke(ToolDirective.Upgrade, upgraded, toolName, levelRequirements[level + 1], level + 1);
+        //_playerController.SendMessage(args);
     }
 }
