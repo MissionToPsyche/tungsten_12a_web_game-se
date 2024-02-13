@@ -36,14 +36,18 @@ public class IntroController : MonoBehaviour
                     intro3.SetActive(false);
                     intro4.SetActive(true);
                     break;
+                
                 case 4:
                     curScreen++;
                     intro4.SetActive(false);
-                    intro5.SetActive(true);
+                    intro5.setActive(true);
                     break;
-
+                    
                 default:
-                    UnityEngine.SceneManagement.SceneManager.LoadScene("Landing_Scene");
+                    // Set the value this way so if any changes are made they are accounted for
+                    string scene = GameController.Instance.gameStateManager.MatchScene(GameStateManager.Scene.Landing_Scene);
+                    GameController.Instance.sceneTransitionManager.devControl = true;
+                    GameController.Instance.sceneTransitionManager.OnInitiateTransition(scene);
                     break;
             }
         }
