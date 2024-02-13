@@ -16,8 +16,9 @@ public class InventoryManager : MonoBehaviour
     private Dictionary<Element, ushort> _elements2;
 
     // Events
-    public event Action<ArrayList> OnUpdateInventoryTool;
-    public event Action<ArrayList> OnUpdateInventoryElement;
+    public event Action<ArrayList>      OnUpdateInventoryTool;
+    public event Action<ArrayList>      OnUpdateInventoryElement;
+    public event Action<string, object> SetObjectState;
 
     public enum Element
     {
@@ -59,6 +60,7 @@ public class InventoryManager : MonoBehaviour
     {
         IMAGER,
         BATTERY,
+        SOLARPANEL,
         SPECTROMETER,
         THRUSTER,
         ELECTROMAGNET,
@@ -72,7 +74,8 @@ public class InventoryManager : MonoBehaviour
         return tool.ToLower() switch
         {
             "imager"        => Tool.IMAGER,
-            "battery"       => Tool.BATTERY,
+            "battery"       or "battery pickup variant" => Tool.BATTERY,
+            "solarpanel"    or "soar panel pickup"      => Tool.SOLARPANEL,
             "spectrometer"  => Tool.SPECTROMETER,
             "thruster"      => Tool.THRUSTER,
             "electromagnet" => Tool.ELECTROMAGNET,
@@ -86,6 +89,7 @@ public class InventoryManager : MonoBehaviour
         {
             Tool.IMAGER         => "imager",
             Tool.BATTERY        => "battery",
+            Tool.SOLARPANEL     => "solarpanel",
             Tool.SPECTROMETER   => "spectrometer",
             Tool.THRUSTER       => "thruster",
             Tool.ELECTROMAGNET  => "electromagnet",
@@ -158,6 +162,62 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Activates tool when its pickup is collected
+    /// </summary>
+    /// <param name="toolName"></param>
+    public void ToolPickUp(string toolName)
+    {
+        Debug.Log($"{toolName}");
+        // Transition to this at some point
+        Tool tool = MatchTool(toolName);
+        if (tool == Tool.None)
+        {
+            Debug.Log($"Not a tool {toolName}");
+        }
+
+        if (tool != Tool.None && tool != Tool.BATTERY && tool != Tool.SOLARPANEL)
+        {
+            SetTool(tool, true);
+        }
+        ArrayList args = new ArrayList { toolName, true };
+        OnUpdateInventoryTool?.Invoke(args);
+        // Remove the object from the scene state
+        SetObjectState?.Invoke(toolName, false);
+        
+        //Other actions
+        switch (tool)
+        {
+            case Tool.SOLARPANEL:
+                _playerController.batteryManager.Enable();
+                SetTool(Tool.BATTERY, true);
+                break;
+
+            case Tool.THRUSTER:
+                _playerController.thrusterManager.Enable();
+                break;
+
+            case Tool.IMAGER:
+                _playerController.imagerManager.Enable();
+                break;
+
+            case Tool.SPECTROMETER:
+                break;
+
+            case Tool.ELECTROMAGNET:
+                _playerController.eMagnetManager.Enable();
+                break;
+
+            case Tool.BATTERY:
+                _playerController.batteryManager.ChargeBatt(500);
+                break;
+
+            default:
+                Debug.LogWarning("Tool name '" + toolName + "' not found!");
+                break;
+        }
+    }
+
     public void SetTool(Tool tool, bool value) // New version that uses enums in place of strings
     {
         if (tool == Tool.None) return;
@@ -166,7 +226,7 @@ public class InventoryManager : MonoBehaviour
         _tools[MatchTool(tool)] = value;
 
         ArrayList args = new ArrayList { MatchTool(tool), value };
-        OnUpdateInventoryTool.Invoke(args);
+        //OnUpdateInventoryTool?.Invoke(args);
     }
 
     /// <summary>
@@ -189,7 +249,7 @@ public class InventoryManager : MonoBehaviour
         //Send message to UI
         ArrayList args = new ArrayList { toolName, value };
         //Send the message
-        OnUpdateInventoryTool.Invoke(args);
+        OnUpdateInventoryTool?.Invoke(args);
     }
 
     /// <summary>

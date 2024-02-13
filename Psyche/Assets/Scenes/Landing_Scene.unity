@@ -8276,7 +8276,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4341645555283248702, guid: 928ca434870a0654e9ea5c8de8cba140, type: 3}
       propertyPath: m_Name
-      value: Battery Pickup Variant
+      value: Battery
+      objectReference: {fileID: 0}
+    - target: {fileID: 4341645555283248702, guid: 928ca434870a0654e9ea5c8de8cba140, type: 3}
+      propertyPath: m_TagString
+      value: Tool
       objectReference: {fileID: 0}
     - target: {fileID: 6969730462459996994, guid: 928ca434870a0654e9ea5c8de8cba140, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10711,11 +10715,11 @@ PrefabInstance:
       objectReference: {fileID: 1195215623}
     - target: {fileID: 4822381043481428571, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.24999991
+      value: -0.25
       objectReference: {fileID: 0}
     - target: {fileID: 4822381043481428571, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.576635
+      value: 0.625
       objectReference: {fileID: 0}
     - target: {fileID: 6787539359732067765, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10776,7 +10780,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2256284953869002401, guid: 4279c030866387f4a82ae42b380b6d37, type: 3}
       propertyPath: m_Name
-      value: Solar Panel Pickup
+      value: SolarPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 2256284953869002401, guid: 4279c030866387f4a82ae42b380b6d37, type: 3}
+      propertyPath: m_TagString
+      value: Tool
       objectReference: {fileID: 0}
     - target: {fileID: 4879092171002727389, guid: 4279c030866387f4a82ae42b380b6d37, type: 3}
       propertyPath: m_LocalPosition.x

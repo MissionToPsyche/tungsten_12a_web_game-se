@@ -6,9 +6,6 @@
 
 using UnityEngine;
 using System.Collections;
-using System;
-using static ToolManager;
-using System.Collections.Generic;
 
 /// <summary>
 /// Player Management script controls how the player interacts with the 
@@ -34,7 +31,7 @@ public class PlayerController : BaseController<PlayerController>
 
     //Management scripts
     [Header("Scripts")]
-    private PlayerCollisionManager _playerCollisionManager;
+    public PlayerCollisionManager playerCollisionManager;
     public PlayerHealth playerHealth;
     public BatteryManager batteryManager;
     public PlayerMovement playerMovement;
@@ -59,11 +56,14 @@ public class PlayerController : BaseController<PlayerController>
         //Initialize base
         base.Initialize();
 
+        
         //Assign and initialize scripts
         playerCharacter = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<BoxCollider2D>();
         playerMovement = GetComponent<PlayerMovement>();
         playerMovement.Initialize(this);
+        playerCollisionManager = GetComponent<PlayerCollisionManager>();
+        playerCollisionManager.Initialize(this);
         // ##### Managers #####
         batteryManager = GetComponent<BatteryManager>();
         batteryManager.Initialize(this);
@@ -74,15 +74,13 @@ public class PlayerController : BaseController<PlayerController>
         imagerManager = GetComponent<ImagerManager>();
         imagerManager.Initialize(this);
         // ##### Object Managers ######
-        _playerCollisionManager = GetComponent<PlayerCollisionManager>();
-        _playerCollisionManager.Initialize(this);
+
         //playerHealth.Initialize(this); <-- this initializes the script and creates a cross reference between the two
         // ##### Miscellaneous ######
-        //sceneTransition = GetComponent<SceneManager>();
-        //sceneTransition.Initialize(this);
-        deathCon = GetComponent<PlayerDeath>();
         inventoryManager = GetComponent<InventoryManager>();
         inventoryManager.Initialize(this);
+        deathCon = GetComponent<PlayerDeath>();
+
         //hides mouse cursor
         Cursor.visible = false;
 
@@ -200,9 +198,8 @@ public class PlayerController : BaseController<PlayerController>
 
     //======================================================== Events ========================================================
     
-    //Events definitions
-    public event Action<string>         InitiateTransition;
-    public event Action<string, object> SetObjectState;
+    // Events definitions
+    // ...
 
     void ModifyTool(ArrayList args)
     {
@@ -253,89 +250,7 @@ public class PlayerController : BaseController<PlayerController>
 
     //======================================================= Triggers =======================================================
 
-    /// <summary>
-    /// When the player is in range of a 2d collider, it will activate this function
-    /// </summary>
-    /// <param name="other"></param>
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        if (other.tag == "TransitionObjectIn" || other.tag ==  "TransitionObjectOut") //for Transition objects
-        {
-            InitiateTransition?.Invoke(other.name);
-        }
-    }
 
-    /// <summary>
-    /// When the player enters the 2D collider, this function is triggered
-    /// </summary>
-    /// <param name="other"></param>
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.tag == "Element") //for picking up the elements
-        {
-            inventoryManager.AddElement(other.name, 1);
-            Destroy(other.gameObject); //remove the element from the screen
-        }
-        /*
-        if (other.tag == "Tool")
-        {
-            ToolPickUp(other.name);
-            Destroy(other.gameObject);
-        }*/
-    }
-
-    /// <summary>
-    /// Activates tool when its pickup is collected
-    /// </summary>
-    /// <param name="toolName"></param>
-    public void ToolPickUp(string toolName)
-    {
-        // Transition to this at some point
-        var tool = inventoryManager.MatchTool(toolName);
-        SetObjectState?.Invoke(toolName, false);
-
-        //Other actions
-        switch (toolName)
-        {
-            case "SolarPanel":
-                batteryManager.Enable();
-                inventoryManager.SetTool("Battery", true);
-                break;
-
-            case "Thruster":
-                thrusterManager.Enable();
-                inventoryManager.SetTool(toolName, true);
-                break;
-
-            case "Imager":
-                imagerManager.Enable();
-                inventoryManager.SetTool(toolName, true);
-                break;
-
-            case "Spectrometer":
-                inventoryManager.SetTool(toolName, true);
-                break;
-
-            case "ElectroMagnet":
-                eMagnetManager.Enable();
-                inventoryManager.SetTool(toolName, true);
-                break;
-
-            case "Battery":
-                //batteryManager.Enable();
-                //inventoryManager.SetTool(toolName, true);
-                batteryManager.ChargeBatt(500);
-                break;
-
-            case "Health":
-                playerHealth.HealthUp(1);
-                break;
-
-            default:
-                Debug.LogWarning("Tool name '" + toolName + "' not found!");
-                break;
-        }
-    }
 
     /// <summary>
     /// Creates a cast from the groundcheck box object, attached to the player, pointing down.

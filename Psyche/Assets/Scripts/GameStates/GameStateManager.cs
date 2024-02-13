@@ -37,22 +37,19 @@ public class GameStateManager : MonoBehaviour
 
     public void LoadPlayer()
     {
-        PlayerController.Instance.SetObjectState += SetObjectState;
+        PlayerController.Instance.inventoryManager.SetObjectState += SetObjectState;
     }
 
     public void OnEnable()
     {
-        if (PlayerController.Instance != null)
-        {
-            LoadPlayer();
-        }
+
     }
 
     public void OnDisable()
     {
         if (PlayerController.Instance != null)
         {
-            PlayerController.Instance.SetObjectState -= SetObjectState;
+            PlayerController.Instance.inventoryManager.SetObjectState -= SetObjectState;
         }
     }
 
