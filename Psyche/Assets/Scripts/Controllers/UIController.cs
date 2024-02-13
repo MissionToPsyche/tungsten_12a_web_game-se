@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static ToolManager;
 
 /// <summary>
 /// Functions for the inventory and dialog box. Script is a component of the UI gameobject
@@ -31,6 +32,8 @@ public class UIController : BaseController<UIController>
         //Base class
         base.Initialize();
 
+        
+
         //DevConsole Objects
         _devConsolePanel = transform.Find("DevConsolePanel").gameObject;
         _devConsoleFPSPanel = transform.Find("DevConsoleFPSPanel").gameObject;
@@ -48,6 +51,9 @@ public class UIController : BaseController<UIController>
         _devConsoleFPSPanel.SetActive(false);
         _devConsoleResourcePanel.SetActive(false);
 
+        // Temporary workaround until UI issues fixed -- Tell GameController to load the UI event and DevConsole script
+        GameController.Instance.LoadUI();
+
         //Specific to this class
         _aspectRatio = (float)Screen.width / Screen.height;               //<-- Use this to adjust UI layout/positioning
 
@@ -64,15 +70,6 @@ public class UIController : BaseController<UIController>
     {
         base.Awake();
         Initialize();
-    }
-
-    /// <summary>
-    /// Runs just before first frame:
-    ///   - Empty
-    /// </summary>
-    public void Start()
-    {
-        //Insert logic
     }
 
     /// <summary>
@@ -125,102 +122,9 @@ public class UIController : BaseController<UIController>
     //======================================================== Events ========================================================
     
     //Events Declarations
-    public event Action<ArrayList> OnUpdateUIToGame;
-    public event Action<ArrayList> OnUpdateUIToPlayer;
-    public event Action<ArrayList> OnUpdateInventoryUpdate;
     public event Action<ArrayList> OnUpdateToolModify;      // Send Tool Modification requests to Inventory
 
     public event Action<ArrayList> OnUpdateUIToDevConsole;  // Send dev input commands to DevConsole
-
-    /// <summary>
-    /// Invokes events for this and any subclasses.
-    /// - Takes in an arraylist -- Requirements:
-    ///   - ArrayList[0] = destination
-    ///   - ArrayList[1] = subdesination
-    ///   - ArrayList[2] = source
-    /// </summary>
-    /// <param name="args"></param>
-    public override void SendMessage(ArrayList args)
-    {
-        string destination = args[0].ToString();
-        args.RemoveAt(0);
-
-        //Send out events depending on the invokee
-        switch (destination)
-        {
-            case "Game":
-                OnUpdateUIToGame?.Invoke(args);
-                break;
-            case "Player":
-                OnUpdateUIToPlayer?.Invoke(args);
-                break;
-            default:
-                Debug.Log("Incorrect invocation -- UIController");
-                break;
-        }
-    }
-
-    /// <summary>
-    /// Processes any event passed to this class
-    /// Requirements:
-    ///   - ArrayList[0] = sub-destination ('None' if Controller)
-    ///   - ArrayList[1] = source
-    /// </summary>
-    /// <param name="args"></param>
-    protected override void ReceiveMessage(ArrayList args) /////////////////////////////////////////////////////////////////////////////
-    {
-        string subdestination = args[0].ToString();
-        args.RemoveAt(0);
-        string directive;
-
-        switch (subdestination)
-        {
-            case "None":
-                string source = args[0].ToString();
-                args.RemoveAt(0);
-
-                switch (source)
-                {
-                    case "DeveloperConsole":
-                        ProcessDevConsole(args);
-                        break;
-                    case "BatteryManager":
-                        UpdateBattery(args);
-                        break;
-                    case "ToolManager": /////////////////////////////////////////////////////////////////////////////
-                        directive = args[0].ToString();
-                        args.RemoveAt(0);
-
-                        switch(directive)
-                        {
-                            case "ToolInfo":
-                                ToolInfoGather(args);
-                                break;
-                        }
-                        break;
-                    case "InventoryManager":
-                        directive = args[0].ToString();
-                        args.RemoveAt(0);
-                        switch(directive)
-                        {
-                            case "element_update":
-                                ElementUpdate(args);
-                                break;
-                            case "tool_update":
-                                EnableToolButton(args);
-                                break;
-                        }
-                        break;
-                    default:
-                        Debug.Log("Incorrect source provided: " + source  + " -- UI ProcessEvent");
-                        break;
-                }
-                break;
-            default:
-                Debug.Log("Incorrect subdestination -- UI ProcessEvent");
-                break;
-        }
-    }
 
 
     /// <summary>
@@ -228,13 +132,23 @@ public class UIController : BaseController<UIController>
     /// </summary>
     private void OnEnable()
     {
-        GameController.Instance.OnUpdateGameToUI += ReceiveMessage;
-        PlayerController.Instance.OnUpdatePlayerToUI += ReceiveMessage;
-        PlayerController.Instance.inventoryManager.OnUpdateInventoryElement += ElementUpdate;
-        PlayerController.Instance.inventoryManager.OnUpdateInventoryTool += EnableToolButton;
+        if (GameController.Instance != null)
+        {
+            GameController.Instance.developerConsole.OnDevConsoleUIUpdate += ProcessDevConsole;
+        }
 
-        // Process events from DevConsole
-        GameController.Instance.developerConsole.OnDevConsoleUIUpdate += ProcessDevConsole;
+        if (PlayerController.Instance != null)
+        {
+            PlayerController.Instance.inventoryManager.OnUpdateInventoryElement += ElementUpdate;
+            PlayerController.Instance.inventoryManager.OnUpdateInventoryTool += EnableToolButton;
+            PlayerController.Instance.batteryManager.OnBatteryPercentageChanged += UpdateBattery;
+
+            // ToolInfoGathers
+            PlayerController.Instance.batteryManager.ToolManagerUpdate += ToolInfoGather;
+            PlayerController.Instance.thrusterManager.ToolManagerUpdate += ToolInfoGather;
+            PlayerController.Instance.imagerManager.ToolManagerUpdate += ToolInfoGather;
+            PlayerController.Instance.eMagnetManager.ToolManagerUpdate += ToolInfoGather;
+        }
     }
 
     /// <summary>
@@ -243,15 +157,21 @@ public class UIController : BaseController<UIController>
     /// </summary>
     private void OnDisable()
     {
-        if (PlayerController.Instance != null)
-        {
-            PlayerController.Instance.OnUpdatePlayerToUI -= EnableToolButton;
-            //PlayerController.Instance.inventoryManager.OnUpdateInventoryElement -= //Insert correct function here
-            //PlayerController.Instance.inventoryManager.OnUpdateInventoryTool -= //Insert correct function here
-        }
         if (GameController.Instance != null)
         {
-            GameController.Instance.OnUpdateGameToUI -= ReceiveMessage;
+            GameController.Instance.developerConsole.OnDevConsoleUIUpdate -= ProcessDevConsole;
+        }
+        if (PlayerController.Instance != null)
+        {
+            PlayerController.Instance.inventoryManager.OnUpdateInventoryElement -= ElementUpdate;
+            PlayerController.Instance.inventoryManager.OnUpdateInventoryTool -= EnableToolButton;
+            PlayerController.Instance.batteryManager.OnBatteryPercentageChanged -= UpdateBattery;
+
+            // ToolInfoGathers
+            PlayerController.Instance.batteryManager.ToolManagerUpdate -= ToolInfoGather;
+            PlayerController.Instance.thrusterManager.ToolManagerUpdate -= ToolInfoGather;
+            PlayerController.Instance.imagerManager.ToolManagerUpdate -= ToolInfoGather;
+            PlayerController.Instance.eMagnetManager.ToolManagerUpdate -= ToolInfoGather;
         }
     }
 
@@ -313,10 +233,10 @@ public class UIController : BaseController<UIController>
     /// Function to update the battery text     ///TODO: Relocate battpertext to UIController object
     /// </summary>
     /// <param name="newPercentage"></param>
-    private void UpdateBattery(ArrayList args)
+    private void UpdateBattery(float percent)
     {
-        battPerText.text = args[0].ToString() + "%";
-        switch (float.Parse(args[0].ToString())) {
+        battPerText.text = percent.ToString() + "%";
+        switch (percent) {
             case > 83.35f:
                 activeBattSpriteRenderer.sprite = batterySprite6; break;
             case > 66.68f:
@@ -618,7 +538,7 @@ public class UIController : BaseController<UIController>
     {
         ArrayList args = new ArrayList { toolName };
         //Send the message
-        OnUpdateToolModify(args);
+        OnUpdateToolModify?.Invoke(args);
     }
 
     /// <summary>
@@ -628,50 +548,27 @@ public class UIController : BaseController<UIController>
     ///     - Dictionary contains a list of elements and their required values
     /// </summary>
     /// <param name="args"></param>
-    public void ToolInfoGather(ArrayList args) /////////////////////////////////////////////////////////////////////////////
+    public void ToolInfoGather(ToolDirective directive, bool upgraded, string toolName, Dictionary<string, ushort> requirements, int level)
     {
-        //passes upgrade or info
-        string directive = args[0].ToString().ToLower();
-        //Whether the upgrade was successful
-        bool upgradeSuccess = (bool)args[1];
-        //Toolname
-        string toolName = args[2].ToString().ToLower();
-        //Dictionary that contains everything required for the tool's next level requirements - see any toolmanager
-        Dictionary<string, ushort> levelRequirements = (Dictionary<string, ushort>)args[3];
-        string level = args[4].ToString();
-
         switch (directive)
         {
-            case "upgrade":
-                if (!upgradeSuccess)
+            case ToolDirective.Upgrade:
+                if (!upgraded)
                 {
                     string requirement_display = "Must Have: ";
-                    foreach (var requirement in levelRequirements)
+                    foreach (var requirement in requirements)
                     {
                         if (requirement.Value > 0)
                         {
-                            string name;
-                            switch (requirement.Key)
+                            string name = requirement.Key.ToLower() switch
                             {
-                                case "element_copper":
-                                    name = "Copper";
-                                    break;
-                                case "element_iron":
-                                    name = "Iron";
-                                    break;
-                                case "element_nickel":
-                                    name = "Nickel";
-                                    break;
-                                case "element_gold":
-                                    name = "Gold";
-                                    break;
-                                case "element_tungsten":
-                                    name = "Tungsten";
-                                    break;
-                                default:
-                                    name = requirement.Key;
-                                    break;
-                            }
+                                "element_copper"    => "Copper",
+                                "element_iron"      => "Iron",
+                                "element_nickel"    => "Nickel",
+                                "element_gold"      => "Gold",
+                                "element_platinum"  => "Platinum",                  // Change to Tungsten?
+                               _ => requirement.Key
+                            };
 
                             requirement_display += name + " " + requirement.Value + "  ";
                         }
@@ -685,27 +582,27 @@ public class UIController : BaseController<UIController>
                 switch (toolName.ToLower())
                 {
                     case "thruster":
-                        thrusterLevel.SetText(level);
-                        UpdateRequirements(levelRequirements, thrusterRequirementsList.transform);
+                        thrusterLevel.SetText(level.ToString());
+                        UpdateRequirements(requirements, thrusterRequirementsList.transform);
                         break;
                     case "battery":
-                        batteryLevel.SetText(level);
-                        UpdateRequirements(levelRequirements, batteryRequirementsList.transform);
+                        batteryLevel.SetText(level.ToString());
+                        UpdateRequirements(requirements, batteryRequirementsList.transform);
                         break;
                     case "imager":
-                        imagerLevel.SetText(level);
-                        UpdateRequirements(levelRequirements, imagerRequirementsList.transform);
+                        imagerLevel.SetText(level.ToString());
+                        UpdateRequirements(requirements, imagerRequirementsList.transform);
                         break;
                     case "electromagnet":
-                        eMagnetLevel.SetText(level);
-                        UpdateRequirements(levelRequirements, eMagnetRequirementsList.transform);
+                        eMagnetLevel.SetText(level.ToString());
+                        UpdateRequirements(requirements, eMagnetRequirementsList.transform);
                         break;
                     default:
                         break;
                 }
                 break;
 
-            case "info":
+            case ToolDirective.Info:
                 switch (toolName.ToLower())
                 {
                     case "thruster":

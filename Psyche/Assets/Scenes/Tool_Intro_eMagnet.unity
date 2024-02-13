@@ -1202,6 +1202,10 @@ PrefabInstance:
       value: Cave - GRS
       objectReference: {fileID: 0}
     - target: {fileID: 8140704363619917703, guid: e741af7aeecf1c0448c6a06b5ba4dae9, type: 3}
+      propertyPath: m_Name
+      value: Tool_Intro_GRS Out
+      objectReference: {fileID: 0}
+    - target: {fileID: 8140704363619917703, guid: e741af7aeecf1c0448c6a06b5ba4dae9, type: 3}
       propertyPath: m_TagString
       value: TransitionObjectIn
       objectReference: {fileID: 0}
@@ -3789,6 +3793,10 @@ PrefabInstance:
     - target: {fileID: 3367525011058131399, guid: cad7e5c12c64a524a94bb572030aceb2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6226398195049298968, guid: cad7e5c12c64a524a94bb572030aceb2, type: 3}
+      propertyPath: m_Name
+      value: Tool_Intro_Thruster In
       objectReference: {fileID: 0}
     - target: {fileID: 6226398195049298968, guid: cad7e5c12c64a524a94bb572030aceb2, type: 3}
       propertyPath: m_TagString
