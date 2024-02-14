@@ -198,7 +198,7 @@ public class UIController : BaseController<UIController>
                 break;
 
             case "imager":
-                setDialogText("This is Multispectral Imager. It is highly sensitive to light and Psyche used 2 of these to analyze the asteroid's geology and topography.\n\nI can use this to help me see in the dark.\n\n<i>Look around with the spotlight using your mouse</i>\n\n<i>Press <b>TAB</b> to learn more.</i>");
+                setDialogText("This is Multispectral Imager. It is highly sensitive to light and Psyche used 2 of these to analyze the asteroid's geology and topography.\n\nI can use this to help me see in the dark.\n<i>Look around with the spotlight using your mouse</i>\n\n<i>Press <b>TAB</b> to learn more.</i>");
                 imagerButton.SetActive(true);
                 imagerLevel.transform.parent.gameObject.SetActive(true);
                 break;
@@ -210,7 +210,7 @@ public class UIController : BaseController<UIController>
                 break;
 
             case "electromagnet":
-                setDialogText("This is an Magnetometer. Psyche used 2 of these to measure the asteroid's magnetic field.\n\nI can use this to detect deposits of iron. I should then be able to use my suit's Electro-Magnet to propel myself towards them.\n<i>Hold <b>LEFT CLICK</b> to use the Electro-Magnet to pull yourself towards iron deposits</i>\n\n<i>Press <b>TAB</b> to learn more.</i>");
+                setDialogText("This is an Magnetometer. Psyche used 2 of these to measure the asteroid's magnetic field.\n\nI can use this to detect deposits of iron. I should then be able to use my suit's Electro-Magnet to propel myself towards them.\n<i>Hold <b>LEFT CLICK</b> to aim the Electro-Magnet with your mouse and pull yourself towards iron deposits</i>\n\n<i>Press <b>TAB</b> to learn more.</i>");
                 eMagnetButton.SetActive(true);
                 eMagnetLevel.transform.parent.gameObject.SetActive(true);
                 eMagnetIcon.SetActive(true);
@@ -313,7 +313,7 @@ public class UIController : BaseController<UIController>
                 break;
             case "Spectrometer2":
                 Application.OpenURL("https://www.jpl.nasa.gov/images/pia24892-psyches-gamma-ray-and-neutron-spectrometer-up-close");
-                break;    
+                break;
             case "Imager":
                 Application.OpenURL("https://www.jpl.nasa.gov/images/pia24894-psyches-imager-in-progress");
                 break;
@@ -322,6 +322,9 @@ public class UIController : BaseController<UIController>
                 break;
             case "EMagnet":
                 Application.OpenURL("https://psyche.asu.edu/gallery/meet-nasas-psyche-team-who-will-measure-the-asteroids-magnetic-field/");
+                break;
+            case "SolarPanel":
+                Application.OpenURL("https://psyche.asu.edu/mission/the-spacecraft/");
                 break;
             default:
                 Debug.LogError("Tool link not set or incorrect name passed");
