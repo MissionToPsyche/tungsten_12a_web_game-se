@@ -22,6 +22,7 @@ public class PlayerController : BaseController<PlayerController>
     [Header("Components")]
     public Rigidbody2D playerCharacter;
     public BoxCollider2D playerCollider;
+    public GameObject pressUpPopup;
 
     //Set up environmental checks
     public Transform groundCheck;
@@ -279,6 +280,18 @@ public class PlayerController : BaseController<PlayerController>
             ToolPickUp(other.name);
             Destroy(other.gameObject);
         }*/
+        else if (other.tag == "TransitionObjectIn" || other.tag == "TransitionObjectOut")
+        {
+            pressUpPopup.SetActive(true);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.tag == "TransitionObjectIn" || other.tag == "TransitionObjectOut")
+        {
+            pressUpPopup.SetActive(false);
+        }
     }
 
     /// <summary>
