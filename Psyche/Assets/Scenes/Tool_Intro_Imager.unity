@@ -16524,6 +16524,7 @@ Transform:
   - {fileID: 1507882395}
   - {fileID: 2058579096}
   - {fileID: 1226510808}
+  - {fileID: 968476934}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1225301369
@@ -17947,7 +17948,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7423023160452361083, guid: c3459c583f34bbf49be52ea0ad5df946, type: 3}
       propertyPath: m_Name
-      value: Imager Pickup Variant
+      value: Imager
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -16,7 +16,7 @@ public class InventoryManager : MonoBehaviour
     private Dictionary<Element, ushort> _elements2;
 
     // Events
-    public event Action<ArrayList>      OnUpdateInventoryTool;
+    public event Action<Tool, bool>      OnUpdateInventoryTool;
     public event Action<ArrayList>      OnUpdateInventoryElement;
     public event Action<string, object> SetObjectState;
 
@@ -180,8 +180,7 @@ public class InventoryManager : MonoBehaviour
         {
             SetTool(tool, true);
         }
-        ArrayList args = new ArrayList { toolName, true };
-        OnUpdateInventoryTool?.Invoke(args);
+        OnUpdateInventoryTool?.Invoke(tool, true);
         // Remove the object from the scene state
         SetObjectState?.Invoke(toolName, false);
         
@@ -247,9 +246,7 @@ public class InventoryManager : MonoBehaviour
         _tools[toolName] = value;
 
         //Send message to UI
-        ArrayList args = new ArrayList { toolName, value };
-        //Send the message
-        OnUpdateInventoryTool?.Invoke(args);
+        OnUpdateInventoryTool?.Invoke(MatchTool(toolName), value);
     }
 
     /// <summary>

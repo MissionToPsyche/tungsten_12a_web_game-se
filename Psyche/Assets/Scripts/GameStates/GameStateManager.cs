@@ -35,21 +35,25 @@ public class GameStateManager : MonoBehaviour
         };
     }
 
+    /// <summary>
+    /// When the PlayerCnotroller loads, it will call this function to set up the communication events
+    /// </summary>
     public void LoadPlayer()
     {
         PlayerController.Instance.inventoryManager.SetObjectState += SetObjectState;
+        PlayerController.Instance.playerCollisionManager.SetObjectState += SetObjectState;
+        PlayerController.Instance.playerCollisionManager.SaveSceneState += SaveSceneState;
     }
 
-    public void OnEnable()
-    {
-
-    }
+    public void OnEnable() { }
 
     public void OnDisable()
     {
         if (PlayerController.Instance != null)
         {
             PlayerController.Instance.inventoryManager.SetObjectState -= SetObjectState;
+            PlayerController.Instance.playerCollisionManager.SetObjectState += SetObjectState;
+            PlayerController.Instance.playerCollisionManager.SaveSceneState += SaveSceneState;
         }
     }
 
@@ -96,10 +100,15 @@ public class GameStateManager : MonoBehaviour
         Tool_Combo_1,
         Tool_Combo_2,
         
-
+        // Error state or incorrect value passed
         None,
     }
 
+    /// <summary>
+    /// Matches the passed scene enum value with a string output
+    /// </summary>
+    /// <param name="scene"></param>
+    /// <returns></returns>
     public string MatchScene(Scene scene)
     {
         return scene switch
@@ -119,6 +128,11 @@ public class GameStateManager : MonoBehaviour
         };
     }
 
+    /// <summary>
+    /// Matches the given string with the respective Scene enum value
+    /// </summary>
+    /// <param name="scene"></param>
+    /// <returns></returns>
     public Scene MatchScene(string scene)
     {
         return scene.ToLower() switch
@@ -128,7 +142,7 @@ public class GameStateManager : MonoBehaviour
             "outro_cutscene"            or "outro"    => Scene.Outro_Cutscene,
             "landing_scene"             or "landing"  => Scene.Landing_Scene,
             "tool_intro_emagnet"        or "emagnet"  => Scene.Tool_Intro_eMagnet,
-            "tool_intro_grs"            or "grs"      => Scene.Tool_Intro_GRS,
+            "tool_intro_grs"            or "grns"     => Scene.Tool_Intro_GRS,
             "tool_intro_imager"         or "imager"   => Scene.Tool_Intro_Imager,
             "tool_intro_thruster"       or "thruster" => Scene.Tool_Intro_Thruster,
             "tool_comb_1"               or "combo1"   => Scene.Tool_Combo_1,
