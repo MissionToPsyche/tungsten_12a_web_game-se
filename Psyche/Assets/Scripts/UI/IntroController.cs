@@ -6,7 +6,7 @@ using UnityEngine;
 /// Author: jmolive8
 public class IntroController : MonoBehaviour
 {
-    public GameObject intro1, intro2, intro3, intro4, intro5;
+    public GameObject intro1, intro2, intro3, intro4, intro5, intro6;
 
     int curScreen = 1;
 
@@ -42,7 +42,13 @@ public class IntroController : MonoBehaviour
                     intro4.SetActive(false);
                     intro5.SetActive(true);
                     break;
-                    
+
+                case 5:
+                    curScreen++;
+                    intro5.SetActive(false);
+                    intro6.SetActive(true);
+                    break;
+
                 default:
                     // Set the value this way so if any changes are made they are accounted for
                     string scene = GameController.Instance.gameStateManager.MatchScene(GameStateManager.Scene.Landing_Scene);
