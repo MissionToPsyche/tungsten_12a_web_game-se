@@ -179,44 +179,37 @@ public class UIController : BaseController<UIController>
     /// When called, will enable the tool button
     /// </summary>
     /// <param name="toolName"></param>
-    public void EnableToolButton(ArrayList args)
+    public void EnableToolButton(InventoryManager.Tool tool, bool value)
     {
-        string toolName = args[0].ToString();
-        bool value = (bool)args[1];
-        if(toolName == "health")
+        switch (tool)
         {
-            return;
-        }
-
-        switch (toolName)
-        {
-            case "battery":
+            case InventoryManager.Tool.BATTERY or InventoryManager.Tool.SOLARPANEL:
                 setDialogText("'This is an Solar Panel'\n\nYour battery will automatically charge");
                 solarPanelButton.SetActive(true);
                 batteryLevel.transform.parent.gameObject.SetActive(true);
                 batteryIndicator.SetActive(true);
                 break;
 
-            case "thruster":
+            case InventoryManager.Tool.THRUSTER:
                 setDialogText("This is a Thruster\n\n Hold spacebar to activate");
                 thrusterButton.SetActive(true);
                 thrusterLevel.transform.parent.gameObject.SetActive(true);
                 thrusterIcon.SetActive(true);
                 break;
 
-            case "imager":
+            case InventoryManager.Tool.IMAGER:
                 setDialogText("This is an Imager\n\n It will automatically follow your mouse");
                 imagerButton.SetActive(true);
                 imagerLevel.transform.parent.gameObject.SetActive(true);
                 break;
 
-            case "spectrometer":
+            case InventoryManager.Tool.SPECTROMETER:
                 setDialogText("This is a Spectrometer\n\n Right-Click to activate");
                 spectrometerButton.SetActive(true);
                 GRNSIcon.SetActive(true);
                 break;
 
-            case "electromagnet":
+            case InventoryManager.Tool.ELECTROMAGNET:
                 setDialogText("This is an ElectroMagnet");
                 eMagnetButton.SetActive(true);
                 eMagnetLevel.transform.parent.gameObject.SetActive(true);
@@ -224,7 +217,7 @@ public class UIController : BaseController<UIController>
                 break;
 
             default:
-                Debug.Log("Incorrect tool name passed: " + args[0].ToString());
+                Debug.Log("Incorrect tool name passed: " + tool.ToString());
                 break;
         }
     }

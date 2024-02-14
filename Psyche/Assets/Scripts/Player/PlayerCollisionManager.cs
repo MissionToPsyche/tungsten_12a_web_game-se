@@ -11,6 +11,8 @@ public class PlayerCollisionManager : MonoBehaviour
 
     // Events
     public event Action<string> InitiateTransition;
+    public event Action SaveSceneState;
+    public event Action<string, object> SetObjectState;
     //public event Action<Collision2D> OnCollisionEnter;
     //public event Action<Collision2D> OnCollisionExit;
     //public event Action<Collision2D> OnCollisionStay;
@@ -50,6 +52,8 @@ public class PlayerCollisionManager : MonoBehaviour
         TransitionObjectIn,
         TransitionObjectOut,
 
+        Checkpoint,
+
         None,
     }
 
@@ -57,11 +61,12 @@ public class PlayerCollisionManager : MonoBehaviour
     {
         return tag.ToLower() switch
         {
-            "element" => CollisionTag.Element,
-            "tool" => CollisionTag.Tool,
-            "transitionobjectin" => CollisionTag.TransitionObjectIn,
-            "transitionobjectout" => CollisionTag.TransitionObjectOut,
-            _ => CollisionTag.None,
+            "element"               => CollisionTag.Element,
+            "tool"                  => CollisionTag.Tool,
+            "transitionobjectin"    => CollisionTag.TransitionObjectIn,
+            "transitionobjectout"   => CollisionTag.TransitionObjectOut,
+            "checkpoint"            => CollisionTag.Checkpoint,
+            _                       => CollisionTag.None,
         };
     }
 
@@ -69,11 +74,12 @@ public class PlayerCollisionManager : MonoBehaviour
     {
         return tag switch
         {
-            CollisionTag.Element => "Element",
-            CollisionTag.Tool => "Tool",
-            CollisionTag.TransitionObjectIn => "TransitionObjectIn",
-            CollisionTag.TransitionObjectOut => "TransitionObjectOut",
-            _ => null,
+            CollisionTag.Element                => "Element",
+            CollisionTag.Tool                   => "Tool",
+            CollisionTag.TransitionObjectIn     => "TransitionObjectIn",
+            CollisionTag.TransitionObjectOut    => "TransitionObjectOut",
+            CollisionTag.Checkpoint             => "Checkpoint",
+            _                                   => null,
         };
     }
 
@@ -100,11 +106,11 @@ public class PlayerCollisionManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log($"{other.name}, {other.tag}");
         switch (MatchName(other.name))
         {
-            case CollisionName.Health:
-                _playerController.playerHealth.HealthUp(1);
+            case CollisionName.Health:                                        // Should we do away with the health pickup now?
+                _playerController.playerHealth.HealthUp(1); 
+                Destroy(other.gameObject);
                 //return; // Return out early for the time being
                 break;
 
@@ -116,12 +122,17 @@ public class PlayerCollisionManager : MonoBehaviour
         {
             case CollisionTag.Element:
                 _playerController.inventoryManager.AddElement(other.name, 1);
-                Destroy(other.gameObject); //remove the element from the screen
+                Destroy(other.gameObject);
                 break;
 
             case CollisionTag.Tool:
                 _playerController.inventoryManager.ToolPickUp(other.name);
                 Destroy(other.gameObject);
+                break;
+
+            case CollisionTag.Checkpoint:
+                SetObjectState?.Invoke(other.name, true);
+                SaveSceneState?.Invoke();
                 break;
 
             default:

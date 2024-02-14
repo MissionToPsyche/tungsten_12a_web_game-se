@@ -9418,7 +9418,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4341645555283248702, guid: 45d670c76eee18f4f8ba4ab2d707a340, type: 3}
       propertyPath: m_Name
-      value: Health Pickup Variant
+      value: Health
       objectReference: {fileID: 0}
     - target: {fileID: 6969730462459996994, guid: 45d670c76eee18f4f8ba4ab2d707a340, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10709,6 +10709,14 @@ PrefabInstance:
       propertyPath: m_BoundingShape2D
       value: 
       objectReference: {fileID: 1195215623}
+    - target: {fileID: 3839175105450516163, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3839175105450516163, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.625
+      objectReference: {fileID: 0}
     - target: {fileID: 3895818665434327867, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: m_BoundingShape2D
       value: 
