@@ -15803,6 +15803,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4177737924768369505, guid: 10a784b2e24e2ff4fb82ba9c1791fe76, type: 3}
+      propertyPath: m_Name
+      value: Landing_Scene Out
+      objectReference: {fileID: 0}
+    - target: {fileID: 4177737924768369505, guid: 10a784b2e24e2ff4fb82ba9c1791fe76, type: 3}
       propertyPath: m_TagString
       value: TransitionObjectIn
       objectReference: {fileID: 0}
@@ -16995,6 +16999,10 @@ PrefabInstance:
     - target: {fileID: 6813600720024782082, guid: e741af7aeecf1c0448c6a06b5ba4dae9, type: 3}
       propertyPath: m_Name
       value: Cave - GRS
+      objectReference: {fileID: 0}
+    - target: {fileID: 8140704363619917703, guid: e741af7aeecf1c0448c6a06b5ba4dae9, type: 3}
+      propertyPath: m_Name
+      value: Tool_Intro_GRS In
       objectReference: {fileID: 0}
     - target: {fileID: 8140704363619917703, guid: e741af7aeecf1c0448c6a06b5ba4dae9, type: 3}
       propertyPath: m_TagString
