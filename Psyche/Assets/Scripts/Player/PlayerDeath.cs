@@ -4,7 +4,6 @@
  * Version: 20240130
  */
 
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -38,8 +37,11 @@ public class PlayerDeath : MonoBehaviour {
 
             // Calculate kickback direction based on hazard position relative to the player
             Vector2 kickbackDirection = new Vector2(-5f, 5f).normalized;
-            ApplyKickback(kickbackDirection);            
-            
+            ApplyKickback(kickbackDirection);
+
+            ///Temporarily disables EMagnet
+            StartCoroutine(PlayerController.Instance.interruptMagnet());
+
             GetHurt(1);
             GameController.Instance.audioManager.playerHurt.Play();
         }
