@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     private float _xAxis;
     private string _currentAnimation;
     private string _newAnimation;
-    private bool _isFacingRight;
+    public bool _isFacingRight;
     private bool _flipSprite;
     private Vector2 _walkVelocity;
     //A Camera to bias right when player is looking right
