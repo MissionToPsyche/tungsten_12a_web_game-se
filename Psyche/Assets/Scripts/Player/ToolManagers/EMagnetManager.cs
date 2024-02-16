@@ -13,6 +13,7 @@ public class EMagnetManager : ToolManager {
     /// Parent object of EMagnet Hit Box. Used for rotating the Hit Box around the player's center
     /// </summary>
     private Transform hitBoxRotator;
+    private int pullSpeed = 20;
 
     public void Initialize(PlayerController playerManagement)
     {
@@ -121,7 +122,7 @@ public class EMagnetManager : ToolManager {
             if (target != null)
             {
                 if (target.gameObject.activeInHierarchy)
-                    _playerController.playerCharacter.MovePosition(Vector2.MoveTowards(transform.position, target.transform.position, Time.deltaTime * 20));
+                    _playerController.playerCharacter.MovePosition(Vector2.MoveTowards(transform.position, target.transform.position, Time.deltaTime * pullSpeed));
                 else
                 {
                     /**
@@ -148,7 +149,8 @@ public class EMagnetManager : ToolManager {
     /// </summary>
     protected override void UpgradeTool()
     {
-        eMagHitBox.transform.localScale += new Vector3(0.5f, 0, 0);
-        eMagHitBox.transform.localPosition += new Vector3(0.25f, 0, 0);
+        //eMagHitBox.transform.localScale += new Vector3(0.5f, 0, 0);
+        //eMagHitBox.transform.localPosition += new Vector3(0.25f, 0, 0);
+        pullSpeed += 10;
     }
 }
