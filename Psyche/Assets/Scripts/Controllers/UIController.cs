@@ -191,36 +191,36 @@ public class UIController : BaseController<UIController>
         switch (toolName)
         {
             case "battery":
-                setDialogText("'This is an Solar Panel'\n\nYour battery will automatically charge");
+                setDialogText("This is a Solar Array. Psyche had 2 of these in cross formations to generate power.\n\nI can use this to automatically recharge my suit's battery.\n\n<i>Press <b>TAB</b> to learn more.</i>");
                 solarPanelButton.SetActive(true);
                 batteryLevel.transform.parent.gameObject.SetActive(true);
                 batteryIndicator.SetActive(true);
                 break;
 
-            case "thruster":
-                setDialogText("This is a Thruster\n\n Hold spacebar to activate");
-                thrusterButton.SetActive(true);
-                thrusterLevel.transform.parent.gameObject.SetActive(true);
-                thrusterIcon.SetActive(true);
-                break;
-
             case "imager":
-                setDialogText("This is an Imager\n\n It will automatically follow your mouse");
+                setDialogText("This is Multispectral Imager. It is highly sensitive to light and Psyche used 2 of these to analyze the asteroid's geology and topography.\n\nI can use this to help me see in the dark.\n<i>Look around with the spotlight using your mouse</i>\n\n<i>Press <b>TAB</b> to learn more.</i>");
                 imagerButton.SetActive(true);
                 imagerLevel.transform.parent.gameObject.SetActive(true);
                 break;
 
             case "spectrometer":
-                setDialogText("This is a Spectrometer\n\n Right-Click to activate");
+                setDialogText("This is a Gamma-Ray and Neutron Spectrometer. This system was used on Psyche to map the elemental composition of the asteroid.\n\nI can use this to help me search for the elements I need.\n<i>Hold <b>RIGHT CLICK</b> to see see through objects.</i>\n\n<i>Press <b>TAB</b> to learn more.</i>");
                 spectrometerButton.SetActive(true);
                 GRNSIcon.SetActive(true);
                 break;
 
             case "electromagnet":
-                setDialogText("This is an ElectroMagnet");
+                setDialogText("This is an Magnetometer. Psyche used 2 of these to measure the asteroid's magnetic field.\n\nI can use this to detect deposits of iron. I should then be able to use my suit's Electro-Magnet to propel myself towards them.\n<i>Hold <b>LEFT CLICK</b> to aim the Electro-Magnet with your mouse and pull yourself towards iron deposits</i>\n\n<i>Press <b>TAB</b> to learn more.</i>");
                 eMagnetButton.SetActive(true);
                 eMagnetLevel.transform.parent.gameObject.SetActive(true);
                 eMagnetIcon.SetActive(true);
+                break;
+
+            case "thruster":
+                setDialogText("This is a Hall Thruster. This thruster used electricity to propel Psyche from Earth's orbit to the asteroid.\n\nI can use this to help me reach high up areas.\n<i>Hold <b>SPACEBAR</b> to fly upwards.</i>\n\n<i>Press <b>TAB</b> to learn more.</i>");
+                thrusterButton.SetActive(true);
+                thrusterLevel.transform.parent.gameObject.SetActive(true);
+                thrusterIcon.SetActive(true);
                 break;
 
             default:
@@ -313,7 +313,7 @@ public class UIController : BaseController<UIController>
                 break;
             case "Spectrometer2":
                 Application.OpenURL("https://www.jpl.nasa.gov/images/pia24892-psyches-gamma-ray-and-neutron-spectrometer-up-close");
-                break;    
+                break;
             case "Imager":
                 Application.OpenURL("https://www.jpl.nasa.gov/images/pia24894-psyches-imager-in-progress");
                 break;
@@ -322,6 +322,9 @@ public class UIController : BaseController<UIController>
                 break;
             case "EMagnet":
                 Application.OpenURL("https://psyche.asu.edu/gallery/meet-nasas-psyche-team-who-will-measure-the-asteroids-magnetic-field/");
+                break;
+            case "SolarPanel":
+                Application.OpenURL("https://psyche.asu.edu/mission/the-spacecraft/");
                 break;
             default:
                 Debug.LogError("Tool link not set or incorrect name passed");
@@ -382,20 +385,41 @@ public class UIController : BaseController<UIController>
     public void handleUI()
     {
         if (dialogText.transform.parent.gameObject.activeInHierarchy)
+            setDialogText("");
+
+        else if(curSubmenu != null)
+            closeSubmenu();
+
+        else if (inventoryMenu.activeInHierarchy)
+        {
+            ///enables and disables player collider to deal with being unable to go through doors after opening inventory
+            PlayerController.Instance.playerCollider.enabled = false;
+            setInventory(false);
+            PlayerController.Instance.playerCollider.enabled = true;
+        }
+
+        else
+            setInventory(true);
+    }
+
+    /// <summary>
+    /// Sets text of Dialog Box and opens it. If text is blank it closes the box
+    /// </summary>
+    /// <param name="text">Set blank if you want to close the Dialog Box</param>
+    public void setDialogText(string text)
+    {
+        if (text == "")
+        {
+            PlayerController.Instance.inputBlocked = false;
             dialogText.transform.parent.gameObject.SetActive(false);
+            Cursor.visible = false;
+        }
         else
         {
-            if (curSubmenu != null)
-                closeSubmenu();
-            else if (inventoryMenu.activeInHierarchy)
-            {
-                ///enables and disables player collider to deal with being unable to go through doors after opening inventory
-                PlayerController.Instance.playerCollider.enabled = false;
-                setInventory(false);
-                PlayerController.Instance.playerCollider.enabled = true;
-            }
-            else
-                setInventory(true);
+            PlayerController.Instance.inputBlocked = true;
+            dialogText.SetText(text);
+            dialogText.transform.parent.gameObject.SetActive(true);
+            Cursor.visible = true;
         }
     }
 
@@ -431,16 +455,6 @@ public class UIController : BaseController<UIController>
         curSubmenu.SetActive(false);
         curSubmenu = null;
         inventoryMenu.SetActive(true);
-    }
-
-    /// <summary>
-    /// Sets text of Dialog Box and opens it
-    /// </summary>
-    /// <param name="text"></param>
-    public void setDialogText(string text)
-    {
-        dialogText.SetText(text);
-        dialogText.transform.parent.gameObject.SetActive(true);
     }
 
     private bool shouldRespawn;
