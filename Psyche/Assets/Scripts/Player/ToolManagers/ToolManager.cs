@@ -21,6 +21,7 @@ public abstract class ToolManager : MonoBehaviour
     {
         Upgrade, 
         Info,
+        MaxLevel
     }
 
     // Events
@@ -92,8 +93,14 @@ public abstract class ToolManager : MonoBehaviour
         {
             //args.Add(levelRequirements[newLevel]);
         }
-        //args.Add(level + 1);
-        ToolManagerUpdate?.Invoke(ToolDirective.Upgrade, upgraded, toolName, levelRequirements[level + 1], level + 1);
-        //_playerController.SendMessage(args);
+
+        if (levelRequirements.ContainsKey(level + 1))
+        {
+            //args.Add(level + 1);
+            ToolManagerUpdate?.Invoke(ToolDirective.Upgrade, upgraded, toolName, levelRequirements[level + 1], level + 1);
+            //_playerController.SendMessage(args);
+        }
+        else
+            ToolManagerUpdate?.Invoke(ToolDirective.MaxLevel, upgraded, toolName, null, level + 1);
     }
 }

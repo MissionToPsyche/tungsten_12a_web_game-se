@@ -4,7 +4,6 @@
  * Version: 20240130
  */
 
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,9 +34,12 @@ public class PlayerDeath : MonoBehaviour {
     private void OnCollisionEnter2D(Collision2D collision) {
             //regular hazards do 1 damage
         if (collision.gameObject.CompareTag("Hazard")) {
-            ApplyKickback(collision);            
+            ApplyKickback(collision);
             GetHurt(1);
             GameController.Instance.audioManager.playerHurt.Play();
+
+            ///Temporarily disables EMagnet
+            StartCoroutine(PlayerController.Instance.interruptMagnet());
         }
 
         //spikes do full damage
