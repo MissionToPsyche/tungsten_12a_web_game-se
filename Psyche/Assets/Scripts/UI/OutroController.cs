@@ -11,7 +11,6 @@ public class OutroController : MonoBehaviour {
     /// Gets rid of objects not needed anymore
     /// </summary>
     void Awake() {
-        //UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
         Destroy(GameObject.FindGameObjectWithTag("Player"));
         Destroy(GameObject.FindGameObjectWithTag("UI"));
     }
