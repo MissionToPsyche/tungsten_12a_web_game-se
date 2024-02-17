@@ -190,12 +190,28 @@ public class SceneTransitionManager : MonoBehaviour {
         if (scene.isLoaded) {
             string tag = (_directionTag.ToLower().Contains("in")) ? "TransitionObjectIn" : "TransitionObjectOut";
 
-            GameObject obj = GameObject.FindGameObjectWithTag(tag);
-                if (obj != null) {
-                    return obj.transform.position;
-                } else {
-                    Debug.LogWarning(tag+" not found.");
+            // there should only be one transition object in and one transition object out for each scene
+            // with the exception of two "outs" for the landing scene since we can go out from the landing scene
+            // to the imager level and to the outro endgame scene
+            GameObject[] objectsWithTransitionTag = GameObject.FindGameObjectsWithTag(tag);
+            GameObject caveObject = objectsWithTransitionTag[0]; // set to first but might change below
+
+            // we differentiate the proper transition objects for the player with the layer as well
+            // caves use the terrain layer so these are the ones we want
+            foreach (GameObject obj in objectsWithTransitionTag) {
+                if (obj.layer == 3) { // terrain layer
+                    caveObject = obj;                   
+                    break; // break since we only need one GameObject
                 }
+            }
+
+            // return proper cave object position
+            if (caveObject != null) {
+                return caveObject.transform.position;
+            } else {
+                Debug.LogWarning(tag+" not found.");
+            }
+
         } else {
             Debug.LogWarning("Scene "+sceneName+" is not loaded.");
         }

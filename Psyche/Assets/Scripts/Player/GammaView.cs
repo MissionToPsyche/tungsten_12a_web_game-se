@@ -64,12 +64,14 @@ public class GammaView : MonoBehaviour {
     /// <param name="scene"></param>
     /// <param name="mode"></param>
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
-        sceneLight = GameObject.FindGameObjectWithTag("SceneLight").GetComponent<Light2D>();
-        sceneTilemap = GameObject.FindGameObjectWithTag("Terrain").GetComponent<Tilemap>();
-        sceneBackground = GameObject.FindGameObjectWithTag("Background").GetComponent<SpriteRenderer>();
-        origSceneLightIntensity = sceneLight.intensity;
-        origSceneTilemapColor = sceneTilemap.color;
-        origSceneBackgroundColor = sceneBackground.color;
+        if (scene.name != "Outro_Cutscene") {
+            sceneLight = GameObject.FindGameObjectWithTag("SceneLight").GetComponent<Light2D>();
+            sceneTilemap = GameObject.FindGameObjectWithTag("Terrain").GetComponent<Tilemap>();
+            sceneBackground = GameObject.FindGameObjectWithTag("Background").GetComponent<SpriteRenderer>();
+            origSceneLightIntensity = sceneLight.intensity;
+            origSceneTilemapColor = sceneTilemap.color;
+            origSceneBackgroundColor = sceneBackground.color;
+        }
     }
 
     /// <summary>
