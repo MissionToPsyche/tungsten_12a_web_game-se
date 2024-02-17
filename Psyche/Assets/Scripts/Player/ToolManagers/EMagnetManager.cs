@@ -87,7 +87,7 @@ public class EMagnetManager : ToolManager {
             /**
              * Makes a box cast using the scale of the EMagnet Hit Box
              */
-            hit = Physics2D.OverlapBox(eMagHitBox.transform.position, eMagHitBox.transform.lossyScale, angle, 1 << 14);
+            hit = Physics2D.OverlapBox(eMagHitBox.transform.position, eMagHitBox.transform.lossyScale, angle, 1 << 7);
             if (hit != null)
             {
                 ///If movable Iron object hit
