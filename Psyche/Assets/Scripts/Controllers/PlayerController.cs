@@ -49,7 +49,7 @@ public class PlayerController : BaseController<PlayerController>
     private bool usingThruster; //for animation purposes  // <--Implement boolean in thruster script
 
     //Booleans to prevent needless code runs
-    [HideInInspector] public bool eMagnetActive, beingPulled, inputBlocked, beingWarped, enteringCave, exitingCave; //Create a dictionary or list to track these
+    [HideInInspector] public bool eMagnetActive, magnetInterrupt, beingPulled, inputBlocked, beingWarped, enteringCave, exitingCave; //Create a dictionary or list to track these
 
     /// <summary>
     /// Initialize the object and parent class
@@ -167,7 +167,7 @@ public class PlayerController : BaseController<PlayerController>
             }
 
             //ElectroMagnet
-            if (inventoryManager.CheckTool("electromagnet") && Input.GetButton("EMagnet") && batteryManager.batteryPercent != 0 && !eMagnetActive) {
+            if (inventoryManager.CheckTool("electromagnet") && Input.GetButton("EMagnet") && batteryManager.batteryPercent != 0 && !eMagnetActive && !magnetInterrupt) {
                 eMagnetManager.Activate();
                 batteryManager.DrainBatt(500);
             }
@@ -358,6 +358,16 @@ public class PlayerController : BaseController<PlayerController>
             return true;
         else
             return false;
+    }
+
+    /// <summary>
+    /// Disables EMagnet for a bit when the player gets damaged
+    /// </summary>
+    public IEnumerator interruptMagnet()
+    {
+        magnetInterrupt = true;
+        yield return new WaitForSeconds(1);
+        magnetInterrupt = false;
     }
 
     /// <summary>
