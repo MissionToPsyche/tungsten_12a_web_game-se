@@ -15,7 +15,7 @@ public class DisappearingPlatform : MonoBehaviour
     public float offDuration = 1;
     public float onDuration = 4;
     private float now = 0;
-    private bool enabled = true;
+    private new bool enabled = true;
 
     // Start is called before the first frame update
     void Start()
