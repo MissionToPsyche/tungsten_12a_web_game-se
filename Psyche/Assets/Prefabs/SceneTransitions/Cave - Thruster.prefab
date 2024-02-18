@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6887492695322833631}
   - component: {fileID: 8884460815799364167}
   - component: {fileID: 3974784750555713499}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tool_Intro_Thruster
   m_TagString: TransitionObject
   m_Icon: {fileID: 0}
@@ -141,7 +141,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3367525011058131399}
   - component: {fileID: 6020562118249680928}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cave - Thruster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -279,6 +279,10 @@ PrefabInstance:
     - target: {fileID: 5824598847134807716, guid: 03038793f38437e42b224298834c254e, type: 3}
       propertyPath: m_Name
       value: Checkpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824598847134807716, guid: 03038793f38437e42b224298834c254e, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5824598847134807716, guid: 03038793f38437e42b224298834c254e, type: 3}
       propertyPath: m_IsActive
