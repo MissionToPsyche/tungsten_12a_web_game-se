@@ -30,7 +30,8 @@ public class MovingHazard : MonoBehaviour
 
     void Update()
     {
-        hazard.transform.position = Vector2.MoveTowards(hazard.transform.position, points[pointsIndex], moveSpeed * Time.deltaTime);
+        Vector2 moveVect = Vector2.MoveTowards(hazard.transform.position, points[pointsIndex], moveSpeed * Time.deltaTime);
+        hazard.transform.position = new Vector3(moveVect.x, moveVect.y, hazard.transform.position.z);
 
         /**
          * Sets the next target position when current target is reached
@@ -47,7 +48,7 @@ public class MovingHazard : MonoBehaviour
                 pointsIndex = 0;
 
                 if (warpToStart)
-                    hazard.transform.position = points[0];
+                    hazard.transform.position = new Vector3(points[0].x, points[0].y, hazard.transform.position.z);
             }
         }
     }

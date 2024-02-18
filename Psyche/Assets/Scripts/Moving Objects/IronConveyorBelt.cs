@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -54,7 +55,8 @@ public class IronConveyorBelt : MonoBehaviour
 
         while (true)
         {
-            vein.transform.position = Vector2.MoveTowards(vein.transform.position, points[pointsIndex], moveSpeed * Time.deltaTime);
+            Vector2 moveVect = Vector2.MoveTowards(vein.transform.position, points[pointsIndex], moveSpeed * Time.deltaTime);
+            vein.transform.position = new Vector3(moveVect.x, moveVect.y, vein.transform.position.z);
 
             /**
              * Sets the next target position when current target is reached
@@ -72,7 +74,7 @@ public class IronConveyorBelt : MonoBehaviour
 
                     yield return spawnDelay;
 
-                    vein.transform.position = points[0];
+                    vein.transform.position = new Vector3(points[0].x, points[0].y, vein.transform.position.z);
                     pointsIndex = 1;
                     vein.SetActive(true);
                 }
