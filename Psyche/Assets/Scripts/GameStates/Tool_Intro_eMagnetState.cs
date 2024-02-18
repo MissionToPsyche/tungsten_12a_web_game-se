@@ -18,8 +18,8 @@ public class Tool_Intro_eMagnetState : BaseState
         ELECTRO_MAGNET_PICKUP_VARIANT = 0,
         CHECKPOINT_0 = 1,
         CHECKPOINT_1 = 2,
-        IRON_MOVEABLE = 3,
-        BASIC_MOVING_HAZARD = 4,
+        GOLD_1,
+        GOLD_2,
     }
 
     /// <summary>
@@ -29,13 +29,13 @@ public class Tool_Intro_eMagnetState : BaseState
     /// <returns></returns>
     public override short Match(string obj)
     {
-        switch (obj)
+        switch (obj.ToLower())
         {
-            case "ElectroMagnet": return (short)SceneObject.ELECTRO_MAGNET_PICKUP_VARIANT;
-            case "Checkpoint 0": return (short)SceneObject.CHECKPOINT_0;
-            case "Checkpoint 1": return (short)SceneObject.CHECKPOINT_1;
-            case "Iron Moveable": return (short)SceneObject.IRON_MOVEABLE;
-            case "Basic Moving Hazard": return (short)SceneObject.BASIC_MOVING_HAZARD;
+            case "electromagnet":   return (short)SceneObject.ELECTRO_MAGNET_PICKUP_VARIANT;
+            case "checkpoint 0":    return (short)SceneObject.CHECKPOINT_0;
+            case "checkpoint 1":    return (short)SceneObject.CHECKPOINT_1;
+            case "element_gold 1":  return (short)SceneObject.GOLD_1;
+            case "element_gold 2":  return (short)SceneObject.GOLD_2;
         }
         return -1;
     }
@@ -43,11 +43,11 @@ public class Tool_Intro_eMagnetState : BaseState
     public override string Match(short obj) {
         switch (obj)
         {
-            case (short)SceneObject.ELECTRO_MAGNET_PICKUP_VARIANT: return "ElectroMagnet";
-            case (short)SceneObject.CHECKPOINT_0: return "Checkpoint 0";               
-            case (short)SceneObject.CHECKPOINT_1: return "Checkpoint 1";               
-            case (short)SceneObject.IRON_MOVEABLE: return "Iron Moveable";              
-            case (short)SceneObject.BASIC_MOVING_HAZARD: return "Basic Moving Hazard";
+            case (short)SceneObject.ELECTRO_MAGNET_PICKUP_VARIANT:  return "ElectroMagnet";
+            case (short)SceneObject.CHECKPOINT_0:                   return "Checkpoint 0";               
+            case (short)SceneObject.CHECKPOINT_1:                   return "Checkpoint 1";
+            case (short)SceneObject.GOLD_1:                         return "Element_Gold 1";
+            case (short)SceneObject.GOLD_2:                         return "Element_Gold 2";
         }
         return "";
     }
@@ -60,12 +60,12 @@ public class Tool_Intro_eMagnetState : BaseState
         // This must be set up first before anything else is created as everything else is based off of this
         _defaultState = new Dictionary<short, object>
         {
-                { (short)SceneObject.ELECTRO_MAGNET_PICKUP_VARIANT, true }, // 'true' for available
-                { (short)SceneObject.CHECKPOINT_0, true },  // `true` for activate-able
-                { (short)SceneObject.CHECKPOINT_1, true },
-                { (short)SceneObject.IRON_MOVEABLE, new Vector3(56.69f, -3.1f, -1.0f) },
-                { (short)SceneObject.BASIC_MOVING_HAZARD, new Vector3(29.24f, 3.48f, 0f) }
-        };
+            { (short)SceneObject.ELECTRO_MAGNET_PICKUP_VARIANT, true }, // 'true' for available
+            { (short)SceneObject.CHECKPOINT_0, true },  // `true` for activate-able
+            { (short)SceneObject.CHECKPOINT_1, true },
+            { (short)SceneObject.GOLD_1, true },
+            { (short)SceneObject.GOLD_2, true },
+        };    
         LoadDefaultState();
         SaveState();
     }
@@ -112,18 +112,34 @@ public class Tool_Intro_eMagnetState : BaseState
                         var targetObject = GameObject.Find(objectName);
                     }
                     break;
-                case (short)SceneObject.IRON_MOVEABLE:
+                case (short)SceneObject.GOLD_1:
                     {
-                        var value = (Vector3)pair.Value;
-                        var targetObject = GameObject.Find(objectName);
-                        targetObject.transform.position = value;
+                        var value = (bool)pair.Value;
+                        if (!value)
+                        {
+                            var targetObject = GameObject.Find(objectName);
+                            if(targetObject == null)
+                            {
+                                Debug.LogError($"Object {objectName} does not exist");
+                                return;
+                            }
+                            targetObject.SetActive(value);
+                        }
                     }
                     break;
-                case (short)SceneObject.BASIC_MOVING_HAZARD:
+                case (short)SceneObject.GOLD_2:
                     {
-                        var value = (Vector3)pair.Value;
-                        var targetObject = GameObject.Find(objectName);
-                        targetObject.transform.position = value;
+                        var value = (bool)pair.Value;
+                        if (!value)
+                        {
+                            var targetObject = GameObject.Find(objectName);
+                            if (targetObject == null)
+                            {
+                                Debug.LogError($"Object {objectName} does not exist");
+                                return;
+                            }
+                            targetObject.SetActive(value);
+                        }
                     }
                     break;
             }
