@@ -283,6 +283,15 @@ public class PlayerController : BaseController<PlayerController>
         else if (other.tag == "TransitionObjectIn" || other.tag == "TransitionObjectOut")
         {
             pressUpPopup.SetActive(true);
+
+            // crashed ship exit scene
+            if (other.gameObject.layer == 12) { // tungsten / ship
+                //Debug.Log("Ship transition detected");
+                if (inventoryManager.CheckElement("Element_Tungsten") < 8) {
+                    //Debug.Log("Not enough tungsten");
+                    other.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                }
+            }
         }
     }
 
@@ -291,6 +300,11 @@ public class PlayerController : BaseController<PlayerController>
         if (other.tag == "TransitionObjectIn" || other.tag == "TransitionObjectOut")
         {
             pressUpPopup.SetActive(false);
+
+            // crashed ship exit scene
+            if (other.gameObject.layer == 12) { // tungsten / ship
+                other.gameObject.GetComponent<BoxCollider2D>().enabled = true;
+            }
         }
     }
 
