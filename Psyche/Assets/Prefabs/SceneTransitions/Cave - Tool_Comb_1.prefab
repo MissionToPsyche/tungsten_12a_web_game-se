@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3818017581669801352}
   - component: {fileID: 7868741783083565369}
   - component: {fileID: 5747827393776354658}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tool_Comb_1
   m_TagString: TransitionObjectOut
   m_Icon: {fileID: 0}
@@ -31,7 +31,7 @@ Transform:
   m_LocalScale: {x: 0.8999295, y: 0.8999295, z: 2.6997886}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6016245110367599872}
+  - {fileID: 3731608117377695724}
   m_Father: {fileID: 4071215947007272810}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7868741783083565369
@@ -141,7 +141,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4071215947007272810}
   - component: {fileID: 7219485014462739359}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cave - Tool_Comb_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,7 +216,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1001 &8085242793794222723
+--- !u!1001 &1188993979270756463
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -225,16 +225,28 @@ PrefabInstance:
     m_TransformParent: {fileID: 3818017581669801352}
     m_Modifications:
     - target: {fileID: 2542689318640551811, guid: 03038793f38437e42b224298834c254e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8471827
+      objectReference: {fileID: 0}
+    - target: {fileID: 2542689318640551811, guid: 03038793f38437e42b224298834c254e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8471827
+      objectReference: {fileID: 0}
+    - target: {fileID: 2542689318640551811, guid: 03038793f38437e42b224298834c254e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.0052295225
+      objectReference: {fileID: 0}
+    - target: {fileID: 2542689318640551811, guid: 03038793f38437e42b224298834c254e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.0023314
+      value: -0.0015248582
       objectReference: {fileID: 0}
     - target: {fileID: 2542689318640551811, guid: 03038793f38437e42b224298834c254e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.009
+      value: 0.18777537
       objectReference: {fileID: 0}
     - target: {fileID: 2542689318640551811, guid: 03038793f38437e42b224298834c254e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.51602244
       objectReference: {fileID: 0}
     - target: {fileID: 2542689318640551811, guid: 03038793f38437e42b224298834c254e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -269,16 +281,24 @@ PrefabInstance:
       value: Checkpoint
       objectReference: {fileID: 0}
     - target: {fileID: 5824598847134807716, guid: 03038793f38437e42b224298834c254e, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824598847134807716, guid: 03038793f38437e42b224298834c254e, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5936509847018544958, guid: 03038793f38437e42b224298834c254e, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03038793f38437e42b224298834c254e, type: 3}
---- !u!4 &6016245110367599872 stripped
+--- !u!4 &3731608117377695724 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2542689318640551811, guid: 03038793f38437e42b224298834c254e, type: 3}
-  m_PrefabInstance: {fileID: 8085242793794222723}
+  m_PrefabInstance: {fileID: 1188993979270756463}
   m_PrefabAsset: {fileID: 0}
