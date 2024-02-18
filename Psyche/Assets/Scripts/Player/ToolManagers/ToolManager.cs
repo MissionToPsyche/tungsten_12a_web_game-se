@@ -21,6 +21,7 @@ public abstract class ToolManager : MonoBehaviour
     {
         Upgrade, 
         Info,
+        MaxLevel
     }
 
     // Events

@@ -61,6 +61,31 @@ public class ImagerManager : ToolManager
                     { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 0 } , { "element_gold", 4 }, { "element_tungsten", 0 }
                 }
             },
+            {  6, new Dictionary<string, ushort>()
+                {
+                    { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 0 } , { "element_gold", 4 }, { "element_tungsten", 0 }
+                }
+            },
+            {  7, new Dictionary<string, ushort>()
+                {
+                    { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 0 } , { "element_gold", 4 }, { "element_tungsten", 0 }
+                }
+            },
+            {  8, new Dictionary<string, ushort>()
+                {
+                    { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 0 } , { "element_gold", 4 }, { "element_tungsten", 0 }
+                }
+            },
+            {  9, new Dictionary<string, ushort>()
+                {
+                    { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 0 } , { "element_gold", 4 }, { "element_tungsten", 0 }
+                }
+            },
+            {  10, new Dictionary<string, ushort>()
+                {
+                    { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 0 } , { "element_gold", 4 }, { "element_tungsten", 0 }
+                }
+            },
         };
 
         //Tool specific variables

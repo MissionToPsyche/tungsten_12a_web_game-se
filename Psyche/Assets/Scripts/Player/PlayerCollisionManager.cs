@@ -22,8 +22,6 @@ public class PlayerCollisionManager : MonoBehaviour
     /// </summary>
     public enum CollisionName
     {
-        Health,
-
         None,
     }
 
@@ -36,7 +34,6 @@ public class PlayerCollisionManager : MonoBehaviour
     {
         return name.ToLower() switch
         {
-            "health" or "health pickup variant" => CollisionName.Health,
             _ => CollisionName.None,
         };
     }
@@ -50,7 +47,6 @@ public class PlayerCollisionManager : MonoBehaviour
     {
         return name switch
         {
-            CollisionName.Health => "Health",
             _ => null,
         };
     }
@@ -136,7 +132,7 @@ public class PlayerCollisionManager : MonoBehaviour
         switch (MatchTag(other.gameObject.tag))
         {
             case CollisionTag.Hazard:
-                _playerController.playerDeath.Hazard();
+                _playerController.playerDeath.Hazard(other);
                 break;
             case CollisionTag.Spikes:
                 _playerController.playerDeath.Spikes();
@@ -172,12 +168,6 @@ public class PlayerCollisionManager : MonoBehaviour
     {
         switch (MatchName(other.name))
         {
-            case CollisionName.Health:                                        // Should we do away with the health pickup now?
-                _playerController.playerHealth.HealthUp(1); 
-                Destroy(other.gameObject);
-                //return; // Return out early for the time being
-                break;
-
             default:
                 break;
         }

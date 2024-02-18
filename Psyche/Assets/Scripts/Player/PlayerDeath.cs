@@ -4,7 +4,6 @@
  * Version: 20240130
  */
 
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -40,11 +39,9 @@ public class PlayerDeath : MonoBehaviour {
     /// Player touches hazard object.
     /// </summary>
     /// <param name="collision"></param>
-    public void Hazard()
+    public void Hazard(Collision2D collision)
     {
-        // Calculate kickback direction based on hazard position relative to the player
-        Vector2 kickbackDirection = new Vector2(-5f, 5f).normalized;
-        ApplyKickback(kickbackDirection);
+        ApplyKickback(collision);
 
         GetHurt(1);
         GameController.Instance.audioManager.playerHurt.Play();
@@ -61,13 +58,23 @@ public class PlayerDeath : MonoBehaviour {
     /// <summary>
     /// Applies a kickback force to the player character
     /// </summary>
-    /// <param name="kickbackDirection"></param>
-    private void ApplyKickback(Vector2 kickbackDirection) {
-        float kickbackForce = 3.5f;
+    private void ApplyKickback(Collision2D collision) {
+        // calculate kickback direction
+        // left up or right up, TODO: base it off collision
+        Vector2 kickbackDirection;
+        if (PlayerController.Instance.playerMovement._isFacingRight) {
+            kickbackDirection = new Vector2(-5f, 5f).normalized;
+        } else {
+            kickbackDirection = new Vector2(5f, 5f).normalized;
+        }
+
+        // set force and apply
         //Debug.Log($"Before kickback, velocity: {PlayerController.Instance.playerCharacter.velocity}");
-        PlayerController.Instance.playerCharacter.AddForce(
-            kickbackDirection * kickbackForce, ForceMode2D.Impulse
-        );
+        PlayerController.Instance.inputBlocked = true;
+        float kickbackForce = 5f;        
+        PlayerController.Instance.playerCharacter.AddForce(kickbackDirection * kickbackForce, ForceMode2D.Impulse);
+        // TODO: Simulate horizontal key press here as horizontal force is not being applied   
+        PlayerController.Instance.inputBlocked = false;
         //Debug.Log($"After kickback, velocity: {PlayerController.Instance.playerCharacter.velocity}");
     }
 

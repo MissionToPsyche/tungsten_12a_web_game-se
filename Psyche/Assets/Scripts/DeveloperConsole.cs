@@ -250,17 +250,17 @@ public class DeveloperConsole : MonoBehaviour
                                 // Currently nothing to do here
                                 break;
                             case InventoryManager.Tool.BATTERY:
-                                PlayerController.Instance.batteryManager.toolEnabled = value;
+                                PlayerController.Instance.batteryManager.Enable();
                                 break;
                             case InventoryManager.Tool.THRUSTER:
-                                PlayerController.Instance.thrusterManager.toolEnabled = value;
+                                PlayerController.Instance.thrusterManager.Enable();
                                 break;
                             case InventoryManager.Tool.ELECTROMAGNET:
-                                PlayerController.Instance.eMagnetManager.toolEnabled = value;
+                                PlayerController.Instance.eMagnetManager.Enable();
                                 PlayerController.Instance.eMagnetActive = value;
                                 break;
                             case InventoryManager.Tool.IMAGER:
-                                PlayerController.Instance.imagerManager.toolEnabled = value;
+                                PlayerController.Instance.imagerManager.Enable();
                                 break;
                             default:
                                 Debug.Log($"You somehow broke existence -- DeveloperConsole: {tool}");
