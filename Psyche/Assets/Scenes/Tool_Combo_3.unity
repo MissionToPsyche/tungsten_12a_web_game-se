@@ -1299,11 +1299,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6969730462459996994, guid: 05c40341d3492f241a8ea868ffb11cef, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.14
+      value: 2.8209999
       objectReference: {fileID: 0}
     - target: {fileID: 6969730462459996994, guid: 05c40341d3492f241a8ea868ffb11cef, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.38
+      value: -4.267
       objectReference: {fileID: 0}
     - target: {fileID: 6969730462459996994, guid: 05c40341d3492f241a8ea868ffb11cef, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1718,6 +1718,14 @@ PrefabInstance:
       propertyPath: warpToStart
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6198190713916354369, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198190713916354369, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7877526449693348844, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.34
@@ -1728,7 +1736,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7877526449693348844, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7877526449693348844, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2083,7 +2091,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 497446575545236285, guid: 15fd2b5ec1408e24ab4f8ee917000aaa, type: 3}
       propertyPath: numOfIrons
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 497446575545236285, guid: 15fd2b5ec1408e24ab4f8ee917000aaa, type: 3}
       propertyPath: spacingBetweenIrons
@@ -2239,11 +2247,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4321779371337106951, guid: c3459c583f34bbf49be52ea0ad5df946, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.97
+      value: 2.86
       objectReference: {fileID: 0}
     - target: {fileID: 4321779371337106951, guid: c3459c583f34bbf49be52ea0ad5df946, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.3
+      value: -4.478
       objectReference: {fileID: 0}
     - target: {fileID: 4321779371337106951, guid: c3459c583f34bbf49be52ea0ad5df946, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2304,7 +2312,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4327866532396469336, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4364914062602311851, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2317,6 +2325,14 @@ PrefabInstance:
     - target: {fileID: 5198483908214934543, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
       propertyPath: warpToStart
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198190713916354369, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198190713916354369, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7877526449693348844, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2392,11 +2408,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5608750381463216694, guid: 6f065834d363ff44b81d9cda2988a82a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3
+      value: 2.82
       objectReference: {fileID: 0}
     - target: {fileID: 5608750381463216694, guid: 6f065834d363ff44b81d9cda2988a82a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.31
+      value: -4.33
       objectReference: {fileID: 0}
     - target: {fileID: 5608750381463216694, guid: 6f065834d363ff44b81d9cda2988a82a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2617,11 +2633,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 439559173462451336, guid: 0b1d10aa0796d0d42981caf795db9dab, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.22
+      value: 2.85
       objectReference: {fileID: 0}
     - target: {fileID: 439559173462451336, guid: 0b1d10aa0796d0d42981caf795db9dab, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.38
+      value: -4.37
       objectReference: {fileID: 0}
     - target: {fileID: 439559173462451336, guid: 0b1d10aa0796d0d42981caf795db9dab, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2682,7 +2698,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 497446575545236285, guid: 15fd2b5ec1408e24ab4f8ee917000aaa, type: 3}
       propertyPath: spacingBetweenIrons
-      value: 3.5
+      value: 3.3
       objectReference: {fileID: 0}
     - target: {fileID: 669455269291958044, guid: 15fd2b5ec1408e24ab4f8ee917000aaa, type: 3}
       propertyPath: m_LocalPosition.y
