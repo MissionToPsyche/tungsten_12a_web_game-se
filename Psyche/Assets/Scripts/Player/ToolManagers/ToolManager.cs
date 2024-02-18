@@ -54,12 +54,8 @@ public abstract class ToolManager : MonoBehaviour
     /// </summary>
     public void Modify()
     {
-        //int newLevel = level + 1;
-        //Create package to send to UI to upgrade interface
-        ArrayList args = new ArrayList {
-                "UI", "None", "ToolManager", "ToolInfo", "upgrade",
-        };
-
+        // Check for upgrading
+        int send_level = (levelRequirements.ContainsKey(level + 1) ? level + 1 : level);
         bool upgraded = true;
         if (levelRequirements.ContainsKey(level + 1))
         {
@@ -71,10 +67,8 @@ public abstract class ToolManager : MonoBehaviour
                 }
             }
         }
-        //args.Add(upgraded);
-        //args.Add(toolName);
         //Confirm the number of required elements exists
-        if (upgraded)
+        if (upgraded && level + 1 <= send_level)
         {
             //Remove the required elements
             foreach (var requirement in levelRequirements[level + 1])
@@ -87,13 +81,7 @@ public abstract class ToolManager : MonoBehaviour
             //Upgrade the tool
             level++;
             UpgradeTool();
-            //args.Add(levelRequirements[newLevel]);
-        } else
-        {
-            //args.Add(levelRequirements[newLevel]);
         }
-        //args.Add(level + 1);
-        ToolManagerUpdate?.Invoke(ToolDirective.Upgrade, upgraded, toolName, levelRequirements[level + 1], level + 1);
-        //_playerController.SendMessage(args);
+        ToolManagerUpdate?.Invoke(ToolDirective.Upgrade, upgraded, toolName, levelRequirements[send_level], level + 1);
     }
 }

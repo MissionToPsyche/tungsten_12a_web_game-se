@@ -39,7 +39,7 @@ public class PlayerController : BaseController<PlayerController>
     public EMagnetManager eMagnetManager;
     public ThrusterManager thrusterManager;
     public GammaView gammaView;
-    public PlayerDeath deathCon;
+    public PlayerDeath playerDeath;
     public InventoryManager inventoryManager;
 
     //Booleans for the various tools
@@ -79,7 +79,8 @@ public class PlayerController : BaseController<PlayerController>
         // ##### Miscellaneous ######
         inventoryManager = GetComponent<InventoryManager>();
         inventoryManager.Initialize(this);
-        deathCon = GetComponent<PlayerDeath>();
+        playerDeath = GetComponent<PlayerDeath>();
+        playerDeath.Initialize(this);
 
         //hides mouse cursor
         Cursor.visible = false;

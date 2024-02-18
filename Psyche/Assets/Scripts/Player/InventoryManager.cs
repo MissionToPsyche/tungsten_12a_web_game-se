@@ -168,12 +168,12 @@ public class InventoryManager : MonoBehaviour
     /// <param name="toolName"></param>
     public void ToolPickUp(string toolName)
     {
-        Debug.Log($"{toolName}");
         // Transition to this at some point
         Tool tool = MatchTool(toolName);
         if (tool == Tool.None)
         {
             Debug.Log($"Not a tool {toolName}");
+            return;
         }
 
         if (tool != Tool.None && tool != Tool.BATTERY && tool != Tool.SOLARPANEL)
@@ -284,38 +284,26 @@ public class InventoryManager : MonoBehaviour
     /// <summary>
     /// Sets the amount of an element
     /// </summary>
-    /// <param name="element"></param>
-    /// <param name="amount"></param>
-    public void AddElement(Element element, ushort amount)
-    {
-        if (element == Element.None) { return; }
-        _elements2[element] += amount;
-
-        // Temporary until swapped over completely:
-        _elements[MatchElement(element)] += amount;
-        ArrayList args = new ArrayList { MatchElement(element), _elements2[element] };
-        //Send the message
-        OnUpdateInventoryElement.Invoke(args);
-    }
-
-    /// <summary>
-    /// Sets the amount of an element
-    /// </summary>
-    /// <param name="element"></param>
+    /// <param name="elementName"></param>
     /// <param name="amount"></param>
     public void AddElement(string element, ushort amount)
     {
+        // Split the incoming value from its element name and element ID
+        string[] element_set = element.Split(' ');
         //Standardize lower case
-        element = element.ToLower();
+        Element elementName = MatchElement(element_set[0].ToLower());
+        SetObjectState?.Invoke(element, false);
         //Check if valid name passed and return int
-        if (!_elements.ContainsKey(element))
+        if (!_elements2.ContainsKey(elementName))
         {
-            Debug.LogError("Incorrect element name passed -- InventoryManager Add");
+            Debug.LogError($"Incorrect element name passed -- InventoryManager Add: {elementName}");
             return;
         }
-        _elements[element] += amount;
+        _elements2[elementName] += amount;
+        // Temporary - continue to track with both dictionaries until fully transitioned over
+        _elements[element_set[0].ToLower()] += amount;
 
-        ArrayList args = new ArrayList { element, _elements[element] };
+        ArrayList args = new ArrayList { elementName, _elements[element_set[0].ToLower()] };
         //Send the message
         OnUpdateInventoryElement.Invoke(args);
     }
@@ -367,6 +355,8 @@ public class InventoryManager : MonoBehaviour
     /// <param name="amount"></param>
     public void SetElement(Element element, ushort amount)
     {
+        Debug.Log("boop");
+        Debug.Log($"{element}, {amount}");
         //Check if valid name passed and return int
         if (element == Element.None) { return; }
         _elements2[element] = amount;

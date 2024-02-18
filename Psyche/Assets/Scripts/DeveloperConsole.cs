@@ -217,7 +217,9 @@ public class DeveloperConsole : MonoBehaviour
                             Debug.Log($"Invalid amount provided: {commands[3]}");
                             return;
                         }
-                        OnDevConsoleInventorySetElement?.Invoke(element, amount); //PlayerController.Instance.inventoryManager.SetElement(element, amount);
+                        Debug.Log(amount);
+                        //OnDevConsoleInventorySetElement?.Invoke(element, amount); 
+                        PlayerController.Instance.inventoryManager.SetElement(element, amount);
                         break;
 
 
@@ -256,6 +258,9 @@ public class DeveloperConsole : MonoBehaviour
                             case InventoryManager.Tool.ELECTROMAGNET:
                                 PlayerController.Instance.eMagnetManager.toolEnabled = value;
                                 PlayerController.Instance.eMagnetActive = value;
+                                break;
+                            case InventoryManager.Tool.IMAGER:
+                                PlayerController.Instance.imagerManager.toolEnabled = value;
                                 break;
                             default:
                                 Debug.Log($"You somehow broke existence -- DeveloperConsole: {tool}");
