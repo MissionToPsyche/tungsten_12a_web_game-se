@@ -183,7 +183,10 @@ public class UIController : BaseController<UIController>
     {
         switch (tool)
         {
-            case InventoryManager.Tool.BATTERY or InventoryManager.Tool.SOLARPANEL:
+            case InventoryManager.Tool.BATTERY:
+                break;
+
+            case /*InventoryManager.Tool.BATTERY or */InventoryManager.Tool.SOLARPANEL:
                 setDialogText("'This is an Solar Panel'\n\nYour battery will automatically charge");
                 solarPanelButton.SetActive(true);
                 batteryLevel.transform.parent.gameObject.SetActive(true);
@@ -469,7 +472,7 @@ public class UIController : BaseController<UIController>
             confirmBoxText.transform.parent.gameObject.SetActive(false);
             inventoryMenu.SetActive(false);
             PlayerController.Instance.inputBlocked = false;
-            StartCoroutine(PlayerController.Instance.deathCon.Warp());
+            StartCoroutine(PlayerController.Instance.playerDeath.Warp());
         }
         ///If Title Screen button opened the Confirmation Box
         else
@@ -621,7 +624,7 @@ public class UIController : BaseController<UIController>
     }
 
     /// <summary>
-    /// 
+    /// Update the display for the requirements
     /// </summary>
     private void UpdateRequirements(Dictionary<string, ushort> levelRequirements, Transform requirementsArea)
     {
@@ -661,19 +664,19 @@ public class UIController : BaseController<UIController>
 
         switch (element)
         {
-            case "element_copper":
+            case "element_copper" or "copper":
                 copperAmount.SetText(value);
                 break;
-            case "element_iron":
+            case "element_iron" or "iron":
                 ironAmount.SetText(value);
                 break;
-            case "element_nickel":
+            case "element_nickel" or "nickel":
                 nickelAmount.SetText(value);
                 break;
-            case "element_gold":
+            case "element_gold" or "gold":
                 goldAmount.SetText(value);
                 break;
-            case "element_tungsten":
+            case "element_tungsten" or "tungsten":
                 tungstenAmount.SetText(value);
                 break;
             default:

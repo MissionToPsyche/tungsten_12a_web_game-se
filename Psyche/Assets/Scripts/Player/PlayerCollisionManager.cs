@@ -17,6 +17,9 @@ public class PlayerCollisionManager : MonoBehaviour
     //public event Action<Collision2D> OnCollisionExit;
     //public event Action<Collision2D> OnCollisionStay;
 
+    /// <summary>
+    /// Enum for tracking object names upon collision
+    /// </summary>
     public enum CollisionName
     {
         Health,
@@ -24,6 +27,11 @@ public class PlayerCollisionManager : MonoBehaviour
         None,
     }
 
+    /// <summary>
+    /// Matches the name value (string) with its respective CollisionName enum
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
     public CollisionName MatchName(string name)
     {
         return name.ToLower() switch
@@ -33,6 +41,11 @@ public class PlayerCollisionManager : MonoBehaviour
         };
     }
 
+    /// <summary>
+    /// Matches the CollisionName enum value with its respective string
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
     public string MatchName(CollisionName name)
     {
         return name switch
@@ -42,6 +55,9 @@ public class PlayerCollisionManager : MonoBehaviour
         };
     }
 
+    /// <summary>
+    /// For tracking the various CollisionTags
+    /// </summary>
     public enum CollisionTag
     {
         // Pickupable
@@ -52,11 +68,21 @@ public class PlayerCollisionManager : MonoBehaviour
         TransitionObjectIn,
         TransitionObjectOut,
 
+        // Hazards
+        Hazard,
+        Spikes,
+
+        // Checkpoint
         Checkpoint,
 
         None,
     }
 
+    /// <summary>
+    /// Matches a given tag (string) with its enum variant
+    /// </summary>
+    /// <param name="tag"></param>
+    /// <returns></returns>
     public CollisionTag MatchTag(string tag)
     {
         return tag.ToLower() switch
@@ -66,10 +92,17 @@ public class PlayerCollisionManager : MonoBehaviour
             "transitionobjectin"    => CollisionTag.TransitionObjectIn,
             "transitionobjectout"   => CollisionTag.TransitionObjectOut,
             "checkpoint"            => CollisionTag.Checkpoint,
+            "hazard"                => CollisionTag.Hazard,
+            "spikes"                => CollisionTag.Spikes,
             _                       => CollisionTag.None,
         };
     }
 
+    /// <summary>
+    /// Matches a given tag (enum) with its string variant
+    /// </summary>
+    /// <param name="tag"></param>
+    /// <returns></returns>
     public string MatchTag(CollisionTag tag)
     {
         return tag switch
@@ -79,31 +112,62 @@ public class PlayerCollisionManager : MonoBehaviour
             CollisionTag.TransitionObjectIn     => "TransitionObjectIn",
             CollisionTag.TransitionObjectOut    => "TransitionObjectOut",
             CollisionTag.Checkpoint             => "Checkpoint",
+            CollisionTag.Hazard                 => "Hazard",
+            CollisionTag.Spikes                 => "Spikes",
             _                                   => null,
         };
     }
 
-
+    /// <summary>
+    /// Initializes the script and assigns a reference to PlayerController
+    /// </summary>
+    /// <param name="playerController"></param>
     public void Initialize(PlayerController playerController)
     {
         _playerController = playerController;
     }
 
+    /// <summary>
+    /// Object collision entrance
+    /// </summary>
+    /// <param name="other"></param>
     private void OnCollisionEnter2D(Collision2D other)
     {
-        // Enter stuff Stuff
+        switch (MatchTag(other.gameObject.tag))
+        {
+            case CollisionTag.Hazard:
+                _playerController.playerDeath.Hazard();
+                break;
+            case CollisionTag.Spikes:
+                _playerController.playerDeath.Spikes();
+                break;
+            default:
+                break;
+        }
     }
 
+    /// <summary>
+    /// Object collision exit
+    /// </summary>
+    /// <param name="other"></param>
     private void OnCollisionExit2D(Collision2D other)
     {
         // Stuff
     }
 
+    /// <summary>
+    /// Object collision stay
+    /// </summary>
+    /// <param name="other"></param>
     private void OnCollisionStay2D(Collision2D other)
     {
         // Enter the rest of the stuff
     }
 
+    /// <summary>
+    /// Object collision - trigger enter
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter2D(Collider2D other)
     {
         switch (MatchName(other.name))
@@ -133,6 +197,7 @@ public class PlayerCollisionManager : MonoBehaviour
             case CollisionTag.Checkpoint:
                 SetObjectState?.Invoke(other.name, true);
                 SaveSceneState?.Invoke();
+                _playerController.playerDeath.Checkpoint(other);
                 break;
 
             default:
@@ -140,11 +205,19 @@ public class PlayerCollisionManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Object collision - trigger exit
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerExit2D(Collider2D other)
     {
         // Trigger Exit Stuff
     }
 
+    /// <summary>
+    /// Object collision - trigger stay
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerStay2D(Collider2D other)
     {
         switch (other.name)
@@ -163,8 +236,6 @@ public class PlayerCollisionManager : MonoBehaviour
                 break;
         }
     }
-
-
 
     // Start is called before the first frame update
     void Start() { }
