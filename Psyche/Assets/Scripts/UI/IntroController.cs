@@ -6,7 +6,7 @@ using UnityEngine;
 /// Author: jmolive8
 public class IntroController : MonoBehaviour
 {
-    public GameObject intro1, intro2, intro3, intro4;
+    public GameObject intro1, intro2, intro3, intro4, intro5, intro6, intro7;
 
     int curScreen = 1;
 
@@ -36,9 +36,30 @@ public class IntroController : MonoBehaviour
                     intro3.SetActive(false);
                     intro4.SetActive(true);
                     break;
+                
+                case 4:
+                    curScreen++;
+                    intro4.SetActive(false);
+                    intro5.SetActive(true);
+                    break;
+
+                case 5:
+                    curScreen++;
+                    intro5.SetActive(false);
+                    intro6.SetActive(true);
+                    break;
+
+                case 6:
+                    curScreen++;
+                    intro6.SetActive(false);
+                    intro7.SetActive(true);
+                    break;
 
                 default:
-                    UnityEngine.SceneManagement.SceneManager.LoadScene("Landing_Scene");
+                    // Set the value this way so if any changes are made they are accounted for
+                    string scene = GameController.Instance.gameStateManager.MatchScene(GameStateManager.Scene.Landing_Scene);
+                    GameController.Instance.sceneTransitionManager.devControl = true;
+                    GameController.Instance.sceneTransitionManager.OnInitiateTransition(scene);
                     break;
             }
         }

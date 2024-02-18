@@ -1,12 +1,14 @@
 /*
  * Description: Player Character
  * Authors: joshbenn, blopezro, mcmyers4, jmolive8, dnguye99asu
- * Version: 20240119
+ * Version: 20240206
  */
 
 using UnityEngine;
 using System.Collections;
 using System;
+using static ToolManager;
+using System.Collections.Generic;
 
 /// <summary>
 /// Player Management script controls how the player interacts with the 
@@ -16,18 +18,17 @@ public class PlayerController : BaseController<PlayerController>
 {
     //============================================== Initialize/Updates/Destroy ==============================================
 
-    //TEMPORARY <-----------------------------------------REMOVE WHEN NO LONGER NECESSARY
-    GameController gameController;
-
     //Create the playercharacter assignment
     [Header("Components")]
     public Rigidbody2D playerCharacter;
     public BoxCollider2D playerCollider;
+    public GameObject pressUpPopup;
 
     //Set up environmental checks
     public Transform groundCheck;
-    public float groundCheckRadius = 0.2f;
+    public Vector2 groundCheckSize;
     public LayerMask whatIsGround;
+    public float groundCastDistance;
 
     //Booleans for environmental checks
     [HideInInspector] public bool isGrounded;
@@ -41,7 +42,6 @@ public class PlayerController : BaseController<PlayerController>
     public EMagnetManager eMagnetManager;
     public ThrusterManager thrusterManager;
     public GammaView gammaView;
-    private SceneManager sceneTransition;
     public PlayerDeath deathCon;
     public InventoryManager inventoryManager;
 
@@ -49,7 +49,7 @@ public class PlayerController : BaseController<PlayerController>
     private bool usingThruster; //for animation purposes  // <--Implement boolean in thruster script
 
     //Booleans to prevent needless code runs
-    [HideInInspector] public bool eMagnetActive, beingPulled, inputBlocked, beingWarped, enteringCave, exitingCave; //Create a dictionary or list to track these
+    [HideInInspector] public bool eMagnetActive, magnetInterrupt, beingPulled, inputBlocked, beingWarped, enteringCave, exitingCave; //Create a dictionary or list to track these
 
     /// <summary>
     /// Initialize the object and parent class
@@ -58,9 +58,6 @@ public class PlayerController : BaseController<PlayerController>
     {
         //Initialize base
         base.Initialize();
-
-        //TEMPORARY <-----------------------------------------REMOVE WHEN NO LONGER NECESSARY
-        gameController = FindAnyObjectByType<GameController>();
 
         //Assign and initialize scripts
         playerCharacter = GetComponent<Rigidbody2D>();
@@ -86,6 +83,12 @@ public class PlayerController : BaseController<PlayerController>
         inventoryManager.Initialize(this);
         //hides mouse cursor
         Cursor.visible = false;
+
+        //groundcheck
+        groundCheckSize = new Vector2(0.785f, 0.1f);
+
+        // Tell GameController to LoadPlayer() after everything's initialized
+        GameController.Instance.LoadPlayer();
     }
 
     /// <summary>
@@ -129,7 +132,7 @@ public class PlayerController : BaseController<PlayerController>
     public void Update()
     {
         //Check booleans
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
+        isGrounded = checkGrounded();
 
         //Max cap for fall rate
         float maxFallVelocity = -10.0f;
@@ -164,9 +167,16 @@ public class PlayerController : BaseController<PlayerController>
             }
 
             //ElectroMagnet
-            if (inventoryManager.CheckTool("electromagnet") && Input.GetButton("EMagnet") && batteryManager.batteryPercent != 0 && !eMagnetActive) {
+            if (inventoryManager.CheckTool("electromagnet") && Input.GetButton("EMagnet") && batteryManager.batteryPercent != 0 && !eMagnetActive && !magnetInterrupt) {
                 eMagnetManager.Activate();
                 batteryManager.DrainBatt(500);
+            }
+
+            //Passive Battery
+            //if (inventoryManager.CheckTool("battery") && !Input.GetButton("Jump") && !Input.GetButton("FireGRS") && !Input.GetButton("EMagnet") && batteryManager.batteryPercent != 100 && !eMagnetActive && !beingPulled && !usingThruster)
+            if (!Input.GetButton("Jump") && !Input.GetButton("FireGRS") && !Input.GetButton("EMagnet") && batteryManager.batteryPercent != 100 && !eMagnetActive && !beingPulled && !usingThruster)
+            {
+                batteryManager.PassiveBatt(1);
             }
         }
 
@@ -189,36 +199,8 @@ public class PlayerController : BaseController<PlayerController>
     //======================================================== Events ========================================================
     
     //Events definitions
-    public event Action<ArrayList> OnUpdatePlayerToUI;
-    public event Action<ArrayList> OnUpdatePlayerToGame;
-
-    /// <summary>
-    /// Invokes events for this and any subclasses.
-    /// - Takes in an arraylist -- Requirements:
-    ///   - ArrayList[0] = destination
-    ///   - ArrayList[1] = sub-destination ('None' if Controller)
-    ///   - ArrayList[2] = source
-    /// </summary>
-    /// <param name="args"></param>
-    public override void SendMessage(ArrayList args)
-    {
-        string destination = args[0].ToString();
-        args.RemoveAt(0);
-
-        //Send out events depending on the invokee
-        switch (destination)
-        {
-            case "UI":
-                OnUpdatePlayerToUI?.Invoke(args);
-                break;
-            case "Game":
-                OnUpdatePlayerToGame?.Invoke(args);
-                break;
-            default:
-                Debug.Log("Incorrect invocation in GameController");
-                break;
-        }
-    }
+    public event Action<string>         InitiateTransition;
+    public event Action<string, object> SetObjectState;
 
     void ModifyTool(ArrayList args)
     {
@@ -240,41 +222,6 @@ public class PlayerController : BaseController<PlayerController>
         }
     }
 
-    /// <summary>
-    /// Processes any event passed to this class
-    /// Requirements:
-    ///   - ArrayList[0] = sub-destination ('None' if Controller)
-    ///   - ArrayList[1] = source
-    /// </summary>
-    /// <param name="args"></param>
-    protected override void ReceiveMessage(ArrayList args)
-    {
-        string subdestination = args[0].ToString();
-        args.RemoveAt(0);
-
-        switch (subdestination)
-        {
-            case "None":
-                string source = args[0].ToString();
-                args.RemoveAt(0);
-                
-                switch(source)
-                {
-                    case "DeveloperConsole":
-                        string item = args[0].ToString();
-                        //Set up for whether tool/element is passed
-                        break;
-                }
-                break;
-            case "InventoryManager":
-                inventoryManager.ReceiveMessage(args);
-                break;
-            default:
-                Debug.Log("Incorrect subdestination -- PlayerController");
-                break;
-        }
-    }
-
 
     /// <summary>
     /// Subscribes to events and activates when event triggered
@@ -282,8 +229,6 @@ public class PlayerController : BaseController<PlayerController>
     /// </summary>
     private void OnEnable()
     {
-        GameController.Instance.OnUpdateGameToPlayer += ReceiveMessage;
-        UIController.Instance.OnUpdateUIToPlayer += ReceiveMessage;
         UIController.Instance.OnUpdateToolModify += ModifyTool;
     }
 
@@ -295,15 +240,13 @@ public class PlayerController : BaseController<PlayerController>
     {
         if(GameController.Instance != null)
         {
-            GameController.Instance.OnUpdateGameToPlayer -= ReceiveMessage;
+
         }
         if(UIController.Instance != null)
         {
-            UIController.Instance.OnUpdateUIToPlayer -= ReceiveMessage;
+ 
         }
     }
-
-    //TODO: INSERT EVENT FUNCTIONS HERE
 
 
     //======================================================= Triggers =======================================================
@@ -316,10 +259,7 @@ public class PlayerController : BaseController<PlayerController>
     {
         if (other.tag == "TransitionObjectIn" || other.tag ==  "TransitionObjectOut") //for Transition objects
         {
-            ArrayList args = new ArrayList { 
-                "Game", "SceneManager", "PlayerController", other.name, other.tag 
-            };
-            SendMessage(args);
+            InitiateTransition?.Invoke(other.name);
         }
     }
 
@@ -340,6 +280,18 @@ public class PlayerController : BaseController<PlayerController>
             ToolPickUp(other.name);
             Destroy(other.gameObject);
         }*/
+        else if (other.tag == "TransitionObjectIn" || other.tag == "TransitionObjectOut")
+        {
+            pressUpPopup.SetActive(true);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.tag == "TransitionObjectIn" || other.tag == "TransitionObjectOut")
+        {
+            pressUpPopup.SetActive(false);
+        }
     }
 
     /// <summary>
@@ -348,9 +300,18 @@ public class PlayerController : BaseController<PlayerController>
     /// <param name="toolName"></param>
     public void ToolPickUp(string toolName)
     {
+        // Transition to this at some point
+        var tool = inventoryManager.MatchTool(toolName);
+        SetObjectState?.Invoke(toolName, false);
+
         //Other actions
         switch (toolName)
         {
+            case "SolarPanel":
+                batteryManager.Enable();
+                inventoryManager.SetTool("Battery", true);
+                break;
+
             case "Thruster":
                 thrusterManager.Enable();
                 inventoryManager.SetTool(toolName, true);
@@ -371,8 +332,8 @@ public class PlayerController : BaseController<PlayerController>
                 break;
 
             case "Battery":
-                batteryManager.Enable();
-                inventoryManager.SetTool(toolName, true);
+                //batteryManager.Enable();
+                //inventoryManager.SetTool(toolName, true);
                 batteryManager.ChargeBatt(500);
                 break;
 
@@ -384,5 +345,36 @@ public class PlayerController : BaseController<PlayerController>
                 Debug.LogWarning("Tool name '" + toolName + "' not found!");
                 break;
         }
+    }
+
+    /// <summary>
+    /// Creates a cast from the groundcheck box object, attached to the player, pointing down.
+    /// If it detects a ground object, then it returns true. If not, then false.
+    /// </summary>
+    /// <returns></returns>
+    public bool checkGrounded()
+    {
+        if (Physics2D.BoxCast(groundCheck.position, groundCheckSize, 0, -groundCheck.up, groundCastDistance, whatIsGround))
+            return true;
+        else
+            return false;
+    }
+
+    /// <summary>
+    /// Disables EMagnet for a bit when the player gets damaged
+    /// </summary>
+    public IEnumerator interruptMagnet()
+    {
+        magnetInterrupt = true;
+        yield return new WaitForSeconds(1);
+        magnetInterrupt = false;
+    }
+
+    /// <summary>
+    /// For debugging purposes. This draws a box to show where the ground check is/how far the cast is.
+    /// </summary>
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireCube(groundCheck.position - groundCheck.up * groundCastDistance, groundCheckSize);
     }
 }

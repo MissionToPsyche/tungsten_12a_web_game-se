@@ -1,9 +1,10 @@
 /** 
 Description: battery script
-Author: blopezro
-Version: 20231109
+Author: blopezro, mcmyers
+Version: 20240206
 **/
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,11 +18,10 @@ public class BatteryManager : ToolManager {
     public float maxCapacity;
     public float batteryPercent;
     public float rate;
-    public bool batteryDrained;
+    public bool  batteryDrained;
 
     //Events to communicate to UI
-    public delegate void OnBatteryPercentageChanged(float newPercentage);
-    public event OnBatteryPercentageChanged onBatteryPercentageChanged;
+    public event Action<float> OnBatteryPercentageChanged;
 
     /// <summary>
     /// Initialize this script
@@ -33,31 +33,31 @@ public class BatteryManager : ToolManager {
         toolEnabled = false;
         _playerController = playerController;
         level = 0;
-        levelRequirements = new Dictionary<int, Dictionary<string, int>>()
+        levelRequirements = new Dictionary<int, Dictionary<string, ushort>>()
         {
-            {  1, new Dictionary<string, int>()
+            {  1, new Dictionary<string, ushort>()
                 {
-                    { "element_copper", 0 }, { "element_iron", 0 }, { "element_nickel", 1 }, { "element_gold", 0 }, { "element_platinum", 0 }
+                    { "element_copper", 0 }, { "element_iron", 0 }, { "element_nickel", 2 }, { "element_gold", 0 }, { "element_tungsten", 0 }
                 }
             },
-            {  2, new Dictionary<string, int>()
+            {  2, new Dictionary<string, ushort>()
                 {
-                    { "element_copper", 0 }, { "element_iron", 0 }, { "element_nickel", 2 }, { "element_gold", 0 }, { "element_platinum", 0 }
+                    { "element_copper", 0 }, { "element_iron", 0 }, { "element_nickel", 2 }, { "element_gold", 0 }, { "element_tungsten", 0 }
                 }
             },
-            {  3, new Dictionary<string, int>()
+            {  3, new Dictionary<string, ushort>()
                 {
-                    { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 3 }, { "element_gold", 0 }, { "element_platinum", 0 }
+                    { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 3 }, { "element_gold", 0 }, { "element_tungsten", 0 }
                 }
             },
-            {  4, new Dictionary<string, int>()
+            {  4, new Dictionary<string, ushort>()
                 {
-                    { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 4 } , { "element_gold", 0 } , { "element_platinum", 0 }
+                    { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 4 } , { "element_gold", 0 } , { "element_tungsten", 0 }
                 }
             },
-            {  5, new Dictionary<string, int>()
+            {  5, new Dictionary<string, ushort>()
                 {
-                    { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 5 } , { "element_gold", 0 } , { "element_platinum", 0 }
+                    { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 5 } , { "element_gold", 0 } , { "element_tungsten", 0 }
                 }
             },
         };
@@ -81,11 +81,7 @@ public class BatteryManager : ToolManager {
         if (batteryPercent == 0) {
             batteryDrained = true;
         }
-        //Create package to send
-        ArrayList args = new ArrayList {
-                "UI", "None", "BatteryManager", Mathf.RoundToInt(batteryPercent),
-        };
-        _playerController.SendMessage(args);
+        OnBatteryPercentageChanged?.Invoke(Mathf.RoundToInt(batteryPercent));
     }
 
     /// <summary>
@@ -99,11 +95,23 @@ public class BatteryManager : ToolManager {
         if (batteryPercent > 0) {
             batteryDrained = false;
         }
-        //Create package to send
-        ArrayList args = new ArrayList {
-                "UI", "None", "BatteryManager", Mathf.RoundToInt(batteryPercent),
-        };
-        _playerController.SendMessage(args);
+        OnBatteryPercentageChanged?.Invoke(Mathf.RoundToInt(batteryPercent));
+    }
+
+    /// <summary>
+    /// passively recharges battery at given rate
+    /// </summary>
+    /// <param name="rate"></param>
+    public void PassiveBatt(float rate)
+    {
+        batteryLevel += rate/1000 ;
+        batteryLevel = Mathf.Clamp(batteryLevel, 0f, maxCapacity); // keeps batt level between 0-100
+        batteryPercent = batteryLevel / maxCapacity * 100f;
+        if (batteryPercent > 0)
+        {
+            batteryDrained = false;
+        }
+        OnBatteryPercentageChanged?.Invoke(Mathf.RoundToInt(batteryPercent));
     }
 
     /// <summary>
@@ -116,11 +124,7 @@ public class BatteryManager : ToolManager {
         if (batteryPercent > 0) {
             batteryDrained = false;
         }
-        //Create package to send
-        ArrayList args = new ArrayList {
-                "UI", "None", "BatteryManager", Mathf.RoundToInt(batteryPercent),
-        };
-        _playerController.SendMessage(args);
+        OnBatteryPercentageChanged?.Invoke(Mathf.RoundToInt(batteryPercent));
     }
 
     /// <summary>

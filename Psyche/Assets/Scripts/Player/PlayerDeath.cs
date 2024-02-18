@@ -4,7 +4,6 @@
  * Version: 20240130
  */
 
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,30 +34,41 @@ public class PlayerDeath : MonoBehaviour {
     private void OnCollisionEnter2D(Collision2D collision) {
             //regular hazards do 1 damage
         if (collision.gameObject.CompareTag("Hazard")) {
-
-            // Calculate kickback direction based on hazard position relative to the player
-            Vector2 kickbackDirection = new Vector2(-5f, 5f).normalized;
-            ApplyKickback(kickbackDirection);            
-            
+            ApplyKickback(collision);
             GetHurt(1);
+            GameController.Instance.audioManager.playerHurt.Play();
+
+            ///Temporarily disables EMagnet
+            StartCoroutine(PlayerController.Instance.interruptMagnet());
         }
 
         //spikes do full damage
         else if (collision.gameObject.CompareTag("Spikes")) {
             GetHurt(playerHealth.playerHealth);
+            GameController.Instance.audioManager.playerHurt.Play();
         }
     }
 
     /// <summary>
     /// Applies a kickback force to the player character
     /// </summary>
-    /// <param name="kickbackDirection"></param>
-    private void ApplyKickback(Vector2 kickbackDirection) {
-        float kickbackForce = 3.5f;
+    private void ApplyKickback(Collision2D collision) {
+        // calculate kickback direction
+        // left up or right up, TODO: base it off collision
+        Vector2 kickbackDirection;
+        if (PlayerController.Instance.playerMovement._isFacingRight) {
+            kickbackDirection = new Vector2(-5f, 5f).normalized;
+        } else {
+            kickbackDirection = new Vector2(5f, 5f).normalized;
+        }
+
+        // set force and apply
         //Debug.Log($"Before kickback, velocity: {PlayerController.Instance.playerCharacter.velocity}");
-        PlayerController.Instance.playerCharacter.AddForce(
-            kickbackDirection * kickbackForce, ForceMode2D.Impulse
-        );
+        PlayerController.Instance.inputBlocked = true;
+        float kickbackForce = 5f;        
+        PlayerController.Instance.playerCharacter.AddForce(kickbackDirection * kickbackForce, ForceMode2D.Impulse);
+        // TODO: Simulate horizontal key press here as horizontal force is not being applied   
+        PlayerController.Instance.inputBlocked = false;
         //Debug.Log($"After kickback, velocity: {PlayerController.Instance.playerCharacter.velocity}");
     }
 
@@ -97,10 +107,8 @@ public class PlayerDeath : MonoBehaviour {
         if (playerHealth.playerHealth <= 0) {
             //Debug.Log("Game should rest to checkpoint here.....");
 
-            //start the warping animation
+            //start the warping animation & reset player's heath & battery
             StartCoroutine(Warp());
-            //reset the player's health to 5
-            playerHealth.HealthUp(5);
         }
     }
 
@@ -121,14 +129,14 @@ public class PlayerDeath : MonoBehaviour {
         if (startPoint.Equals(respawnPoint)) {
             //UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
             //changed so that camera bounds would load on player repawn
-            ArrayList args = new ArrayList {
-                "Game", "SceneManager", "PlayerController", UnityEngine.SceneManagement.SceneManager.GetActiveScene().name
-            };
-            PlayerController.Instance.SendMessage(args);
+            StartCoroutine(GameController.Instance.sceneTransitionManager.CheckTransition(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name));
         }
 
         //move the player to their respawn point
         transform.position = respawnPoint;
+
+        playerHealth.HealthUp(100);
+        gameObject.GetComponent<BatteryManager>().Activate();
 
         //unblock player controls
         PlayerController.Instance.inputBlocked = false;
