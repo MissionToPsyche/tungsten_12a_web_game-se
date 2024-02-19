@@ -13,6 +13,7 @@ public class EMagnetManager : ToolManager {
     /// Parent object of EMagnet Hit Box. Used for rotating the Hit Box around the player's center
     /// </summary>
     private Transform hitBoxRotator;
+    private int pullSpeed = 20;
 
     public void Initialize(PlayerController playerManagement)
     {
@@ -21,31 +22,31 @@ public class EMagnetManager : ToolManager {
         toolEnabled = false;
         _playerController = playerManagement;
         level = 0;
-        levelRequirements = new Dictionary<int, Dictionary<string, int>>()
+        levelRequirements = new Dictionary<int, Dictionary<string, ushort>>()
         {
-            {  1, new Dictionary<string, int>()
+            {  1, new Dictionary<string, ushort>()
                 {
-                    { "element_copper", 0 }, { "element_iron", 1 }, { "element_nickel", 0 }, { "element_gold", 0 }, { "element_platinum", 0 }
+                    { "element_copper", 0 }, { "element_iron", 2 }, { "element_nickel", 0 }, { "element_gold", 0 }, { "element_tungsten", 0 }
                 }
             },
-            {  2, new Dictionary<string, int>()
+            {  2, new Dictionary<string, ushort>()
                 {
-                    { "element_copper", 0 }, { "element_iron", 2 }, { "element_nickel", 0 }, { "element_gold", 0 }, { "element_platinum", 0 }
+                    { "element_copper", 0 }, { "element_iron", 2 }, { "element_nickel", 0 }, { "element_gold", 0 }, { "element_tungsten", 0 }
                 }
             },
-            {  3, new Dictionary<string, int>()
+            {  3, new Dictionary<string, ushort>()
                 {
-                    { "element_copper", 0 } , { "element_iron", 3 }, { "element_nickel", 0 }, { "element_gold", 0 }, { "element_platinum", 0 }
+                    { "element_copper", 0 } , { "element_iron", 3 }, { "element_nickel", 0 }, { "element_gold", 0 }, { "element_tungsten", 0 }
                 }
             },
-            {  4, new Dictionary<string, int>()
+            {  4, new Dictionary<string, ushort>()
                 {
-                    { "element_copper", 0 } , { "element_iron", 4 }, { "element_nickel", 0 }, { "element_gold", 0 }, { "element_platinum", 0 }
+                    { "element_copper", 0 } , { "element_iron", 4 }, { "element_nickel", 0 }, { "element_gold", 0 }, { "element_tungsten", 0 }
                 }
             },
-            {  5, new Dictionary<string, int>()
+            {  5, new Dictionary<string, ushort>()
                 {
-                    { "element_copper", 0 } , { "element_iron", 5 } , { "element_nickel", 0 } , { "element_gold", 0 }, { "element_platinum", 0 }
+                    { "element_copper", 0 } , { "element_iron", 5 } , { "element_nickel", 0 } , { "element_gold", 0 }, { "element_tungsten", 0 }
                 }
             },
         };
@@ -87,7 +88,7 @@ public class EMagnetManager : ToolManager {
             /**
              * Makes a box cast using the scale of the EMagnet Hit Box
              */
-            hit = Physics2D.OverlapBox(eMagHitBox.transform.position, eMagHitBox.transform.lossyScale, angle, 1 << 14);
+            hit = Physics2D.OverlapBox(eMagHitBox.transform.position, eMagHitBox.transform.lossyScale, angle, 1 << 7);
             if (hit != null)
             {
                 ///If movable Iron object hit
@@ -121,7 +122,7 @@ public class EMagnetManager : ToolManager {
             if (target != null)
             {
                 if (target.gameObject.activeInHierarchy)
-                    _playerController.playerCharacter.MovePosition(Vector2.MoveTowards(transform.position, target.transform.position, Time.deltaTime * 20));
+                    _playerController.playerCharacter.MovePosition(Vector2.MoveTowards(transform.position, target.transform.position, Time.deltaTime * pullSpeed));
                 else
                 {
                     /**
@@ -134,7 +135,7 @@ public class EMagnetManager : ToolManager {
             }
 
             yield return null;
-        } while (Input.GetButton("EMagnet"));
+        } while (Input.GetButton("EMagnet") && !_playerController.magnetInterrupt);
 
         GameController.Instance.audioManager.toolEMagnet.Stop();
         _playerController.playerCharacter.gravityScale = curGrav;
@@ -148,7 +149,8 @@ public class EMagnetManager : ToolManager {
     /// </summary>
     protected override void UpgradeTool()
     {
-        eMagHitBox.transform.localScale += new Vector3(0.5f, 0, 0);
-        eMagHitBox.transform.localPosition += new Vector3(0.25f, 0, 0);
+        //eMagHitBox.transform.localScale += new Vector3(0.5f, 0, 0);
+        //eMagHitBox.transform.localPosition += new Vector3(0.25f, 0, 0);
+        pullSpeed += 10;
     }
 }

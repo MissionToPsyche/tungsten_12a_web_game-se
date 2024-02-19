@@ -1,12 +1,17 @@
 /** 
 Description: spectrometer tool gamma view script
 Author: blopezro
-Version: 20240119
+Version: 20240210
+**/
+
+/**
+Notes:
+grs/GRS (gamma ray spectrometer) and grns/GRNS
+(gamma ray neutron spectrometer) refer to the same thing
 **/
 
 using System;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
@@ -23,14 +28,21 @@ public class GammaView : MonoBehaviour {
     public List<SpriteRenderer> spriteRenderersList; // holds all sprite renderers of game objects
     public Color[] origColorArray;                   // holds original colors of the sprite renderers
     public List<GameObject> colorBlindModeObjects;   // holds objects stored for assistance with color blindness
-    /* other variables */
-    public Color defaultColor = Color.green;         // default color to use when default layer is used
-    public bool colorBlindMode;                      // color blind mode boolean    
-    public Camera mainCamera;                        // scene camera used to only load objects within view
+    /* scene light */
     public Light2D sceneLight;                       // light in the current scene
     public float origSceneLightIntensity;            // light intensity of the scene
+    public bool grnsControlsSceneLight = false;      // boolean to set if grns will influence scene light    
+    /* scene terrain */
     public Tilemap sceneTilemap;                     // tilemap (terrain component) in current scene
     public Color origSceneTilemapColor;              // terrain color of the scene
+    /* scene background image */
+    public SpriteRenderer sceneBackground;           // background image in current scene
+    public Color origSceneBackgroundColor;           // background color of the scene
+    /* other variables */
+    public Color defaultColor = Color.green;         // default color to use when default layer is used
+    public bool colorBlindMode;                      // color blind mode boolean
+    public bool colorBlindModeNames = true;          // boolean to set if color blind mode will set layer name vice number
+    public Camera mainCamera;                        // scene camera used to only load objects within view
     
     /// <summary>
     /// Subscribes to the SceneManager.sceneLoaded event
@@ -52,10 +64,14 @@ public class GammaView : MonoBehaviour {
     /// <param name="scene"></param>
     /// <param name="mode"></param>
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
-        sceneLight = GameObject.FindGameObjectWithTag("SceneLight").GetComponent<Light2D>();
-        sceneTilemap = GameObject.FindGameObjectWithTag("Terrain").GetComponent<Tilemap>();
-        origSceneLightIntensity = sceneLight.intensity;
-        origSceneTilemapColor = sceneTilemap.color;
+        if (scene.name != "Outro_Cutscene") {
+            sceneLight = GameObject.FindGameObjectWithTag("SceneLight").GetComponent<Light2D>();
+            sceneTilemap = GameObject.FindGameObjectWithTag("Terrain").GetComponent<Tilemap>();
+            sceneBackground = GameObject.FindGameObjectWithTag("Background").GetComponent<SpriteRenderer>();
+            origSceneLightIntensity = sceneLight.intensity;
+            origSceneTilemapColor = sceneTilemap.color;
+            origSceneBackgroundColor = sceneBackground.color;
+        }
     }
 
     /// <summary>
@@ -94,6 +110,9 @@ public class GammaView : MonoBehaviour {
                 ApplyColorBlindModifications(spriteRenderer);
             }
         }
+
+        // changes terrain and background color
+        ChangeTerrainAndBackgroundColor();
     }
 
     /// <summary>
@@ -139,10 +158,9 @@ public class GammaView : MonoBehaviour {
                 spriteRenderersList[i].color = LayerColor(spriteRenderersList[i].gameObject);
                 if (Input.GetButtonDown("FireGRS")) {
                     GameController.Instance.audioManager.toolGRS.Play();
-                    ChangeTerrainColor(); // placed in here so it runs one time
                 }
                 if (colorBlindMode) { ActivateGRSaltView(); }
-                if (!sceneLight.intensity.Equals(1)) {
+                if (!sceneLight.intensity.Equals(1) && grnsControlsSceneLight) {
                     TurnOnSceneLight();
                 }
             }
@@ -158,10 +176,9 @@ public class GammaView : MonoBehaviour {
                 spriteRenderersList[i].color = origColorArray[i];
                 if (Input.GetButtonUp("FireGRS")) {
                     GameController.Instance.audioManager.toolGRS.Stop();
-                    RevertTerrainColor(); // placed in here so it runs one time
                 }
                 if (colorBlindMode) { DeactivateGRSaltView(); }
-                if (!sceneLight.intensity.Equals(origSceneLightIntensity)) {
+                if (!sceneLight.intensity.Equals(origSceneLightIntensity) && grnsControlsSceneLight) {
                     RevertSceneLight();
                 }
             }
@@ -250,49 +267,63 @@ public class GammaView : MonoBehaviour {
 
     /// <summary>
     /// Modifies game object properties to assist with color blind players
+    /// by displaying the layers text vice a new color
     /// </summary>
     /// <param name="spriteRenderer"></param>
     void ApplyColorBlindModifications(SpriteRenderer spriteRenderer) {
         if (colorBlindMode) {
-            // get current game object
-            GameObject gameObject = spriteRenderer.gameObject;
-            // get layer of game object
-            int layerNum = gameObject.layer;
+            GameObject gameObject = spriteRenderer.gameObject;      // get current game object
+            int layerNum = gameObject.layer;                        // get layer number of game object
+            string layerName = LayerMask.LayerToName(layerNum);     // get layer name of game object
 
-            // create game object to display number and anchor in center
-            GameObject grsNumberObject = new GameObject("GRS_ColorBlindMode");
-            TextMesh textMesh = grsNumberObject.AddComponent<TextMesh>();
+            // create game object to display text and anchor in center
+            GameObject grsTextObject = new GameObject("GRS_ColorBlindMode");
+            TextMesh textMesh = grsTextObject.AddComponent<TextMesh>();
             
             // initially set to false until GRS is activated
-            grsNumberObject.SetActive(false);
-            colorBlindModeObjects.Add(grsNumberObject);
+            grsTextObject.SetActive(false);
+            colorBlindModeObjects.Add(grsTextObject);
 
-            // text properties based on layer number
-            textMesh.text = layerNum switch {
-                0 or 15 => "",            // default (0) or clear (15) layer numbers
-                _ => layerNum.ToString(), // else displays number
-            };
-            textMesh.characterSize = 0.15f;
-            textMesh.fontSize = 30;
-            textMesh.font = Resources.Load<Font>("");
-            textMesh.color = Color.white;
-            textMesh.anchor = TextAnchor.MiddleCenter;
-
-            // position the number object at the center of the object and set parent
-            grsNumberObject.transform.position = spriteRenderer.transform.position;
-            grsNumberObject.transform.parent = spriteRenderer.transform;
-
-            // set sorting layer and order to view text in front of game object
-            grsNumberObject.GetComponent<Renderer>().sortingLayerName = "Foreground";
-            grsNumberObject.GetComponent<Renderer>().sortingOrder = 1;
-        } else {
-            // destroy number object if created
-            GameObject numberObject = spriteRenderer.transform.Find("GRS_ColorBlindMode").gameObject;
-            if (numberObject != null) {
-                colorBlindModeObjects.Remove(numberObject);
-                Destroy(numberObject);
-            }
+            // set the text and game object properties
+            SetTextMeshProperties(textMesh, layerNum, layerName);
+            SetTextObjProperties(grsTextObject, spriteRenderer);
         }
+    }
+
+    /// <summary>
+    /// Sets the text properties of the given text mesh
+    /// </summary>
+    /// <param name="textMesh"></param>
+    /// <param name="layerNum"></param>
+    /// <param name="layerName"></param>
+    public void SetTextMeshProperties(TextMesh textMesh, int layerNum, String layerName) {
+        // text properties based on layer number
+        textMesh.text = layerNum switch {
+            <= 5 or >= 15 => "", // layers to ignore for labeling
+            // else displays text based on bool? true:false
+            _ => colorBlindModeNames? layerName.ToString():layerNum.ToString(),
+        };
+        textMesh.characterSize = 0.15f;
+        textMesh.fontSize = 30;
+        textMesh.font = Resources.Load<Font>("");
+        textMesh.color = Color.red;
+        textMesh.anchor = TextAnchor.MiddleCenter;
+    }
+
+    /// <summary>
+    /// Sets the game object properties
+    /// </summary>
+    /// <param name="grsTextObject"></param>
+    /// <param name="spriteRenderer"></param>
+    public void SetTextObjProperties(GameObject grsTextObject, SpriteRenderer spriteRenderer) {
+        // set the text object as a child of the sprite renderer
+        grsTextObject.transform.parent = spriteRenderer.transform;
+        // position at the center and rotate 45 degrees
+        grsTextObject.transform.position = spriteRenderer.transform.position;
+        grsTextObject.transform.Rotate(new Vector3(0,0,45));
+        // set sorting layer and order to view text in front of game object
+        grsTextObject.GetComponent<Renderer>().sortingLayerName = "UI";
+        grsTextObject.GetComponent<Renderer>().sortingOrder = 1;
     }
 
     /// <summary>
@@ -307,12 +338,13 @@ public class GammaView : MonoBehaviour {
     }
 
     /// <summary>
-    /// Hide alternative view
+    /// Hide alternative view and additionally destroy game object
     /// </summary>
     void DeactivateGRSaltView() {
         foreach (GameObject obj in colorBlindModeObjects) {
             if (obj != null) {
                 obj.SetActive(false);
+                Destroy(obj);
             }
         }
     }
@@ -333,23 +365,30 @@ public class GammaView : MonoBehaviour {
         spriteRenderersList.Clear();
         origColorArray = new Color[0];
         colorBlindModeObjects.Clear();
+        RevertTerrainAndBackgroundColor();
     }
 
     /// <summary>
-    /// Changes the color of the terrain
+    /// Changes the color of the terrain and background
     /// </summary>
-    void ChangeTerrainColor() {
+    void ChangeTerrainAndBackgroundColor() {
         if (sceneTilemap != null) {
             sceneTilemap.color = defaultColor;
+        }
+        if (sceneBackground != null) {
+            sceneBackground.color = defaultColor;
         }
     }
 
     /// <summary>
-    /// Reverts the color of the terrain
+    /// Reverts the color of the terrain and background
     /// </summary>
-    void RevertTerrainColor() {
+    void RevertTerrainAndBackgroundColor() {
         if (sceneTilemap != null) {
             sceneTilemap.color = origSceneTilemapColor;
+        }
+        if (sceneBackground != null) {
+            sceneBackground.color = origSceneBackgroundColor;
         }
     }
 
