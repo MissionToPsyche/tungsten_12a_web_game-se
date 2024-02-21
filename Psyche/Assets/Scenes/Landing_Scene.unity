@@ -9539,6 +9539,24 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 560800506677926890, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 560800506677926890, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 108
+      objectReference: {fileID: 0}
+    - target: {fileID: 989306977366759906, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b741a41b55dc104439e825cf3512e571, type: 3}
+    - target: {fileID: 2345780526257056279, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: m_text
+      value: 'Solar Array
+
+'
+      objectReference: {fileID: 0}
     - target: {fileID: 5172690812288988953, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
       propertyPath: m_Camera
       value: 
