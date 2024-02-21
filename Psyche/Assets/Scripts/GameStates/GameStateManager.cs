@@ -28,8 +28,7 @@ public class GameStateManager : MonoBehaviour
 
             //InGame state mappings
             { GameState.InGame, new Dictionary<Scene, BaseState>() {
-                /*{ SceneState.Intro_Cutscene, new IntroCutsceneState() },
-                { SceneState.Landing_Scene, new LandingSceneState() },*/
+                { Scene.Landing_Scene, new Landing_SceneState() },
                 { Scene.Tool_Intro_eMagnet, new Tool_Intro_eMagnetState() },
             } },
         };
@@ -45,15 +44,22 @@ public class GameStateManager : MonoBehaviour
         PlayerController.Instance.playerCollisionManager.SaveSceneState += SaveSceneState;
     }
 
+    public void UnloadPlayer()
+    {
+        PlayerController.Instance.inventoryManager.SetObjectState -= SetObjectState;
+        PlayerController.Instance.playerCollisionManager.SetObjectState += SetObjectState;
+        PlayerController.Instance.playerCollisionManager.SaveSceneState += SaveSceneState;
+    }
+
     public void OnEnable() { }
 
     public void OnDisable()
     {
         if (PlayerController.Instance != null)
         {
-            PlayerController.Instance.inventoryManager.SetObjectState -= SetObjectState;
-            PlayerController.Instance.playerCollisionManager.SetObjectState += SetObjectState;
-            PlayerController.Instance.playerCollisionManager.SaveSceneState += SaveSceneState;
+            //PlayerController.Instance.inventoryManager.SetObjectState -= SetObjectState;
+            //PlayerController.Instance.playerCollisionManager.SetObjectState += SetObjectState;
+            //PlayerController.Instance.playerCollisionManager.SaveSceneState += SaveSceneState;
         }
     }
 
