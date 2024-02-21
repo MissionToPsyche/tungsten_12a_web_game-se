@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -94,8 +95,8 @@ public class UIController : BaseController<UIController>
             _devConsolePanel.SetActive(!_devConsolePanel.activeSelf); //shows panel
             PlayerController.Instance.inputBlocked = _devConsolePanel.activeSelf; //blocks movement
             _devConsoleText["DevConsoleMenu"].text = "Choices:\n" +
-                "toggle <arg>\t\tExample: toggle fps  --or--  toggle resource_monitor\n" +
-                "set <type> <arg> [value]";
+                "toggle <arg>\n\tExample: toggle fps  -or-  toggle resource_monitor\n" +
+                "set <type> <arg> [value]\n\tExample: set scene thruster out -or- set element copper 30";
             _devConsoleInput.ActivateInputField();
         }
 
@@ -185,10 +186,7 @@ public class UIController : BaseController<UIController>
     {
         switch (tool)
         {
-            case InventoryManager.Tool.BATTERY:
-                break;
-
-            case /*InventoryManager.Tool.BATTERY or */InventoryManager.Tool.SOLARPANEL:
+            case InventoryManager.Tool.BATTERY or InventoryManager.Tool.SOLARPANEL:
                 setDialogText("This is a Solar Array. Psyche had 2 of these in cross formations to generate power.\n\nI can use this to automatically recharge my suit's battery.\n\n<i>Press <b>TAB</b> to learn more.</i>");
                 solarPanelInfoButton.SetActive(true);
                 batteryLevel.transform.parent.gameObject.SetActive(true);
@@ -566,7 +564,7 @@ public class UIController : BaseController<UIController>
     ///     - Dictionary contains a list of elements and their required values
     /// </summary>
     /// <param name="args"></param>
-    public void ToolInfoGather(ToolDirective directive, bool upgraded, string toolName, Dictionary<string, ushort> requirements, int level)
+    public void ToolInfoGather(ToolDirective directive, bool upgraded, string toolName, Dictionary<InventoryManager.Element, ushort> requirements, int level)
     {
         switch (directive)
         {
@@ -578,14 +576,13 @@ public class UIController : BaseController<UIController>
                     {
                         if (requirement.Value > 0)
                         {
-                            string name = requirement.Key.ToLower() switch
+                            string name = requirement.Key switch
                             {
-                                "element_copper"    => "Copper",
-                                "element_iron"      => "Iron",
-                                "element_nickel"    => "Nickel",
-                                "element_gold"      => "Gold",
-                                "element_platinum"  => "Platinum",                  // Change to Tungsten
-                               _ => requirement.Key
+                                InventoryManager.Element.COPPER     => "Copper",
+                                InventoryManager.Element.IRON       => "Iron",
+                                InventoryManager.Element.NICKEL     => "Nickel",
+                                InventoryManager.Element.GOLD       => "Gold",
+                               _                                    => ""
                             };
 
                             requirement_display += name + " " + requirement.Value + "  ";
@@ -667,57 +664,57 @@ public class UIController : BaseController<UIController>
     /// <summary>
     /// Update the display for the requirements
     /// </summary>
-    private void UpdateRequirements(Dictionary<string, ushort> levelRequirements, Transform requirementsArea)
+    private void UpdateRequirements(Dictionary<InventoryManager.Element, ushort> levelRequirements, Transform requirementsArea)
     {
         foreach (Transform child in requirementsArea)
         {
             Destroy(child.gameObject);
         }
 
-        int amount = levelRequirements["element_copper"];
+        int amount = levelRequirements[InventoryManager.Element.COPPER];
         if (amount > 0)
             Instantiate(copperRequirement, requirementsArea).GetComponentInChildren<TMP_Text>().SetText(amount.ToString());
 
-        amount = levelRequirements["element_iron"];
+        amount = levelRequirements[InventoryManager.Element.IRON];
         if (amount > 0)
             Instantiate(ironRequirement, requirementsArea).GetComponentInChildren<TMP_Text>().SetText(amount.ToString());
 
-        amount = levelRequirements["element_nickel"];
+        amount = levelRequirements[InventoryManager.Element.NICKEL];
         if (amount > 0)
             Instantiate(nickelRequirement, requirementsArea).GetComponentInChildren<TMP_Text>().SetText(amount.ToString());
 
-        amount = levelRequirements["element_gold"];
+        amount = levelRequirements[InventoryManager.Element.GOLD];
         if (amount > 0)
             Instantiate(goldRequirement, requirementsArea).GetComponentInChildren<TMP_Text>().SetText(amount.ToString());
 
-        amount = levelRequirements["element_tungsten"];
+        /*amount = levelRequirements[];
         if (amount > 0)
-            Instantiate(tungstenRequirement, requirementsArea).GetComponentInChildren<TMP_Text>().SetText(amount.ToString());
+            Instantiate(tungstenRequirement, requirementsArea).GetComponentInChildren<TMP_Text>().SetText(amount.ToString());*/
     }
 
     /// <summary>
     /// When the player walks over the object, pick up the object
     /// </summary>
-    public void ElementUpdate(ArrayList args)
+    public void ElementUpdate(InventoryManager.Element element, ushort amount)
     {
-        string element = args[0].ToString().ToLower();
-        string value = args[1].ToString();
+        //string element = args[0].ToString().ToLower();
+        string value = amount.ToString();
 
         switch (element)
         {
-            case "element_copper" or "copper":
+            case InventoryManager.Element.COPPER:
                 copperAmount.SetText(value);
                 break;
-            case "element_iron" or "iron":
+            case InventoryManager.Element.IRON:
                 ironAmount.SetText(value);
                 break;
-            case "element_nickel" or "nickel":
+            case InventoryManager.Element.NICKEL:
                 nickelAmount.SetText(value);
                 break;
-            case "element_gold" or "gold":
+            case InventoryManager.Element.GOLD:
                 goldAmount.SetText(value);
                 break;
-            case "element_tungsten" or "tungsten":
+            case InventoryManager.Element.TUNGSTEN:
                 tungstenAmount.SetText(value);
                 break;
             default:

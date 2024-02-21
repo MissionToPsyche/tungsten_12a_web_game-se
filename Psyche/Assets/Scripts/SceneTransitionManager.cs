@@ -54,10 +54,6 @@ public class SceneTransitionManager : MonoBehaviour {
         {
             PlayerController.Instance.playerCollisionManager.InitiateTransition -= OnInitiateTransition;
         }
-        //if (_gameController.developerConsole != null)
-        //{
-        //    _gameController.developerConsole.OnDevConsoleTransition -= OnInitiateTransition;
-        //}
     }
 
     // ################################################  Scene Management ################################################
@@ -155,15 +151,6 @@ public class SceneTransitionManager : MonoBehaviour {
 
         canvas.planeDistance = 100;
         canvas.worldCamera = Camera.main;
-    }
-
-    /// <summary>
-    /// Runs each time a new scene is loaded
-    /// </summary>
-    /// <param name="scene"></param>
-    /// <param name="mode"></param>
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
-        _transition = false;
     }
 
     /// <summary>

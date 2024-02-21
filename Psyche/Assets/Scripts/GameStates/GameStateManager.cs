@@ -15,8 +15,6 @@ public class GameStateManager : MonoBehaviour
     public void Initialize(GameController gameController, string scene)
     {
         _gameController = gameController;
-        currentScene = MatchScene(scene);
-        SetScene(currentScene);
 
         //Expand upon later
         _gameStateToScene = new Dictionary<GameState, Dictionary<Scene, BaseState>>()
@@ -32,6 +30,10 @@ public class GameStateManager : MonoBehaviour
                 { Scene.Tool_Intro_eMagnet, new Tool_Intro_eMagnetState() },
             } },
         };
+        
+        // Set up the current scene
+        currentScene = MatchScene(scene);
+        SetScene(currentScene);
     }
 
     /// <summary>
@@ -53,15 +55,7 @@ public class GameStateManager : MonoBehaviour
 
     public void OnEnable() { }
 
-    public void OnDisable()
-    {
-        if (PlayerController.Instance != null)
-        {
-            //PlayerController.Instance.inventoryManager.SetObjectState -= SetObjectState;
-            //PlayerController.Instance.playerCollisionManager.SetObjectState += SetObjectState;
-            //PlayerController.Instance.playerCollisionManager.SaveSceneState += SaveSceneState;
-        }
-    }
+    public void OnDisable() { }
 
 
     /// <summary>
@@ -82,8 +76,7 @@ public class GameStateManager : MonoBehaviour
     /// <param name="state"></param>
     public void SetGameState(GameState state)
     {
-        currentState = state;
-        _gameController.HandleGameStateEvent(currentState);
+        
     }
 
     /// <summary>
@@ -174,20 +167,21 @@ public class GameStateManager : MonoBehaviour
         switch (scene)
         {
             case Scene.Title_Screen or Scene.Intro_Cutscene or Scene.Outro_Cutscene or Scene.SceneTransition_Game_End:
-                SetGameState(GameState.MainMenu);
+                currentState = GameState.MainMenu;
                 break;
             
             default:
-                SetGameState(GameState.InGame);
+                currentState = GameState.InGame;
                 break;
-            
         }
-        
+
+        _gameController.HandleGameStateEvent();
+
         // Scenes without a viable scene state are ignored
         if (currentState == GameState.InGame || scene == Scene.Title_Screen)
         {
             // Temporary check until the respective states are added
-            if (scene != Scene.Tool_Intro_eMagnet)
+            if (scene != Scene.Tool_Intro_eMagnet && currentScene != Scene.Landing_Scene)
             {
                 Debug.Log($"Scene state loader for {scene} not yet implemented");
             }
@@ -205,7 +199,7 @@ public class GameStateManager : MonoBehaviour
     public void LoadSceneState()
     {
         // Temporary until others are fully implemented
-        if (currentScene != Scene.Tool_Intro_eMagnet) { return; }
+        if (currentScene != Scene.Tool_Intro_eMagnet && currentScene != Scene.Landing_Scene) { return; }
 
         var stateManager = _gameStateToScene[currentState];
         stateManager[currentScene].LoadState();
@@ -219,7 +213,7 @@ public class GameStateManager : MonoBehaviour
     public void SaveSceneState()
     {
         // Temporary until others are fully implemented
-        if (currentScene != Scene.Tool_Intro_eMagnet) { return; }
+        if (currentScene != Scene.Tool_Intro_eMagnet && currentScene != Scene.Landing_Scene) { return; }
 
         var stateManager = _gameStateToScene[currentState];
         stateManager[currentScene].SaveState();
@@ -233,9 +227,20 @@ public class GameStateManager : MonoBehaviour
     public void SetObjectState(string key, object value)
     {
         // Temporary until others are fully implemented
-        if (currentScene != Scene.Tool_Intro_eMagnet) { return; }
+        if (currentScene != Scene.Tool_Intro_eMagnet && currentScene != Scene.Landing_Scene) { return; }
 
         var stateManager = _gameStateToScene[currentState];
         stateManager[currentScene].SetObjectState(key, value);
+    }
+
+    /// <summary>
+    /// Resets the state of all InGame scenes when called
+    /// </summary>
+    public void ResetScenes()
+    {
+        foreach (var scene in _gameStateToScene[GameState.InGame])
+        {
+            scene.Value.LoadDefaultState();
+        }
     }
 }

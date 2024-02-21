@@ -21,10 +21,8 @@ public class DeveloperConsole : MonoBehaviour
     {
         { DevConsoleCommand.FPS, false }, { DevConsoleCommand.RESOURCE_MONITOR, false },
     };
-    public event Action<ArrayList>                          OnDevConsoleUIUpdate;               // Updating the UI communication
-    public event Action<InventoryManager.Element, ushort>   OnDevConsoleInventorySetElement;    // Inventory changes -- Element
-    public event Action<InventoryManager.Tool, bool>        OnDevConsoleInventorySetTool;       // Inventory Changes -- Tool
-    public event Action<string>                             OnDevConsoleTransition;             // Transition scenes
+    public event Action<ArrayList>  OnDevConsoleUIUpdate;               // Updating the UI communication
+    public event Action<string>     OnDevConsoleTransition;             // Transition scenes
 
     private enum EventSource
     {
@@ -217,8 +215,6 @@ public class DeveloperConsole : MonoBehaviour
                             Debug.Log($"Invalid amount provided: {commands[3]}");
                             return;
                         }
-                        Debug.Log(amount);
-                        //OnDevConsoleInventorySetElement?.Invoke(element, amount); 
                         PlayerController.Instance.inventoryManager.SetElement(element, amount);
                         break;
 
@@ -241,7 +237,7 @@ public class DeveloperConsole : MonoBehaviour
                             return;
                         }
                         // Update the Inventory Manager
-                        OnDevConsoleInventorySetTool?.Invoke(tool, true);
+                        PlayerController.Instance.inventoryManager.SetTool(tool, value);
 
                         // Update the specific tool itself
                         switch (tool)
