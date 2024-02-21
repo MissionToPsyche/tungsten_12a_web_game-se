@@ -31,13 +31,17 @@ public class SceneTransitionManager : MonoBehaviour {
     /// <param name="playerManagement"></param>
     public void Initialize(GameController gameController) {
         _gameController = gameController;
+        if (PlayerController.Instance != null)
+        {
+            LoadPlayer();
+        }
     }
 
     // #####################################################  Events #####################################################
 
     public void LoadPlayer()
     {
-        PlayerController.Instance.playerCollisionManager.InitiateTransition += OnInitiateTransition;
+        PlayerController.Instance.InitiateTransition += OnInitiateTransition;
     }
 
     public void LoadDevConsole()
@@ -52,7 +56,7 @@ public class SceneTransitionManager : MonoBehaviour {
     {
         if (PlayerController.Instance != null)
         {
-            PlayerController.Instance.playerCollisionManager.InitiateTransition -= OnInitiateTransition;
+            PlayerController.Instance.InitiateTransition -= OnInitiateTransition;
         }
         //if (_gameController.developerConsole != null)
         //{

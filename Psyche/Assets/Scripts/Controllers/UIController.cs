@@ -181,48 +181,52 @@ public class UIController : BaseController<UIController>
     /// When called, will enable the tool button
     /// </summary>
     /// <param name="toolName"></param>
-    public void EnableToolButton(InventoryManager.Tool tool, bool value)
+    public void EnableToolButton(ArrayList args)
     {
-        switch (tool)
+        string toolName = args[0].ToString();
+        bool value = (bool)args[1];
+        if(toolName == "health")
         {
-            case InventoryManager.Tool.BATTERY:
-                break;
+            return;
+        }
 
-            case /*InventoryManager.Tool.BATTERY or */InventoryManager.Tool.SOLARPANEL:
+        switch (toolName)
+        {
+            case "battery":
                 setDialogText("This is a Solar Array. Psyche had 2 of these in cross formations to generate power.\n\nI can use this to automatically recharge my suit's battery.\n\n<i>Press <b>TAB</b> to learn more.</i>");
                 solarPanelInfoButton.SetActive(true);
                 batteryLevel.transform.parent.gameObject.SetActive(true);
                 batteryIndicator.SetActive(true);
                 break;
 
-            case InventoryManager.Tool.THRUSTER:
-                setDialogText("This is a Hall Thruster. This thruster used electricity to propel Psyche from Earth's orbit to the asteroid.\n\nI can use this to help me reach high up areas.\n<i>Hold <b>SPACEBAR</b> to fly upwards.</i>\n\n<i>Press <b>TAB</b> to learn more.</i>");
-                thrusterInfoButton.SetActive(true);
-                thrusterLevel.transform.parent.gameObject.SetActive(true);
-                thrusterIcon.SetActive(true);
-                break;
-
-            case InventoryManager.Tool.IMAGER:
-                setDialogText("his is Multispectral Imager. It is highly sensitive to light and Psyche used 2 of these to analyze the asteroid's geology and topography.\n\nI can use this to help me see in the dark.\n<i>Look around with the spotlight using your mouse</i>\n\n<i>Press <b>TAB</b> to learn more.</i>");
+            case "imager":
+                setDialogText("This is Multispectral Imager. It is highly sensitive to light and Psyche used 2 of these to analyze the asteroid's geology and topography.\n\nI can use this to help me see in the dark.\n<i>Look around with the spotlight using your mouse</i>\n\n<i>Press <b>TAB</b> to learn more.</i>");
                 imagerInfoButton.SetActive(true);
                 imagerLevel.transform.parent.gameObject.SetActive(true);
                 break;
 
-            case InventoryManager.Tool.SPECTROMETER:
+            case "spectrometer":
                 setDialogText("This is a Gamma-Ray and Neutron Spectrometer. This system was used on Psyche to map the elemental composition of the asteroid.\n\nI can use this to help me search for the elements I need.\n<i>Hold <b>RIGHT CLICK</b> to see see through objects.</i>\n\n<i>Press <b>TAB</b> to learn more.</i>");
                 spectrometerInfoButton.SetActive(true);
                 GRNSIcon.SetActive(true);
                 break;
 
-            case InventoryManager.Tool.ELECTROMAGNET:
+            case "electromagnet":
                 setDialogText("This is an Magnetometer. Psyche used 2 of these to measure the asteroid's magnetic field.\n\nI can use this to detect deposits of iron. I should then be able to use my suit's Electro-Magnet to propel myself towards them.\n<i>Hold <b>LEFT CLICK</b> to aim the Electro-Magnet with your mouse and pull yourself towards iron deposits</i>\n\n<i>Press <b>TAB</b> to learn more.</i>");
                 eMagnetInfoButton.SetActive(true);
                 eMagnetLevel.transform.parent.gameObject.SetActive(true);
                 eMagnetIcon.SetActive(true);
                 break;
 
+            case "thruster":
+                setDialogText("This is a Hall Thruster. This thruster used electricity to propel Psyche from Earth's orbit to the asteroid.\n\nI can use this to help me reach high up areas.\n<i>Hold <b>SPACEBAR</b> to fly upwards.</i>\n\n<i>Press <b>TAB</b> to learn more.</i>");
+                thrusterInfoButton.SetActive(true);
+                thrusterLevel.transform.parent.gameObject.SetActive(true);
+                thrusterIcon.SetActive(true);
+                break;
+
             default:
-                Debug.Log("Incorrect tool name passed: " + tool.ToString());
+                Debug.Log("Incorrect tool name passed: " + args[0].ToString());
                 break;
         }
     }
@@ -488,7 +492,7 @@ public class UIController : BaseController<UIController>
             confirmBoxText.transform.parent.gameObject.SetActive(false);
             inventoryMenu.SetActive(false);
             PlayerController.Instance.inputBlocked = false;
-            StartCoroutine(PlayerController.Instance.playerDeath.Warp());
+            StartCoroutine(PlayerController.Instance.deathCon.Warp());
         }
         ///If Title Screen button opened the Confirmation Box
         else
@@ -665,7 +669,7 @@ public class UIController : BaseController<UIController>
     }
 
     /// <summary>
-    /// Update the display for the requirements
+    /// 
     /// </summary>
     private void UpdateRequirements(Dictionary<string, ushort> levelRequirements, Transform requirementsArea)
     {
@@ -705,19 +709,19 @@ public class UIController : BaseController<UIController>
 
         switch (element)
         {
-            case "element_copper" or "copper":
+            case "element_copper":
                 copperAmount.SetText(value);
                 break;
-            case "element_iron" or "iron":
+            case "element_iron":
                 ironAmount.SetText(value);
                 break;
-            case "element_nickel" or "nickel":
+            case "element_nickel":
                 nickelAmount.SetText(value);
                 break;
-            case "element_gold" or "gold":
+            case "element_gold":
                 goldAmount.SetText(value);
                 break;
-            case "element_tungsten" or "tungsten":
+            case "element_tungsten":
                 tungstenAmount.SetText(value);
                 break;
             default:

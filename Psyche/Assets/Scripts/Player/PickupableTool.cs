@@ -14,7 +14,7 @@ public class PickupableTool : MonoBehaviour {
     /// <param name="other"></param>
     private void OnTriggerEnter2D(Collider2D other)
     {
-        //PlayerController.Instance.ToolPickUp(toolName);
-        //Destroy(gameObject);
+        PlayerController.Instance.ToolPickUp(toolName);
+        Destroy(gameObject);
     }
 }

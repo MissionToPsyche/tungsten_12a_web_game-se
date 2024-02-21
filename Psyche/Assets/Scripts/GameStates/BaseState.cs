@@ -87,5 +87,6 @@ public abstract class BaseState
             return;
         }
         _sceneState[matched_key] = value;
+        //Debug.Log($"After: {matched_key}, {_sceneState[matched_key]}");
     }
 }

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &3532995982466017545
+--- !u!1001 &8847410926514155447
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -11,34 +11,30 @@ PrefabInstance:
     - target: {fileID: 909618470094357323, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 2a86df8f4d8b1f44aa50794e661bc41a, type: 3}
+      objectReference: {fileID: 21300000, guid: c6d443d246f8a174899dd682c21f8def, type: 3}
     - target: {fileID: 1733599726157441985, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_Size.x
-      value: 0.4
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1733599726157441985, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_Size.y
-      value: 0.32103753
-      objectReference: {fileID: 0}
-    - target: {fileID: 1733599726157441985, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
-      propertyPath: m_Offset.x
-      value: 0
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 1733599726157441985, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 0.39
+      value: 0.66
       objectReference: {fileID: 0}
     - target: {fileID: 1733599726157441985, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 0.3
+      value: 0.66
       objectReference: {fileID: 0}
     - target: {fileID: 3971640087115632001, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.9749
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: 3971640087115632001, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.9749
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: 3971640087115632001, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_LocalScale.z
@@ -46,11 +42,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3971640087115632001, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.9584
+      value: 3.8
       objectReference: {fileID: 0}
     - target: {fileID: 3971640087115632001, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.6197
+      value: -4.37
       objectReference: {fileID: 0}
     - target: {fileID: 3971640087115632001, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_LocalPosition.z
@@ -86,15 +82,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7265056701094702297, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: toolName
-      value: Thruster
+      value: ElectroMagnet
       objectReference: {fileID: 0}
     - target: {fileID: 7775450262555123965, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_Name
-      value: Thruster
-      objectReference: {fileID: 0}
-    - target: {fileID: 7775450262555123965, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
-      propertyPath: m_TagString
-      value: Tool
+      value: Magnetometer Pickup
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

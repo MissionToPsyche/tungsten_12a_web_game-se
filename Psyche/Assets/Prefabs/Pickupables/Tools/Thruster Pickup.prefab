@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &6316137332145596099
+--- !u!1001 &3532995982466017545
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -11,30 +11,34 @@ PrefabInstance:
     - target: {fileID: 909618470094357323, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 653cec429f8a62c468daced96e9d6bed, type: 3}
+      objectReference: {fileID: 21300000, guid: 2a86df8f4d8b1f44aa50794e661bc41a, type: 3}
     - target: {fileID: 1733599726157441985, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_Size.x
-      value: 0.25
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 1733599726157441985, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_Size.y
-      value: 0.48
+      value: 0.32103753
+      objectReference: {fileID: 0}
+    - target: {fileID: 1733599726157441985, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
+      propertyPath: m_Offset.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1733599726157441985, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 0.23
+      value: 0.39
       objectReference: {fileID: 0}
     - target: {fileID: 1733599726157441985, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 0.44
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 3971640087115632001, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.84152
+      value: 1.9749
       objectReference: {fileID: 0}
     - target: {fileID: 3971640087115632001, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.84152
+      value: 1.9749
       objectReference: {fileID: 0}
     - target: {fileID: 3971640087115632001, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_LocalScale.z
@@ -42,11 +46,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3971640087115632001, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.0666
+      value: 3.9584
       objectReference: {fileID: 0}
     - target: {fileID: 3971640087115632001, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.3519
+      value: -3.6197
       objectReference: {fileID: 0}
     - target: {fileID: 3971640087115632001, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_LocalPosition.z
@@ -82,15 +86,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7265056701094702297, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: toolName
-      value: Spectrometer
+      value: Thruster
       objectReference: {fileID: 0}
     - target: {fileID: 7775450262555123965, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_Name
-      value: Spectrometer
-      objectReference: {fileID: 0}
-    - target: {fileID: 7775450262555123965, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
-      propertyPath: m_TagString
-      value: Tool
+      value: Thruster Pickup
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

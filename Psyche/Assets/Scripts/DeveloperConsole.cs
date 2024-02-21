@@ -217,9 +217,7 @@ public class DeveloperConsole : MonoBehaviour
                             Debug.Log($"Invalid amount provided: {commands[3]}");
                             return;
                         }
-                        Debug.Log(amount);
-                        //OnDevConsoleInventorySetElement?.Invoke(element, amount); 
-                        PlayerController.Instance.inventoryManager.SetElement(element, amount);
+                        OnDevConsoleInventorySetElement?.Invoke(element, amount); //PlayerController.Instance.inventoryManager.SetElement(element, amount);
                         break;
 
 
@@ -250,17 +248,14 @@ public class DeveloperConsole : MonoBehaviour
                                 // Currently nothing to do here
                                 break;
                             case InventoryManager.Tool.BATTERY:
-                                PlayerController.Instance.batteryManager.Enable();
+                                PlayerController.Instance.batteryManager.toolEnabled = value;
                                 break;
                             case InventoryManager.Tool.THRUSTER:
-                                PlayerController.Instance.thrusterManager.Enable();
+                                PlayerController.Instance.thrusterManager.toolEnabled = value;
                                 break;
                             case InventoryManager.Tool.ELECTROMAGNET:
-                                PlayerController.Instance.eMagnetManager.Enable();
+                                PlayerController.Instance.eMagnetManager.toolEnabled = value;
                                 PlayerController.Instance.eMagnetActive = value;
-                                break;
-                            case InventoryManager.Tool.IMAGER:
-                                PlayerController.Instance.imagerManager.Enable();
                                 break;
                             default:
                                 Debug.Log($"You somehow broke existence -- DeveloperConsole: {tool}");
