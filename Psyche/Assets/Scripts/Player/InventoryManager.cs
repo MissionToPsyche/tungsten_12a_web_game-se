@@ -16,8 +16,9 @@ public class InventoryManager : MonoBehaviour
     private Dictionary<Element, ushort> _elements2;
 
     // Events
-    public event Action<ArrayList> OnUpdateInventoryTool;
-    public event Action<ArrayList> OnUpdateInventoryElement;
+    public event Action<Tool, bool>      OnUpdateInventoryTool;
+    public event Action<ArrayList>      OnUpdateInventoryElement;
+    public event Action<string, object> SetObjectState;
 
     public enum Element
     {
@@ -59,6 +60,7 @@ public class InventoryManager : MonoBehaviour
     {
         IMAGER,
         BATTERY,
+        SOLARPANEL,
         SPECTROMETER,
         THRUSTER,
         ELECTROMAGNET,
@@ -72,7 +74,8 @@ public class InventoryManager : MonoBehaviour
         return tool.ToLower() switch
         {
             "imager"        => Tool.IMAGER,
-            "battery"       => Tool.BATTERY,
+            "battery"       or "battery pickup variant" => Tool.BATTERY,
+            "solarpanel"    or "soar panel pickup"      => Tool.SOLARPANEL,
             "spectrometer"  => Tool.SPECTROMETER,
             "thruster"      => Tool.THRUSTER,
             "electromagnet" => Tool.ELECTROMAGNET,
@@ -86,6 +89,7 @@ public class InventoryManager : MonoBehaviour
         {
             Tool.IMAGER         => "imager",
             Tool.BATTERY        => "battery",
+            Tool.SOLARPANEL     => "solarpanel",
             Tool.SPECTROMETER   => "spectrometer",
             Tool.THRUSTER       => "thruster",
             Tool.ELECTROMAGNET  => "electromagnet",
@@ -158,6 +162,61 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Activates tool when its pickup is collected
+    /// </summary>
+    /// <param name="toolName"></param>
+    public void ToolPickUp(string toolName)
+    {
+        // Transition to this at some point
+        Tool tool = MatchTool(toolName);
+        if (tool == Tool.None)
+        {
+            Debug.Log($"Not a tool {toolName}");
+            return;
+        }
+
+        if (tool != Tool.None && tool != Tool.BATTERY && tool != Tool.SOLARPANEL)
+        {
+            SetTool(tool, true);
+        }
+        OnUpdateInventoryTool?.Invoke(tool, true);
+        // Remove the object from the scene state
+        SetObjectState?.Invoke(toolName, false);
+        
+        //Other actions
+        switch (tool)
+        {
+            case Tool.SOLARPANEL:
+                _playerController.batteryManager.Enable();
+                SetTool(Tool.BATTERY, true);
+                break;
+
+            case Tool.THRUSTER:
+                _playerController.thrusterManager.Enable();
+                break;
+
+            case Tool.IMAGER:
+                _playerController.imagerManager.Enable();
+                break;
+
+            case Tool.SPECTROMETER:
+                break;
+
+            case Tool.ELECTROMAGNET:
+                _playerController.eMagnetManager.Enable();
+                break;
+
+            case Tool.BATTERY:
+                _playerController.batteryManager.ChargeBatt(500);
+                break;
+
+            default:
+                Debug.LogWarning("Tool name '" + toolName + "' not found!");
+                break;
+        }
+    }
+
     public void SetTool(Tool tool, bool value) // New version that uses enums in place of strings
     {
         if (tool == Tool.None) return;
@@ -166,7 +225,7 @@ public class InventoryManager : MonoBehaviour
         _tools[MatchTool(tool)] = value;
 
         ArrayList args = new ArrayList { MatchTool(tool), value };
-        OnUpdateInventoryTool.Invoke(args);
+        //OnUpdateInventoryTool?.Invoke(args);
     }
 
     /// <summary>
@@ -187,9 +246,7 @@ public class InventoryManager : MonoBehaviour
         _tools[toolName] = value;
 
         //Send message to UI
-        ArrayList args = new ArrayList { toolName, value };
-        //Send the message
-        OnUpdateInventoryTool.Invoke(args);
+        OnUpdateInventoryTool?.Invoke(MatchTool(toolName), value);
     }
 
     /// <summary>
@@ -227,38 +284,26 @@ public class InventoryManager : MonoBehaviour
     /// <summary>
     /// Sets the amount of an element
     /// </summary>
-    /// <param name="element"></param>
-    /// <param name="amount"></param>
-    public void AddElement(Element element, ushort amount)
-    {
-        if (element == Element.None) { return; }
-        _elements2[element] += amount;
-
-        // Temporary until swapped over completely:
-        _elements[MatchElement(element)] += amount;
-        ArrayList args = new ArrayList { MatchElement(element), _elements2[element] };
-        //Send the message
-        OnUpdateInventoryElement.Invoke(args);
-    }
-
-    /// <summary>
-    /// Sets the amount of an element
-    /// </summary>
-    /// <param name="element"></param>
+    /// <param name="elementName"></param>
     /// <param name="amount"></param>
     public void AddElement(string element, ushort amount)
     {
+        // Split the incoming value from its element name and element ID
+        string[] element_set = element.Split(' ');
         //Standardize lower case
-        element = element.ToLower();
+        Element elementName = MatchElement(element_set[0].ToLower());
+        SetObjectState?.Invoke(element, false);
         //Check if valid name passed and return int
-        if (!_elements.ContainsKey(element))
+        if (!_elements2.ContainsKey(elementName))
         {
-            Debug.LogError("Incorrect element name passed -- InventoryManager Add");
+            Debug.LogError($"Incorrect element name passed -- InventoryManager Add: {elementName}");
             return;
         }
-        _elements[element] += amount;
+        _elements2[elementName] += amount;
+        // Temporary - continue to track with both dictionaries until fully transitioned over
+        _elements[element_set[0].ToLower()] += amount;
 
-        ArrayList args = new ArrayList { element, _elements[element] };
+        ArrayList args = new ArrayList { elementName, _elements[element_set[0].ToLower()] };
         //Send the message
         OnUpdateInventoryElement.Invoke(args);
     }
@@ -310,6 +355,8 @@ public class InventoryManager : MonoBehaviour
     /// <param name="amount"></param>
     public void SetElement(Element element, ushort amount)
     {
+        Debug.Log("boop");
+        Debug.Log($"{element}, {amount}");
         //Check if valid name passed and return int
         if (element == Element.None) { return; }
         _elements2[element] = amount;

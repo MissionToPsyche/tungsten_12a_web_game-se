@@ -181,52 +181,48 @@ public class UIController : BaseController<UIController>
     /// When called, will enable the tool button
     /// </summary>
     /// <param name="toolName"></param>
-    public void EnableToolButton(ArrayList args)
+    public void EnableToolButton(InventoryManager.Tool tool, bool value)
     {
-        string toolName = args[0].ToString();
-        bool value = (bool)args[1];
-        if(toolName == "health")
+        switch (tool)
         {
-            return;
-        }
+            case InventoryManager.Tool.BATTERY:
+                break;
 
-        switch (toolName)
-        {
-            case "battery":
+            case /*InventoryManager.Tool.BATTERY or */InventoryManager.Tool.SOLARPANEL:
                 setDialogText("This is a Solar Array. Psyche had 2 of these in cross formations to generate power.\n\nI can use this to automatically recharge my suit's battery.\n\n<i>Press <b>TAB</b> to learn more.</i>");
                 solarPanelInfoButton.SetActive(true);
                 batteryLevel.transform.parent.gameObject.SetActive(true);
                 batteryIndicator.SetActive(true);
                 break;
 
-            case "imager":
-                setDialogText("This is Multispectral Imager. It is highly sensitive to light and Psyche used 2 of these to analyze the asteroid's geology and topography.\n\nI can use this to help me see in the dark.\n<i>Look around with the spotlight using your mouse</i>\n\n<i>Press <b>TAB</b> to learn more.</i>");
-                imagerInfoButton.SetActive(true);
-                imagerLevel.transform.parent.gameObject.SetActive(true);
-                break;
-
-            case "spectrometer":
-                setDialogText("This is a Gamma-Ray and Neutron Spectrometer. This system was used on Psyche to map the elemental composition of the asteroid.\n\nI can use this to help me search for the elements I need.\n<i>Hold <b>RIGHT CLICK</b> to see see through objects.</i>\n\n<i>Press <b>TAB</b> to learn more.</i>");
-                spectrometerInfoButton.SetActive(true);
-                GRNSIcon.SetActive(true);
-                break;
-
-            case "electromagnet":
-                setDialogText("This is an Magnetometer. Psyche used 2 of these to measure the asteroid's magnetic field.\n\nI can use this to detect deposits of iron. I should then be able to use my suit's Electro-Magnet to propel myself towards them.\n<i>Hold <b>LEFT CLICK</b> to aim the Electro-Magnet with your mouse and pull yourself towards iron deposits</i>\n\n<i>Press <b>TAB</b> to learn more.</i>");
-                eMagnetInfoButton.SetActive(true);
-                eMagnetLevel.transform.parent.gameObject.SetActive(true);
-                eMagnetIcon.SetActive(true);
-                break;
-
-            case "thruster":
+            case InventoryManager.Tool.THRUSTER:
                 setDialogText("This is a Hall Thruster. This thruster used electricity to propel Psyche from Earth's orbit to the asteroid.\n\nI can use this to help me reach high up areas.\n<i>Hold <b>SPACEBAR</b> to fly upwards.</i>\n\n<i>Press <b>TAB</b> to learn more.</i>");
                 thrusterInfoButton.SetActive(true);
                 thrusterLevel.transform.parent.gameObject.SetActive(true);
                 thrusterIcon.SetActive(true);
                 break;
 
+            case InventoryManager.Tool.IMAGER:
+                setDialogText("his is Multispectral Imager. It is highly sensitive to light and Psyche used 2 of these to analyze the asteroid's geology and topography.\n\nI can use this to help me see in the dark.\n<i>Look around with the spotlight using your mouse</i>\n\n<i>Press <b>TAB</b> to learn more.</i>");
+                imagerInfoButton.SetActive(true);
+                imagerLevel.transform.parent.gameObject.SetActive(true);
+                break;
+
+            case InventoryManager.Tool.SPECTROMETER:
+                setDialogText("This is a Gamma-Ray and Neutron Spectrometer. This system was used on Psyche to map the elemental composition of the asteroid.\n\nI can use this to help me search for the elements I need.\n<i>Hold <b>RIGHT CLICK</b> to see see through objects.</i>\n\n<i>Press <b>TAB</b> to learn more.</i>");
+                spectrometerInfoButton.SetActive(true);
+                GRNSIcon.SetActive(true);
+                break;
+
+            case InventoryManager.Tool.ELECTROMAGNET:
+                setDialogText("This is an Magnetometer. Psyche used 2 of these to measure the asteroid's magnetic field.\n\nI can use this to detect deposits of iron. I should then be able to use my suit's Electro-Magnet to propel myself towards them.\n<i>Hold <b>LEFT CLICK</b> to aim the Electro-Magnet with your mouse and pull yourself towards iron deposits</i>\n\n<i>Press <b>TAB</b> to learn more.</i>");
+                eMagnetInfoButton.SetActive(true);
+                eMagnetLevel.transform.parent.gameObject.SetActive(true);
+                eMagnetIcon.SetActive(true);
+                break;
+
             default:
-                Debug.Log("Incorrect tool name passed: " + args[0].ToString());
+                Debug.Log("Incorrect tool name passed: " + tool.ToString());
                 break;
         }
     }
@@ -492,7 +488,7 @@ public class UIController : BaseController<UIController>
             confirmBoxText.transform.parent.gameObject.SetActive(false);
             inventoryMenu.SetActive(false);
             PlayerController.Instance.inputBlocked = false;
-            StartCoroutine(PlayerController.Instance.deathCon.Warp());
+            StartCoroutine(PlayerController.Instance.playerDeath.Warp());
         }
         ///If Title Screen button opened the Confirmation Box
         else
@@ -669,7 +665,7 @@ public class UIController : BaseController<UIController>
     }
 
     /// <summary>
-    /// 
+    /// Update the display for the requirements
     /// </summary>
     private void UpdateRequirements(Dictionary<string, ushort> levelRequirements, Transform requirementsArea)
     {
@@ -709,19 +705,19 @@ public class UIController : BaseController<UIController>
 
         switch (element)
         {
-            case "element_copper":
+            case "element_copper" or "copper":
                 copperAmount.SetText(value);
                 break;
-            case "element_iron":
+            case "element_iron" or "iron":
                 ironAmount.SetText(value);
                 break;
-            case "element_nickel":
+            case "element_nickel" or "nickel":
                 nickelAmount.SetText(value);
                 break;
-            case "element_gold":
+            case "element_gold" or "gold":
                 goldAmount.SetText(value);
                 break;
-            case "element_tungsten":
+            case "element_tungsten" or "tungsten":
                 tungstenAmount.SetText(value);
                 break;
             default:
