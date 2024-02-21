@@ -21,6 +21,8 @@ public class Landing_SceneState : BaseState
         IRON_1 = 4,
         NICKEL_1 = 5,
         TUNGSTEN_1 = 6,
+
+        CHECKPOINT = 99,
     }
 
     /// <summary>
@@ -39,6 +41,7 @@ public class Landing_SceneState : BaseState
             "element_iron 1"        => (short)SceneObject.IRON_1,
             "element_nickel 1"      => (short)SceneObject.NICKEL_1,
             "element_tungsten 1"    => (short)SceneObject.TUNGSTEN_1,
+            "checkpoint"            => (short)SceneObject.CHECKPOINT,
             _                       => -1,
         };
     }
@@ -54,6 +57,7 @@ public class Landing_SceneState : BaseState
             (short)SceneObject.IRON_1       => "Element_Iron 1",
             (short)SceneObject.NICKEL_1     => "Element_Nickel 1",
             (short)SceneObject.TUNGSTEN_1   => "Element_Tungsten 1",
+            (short)SceneObject.CHECKPOINT   => "Checkpoint",
             _ => null,
         };
     }
@@ -90,18 +94,130 @@ public class Landing_SceneState : BaseState
             switch (pair.Key)
             {
                 case (short)SceneObject.SOLARPANEL:
+                    { // Specifying scope for use of `var value` && `var targetObject`
+                        var value = (bool)pair.Value;
+
+                        // Remove the object if it's already been picked up
+                        if (!value)
+                        {
+                            var targetObject = GameObject.Find(objectName);
+                            if (targetObject == null)
+                            {
+                                Debug.LogError($"Object {objectName} does not exist");
+                                return;
+                            }
+
+                            targetObject.SetActive(value);
+                        }
+                    }
                     break;
+
+
                 case (short)SceneObject.CHECKPOINT_1:
+                    {
+                        var value = (bool)pair.Value;
+                        var targetObject = GameObject.Find(objectName);
+                    }
                     break;
+
+
                 case (short)SceneObject.COPPER_1:
+                    { // Specifying scope for use of `var value` && `var targetObject`
+                        var value = (bool)pair.Value;
+
+                        // Remove the object if it's already been picked up
+                        if (!value)
+                        {
+                            var targetObject = GameObject.Find(objectName);
+                            if (targetObject == null)
+                            {
+                                Debug.LogError($"Object {objectName} does not exist");
+                                return;
+                            }
+
+                            targetObject.SetActive(value);
+                        }
+                    }
                     break;
+
+
                 case (short)SceneObject.GOLD_1:
+                    { // Specifying scope for use of `var value` && `var targetObject`
+                        var value = (bool)pair.Value;
+
+                        // Remove the object if it's already been picked up
+                        if (!value)
+                        {
+                            var targetObject = GameObject.Find(objectName);
+                            if (targetObject == null)
+                            {
+                                Debug.LogError($"Object {objectName} does not exist");
+                                return;
+                            }
+
+                            targetObject.SetActive(value);
+                        }
+                    }
                     break;
+
+
                 case (short)SceneObject.IRON_1:
+                    { // Specifying scope for use of `var value` && `var targetObject`
+                        var value = (bool)pair.Value;
+
+                        // Remove the object if it's already been picked up
+                        if (!value)
+                        {
+                            var targetObject = GameObject.Find(objectName);
+                            if (targetObject == null)
+                            {
+                                Debug.LogError($"Object {objectName} does not exist");
+                                return;
+                            }
+
+                            targetObject.SetActive(value);
+                        }
+                    }
                     break;
+
+
                 case (short)SceneObject.NICKEL_1:
+                    { // Specifying scope for use of `var value` && `var targetObject`
+                        var value = (bool)pair.Value;
+
+                        // Remove the object if it's already been picked up
+                        if (!value)
+                        {
+                            var targetObject = GameObject.Find(objectName);
+                            if (targetObject == null)
+                            {
+                                Debug.LogError($"Object {objectName} does not exist");
+                                return;
+                            }
+
+                            targetObject.SetActive(value);
+                        }
+                    }
                     break;
+
+
                 case (short)SceneObject.TUNGSTEN_1:
+                    { // Specifying scope for use of `var value` && `var targetObject`
+                        var value = (bool)pair.Value;
+
+                        // Remove the object if it's already been picked up
+                        if (!value)
+                        {
+                            var targetObject = GameObject.Find(objectName);
+                            if (targetObject == null)
+                            {
+                                Debug.LogError($"Object {objectName} does not exist");
+                                return;
+                            }
+
+                            targetObject.SetActive(value);
+                        }
+                    }
                     break;
 
                 default:

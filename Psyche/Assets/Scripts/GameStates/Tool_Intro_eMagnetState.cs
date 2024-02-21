@@ -18,8 +18,9 @@ public class Tool_Intro_eMagnetState : BaseState
         ELECTROMAGNET = 0,
         CHECKPOINT_0 = 1,
         CHECKPOINT_1 = 2,
-        GOLD_1,
-        GOLD_2,
+        GOLD_1 = 3,
+        GOLD_2 = 4,
+        CHECKPOINT = 99,
     }
 
     /// <summary>
@@ -29,15 +30,16 @@ public class Tool_Intro_eMagnetState : BaseState
     /// <returns></returns>
     public override short Match(string obj)
     {
-        switch (obj.ToLower())
+        return obj.ToLower() switch 
         {
-            case "electromagnet":   return (short)SceneObject.ELECTROMAGNET;
-            case "checkpoint 0":    return (short)SceneObject.CHECKPOINT_0;
-            case "checkpoint 1":    return (short)SceneObject.CHECKPOINT_1;
-            case "element_gold 1":  return (short)SceneObject.GOLD_1;
-            case "element_gold 2":  return (short)SceneObject.GOLD_2;
-        }
-        return -1;
+            "electromagnet"     => (short)SceneObject.ELECTROMAGNET,
+            "checkpoint 0"      => (short)SceneObject.CHECKPOINT_0,
+            "checkpoint 1"      => (short)SceneObject.CHECKPOINT_1,
+            "element_gold 1"    => (short)SceneObject.GOLD_1,
+            "element_gold 2"    => (short)SceneObject.GOLD_2,
+            "checkpoint"        => (short)SceneObject.CHECKPOINT,
+            _                   => -1,
+        };
     }
 
     /// <summary>
@@ -45,16 +47,18 @@ public class Tool_Intro_eMagnetState : BaseState
     /// </summary>
     /// <param name="obj"></param>
     /// <returns></returns>
-    public override string Match(short obj) {
-        switch (obj)
+    public override string Match(short obj) 
+    {
+        return obj switch
         {
-            case (short)SceneObject.ELECTROMAGNET:  return "ElectroMagnet";
-            case (short)SceneObject.CHECKPOINT_0:                   return "Checkpoint 0";               
-            case (short)SceneObject.CHECKPOINT_1:                   return "Checkpoint 1";
-            case (short)SceneObject.GOLD_1:                         return "Element_Gold 1";
-            case (short)SceneObject.GOLD_2:                         return "Element_Gold 2";
-        }
-        return "";
+            (short)SceneObject.ELECTROMAGNET    => "ElectroMagnet",
+            (short)SceneObject.CHECKPOINT_0     => "Checkpoint 0",
+            (short)SceneObject.CHECKPOINT_1     => "Checkpoint 1",
+            (short)SceneObject.GOLD_1           => "Element_Gold 1",
+            (short)SceneObject.GOLD_2           => "Element_Gold 2",
+            (short)SceneObject.CHECKPOINT       => "Checkpoint",
+            _                                   => "",
+        };
     }
 
     /// <summary>
