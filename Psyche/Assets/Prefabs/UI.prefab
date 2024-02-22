@@ -313,7 +313,6 @@ GameObject:
   - component: {fileID: 3371999366776974215}
   - component: {fileID: 5486136740920217453}
   - component: {fileID: 8971213152382722960}
-  - component: {fileID: 8758440327323987177}
   m_Layer: 5
   m_Name: Element (4)
   m_TagString: Untagged
@@ -390,7 +389,7 @@ SpriteRenderer:
   m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3d75b6fd428fc9748b00f9f66e5578fa, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.19607843}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -400,26 +399,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8758440327323987177
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 155151453157986170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd2ae6f3bb942a548b7a61689e141795, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  toolName: 
-  level: 0
-  toolEnabled: 0
-  batteryLevel: 0
-  maxCapacity: 0
-  batteryPercent: 0
-  rate: 0
-  batteryDrained: 0
 --- !u!1 &271368541938500320
 GameObject:
   m_ObjectHideFlags: 0
@@ -1219,7 +1198,6 @@ GameObject:
   - component: {fileID: 5543997178747603917}
   - component: {fileID: 7027701489665506095}
   - component: {fileID: 8332689260407971745}
-  - component: {fileID: 307309582108945483}
   m_Layer: 5
   m_Name: Element (5)
   m_TagString: Untagged
@@ -1296,7 +1274,7 @@ SpriteRenderer:
   m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3d75b6fd428fc9748b00f9f66e5578fa, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.19607843}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1306,26 +1284,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &307309582108945483
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 917831293996480626}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd2ae6f3bb942a548b7a61689e141795, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  toolName: 
-  level: 0
-  toolEnabled: 0
-  batteryLevel: 0
-  maxCapacity: 0
-  batteryPercent: 0
-  rate: 0
-  batteryDrained: 0
 --- !u!1 &928993155388104755
 GameObject:
   m_ObjectHideFlags: 0
@@ -4771,7 +4729,6 @@ GameObject:
   - component: {fileID: 6656764535911270194}
   - component: {fileID: 1213251991204596929}
   - component: {fileID: 6257963918514445753}
-  - component: {fileID: 4505284310850617376}
   m_Layer: 5
   m_Name: Element (6)
   m_TagString: Untagged
@@ -4848,7 +4805,7 @@ SpriteRenderer:
   m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3d75b6fd428fc9748b00f9f66e5578fa, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.19607843}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -4858,26 +4815,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4505284310850617376
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2229381180397392328}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd2ae6f3bb942a548b7a61689e141795, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  toolName: 
-  level: 0
-  toolEnabled: 0
-  batteryLevel: 0
-  maxCapacity: 0
-  batteryPercent: 0
-  rate: 0
-  batteryDrained: 0
 --- !u!1 &2258920317905871370
 GameObject:
   m_ObjectHideFlags: 0
@@ -5727,7 +5664,6 @@ GameObject:
   - component: {fileID: 7390014560138164252}
   - component: {fileID: 6652338209866608041}
   - component: {fileID: 2782967350515348952}
-  - component: {fileID: 3362987285392014663}
   m_Layer: 5
   m_Name: Element (3)
   m_TagString: Untagged
@@ -5804,7 +5740,7 @@ SpriteRenderer:
   m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3d75b6fd428fc9748b00f9f66e5578fa, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.19607843}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -5814,26 +5750,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3362987285392014663
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2601859688418209318}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd2ae6f3bb942a548b7a61689e141795, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  toolName: 
-  level: 0
-  toolEnabled: 0
-  batteryLevel: 0
-  maxCapacity: 0
-  batteryPercent: 0
-  rate: 0
-  batteryDrained: 0
 --- !u!1 &2605753800641985410
 GameObject:
   m_ObjectHideFlags: 0
@@ -8108,7 +8024,6 @@ GameObject:
   - component: {fileID: 2538267930619269995}
   - component: {fileID: 1132243349268681394}
   - component: {fileID: 2759517852222390772}
-  - component: {fileID: 1499707227831679880}
   m_Layer: 5
   m_Name: Element
   m_TagString: Untagged
@@ -8185,7 +8100,7 @@ SpriteRenderer:
   m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3d75b6fd428fc9748b00f9f66e5578fa, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.19607843}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -8195,26 +8110,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1499707227831679880
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3784937036196255433}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd2ae6f3bb942a548b7a61689e141795, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  toolName: 
-  level: 0
-  toolEnabled: 0
-  batteryLevel: 0
-  maxCapacity: 0
-  batteryPercent: 0
-  rate: 0
-  batteryDrained: 0
 --- !u!1 &3825867815347799416
 GameObject:
   m_ObjectHideFlags: 0
@@ -10120,7 +10015,6 @@ GameObject:
   - component: {fileID: 1011380854414156044}
   - component: {fileID: 364824551645068331}
   - component: {fileID: 7622062497504766336}
-  - component: {fileID: 5107992277521826682}
   m_Layer: 5
   m_Name: Element (7)
   m_TagString: Untagged
@@ -10197,7 +10091,7 @@ SpriteRenderer:
   m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3d75b6fd428fc9748b00f9f66e5578fa, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.19607843}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -10207,26 +10101,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5107992277521826682
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4467266398919620425}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd2ae6f3bb942a548b7a61689e141795, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  toolName: 
-  level: 0
-  toolEnabled: 0
-  batteryLevel: 0
-  maxCapacity: 0
-  batteryPercent: 0
-  rate: 0
-  batteryDrained: 0
 --- !u!1 &4533915892084685258
 GameObject:
   m_ObjectHideFlags: 0
@@ -11125,7 +10999,6 @@ GameObject:
   - component: {fileID: 7917496144151226533}
   - component: {fileID: 7682842629008077480}
   - component: {fileID: 1049013582365762751}
-  - component: {fileID: 647969803424017119}
   m_Layer: 5
   m_Name: Element (1)
   m_TagString: Untagged
@@ -11202,7 +11075,7 @@ SpriteRenderer:
   m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3d75b6fd428fc9748b00f9f66e5578fa, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.5882353}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.19607843}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -11212,26 +11085,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &647969803424017119
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4921881938827443532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd2ae6f3bb942a548b7a61689e141795, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  toolName: 
-  level: 0
-  toolEnabled: 0
-  batteryLevel: 0
-  maxCapacity: 0
-  batteryPercent: 0
-  rate: 0
-  batteryDrained: 0
 --- !u!1 &5017585625828560073
 GameObject:
   m_ObjectHideFlags: 0
@@ -12516,14 +12369,15 @@ MonoBehaviour:
   batterySprite2: {fileID: -39812770, guid: 95f5ab7703bd6f349b506610baa6faa9, type: 3}
   batterySprite1: {fileID: 88227712, guid: 95f5ab7703bd6f349b506610baa6faa9, type: 3}
   batterySprite0: {fileID: -797366915, guid: 95f5ab7703bd6f349b506610baa6faa9, type: 3}
-  element1: {fileID: 2759517852222390772}
-  element2: {fileID: 1049013582365762751}
-  element3: {fileID: 2914551492360488031}
-  element4: {fileID: 2782967350515348952}
-  element5: {fileID: 8971213152382722960}
-  element6: {fileID: 8332689260407971745}
-  element7: {fileID: 6257963918514445753}
-  element8: {fileID: 7622062497504766336}
+  elements:
+  - {fileID: 2759517852222390772}
+  - {fileID: 1049013582365762751}
+  - {fileID: 2914551492360488031}
+  - {fileID: 2782967350515348952}
+  - {fileID: 8971213152382722960}
+  - {fileID: 8332689260407971745}
+  - {fileID: 6257963918514445753}
+  - {fileID: 7622062497504766336}
   inventoryMenu: {fileID: 1690373141205758407}
   confirmBoxText: {fileID: 7116520113140859952}
   optionsMenu: {fileID: 5624132768119358631}
@@ -16493,7 +16347,6 @@ GameObject:
   - component: {fileID: 953089026643569838}
   - component: {fileID: 2108609252435073970}
   - component: {fileID: 2914551492360488031}
-  - component: {fileID: 7690069920873850935}
   m_Layer: 5
   m_Name: Element (2)
   m_TagString: Untagged
@@ -16570,7 +16423,7 @@ SpriteRenderer:
   m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3d75b6fd428fc9748b00f9f66e5578fa, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.78431374}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.19607843}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -16580,26 +16433,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7690069920873850935
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7633471731784414574}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd2ae6f3bb942a548b7a61689e141795, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  toolName: 
-  level: 0
-  toolEnabled: 0
-  batteryLevel: 0
-  maxCapacity: 0
-  batteryPercent: 0
-  rate: 0
-  batteryDrained: 0
 --- !u!1 &7699270111964967587
 GameObject:
   m_ObjectHideFlags: 0
@@ -19741,7 +19574,7 @@ SpriteRenderer:
   m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: -5177388603050735206, guid: 8884154dfe85442a3a3578be807dbcdf, type: 3}
-  m_Color: {r: 0.13168074, g: 0.6981132, b: 0.02963687, a: 1}
+  m_Color: {r: 0.10588236, g: 0.39607844, b: 0.0627451, a: 0.7607843}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

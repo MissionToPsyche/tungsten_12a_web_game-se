@@ -225,6 +225,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6813600720024782082, guid: b0b2d71c51a1ed342930e182e3f1eeaa, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 8266728179494697823, guid: b0b2d71c51a1ed342930e182e3f1eeaa, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -9537,7 +9541,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 155151453157986170, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
       propertyPath: m_Name
-      value: Element5
+      value: Element (4)
       objectReference: {fileID: 0}
     - target: {fileID: 337239980718798433, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
       propertyPath: m_IsActive
@@ -9555,11 +9559,31 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: b741a41b55dc104439e825cf3512e571, type: 3}
+    - target: {fileID: 1878662079208719805, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -43
+      objectReference: {fileID: 0}
     - target: {fileID: 2345780526257056279, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
       propertyPath: m_text
       value: 'Solar Array
 
 '
+      objectReference: {fileID: 0}
+    - target: {fileID: 4891984978523379572, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4891984978523379572, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: m_Color.b
+      value: 0.17254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 4891984978523379572, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: m_Color.g
+      value: 0.10980393
+      objectReference: {fileID: 0}
+    - target: {fileID: 4891984978523379572, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: m_Color.r
+      value: 0.11764707
       objectReference: {fileID: 0}
     - target: {fileID: 5172690812288988953, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
       propertyPath: m_Camera
@@ -9569,9 +9593,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
-    - target: {fileID: 6257963918514445753, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
-      propertyPath: m_Color.a
-      value: 0.39215687
+    - target: {fileID: 6402019854735247698, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7331055490882894279, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
       propertyPath: m_Pivot.x
@@ -9653,21 +9677,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7622062497504766336, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
-      propertyPath: m_Color.a
-      value: 0.39215687
-      objectReference: {fileID: 0}
     - target: {fileID: 7633471731784414574, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
       propertyPath: m_Name
-      value: Element3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8332689260407971745, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
-      propertyPath: m_Color.a
-      value: 0.39215687
-      objectReference: {fileID: 0}
-    - target: {fileID: 8971213152382722960, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
-      propertyPath: m_Color.a
-      value: 0.39215687
+      value: Element (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11267,6 +11279,10 @@ PrefabInstance:
     - target: {fileID: 82528849670660265, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: m_Name
       value: PlayerCharacter
+      objectReference: {fileID: 0}
+    - target: {fileID: 1078862222496993058, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3118868635833949731, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: m_LocalPosition.x

@@ -236,8 +236,42 @@ public class UIController : BaseController<UIController>
         }
     }
 
-    private void UpdateElements() {
-        //TODO
+    public void UpdateCapturedTungstens(GameStateManager.Scene currentScene) {
+        // Determine which element to update based on the current scene
+        int elementIndex = -1;
+        switch (currentScene) {
+            case GameStateManager.Scene.Landing_Scene:
+                elementIndex = 0;
+                break;
+            case GameStateManager.Scene.Tool_Intro_Imager:
+                elementIndex = 1;
+                break;
+            case GameStateManager.Scene.Tool_Intro_GRS:
+                elementIndex = 2;
+                break;
+            case GameStateManager.Scene.Tool_Intro_eMagnet:
+                elementIndex = 3;
+                break;
+            case GameStateManager.Scene.Tool_Intro_Thruster:
+                elementIndex = 4;
+                break;
+            case GameStateManager.Scene.Tool_Combo_1:
+                elementIndex = 5;
+                break;
+            case GameStateManager.Scene.Tool_Combo_2:
+                elementIndex = 6;
+                break;
+            case GameStateManager.Scene.Tool_Combo_3:
+                elementIndex = 7;
+                break;
+        }
+
+        // If elementIndex is valid, update the corresponding element's alpha to "unghost"
+        if (elementIndex >= 0 && elementIndex < elements.Length) {
+            Color newColor = elements[elementIndex].color;
+            newColor.a = 1f;
+            elements[elementIndex].color = newColor;
+        }
     }
 
     /// <summary>
@@ -341,14 +375,7 @@ public class UIController : BaseController<UIController>
     public Sprite batterySprite1;
     public Sprite batterySprite0;
 
-    public SpriteRenderer element1;
-    public SpriteRenderer element2;
-    public SpriteRenderer element3;
-    public SpriteRenderer element4;
-    public SpriteRenderer element5;
-    public SpriteRenderer element6;
-    public SpriteRenderer element7;
-    public SpriteRenderer element8;
+    public SpriteRenderer[] elements = new SpriteRenderer[8];
 
     [Header("Inventory Menus")]
     public GameObject inventoryMenu;
