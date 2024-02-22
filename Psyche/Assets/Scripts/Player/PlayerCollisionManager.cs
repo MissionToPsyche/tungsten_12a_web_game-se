@@ -10,8 +10,8 @@ public class PlayerCollisionManager : MonoBehaviour
     private PlayerController _playerController;
 
     // Events
-    public event Action<string> InitiateTransition;
-    public event Action SaveSceneState;
+    public event Action<string>         InitiateTransition;
+    public event Action                 SaveSceneState;
     public event Action<string, object> SetObjectState;
     //public event Action<Collision2D> OnCollisionEnter;
     //public event Action<Collision2D> OnCollisionExit;

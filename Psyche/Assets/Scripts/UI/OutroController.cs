@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Basic Outro Cutscene that shows an image
@@ -20,8 +19,11 @@ public class OutroController : MonoBehaviour {
     /// </summary>
     public void QuitGame()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Title_Screen");
         GameController.Instance.audioManager.buttonClick.Play();
+        string scene = GameController.Instance.gameStateManager.MatchScene(GameStateManager.Scene.Title_Screen);
+        GameController.Instance.sceneTransitionManager.devControl = true;
+        GameController.Instance.sceneTransitionManager.OnInitiateTransition(scene);
+        //UnityEngine.SceneManagement.SceneManager.LoadScene("Title_Screen");
     }
 
 }
