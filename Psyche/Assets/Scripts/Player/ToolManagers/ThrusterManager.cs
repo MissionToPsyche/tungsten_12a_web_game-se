@@ -1,9 +1,3 @@
-/*
- * Description: Electric Hall Thruster Tool
- * Authors: joshbenn, mcmyers4
- * Version: 20240119
- */
-
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -45,31 +39,36 @@ public class ThrusterManager : ToolManager
         toolEnabled = false;
         _playerController = playerController;
         level = 0;
-        levelRequirements = new Dictionary<int, Dictionary<string, ushort>>()
+        levelRequirements = new Dictionary<int, Dictionary<InventoryManager.Element, ushort>>()
         {
-            {  1, new Dictionary<string, ushort>()
+            {  1, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { "element_copper", 2 }, { "element_iron", 0 }, { "element_nickel", 0 }, { "element_gold", 0 }, { "element_tungsten", 0 }
+                    { InventoryManager.Element.COPPER, 2 }, { InventoryManager.Element.IRON, 0 }, 
+                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 0 },
                 }
             },
-            {  2, new Dictionary<string, ushort>()
+            {  2, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { "element_copper", 2 } , { "element_iron", 0 } , { "element_nickel", 0 } , { "element_gold", 0 }, { "element_tungsten", 0 }
+                    { InventoryManager.Element.COPPER, 2 } , { InventoryManager.Element.IRON, 0 }, 
+                    { InventoryManager.Element.NICKEL, 0 } , { InventoryManager.Element.GOLD, 0 },
                 }
             },
-            {  3, new Dictionary<string, ushort>()
+            {  3, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { "element_copper", 3 } , { "element_iron", 0 } , { "element_nickel", 0 } , { "element_gold", 0 }, { "element_tungsten", 0 }
+                    { InventoryManager.Element.COPPER, 3 } , { InventoryManager.Element.IRON, 0 }, 
+                    { InventoryManager.Element.NICKEL, 0 } , { InventoryManager.Element.GOLD, 0 },
                 }
             },
-            {  4, new Dictionary<string, ushort>()
+            {  4, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { "element_copper", 4 } , { "element_iron", 0 } , { "element_nickel", 0 } , { "element_gold", 0 }, { "element_tungsten", 0 }
+                    { InventoryManager.Element.COPPER, 4 } , { InventoryManager.Element.IRON, 0 }, 
+                    { InventoryManager.Element.NICKEL, 0 } , { InventoryManager.Element.GOLD, 0 },
                 }
             },
-            {  5, new Dictionary<string, ushort>()
+            {  5, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { "element_copper", 5 } , { "element_iron", 0 } , { "element_nickel", 0 } , { "element_gold", 0 }, { "element_tungsten", 0 }
+                    { InventoryManager.Element.COPPER, 5 } , { InventoryManager.Element.IRON, 0 }, 
+                    { InventoryManager.Element.NICKEL, 0 } , { InventoryManager.Element.GOLD, 0 },
                 }
             },
         };

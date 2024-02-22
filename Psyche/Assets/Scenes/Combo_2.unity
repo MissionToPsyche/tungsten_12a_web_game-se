@@ -217,7 +217,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4341645555283248702, guid: 05c40341d3492f241a8ea868ffb11cef, type: 3}
       propertyPath: m_Name
-      value: Spectrometer Pickup Variant
+      value: Spectrometer
       objectReference: {fileID: 0}
     - target: {fileID: 6969730462459996994, guid: 05c40341d3492f241a8ea868ffb11cef, type: 3}
       propertyPath: m_LocalScale.x
@@ -41271,7 +41271,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7423023160452361083, guid: c3459c583f34bbf49be52ea0ad5df946, type: 3}
       propertyPath: m_Name
-      value: Imager Pickup Variant
+      value: Imager
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -45602,7 +45602,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1238388252371177290, guid: 6f065834d363ff44b81d9cda2988a82a, type: 3}
       propertyPath: m_Name
-      value: ElectroMagnet Pickup Variant
+      value: ElectroMagnet
       objectReference: {fileID: 0}
     - target: {fileID: 5608750381463216694, guid: 6f065834d363ff44b81d9cda2988a82a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -57241,7 +57241,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6548317360071379444, guid: 0b1d10aa0796d0d42981caf795db9dab, type: 3}
       propertyPath: m_Name
-      value: Thruster Pickup Variant
+      value: Thruster
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
