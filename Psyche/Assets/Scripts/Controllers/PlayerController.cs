@@ -177,7 +177,7 @@ public class PlayerController : BaseController<PlayerController>
             //if (inventoryManager.CheckTool("battery") && !Input.GetButton("Jump") && !Input.GetButton("FireGRS") && !Input.GetButton("EMagnet") && batteryManager.batteryPercent != 100 && !eMagnetActive && !beingPulled && !usingThruster)
             if (!Input.GetButton("Jump") && !Input.GetButton("FireGRS") && !Input.GetButton("EMagnet") && batteryManager.batteryPercent != 100 && !eMagnetActive && !beingPulled && !usingThruster)
             {
-                batteryManager.PassiveBatt(1);
+                batteryManager.PassiveBatt();
             }
         }
 
