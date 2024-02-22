@@ -36,12 +36,6 @@ public class Checkpoint : MonoBehaviour
                 animator.Play(SPIN);
                 isSpinning = true;
             }
-            // Temporary -- Find a better way to handle this
-            Scene scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
-            if (scene.name == "Tool_Intro_eMagnet") 
-            {
-                GameController.Instance.gameStateManager.SaveSceneState();
-            }
         }
     }
 }

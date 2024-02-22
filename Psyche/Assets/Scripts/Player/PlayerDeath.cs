@@ -12,12 +12,20 @@ using UnityEngine;
 /// Player death script to handle hazard interactions and respawn attempts.
 /// </summary>
 public class PlayerDeath : MonoBehaviour {
-    
+    private PlayerController _playerController;
     private Vector3 respawnPoint;         //Respawn location
     private Vector3 startPoint;           //Initial character location when level first begins
     public PlayerHealth playerHealth;     //Initial player health
     public BatteryManager batteryManager; //Initial battery
     public HashSet<int> reachedCheckpoints = new HashSet<int>(); //Stores unique IDs of checkpoints
+
+
+    public void Initialize(PlayerController playerController)
+    {
+        _playerController = playerController;
+        startPoint = transform.position;
+        respawnPoint = transform.position;
+    }
 
     /// <summary>
     /// Initialize respawn point and set starting location.
@@ -31,22 +39,20 @@ public class PlayerDeath : MonoBehaviour {
     /// Player touches hazard object.
     /// </summary>
     /// <param name="collision"></param>
-    private void OnCollisionEnter2D(Collision2D collision) {
-            //regular hazards do 1 damage
-        if (collision.gameObject.CompareTag("Hazard")) {
-            ApplyKickback(collision);
-            GetHurt(1);
-            GameController.Instance.audioManager.playerHurt.Play();
+    public void Hazard(Collision2D collision)
+    {
+        ApplyKickback(collision);
 
-            ///Temporarily disables EMagnet
-            StartCoroutine(PlayerController.Instance.interruptMagnet());
-        }
-
-        //spikes do full damage
-        else if (collision.gameObject.CompareTag("Spikes")) {
-            GetHurt(playerHealth.playerHealth);
-            GameController.Instance.audioManager.playerHurt.Play();
-        }
+        GetHurt(1);
+        GameController.Instance.audioManager.playerHurt.Play();
+    }
+    
+    /// <summary>
+    /// When player touches spikes
+    /// </summary>
+    public void Spikes()
+    {
+        GetHurt(playerHealth.playerHealth);
     }
 
     /// <summary>
@@ -77,7 +83,7 @@ public class PlayerDeath : MonoBehaviour {
     /// Additionally recharges health and battery.
     /// </summary>
     /// <param name="collision"></param>
-    private void OnTriggerEnter2D(Collider2D collision) {
+    public void Checkpoint(Collider2D collision) {
         if (collision.gameObject.CompareTag("Checkpoint")) {
             //ID of the checkpoint
             int checkpointID = collision.gameObject.GetInstanceID();

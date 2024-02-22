@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -94,8 +95,8 @@ public class UIController : BaseController<UIController>
             _devConsolePanel.SetActive(!_devConsolePanel.activeSelf); //shows panel
             PlayerController.Instance.inputBlocked = _devConsolePanel.activeSelf; //blocks movement
             _devConsoleText["DevConsoleMenu"].text = "Choices:\n" +
-                "toggle <arg>\t\tExample: toggle fps  --or--  toggle resource_monitor\n" +
-                "set <type> <arg> [value]";
+                "toggle <arg>\n\tExample: toggle fps  -or-  toggle resource_monitor\n" +
+                "set <type> <arg> [value]\n\tExample: set scene thruster out -or- set element copper 30";
             _devConsoleInput.ActivateInputField();
         }
 
@@ -181,52 +182,45 @@ public class UIController : BaseController<UIController>
     /// When called, will enable the tool button
     /// </summary>
     /// <param name="toolName"></param>
-    public void EnableToolButton(ArrayList args)
+    public void EnableToolButton(InventoryManager.Tool tool, bool value)
     {
-        string toolName = args[0].ToString();
-        bool value = (bool)args[1];
-        if(toolName == "health")
+        switch (tool)
         {
-            return;
-        }
-
-        switch (toolName)
-        {
-            case "battery":
+            case InventoryManager.Tool.BATTERY or InventoryManager.Tool.SOLARPANEL:
                 setDialogText("This is a Solar Array. Psyche had 2 of these in cross formations to generate power.\n\nI can use this to automatically recharge my suit's battery.\n\n<i>Press <b>TAB</b> to learn more.</i>");
                 solarPanelInfoButton.SetActive(true);
                 batteryLevel.transform.parent.gameObject.SetActive(true);
                 batteryIndicator.SetActive(true);
                 break;
 
-            case "imager":
-                setDialogText("This is Multispectral Imager. It is highly sensitive to light and Psyche used 2 of these to analyze the asteroid's geology and topography.\n\nI can use this to help me see in the dark.\n<i>Look around with the spotlight using your mouse</i>\n\n<i>Press <b>TAB</b> to learn more.</i>");
-                imagerInfoButton.SetActive(true);
-                imagerLevel.transform.parent.gameObject.SetActive(true);
-                break;
-
-            case "spectrometer":
-                setDialogText("This is a Gamma-Ray and Neutron Spectrometer. This system was used on Psyche to map the elemental composition of the asteroid.\n\nI can use this to help me search for the elements I need.\n<i>Hold <b>RIGHT CLICK</b> to see see through objects.</i>\n\n<i>Press <b>TAB</b> to learn more.</i>");
-                spectrometerInfoButton.SetActive(true);
-                GRNSIcon.SetActive(true);
-                break;
-
-            case "electromagnet":
-                setDialogText("This is an Magnetometer. Psyche used 2 of these to measure the asteroid's magnetic field.\n\nI can use this to detect deposits of iron. I should then be able to use my suit's Electro-Magnet to propel myself towards them.\n<i>Hold <b>LEFT CLICK</b> to aim the Electro-Magnet with your mouse and pull yourself towards iron deposits</i>\n\n<i>Press <b>TAB</b> to learn more.</i>");
-                eMagnetInfoButton.SetActive(true);
-                eMagnetLevel.transform.parent.gameObject.SetActive(true);
-                eMagnetIcon.SetActive(true);
-                break;
-
-            case "thruster":
+            case InventoryManager.Tool.THRUSTER:
                 setDialogText("This is a Hall Thruster. This thruster used electricity to propel Psyche from Earth's orbit to the asteroid.\n\nI can use this to help me reach high up areas.\n<i>Hold <b>SPACEBAR</b> to fly upwards.</i>\n\n<i>Press <b>TAB</b> to learn more.</i>");
                 thrusterInfoButton.SetActive(true);
                 thrusterLevel.transform.parent.gameObject.SetActive(true);
                 thrusterIcon.SetActive(true);
                 break;
 
+            case InventoryManager.Tool.IMAGER:
+                setDialogText("his is Multispectral Imager. It is highly sensitive to light and Psyche used 2 of these to analyze the asteroid's geology and topography.\n\nI can use this to help me see in the dark.\n<i>Look around with the spotlight using your mouse</i>\n\n<i>Press <b>TAB</b> to learn more.</i>");
+                imagerInfoButton.SetActive(true);
+                imagerLevel.transform.parent.gameObject.SetActive(true);
+                break;
+
+            case InventoryManager.Tool.SPECTROMETER:
+                setDialogText("This is a Gamma-Ray and Neutron Spectrometer. This system was used on Psyche to map the elemental composition of the asteroid.\n\nI can use this to help me search for the elements I need.\n<i>Hold <b>RIGHT CLICK</b> to see see through objects.</i>\n\n<i>Press <b>TAB</b> to learn more.</i>");
+                spectrometerInfoButton.SetActive(true);
+                GRNSIcon.SetActive(true);
+                break;
+
+            case InventoryManager.Tool.ELECTROMAGNET:
+                setDialogText("This is an Magnetometer. Psyche used 2 of these to measure the asteroid's magnetic field.\n\nI can use this to detect deposits of iron. I should then be able to use my suit's Electro-Magnet to propel myself towards them.\n<i>Hold <b>LEFT CLICK</b> to aim the Electro-Magnet with your mouse and pull yourself towards iron deposits</i>\n\n<i>Press <b>TAB</b> to learn more.</i>");
+                eMagnetInfoButton.SetActive(true);
+                eMagnetLevel.transform.parent.gameObject.SetActive(true);
+                eMagnetIcon.SetActive(true);
+                break;
+
             default:
-                Debug.Log("Incorrect tool name passed: " + args[0].ToString());
+                Debug.Log("Incorrect tool name passed: " + tool.ToString());
                 break;
         }
     }
@@ -492,7 +486,7 @@ public class UIController : BaseController<UIController>
             confirmBoxText.transform.parent.gameObject.SetActive(false);
             inventoryMenu.SetActive(false);
             PlayerController.Instance.inputBlocked = false;
-            StartCoroutine(PlayerController.Instance.deathCon.Warp());
+            StartCoroutine(PlayerController.Instance.playerDeath.Warp());
         }
         ///If Title Screen button opened the Confirmation Box
         else
@@ -570,7 +564,7 @@ public class UIController : BaseController<UIController>
     ///     - Dictionary contains a list of elements and their required values
     /// </summary>
     /// <param name="args"></param>
-    public void ToolInfoGather(ToolDirective directive, bool upgraded, string toolName, Dictionary<string, ushort> requirements, int level)
+    public void ToolInfoGather(ToolDirective directive, bool upgraded, string toolName, Dictionary<InventoryManager.Element, ushort> requirements, int level)
     {
         switch (directive)
         {
@@ -582,14 +576,13 @@ public class UIController : BaseController<UIController>
                     {
                         if (requirement.Value > 0)
                         {
-                            string name = requirement.Key.ToLower() switch
+                            string name = requirement.Key switch
                             {
-                                "element_copper"    => "Copper",
-                                "element_iron"      => "Iron",
-                                "element_nickel"    => "Nickel",
-                                "element_gold"      => "Gold",
-                                "element_platinum"  => "Platinum",                  // Change to Tungsten
-                               _ => requirement.Key
+                                InventoryManager.Element.COPPER     => "Copper",
+                                InventoryManager.Element.IRON       => "Iron",
+                                InventoryManager.Element.NICKEL     => "Nickel",
+                                InventoryManager.Element.GOLD       => "Gold",
+                               _                                    => ""
                             };
 
                             requirement_display += name + " " + requirement.Value + "  ";
@@ -669,59 +662,59 @@ public class UIController : BaseController<UIController>
     }
 
     /// <summary>
-    /// 
+    /// Update the display for the requirements
     /// </summary>
-    private void UpdateRequirements(Dictionary<string, ushort> levelRequirements, Transform requirementsArea)
+    private void UpdateRequirements(Dictionary<InventoryManager.Element, ushort> levelRequirements, Transform requirementsArea)
     {
         foreach (Transform child in requirementsArea)
         {
             Destroy(child.gameObject);
         }
 
-        int amount = levelRequirements["element_copper"];
+        int amount = levelRequirements[InventoryManager.Element.COPPER];
         if (amount > 0)
             Instantiate(copperRequirement, requirementsArea).GetComponentInChildren<TMP_Text>().SetText(amount.ToString());
 
-        amount = levelRequirements["element_iron"];
+        amount = levelRequirements[InventoryManager.Element.IRON];
         if (amount > 0)
             Instantiate(ironRequirement, requirementsArea).GetComponentInChildren<TMP_Text>().SetText(amount.ToString());
 
-        amount = levelRequirements["element_nickel"];
+        amount = levelRequirements[InventoryManager.Element.NICKEL];
         if (amount > 0)
             Instantiate(nickelRequirement, requirementsArea).GetComponentInChildren<TMP_Text>().SetText(amount.ToString());
 
-        amount = levelRequirements["element_gold"];
+        amount = levelRequirements[InventoryManager.Element.GOLD];
         if (amount > 0)
             Instantiate(goldRequirement, requirementsArea).GetComponentInChildren<TMP_Text>().SetText(amount.ToString());
 
-        amount = levelRequirements["element_tungsten"];
+        /*amount = levelRequirements[];
         if (amount > 0)
-            Instantiate(tungstenRequirement, requirementsArea).GetComponentInChildren<TMP_Text>().SetText(amount.ToString());
+            Instantiate(tungstenRequirement, requirementsArea).GetComponentInChildren<TMP_Text>().SetText(amount.ToString());*/
     }
 
     /// <summary>
     /// When the player walks over the object, pick up the object
     /// </summary>
-    public void ElementUpdate(ArrayList args)
+    public void ElementUpdate(InventoryManager.Element element, ushort amount)
     {
-        string element = args[0].ToString().ToLower();
-        string value = args[1].ToString();
+        //string element = args[0].ToString().ToLower();
+        string value = amount.ToString();
 
         switch (element)
         {
-            case "element_copper":
+            case InventoryManager.Element.COPPER:
                 copperAmount.SetText(value);
                 break;
-            case "element_iron":
+            case InventoryManager.Element.IRON:
                 ironAmount.SetText(value);
                 break;
-            case "element_nickel":
+            case InventoryManager.Element.NICKEL:
                 nickelAmount.SetText(value);
                 break;
-            case "element_gold":
+            case InventoryManager.Element.GOLD:
                 goldAmount.SetText(value);
                 break;
-            case "element_tungsten":
+            case InventoryManager.Element.TUNGSTEN:
                 tungstenAmount.SetText(value);
                 break;
             default:

@@ -31,17 +31,13 @@ public class SceneTransitionManager : MonoBehaviour {
     /// <param name="playerManagement"></param>
     public void Initialize(GameController gameController) {
         _gameController = gameController;
-        if (PlayerController.Instance != null)
-        {
-            LoadPlayer();
-        }
     }
 
     // #####################################################  Events #####################################################
 
     public void LoadPlayer()
     {
-        PlayerController.Instance.InitiateTransition += OnInitiateTransition;
+        PlayerController.Instance.playerCollisionManager.InitiateTransition += OnInitiateTransition;
     }
 
     public void LoadDevConsole()
@@ -56,12 +52,8 @@ public class SceneTransitionManager : MonoBehaviour {
     {
         if (PlayerController.Instance != null)
         {
-            PlayerController.Instance.InitiateTransition -= OnInitiateTransition;
+            PlayerController.Instance.playerCollisionManager.InitiateTransition -= OnInitiateTransition;
         }
-        //if (_gameController.developerConsole != null)
-        //{
-        //    _gameController.developerConsole.OnDevConsoleTransition -= OnInitiateTransition;
-        //}
     }
 
     // ################################################  Scene Management ################################################
@@ -159,15 +151,6 @@ public class SceneTransitionManager : MonoBehaviour {
 
         canvas.planeDistance = 100;
         canvas.worldCamera = Camera.main;
-    }
-
-    /// <summary>
-    /// Runs each time a new scene is loaded
-    /// </summary>
-    /// <param name="scene"></param>
-    /// <param name="mode"></param>
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
-        _transition = false;
     }
 
     /// <summary>
