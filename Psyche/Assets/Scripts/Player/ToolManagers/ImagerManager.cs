@@ -34,56 +34,66 @@ public class ImagerManager : ToolManager
         _playerController = playerManagement;
         _flashlight.intensity = 0f;
         level = 0;
-        levelRequirements = new Dictionary<int, Dictionary<string, ushort>>()
+        levelRequirements = new Dictionary<int, Dictionary<InventoryManager.Element, ushort>>()
         {
-            {  1, new Dictionary<string, ushort>()
+            {  1, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { "element_copper", 0 }, { "element_iron", 0 }, { "element_nickel", 0 }, { "element_gold", 2 }, { "element_tungsten", 0 }
+                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
+                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 2 },
                 }
             },
-            {  2, new Dictionary<string, ushort>()
+            {  2, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 0 } , { "element_gold", 4 }, { "element_tungsten", 0 }
+                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
+                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 4 },
                 }
             },
-            {  3, new Dictionary<string, ushort>()
+            {  3, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 0 } , { "element_gold", 4 }, { "element_tungsten", 0 }
+                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
+                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 4 },
                 }
             },
-            {  4, new Dictionary<string, ushort>()
+            {  4, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 0 } , { "element_gold", 4 }, { "element_tungsten", 0 }
+                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
+                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 4 },
                 }
             },
-            {  5, new Dictionary<string, ushort>()
+            {  5, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 0 } , { "element_gold", 4 }, { "element_tungsten", 0 }
+                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
+                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 4 },
                 }
             },
-            {  6, new Dictionary<string, ushort>()
+            {  6, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 0 } , { "element_gold", 4 }, { "element_tungsten", 0 }
+                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
+                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 4 },
                 }
             },
-            {  7, new Dictionary<string, ushort>()
+            {  7, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 0 } , { "element_gold", 4 }, { "element_tungsten", 0 }
+                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
+                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 4 },
                 }
             },
-            {  8, new Dictionary<string, ushort>()
+            {  8, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 0 } , { "element_gold", 4 }, { "element_tungsten", 0 }
+                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
+                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 4 },
                 }
             },
-            {  9, new Dictionary<string, ushort>()
+            {  9, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 0 } , { "element_gold", 4 }, { "element_tungsten", 0 }
+                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 },     
+                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 4 },
                 }
             },
-            {  10, new Dictionary<string, ushort>()
+            {  10, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 0 } , { "element_gold", 4 }, { "element_tungsten", 0 }
+                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
+                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 4 },
                 }
             },
         };

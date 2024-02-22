@@ -43,6 +43,7 @@ public abstract class BaseState
                 _sceneState[pair.Key] = pair.Value;
             }
         }
+        SaveState();
     }
 
     /// <summary>
@@ -86,6 +87,6 @@ public abstract class BaseState
             Debug.Log("No match found for the provided key");
             return;
         }
-        _sceneState[matched_key] = value;
+        if (_sceneState.ContainsKey(matched_key)) { _sceneState[matched_key] = value; }
     }
 }

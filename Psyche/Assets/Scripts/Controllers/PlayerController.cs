@@ -76,7 +76,6 @@ public class PlayerController : BaseController<PlayerController>
         imagerManager.Initialize(this);
         // ##### Object Managers ######
 
-        //playerHealth.Initialize(this); <-- this initializes the script and creates a cross reference between the two
         // ##### Miscellaneous ######
         inventoryManager = GetComponent<InventoryManager>();
         inventoryManager.Initialize(this);
@@ -178,15 +177,14 @@ public class PlayerController : BaseController<PlayerController>
             //if (inventoryManager.CheckTool("battery") && !Input.GetButton("Jump") && !Input.GetButton("FireGRS") && !Input.GetButton("EMagnet") && batteryManager.batteryPercent != 100 && !eMagnetActive && !beingPulled && !usingThruster)
             if (!Input.GetButton("Jump") && !Input.GetButton("FireGRS") && !Input.GetButton("EMagnet") && batteryManager.batteryPercent != 100 && !eMagnetActive && !beingPulled && !usingThruster)
             {
-                batteryManager.PassiveBatt(1);
+                batteryManager.PassiveBatt();
             }
         }
 
         playerMovement.handleMovement(usingThruster, beingWarped, enteringCave, exitingCave);
 
         //Inventory and Dialog Box 
-        if (Input.GetButtonDown("Inventory") && !Input.GetButton("FireGRS"))
-            UIController.Instance.handleUI();
+        if (Input.GetButtonDown("Inventory") && !Input.GetButton("FireGRS")) { UIController.Instance.handleUI(); }
     }
 
     /// <summary>
@@ -241,7 +239,7 @@ public class PlayerController : BaseController<PlayerController>
     {
         if(GameController.Instance != null)
         {
-
+            GameController.Instance.gameStateManager.UnloadPlayer();
         }
         if(UIController.Instance != null)
         {
