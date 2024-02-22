@@ -15,11 +15,12 @@ public class Tool_Intro_eMagnetState : BaseState
     /// </summary>
     public enum SceneObject : short
     {
-        ELECTRO_MAGNET_PICKUP_VARIANT = 0,
+        ELECTROMAGNET = 0,
         CHECKPOINT_0 = 1,
         CHECKPOINT_1 = 2,
-        GOLD_1,
-        GOLD_2,
+        GOLD_1 = 3,
+        GOLD_2 = 4,
+        CHECKPOINT = 99,
     }
 
     /// <summary>
@@ -29,27 +30,35 @@ public class Tool_Intro_eMagnetState : BaseState
     /// <returns></returns>
     public override short Match(string obj)
     {
-        switch (obj.ToLower())
+        return obj.ToLower() switch 
         {
-            case "electromagnet":   return (short)SceneObject.ELECTRO_MAGNET_PICKUP_VARIANT;
-            case "checkpoint 0":    return (short)SceneObject.CHECKPOINT_0;
-            case "checkpoint 1":    return (short)SceneObject.CHECKPOINT_1;
-            case "element_gold 1":  return (short)SceneObject.GOLD_1;
-            case "element_gold 2":  return (short)SceneObject.GOLD_2;
-        }
-        return -1;
+            "electromagnet"     => (short)SceneObject.ELECTROMAGNET,
+            "checkpoint 0"      => (short)SceneObject.CHECKPOINT_0,
+            "checkpoint 1"      => (short)SceneObject.CHECKPOINT_1,
+            "element_gold 1"    => (short)SceneObject.GOLD_1,
+            "element_gold 2"    => (short)SceneObject.GOLD_2,
+            "checkpoint"        => (short)SceneObject.CHECKPOINT,
+            _                   => -1,
+        };
     }
 
-    public override string Match(short obj) {
-        switch (obj)
+    /// <summary>
+    /// Matches the input object short (enum) with its string variant
+    /// </summary>
+    /// <param name="obj"></param>
+    /// <returns></returns>
+    public override string Match(short obj) 
+    {
+        return obj switch
         {
-            case (short)SceneObject.ELECTRO_MAGNET_PICKUP_VARIANT:  return "ElectroMagnet";
-            case (short)SceneObject.CHECKPOINT_0:                   return "Checkpoint 0";               
-            case (short)SceneObject.CHECKPOINT_1:                   return "Checkpoint 1";
-            case (short)SceneObject.GOLD_1:                         return "Element_Gold 1";
-            case (short)SceneObject.GOLD_2:                         return "Element_Gold 2";
-        }
-        return "";
+            (short)SceneObject.ELECTROMAGNET    => "ElectroMagnet",
+            (short)SceneObject.CHECKPOINT_0     => "Checkpoint 0",
+            (short)SceneObject.CHECKPOINT_1     => "Checkpoint 1",
+            (short)SceneObject.GOLD_1           => "Element_Gold 1",
+            (short)SceneObject.GOLD_2           => "Element_Gold 2",
+            (short)SceneObject.CHECKPOINT       => "Checkpoint",
+            _                                   => "",
+        };
     }
 
     /// <summary>
@@ -60,7 +69,7 @@ public class Tool_Intro_eMagnetState : BaseState
         // This must be set up first before anything else is created as everything else is based off of this
         _defaultState = new Dictionary<short, object>
         {
-            { (short)SceneObject.ELECTRO_MAGNET_PICKUP_VARIANT, true }, // 'true' for available
+            { (short)SceneObject.ELECTROMAGNET, true }, // 'true' for available
             { (short)SceneObject.CHECKPOINT_0, true },  // `true` for activate-able
             { (short)SceneObject.CHECKPOINT_1, true },
             { (short)SceneObject.GOLD_1, true },
@@ -81,7 +90,7 @@ public class Tool_Intro_eMagnetState : BaseState
             string objectName = Match(pair.Key);
             switch (pair.Key)
             {
-                case (short)SceneObject.ELECTRO_MAGNET_PICKUP_VARIANT:
+                case (short)SceneObject.ELECTROMAGNET:
                     { // Specifying scope for use of `var value` && `var targetObject`
                         var value = (bool)pair.Value;
                         

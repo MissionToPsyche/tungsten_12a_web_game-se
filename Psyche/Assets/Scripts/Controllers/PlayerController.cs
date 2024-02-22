@@ -76,7 +76,6 @@ public class PlayerController : BaseController<PlayerController>
         imagerManager.Initialize(this);
         // ##### Object Managers ######
 
-        //playerHealth.Initialize(this); <-- this initializes the script and creates a cross reference between the two
         // ##### Miscellaneous ######
         inventoryManager = GetComponent<InventoryManager>();
         inventoryManager.Initialize(this);
@@ -185,8 +184,7 @@ public class PlayerController : BaseController<PlayerController>
         playerMovement.handleMovement(usingThruster, beingWarped, enteringCave, exitingCave);
 
         //Inventory and Dialog Box 
-        if (Input.GetButtonDown("Inventory") && !Input.GetButton("FireGRS"))
-            UIController.Instance.handleUI();
+        if (Input.GetButtonDown("Inventory") && !Input.GetButton("FireGRS")) { UIController.Instance.handleUI(); }
     }
 
     /// <summary>
@@ -241,7 +239,7 @@ public class PlayerController : BaseController<PlayerController>
     {
         if(GameController.Instance != null)
         {
-
+            GameController.Instance.gameStateManager.UnloadPlayer();
         }
         if(UIController.Instance != null)
         {
