@@ -1,7 +1,7 @@
 /** 
 Description: battery script
 Author: blopezro, mcmyers
-Version: 20240206
+Version: 20240220
 **/
 
 using System;
@@ -71,7 +71,7 @@ public class BatteryManager : ToolManager {
         maxCapacity = 100f;
         batteryLevel = maxCapacity;
         batteryPercent = batteryLevel / maxCapacity * 100f;
-        rate = 1;
+        rate = 0.5f;
         batteryDrained = (batteryLevel > 0);
     }
 
@@ -106,8 +106,7 @@ public class BatteryManager : ToolManager {
     /// <summary>
     /// passively recharges battery at given rate
     /// </summary>
-    /// <param name="rate"></param>
-    public void PassiveBatt(float rate)
+    public void PassiveBatt()
     {
         batteryLevel += rate/1000 ;
         batteryLevel = Mathf.Clamp(batteryLevel, 0f, maxCapacity); // keeps batt level between 0-100
@@ -136,6 +135,6 @@ public class BatteryManager : ToolManager {
     /// Increases the max capacity when called.
     /// </summary>
     protected override void UpgradeTool() {
-        maxCapacity += 10f;
+        rate += 0.5f;
     }
 }
