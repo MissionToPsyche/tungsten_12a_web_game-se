@@ -98,7 +98,8 @@ public class GameStateManager : MonoBehaviour
         Tool_Intro_Thruster,
         Tool_Combo_1,
         Tool_Combo_2,
-        
+        Tool_Combo_3,
+
         // Error state or incorrect value passed
         None,
     }
