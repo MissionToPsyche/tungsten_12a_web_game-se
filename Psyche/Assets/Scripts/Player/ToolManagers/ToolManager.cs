@@ -13,7 +13,7 @@ public abstract class ToolManager : MonoBehaviour
 
     //Tool State
     public int level;
-    public Dictionary<int, Dictionary<string, ushort>> levelRequirements;
+    public Dictionary<int, Dictionary<InventoryManager.Element, ushort>> levelRequirements;
 
     public bool toolEnabled;
 
@@ -25,7 +25,7 @@ public abstract class ToolManager : MonoBehaviour
     }
 
     // Events
-    public event Action<ToolDirective, bool, string, Dictionary<string, ushort>, int> ToolManagerUpdate;
+    public event Action<ToolDirective, bool, string, Dictionary<InventoryManager.Element, ushort>, int> ToolManagerUpdate;
 
     /// <summary>
     /// Enables the tool
@@ -33,10 +33,6 @@ public abstract class ToolManager : MonoBehaviour
     public void Enable()
     {
         toolEnabled = true;
-        //Create package to send to UI to upgrade interface
-        ArrayList args = new ArrayList {
-                "UI", "None", "ToolManager", "ToolInfo", "info", false, levelRequirements[level+1],
-        };
         ToolManagerUpdate?.Invoke(ToolDirective.Info, false, toolName, levelRequirements[level + 1], level + 1);
     }
 
@@ -56,7 +52,7 @@ public abstract class ToolManager : MonoBehaviour
     public void Modify()
     {
         // Check for upgrading
-        int send_level = (levelRequirements.ContainsKey(level + 1) ? level + 1 : level);
+        int nextLevel = (levelRequirements.ContainsKey(level + 1) ? level + 1 : level);
         bool upgraded = true;
         if (levelRequirements.ContainsKey(level + 1))
         {
@@ -69,7 +65,7 @@ public abstract class ToolManager : MonoBehaviour
             }
         }
         //Confirm the number of required elements exists
-        if (upgraded && level + 1 <= send_level)
+        if (upgraded && level + 1 <= nextLevel)
         {
             //Remove the required elements
             foreach (var requirement in levelRequirements[level + 1])
@@ -83,6 +79,6 @@ public abstract class ToolManager : MonoBehaviour
             level++;
             UpgradeTool();
         }
-        ToolManagerUpdate?.Invoke(ToolDirective.Upgrade, upgraded, toolName, levelRequirements[send_level], level + 1);
+        ToolManagerUpdate?.Invoke(ToolDirective.Upgrade, upgraded, toolName, levelRequirements[nextLevel], level + 1);
     }
 }
