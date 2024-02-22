@@ -4,14 +4,13 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 using static ToolManager;
 
 /// <summary>
 /// Functions for the inventory and dialog box. Script is a component of the UI gameobject
 /// </summary>
-/// Author: jmolive8
+/// Author: jmolive8, blopezro
 public class UIController : BaseController<UIController>
 {
     //============================================== Initialize/Updates/Destroy ==============================================
@@ -26,7 +25,6 @@ public class UIController : BaseController<UIController>
     //Variables
     private float _aspectRatio;
     
-
     /// <summary>
     /// Initialize the object and parent class
     /// </summary>
@@ -35,21 +33,18 @@ public class UIController : BaseController<UIController>
         //Base class
         base.Initialize();
 
-        
-
         //DevConsole Objects
         _devConsolePanel = transform.Find("DevConsolePanel").gameObject;
         _devConsoleFPSPanel = transform.Find("DevConsoleFPSPanel").gameObject;
         _devConsoleResourcePanel = transform.Find("DevConsoleResourcePanel").gameObject;
-        _devConsoleInput = _devConsolePanel.transform.Find("DevConsoleInput")
-            .GetComponent<TMP_InputField>();
+        _devConsoleInput = _devConsolePanel.transform.Find("DevConsoleInput").GetComponent<TMP_InputField>();
         _devConsoleText = new Dictionary<string, TMP_Text>();
-        _devConsoleText.Add("DevConsoleFPS",
-            _devConsoleFPSPanel.transform.Find("DevConsoleFPS").GetComponent<TMP_Text>());
-        _devConsoleText.Add("DevConsoleMenu",
-            _devConsolePanel.transform.Find("DevConsoleMenu").GetComponent<TMP_Text>());
-        _devConsoleText.Add("DevConsoleResourceMonitor",
-            _devConsoleResourcePanel.transform.Find("DevConsoleResourceMonitor").GetComponent<TMP_Text>());
+        _devConsoleText.Add("DevConsoleFPS",_devConsoleFPSPanel.transform
+            .Find("DevConsoleFPS").GetComponent<TMP_Text>());
+        _devConsoleText.Add("DevConsoleMenu",_devConsolePanel.transform
+            .Find("DevConsoleMenu").GetComponent<TMP_Text>());
+        _devConsoleText.Add("DevConsoleResourceMonitor",_devConsoleResourcePanel.transform
+            .Find("DevConsoleResourceMonitor").GetComponent<TMP_Text>());
         _devConsolePanel.SetActive(false);
         _devConsoleFPSPanel.SetActive(false);
         _devConsoleResourcePanel.SetActive(false);
@@ -128,7 +123,6 @@ public class UIController : BaseController<UIController>
     public event Action<ArrayList> OnUpdateToolModify;      // Send Tool Modification requests to Inventory
 
     public event Action<ArrayList> OnUpdateUIToDevConsole;  // Send dev input commands to DevConsole
-
 
     /// <summary>
     /// Subscribes to events and activates when event triggered
@@ -229,24 +223,54 @@ public class UIController : BaseController<UIController>
     /// Function to update the battery text     ///TODO: Relocate battpertext to UIController object
     /// </summary>
     /// <param name="newPercentage"></param>
-    private void UpdateBattery(float percent)
-    {
+    private void UpdateBattery(float percent) {
         battPerText.text = percent.ToString() + "%";
         switch (percent) {
-            case > 83.35f:
-                activeBattSpriteRenderer.sprite = batterySprite6; break;
-            case > 66.68f:
-                activeBattSpriteRenderer.sprite = batterySprite5; break;
-            case > 50.01f:                
-                activeBattSpriteRenderer.sprite = batterySprite4; break;
-            case > 33.34f:                
-                activeBattSpriteRenderer.sprite = batterySprite3; break;
-            case > 16.67f:                
-                activeBattSpriteRenderer.sprite = batterySprite2; break;
-            case > 0f:                
-                activeBattSpriteRenderer.sprite = batterySprite1; break;
-            case <= 0f:            
-                activeBattSpriteRenderer.sprite = batterySprite0; break;
+            case > 83.35f: activeBattSpriteRenderer.sprite = batterySprite6; break;
+            case > 66.68f: activeBattSpriteRenderer.sprite = batterySprite5; break;
+            case > 50.01f: activeBattSpriteRenderer.sprite = batterySprite4; break;
+            case > 33.34f: activeBattSpriteRenderer.sprite = batterySprite3; break;
+            case > 16.67f: activeBattSpriteRenderer.sprite = batterySprite2; break;
+            case > 0f:     activeBattSpriteRenderer.sprite = batterySprite1; break;
+            case <= 0f:    activeBattSpriteRenderer.sprite = batterySprite0; break;
+        }
+    }
+
+    public void UpdateCapturedTungstens(GameStateManager.Scene currentScene) {
+        // Determine which element to update based on the current scene
+        int elementIndex = -1;
+        switch (currentScene) {
+            case GameStateManager.Scene.Landing_Scene:
+                elementIndex = 0;
+                break;
+            case GameStateManager.Scene.Tool_Intro_Imager:
+                elementIndex = 1;
+                break;
+            case GameStateManager.Scene.Tool_Intro_GRS:
+                elementIndex = 2;
+                break;
+            case GameStateManager.Scene.Tool_Intro_eMagnet:
+                elementIndex = 3;
+                break;
+            case GameStateManager.Scene.Tool_Intro_Thruster:
+                elementIndex = 4;
+                break;
+            case GameStateManager.Scene.Tool_Combo_1:
+                elementIndex = 5;
+                break;
+            case GameStateManager.Scene.Tool_Combo_2:
+                elementIndex = 6;
+                break;
+            case GameStateManager.Scene.Tool_Combo_3:
+                elementIndex = 7;
+                break;
+        }
+
+        // If elementIndex is valid, update the corresponding element's alpha to "unghost"
+        if (elementIndex >= 0 && elementIndex < elements.Length) {
+            Color newColor = elements[elementIndex].color;
+            newColor.a = 1f;
+            elements[elementIndex].color = newColor;
         }
     }
 
@@ -350,6 +374,8 @@ public class UIController : BaseController<UIController>
     public Sprite batterySprite2;
     public Sprite batterySprite1;
     public Sprite batterySprite0;
+
+    public SpriteRenderer[] elements = new SpriteRenderer[8];
 
     [Header("Inventory Menus")]
     public GameObject inventoryMenu;
@@ -507,9 +533,6 @@ public class UIController : BaseController<UIController>
         else
             UnityEngine.SceneManagement.SceneManager.LoadScene("Title_Screen");
     }
-
-
-
 
     //========================================================== Upgrades Menu ==========================================================
     [Header("Upgrades Menu")]
