@@ -195,7 +195,7 @@ public class UIController : BaseController<UIController>
                 break;
 
             case InventoryManager.Tool.IMAGER:
-                setDialogText("his is Multispectral Imager. It is highly sensitive to light and Psyche used 2 of these to analyze the asteroid's geology and topography.\n\nI can use this to help me see in the dark.\n<i>Look around with the spotlight using your mouse</i>\n\n<i>Press <b>TAB</b> to learn more.</i>");
+                setDialogText("This is Multispectral Imager. It is highly sensitive to light and Psyche used 2 of these to analyze the asteroid's geology and topography.\n\nI can use this to help me see in the dark.\n<i>Look around with the spotlight using your mouse</i>\n\n<i>Press <b>TAB</b> to learn more.</i>");
                 imagerInfoButton.SetActive(true);
                 imagerLevel.transform.parent.gameObject.SetActive(true);
                 break;
