@@ -42,9 +42,8 @@ public class PlayerDeath : MonoBehaviour {
     public void Hazard(Collision2D collision)
     {
         ApplyKickback(collision);
-
-        GetHurt(1);
         GameController.Instance.audioManager.playerHurt.Play();
+        GetHurt(1);
     }
     
     /// <summary>
@@ -52,6 +51,7 @@ public class PlayerDeath : MonoBehaviour {
     /// </summary>
     public void Spikes()
     {
+        GameController.Instance.audioManager.playerHurt.Play();
         GetHurt(playerHealth.playerHealth);
     }
 
@@ -99,6 +99,10 @@ public class PlayerDeath : MonoBehaviour {
                 //Recharge health and battery
                 playerHealth.HealthUp(100);
                 gameObject.GetComponent<BatteryManager>().Activate();
+                //Play audio if you hit a checkpoint with default layer
+                if (collision.gameObject.layer.Equals(0)) {
+                    GameController.Instance.audioManager.checkpoint.Play();
+                }
             }
         }
     }
