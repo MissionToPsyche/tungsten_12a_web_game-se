@@ -11281,6 +11281,10 @@ PrefabInstance:
       value: PlayerCharacter
       objectReference: {fileID: 0}
     - target: {fileID: 1078862222496993058, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: m_Name
+      value: Press Up Popup
+      objectReference: {fileID: 0}
+    - target: {fileID: 1078862222496993058, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
