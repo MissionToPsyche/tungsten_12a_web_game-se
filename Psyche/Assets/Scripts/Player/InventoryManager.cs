@@ -244,8 +244,15 @@ public class InventoryManager : MonoBehaviour
         // Split the incoming value from its element name and element ID
         string[] element_set = item.Split(' ');
 
-        //Check if valid name passed and return int
+        // Check if valid name passed and return int
         Element element = MatchElement(element_set[0]);
+        
+        // If the element is tungsten, updates the UI for the element at the current scene
+        if (element == Element.TUNGSTEN) {
+            GameStateManager.Scene currentScene = GameController.Instance.gameStateManager.currentScene;
+            UIController.Instance.UpdateCapturedTungstens(currentScene);
+        }
+
         if (!_elements.ContainsKey(element))
         {
             Debug.LogError($"Incorrect element name passed -- InventoryManager Add: {element}");
