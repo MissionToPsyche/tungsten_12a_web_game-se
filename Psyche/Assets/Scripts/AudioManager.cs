@@ -1,7 +1,7 @@
 /** 
 Description: audio manager script
 Author: blopezro
-Version: 20240206
+Version: 20240222
 **/
 
 using UnityEngine;
@@ -27,6 +27,10 @@ public class AudioManager : MonoBehaviour {
     [SerializeField] public AudioSource toolThrusters;
     [SerializeField] public AudioSource playerJump;
     [SerializeField] public AudioSource playerHurt;
+    [SerializeField] public AudioSource pickupElement;
+    [SerializeField] public AudioSource pickupElementTungsten;
+    [SerializeField] public AudioSource pickupTool;
+    [SerializeField] public AudioSource checkpoint;
     public List<AudioSource> sfxAudioSources;
     
     //////////////////////////////////////////////////
@@ -46,6 +50,10 @@ public class AudioManager : MonoBehaviour {
         sfxAudioSources.Add(toolThrusters);
         sfxAudioSources.Add(playerJump);
         sfxAudioSources.Add(playerHurt);
+        sfxAudioSources.Add(pickupElement);
+        sfxAudioSources.Add(pickupElementTungsten);
+        sfxAudioSources.Add(pickupTool);
+        sfxAudioSources.Add(checkpoint);
     }
 
     /// <summary>
