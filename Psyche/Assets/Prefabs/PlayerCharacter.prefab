@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 4004592847061855459}
   - component: {fileID: 3447453164145479344}
   - component: {fileID: 2286438820298863988}
+  - component: {fileID: 8887768595643478277}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -141,9 +142,10 @@ MonoBehaviour:
   groundCheckSize: {x: 0.798, y: 0.1}
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 16392
+    m_Bits: 136
   groundCastDistance: 0
   isGrounded: 0
+  playerCollisionManager: {fileID: 0}
   playerHealth: {fileID: 0}
   batteryManager: {fileID: 0}
   playerMovement: {fileID: 0}
@@ -151,9 +153,10 @@ MonoBehaviour:
   eMagnetManager: {fileID: 0}
   thrusterManager: {fileID: 0}
   gammaView: {fileID: 4691425001880923315}
-  deathCon: {fileID: 0}
+  playerDeath: {fileID: 0}
   inventoryManager: {fileID: 0}
   eMagnetActive: 0
+  magnetInterrupt: 0
   beingPulled: 0
   inputBlocked: 0
   beingWarped: 0
@@ -171,6 +174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4205c21202344ba1bf727cda06856, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isFacingRight: 0
   _virtualCameraR: {fileID: 4193794722220228110}
   _virtualCameraL: {fileID: 9155241973715927046}
   _virtualCameraLowR: {fileID: 4318120916778828067}
@@ -298,6 +302,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: be248da1dc03e834a974c62bc0b2a7a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8887768595643478277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 82528849670660265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1a6441281f0e5d47a733f475e739427, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1078862222496993058
