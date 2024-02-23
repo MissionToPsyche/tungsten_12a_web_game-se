@@ -190,6 +190,17 @@ public class PlayerCollisionManager : MonoBehaviour
                 _playerController.playerDeath.Checkpoint(other);
                 break;
 
+            case CollisionTag.TransitionObjectIn or CollisionTag.TransitionObjectOut:
+                // Popup over the player
+                _playerController.pressUpPopup.SetActive(true);
+
+                // If ship (tungsten: layer 12) and fewer than 8 tungsten available - disable the BoxCollider
+                if (other.gameObject.layer == 12 && _playerController.inventoryManager.CheckElement(InventoryManager.Element.TUNGSTEN) < 8)
+                {
+                    other.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                }
+                break;
+
             default:
                 break;
         }
@@ -201,7 +212,22 @@ public class PlayerCollisionManager : MonoBehaviour
     /// <param name="other"></param>
     private void OnTriggerExit2D(Collider2D other)
     {
-        // Trigger Exit Stuff
+        switch (MatchTag(other.tag))
+        {
+            case CollisionTag.TransitionObjectIn or CollisionTag.TransitionObjectOut:
+                // Popup over the player
+                _playerController.pressUpPopup.SetActive(false);
+
+                // If ship (tungsten: layer 12) - enable the BoxCollider
+                if (other.gameObject.layer == 12)
+                {
+                    other.gameObject.GetComponent<BoxCollider2D>().enabled = true;
+                }
+                break;
+
+            default:
+                break;
+        }
     }
 
     /// <summary>

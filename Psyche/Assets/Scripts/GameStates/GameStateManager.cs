@@ -27,6 +27,7 @@ public class GameStateManager : MonoBehaviour
             //InGame state mappings
             { GameState.InGame, new Dictionary<Scene, BaseState>() {
                 { Scene.Landing_Scene, new Landing_SceneState() },
+                { Scene.Tool_Intro_Imager, new Tool_Intro_ImagerState() },
                 { Scene.Tool_Intro_eMagnet, new Tool_Intro_eMagnetState() },
             } },
         };

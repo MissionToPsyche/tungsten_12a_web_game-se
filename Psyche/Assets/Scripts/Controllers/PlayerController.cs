@@ -6,6 +6,7 @@
 
 using UnityEngine;
 using System.Collections;
+using Unity.VisualScripting;
 
 /// <summary>
 /// Player Management script controls how the player interacts with the 
@@ -81,6 +82,7 @@ public class PlayerController : BaseController<PlayerController>
         inventoryManager.Initialize(this);
         playerDeath = GetComponent<PlayerDeath>();
         playerDeath.Initialize(this);
+        pressUpPopup = transform.Find("Press Up Popup").gameObject;
 
         //hides mouse cursor
         Cursor.visible = false;

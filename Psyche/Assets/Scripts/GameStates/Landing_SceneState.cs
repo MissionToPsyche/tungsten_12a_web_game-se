@@ -226,4 +226,3 @@ public class Landing_SceneState : BaseState
         }
     }
 }
-
