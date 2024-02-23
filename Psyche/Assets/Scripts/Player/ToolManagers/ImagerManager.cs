@@ -99,6 +99,7 @@ public class ImagerManager : ToolManager
         };
 
         //Tool specific variables
+        maxLevel = levelRequirements.Count;
         _radiusIncrease = 1f;
         _active = false;
     }
