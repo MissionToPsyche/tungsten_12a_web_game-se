@@ -93,15 +93,151 @@ public class Tool_Intro_ImagerState : BaseState
     /// </summary>
     public override void LoadState()
     {
-
         foreach (var pair in _savedState)
         {
             string objectName = Match(pair.Key);
             switch (pair.Key)
             {
-                
-                default:
+                case (short)SceneObject.IMAGER:
+                    { // Specifying scope for use of `var value` && `var targetObject`
+                        var value = (bool)pair.Value;
+
+                        // Remove the object if it's already been picked up
+                        if (!value)
+                        {
+                            var targetObject = GameObject.Find(objectName);
+                            if (targetObject == null)
+                            {
+                                Debug.LogError($"Object {objectName} does not exist");
+                                return;
+                            }
+
+                            targetObject.SetActive(value);
+                        }
+                    }
                     break;
+                case (short)SceneObject.CHECKPOINT_1:
+                    {
+                        var value = (bool)pair.Value;
+                        var targetObject = GameObject.Find(objectName);
+                    }
+                    break;
+                case (short)SceneObject.CHECKPOINT_2:
+                    {
+                        var value = (bool)pair.Value;
+                        var targetObject = GameObject.Find(objectName);
+                    }
+                    break;
+                case (short)SceneObject.TUNGSTEN_1:
+                    { // Specifying scope for use of `var value` && `var targetObject`
+                        var value = (bool)pair.Value;
+
+                        // Remove the object if it's already been picked up
+                        if (!value)
+                        {
+                            var targetObject = GameObject.Find(objectName);
+                            if (targetObject == null)
+                            {
+                                Debug.LogError($"Object {objectName} does not exist");
+                                return;
+                            }
+
+                            targetObject.SetActive(value);
+                        }
+                    }
+                    break;
+                case (short)SceneObject.GOLD_1:
+                    { // Specifying scope for use of `var value` && `var targetObject`
+                        var value = (bool)pair.Value;
+
+                        // Remove the object if it's already been picked up
+                        if (!value)
+                        {
+                            var targetObject = GameObject.Find(objectName);
+                            if (targetObject == null)
+                            {
+                                Debug.LogError($"Object {objectName} does not exist");
+                                return;
+                            }
+
+                            targetObject.SetActive(value);
+                        }
+                    }
+                    break;
+                case (short)SceneObject.GOLD_2:
+                    { // Specifying scope for use of `var value` && `var targetObject`
+                        var value = (bool)pair.Value;
+
+                        // Remove the object if it's already been picked up
+                        if (!value)
+                        {
+                            var targetObject = GameObject.Find(objectName);
+                            if (targetObject == null)
+                            {
+                                Debug.LogError($"Object {objectName} does not exist");
+                                return;
+                            }
+
+                            targetObject.SetActive(value);
+                        }
+                    }
+                    break;
+                case (short)SceneObject.GOLD_3:
+                    { // Specifying scope for use of `var value` && `var targetObject`
+                        var value = (bool)pair.Value;
+
+                        // Remove the object if it's already been picked up
+                        if (!value)
+                        {
+                            var targetObject = GameObject.Find(objectName);
+                            if (targetObject == null)
+                            {
+                                Debug.LogError($"Object {objectName} does not exist");
+                                return;
+                            }
+
+                            targetObject.SetActive(value);
+                        }
+                    }
+                    break;
+                case (short)SceneObject.GOLD_4:
+                    { // Specifying scope for use of `var value` && `var targetObject`
+                        var value = (bool)pair.Value;
+
+                        // Remove the object if it's already been picked up
+                        if (!value)
+                        {
+                            var targetObject = GameObject.Find(objectName);
+                            if (targetObject == null)
+                            {
+                                Debug.LogError($"Object {objectName} does not exist");
+                                return;
+                            }
+
+                            targetObject.SetActive(value);
+                        }
+                    }
+                    break;
+                case (short)SceneObject.GOLD_5:
+                    { // Specifying scope for use of `var value` && `var targetObject`
+                        var value = (bool)pair.Value;
+
+                        // Remove the object if it's already been picked up
+                        if (!value)
+                        {
+                            var targetObject = GameObject.Find(objectName);
+                            if (targetObject == null)
+                            {
+                                Debug.LogError($"Object {objectName} does not exist");
+                                return;
+                            }
+
+                            targetObject.SetActive(value);
+                        }
+                    }
+                    break;
+
+                default: break;
             }
         }
     }
