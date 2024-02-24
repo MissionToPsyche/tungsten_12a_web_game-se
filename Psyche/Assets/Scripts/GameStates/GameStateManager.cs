@@ -27,6 +27,7 @@ public class GameStateManager : MonoBehaviour
             //InGame state mappings
             { GameState.InGame, new Dictionary<Scene, BaseState>() {
                 { Scene.Landing_Scene, new Landing_SceneState() },
+                { Scene.Tool_Intro_Imager, new Tool_Intro_ImagerState() },
                 { Scene.Tool_Intro_eMagnet, new Tool_Intro_eMagnetState() },
             } },
         };
@@ -182,7 +183,7 @@ public class GameStateManager : MonoBehaviour
         if (currentState == GameState.InGame || scene == Scene.Title_Screen)
         {
             // Temporary check until the respective states are added
-            if (scene != Scene.Tool_Intro_eMagnet && currentScene != Scene.Landing_Scene)
+            if (scene != Scene.Tool_Intro_eMagnet && currentScene != Scene.Landing_Scene && currentScene != Scene.Tool_Intro_Imager)
             {
                 Debug.Log($"Scene state loader for {scene} not yet implemented");
             }
@@ -200,7 +201,7 @@ public class GameStateManager : MonoBehaviour
     public void LoadSceneState()
     {
         // Temporary until others are fully implemented
-        if (currentScene != Scene.Tool_Intro_eMagnet && currentScene != Scene.Landing_Scene) { return; }
+        if (currentScene != Scene.Tool_Intro_eMagnet && currentScene != Scene.Landing_Scene && currentScene != Scene.Tool_Intro_Imager) { return; }
 
         var stateManager = _gameStateToScene[currentState];
         stateManager[currentScene].LoadState();
@@ -214,7 +215,7 @@ public class GameStateManager : MonoBehaviour
     public void SaveSceneState()
     {
         // Temporary until others are fully implemented
-        if (currentScene != Scene.Tool_Intro_eMagnet && currentScene != Scene.Landing_Scene) { return; }
+        if (currentScene != Scene.Tool_Intro_eMagnet && currentScene != Scene.Landing_Scene && currentScene != Scene.Tool_Intro_Imager) { return; }
 
         var stateManager = _gameStateToScene[currentState];
         stateManager[currentScene].SaveState();
@@ -228,7 +229,7 @@ public class GameStateManager : MonoBehaviour
     public void SetObjectState(string key, object value)
     {
         // Temporary until others are fully implemented
-        if (currentScene != Scene.Tool_Intro_eMagnet && currentScene != Scene.Landing_Scene) { return; }
+        if (currentScene != Scene.Tool_Intro_eMagnet && currentScene != Scene.Landing_Scene && currentScene != Scene.Tool_Intro_Imager) { return; }
 
         var stateManager = _gameStateToScene[currentState];
         stateManager[currentScene].SetObjectState(key, value);
