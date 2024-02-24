@@ -588,7 +588,7 @@ public class UIController : BaseController<UIController>
     ///     - Dictionary contains a list of elements and their required values
     /// </summary>
     /// <param name="args"></param>
-    public void ToolInfoGather(ToolDirective directive, bool upgraded, string toolName, Dictionary<InventoryManager.Element, ushort> requirements, int level)
+    public void ToolInfoGather(ToolDirective directive, bool upgraded, string toolName, Dictionary<InventoryManager.Element, ushort> requirements, int level, int maxLevel)
     {
         switch (directive)
         {
@@ -621,19 +621,19 @@ public class UIController : BaseController<UIController>
                 switch (toolName.ToLower())
                 {
                     case "thruster":
-                        thrusterLevel.SetText(level.ToString());
+                        thrusterLevel.SetText("Current Level: " + level.ToString() + " / " + maxLevel.ToString());
                         UpdateRequirements(requirements, thrusterRequirementsList.transform);
                         break;
                     case "battery":
-                        batteryLevel.SetText(level.ToString());
+                        batteryLevel.SetText("Current Level: " + level.ToString() + " / " + maxLevel.ToString());
                         UpdateRequirements(requirements, batteryRequirementsList.transform);
                         break;
                     case "imager":
-                        imagerLevel.SetText(level.ToString());
+                        imagerLevel.SetText("Current Level: " + level.ToString() + " / " + maxLevel.ToString());
                         UpdateRequirements(requirements, imagerRequirementsList.transform);
                         break;
                     case "electromagnet":
-                        eMagnetLevel.SetText(level.ToString());
+                        eMagnetLevel.SetText("Current Level: " + level.ToString() + " / " + maxLevel.ToString());
                         UpdateRequirements(requirements, eMagnetRequirementsList.transform);
                         break;
                 }
