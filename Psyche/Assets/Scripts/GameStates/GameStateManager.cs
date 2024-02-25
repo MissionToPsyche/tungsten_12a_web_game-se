@@ -26,9 +26,9 @@ public class GameStateManager : MonoBehaviour
 
             //InGame state mappings
             { GameState.InGame, new Dictionary<Scene, BaseState>() {
-                { Scene.Landing_Scene, new Landing_SceneState() },
-                { Scene.Tool_Intro_Imager, new Tool_Intro_ImagerState() },
-                { Scene.Tool_Intro_eMagnet, new Tool_Intro_eMagnetState() },
+                { Scene.Landing, new Landing_SceneState() },
+                { Scene.Imager, new Tool_Intro_ImagerState() },
+                { Scene.eMagnet, new Tool_Intro_eMagnetState() },
             } },
         };
         
@@ -65,10 +65,7 @@ public class GameStateManager : MonoBehaviour
     /// </summary>
     public enum GameState
     {
-        MainMenu,
-        InGame,
-
-        None,
+        MainMenu, InGame, None,
     }
 
     /// <summary>
@@ -86,20 +83,11 @@ public class GameStateManager : MonoBehaviour
     public enum Scene
     {
         // Main Menu
-        Title_Screen,
-        Intro_Cutscene,
-        Outro_Cutscene,
-        SceneTransition_Game_End,
+        Title, Intro, Outro, End,
 
         // In Game
-        Landing_Scene,
-        Tool_Intro_eMagnet,
-        Tool_Intro_GRS,
-        Tool_Intro_Imager,
-        Tool_Intro_Thruster,
-        Tool_Combo_1,
-        Tool_Combo_2,
-        Tool_Combo_3,
+        Landing, eMagnet, GRNS, Imager, Thruster,
+        Combo1,  Combo2,  Combo3,
 
         // Error state or incorrect value passed
         None,
@@ -114,18 +102,19 @@ public class GameStateManager : MonoBehaviour
     {
         return scene switch
         {
-            Scene.Title_Screen              => "Title_Screen",
-            Scene.Intro_Cutscene            => "Intro_Cutscene",
-            Scene.Outro_Cutscene            => "Outro_Cutscene",
-            Scene.Landing_Scene             => "Landing_Scene",
-            Scene.Tool_Intro_eMagnet        => "Tool_Intro_eMagnet",
-            Scene.Tool_Intro_GRS            => "Tool_Intro_GRS",
-            Scene.Tool_Intro_Imager         => "Tool_Intro_Imager",
-            Scene.Tool_Intro_Thruster       => "Tool_Intro_Thruster",
-            Scene.Tool_Combo_1              => "Tool_Comb_1",
-            Scene.Tool_Combo_2              => "Combo_2",
-            Scene.SceneTransition_Game_End  => "SceneTransition_Game_End",
-            _                               => null
+            Scene.Title      => "00_Title_Screen",
+            Scene.Intro      => "01_Cutscene_Intro",
+            Scene.Landing    => "02_Landing",
+            Scene.Imager     => "03_Imager",
+            Scene.GRNS       => "04_GRNS",
+            Scene.eMagnet    => "05_eMagnet",
+            Scene.Thruster   => "06_Thruster",
+            Scene.Combo1     => "07_Combo_1",
+            Scene.Combo2     => "08_Combo_2",
+            Scene.Combo3     => "09_Combo_3",
+            Scene.Outro      => "10_Cutscene_Outro",
+            Scene.End        => "Game_End",
+            _                => null
         };
     }
 
@@ -138,18 +127,19 @@ public class GameStateManager : MonoBehaviour
     {
         return scene.ToLower() switch
         {
-            "title_screen"              or "title"    => Scene.Title_Screen,
-            "intro_cutscene"            or "intro"    => Scene.Intro_Cutscene,
-            "outro_cutscene"            or "outro"    => Scene.Outro_Cutscene,
-            "landing_scene"             or "landing"  => Scene.Landing_Scene,
-            "tool_intro_emagnet"        or "emagnet"  => Scene.Tool_Intro_eMagnet,
-            "tool_intro_grs"            or "grns"     => Scene.Tool_Intro_GRS,
-            "tool_intro_imager"         or "imager"   => Scene.Tool_Intro_Imager,
-            "tool_intro_thruster"       or "thruster" => Scene.Tool_Intro_Thruster,
-            "tool_comb_1"               or "combo1"   => Scene.Tool_Combo_1,
-            "combo_2"                   or "combo2"   => Scene.Tool_Combo_2,
-            "scenetransition_game_end"  or "end"      => Scene.SceneTransition_Game_End,
-            _                                         => Scene.None,
+            "00_title_screen"   or "title"    => Scene.Title,
+            "01_cutscene_intro" or "intro"    => Scene.Intro,
+            "02_landing"        or "landing"  => Scene.Landing,
+            "03_imager"         or "imager"   => Scene.Imager,
+            "04_grns"           or "grns"     => Scene.GRNS,
+            "05_emagnet"        or "emagnet"  => Scene.eMagnet,
+            "06_thruster"       or "thruster" => Scene.Thruster,
+            "07_combo_1"        or "combo1"   => Scene.Combo1,
+            "08_combo_2"        or "combo2"   => Scene.Combo2,
+            "09_combo_3"        or "combo3"   => Scene.Combo3,
+            "10_cutscene_outro" or "outro"    => Scene.Outro,
+            "game_end"          or "end"      => Scene.End,
+            _                                 => Scene.None,
         };
     }
 
@@ -168,7 +158,7 @@ public class GameStateManager : MonoBehaviour
         // Set current gamestate based on passed scene
         switch (scene)
         {
-            case Scene.Title_Screen or Scene.Intro_Cutscene or Scene.Outro_Cutscene or Scene.SceneTransition_Game_End:
+            case Scene.Title or Scene.Intro or Scene.Outro or Scene.End:
                 currentState = GameState.MainMenu;
                 break;
             
@@ -180,10 +170,10 @@ public class GameStateManager : MonoBehaviour
         _gameController.HandleGameStateEvent();
 
         // Scenes without a viable scene state are ignored
-        if (currentState == GameState.InGame || scene == Scene.Title_Screen)
+        if (currentState == GameState.InGame || scene == Scene.Title)
         {
             // Temporary check until the respective states are added
-            if (scene != Scene.Tool_Intro_eMagnet && currentScene != Scene.Landing_Scene && currentScene != Scene.Tool_Intro_Imager)
+            if (scene != Scene.eMagnet && currentScene != Scene.Landing && currentScene != Scene.Imager)
             {
                 Debug.Log($"Scene state loader for {scene} not yet implemented");
             }
@@ -201,7 +191,7 @@ public class GameStateManager : MonoBehaviour
     public void LoadSceneState()
     {
         // Temporary until others are fully implemented
-        if (currentScene != Scene.Tool_Intro_eMagnet && currentScene != Scene.Landing_Scene && currentScene != Scene.Tool_Intro_Imager) { return; }
+        if (currentScene != Scene.eMagnet && currentScene != Scene.Landing && currentScene != Scene.Imager) { return; }
 
         var stateManager = _gameStateToScene[currentState];
         stateManager[currentScene].LoadState();
@@ -215,7 +205,7 @@ public class GameStateManager : MonoBehaviour
     public void SaveSceneState()
     {
         // Temporary until others are fully implemented
-        if (currentScene != Scene.Tool_Intro_eMagnet && currentScene != Scene.Landing_Scene && currentScene != Scene.Tool_Intro_Imager) { return; }
+        if (currentScene != Scene.eMagnet && currentScene != Scene.Landing && currentScene != Scene.Imager) { return; }
 
         var stateManager = _gameStateToScene[currentState];
         stateManager[currentScene].SaveState();
@@ -229,7 +219,7 @@ public class GameStateManager : MonoBehaviour
     public void SetObjectState(string key, object value)
     {
         // Temporary until others are fully implemented
-        if (currentScene != Scene.Tool_Intro_eMagnet && currentScene != Scene.Landing_Scene && currentScene != Scene.Tool_Intro_Imager) { return; }
+        if (currentScene != Scene.eMagnet && currentScene != Scene.Landing && currentScene != Scene.Imager) { return; }
 
         var stateManager = _gameStateToScene[currentState];
         stateManager[currentScene].SetObjectState(key, value);
