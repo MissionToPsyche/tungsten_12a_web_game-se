@@ -170,7 +170,7 @@ public class SceneTransitionManager : MonoBehaviour {
     public Vector3 GetTransitionObjectPosition(string sceneName) {
         Scene scene = SceneManager.GetSceneByName(sceneName);
         if (scene.isLoaded) {
-            string tag = (_directionTag.ToLower().Contains("in")) ? "TransitionObjectIn" : "TransitionObjectOut";
+            string tag = _directionTag.ToLower().Contains("in") ? "TransitionObjectOut" : "TransitionObjectIn";
 
             // there should only be one transition object in and one transition object out for each scene
             // with the exception of two "outs" for the landing scene since we can go out from the landing scene
