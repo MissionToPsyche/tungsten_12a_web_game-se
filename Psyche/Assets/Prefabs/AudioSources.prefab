@@ -907,7 +907,7 @@ GameObject:
   - component: {fileID: 8311097964515268983}
   - component: {fileID: 4865449824313960382}
   m_Layer: 0
-  m_Name: tool_GRS
+  m_Name: tool_GRNS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1084,7 +1084,7 @@ MonoBehaviour:
   uiAudioSources: []
   backgroundMusic: {fileID: 5948697260629374984}
   musicAudioSources: []
-  toolGRS: {fileID: 4865449824313960382}
+  toolGRNS: {fileID: 4865449824313960382}
   toolImager: {fileID: 7499777817660809251}
   toolEMagnet: {fileID: 8697921962840599155}
   toolThrusters: {fileID: 4952495706873234069}
