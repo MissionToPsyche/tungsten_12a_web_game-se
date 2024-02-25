@@ -83,7 +83,7 @@ public class GameStateManager : MonoBehaviour
     public enum Scene
     {
         // Main Menu
-        Title, Intro, Outro, SceneTransition_Game_End,
+        Title, Intro, Outro, End,
 
         // In Game
         Landing, eMagnet, GRNS, Imager, Thruster,
@@ -113,8 +113,8 @@ public class GameStateManager : MonoBehaviour
             Scene.Combo2     => "08_Combo_2",
             Scene.Combo3     => "09_Combo_3",
             Scene.Outro      => "10_Outro_Cutscene",
-            Scene.SceneTransition_Game_End  => "SceneTransition_Game_End",
-            _                               => null
+            Scene.End        => "Game_End",
+            _                => null
         };
     }
 
@@ -127,19 +127,19 @@ public class GameStateManager : MonoBehaviour
     {
         return scene.ToLower() switch
         {
-            "00_title_screen"           or "title"    => Scene.Title,
-            "01_intro_cutscene"         or "intro"    => Scene.Intro,
-            "02_landing"                or "landing"  => Scene.Landing,
-            "03_imager"                 or "imager"   => Scene.Imager,
-            "04_grns"                   or "grns"     => Scene.GRNS,
-            "05_emagnet"                or "emagnet"  => Scene.eMagnet,
-            "06_thruster"               or "thruster" => Scene.Thruster,
-            "07_combo_1"                or "combo1"   => Scene.Combo1,
-            "08_combo_2"                or "combo2"   => Scene.Combo2,
-            "09_combo_3"                or "combo3"   => Scene.Combo3,
-            "10_outro_cutscene"         or "outro"    => Scene.Outro,
-            "scenetransition_game_end"  or "end"      => Scene.SceneTransition_Game_End,
-            _                                         => Scene.None,
+            "00_title_screen"   or "title"    => Scene.Title,
+            "01_intro_cutscene" or "intro"    => Scene.Intro,
+            "02_landing"        or "landing"  => Scene.Landing,
+            "03_imager"         or "imager"   => Scene.Imager,
+            "04_grns"           or "grns"     => Scene.GRNS,
+            "05_emagnet"        or "emagnet"  => Scene.eMagnet,
+            "06_thruster"       or "thruster" => Scene.Thruster,
+            "07_combo_1"        or "combo1"   => Scene.Combo1,
+            "08_combo_2"        or "combo2"   => Scene.Combo2,
+            "09_combo_3"        or "combo3"   => Scene.Combo3,
+            "10_outro_cutscene" or "outro"    => Scene.Outro,
+            "game_end"          or "end"      => Scene.End,
+            _                                 => Scene.None,
         };
     }
 
@@ -158,7 +158,7 @@ public class GameStateManager : MonoBehaviour
         // Set current gamestate based on passed scene
         switch (scene)
         {
-            case Scene.Title or Scene.Intro or Scene.Outro or Scene.SceneTransition_Game_End:
+            case Scene.Title or Scene.Intro or Scene.Outro or Scene.End:
                 currentState = GameState.MainMenu;
                 break;
             
