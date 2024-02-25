@@ -103,7 +103,7 @@ public class SceneTransitionManager : MonoBehaviour {
             //yield return new WaitForSeconds(0.1f); // <-- Necessary anymore?
             if (!_transition)
             {
-                _directionTag = (sceneInfo.Count() > 1) ? sceneInfo[1] : "in";
+                _directionTag = (sceneInfo.Count() > 1) ? sceneInfo[1] : "out";
                 _transition = true;
             }
             if (_transition && _gameController.gameStateManager.currentState == GameStateManager.GameState.InGame)
