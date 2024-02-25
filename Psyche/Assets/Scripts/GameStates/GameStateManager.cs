@@ -103,7 +103,7 @@ public class GameStateManager : MonoBehaviour
         return scene switch
         {
             Scene.Title      => "00_Title_Screen",
-            Scene.Intro      => "01_Intro_Cutscene",
+            Scene.Intro      => "01_Cutscene_Intro",
             Scene.Landing    => "02_Landing",
             Scene.Imager     => "03_Imager",
             Scene.GRNS       => "04_GRNS",
@@ -112,7 +112,7 @@ public class GameStateManager : MonoBehaviour
             Scene.Combo1     => "07_Combo_1",
             Scene.Combo2     => "08_Combo_2",
             Scene.Combo3     => "09_Combo_3",
-            Scene.Outro      => "10_Outro_Cutscene",
+            Scene.Outro      => "10_Cutscene_Outro",
             Scene.End        => "Game_End",
             _                => null
         };
@@ -128,7 +128,7 @@ public class GameStateManager : MonoBehaviour
         return scene.ToLower() switch
         {
             "00_title_screen"   or "title"    => Scene.Title,
-            "01_intro_cutscene" or "intro"    => Scene.Intro,
+            "01_cutscene_intro" or "intro"    => Scene.Intro,
             "02_landing"        or "landing"  => Scene.Landing,
             "03_imager"         or "imager"   => Scene.Imager,
             "04_grns"           or "grns"     => Scene.GRNS,
@@ -137,7 +137,7 @@ public class GameStateManager : MonoBehaviour
             "07_combo_1"        or "combo1"   => Scene.Combo1,
             "08_combo_2"        or "combo2"   => Scene.Combo2,
             "09_combo_3"        or "combo3"   => Scene.Combo3,
-            "10_outro_cutscene" or "outro"    => Scene.Outro,
+            "10_cutscene_outro" or "outro"    => Scene.Outro,
             "game_end"          or "end"      => Scene.End,
             _                                 => Scene.None,
         };
