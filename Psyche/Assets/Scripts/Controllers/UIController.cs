@@ -90,7 +90,7 @@ public class UIController : BaseController<UIController>
             PlayerController.Instance.inputBlocked = _devConsolePanel.activeSelf; //blocks movement
             _devConsoleText["DevConsoleMenu"].text = "Choices:\n" +
                 "toggle <arg>\n\tExample: toggle fps  -or-  toggle resource_monitor\n" +
-                "set <type> <arg> [value]\n\tExample: set scene thruster out -or- set element copper 30";
+                "set <type> <arg> [value]\n\tExample: set scene thruster end -or- set element copper 30";
             _devConsoleInput.ActivateInputField();
         }
 
