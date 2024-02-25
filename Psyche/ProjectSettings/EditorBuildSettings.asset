@@ -6,36 +6,36 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Title_Screen.unity
+    path: Assets/Scenes/00_Title_Screen.unity
     guid: 712918414b701254f86033748f0d80f1
   - enabled: 1
-    path: Assets/Scenes/Intro_Cutscene.unity
+    path: Assets/Scenes/01_Cutscene_Intro.unity
     guid: 32b184816c80c61468a4e2614a474315
   - enabled: 1
-    path: Assets/Scenes/Outro_Cutscene.unity
+    path: Assets/Scenes/10_Cutscene_Outro.unity
     guid: 21a177cbcd7f0a84b8a5b7676bb4d782
   - enabled: 1
-    path: Assets/Scenes/Landing_Scene.unity
+    path: Assets/Scenes/02_Landing.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
-    path: Assets/Scenes/Tool_Intro_GRS.unity
+    path: Assets/Scenes/04_GRNS.unity
     guid: 15eb048ff84b1514d9e53cd250000115
   - enabled: 1
-    path: Assets/Scenes/Tool_Intro_Thruster.unity
+    path: Assets/Scenes/06_Thruster.unity
     guid: 20a1b79940133d447902fb43a5040f0a
   - enabled: 1
-    path: Assets/Scenes/Tool_Intro_eMagnet.unity
+    path: Assets/Scenes/05_eMagnet.unity
     guid: f4ea544d5a5ee014c873e12083471b4b
   - enabled: 1
-    path: Assets/Scenes/Tool_Intro_Imager.unity
+    path: Assets/Scenes/03_Imager.unity
     guid: 0df680d33daff7946b8d37dfd29a6516
   - enabled: 1
-    path: Assets/Scenes/Tool_Comb_1.unity
+    path: Assets/Scenes/07_Combo_1.unity
     guid: ace3b67478781b148899e350af93e5eb
   - enabled: 1
-    path: Assets/Scenes/Combo_2.unity
+    path: Assets/Scenes/08_Combo_2.unity
     guid: b97041256d378fe43a52dd2b06807fca
   - enabled: 1
-    path: Assets/Scenes/Tool_Combo_3.unity
+    path: Assets/Scenes/09_Combo_3.unity
     guid: 7bf2004a5af36274181bedd15d8bc80d
   m_configObjects: {}

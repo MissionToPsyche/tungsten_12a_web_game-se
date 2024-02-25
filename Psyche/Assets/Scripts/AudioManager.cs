@@ -21,7 +21,7 @@ public class AudioManager : MonoBehaviour {
     public List<AudioSource> musicAudioSources;
 
     // in game sfx
-    [SerializeField] public AudioSource toolGRS;
+    [SerializeField] public AudioSource toolGRNS;
     [SerializeField] public AudioSource toolImager;
     [SerializeField] public AudioSource toolEMagnet;
     [SerializeField] public AudioSource toolThrusters;
@@ -44,7 +44,7 @@ public class AudioManager : MonoBehaviour {
     private void OnEnable() {
         uiAudioSources.Add(buttonClick);
         musicAudioSources.Add(backgroundMusic);
-        sfxAudioSources.Add(toolGRS);
+        sfxAudioSources.Add(toolGRNS);
         sfxAudioSources.Add(toolImager);
         sfxAudioSources.Add(toolEMagnet);
         sfxAudioSources.Add(toolThrusters);

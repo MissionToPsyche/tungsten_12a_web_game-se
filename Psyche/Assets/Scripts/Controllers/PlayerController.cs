@@ -164,8 +164,8 @@ public class PlayerController : BaseController<PlayerController>
             }
 
             //Spectrometer
-            if (inventoryManager.CheckTool("spectrometer") && Input.GetButton("FireGRS") && batteryManager.batteryPercent != 0) {
-                gammaView.ActivateGRS();
+            if (inventoryManager.CheckTool("spectrometer") && Input.GetButton("FireGRNS") && batteryManager.batteryPercent != 0) {
+                gammaView.ActivateGRNS();
                 batteryManager.DrainBatt(2);
             }
 
@@ -176,8 +176,7 @@ public class PlayerController : BaseController<PlayerController>
             }
 
             //Passive Battery
-            //if (inventoryManager.CheckTool("battery") && !Input.GetButton("Jump") && !Input.GetButton("FireGRS") && !Input.GetButton("EMagnet") && batteryManager.batteryPercent != 100 && !eMagnetActive && !beingPulled && !usingThruster)
-            if (!Input.GetButton("Jump") && !Input.GetButton("FireGRS") && !Input.GetButton("EMagnet") && batteryManager.batteryPercent != 100 && !eMagnetActive && !beingPulled && !usingThruster)
+            if (!Input.GetButton("Jump") && !Input.GetButton("FireGRNS") && !Input.GetButton("EMagnet") && batteryManager.batteryPercent != 100 && !eMagnetActive && !beingPulled && !usingThruster)
             {
                 batteryManager.PassiveBatt();
             }
@@ -186,7 +185,7 @@ public class PlayerController : BaseController<PlayerController>
         playerMovement.handleMovement(usingThruster, beingWarped, enteringCave, exitingCave);
 
         //Inventory and Dialog Box 
-        if (Input.GetButtonDown("Inventory") && !Input.GetButton("FireGRS")) { UIController.Instance.handleUI(); }
+        if (Input.GetButtonDown("Inventory") && !Input.GetButton("FireGRNS")) { UIController.Instance.handleUI(); }
     }
 
     /// <summary>
