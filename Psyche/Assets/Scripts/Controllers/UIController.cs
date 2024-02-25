@@ -246,7 +246,7 @@ public class UIController : BaseController<UIController>
             case GameStateManager.Scene.Tool_Intro_Imager:
                 elementIndex = 1;
                 break;
-            case GameStateManager.Scene.Tool_Intro_GRS:
+            case GameStateManager.Scene.Tool_Intro_GRNS:
                 elementIndex = 2;
                 break;
             case GameStateManager.Scene.Tool_Intro_eMagnet:

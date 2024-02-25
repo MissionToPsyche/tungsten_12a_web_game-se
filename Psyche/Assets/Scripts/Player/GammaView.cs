@@ -1,13 +1,7 @@
 /** 
 Description: spectrometer tool gamma view script
 Author: blopezro
-Version: 20240210
-**/
-
-/**
-Notes:
-grs/GRS (gamma ray spectrometer) and grns/GRNS
-(gamma ray neutron spectrometer) refer to the same thing
+Version: 20240224
 **/
 
 using System;
@@ -75,15 +69,15 @@ public class GammaView : MonoBehaviour {
     }
 
     /// <summary>
-    /// Checks every frame to see if GRS tool is active and 
+    /// Checks every frame to see if GRNS tool is active and 
     /// if it's not will ensure it's deactivated 
     /// </summary>
     private void Update() {
-        DeactivateGRS();
+        DeactivateGRNS();
     }
 
     /// <summary>
-    /// Objects loaded at the activation of the GRS
+    /// Objects loaded at the activation of the GRNS
     /// </summary>
     void Initialize() {
         // sets main camera for use during objects in view capture
@@ -151,15 +145,15 @@ public class GammaView : MonoBehaviour {
     /// <summary>
     /// Activates gamma ray spectrometer and shows new color
     /// </summary>
-    public void ActivateGRS() {
+    public void ActivateGRNS() {
         Initialize(); //DebugReportLog();
         for (int i = 0; i < spriteRenderersList.Count; i++) {
             if (spriteRenderersList[i] != null) {
                 spriteRenderersList[i].color = LayerColor(spriteRenderersList[i].gameObject);
-                if (Input.GetButtonDown("FireGRS")) {
-                    GameController.Instance.audioManager.toolGRS.Play();
+                if (Input.GetButtonDown("FireGRNS")) {
+                    GameController.Instance.audioManager.toolGRNS.Play();
                 }
-                if (colorBlindMode) { ActivateGRSaltView(); }
+                if (colorBlindMode) { ActivateGRNSaltView(); }
                 if (!sceneLight.intensity.Equals(1) && grnsControlsSceneLight) {
                     TurnOnSceneLight();
                 }
@@ -170,14 +164,14 @@ public class GammaView : MonoBehaviour {
     /// <summary>
     /// Deactivates gamma ray spectrometer and reverts to original color
     /// </summary>
-    public void DeactivateGRS() {
+    public void DeactivateGRNS() {
         for (int i = 0; i < spriteRenderersList.Count; i++) {
             if (spriteRenderersList[i] != null) {
                 spriteRenderersList[i].color = origColorArray[i];
-                if (Input.GetButtonUp("FireGRS")) {
-                    GameController.Instance.audioManager.toolGRS.Stop();
+                if (Input.GetButtonUp("FireGRNS")) {
+                    GameController.Instance.audioManager.toolGRNS.Stop();
                 }
-                if (colorBlindMode) { DeactivateGRSaltView(); }
+                if (colorBlindMode) { DeactivateGRNSaltView(); }
                 if (!sceneLight.intensity.Equals(origSceneLightIntensity) && grnsControlsSceneLight) {
                     RevertSceneLight();
                 }
@@ -277,16 +271,16 @@ public class GammaView : MonoBehaviour {
             string layerName = LayerMask.LayerToName(layerNum);     // get layer name of game object
 
             // create game object to display text and anchor in center
-            GameObject grsTextObject = new GameObject("GRS_ColorBlindMode");
-            TextMesh textMesh = grsTextObject.AddComponent<TextMesh>();
+            GameObject grnsTextObject = new GameObject("GRNS_ColorBlindMode");
+            TextMesh textMesh = grnsTextObject.AddComponent<TextMesh>();
             
-            // initially set to false until GRS is activated
-            grsTextObject.SetActive(false);
-            colorBlindModeObjects.Add(grsTextObject);
+            // initially set to false until GRNS is activated
+            grnsTextObject.SetActive(false);
+            colorBlindModeObjects.Add(grnsTextObject);
 
             // set the text and game object properties
             SetTextMeshProperties(textMesh, layerNum, layerName);
-            SetTextObjProperties(grsTextObject, spriteRenderer);
+            SetTextObjProperties(grnsTextObject, spriteRenderer);
         }
     }
 
@@ -313,23 +307,23 @@ public class GammaView : MonoBehaviour {
     /// <summary>
     /// Sets the game object properties
     /// </summary>
-    /// <param name="grsTextObject"></param>
+    /// <param name="grnsTextObject"></param>
     /// <param name="spriteRenderer"></param>
-    public void SetTextObjProperties(GameObject grsTextObject, SpriteRenderer spriteRenderer) {
+    public void SetTextObjProperties(GameObject grnsTextObject, SpriteRenderer spriteRenderer) {
         // set the text object as a child of the sprite renderer
-        grsTextObject.transform.parent = spriteRenderer.transform;
+        grnsTextObject.transform.parent = spriteRenderer.transform;
         // position at the center and rotate 45 degrees
-        grsTextObject.transform.position = spriteRenderer.transform.position;
-        grsTextObject.transform.Rotate(new Vector3(0,0,45));
+        grnsTextObject.transform.position = spriteRenderer.transform.position;
+        grnsTextObject.transform.Rotate(new Vector3(0,0,45));
         // set sorting layer and order to view text in front of game object
-        grsTextObject.GetComponent<Renderer>().sortingLayerName = "UI";
-        grsTextObject.GetComponent<Renderer>().sortingOrder = 1;
+        grnsTextObject.GetComponent<Renderer>().sortingLayerName = "UI";
+        grnsTextObject.GetComponent<Renderer>().sortingOrder = 1;
     }
 
     /// <summary>
     /// Show alternative view
     /// </summary>
-    void ActivateGRSaltView() {
+    void ActivateGRNSaltView() {
         foreach (GameObject obj in colorBlindModeObjects) {
             if (obj != null) {
                 obj.SetActive(true);
@@ -340,7 +334,7 @@ public class GammaView : MonoBehaviour {
     /// <summary>
     /// Hide alternative view and additionally destroy game object
     /// </summary>
-    void DeactivateGRSaltView() {
+    void DeactivateGRNSaltView() {
         foreach (GameObject obj in colorBlindModeObjects) {
             if (obj != null) {
                 obj.SetActive(false);
