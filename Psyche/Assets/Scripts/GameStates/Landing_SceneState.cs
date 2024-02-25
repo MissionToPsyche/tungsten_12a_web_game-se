@@ -1,9 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Test integration for a gamestate class to manage the state of a scene
+/// Integration of the state saving for the Landing Scene
 /// </summary>
 public class Landing_SceneState : BaseState
 {
@@ -14,15 +13,15 @@ public class Landing_SceneState : BaseState
     /// </summary>
     public enum SceneObject : short
     {
-        SOLARPANEL = 0,
-        CHECKPOINT_1 = 1,
-        COPPER_1 = 2,
-        GOLD_1 = 3,
-        IRON_1 = 4,
-        NICKEL_1 = 5,
-        TUNGSTEN_1 = 6,
+        SOLARPANEL      = 0,
+        CHECKPOINT_1    = 1,
+        COPPER_1        = 2,
+        GOLD_1          = 3,
+        IRON_1          = 4,
+        NICKEL_1        = 5,
+        TUNGSTEN_1      = 6,
 
-        CHECKPOINT = 99,
+        CHECKPOINT      = 99,
     }
 
     /// <summary>
@@ -46,6 +45,11 @@ public class Landing_SceneState : BaseState
         };
     }
 
+    /// <summary>
+    /// Matches the input object short (enum) with its string variant
+    /// </summary>
+    /// <param name="obj"></param>
+    /// <returns></returns>
     public override string Match(short obj)
     {
         return obj switch
@@ -57,8 +61,9 @@ public class Landing_SceneState : BaseState
             (short)SceneObject.IRON_1       => "Element_Iron 1",
             (short)SceneObject.NICKEL_1     => "Element_Nickel 1",
             (short)SceneObject.TUNGSTEN_1   => "Element_Tungsten 1",
+
             (short)SceneObject.CHECKPOINT   => "Checkpoint",
-            _ => null,
+            _                               => null,
         };
     }
 
@@ -70,13 +75,13 @@ public class Landing_SceneState : BaseState
         // This must be set up first before anything else is created as everything else is based off of this
         _defaultState = new Dictionary<short, object>
         {
-            { (short)SceneObject.SOLARPANEL, true }, // 'true' for available
-            { (short)SceneObject.CHECKPOINT_1, true }, // `false` for not activated
-            { (short)SceneObject.COPPER_1, true },
-            { (short)SceneObject.GOLD_1, true },
-            { (short)SceneObject.IRON_1, true },
-            { (short)SceneObject.NICKEL_1, true },
-            { (short)SceneObject.TUNGSTEN_1, true },
+            { (short)SceneObject.SOLARPANEL,    true }, // 'true' for available
+            { (short)SceneObject.CHECKPOINT_1,  true }, // `false` for not activated
+            { (short)SceneObject.COPPER_1,      true },
+            { (short)SceneObject.GOLD_1,        true },
+            { (short)SceneObject.IRON_1,        true },
+            { (short)SceneObject.NICKEL_1,      true },
+            { (short)SceneObject.TUNGSTEN_1,    true },
         };
         LoadDefaultState();
         SaveState();
