@@ -11,16 +11,15 @@ public class Tool_Intro_ImagerState : BaseState
     /// </summary>
     public enum SceneObject : short
     {
-        IMAGER = 0,
-        CHECKPOINT_1 = 1,
-        CHECKPOINT_2 = 2,
-        TUNGSTEN_1 = 3,
-        GOLD_1 = 4,
-        GOLD_2 = 5,
-        GOLD_3 = 6, 
-        GOLD_4 = 7, 
-        GOLD_5 = 8,
-
+        IMAGER          = 0,
+        CHECKPOINT_1    = 1,
+        CHECKPOINT_2    = 2,
+        TUNGSTEN_1      = 3,
+        GOLD_1          = 4,
+        GOLD_2          = 5,
+        GOLD_3          = 6, 
+        GOLD_4          = 7, 
+        GOLD_5          = 8,
 
         CHECKPOINT = 99,
     }
@@ -43,11 +42,17 @@ public class Tool_Intro_ImagerState : BaseState
             "element_gold 3"        => (short)SceneObject.GOLD_3,
             "element_gold 4"        => (short)SceneObject.GOLD_4,
             "element_gold 5"        => (short)SceneObject.GOLD_5,
+
             "checkpoint"            => (short)SceneObject.CHECKPOINT,
-            _ => -1,
+            _                       => -1,
         };
     }
 
+    /// <summary>
+    /// Matches the input object short (enum) with its string variant
+    /// </summary>
+    /// <param name="obj"></param>
+    /// <returns></returns>
     public override string Match(short obj)
     {
         return obj switch
@@ -61,6 +66,7 @@ public class Tool_Intro_ImagerState : BaseState
             (short)SceneObject.GOLD_3       => "Element_Gold 3",
             (short)SceneObject.GOLD_4       => "Element_Gold 4",
             (short)SceneObject.GOLD_5       => "Element_Gold 5",
+
             (short)SceneObject.CHECKPOINT   => "Checkpoint",
             _                               => null,
         };
@@ -74,15 +80,15 @@ public class Tool_Intro_ImagerState : BaseState
         // This must be set up first before anything else is created as everything else is based off of this
         _defaultState = new Dictionary<short, object>
         {
-            { (short)SceneObject.IMAGER, true }, // 'true' for available
-            { (short)SceneObject.CHECKPOINT_1, true }, // `false` for not activated
-            { (short)SceneObject.CHECKPOINT_2, true },
-            { (short)SceneObject.TUNGSTEN_1, true },
-            { (short)SceneObject.GOLD_1, true },
-            { (short)SceneObject.GOLD_2, true },
-            { (short)SceneObject.GOLD_3, true },
-            { (short)SceneObject.GOLD_4, true },
-            { (short)SceneObject.GOLD_5, true },
+            { (short)SceneObject.IMAGER,        true }, // 'true' for available
+            { (short)SceneObject.CHECKPOINT_1,  true }, 
+            { (short)SceneObject.CHECKPOINT_2,  true },
+            { (short)SceneObject.TUNGSTEN_1,    true },
+            { (short)SceneObject.GOLD_1,        true },
+            { (short)SceneObject.GOLD_2,        true },
+            { (short)SceneObject.GOLD_3,        true },
+            { (short)SceneObject.GOLD_4,        true },
+            { (short)SceneObject.GOLD_5,        true },
         };                  
         LoadDefaultState(); 
         SaveState();
@@ -237,7 +243,8 @@ public class Tool_Intro_ImagerState : BaseState
                     }
                     break;
 
-                default: break;
+                default: 
+                    break;
             }
         }
     }

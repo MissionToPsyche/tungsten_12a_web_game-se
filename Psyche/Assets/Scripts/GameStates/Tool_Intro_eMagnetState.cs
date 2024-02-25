@@ -1,10 +1,9 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 
 /// <summary>
-/// Test integration for a gamestate class to manage the state of a scene
+/// Integration for eMagnet state management for the scene
 /// </summary>
 public class Tool_Intro_eMagnetState : BaseState
 {
@@ -15,12 +14,13 @@ public class Tool_Intro_eMagnetState : BaseState
     /// </summary>
     public enum SceneObject : short
     {
-        ELECTROMAGNET = 0,
-        CHECKPOINT_0 = 1,
-        CHECKPOINT_1 = 2,
-        GOLD_1 = 3,
-        GOLD_2 = 4,
-        CHECKPOINT = 99,
+        ELECTROMAGNET   = 0,
+        CHECKPOINT_0    = 1,
+        CHECKPOINT_1    = 2,
+        GOLD_1          = 3,
+        GOLD_2          = 4,
+
+        CHECKPOINT      = 99,
     }
 
     /// <summary>
@@ -57,7 +57,7 @@ public class Tool_Intro_eMagnetState : BaseState
             (short)SceneObject.GOLD_1           => "Element_Gold 1",
             (short)SceneObject.GOLD_2           => "Element_Gold 2",
             (short)SceneObject.CHECKPOINT       => "Checkpoint",
-            _                                   => "",
+            _                                   => null,
         };
     }
 
@@ -70,10 +70,10 @@ public class Tool_Intro_eMagnetState : BaseState
         _defaultState = new Dictionary<short, object>
         {
             { (short)SceneObject.ELECTROMAGNET, true }, // 'true' for available
-            { (short)SceneObject.CHECKPOINT_0, true },  // `true` for activate-able
-            { (short)SceneObject.CHECKPOINT_1, true },
-            { (short)SceneObject.GOLD_1, true },
-            { (short)SceneObject.GOLD_2, true },
+            { (short)SceneObject.CHECKPOINT_0,  true }, // `true` for activate-able
+            { (short)SceneObject.CHECKPOINT_1,  true },
+            { (short)SceneObject.GOLD_1,        true },
+            { (short)SceneObject.GOLD_2,        true },
         };    
         LoadDefaultState();
         SaveState();
@@ -150,6 +150,9 @@ public class Tool_Intro_eMagnetState : BaseState
                             targetObject.SetActive(value);
                         }
                     }
+                    break;
+
+                default:
                     break;
             }
         }
