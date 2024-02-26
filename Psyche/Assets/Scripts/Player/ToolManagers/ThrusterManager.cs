@@ -74,6 +74,7 @@ public class ThrusterManager : ToolManager
         };
 
         //Tool specific variables
+        maxLevel = levelRequirements.Count;
         _thrusterForce = 0.9f;
     }
     

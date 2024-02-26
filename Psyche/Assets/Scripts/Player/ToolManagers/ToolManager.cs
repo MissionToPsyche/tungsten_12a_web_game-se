@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public abstract class ToolManager : MonoBehaviour
@@ -14,6 +15,7 @@ public abstract class ToolManager : MonoBehaviour
     //Tool State
     public int level;
     public Dictionary<int, Dictionary<InventoryManager.Element, ushort>> levelRequirements;
+    public int maxLevel;
 
     public bool toolEnabled;
 
@@ -25,7 +27,7 @@ public abstract class ToolManager : MonoBehaviour
     }
 
     // Events
-    public event Action<ToolDirective, bool, string, Dictionary<InventoryManager.Element, ushort>, int> ToolManagerUpdate;
+    public event Action<ToolDirective, bool, string, Dictionary<InventoryManager.Element, ushort>, int, int> ToolManagerUpdate;
 
     /// <summary>
     /// Enables the tool
@@ -33,7 +35,7 @@ public abstract class ToolManager : MonoBehaviour
     public void Enable()
     {
         toolEnabled = true;
-        ToolManagerUpdate?.Invoke(ToolDirective.Info, false, toolName, levelRequirements[level + 1], level + 1);
+        ToolManagerUpdate?.Invoke(ToolDirective.Info, false, toolName, levelRequirements[level + 1], level + 1, maxLevel);
     }
 
     /// <summary>
@@ -79,6 +81,6 @@ public abstract class ToolManager : MonoBehaviour
             level++;
             UpgradeTool();
         }
-        ToolManagerUpdate?.Invoke(ToolDirective.Upgrade, upgraded, toolName, levelRequirements[nextLevel], level + 1);
+        ToolManagerUpdate?.Invoke(ToolDirective.Upgrade, upgraded, toolName, levelRequirements[nextLevel], level + 1, maxLevel);
     }
 }

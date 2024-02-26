@@ -177,17 +177,30 @@ public class PlayerCollisionManager : MonoBehaviour
             case CollisionTag.Element:
                 _playerController.inventoryManager.AddElement(other.name, 1);
                 Destroy(other.gameObject);
+                GameController.Instance.audioManager.pickupElement.Play();
                 break;
 
             case CollisionTag.Tool:
                 _playerController.inventoryManager.ToolPickUp(other.name);
                 Destroy(other.gameObject);
+                GameController.Instance.audioManager.pickupTool.Play();
                 break;
 
             case CollisionTag.Checkpoint:
                 SetObjectState?.Invoke(other.name, true);
                 SaveSceneState?.Invoke();
                 _playerController.playerDeath.Checkpoint(other);
+                break;
+
+            case CollisionTag.TransitionObjectIn or CollisionTag.TransitionObjectOut:
+                // Popup over the player
+                _playerController.pressUpPopup.SetActive(true);
+
+                // If ship (tungsten: layer 12) and fewer than 8 tungsten available - disable the BoxCollider
+                if (other.gameObject.layer == 12 && _playerController.inventoryManager.CheckElement(InventoryManager.Element.TUNGSTEN) < 8)
+                {
+                    other.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                }
                 break;
 
             default:
@@ -201,7 +214,22 @@ public class PlayerCollisionManager : MonoBehaviour
     /// <param name="other"></param>
     private void OnTriggerExit2D(Collider2D other)
     {
-        // Trigger Exit Stuff
+        switch (MatchTag(other.tag))
+        {
+            case CollisionTag.TransitionObjectIn or CollisionTag.TransitionObjectOut:
+                // Popup over the player
+                _playerController.pressUpPopup.SetActive(false);
+
+                // If ship (tungsten: layer 12) - enable the BoxCollider
+                if (other.gameObject.layer == 12)
+                {
+                    other.gameObject.GetComponent<BoxCollider2D>().enabled = true;
+                }
+                break;
+
+            default:
+                break;
+        }
     }
 
     /// <summary>
