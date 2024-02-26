@@ -64,7 +64,7 @@ public class OutroController : MonoBehaviour {
     public void QuitGame()
     {
         GameController.Instance.audioManager.buttonClick.Play();
-        string scene = GameController.Instance.gameStateManager.MatchScene(GameStateManager.Scene.Title_Screen);
+        string scene = GameController.Instance.gameStateManager.MatchScene(GameStateManager.Scene.Title);
         GameController.Instance.sceneTransitionManager.devControl = true;
         GameController.Instance.sceneTransitionManager.OnInitiateTransition(scene);
         //UnityEngine.SceneManagement.SceneManager.LoadScene("Title_Screen");

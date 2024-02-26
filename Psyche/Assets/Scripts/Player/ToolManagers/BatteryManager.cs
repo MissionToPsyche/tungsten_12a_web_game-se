@@ -68,6 +68,7 @@ public class BatteryManager : ToolManager {
         };
 
         //Tool specific
+        maxLevel = levelRequirements.Count;
         maxCapacity = 100f;
         batteryLevel = maxCapacity;
         batteryPercent = batteryLevel / maxCapacity * 100f;
