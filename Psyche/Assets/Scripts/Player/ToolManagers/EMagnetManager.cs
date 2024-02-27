@@ -57,6 +57,7 @@ public class EMagnetManager : ToolManager {
         };
 
         //Tool specific variables
+        maxLevel = levelRequirements.Count;
         hitBoxRotator = eMagHitBox.transform.parent;
     }
 
