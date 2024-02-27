@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 7989339030994786575}
   - component: {fileID: 6992606622709754612}
   - component: {fileID: 6398266592239590503}
+  - component: {fileID: 570958073381346106}
   m_Layer: 3
   m_Name: Moving Platform XS
   m_TagString: Untagged
@@ -152,7 +153,7 @@ BoxCollider2D:
     serializedVersion: 2
     m_Bits: 4294967295
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: -0.63593626, y: 0.0021638274}
   m_SpriteTilingProperty:
@@ -208,6 +209,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointsObject: {fileID: 3522257259456775252}
   moveSpeed: 2.5
+--- !u!251 &570958073381346106
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498040819576534879}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1 &3261406462910221229
 GameObject:
   m_ObjectHideFlags: 0
