@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using static ToolManager;
@@ -24,7 +23,7 @@ public class UIController : BaseController<UIController>
 
     //Variables
     private float _aspectRatio;
-    
+
     /// <summary>
     /// Initialize the object and parent class
     /// </summary>
@@ -39,11 +38,11 @@ public class UIController : BaseController<UIController>
         _devConsoleResourcePanel = transform.Find("DevConsoleResourcePanel").gameObject;
         _devConsoleInput = _devConsolePanel.transform.Find("DevConsoleInput").GetComponent<TMP_InputField>();
         _devConsoleText = new Dictionary<string, TMP_Text>();
-        _devConsoleText.Add("DevConsoleFPS",_devConsoleFPSPanel.transform
+        _devConsoleText.Add("DevConsoleFPS", _devConsoleFPSPanel.transform
             .Find("DevConsoleFPS").GetComponent<TMP_Text>());
-        _devConsoleText.Add("DevConsoleMenu",_devConsolePanel.transform
+        _devConsoleText.Add("DevConsoleMenu", _devConsolePanel.transform
             .Find("DevConsoleMenu").GetComponent<TMP_Text>());
-        _devConsoleText.Add("DevConsoleResourceMonitor",_devConsoleResourcePanel.transform
+        _devConsoleText.Add("DevConsoleResourceMonitor", _devConsoleResourcePanel.transform
             .Find("DevConsoleResourceMonitor").GetComponent<TMP_Text>());
         _devConsolePanel.SetActive(false);
         _devConsoleFPSPanel.SetActive(false);
@@ -53,7 +52,7 @@ public class UIController : BaseController<UIController>
         GameController.Instance.LoadUI();
 
         //Specific to this class
-        _aspectRatio = (float)Screen.width / Screen.height;               //<-- Use this to adjust UI layout/positioning
+        _aspectRatio = (float)Screen.width / Screen.height; //<-- Use this to adjust UI layout/positioning
 
         //TODO: add child components
         //battPerText = GetComponent<TMP_Text>();
@@ -85,13 +84,13 @@ public class UIController : BaseController<UIController>
     public void Update()
     {
         //MOVE TO GAMECONTROLLER WHEN NO LONGER STARTING FROM SAMPLESCENE
-        if(Input.GetButtonDown("DevConsole"))  //Activate the dev Console
+        if (Input.GetButtonDown("DevConsole"))  //Activate the dev Console
         {
             _devConsolePanel.SetActive(!_devConsolePanel.activeSelf); //shows panel
             PlayerController.Instance.inputBlocked = _devConsolePanel.activeSelf; //blocks movement
             _devConsoleText["DevConsoleMenu"].text = "Choices:\n" +
                 "toggle <arg>\n\tExample: toggle fps  -or-  toggle resource_monitor\n" +
-                "set <type> <arg> [value]\n\tExample: set scene thruster out -or- set element copper 30";
+                "set <type> <arg> [value]\n\tExample: set scene thruster end -or- set element copper 30";
             _devConsoleInput.ActivateInputField();
         }
 
@@ -118,7 +117,7 @@ public class UIController : BaseController<UIController>
     }
 
     //======================================================== Events ========================================================
-    
+
     //Events Declarations
     public event Action<ArrayList> OnUpdateToolModify;      // Send Tool Modification requests to Inventory
 
@@ -223,9 +222,11 @@ public class UIController : BaseController<UIController>
     /// Function to update the battery text     ///TODO: Relocate battpertext to UIController object
     /// </summary>
     /// <param name="newPercentage"></param>
-    private void UpdateBattery(float percent) {
+    private void UpdateBattery(float percent)
+    {
         battPerText.text = percent.ToString() + "%";
-        switch (percent) {
+        switch (percent)
+        {
             case > 83.35f: activeBattSpriteRenderer.sprite = batterySprite6; break;
             case > 66.68f: activeBattSpriteRenderer.sprite = batterySprite5; break;
             case > 50.01f: activeBattSpriteRenderer.sprite = batterySprite4; break;
@@ -236,41 +237,29 @@ public class UIController : BaseController<UIController>
         }
     }
 
-    public void UpdateCapturedTungstens(GameStateManager.Scene currentScene) {
+    public void UpdateCapturedTungstens(GameStateManager.Scene currentScene)
+    {
         // Determine which element to update based on the current scene
         int elementIndex = -1;
-        switch (currentScene) {
-            case GameStateManager.Scene.Landing_Scene:
-                elementIndex = 0;
-                break;
-            case GameStateManager.Scene.Tool_Intro_Imager:
-                elementIndex = 1;
-                break;
-            case GameStateManager.Scene.Tool_Intro_GRS:
-                elementIndex = 2;
-                break;
-            case GameStateManager.Scene.Tool_Intro_eMagnet:
-                elementIndex = 3;
-                break;
-            case GameStateManager.Scene.Tool_Intro_Thruster:
-                elementIndex = 4;
-                break;
-            case GameStateManager.Scene.Tool_Combo_1:
-                elementIndex = 5;
-                break;
-            case GameStateManager.Scene.Tool_Combo_2:
-                elementIndex = 6;
-                break;
-            case GameStateManager.Scene.Tool_Combo_3:
-                elementIndex = 7;
-                break;
+        switch (currentScene)
+        {
+            case GameStateManager.Scene.Landing:  elementIndex = 0; break;
+            case GameStateManager.Scene.Imager:   elementIndex = 1; break;
+            case GameStateManager.Scene.GRNS:     elementIndex = 2; break;
+            case GameStateManager.Scene.eMagnet:  elementIndex = 3; break;
+            case GameStateManager.Scene.Thruster: elementIndex = 4; break;
+            case GameStateManager.Scene.Combo1:   elementIndex = 5; break;
+            case GameStateManager.Scene.Combo2:   elementIndex = 6; break;
+            case GameStateManager.Scene.Combo3:   elementIndex = 7; break;
         }
 
         // If elementIndex is valid, update the corresponding element's alpha to "unghost"
-        if (elementIndex >= 0 && elementIndex < elements.Length) {
+        if (elementIndex >= 0 && elementIndex < elements.Length)
+        {
             Color newColor = elements[elementIndex].color;
             newColor.a = 1f;
             elements[elementIndex].color = newColor;
+            GameController.Instance.audioManager.pickupElementTungsten.Play();
         }
     }
 
@@ -289,7 +278,7 @@ public class UIController : BaseController<UIController>
                 {
                     _devConsoleText["DevConsoleFPS"].text = "FPS: " + args[1].ToString();
                 }
-                if(_devConsoleResourcePanel.activeSelf)
+                if (_devConsoleResourcePanel.activeSelf)
                 {
                     _devConsoleText["DevConsoleResourceMonitor"].text = "RAM: " + args[2].ToString() + "MB";
                 }
@@ -304,7 +293,7 @@ public class UIController : BaseController<UIController>
                         _devConsoleText["DevConsoleFPS"].text = "FPS";
                         break;
                     case DeveloperConsole.DevConsoleCommand.RESOURCE_MONITOR:
-                        
+
                         _devConsoleResourcePanel.SetActive(!_devConsoleResourcePanel.activeSelf);
                         _devConsoleText["DevConsoleResourceMonitor"].text = "Loading...";
                         break;
@@ -329,23 +318,17 @@ public class UIController : BaseController<UIController>
         switch (toolName)
         {
             case "Spectrometer1":
-                Application.OpenURL("https://psyche.asu.edu/gallery/meet-the-nasa-psyche-team-who-will-map-psyches-elemental-composition/");
-                break;
+                Application.OpenURL("https://psyche.asu.edu/gallery/meet-the-nasa-psyche-team-who-will-map-psyches-elemental-composition/"); break;
             case "Spectrometer2":
-                Application.OpenURL("https://www.jpl.nasa.gov/images/pia24892-psyches-gamma-ray-and-neutron-spectrometer-up-close");
-                break;
+                Application.OpenURL("https://www.jpl.nasa.gov/images/pia24892-psyches-gamma-ray-and-neutron-spectrometer-up-close"); break;
             case "Imager":
-                Application.OpenURL("https://www.jpl.nasa.gov/images/pia24894-psyches-imager-in-progress");
-                break;
+                Application.OpenURL("https://www.jpl.nasa.gov/images/pia24894-psyches-imager-in-progress"); break;
             case "Thruster":
-                Application.OpenURL("https://psyche.asu.edu/2018/01/19/electric-thrusters-psyche-spacecraft-work/");
-                break;
+                Application.OpenURL("https://psyche.asu.edu/2018/01/19/electric-thrusters-psyche-spacecraft-work/"); break;
             case "EMagnet":
-                Application.OpenURL("https://psyche.asu.edu/gallery/meet-nasas-psyche-team-who-will-measure-the-asteroids-magnetic-field/");
-                break;
+                Application.OpenURL("https://psyche.asu.edu/gallery/meet-nasas-psyche-team-who-will-measure-the-asteroids-magnetic-field/"); break;
             case "SolarPanel":
-                Application.OpenURL("https://psyche.asu.edu/mission/the-spacecraft/");
-                break;
+                Application.OpenURL("https://psyche.asu.edu/mission/the-spacecraft/"); break;
             default:
                 Debug.LogError("Tool link not set or incorrect name passed");
                 break;
@@ -360,8 +343,6 @@ public class UIController : BaseController<UIController>
     {
         GameController.Instance.audioManager.buttonClick.Play();
     }
-
-
 
     //========================================================== UI ==========================================================
     //UI Components
@@ -409,7 +390,7 @@ public class UIController : BaseController<UIController>
         if (dialogText.transform.parent.gameObject.activeInHierarchy)
             setDialogText("");
 
-        else if(curSubmenu != null)
+        else if (curSubmenu != null)
             closeSubmenu();
 
         else if (inventoryMenu.activeInHierarchy)
@@ -587,7 +568,7 @@ public class UIController : BaseController<UIController>
     ///     - Dictionary contains a list of elements and their required values
     /// </summary>
     /// <param name="args"></param>
-    public void ToolInfoGather(ToolDirective directive, bool upgraded, string toolName, Dictionary<InventoryManager.Element, ushort> requirements, int level)
+    public void ToolInfoGather(ToolDirective directive, bool upgraded, string toolName, Dictionary<InventoryManager.Element, ushort> requirements, int level, int maxLevel)
     {
         switch (directive)
         {
@@ -601,11 +582,11 @@ public class UIController : BaseController<UIController>
                         {
                             string name = requirement.Key switch
                             {
-                                InventoryManager.Element.COPPER     => "Copper",
-                                InventoryManager.Element.IRON       => "Iron",
-                                InventoryManager.Element.NICKEL     => "Nickel",
-                                InventoryManager.Element.GOLD       => "Gold",
-                               _                                    => ""
+                                InventoryManager.Element.COPPER => "Copper",
+                                InventoryManager.Element.IRON => "Iron",
+                                InventoryManager.Element.NICKEL => "Nickel",
+                                InventoryManager.Element.GOLD => "Gold",
+                                _ => ""
                             };
 
                             requirement_display += name + " " + requirement.Value + "  ";
@@ -620,19 +601,19 @@ public class UIController : BaseController<UIController>
                 switch (toolName.ToLower())
                 {
                     case "thruster":
-                        thrusterLevel.SetText(level.ToString());
+                        thrusterLevel.SetText("Current Level: " + level.ToString() + " / " + maxLevel.ToString());
                         UpdateRequirements(requirements, thrusterRequirementsList.transform);
                         break;
                     case "battery":
-                        batteryLevel.SetText(level.ToString());
+                        batteryLevel.SetText("Current Level: " + level.ToString() + " / " + maxLevel.ToString());
                         UpdateRequirements(requirements, batteryRequirementsList.transform);
                         break;
                     case "imager":
-                        imagerLevel.SetText(level.ToString());
+                        imagerLevel.SetText("Current Level: " + level.ToString() + " / " + maxLevel.ToString());
                         UpdateRequirements(requirements, imagerRequirementsList.transform);
                         break;
                     case "electromagnet":
-                        eMagnetLevel.SetText(level.ToString());
+                        eMagnetLevel.SetText("Current Level: " + level.ToString() + " / " + maxLevel.ToString());
                         UpdateRequirements(requirements, eMagnetRequirementsList.transform);
                         break;
                 }

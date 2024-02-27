@@ -21,7 +21,7 @@ public class TitleScreenManager : MonoBehaviour {
 
         // Load the scene
         // Set the value this way so if any changes are made they are accounted for
-        string scene = GameController.Instance.gameStateManager.MatchScene(GameStateManager.Scene.Intro_Cutscene);
+        string scene = GameController.Instance.gameStateManager.MatchScene(GameStateManager.Scene.Intro);
         GameController.Instance.sceneTransitionManager.devControl = true;
         GameController.Instance.sceneTransitionManager.OnInitiateTransition(scene);
     }
