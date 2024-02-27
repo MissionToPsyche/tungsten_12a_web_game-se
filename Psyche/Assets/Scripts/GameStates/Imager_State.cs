@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tool_Intro_ImagerState : BaseState
+public class Imager_State : BaseState
 {
     /// <summary>
     /// Defines the tracked objects in the scene
@@ -69,7 +69,7 @@ public class Tool_Intro_ImagerState : BaseState
     /// <summary>
     /// Constructor for the scene state
     /// </summary>
-    public Tool_Intro_ImagerState()
+    public Imager_State()
     {
         // This must be set up first before anything else is created as everything else is based off of this
         _defaultState = new Dictionary<short, object>

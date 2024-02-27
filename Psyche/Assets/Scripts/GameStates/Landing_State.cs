@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Test integration for a gamestate class to manage the state of a scene
 /// </summary>
-public class Landing_SceneState : BaseState
+public class Landing_State : BaseState
 {
     /// <summary>
     /// Defines the tracked objects in the scene
@@ -65,7 +65,7 @@ public class Landing_SceneState : BaseState
     /// <summary>
     /// Constructor for the scene state
     /// </summary>
-    public Landing_SceneState()
+    public Landing_State()
     {
         // This must be set up first before anything else is created as everything else is based off of this
         _defaultState = new Dictionary<short, object>
