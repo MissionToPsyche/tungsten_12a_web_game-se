@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Integration for eMagnet state management for the scene
 /// </summary>
-public class Tool_Intro_eMagnetState : BaseState
+public class eMagnet_State : BaseState
 {
     /// <summary>
     /// Defines the tracked objects in the scene
@@ -64,7 +64,7 @@ public class Tool_Intro_eMagnetState : BaseState
     /// <summary>
     /// Constructor for the scene state
     /// </summary>
-    public Tool_Intro_eMagnetState()
+    public eMagnet_State()
     {
         // This must be set up first before anything else is created as everything else is based off of this
         _defaultState = new Dictionary<short, object>
