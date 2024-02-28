@@ -58,18 +58,15 @@ public class GammaView : MonoBehaviour {
     /// <param name="scene"></param>
     /// <param name="mode"></param>
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
-        if (scene.name != "10_Cutscene_Outro") {
-            //Debug.Log("Looking for light...");
-        //if (GameController.Instance.gameStateManager.currentState == GameStateManager.GameState.InGame) {
-            //Debug.Log("InGame, looking for light...");
+        GameStateManager.Scene GameStateManagerSn = GameController.Instance.gameStateManager.MatchScene(scene.name);
+        if (GameStateManagerSn != GameStateManager.Scene.Outro) {
             sceneLight = GameObject.FindGameObjectWithTag("SceneLight").GetComponent<Light2D>();
             sceneTilemap = GameObject.FindGameObjectWithTag("Terrain").GetComponent<Tilemap>();
             sceneBackground = GameObject.FindGameObjectWithTag("Background").GetComponent<SpriteRenderer>();
             origSceneLightIntensity = sceneLight.intensity;
             origSceneTilemapColor = sceneTilemap.color;
             origSceneBackgroundColor = sceneBackground.color;
-            if (scene.name != "02_Landing") {
-                //Debug.Log("Turning off light...");
+            if (GameStateManagerSn != GameStateManager.Scene.Landing) {
                 TurnOffSceneLight();
             }
         }
