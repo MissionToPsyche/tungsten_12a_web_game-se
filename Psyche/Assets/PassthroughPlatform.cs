@@ -9,7 +9,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 
 /// <summary>
-/// 
+///  Press down while standing on a platform to fall through
 /// </summary>
 public class PassthroughPlatform : MonoBehaviour
 {
