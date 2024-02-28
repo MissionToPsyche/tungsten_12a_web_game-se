@@ -42,11 +42,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3971640087115632001, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.8
+      value: 0.97
       objectReference: {fileID: 0}
     - target: {fileID: 3971640087115632001, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.37
+      value: -4.394
       objectReference: {fileID: 0}
     - target: {fileID: 3971640087115632001, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
       propertyPath: m_LocalPosition.z
@@ -88,8 +88,33 @@ PrefabInstance:
       propertyPath: m_Name
       value: ElectroMagnet
       objectReference: {fileID: 0}
+    - target: {fileID: 7775450262555123965, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
+      propertyPath: m_TagString
+      value: Tool
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7775450262555123965, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3736933085750048782}
   m_SourcePrefab: {fileID: 100100000, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
+--- !u!1 &1238388252371177290 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7775450262555123965, guid: 424fbeb2b3abd1c4ab5873936d640084, type: 3}
+  m_PrefabInstance: {fileID: 8847410926514155447}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3736933085750048782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1238388252371177290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bb4a85272040014796034b41d76ac28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ironVein: {fileID: 0}
