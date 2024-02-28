@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 3447453164145479344}
   - component: {fileID: 2286438820298863988}
   - component: {fileID: 8887768595643478277}
+  - component: {fileID: 6997680745713006484}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -193,6 +194,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toolName: 
   level: 0
+  maxLevel: 0
   toolEnabled: 0
   _playerlight: {fileID: 4567901035931106489}
   _active: 0
@@ -240,6 +242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toolName: 
   level: 0
+  maxLevel: 0
   toolEnabled: 0
   eMagHitBox: {fileID: 2155109396161933314}
 --- !u!114 &8966456805578203647
@@ -270,6 +273,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toolName: 
   level: 0
+  maxLevel: 0
   toolEnabled: 0
   limit: 4
 --- !u!114 &3447453164145479344
@@ -286,6 +290,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toolName: 
   level: 0
+  maxLevel: 0
   toolEnabled: 0
   batteryLevel: 0
   maxCapacity: 0
@@ -316,6 +321,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a6441281f0e5d47a733f475e739427, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6997680745713006484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 82528849670660265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ed7b7eb61de2944cb32814bb980b7e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCollider: {fileID: 2257811646393419205}
 --- !u!1 &1078862222496993058
 GameObject:
   m_ObjectHideFlags: 0
