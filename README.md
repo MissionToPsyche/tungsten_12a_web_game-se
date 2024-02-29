@@ -1,6 +1,6 @@
 <div align="center">
-  <a href="https://github.com/MissionToPsyche/tungsten_12a_web_game-se">
-    <img src="https://github.com/MissionToPsyche/tungsten_12a_web_game-se/tree/main/Psyche/Assets/Graphics/backgrounds/background.png" alt="Logo">
+  <a href="https://missiontopsyche.github.io/tungsten_12a_web_game-se/M.I.S.T/">
+    <img src="Cover.png" alt="Logo">
   </a>
 
   <h1 align="center">M.I.S.T.</h1>
@@ -16,14 +16,14 @@
 </div>
 
 ## Overview
-<p>
 A futuristic adventure exploration 2D platformer using tools inspired by the Psyche spacecraft to navigate a new environment.
 
-## Controls
+## Access URL: [Play M.I.S.T](https://missiontopsyche.github.io/tungsten_12a_web_game-se/M.I.S.T/)
 
+## Controls
 Movement  | Jump | Thrusters | Spectrometer | Emagnet | Magnetometer | Imager
 :---------: | :-----:| :----------:| :------------: | :-------: | :------------: | :------:
-WASD      | Spacebar(tap) | Spacebar(hold) | G | Left Click | Passive | Passive
+WASD or Arrow Keys      | Spacebar (tap) | Spacebar (hold) | Right Click | Left Click | Passive | Passive
 
 ### Built With
 
@@ -61,6 +61,7 @@ WASD      | Spacebar(tap) | Spacebar(hold) | G | Left Click | Passive | Passive
 [Github-url]: https://github.com/MissionToPsyche/tungsten_12a_web_game-se
 [Github.img]: https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white
 
+##
 ## Run WebGL locally with Unity
 ### Requirements
 - Simple Web Server:\
