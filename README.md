@@ -18,7 +18,7 @@
 ## Overview
 A futuristic adventure exploration 2D platformer using tools inspired by the Psyche spacecraft to navigate a new environment.
 
-## Access URL: [Play M.I.S.T](https://missiontopsyche.github.io/tungsten_12a_web_game-se/M.I.S.T/)
+## Access URL: [Play M.I.S.T.](https://missiontopsyche.github.io/tungsten_12a_web_game-se/M.I.S.T/)
 
 ## Controls
 Movement  | Jump | Thrusters | Spectrometer | Emagnet | Magnetometer | Imager
