@@ -103,7 +103,6 @@ public class Thruster_State : BaseState
         foreach (var pair in _savedState)
         {
             string objectName = Match(pair.Key);
-            Debug.Log($"{objectName} ({pair.Value})");
             switch (pair.Key)
             {
                 case (short)SceneObject.THRUSTER:
