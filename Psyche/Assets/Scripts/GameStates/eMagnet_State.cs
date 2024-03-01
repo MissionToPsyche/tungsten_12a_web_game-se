@@ -1,10 +1,9 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 
 /// <summary>
-/// Test integration for a gamestate class to manage the state of a scene
+/// Integration for eMagnet state management for the scene
 /// </summary>
 public class eMagnet_State : BaseState
 {
@@ -15,12 +14,14 @@ public class eMagnet_State : BaseState
     /// </summary>
     public enum SceneObject : short
     {
-        ELECTROMAGNET = 0,
-        CHECKPOINT_0 = 1,
-        CHECKPOINT_1 = 2,
-        GOLD_1 = 3,
-        GOLD_2 = 4,
-        CHECKPOINT = 99,
+        ELECTROMAGNET   = 0,
+        CHECKPOINT_0    = 1,
+        CHECKPOINT_1    = 2,
+        GOLD_1          = 3,
+        GOLD_2          = 4,
+        TUNGSTEN_1      = 5,
+
+        CHECKPOINT      = 99,
     }
 
     /// <summary>
@@ -32,13 +33,15 @@ public class eMagnet_State : BaseState
     {
         return obj.ToLower() switch 
         {
-            "electromagnet"     => (short)SceneObject.ELECTROMAGNET,
-            "checkpoint 0"      => (short)SceneObject.CHECKPOINT_0,
-            "checkpoint 1"      => (short)SceneObject.CHECKPOINT_1,
-            "element_gold 1"    => (short)SceneObject.GOLD_1,
-            "element_gold 2"    => (short)SceneObject.GOLD_2,
-            "checkpoint"        => (short)SceneObject.CHECKPOINT,
-            _                   => -1,
+            "electromagnet"         => (short)SceneObject.ELECTROMAGNET,
+            "checkpoint 0"          => (short)SceneObject.CHECKPOINT_0,
+            "checkpoint 1"          => (short)SceneObject.CHECKPOINT_1,
+            "element_gold 1"        => (short)SceneObject.GOLD_1,
+            "element_gold 2"        => (short)SceneObject.GOLD_2,
+            "element_tungsten 1"    => (short)SceneObject.TUNGSTEN_1,
+
+            "checkpoint"            => (short)SceneObject.CHECKPOINT,
+            _                       => -1,
         };
     }
 
@@ -56,8 +59,10 @@ public class eMagnet_State : BaseState
             (short)SceneObject.CHECKPOINT_1     => "Checkpoint 1",
             (short)SceneObject.GOLD_1           => "Element_Gold 1",
             (short)SceneObject.GOLD_2           => "Element_Gold 2",
+            (short)SceneObject.TUNGSTEN_1       => "Element_Tungsten 1",
+
             (short)SceneObject.CHECKPOINT       => "Checkpoint",
-            _                                   => "",
+            _                                   => null,
         };
     }
 
@@ -70,10 +75,11 @@ public class eMagnet_State : BaseState
         _defaultState = new Dictionary<short, object>
         {
             { (short)SceneObject.ELECTROMAGNET, true }, // 'true' for available
-            { (short)SceneObject.CHECKPOINT_0, true },  // `true` for activate-able
-            { (short)SceneObject.CHECKPOINT_1, true },
-            { (short)SceneObject.GOLD_1, true },
-            { (short)SceneObject.GOLD_2, true },
+            { (short)SceneObject.CHECKPOINT_0,  true }, // `true` for activate-able
+            { (short)SceneObject.CHECKPOINT_1,  true },
+            { (short)SceneObject.GOLD_1,        true },
+            { (short)SceneObject.GOLD_2,        true },
+            { (short)SceneObject.TUNGSTEN_1,    true },
         };    
         LoadDefaultState();
         SaveState();
@@ -115,12 +121,14 @@ public class eMagnet_State : BaseState
                         var targetObject = GameObject.Find(objectName);
                     }
                     break;
+
                 case (short)SceneObject.CHECKPOINT_1:
                     {
                         var value = (bool)pair.Value;
                         var targetObject = GameObject.Find(objectName);
                     }
                     break;
+
                 case (short)SceneObject.GOLD_1:
                     {
                         var value = (bool)pair.Value;
@@ -150,6 +158,25 @@ public class eMagnet_State : BaseState
                             targetObject.SetActive(value);
                         }
                     }
+                    break;
+
+                case (short)SceneObject.TUNGSTEN_1:
+                    {
+                        var value = (bool)pair.Value;
+                        if (!value)
+                        {
+                            var targetObject = GameObject.Find(objectName);
+                            if (targetObject == null)
+                            {
+                                Debug.LogError($"Object {objectName} does not exist");
+                                return;
+                            }
+                            targetObject.SetActive(value);
+                        }
+                    }
+                    break;
+
+                default:
                     break;
             }
         }
