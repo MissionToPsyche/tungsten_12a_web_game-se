@@ -26,10 +26,11 @@ public class GameStateManager : MonoBehaviour
 
             //InGame state mappings
             { GameState.InGame, new Dictionary<Scene, BaseState>() {
-                { Scene.Landing, new Landing_State() },
-                { Scene.Imager, new Imager_State() },
-                { Scene.GRNS, new GRNS_State() },
-                { Scene.eMagnet, new eMagnet_State() },
+                { Scene.Landing,    new Landing_State() },
+                { Scene.Imager,     new Imager_State() },
+                { Scene.GRNS,       new GRNS_State() },
+                { Scene.eMagnet,    new eMagnet_State() },
+                { Scene.Thruster,   new Thruster_State() },
             } },
         };
         
@@ -174,7 +175,9 @@ public class GameStateManager : MonoBehaviour
         if (currentState == GameState.InGame || scene == Scene.Title)
         {
             // Temporary check until the respective states are added
-            if (currentScene != Scene.eMagnet && currentScene != Scene.Landing && currentScene != Scene.Imager && currentScene != Scene.GRNS)
+            if (currentScene != Scene.eMagnet && currentScene != Scene.Landing 
+                && currentScene != Scene.Imager && currentScene != Scene.GRNS
+                && currentScene != Scene.Thruster)
             {
                 Debug.Log($"Scene state loader for {scene} not yet implemented");
             }
@@ -192,7 +195,9 @@ public class GameStateManager : MonoBehaviour
     public void LoadSceneState()
     {
         // Temporary until others are fully implemented
-        if (currentScene != Scene.eMagnet && currentScene != Scene.Landing && currentScene != Scene.Imager && currentScene != Scene.GRNS) { return; }
+        if (currentScene != Scene.eMagnet && currentScene != Scene.Landing 
+            && currentScene != Scene.Imager && currentScene != Scene.GRNS
+            && currentScene != Scene.Thruster) { return; }
 
         var stateManager = _gameStateToScene[currentState];
         stateManager[currentScene].LoadState();
@@ -206,7 +211,9 @@ public class GameStateManager : MonoBehaviour
     public void SaveSceneState()
     {
         // Temporary until others are fully implemented
-        if (currentScene != Scene.eMagnet && currentScene != Scene.Landing && currentScene != Scene.Imager && currentScene != Scene.GRNS) { return; }
+        if (currentScene != Scene.eMagnet && currentScene != Scene.Landing 
+            && currentScene != Scene.Imager && currentScene != Scene.GRNS
+            && currentScene != Scene.Thruster) { return; }
 
         var stateManager = _gameStateToScene[currentState];
         stateManager[currentScene].SaveState();
@@ -220,7 +227,9 @@ public class GameStateManager : MonoBehaviour
     public void SetObjectState(string key, object value)
     {
         // Temporary until others are fully implemented
-        if (currentScene != Scene.eMagnet && currentScene != Scene.Landing && currentScene != Scene.Imager && currentScene != Scene.GRNS) { return; }
+        if (currentScene != Scene.eMagnet && currentScene != Scene.Landing 
+            && currentScene != Scene.Imager && currentScene != Scene.GRNS
+            && currentScene != Scene.Thruster) { return; }
 
         var stateManager = _gameStateToScene[currentState];
         stateManager[currentScene].SetObjectState(key, value);
