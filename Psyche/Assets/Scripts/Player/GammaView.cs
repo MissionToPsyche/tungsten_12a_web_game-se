@@ -147,7 +147,7 @@ public class GammaView : MonoBehaviour {
     }
 
     /// <summary>
-    /// Activates gamma ray spectrometer and shows new color
+    /// Activates gamma ray neutron spectrometer and shows new color
     /// </summary>
     public void ActivateGRNS() {
         Initialize(); //DebugReportLog();
@@ -166,7 +166,7 @@ public class GammaView : MonoBehaviour {
     }
 
     /// <summary>
-    /// Deactivates gamma ray spectrometer and reverts to original color
+    /// Deactivates gamma ray neutron spectrometer and reverts to original color
     /// </summary>
     public void DeactivateGRNS() {
         for (int i = 0; i < spriteRenderersList.Count; i++) {
@@ -311,7 +311,7 @@ public class GammaView : MonoBehaviour {
         textMesh.characterSize = 0.15f;
         textMesh.fontSize = 30;
         textMesh.font = Resources.Load<Font>("");
-        textMesh.color = Color.red;
+        textMesh.color = Color.yellow;
         textMesh.anchor = TextAnchor.MiddleCenter;
     }
 
