@@ -101,7 +101,7 @@ public class UIController : BaseController<UIController>
             ArrayList commands = new ArrayList();
             commands.AddRange(_devConsoleInput.text.ToLower().Split(" "));
             //Process the command
-            OnUpdateUIToDevConsole.Invoke(commands);
+            OnUpdateUIToDevConsole?.Invoke(commands);
             _devConsoleInput.text = "";
             _devConsoleInput.ActivateInputField();
         }

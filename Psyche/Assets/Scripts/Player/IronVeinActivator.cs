@@ -6,6 +6,9 @@ public class IronVeinActivator : MonoBehaviour
 
     private void OnDestroy()
     {
-        ironVein.SetActive(true);
+        if (ironVein != null)
+        {
+            ironVein.SetActive(true);
+        }
     }
 }
