@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Imager_State : BaseState
+public class Thruster_State : BaseState
 {
     /// <summary>
     /// Defines the tracked objects in the scene
@@ -11,17 +11,17 @@ public class Imager_State : BaseState
     /// </summary>
     public enum SceneObject : short
     {
-        IMAGER          = 0,
+        THRUSTER        = 0,
         CHECKPOINT_1    = 1,
         CHECKPOINT_2    = 2,
-        TUNGSTEN_1      = 3,
-        GOLD_1          = 4,
-        GOLD_2          = 5,
-        GOLD_3          = 6, 
-        GOLD_4          = 7, 
-        GOLD_5          = 8,
+        CHECKPOINT_3    = 3,
+        COPPER_1        = 4,
+        GOLD_1          = 5,
+        GOLD_2          = 6,
+        GOLD_3          = 7,
+        TUNGSTEN_1      = 8,
 
-        CHECKPOINT = 99,
+        CHECKPOINT      = 99,
     }
 
     /// <summary>
@@ -33,15 +33,15 @@ public class Imager_State : BaseState
     {
         return obj.ToLower() switch
         {
-            "imager"                => (short)SceneObject.IMAGER,
+            "thruster"              => (short)SceneObject.THRUSTER,
             "checkpoint 1"          => (short)SceneObject.CHECKPOINT_1,
             "checkpoint 2"          => (short)SceneObject.CHECKPOINT_2,
-            "element_tungsten 1"    => (short)SceneObject.TUNGSTEN_1,
+            "checkpoint 3"          => (short)SceneObject.CHECKPOINT_3,
+            "element_copper 1"      => (short)SceneObject.COPPER_1,
             "element_gold 1"        => (short)SceneObject.GOLD_1,
             "element_gold 2"        => (short)SceneObject.GOLD_2,
             "element_gold 3"        => (short)SceneObject.GOLD_3,
-            "element_gold 4"        => (short)SceneObject.GOLD_4,
-            "element_gold 5"        => (short)SceneObject.GOLD_5,
+            "element_tungsten 1"    => (short)SceneObject.TUNGSTEN_1,
 
             "checkpoint"            => (short)SceneObject.CHECKPOINT,
             _                       => -1,
@@ -57,15 +57,15 @@ public class Imager_State : BaseState
     {
         return obj switch
         {
-            (short)SceneObject.IMAGER       => "Imager",
+            (short)SceneObject.THRUSTER     => "Thruster",
             (short)SceneObject.CHECKPOINT_1 => "Checkpoint 1",
             (short)SceneObject.CHECKPOINT_2 => "Checkpoint 2",
-            (short)SceneObject.TUNGSTEN_1   => "Element_Tungsten 1",
+            (short)SceneObject.CHECKPOINT_3 => "Checkpoint 3",
+            (short)SceneObject.COPPER_1     => "Element_Copper 1",
             (short)SceneObject.GOLD_1       => "Element_Gold 1",
             (short)SceneObject.GOLD_2       => "Element_Gold 2",
             (short)SceneObject.GOLD_3       => "Element_Gold 3",
-            (short)SceneObject.GOLD_4       => "Element_Gold 4",
-            (short)SceneObject.GOLD_5       => "Element_Gold 5",
+            (short)SceneObject.TUNGSTEN_1   => "Element_Tungsten 1",
 
             (short)SceneObject.CHECKPOINT   => "Checkpoint",
             _                               => null,
@@ -75,22 +75,22 @@ public class Imager_State : BaseState
     /// <summary>
     /// Constructor for the scene state
     /// </summary>
-    public Imager_State()
+    public Thruster_State()
     {
         // This must be set up first before anything else is created as everything else is based off of this
         _defaultState = new Dictionary<short, object>
         {
-            { (short)SceneObject.IMAGER,        true }, // 'true' for available
-            { (short)SceneObject.CHECKPOINT_1,  true }, 
+            { (short)SceneObject.THRUSTER,      true }, // 'true' for available
+            { (short)SceneObject.CHECKPOINT_1,  true }, // `false` for not activated
             { (short)SceneObject.CHECKPOINT_2,  true },
-            { (short)SceneObject.TUNGSTEN_1,    true },
+            { (short)SceneObject.CHECKPOINT_3,  true },
+            { (short)SceneObject.COPPER_1,      true },
             { (short)SceneObject.GOLD_1,        true },
             { (short)SceneObject.GOLD_2,        true },
             { (short)SceneObject.GOLD_3,        true },
-            { (short)SceneObject.GOLD_4,        true },
-            { (short)SceneObject.GOLD_5,        true },
-        };                  
-        LoadDefaultState(); 
+            { (short)SceneObject.TUNGSTEN_1,    true },
+        };
+        LoadDefaultState();
         SaveState();
     }
 
@@ -99,12 +99,13 @@ public class Imager_State : BaseState
     /// </summary>
     public override void LoadState()
     {
+
         foreach (var pair in _savedState)
         {
             string objectName = Match(pair.Key);
             switch (pair.Key)
             {
-                case (short)SceneObject.IMAGER:
+                case (short)SceneObject.THRUSTER:
                     { // Specifying scope for use of `var value` && `var targetObject`
                         var value = (bool)pair.Value;
 
@@ -122,19 +123,29 @@ public class Imager_State : BaseState
                         }
                     }
                     break;
+
                 case (short)SceneObject.CHECKPOINT_1:
                     {
                         var value = (bool)pair.Value;
                         var targetObject = GameObject.Find(objectName);
                     }
                     break;
+
                 case (short)SceneObject.CHECKPOINT_2:
                     {
                         var value = (bool)pair.Value;
                         var targetObject = GameObject.Find(objectName);
                     }
                     break;
-                case (short)SceneObject.TUNGSTEN_1:
+
+                case (short)SceneObject.CHECKPOINT_3:
+                    {
+                        var value = (bool)pair.Value;
+                        var targetObject = GameObject.Find(objectName);
+                    }
+                    break;
+
+                case (short)SceneObject.COPPER_1:
                     { // Specifying scope for use of `var value` && `var targetObject`
                         var value = (bool)pair.Value;
 
@@ -152,6 +163,7 @@ public class Imager_State : BaseState
                         }
                     }
                     break;
+
                 case (short)SceneObject.GOLD_1:
                     { // Specifying scope for use of `var value` && `var targetObject`
                         var value = (bool)pair.Value;
@@ -170,6 +182,7 @@ public class Imager_State : BaseState
                         }
                     }
                     break;
+
                 case (short)SceneObject.GOLD_2:
                     { // Specifying scope for use of `var value` && `var targetObject`
                         var value = (bool)pair.Value;
@@ -188,6 +201,7 @@ public class Imager_State : BaseState
                         }
                     }
                     break;
+
                 case (short)SceneObject.GOLD_3:
                     { // Specifying scope for use of `var value` && `var targetObject`
                         var value = (bool)pair.Value;
@@ -206,7 +220,8 @@ public class Imager_State : BaseState
                         }
                     }
                     break;
-                case (short)SceneObject.GOLD_4:
+
+                case (short)SceneObject.TUNGSTEN_1:
                     { // Specifying scope for use of `var value` && `var targetObject`
                         var value = (bool)pair.Value;
 
@@ -224,26 +239,8 @@ public class Imager_State : BaseState
                         }
                     }
                     break;
-                case (short)SceneObject.GOLD_5:
-                    { // Specifying scope for use of `var value` && `var targetObject`
-                        var value = (bool)pair.Value;
 
-                        // Remove the object if it's already been picked up
-                        if (!value)
-                        {
-                            var targetObject = GameObject.Find(objectName);
-                            if (targetObject == null)
-                            {
-                                Debug.LogError($"Object {objectName} does not exist");
-                                return;
-                            }
-
-                            targetObject.SetActive(value);
-                        }
-                    }
-                    break;
-
-                default: 
+                default:
                     break;
             }
         }

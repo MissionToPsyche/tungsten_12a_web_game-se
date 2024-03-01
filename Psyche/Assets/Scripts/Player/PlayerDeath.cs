@@ -44,6 +44,7 @@ public class PlayerDeath : MonoBehaviour {
         ApplyKickback(collision);
         GameController.Instance.audioManager.playerHurt.Play();
         GetHurt(1);
+        StartCoroutine(_playerController.interruptMagnet());
     }
     
     /// <summary>
