@@ -207,13 +207,14 @@ public class DeveloperConsole : MonoBehaviour
                         PlayerController.Instance.inventoryManager.SetElement(InventoryManager.Element.NICKEL,      100);
                         PlayerController.Instance.inventoryManager.SetElement(InventoryManager.Element.TUNGSTEN,    100);
                         PlayerController.Instance.inventoryManager.SetTool(InventoryManager.Tool.SOLARPANEL, true);
+                        PlayerController.Instance.batteryManager.Enable();
                         PlayerController.Instance.inventoryManager.SetTool(InventoryManager.Tool.SPECTROMETER, true);
                         PlayerController.Instance.inventoryManager.SetTool(InventoryManager.Tool.THRUSTER, true);
-                        PlayerController.Instance.inventoryManager.SetTool(InventoryManager.Tool.ELECTROMAGNET, true);
-                        PlayerController.Instance.batteryManager.Enable();
                         PlayerController.Instance.thrusterManager.Enable();
+                        PlayerController.Instance.inventoryManager.SetTool(InventoryManager.Tool.ELECTROMAGNET, true);
                         PlayerController.Instance.eMagnetManager.Enable();
                         PlayerController.Instance.eMagnetActive = true;
+                        PlayerController.Instance.inventoryManager.SetTool(InventoryManager.Tool.IMAGER, true);
                         PlayerController.Instance.imagerManager.Enable();
                         break;
                     // Element Manipulation
