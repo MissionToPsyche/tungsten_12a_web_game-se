@@ -58,18 +58,15 @@ public class GammaView : MonoBehaviour {
     /// <param name="scene"></param>
     /// <param name="mode"></param>
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
-        if (scene.name != "10_Cutscene_Outro") {
-            //Debug.Log("Looking for light...");
-        //if (GameController.Instance.gameStateManager.currentState == GameStateManager.GameState.InGame) {
-            //Debug.Log("InGame, looking for light...");
+        GameStateManager.Scene GameStateManagerSn = GameController.Instance.gameStateManager.MatchScene(scene.name);
+        if (GameStateManagerSn != GameStateManager.Scene.Outro) {
             sceneLight = GameObject.FindGameObjectWithTag("SceneLight").GetComponent<Light2D>();
             sceneTilemap = GameObject.FindGameObjectWithTag("Terrain").GetComponent<Tilemap>();
             sceneBackground = GameObject.FindGameObjectWithTag("Background").GetComponent<SpriteRenderer>();
             origSceneLightIntensity = sceneLight.intensity;
             origSceneTilemapColor = sceneTilemap.color;
             origSceneBackgroundColor = sceneBackground.color;
-            if (scene.name != "02_Landing") {
-                //Debug.Log("Turning off light...");
+            if (GameStateManagerSn != GameStateManager.Scene.Landing) {
                 TurnOffSceneLight();
             }
         }
@@ -150,7 +147,7 @@ public class GammaView : MonoBehaviour {
     }
 
     /// <summary>
-    /// Activates gamma ray spectrometer and shows new color
+    /// Activates gamma ray neutron spectrometer and shows new color
     /// </summary>
     public void ActivateGRNS() {
         Initialize(); //DebugReportLog();
@@ -169,7 +166,7 @@ public class GammaView : MonoBehaviour {
     }
 
     /// <summary>
-    /// Deactivates gamma ray spectrometer and reverts to original color
+    /// Deactivates gamma ray neutron spectrometer and reverts to original color
     /// </summary>
     public void DeactivateGRNS() {
         for (int i = 0; i < spriteRenderersList.Count; i++) {
@@ -314,7 +311,7 @@ public class GammaView : MonoBehaviour {
         textMesh.characterSize = 0.15f;
         textMesh.fontSize = 30;
         textMesh.font = Resources.Load<Font>("");
-        textMesh.color = Color.red;
+        textMesh.color = Color.yellow;
         textMesh.anchor = TextAnchor.MiddleCenter;
     }
 
