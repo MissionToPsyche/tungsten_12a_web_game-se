@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+using UnityEngine.UI;
 
 /// <summary>
 /// Basic Intro Cutscene that shows a series of images
@@ -6,9 +8,30 @@ using UnityEngine;
 /// Author: jmolive8
 public class IntroController : MonoBehaviour
 {
-    public GameObject intro1, intro2, intro3, intro4, intro5, intro6, intro7;
+    public static GameObject intro1, intro2, intro3, intro4, intro5, intro6, intro7;
+
+    private Image img1 = intro1.GetComponent<Image>();
+    private Image img2 = intro2.GetComponent<Image>();
+    private Image img3 = intro3.GetComponent<Image>();
+    private Image img4 = intro4.GetComponent<Image>();
+    private Image img5 = intro5.GetComponent<Image>();
+    private Image img6 = intro6.GetComponent<Image>();
+    private Image img7 = intro7.GetComponent<Image>();
+
 
     int curScreen = 1;
+
+    private void Start()
+    {
+        img1.canvasRenderer.SetAlpha(0.0f);
+        img2.canvasRenderer.SetAlpha(0.0f);
+        img3.canvasRenderer.SetAlpha(0.0f);
+        img4.canvasRenderer.SetAlpha(0.0f);
+        img5.canvasRenderer.SetAlpha(0.0f);
+        img6.canvasRenderer.SetAlpha(0.0f);
+        img7.canvasRenderer.SetAlpha(0.0f);
+        FadeIn(img1);
+    }
 
     /// <summary>
     /// Shows next screen on Left Click
@@ -21,7 +44,7 @@ public class IntroController : MonoBehaviour
             {
                 case 1:
                     curScreen++;
-                    intro1.SetActive(false);
+                    StartCoroutine(Switch(img1,img2));
                     intro2.SetActive(true);
                     break;
 
@@ -63,5 +86,26 @@ public class IntroController : MonoBehaviour
                     break;
             }
         }
+    }
+
+    IEnumerator Switch(Image pic1, Image pic2)
+    {
+        pic2.canvasRenderer.SetAlpha(0.0f);
+
+        FadeOut(pic1);
+        yield return new WaitForSeconds(2.5f);
+
+        FadeIn(pic2);
+        yield return new WaitForSeconds(2.5f);
+    }
+
+    void FadeIn(Image pic)
+    {
+        pic.CrossFadeAlpha(1.0f, 1.5f, false);
+    }
+
+    void FadeOut(Image pic)
+    {
+        pic.CrossFadeAlpha (0.0f, 2.5f, false);  
     }
 }
