@@ -22,36 +22,42 @@ public class EMagnetManager : ToolManager {
         toolEnabled = false;
         _playerController = playerManagement;
         level = 0;
-        levelRequirements = new Dictionary<int, Dictionary<string, ushort>>()
+        levelRequirements = new Dictionary<int, Dictionary<InventoryManager.Element, ushort>>()
         {
-            {  1, new Dictionary<string, ushort>()
+            {  1, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { "element_copper", 0 }, { "element_iron", 2 }, { "element_nickel", 0 }, { "element_gold", 0 }, { "element_tungsten", 0 }
+                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 2 }, 
+                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 0 },
                 }
             },
-            {  2, new Dictionary<string, ushort>()
+            {  2, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { "element_copper", 0 }, { "element_iron", 2 }, { "element_nickel", 0 }, { "element_gold", 0 }, { "element_tungsten", 0 }
+                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 2 }, 
+                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 0 },
                 }
             },
-            {  3, new Dictionary<string, ushort>()
+            {  3, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { "element_copper", 0 } , { "element_iron", 3 }, { "element_nickel", 0 }, { "element_gold", 0 }, { "element_tungsten", 0 }
+                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 3 }, 
+                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 0 },
                 }
             },
-            {  4, new Dictionary<string, ushort>()
+            {  4, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { "element_copper", 0 } , { "element_iron", 4 }, { "element_nickel", 0 }, { "element_gold", 0 }, { "element_tungsten", 0 }
-                }
+                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 4 },    
+                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 0 },
+                }   
             },
-            {  5, new Dictionary<string, ushort>()
+            {  5, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { "element_copper", 0 } , { "element_iron", 5 } , { "element_nickel", 0 } , { "element_gold", 0 }, { "element_tungsten", 0 }
+                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 5 }, 
+                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 0 },
                 }
             },
         };
 
         //Tool specific variables
+        maxLevel = levelRequirements.Count;
         hitBoxRotator = eMagHitBox.transform.parent;
     }
 
@@ -72,7 +78,7 @@ public class EMagnetManager : ToolManager {
         GameController.Instance.audioManager.toolEMagnet.Play();
         _playerController.eMagnetActive = true;
         hitBoxRotator.gameObject.SetActive(true);
-        Collider2D hit, target = null;
+        Collider2D hit, targetVein = null, grabbedObject = null;
         float curGrav = _playerController.playerCharacter.gravityScale;
 
         do
@@ -91,38 +97,36 @@ public class EMagnetManager : ToolManager {
             hit = Physics2D.OverlapBox(eMagHitBox.transform.position, eMagHitBox.transform.lossyScale, angle, 1 << 7);
             if (hit != null)
             {
-                ///If movable Iron object hit
+                //If movable Iron object hit
                 if (hit.attachedRigidbody != null)
                 {
-                    hit.attachedRigidbody.velocity = Vector2.zero;
-                    hit.attachedRigidbody.angularVelocity = 0;
-                    if (!_playerController.playerCollider.IsTouching(hit))
-                        hit.attachedRigidbody.MovePosition(Vector2.MoveTowards(hit.transform.position, transform.position, Time.deltaTime * 20));
+                    if (hit != grabbedObject)
+                        grabbedObject = hit;
                 }
-                ///If new Iron Vein hit
-                else if (hit != target)
+                //If new Iron Vein hit
+                else if (hit != targetVein)
                 {
                     /**
                      * Disables gravity and player movement when being pulled towards an Iron Vein
                      */
-                    if (target == null)
+                    if (targetVein == null)
                     {
                         _playerController.beingPulled = true;
                         _playerController.playerCharacter.gravityScale = 0;
                     }
 
                     _playerController.playerCharacter.velocity = Vector2.zero;
-                    target = hit;
+                    targetVein = hit;
                 }
             }
 
             /**
              * Pulls Player towards most recently hit Iron Vein
              */
-            if (target != null)
+            if (targetVein != null)
             {
-                if (target.gameObject.activeInHierarchy)
-                    _playerController.playerCharacter.MovePosition(Vector2.MoveTowards(transform.position, target.transform.position, Time.deltaTime * pullSpeed));
+                if (targetVein.gameObject.activeInHierarchy)
+                    _playerController.playerCharacter.MovePosition(Vector2.MoveTowards(transform.position, targetVein.transform.position, Time.deltaTime * pullSpeed));
                 else
                 {
                     /**
@@ -130,8 +134,19 @@ public class EMagnetManager : ToolManager {
                      */
                     _playerController.beingPulled = false;
                     _playerController.playerCharacter.gravityScale = curGrav;
-                    target = null;
+                    targetVein = null;
                 }
+            }
+
+            /**
+             * Pulls the most recently hit Movable Iron Object towards the Player
+             */
+            if (grabbedObject != null)
+            {
+                grabbedObject.attachedRigidbody.velocity = Vector2.zero;
+                grabbedObject.attachedRigidbody.angularVelocity = 0;
+                if (!_playerController.playerCollider.IsTouching(grabbedObject))
+                    grabbedObject.attachedRigidbody.MovePosition(Vector2.MoveTowards(grabbedObject.transform.position, transform.position, Time.deltaTime * 20));
             }
 
             yield return null;

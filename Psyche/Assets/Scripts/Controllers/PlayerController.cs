@@ -6,9 +6,7 @@
 
 using UnityEngine;
 using System.Collections;
-using System;
-using static ToolManager;
-using System.Collections.Generic;
+using Unity.VisualScripting;
 
 /// <summary>
 /// Player Management script controls how the player interacts with the 
@@ -35,6 +33,7 @@ public class PlayerController : BaseController<PlayerController>
 
     //Management scripts
     [Header("Scripts")]
+    public PlayerCollisionManager playerCollisionManager;
     public PlayerHealth playerHealth;
     public BatteryManager batteryManager;
     public PlayerMovement playerMovement;
@@ -42,7 +41,7 @@ public class PlayerController : BaseController<PlayerController>
     public EMagnetManager eMagnetManager;
     public ThrusterManager thrusterManager;
     public GammaView gammaView;
-    public PlayerDeath deathCon;
+    public PlayerDeath playerDeath;
     public InventoryManager inventoryManager;
 
     //Booleans for the various tools
@@ -59,12 +58,15 @@ public class PlayerController : BaseController<PlayerController>
         //Initialize base
         base.Initialize();
 
+        
         //Assign and initialize scripts
         playerCharacter = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<BoxCollider2D>();
         playerMovement = GetComponent<PlayerMovement>();
         playerMovement.Initialize(this);
-        // ##### Tool Managers #####
+        playerCollisionManager = GetComponent<PlayerCollisionManager>();
+        playerCollisionManager.Initialize(this);
+        // ##### Managers #####
         batteryManager = GetComponent<BatteryManager>();
         batteryManager.Initialize(this);
         thrusterManager = GetComponent<ThrusterManager>();
@@ -74,13 +76,14 @@ public class PlayerController : BaseController<PlayerController>
         imagerManager = GetComponent<ImagerManager>();
         imagerManager.Initialize(this);
         // ##### Object Managers ######
-        //playerHealth.Initialize(this); <-- this initializes the script and creates a cross reference between the two
+
         // ##### Miscellaneous ######
-        //sceneTransition = GetComponent<SceneManager>();
-        //sceneTransition.Initialize(this);
-        deathCon = GetComponent<PlayerDeath>();
         inventoryManager = GetComponent<InventoryManager>();
         inventoryManager.Initialize(this);
+        playerDeath = GetComponent<PlayerDeath>();
+        playerDeath.Initialize(this);
+        pressUpPopup = transform.Find("Press Up Popup").gameObject;
+
         //hides mouse cursor
         Cursor.visible = false;
 
@@ -161,8 +164,8 @@ public class PlayerController : BaseController<PlayerController>
             }
 
             //Spectrometer
-            if (inventoryManager.CheckTool("spectrometer") && Input.GetButton("FireGRS") && batteryManager.batteryPercent != 0) {
-                gammaView.ActivateGRS();
+            if (inventoryManager.CheckTool("spectrometer") && Input.GetButton("FireGRNS") && batteryManager.batteryPercent != 0) {
+                gammaView.ActivateGRNS();
                 batteryManager.DrainBatt(2);
             }
 
@@ -173,18 +176,16 @@ public class PlayerController : BaseController<PlayerController>
             }
 
             //Passive Battery
-            //if (inventoryManager.CheckTool("battery") && !Input.GetButton("Jump") && !Input.GetButton("FireGRS") && !Input.GetButton("EMagnet") && batteryManager.batteryPercent != 100 && !eMagnetActive && !beingPulled && !usingThruster)
-            if (!Input.GetButton("Jump") && !Input.GetButton("FireGRS") && !Input.GetButton("EMagnet") && batteryManager.batteryPercent != 100 && !eMagnetActive && !beingPulled && !usingThruster)
+            if (!Input.GetButton("Jump") && !Input.GetButton("FireGRNS") && !Input.GetButton("EMagnet") && batteryManager.batteryPercent != 100 && !eMagnetActive && !beingPulled && !usingThruster)
             {
-                batteryManager.PassiveBatt(1);
+                batteryManager.PassiveBatt();
             }
         }
 
         playerMovement.handleMovement(usingThruster, beingWarped, enteringCave, exitingCave);
 
         //Inventory and Dialog Box 
-        if (Input.GetButtonDown("Inventory") && !Input.GetButton("FireGRS"))
-            UIController.Instance.handleUI();
+        if (Input.GetButtonDown("Inventory") && !Input.GetButton("FireGRNS")) { UIController.Instance.handleUI(); }
     }
 
     /// <summary>
@@ -198,9 +199,8 @@ public class PlayerController : BaseController<PlayerController>
 
     //======================================================== Events ========================================================
     
-    //Events definitions
-    public event Action<string>         InitiateTransition;
-    public event Action<string, object> SetObjectState;
+    // Events definitions
+    // ...
 
     void ModifyTool(ArrayList args)
     {
@@ -240,7 +240,7 @@ public class PlayerController : BaseController<PlayerController>
     {
         if(GameController.Instance != null)
         {
-
+            GameController.Instance.gameStateManager.UnloadPlayer();
         }
         if(UIController.Instance != null)
         {
@@ -251,115 +251,7 @@ public class PlayerController : BaseController<PlayerController>
 
     //======================================================= Triggers =======================================================
 
-    /// <summary>
-    /// When the player is in range of a 2d collider, it will activate this function
-    /// </summary>
-    /// <param name="other"></param>
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        if (other.tag == "TransitionObjectIn" || other.tag ==  "TransitionObjectOut") //for Transition objects
-        {
-            InitiateTransition?.Invoke(other.name);
-        }
-    }
 
-    /// <summary>
-    /// When the player enters the 2D collider, this function is triggered
-    /// </summary>
-    /// <param name="other"></param>
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.tag == "Element") //for picking up the elements
-        {
-            inventoryManager.AddElement(other.name, 1);
-            Destroy(other.gameObject); //remove the element from the screen
-        }
-        /*
-        if (other.tag == "Tool")
-        {
-            ToolPickUp(other.name);
-            Destroy(other.gameObject);
-        }*/
-        else if (other.tag == "TransitionObjectIn" || other.tag == "TransitionObjectOut")
-        {
-            pressUpPopup.SetActive(true);
-
-            // crashed ship exit scene
-            if (other.gameObject.layer == 12) { // tungsten / ship
-                //Debug.Log("Ship transition detected");
-                if (inventoryManager.CheckElement("Element_Tungsten") < 8) {
-                    //Debug.Log("Not enough tungsten");
-                    other.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                }
-            }
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.tag == "TransitionObjectIn" || other.tag == "TransitionObjectOut")
-        {
-            pressUpPopup.SetActive(false);
-
-            // crashed ship exit scene
-            if (other.gameObject.layer == 12) { // tungsten / ship
-                other.gameObject.GetComponent<BoxCollider2D>().enabled = true;
-            }
-        }
-    }
-
-    /// <summary>
-    /// Activates tool when its pickup is collected
-    /// </summary>
-    /// <param name="toolName"></param>
-    public void ToolPickUp(string toolName)
-    {
-        // Transition to this at some point
-        var tool = inventoryManager.MatchTool(toolName);
-        SetObjectState?.Invoke(toolName, false);
-
-        //Other actions
-        switch (toolName)
-        {
-            case "SolarPanel":
-                batteryManager.Enable();
-                inventoryManager.SetTool("Battery", true);
-                break;
-
-            case "Thruster":
-                thrusterManager.Enable();
-                inventoryManager.SetTool(toolName, true);
-                break;
-
-            case "Imager":
-                imagerManager.Enable();
-                inventoryManager.SetTool(toolName, true);
-                break;
-
-            case "Spectrometer":
-                inventoryManager.SetTool(toolName, true);
-                break;
-
-            case "ElectroMagnet":
-                eMagnetManager.Enable();
-                inventoryManager.SetTool(toolName, true);
-                break;
-
-            case "Battery":
-                //batteryManager.Enable();
-                //inventoryManager.SetTool(toolName, true);
-                batteryManager.ChargeBatt(500);
-                break;
-
-            case "Health":
-                playerHealth.HealthUp(1);
-                break;
-
-            default:
-                Debug.LogWarning("Tool name '" + toolName + "' not found!");
-                break;
-        }
-    }
 
     /// <summary>
     /// Creates a cast from the groundcheck box object, attached to the player, pointing down.

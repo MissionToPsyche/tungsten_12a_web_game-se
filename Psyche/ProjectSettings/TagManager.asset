@@ -20,6 +20,9 @@ TagManager:
   - Boundary
   - Spikes
   - Background
+  - Tool
+  - PassthroughPlatform
+  - FakeTerrain
   layers:
   - Default
   - TransparentFX

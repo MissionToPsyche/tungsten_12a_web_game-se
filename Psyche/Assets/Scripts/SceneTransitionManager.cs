@@ -5,7 +5,6 @@
  */
 
 using Cinemachine;
-using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
@@ -31,17 +30,13 @@ public class SceneTransitionManager : MonoBehaviour {
     /// <param name="playerManagement"></param>
     public void Initialize(GameController gameController) {
         _gameController = gameController;
-        if (PlayerController.Instance != null)
-        {
-            LoadPlayer();
-        }
     }
 
     // #####################################################  Events #####################################################
 
     public void LoadPlayer()
     {
-        PlayerController.Instance.InitiateTransition += OnInitiateTransition;
+        PlayerController.Instance.playerCollisionManager.InitiateTransition += OnInitiateTransition;
     }
 
     public void LoadDevConsole()
@@ -56,12 +51,8 @@ public class SceneTransitionManager : MonoBehaviour {
     {
         if (PlayerController.Instance != null)
         {
-            PlayerController.Instance.InitiateTransition -= OnInitiateTransition;
+            PlayerController.Instance.playerCollisionManager.InitiateTransition -= OnInitiateTransition;
         }
-        //if (_gameController.developerConsole != null)
-        //{
-        //    _gameController.developerConsole.OnDevConsoleTransition -= OnInitiateTransition;
-        //}
     }
 
     // ################################################  Scene Management ################################################
@@ -112,7 +103,7 @@ public class SceneTransitionManager : MonoBehaviour {
             //yield return new WaitForSeconds(0.1f); // <-- Necessary anymore?
             if (!_transition)
             {
-                _directionTag = (sceneInfo.Count() > 1) ? sceneInfo[1] : "in";
+                _directionTag = (sceneInfo.Count() > 1) ? sceneInfo[1] : "out";
                 _transition = true;
             }
             if (_transition && _gameController.gameStateManager.currentState == GameStateManager.GameState.InGame)
@@ -162,15 +153,6 @@ public class SceneTransitionManager : MonoBehaviour {
     }
 
     /// <summary>
-    /// Runs each time a new scene is loaded
-    /// </summary>
-    /// <param name="scene"></param>
-    /// <param name="mode"></param>
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
-        _transition = false;
-    }
-
-    /// <summary>
     /// Repositions player based on landing position 
     /// </summary>
     /// <param name="travelToSceneName"></param>
@@ -188,7 +170,11 @@ public class SceneTransitionManager : MonoBehaviour {
     public Vector3 GetTransitionObjectPosition(string sceneName) {
         Scene scene = SceneManager.GetSceneByName(sceneName);
         if (scene.isLoaded) {
-            string tag = (_directionTag.ToLower().Contains("in")) ? "TransitionObjectIn" : "TransitionObjectOut";
+
+            // If the tag is "out" as in if "out" is part of the game object the player is interacting with
+            // then we want to "look for" the TransitionObjectIn (in) on the scene we are going into, else
+            // we must be going in reverse so then we look for the TransitionObjectOut (out).
+            string tag = _directionTag.ToLower().Contains("out") ? "TransitionObjectIn" : "TransitionObjectOut";
 
             // there should only be one transition object in and one transition object out for each scene
             // with the exception of two "outs" for the landing scene since we can go out from the landing scene

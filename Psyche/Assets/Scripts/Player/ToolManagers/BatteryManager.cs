@@ -1,7 +1,7 @@
 /** 
 Description: battery script
 Author: blopezro, mcmyers
-Version: 20240206
+Version: 20240220
 **/
 
 using System;
@@ -33,40 +33,46 @@ public class BatteryManager : ToolManager {
         toolEnabled = false;
         _playerController = playerController;
         level = 0;
-        levelRequirements = new Dictionary<int, Dictionary<string, ushort>>()
+        levelRequirements = new Dictionary<int, Dictionary<InventoryManager.Element, ushort>>()
         {
-            {  1, new Dictionary<string, ushort>()
+            {  1, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { "element_copper", 0 }, { "element_iron", 0 }, { "element_nickel", 2 }, { "element_gold", 0 }, { "element_tungsten", 0 }
+                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
+                    { InventoryManager.Element.NICKEL, 2 }, { InventoryManager.Element.GOLD, 0 },
                 }
             },
-            {  2, new Dictionary<string, ushort>()
+            {  2, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { "element_copper", 0 }, { "element_iron", 0 }, { "element_nickel", 2 }, { "element_gold", 0 }, { "element_tungsten", 0 }
+                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
+                    { InventoryManager.Element.NICKEL, 2 }, { InventoryManager.Element.GOLD, 0 },
                 }
             },
-            {  3, new Dictionary<string, ushort>()
+            {  3, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 3 }, { "element_gold", 0 }, { "element_tungsten", 0 }
+                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
+                    { InventoryManager.Element.NICKEL, 3 }, { InventoryManager.Element.GOLD, 0 },
                 }
             },
-            {  4, new Dictionary<string, ushort>()
+            {  4, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 4 } , { "element_gold", 0 } , { "element_tungsten", 0 }
+                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
+                    { InventoryManager.Element.NICKEL, 4 }, { InventoryManager.Element.GOLD, 0 },
                 }
             },
-            {  5, new Dictionary<string, ushort>()
+            {  5, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { "element_copper", 0 } , { "element_iron", 0 } , { "element_nickel", 5 } , { "element_gold", 0 } , { "element_tungsten", 0 }
+                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
+                    { InventoryManager.Element.NICKEL, 5 }, { InventoryManager.Element.GOLD, 0 },
                 }
             },
         };
 
         //Tool specific
+        maxLevel = levelRequirements.Count;
         maxCapacity = 100f;
         batteryLevel = maxCapacity;
         batteryPercent = batteryLevel / maxCapacity * 100f;
-        rate = 1;
+        rate = 0.5f;
         batteryDrained = (batteryLevel > 0);
     }
 
@@ -101,8 +107,7 @@ public class BatteryManager : ToolManager {
     /// <summary>
     /// passively recharges battery at given rate
     /// </summary>
-    /// <param name="rate"></param>
-    public void PassiveBatt(float rate)
+    public void PassiveBatt()
     {
         batteryLevel += rate/1000 ;
         batteryLevel = Mathf.Clamp(batteryLevel, 0f, maxCapacity); // keeps batt level between 0-100
@@ -131,6 +136,6 @@ public class BatteryManager : ToolManager {
     /// Increases the max capacity when called.
     /// </summary>
     protected override void UpgradeTool() {
-        maxCapacity += 10f;
+        rate += 0.5f;
     }
 }

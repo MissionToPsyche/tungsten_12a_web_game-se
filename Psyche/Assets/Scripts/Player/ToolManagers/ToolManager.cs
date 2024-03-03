@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public abstract class ToolManager : MonoBehaviour
@@ -13,7 +14,8 @@ public abstract class ToolManager : MonoBehaviour
 
     //Tool State
     public int level;
-    public Dictionary<int, Dictionary<string, ushort>> levelRequirements;
+    public Dictionary<int, Dictionary<InventoryManager.Element, ushort>> levelRequirements;
+    public int maxLevel;
 
     public bool toolEnabled;
 
@@ -25,7 +27,7 @@ public abstract class ToolManager : MonoBehaviour
     }
 
     // Events
-    public event Action<ToolDirective, bool, string, Dictionary<string, ushort>, int> ToolManagerUpdate;
+    public event Action<ToolDirective, bool, string, Dictionary<InventoryManager.Element, ushort>, int, int> ToolManagerUpdate;
 
     /// <summary>
     /// Enables the tool
@@ -33,11 +35,7 @@ public abstract class ToolManager : MonoBehaviour
     public void Enable()
     {
         toolEnabled = true;
-        //Create package to send to UI to upgrade interface
-        ArrayList args = new ArrayList {
-                "UI", "None", "ToolManager", "ToolInfo", "info", false, levelRequirements[level+1],
-        };
-        ToolManagerUpdate?.Invoke(ToolDirective.Info, false, toolName, levelRequirements[level + 1], level + 1);
+        ToolManagerUpdate?.Invoke(ToolDirective.Info, false, toolName, levelRequirements[level + 1], level + 1, maxLevel);
     }
 
     /// <summary>
@@ -55,12 +53,8 @@ public abstract class ToolManager : MonoBehaviour
     /// </summary>
     public void Modify()
     {
-        //int newLevel = level + 1;
-        //Create package to send to UI to upgrade interface
-        ArrayList args = new ArrayList {
-                "UI", "None", "ToolManager", "ToolInfo", "upgrade",
-        };
-
+        // Check for upgrading
+        int nextLevel = (levelRequirements.ContainsKey(level + 1) ? level + 1 : level);
         bool upgraded = true;
         if (levelRequirements.ContainsKey(level + 1))
         {
@@ -72,10 +66,8 @@ public abstract class ToolManager : MonoBehaviour
                 }
             }
         }
-        //args.Add(upgraded);
-        //args.Add(toolName);
         //Confirm the number of required elements exists
-        if (upgraded)
+        if (upgraded && level + 1 <= nextLevel)
         {
             //Remove the required elements
             foreach (var requirement in levelRequirements[level + 1])
@@ -88,19 +80,7 @@ public abstract class ToolManager : MonoBehaviour
             //Upgrade the tool
             level++;
             UpgradeTool();
-            //args.Add(levelRequirements[newLevel]);
-        } else
-        {
-            //args.Add(levelRequirements[newLevel]);
         }
-
-        if (levelRequirements.ContainsKey(level + 1))
-        {
-            //args.Add(level + 1);
-            ToolManagerUpdate?.Invoke(ToolDirective.Upgrade, upgraded, toolName, levelRequirements[level + 1], level + 1);
-            //_playerController.SendMessage(args);
-        }
-        else
-            ToolManagerUpdate?.Invoke(ToolDirective.MaxLevel, upgraded, toolName, null, level + 1);
+        ToolManagerUpdate?.Invoke(ToolDirective.Upgrade, upgraded, toolName, levelRequirements[nextLevel], level + 1, maxLevel);
     }
 }
