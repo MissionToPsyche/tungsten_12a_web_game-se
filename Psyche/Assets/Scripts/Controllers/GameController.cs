@@ -152,14 +152,14 @@ public class GameController : BaseController<GameController>
     /// Event handling for game state changes
     /// </summary>
     /// <param name="gameState"></param>
-    public void HandleGameStateEvent(GameStateManager.GameState gameState)
+    public void HandleGameStateEvent()
     {
-        OnGameStateChanged?.Invoke(gameState);
+        OnGameStateChanged?.Invoke(gameStateManager.currentState);
         // Handle game state updates
         switch (gameStateManager.currentState)
         {
             case GameStateManager.GameState.MainMenu:
-                // Update in-game logic
+                gameStateManager.ResetScenes();
                 break;
             case GameStateManager.GameState.InGame:
                 // Update pause logic
