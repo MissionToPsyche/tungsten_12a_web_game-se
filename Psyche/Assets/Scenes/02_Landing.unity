@@ -7760,21 +7760,21 @@ Tilemap:
       e33: 1
   - m_RefCount: 0
     m_Data:
-      e00: -10.919876
-      e01: 1.18e-43
-      e02: -5.2011303e-30
+      e00: -8.2014917e+12
+      e01: 4e-45
+      e02: 3.193462e+29
       e03: 0
-      e10: 5.7e-44
+      e10: 1.82e-43
       e11: NaN
       e12: 4.5905e-41
       e13: 0
-      e20: 4.73e-41
+      e20: 4.0823e-41
       e21: 0
-      e22: -10.919861
+      e22: -8.2014833e+12
       e23: 0
       e30: 0
       e31: 7.34684e-40
-      e32: 5.7e-44
+      e32: 1.82e-43
       e33: 1
   m_TileColorArray:
   - m_RefCount: 0
@@ -10705,13 +10705,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCharacter
       objectReference: {fileID: 0}
-    - target: {fileID: 1078862222496993058, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
-      propertyPath: m_Name
-      value: Press Up Popup
+    - target: {fileID: 1411709671536301261, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: m_Size.x
+      value: 0.18
       objectReference: {fileID: 0}
-    - target: {fileID: 1078862222496993058, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
-      propertyPath: m_IsActive
-      value: 0
+    - target: {fileID: 1411709671536301261, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: m_Size.y
+      value: 0.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 1411709671536301261, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.015
       objectReference: {fileID: 0}
     - target: {fileID: 3118868635833949731, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10757,25 +10761,17 @@ PrefabInstance:
       propertyPath: m_BoundingShape2D
       value: 
       objectReference: {fileID: 1195215623}
-    - target: {fileID: 3839175105450516163, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3839175105450516163, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.625
-      objectReference: {fileID: 0}
     - target: {fileID: 3895818665434327867, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: m_BoundingShape2D
       value: 
       objectReference: {fileID: 1195215623}
     - target: {fileID: 4822381043481428571, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.25000003
+      value: -0.25000098
       objectReference: {fileID: 0}
     - target: {fileID: 4822381043481428571, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.625
+      value: 0.576635
       objectReference: {fileID: 0}
     - target: {fileID: 7911676450372591580, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: playerHealth

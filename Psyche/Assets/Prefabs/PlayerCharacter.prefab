@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3118868635833949731}
   - component: {fileID: 4073110612712080880}
-  - component: {fileID: 2257811646393419205}
+  - component: {fileID: 1411709671536301261}
   - component: {fileID: 7911676450372591580}
   - component: {fileID: 7454889652593822882}
   - component: {fileID: 2031395883439144302}
@@ -79,8 +79,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &2257811646393419205
-BoxCollider2D:
+--- !u!70 &1411709671536301261
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -111,19 +111,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0031004995, y: 0.02}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 0.19, y: 0.24}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.20003346, y: 0.25}
-  m_EdgeRadius: 0
+  m_Offset: {x: -0.0031005, y: 0.02}
+  m_Size: {x: 0.2, y: 0.25}
+  m_Direction: 0
 --- !u!114 &7911676450372591580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,6 +211,7 @@ MonoBehaviour:
   origSceneLightIntensity: 0
   grnsControlsSceneLight: 0
   sceneTilemap: {fileID: 0}
+  sceneTilemapFake: {fileID: 0}
   origSceneTilemapColor: {r: 0, g: 0, b: 0, a: 0}
   sceneBackground: {fileID: 0}
   origSceneBackgroundColor: {r: 0, g: 0, b: 0, a: 0}
@@ -333,7 +324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed7b7eb61de2944cb32814bb980b7e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCollider: {fileID: 2257811646393419205}
+  playerCollider: {fileID: 1411709671536301261}
 --- !u!1 &1078862222496993058
 GameObject:
   m_ObjectHideFlags: 0
@@ -344,7 +335,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5257376823333251436}
   m_Layer: 16
-  m_Name: Pres Up Popup
+  m_Name: Press Up Popup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -679,7 +670,7 @@ Transform:
   m_GameObject: {fileID: 2746429122550390308}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.25, y: 0.625, z: -2.5}
+  m_LocalPosition: {x: 0.249999, y: 0.576635, z: -2.5}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
