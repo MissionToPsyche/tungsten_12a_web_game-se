@@ -87,9 +87,6 @@ public class PlayerController : BaseController<PlayerController>
         //hides mouse cursor
         Cursor.visible = false;
 
-        //groundcheck
-        groundCheckSize = new Vector2(0.78f, 0.1f);
-
         // Tell GameController to LoadPlayer() after everything's initialized
         GameController.Instance.LoadPlayer();
     }
