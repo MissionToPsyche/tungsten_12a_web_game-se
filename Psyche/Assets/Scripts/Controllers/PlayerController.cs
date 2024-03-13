@@ -84,9 +84,6 @@ public class PlayerController : BaseController<PlayerController>
         playerDeath.Initialize(this);
         pressUpPopup = transform.Find("Press Up Popup").gameObject;
 
-        //hides mouse cursor
-        Cursor.visible = false;
-
         //groundcheck
         groundCheckSize = new Vector2(0.785f, 0.1f);
 
