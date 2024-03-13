@@ -130,7 +130,7 @@ MonoBehaviour:
   playerCollider: {fileID: 0}
   pressUpPopup: {fileID: 1078862222496993058}
   groundCheck: {fileID: 6787539359732067765}
-  groundCheckSize: {x: 0.798, y: 0.1}
+  groundCheckSize: {x: 0.7, y: 0.1}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 136
