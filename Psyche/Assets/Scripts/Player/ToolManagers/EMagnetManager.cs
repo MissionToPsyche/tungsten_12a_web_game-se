@@ -78,7 +78,7 @@ public class EMagnetManager : ToolManager {
         GameController.Instance.audioManager.toolEMagnet.Play();
         _playerController.eMagnetActive = true;
         hitBoxRotator.gameObject.SetActive(true);
-        Collider2D hit, target = null;
+        Collider2D hit, targetVein = null, grabbedObject = null;
         float curGrav = _playerController.playerCharacter.gravityScale;
 
         do
@@ -97,38 +97,36 @@ public class EMagnetManager : ToolManager {
             hit = Physics2D.OverlapBox(eMagHitBox.transform.position, eMagHitBox.transform.lossyScale, angle, 1 << 7);
             if (hit != null)
             {
-                ///If movable Iron object hit
+                //If movable Iron object hit
                 if (hit.attachedRigidbody != null)
                 {
-                    hit.attachedRigidbody.velocity = Vector2.zero;
-                    hit.attachedRigidbody.angularVelocity = 0;
-                    if (!_playerController.playerCollider.IsTouching(hit))
-                        hit.attachedRigidbody.MovePosition(Vector2.MoveTowards(hit.transform.position, transform.position, Time.deltaTime * 20));
+                    if (hit != grabbedObject)
+                        grabbedObject = hit;
                 }
-                ///If new Iron Vein hit
-                else if (hit != target)
+                //If new Iron Vein hit
+                else if (hit != targetVein)
                 {
                     /**
                      * Disables gravity and player movement when being pulled towards an Iron Vein
                      */
-                    if (target == null)
+                    if (targetVein == null)
                     {
                         _playerController.beingPulled = true;
                         _playerController.playerCharacter.gravityScale = 0;
                     }
 
                     _playerController.playerCharacter.velocity = Vector2.zero;
-                    target = hit;
+                    targetVein = hit;
                 }
             }
 
             /**
              * Pulls Player towards most recently hit Iron Vein
              */
-            if (target != null)
+            if (targetVein != null)
             {
-                if (target.gameObject.activeInHierarchy)
-                    _playerController.playerCharacter.MovePosition(Vector2.MoveTowards(transform.position, target.transform.position, Time.deltaTime * pullSpeed));
+                if (targetVein.gameObject.activeInHierarchy)
+                    _playerController.playerCharacter.MovePosition(Vector2.MoveTowards(transform.position, targetVein.transform.position, Time.deltaTime * pullSpeed));
                 else
                 {
                     /**
@@ -136,8 +134,19 @@ public class EMagnetManager : ToolManager {
                      */
                     _playerController.beingPulled = false;
                     _playerController.playerCharacter.gravityScale = curGrav;
-                    target = null;
+                    targetVein = null;
                 }
+            }
+
+            /**
+             * Pulls the most recently hit Movable Iron Object towards the Player
+             */
+            if (grabbedObject != null)
+            {
+                grabbedObject.attachedRigidbody.velocity = Vector2.zero;
+                grabbedObject.attachedRigidbody.angularVelocity = 0;
+                if (!_playerController.playerCollider.IsTouching(grabbedObject))
+                    grabbedObject.attachedRigidbody.MovePosition(Vector2.MoveTowards(grabbedObject.transform.position, transform.position, Time.deltaTime * 20));
             }
 
             yield return null;

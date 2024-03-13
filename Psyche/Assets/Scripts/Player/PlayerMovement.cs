@@ -22,14 +22,14 @@ public class PlayerMovement : MonoBehaviour
     public bool _isFacingRight;
     private bool _flipSprite;
     private Vector2 _walkVelocity;
-    //A Camera to bias right when player is looking right
+    /*//A Camera to bias right when player is looking right
     [SerializeField] private CinemachineVirtualCamera _virtualCameraR;
     //A Camera to bias left when player is looking left
     [SerializeField] private CinemachineVirtualCamera _virtualCameraL;
     //A Camera to bias lower right when player is in the air and looking right
     [SerializeField] private CinemachineVirtualCamera _virtualCameraLowR;
     //A Camera to bias lower left when player is in the air and looking left
-    [SerializeField] private CinemachineVirtualCamera _virtualCameraLowL;
+    [SerializeField] private CinemachineVirtualCamera _virtualCameraLowL;*/
 
     //Animation states
     const string PLAYER_IDLE = "player_idle";
@@ -170,7 +170,9 @@ public class PlayerMovement : MonoBehaviour
             _currentAnimation = _newAnimation;
         }
 
-        /// <summary>
+        //Trying out camera bias solely on mouse aim
+
+        /*/// <summary>
         /// Bias the camera in the direction the player is facing (left or right).
         /// Show more below the player if the player is in the air.
         /// </summary>
@@ -211,7 +213,7 @@ public class PlayerMovement : MonoBehaviour
                 _virtualCameraLowL.Priority = 0;
                 _virtualCameraR.Priority = 0;
             }
-        }
+        }*/
 
     }
 }

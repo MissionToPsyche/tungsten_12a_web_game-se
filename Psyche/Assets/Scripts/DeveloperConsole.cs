@@ -39,6 +39,7 @@ public class DeveloperConsole : MonoBehaviour
         SCENE,              // Changing the scene
         ELEMENT,            // Setting the element amount
         TOOL,               // Enabling or disabling a tool
+        ALL,
 
         FPS,                // Toggle FPS on and off
         RESOURCE_MONITOR,   // Resource monitor
@@ -53,22 +54,22 @@ public class DeveloperConsole : MonoBehaviour
     /// <returns></returns>
     public string Match(DevConsoleCommand command)
     {
-        switch (command)
+        return command switch
         {
-            case DevConsoleCommand.TOGGLE:              return "toggle";
-            case DevConsoleCommand.SET:                 return "set";
-            case DevConsoleCommand.UPDATE:              return "update";
+            DevConsoleCommand.TOGGLE              => "toggle",
+            DevConsoleCommand.SET                 => "set",
+            DevConsoleCommand.UPDATE              => "update",
 
-            case DevConsoleCommand.SCENE:               return "scene";
-            case DevConsoleCommand.ELEMENT:             return "element";
-            case DevConsoleCommand.TOOL:                return "tool";
+            DevConsoleCommand.SCENE               => "scene",
+            DevConsoleCommand.ELEMENT             => "element",
+            DevConsoleCommand.TOOL                => "tool",
+            DevConsoleCommand.ALL                 => "all",
 
-                    
-            case DevConsoleCommand.FPS:                 return "fps";
-            case DevConsoleCommand.RESOURCE_MONITOR:    return "resource_monitor";
+            DevConsoleCommand.FPS                 => "fps",
+            DevConsoleCommand.RESOURCE_MONITOR    => "resource_monitor",
 
-            default: return null;
-        }
+            _                                     => null,
+        };
     }
 
     /// <summary>
@@ -78,21 +79,22 @@ public class DeveloperConsole : MonoBehaviour
     /// <returns></returns>
     public DevConsoleCommand Match(string command)
     {
-        switch (command.ToLower())
+        return command.ToLower() switch
         {
-            case "toggle":              return DevConsoleCommand.TOGGLE;
-            case "set":                 return DevConsoleCommand.SET;
-            case "update":              return DevConsoleCommand.UPDATE;
+            "toggle"              => DevConsoleCommand.TOGGLE,
+            "set"                 => DevConsoleCommand.SET,
+            "update"              => DevConsoleCommand.UPDATE,
 
-            case "scene":               return DevConsoleCommand.SCENE;
-            case "element":             return DevConsoleCommand.ELEMENT;
-            case "tool":                return DevConsoleCommand.TOOL;
+            "scene"               => DevConsoleCommand.SCENE,
+            "element"             => DevConsoleCommand.ELEMENT,
+            "tool"                => DevConsoleCommand.TOOL,
+            "all"                 => DevConsoleCommand.ALL,
 
-            case "fps":                 return DevConsoleCommand.FPS;
-            case "resource_monitor":    return DevConsoleCommand.RESOURCE_MONITOR;
+            "fps"                 => DevConsoleCommand.FPS,
+            "resource_monitor"    => DevConsoleCommand.RESOURCE_MONITOR,
 
-            default:                    return DevConsoleCommand.ERROR;
-        }
+            _                     => DevConsoleCommand.ERROR,
+        };
     }
 
 
@@ -198,6 +200,23 @@ public class DeveloperConsole : MonoBehaviour
                 var sub_command = Match(commands[1].ToString());
                 switch (sub_command)
                 {
+                    case DevConsoleCommand.ALL:
+                        PlayerController.Instance.inventoryManager.SetElement(InventoryManager.Element.COPPER,      100);
+                        PlayerController.Instance.inventoryManager.SetElement(InventoryManager.Element.IRON,        100);
+                        PlayerController.Instance.inventoryManager.SetElement(InventoryManager.Element.GOLD,        100);
+                        PlayerController.Instance.inventoryManager.SetElement(InventoryManager.Element.NICKEL,      100);
+                        PlayerController.Instance.inventoryManager.SetElement(InventoryManager.Element.TUNGSTEN,    100);
+                        PlayerController.Instance.inventoryManager.SetTool(InventoryManager.Tool.SOLARPANEL, true);
+                        PlayerController.Instance.batteryManager.Enable();
+                        PlayerController.Instance.inventoryManager.SetTool(InventoryManager.Tool.SPECTROMETER, true);
+                        PlayerController.Instance.inventoryManager.SetTool(InventoryManager.Tool.THRUSTER, true);
+                        PlayerController.Instance.thrusterManager.Enable();
+                        PlayerController.Instance.inventoryManager.SetTool(InventoryManager.Tool.ELECTROMAGNET, true);
+                        PlayerController.Instance.eMagnetManager.Enable();
+                        PlayerController.Instance.eMagnetActive = true;
+                        PlayerController.Instance.inventoryManager.SetTool(InventoryManager.Tool.IMAGER, true);
+                        PlayerController.Instance.imagerManager.Enable();
+                        break;
                     // Element Manipulation
                     case DevConsoleCommand.ELEMENT:
                         // Check for a valid element being passed
@@ -210,11 +229,12 @@ public class DeveloperConsole : MonoBehaviour
 
                         // Check for a valid amount being passed
                         ushort amount;
-                        if (!ushort.TryParse(commands[3].ToString(), out amount))
+                        if (commands.Count < 4 || !ushort.TryParse(commands[3].ToString(), out amount))
                         {
-                            Debug.Log($"Invalid amount provided: {commands[3]}");
+                            Debug.Log($"Invalid amount provided");
                             return;
                         }
+                        Debug.Log($"{amount}");
                         PlayerController.Instance.inventoryManager.SetElement(element, amount);
                         break;
 
@@ -231,9 +251,9 @@ public class DeveloperConsole : MonoBehaviour
 
                         // Check for valid value being passed
                         bool value;
-                        if (!bool.TryParse(commands[3].ToString(), out value))
+                        if (commands.Count < 4 || !bool.TryParse(commands[3].ToString(), out value))
                         {
-                            Debug.Log($"Invalid value passed {commands[3]}");
+                            Debug.Log($"Invalid value passed");
                             return;
                         }
                         // Update the Inventory Manager

@@ -27,7 +27,8 @@ public class GammaView : MonoBehaviour {
     public float origSceneLightIntensity;            // light intensity of the scene
     public bool grnsControlsSceneLight = false;      // boolean to set if grns will influence scene light    
     /* scene terrain */
-    public Tilemap sceneTilemap;                     // tilemap (terrain component) in current scene
+    public Tilemap sceneTilemap;                     // tilemap of terrain component in current scene
+    public Tilemap sceneTilemapFake;                 // tilemap of fake terrain component in current scene
     public Color origSceneTilemapColor;              // terrain color of the scene
     /* scene background image */
     public SpriteRenderer sceneBackground;           // background image in current scene
@@ -62,6 +63,9 @@ public class GammaView : MonoBehaviour {
         if (GameStateManagerSn != GameStateManager.Scene.Outro) {
             sceneLight = GameObject.FindGameObjectWithTag("SceneLight").GetComponent<Light2D>();
             sceneTilemap = GameObject.FindGameObjectWithTag("Terrain").GetComponent<Tilemap>();
+            if (GameStateManagerSn == GameStateManager.Scene.Combo1) {
+                sceneTilemapFake = GameObject.FindGameObjectWithTag("FakeTerrain").GetComponent<Tilemap>();
+            }
             sceneBackground = GameObject.FindGameObjectWithTag("Background").GetComponent<SpriteRenderer>();
             origSceneLightIntensity = sceneLight.intensity;
             origSceneTilemapColor = sceneTilemap.color;
@@ -377,24 +381,18 @@ public class GammaView : MonoBehaviour {
     /// Changes the color of the terrain and background
     /// </summary>
     void ChangeTerrainAndBackgroundColor() {
-        if (sceneTilemap != null) {
-            sceneTilemap.color = defaultColor;
-        }
-        if (sceneBackground != null) {
-            sceneBackground.color = defaultColor;
-        }
+        if (sceneTilemap != null) { sceneTilemap.color = defaultColor; }
+        if (sceneTilemapFake != null) { sceneTilemapFake.color = LayerColor(sceneTilemapFake.gameObject); }
+        if (sceneBackground != null) { sceneBackground.color = defaultColor; }
     }
 
     /// <summary>
     /// Reverts the color of the terrain and background
     /// </summary>
     void RevertTerrainAndBackgroundColor() {
-        if (sceneTilemap != null) {
-            sceneTilemap.color = origSceneTilemapColor;
-        }
-        if (sceneBackground != null) {
-            sceneBackground.color = origSceneBackgroundColor;
-        }
+        if (sceneTilemap != null)     { sceneTilemap.color = origSceneTilemapColor; }
+        if (sceneTilemapFake != null) { sceneTilemapFake.color = origSceneTilemapColor; }
+        if (sceneBackground != null)  { sceneBackground.color = origSceneBackgroundColor; }
     }
 
 }
