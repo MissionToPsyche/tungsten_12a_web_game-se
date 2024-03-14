@@ -180,6 +180,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Imager Out
       objectReference: {fileID: 0}
+    - target: {fileID: 8916291704652690240, guid: b326662d187d1dc4a8da3fedc43bf9a8, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.8543108
+      objectReference: {fileID: 0}
+    - target: {fileID: 8916291704652690240, guid: b326662d187d1dc4a8da3fedc43bf9a8, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.2558013
+      objectReference: {fileID: 0}
+    - target: {fileID: 8916291704652690240, guid: b326662d187d1dc4a8da3fedc43bf9a8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.0053
+      objectReference: {fileID: 0}
+    - target: {fileID: 8916291704652690240, guid: b326662d187d1dc4a8da3fedc43bf9a8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0931
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10775,11 +10791,11 @@ PrefabInstance:
       objectReference: {fileID: 1195215623}
     - target: {fileID: 4822381043481428571, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.13000003
+      value: -0.13000318
       objectReference: {fileID: 0}
     - target: {fileID: 4822381043481428571, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.01999998
+      value: 0.576635
       objectReference: {fileID: 0}
     - target: {fileID: 5378337755738974863, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: m_BoundingShape2D
