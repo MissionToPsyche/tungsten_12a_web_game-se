@@ -415,14 +415,12 @@ public class UIController : BaseController<UIController>
         {
             PlayerController.Instance.inputBlocked = false;
             dialogText.transform.parent.gameObject.SetActive(false);
-            Cursor.visible = false;
         }
         else
         {
             PlayerController.Instance.inputBlocked = true;
             dialogText.SetText(text);
             dialogText.transform.parent.gameObject.SetActive(true);
-            Cursor.visible = true;
         }
     }
 
@@ -433,7 +431,6 @@ public class UIController : BaseController<UIController>
     public void setInventory(bool setActive)
     {
         PlayerController.Instance.inputBlocked = setActive;
-        Cursor.visible = setActive;
         inventoryMenu.SetActive(setActive);
     }
 
@@ -508,7 +505,6 @@ public class UIController : BaseController<UIController>
     {
         Destroy(PlayerController.Instance.gameObject);
         Destroy(gameObject);
-        Cursor.visible = true;
         if (playCutscene)
             UnityEngine.SceneManagement.SceneManager.LoadScene("Outro_Cutscene");
         else
