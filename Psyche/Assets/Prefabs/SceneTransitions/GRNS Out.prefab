@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5880233350646282471}
   - component: {fileID: 2501969134958445433}
   - component: {fileID: 2262217949085137462}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: 04_GRNS Out
   m_TagString: TransitionObjectOut
   m_Icon: {fileID: 0}
@@ -141,7 +141,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7994257567425165459}
   - component: {fileID: 3722909131992955015}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: GRNS Out
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -282,7 +282,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5824598847134807716, guid: 03038793f38437e42b224298834c254e, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5824598847134807716, guid: 03038793f38437e42b224298834c254e, type: 3}
       propertyPath: m_IsActive
