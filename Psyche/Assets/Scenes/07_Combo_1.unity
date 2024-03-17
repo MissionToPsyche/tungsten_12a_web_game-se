@@ -3311,6 +3311,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3948003671661331134, guid: fc361304e547d3840844b8faa7d20f0b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.8028173
+      objectReference: {fileID: 0}
+    - target: {fileID: 3948003671661331134, guid: fc361304e547d3840844b8faa7d20f0b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.1748656
+      objectReference: {fileID: 0}
+    - target: {fileID: 3948003671661331134, guid: fc361304e547d3840844b8faa7d20f0b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.0106
+      objectReference: {fileID: 0}
+    - target: {fileID: 3948003671661331134, guid: fc361304e547d3840844b8faa7d20f0b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0875
+      objectReference: {fileID: 0}
     - target: {fileID: 9116578824788770093, guid: fc361304e547d3840844b8faa7d20f0b, type: 3}
       propertyPath: m_Name
       value: Combo_2 Out
@@ -3878,6 +3894,22 @@ PrefabInstance:
     - target: {fileID: 1243875338762029240, guid: 13fc8e67b376e094e8aac3aa983438c1, type: 3}
       propertyPath: m_Name
       value: Thruster In
+      objectReference: {fileID: 0}
+    - target: {fileID: 1320363374821883022, guid: 13fc8e67b376e094e8aac3aa983438c1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.9256866
+      objectReference: {fileID: 0}
+    - target: {fileID: 1320363374821883022, guid: 13fc8e67b376e094e8aac3aa983438c1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.4103088
+      objectReference: {fileID: 0}
+    - target: {fileID: 1320363374821883022, guid: 13fc8e67b376e094e8aac3aa983438c1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.0157
+      objectReference: {fileID: 0}
+    - target: {fileID: 1320363374821883022, guid: 13fc8e67b376e094e8aac3aa983438c1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.047
       objectReference: {fileID: 0}
     - target: {fileID: 8145252261639015330, guid: 13fc8e67b376e094e8aac3aa983438c1, type: 3}
       propertyPath: m_LocalPosition.x
