@@ -550,11 +550,40 @@ public class UIController : BaseController<UIController>
     /// <summary>
     /// Modifies the tool when its upgrade button is pressed
     /// </summary>
-    public void UpgradeInterface(string toolName)
-    {
+    public void UpgradeInterface(string toolName) {
         ArrayList args = new ArrayList { toolName };
-        //Send the message
+        // Send the message
         OnUpdateToolModify?.Invoke(args);
+        
+        // Play audio
+        float soundDuration = 3.0f;
+        AudioSource audioSource = null;
+        switch (toolName) {
+            case "Imager": audioSource = GameController.Instance.audioManager.toolImager; break;
+            case "Battery": audioSource = GameController.Instance.audioManager.buttonClick; break;
+            case "Thruster": audioSource = GameController.Instance.audioManager.toolThrusters; break;
+            case "Electromagnet": audioSource = GameController.Instance.audioManager.toolEMagnet; break;
+        }
+        if (audioSource != null) {
+            StartCoroutine(FadeOutSound(audioSource, soundDuration));
+            audioSource.Play();
+        }
+    }
+
+    private IEnumerator FadeOutSound(AudioSource audioSource, float fadeDuration) {
+        float startVolume = 1.0f;
+        float startTime = Time.time;
+        while (Time.time < startTime + fadeDuration) {
+            // Calculate the normalized time elapsed since starting the fade
+            float normalizedTime = (Time.time - startTime) / fadeDuration;
+            // Calculate the new volume based on the fade curve
+            audioSource.volume = Mathf.Lerp(startVolume, 0, normalizedTime);
+            yield return null;
+        }
+        // Ensure the volume is fully faded out, stop the playback, then restore volume
+        audioSource.volume = 0.0f;
+        audioSource.Stop();
+        audioSource.volume = 1.0f;
     }
 
     /// <summary>
