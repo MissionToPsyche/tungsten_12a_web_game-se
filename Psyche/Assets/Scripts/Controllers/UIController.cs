@@ -570,6 +570,12 @@ public class UIController : BaseController<UIController>
         }
     }
 
+    /// <summary>
+    /// Fades out the sound of the audio played when upgrading a tool
+    /// </summary>
+    /// <param name="audioSource"></param>
+    /// <param name="fadeDuration"></param>
+    /// <returns></returns>
     private IEnumerator FadeOutSound(AudioSource audioSource, float fadeDuration) {
         float startVolume = 1.0f;
         float startTime = Time.time;
