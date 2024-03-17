@@ -67,10 +67,10 @@ public abstract class ToolManager : MonoBehaviour
             }
         }
         //Confirm the number of required elements exists
-        if (upgraded && level + 1 <= nextLevel)
+        if (upgraded && (level + 1) <= nextLevel)
         {
             //Remove the required elements
-            foreach (var requirement in levelRequirements[level + 1])
+            foreach (var requirement in levelRequirements[nextLevel])
             {
                 if (requirement.Value > 0) //No need to activate underlying code if this isn't met
                 {
@@ -79,8 +79,11 @@ public abstract class ToolManager : MonoBehaviour
             }
             //Upgrade the tool
             level++;
-            UpgradeTool();
+            //UpgradeTool();
         }
-        ToolManagerUpdate?.Invoke(ToolDirective.Upgrade, upgraded, toolName, levelRequirements[nextLevel], level + 1, maxLevel);
+        if (nextLevel < maxLevel && upgraded)
+            ToolManagerUpdate?.Invoke(ToolDirective.Upgrade, upgraded, toolName, levelRequirements[nextLevel + 1], nextLevel, maxLevel);
+        else
+            ToolManagerUpdate?.Invoke(ToolDirective.Upgrade, upgraded, toolName, levelRequirements[nextLevel], nextLevel, maxLevel);
     }
 }
