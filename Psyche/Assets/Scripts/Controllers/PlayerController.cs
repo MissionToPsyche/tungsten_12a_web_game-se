@@ -19,7 +19,7 @@ public class PlayerController : BaseController<PlayerController>
     //Create the playercharacter assignment
     [Header("Components")]
     public Rigidbody2D playerCharacter;
-    public BoxCollider2D playerCollider;
+    public CapsuleCollider2D playerCollider;
     public GameObject pressUpPopup;
 
     //Set up environmental checks
@@ -61,7 +61,7 @@ public class PlayerController : BaseController<PlayerController>
         
         //Assign and initialize scripts
         playerCharacter = GetComponent<Rigidbody2D>();
-        playerCollider = GetComponent<BoxCollider2D>();
+        playerCollider = GetComponent<CapsuleCollider2D>();
         playerMovement = GetComponent<PlayerMovement>();
         playerMovement.Initialize(this);
         playerCollisionManager = GetComponent<PlayerCollisionManager>();
@@ -84,8 +84,8 @@ public class PlayerController : BaseController<PlayerController>
         playerDeath.Initialize(this);
         pressUpPopup = transform.Find("Press Up Popup").gameObject;
 
-        //groundcheck
-        groundCheckSize = new Vector2(0.785f, 0.1f);
+        //hides mouse cursor
+        Cursor.visible = false;
 
         // Tell GameController to LoadPlayer() after everything's initialized
         GameController.Instance.LoadPlayer();
@@ -169,6 +169,7 @@ public class PlayerController : BaseController<PlayerController>
             //ElectroMagnet
             if (inventoryManager.CheckTool("electromagnet") && Input.GetButton("EMagnet") && batteryManager.batteryPercent != 0 && !eMagnetActive && !magnetInterrupt) {
                 eMagnetManager.Activate();
+                batteryManager.DrainBatt(500);
             }
 
             //Passive Battery
