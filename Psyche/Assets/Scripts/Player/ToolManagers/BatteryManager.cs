@@ -32,15 +32,9 @@ public class BatteryManager : ToolManager {
         toolName = "Battery";
         toolEnabled = false;
         _playerController = playerController;
-        level = 0;
+        level = 1;
         levelRequirements = new Dictionary<int, Dictionary<InventoryManager.Element, ushort>>()
         {
-            {  1, new Dictionary<InventoryManager.Element, ushort>()
-                {
-                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
-                    { InventoryManager.Element.NICKEL, 2 }, { InventoryManager.Element.GOLD, 0 },
-                }
-            },
             {  2, new Dictionary<InventoryManager.Element, ushort>()
                 {
                     { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
@@ -68,7 +62,7 @@ public class BatteryManager : ToolManager {
         };
 
         //Tool specific
-        maxLevel = levelRequirements.Count;
+        maxLevel = levelRequirements.Count + 1;
         maxCapacity = 100f;
         batteryLevel = maxCapacity;
         batteryPercent = batteryLevel / maxCapacity * 100f;

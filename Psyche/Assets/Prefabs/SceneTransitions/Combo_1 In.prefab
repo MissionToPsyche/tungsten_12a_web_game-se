@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6843403581835532666}
   - component: {fileID: 9193506644177978184}
   - component: {fileID: 9058157282025059915}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: 07_Combo_1 In
   m_TagString: TransitionObjectIn
   m_Icon: {fileID: 0}
@@ -141,7 +141,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1557068656327804947}
   - component: {fileID: 1802261894511312742}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Combo_1 In
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -282,7 +282,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5824598847134807716, guid: 03038793f38437e42b224298834c254e, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5824598847134807716, guid: 03038793f38437e42b224298834c254e, type: 3}
       propertyPath: m_IsActive
