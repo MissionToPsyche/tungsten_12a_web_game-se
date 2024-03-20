@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3116750142191387961}
   - component: {fileID: 7615745270535712752}
   - component: {fileID: 1303078002787559292}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: 03_Imager Out
   m_TagString: TransitionObjectOut
   m_Icon: {fileID: 0}
@@ -141,7 +141,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5768475563091067799}
   - component: {fileID: 5026165362973075821}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Imager Out
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -282,7 +282,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5824598847134807716, guid: 03038793f38437e42b224298834c254e, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5824598847134807716, guid: 03038793f38437e42b224298834c254e, type: 3}
       propertyPath: m_IsActive
