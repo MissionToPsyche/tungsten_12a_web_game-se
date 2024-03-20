@@ -557,13 +557,13 @@ public class UIController : BaseController<UIController>
         
         // Play audio
         float soundDuration = 3.0f;
-        AudioSource audioSource = null;
-        switch (toolName) {
-            case "Imager": audioSource = GameController.Instance.audioManager.toolImager; break;
-            case "Battery": audioSource = GameController.Instance.audioManager.buttonClick; break;
-            case "Thruster": audioSource = GameController.Instance.audioManager.toolThrusters; break;
-            case "Electromagnet": audioSource = GameController.Instance.audioManager.toolEMagnet; break;
-        }
+        AudioSource audioSource = PlayerController.Instance.inventoryManager.MatchTool(toolName) switch {
+            InventoryManager.Tool.IMAGER => GameController.Instance.audioManager.toolImager,
+            InventoryManager.Tool.SOLARPANEL => GameController.Instance.audioManager.buttonClick,
+            InventoryManager.Tool.THRUSTER => GameController.Instance.audioManager.toolThrusters,
+            InventoryManager.Tool.ELECTROMAGNET => GameController.Instance.audioManager.toolEMagnet,
+            _ => null,
+        };
         if (audioSource != null) {
             StartCoroutine(FadeOutSound(audioSource, soundDuration));
             audioSource.Play();
