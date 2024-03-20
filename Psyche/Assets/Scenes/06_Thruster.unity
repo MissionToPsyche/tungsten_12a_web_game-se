@@ -15967,6 +15967,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6201941672259894534, guid: ade6cf1062971094f94a144e4189532d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.225802
+      objectReference: {fileID: 0}
+    - target: {fileID: 6201941672259894534, guid: ade6cf1062971094f94a144e4189532d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.3570228
+      objectReference: {fileID: 0}
+    - target: {fileID: 6201941672259894534, guid: ade6cf1062971094f94a144e4189532d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.0271
+      objectReference: {fileID: 0}
+    - target: {fileID: 6201941672259894534, guid: ade6cf1062971094f94a144e4189532d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0999
+      objectReference: {fileID: 0}
     - target: {fileID: 6716680467694660417, guid: ade6cf1062971094f94a144e4189532d, type: 3}
       propertyPath: m_Name
       value: Combo_1 Out
@@ -57871,6 +57887,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 929805483796523438, guid: 0e9e3bd0027e5be40bff7ee93c2437dc, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.8436366
+      objectReference: {fileID: 0}
+    - target: {fileID: 929805483796523438, guid: 0e9e3bd0027e5be40bff7ee93c2437dc, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.4907348
+      objectReference: {fileID: 0}
+    - target: {fileID: 929805483796523438, guid: 0e9e3bd0027e5be40bff7ee93c2437dc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.0049
+      objectReference: {fileID: 0}
+    - target: {fileID: 929805483796523438, guid: 0e9e3bd0027e5be40bff7ee93c2437dc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0025
+      objectReference: {fileID: 0}
     - target: {fileID: 1854516470267631825, guid: 0e9e3bd0027e5be40bff7ee93c2437dc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.84

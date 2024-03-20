@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2548112791783888869}
   - component: {fileID: 7697628962068074165}
   - component: {fileID: 2229684946372216289}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: 05_eMagnet In
   m_TagString: TransitionObjectIn
   m_Icon: {fileID: 0}
@@ -141,7 +141,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1854516470267631825}
   - component: {fileID: 355730026784232065}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: eMagnet In
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -282,7 +282,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5824598847134807716, guid: 03038793f38437e42b224298834c254e, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5824598847134807716, guid: 03038793f38437e42b224298834c254e, type: 3}
       propertyPath: m_IsActive

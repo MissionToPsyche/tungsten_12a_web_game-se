@@ -21,15 +21,9 @@ public class EMagnetManager : ToolManager {
         toolName = "Electromagnet";
         toolEnabled = false;
         _playerController = playerManagement;
-        level = 0;
+        level = 1;
         levelRequirements = new Dictionary<int, Dictionary<InventoryManager.Element, ushort>>()
         {
-            {  1, new Dictionary<InventoryManager.Element, ushort>()
-                {
-                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 2 }, 
-                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 0 },
-                }
-            },
             {  2, new Dictionary<InventoryManager.Element, ushort>()
                 {
                     { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 2 }, 
@@ -38,26 +32,26 @@ public class EMagnetManager : ToolManager {
             },
             {  3, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 3 }, 
+                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 2 }, 
                     { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 0 },
                 }
             },
             {  4, new Dictionary<InventoryManager.Element, ushort>()
                 {
+                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 3 }, 
+                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 0 },
+                }
+            },
+            {  5, new Dictionary<InventoryManager.Element, ushort>()
+                {
                     { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 4 },    
                     { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 0 },
                 }   
             },
-            {  5, new Dictionary<InventoryManager.Element, ushort>()
-                {
-                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 5 }, 
-                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 0 },
-                }
-            },
         };
 
         //Tool specific variables
-        maxLevel = levelRequirements.Count;
+        maxLevel = levelRequirements.Count + 1;
         hitBoxRotator = eMagHitBox.transform.parent;
     }
 
