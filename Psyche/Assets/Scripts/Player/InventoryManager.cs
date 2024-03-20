@@ -1,8 +1,6 @@
-using System.Collections;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Diagnostics.Tracing;
 
 /// <summary>
 /// Manages the inventory and all items within it

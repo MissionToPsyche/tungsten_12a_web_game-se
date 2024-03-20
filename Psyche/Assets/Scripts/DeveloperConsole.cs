@@ -201,21 +201,25 @@ public class DeveloperConsole : MonoBehaviour
                 switch (sub_command)
                 {
                     case DevConsoleCommand.ALL:
+                        // Add 100 of each element
                         PlayerController.Instance.inventoryManager.SetElement(InventoryManager.Element.COPPER,      100);
                         PlayerController.Instance.inventoryManager.SetElement(InventoryManager.Element.IRON,        100);
                         PlayerController.Instance.inventoryManager.SetElement(InventoryManager.Element.GOLD,        100);
                         PlayerController.Instance.inventoryManager.SetElement(InventoryManager.Element.NICKEL,      100);
                         PlayerController.Instance.inventoryManager.SetElement(InventoryManager.Element.TUNGSTEN,    100);
-                        PlayerController.Instance.inventoryManager.SetTool(InventoryManager.Tool.SOLARPANEL, true);
-                        PlayerController.Instance.batteryManager.Enable();
-                        PlayerController.Instance.inventoryManager.SetTool(InventoryManager.Tool.SPECTROMETER, true);
-                        PlayerController.Instance.inventoryManager.SetTool(InventoryManager.Tool.THRUSTER, true);
-                        PlayerController.Instance.thrusterManager.Enable();
-                        PlayerController.Instance.inventoryManager.SetTool(InventoryManager.Tool.ELECTROMAGNET, true);
-                        PlayerController.Instance.eMagnetManager.Enable();
-                        PlayerController.Instance.eMagnetActive = true;
-                        PlayerController.Instance.inventoryManager.SetTool(InventoryManager.Tool.IMAGER, true);
-                        PlayerController.Instance.imagerManager.Enable();
+                        // Enable every tool
+                        PlayerController.Instance.inventoryManager.ToolPickUp(
+                            PlayerController.Instance.inventoryManager.MatchTool(InventoryManager.Tool.SOLARPANEL));
+                        PlayerController.Instance.inventoryManager.ToolPickUp(
+                            PlayerController.Instance.inventoryManager.MatchTool(InventoryManager.Tool.BATTERY));
+                        PlayerController.Instance.inventoryManager.ToolPickUp(
+                            PlayerController.Instance.inventoryManager.MatchTool(InventoryManager.Tool.SPECTROMETER));
+                        PlayerController.Instance.inventoryManager.ToolPickUp(
+                            PlayerController.Instance.inventoryManager.MatchTool(InventoryManager.Tool.THRUSTER));
+                        PlayerController.Instance.inventoryManager.ToolPickUp(
+                            PlayerController.Instance.inventoryManager.MatchTool(InventoryManager.Tool.ELECTROMAGNET));
+                        PlayerController.Instance.inventoryManager.ToolPickUp(
+                            PlayerController.Instance.inventoryManager.MatchTool(InventoryManager.Tool.IMAGER));
                         break;
                     // Element Manipulation
                     case DevConsoleCommand.ELEMENT:
