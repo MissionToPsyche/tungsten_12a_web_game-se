@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3118868635833949731}
   - component: {fileID: 4073110612712080880}
-  - component: {fileID: 2257811646393419205}
+  - component: {fileID: 727705064091520749}
   - component: {fileID: 7911676450372591580}
   - component: {fileID: 7454889652593822882}
   - component: {fileID: 2031395883439144302}
@@ -80,8 +80,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &2257811646393419205
-BoxCollider2D:
+--- !u!70 &727705064091520749
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -112,19 +112,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0031004995, y: 0.02}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 0.19, y: 0.24}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.20003346, y: 0.25}
-  m_EdgeRadius: 0
+  m_Offset: {x: -0.0031005, y: 0.015}
+  m_Size: {x: 0.18, y: 0.24}
+  m_Direction: 0
 --- !u!114 &7911676450372591580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,10 +128,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCharacter: {fileID: 4073110612712080880}
-  playerCollider: {fileID: 0}
+  playerCollider: {fileID: 727705064091520749}
   pressUpPopup: {fileID: 1078862222496993058}
   groundCheck: {fileID: 6787539359732067765}
-  groundCheckSize: {x: 0.798, y: 0.1}
+  groundCheckSize: {x: 0.7, y: 0.1}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 136
@@ -331,7 +321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed7b7eb61de2944cb32814bb980b7e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCollider: {fileID: 2257811646393419205}
+  playerCollider: {fileID: 727705064091520749}
 --- !u!1 &1078862222496993058
 GameObject:
   m_ObjectHideFlags: 0
@@ -726,7 +716,7 @@ Transform:
   m_GameObject: {fileID: 2746429122550390308}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.1300008, y: 0.576635, z: -3.0440905}
+  m_LocalPosition: {x: -0.13000003, y: -0.01999998, z: -3.0440905}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
