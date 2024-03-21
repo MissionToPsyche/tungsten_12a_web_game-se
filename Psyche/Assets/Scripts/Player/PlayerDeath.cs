@@ -4,7 +4,6 @@
  * Version: 20240130
  */
 
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,26 +12,24 @@ using UnityEngine;
 /// </summary>
 public class PlayerDeath : MonoBehaviour {
     private PlayerController _playerController;
-    private Vector3 respawnPoint;         //Respawn location
-    private Vector3 startPoint;           //Initial character location when level first begins
-    public PlayerHealth playerHealth;     //Initial player health
-    public BatteryManager batteryManager; //Initial battery
-    public HashSet<int> reachedCheckpoints = new HashSet<int>(); //Stores unique IDs of checkpoints
+    public PlayerHealth playerHealth;                               //Initial player health
+    public BatteryManager batteryManager;                           //Initial battery
+    public HashSet<int> reachedCheckpoints = new HashSet<int>();    //Stores unique IDs of checkpoints
 
 
     public void Initialize(PlayerController playerController)
     {
         _playerController = playerController;
-        startPoint = transform.position;
-        respawnPoint = transform.position;
+        GameController.Instance.gameStateManager.startPoint = _playerController.transform.position;
+        GameController.Instance.gameStateManager.respawnPoint = _playerController.transform.position;
     }
 
     /// <summary>
     /// Initialize respawn point and set starting location.
     /// </summary>
     private void Start() {
-        startPoint = transform.position;
-        respawnPoint = transform.position;
+        GameController.Instance.gameStateManager.startPoint = _playerController.transform.position;
+        GameController.Instance.gameStateManager.respawnPoint = _playerController.transform.position;
     }
 
     /// <summary>
@@ -85,26 +82,21 @@ public class PlayerDeath : MonoBehaviour {
     /// </summary>
     /// <param name="collision"></param>
     public void Checkpoint(Collider2D collision) {
-        if (collision.gameObject.CompareTag("Checkpoint")) {
-            //ID of the checkpoint
-            int checkpointID = collision.gameObject.GetInstanceID();
-            //Check if this checkpoint has been reached before
-            if (reachedCheckpoints.Contains(checkpointID)) {
-                //Debug.Log("Already reached this checkpoint!");
-            } else {
-                //Add the checkpoint ID to the HashSet
-                reachedCheckpoints.Add(checkpointID);
-                respawnPoint = transform.position;
-                //Debug.Log("#### Checkpoint captured: " + respawnPoint + " ####");
-                //Debug.Log("Checkpoint ID: " + checkpointID);
-                //Recharge health and battery
-                playerHealth.HealthUp(100);
-                gameObject.GetComponent<BatteryManager>().Activate();
-                //Play audio if you hit a checkpoint with default layer
-                if (collision.gameObject.layer.Equals(0)) {
-                    GameController.Instance.audioManager.checkpoint.Play();
-                }
-            }
+        if (!collision.gameObject.CompareTag(_playerController.playerCollisionManager.MatchTag(PlayerCollisionManager.CollisionTag.Checkpoint)))
+        {
+            return;
+        }
+        //ID of the checkpoint
+        GameController.Instance.gameStateManager.checkpoint = collision.gameObject.GetInstanceID();
+        GameController.Instance.gameStateManager.respawnPoint = _playerController.transform.position;
+
+        //Recharge health and battery
+        playerHealth.HealthUp(100);
+        gameObject.GetComponent<BatteryManager>().Activate();
+
+        //Play audio if you hit a checkpoint with default layer
+        if (collision.gameObject.layer.Equals(0)) {
+            GameController.Instance.audioManager.checkpoint.Play();
         }
     }
 
@@ -116,41 +108,8 @@ public class PlayerDeath : MonoBehaviour {
         //Debug.Log("Ouch!");
         playerHealth.HealthDown(dmg);
         if (playerHealth.playerHealth <= 0) {
-            //Debug.Log("Game should rest to checkpoint here.....");
-
             //start the warping animation & reset player's heath & battery
-            StartCoroutine(Warp());
+            StartCoroutine(GameController.Instance.gameStateManager.Warp());
         }
-    }
-
-    /// <summary>
-    /// This co-routine forces the game to wait for the player's warping
-    /// animation to complete before continuing on.
-    /// </summary>
-    /// <returns></returns>
-    public IEnumerator Warp() {
-        //block player controls
-        PlayerController.Instance.inputBlocked = true;
-        PlayerController.Instance.beingWarped = true;
-
-        //wait for the animation to be completed
-        yield return new WaitForSeconds(1.2f);
-
-        //check if the player is at the starting point
-        if (startPoint.Equals(respawnPoint)) {
-            //UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
-            //changed so that camera bounds would load on player repawn
-            StartCoroutine(GameController.Instance.sceneTransitionManager.CheckTransition(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name));
-        }
-
-        //move the player to their respawn point
-        transform.position = respawnPoint;
-
-        playerHealth.HealthUp(100);
-        gameObject.GetComponent<BatteryManager>().Activate();
-
-        //unblock player controls
-        PlayerController.Instance.inputBlocked = false;
-        PlayerController.Instance.beingWarped = false;
     }
 }

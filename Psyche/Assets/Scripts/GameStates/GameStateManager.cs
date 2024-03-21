@@ -1,6 +1,8 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static GameStateManager;
 
 public class GameStateManager : MonoBehaviour
 {
@@ -11,6 +13,11 @@ public class GameStateManager : MonoBehaviour
     // Public variables
     public GameState currentState { get; private set; } //state of the game
     public Scene currentScene { get; private set; }     // Current scene of the game
+    public int checkpoint { get; set; }                 // Last checkpoint
+    public Vector3 respawnPoint { get; set; }           // Last respawn point
+    public Vector3 startPoint { get; set; }             //Initial character location when level first begins
+
+
 
     public void Initialize(GameController gameController, string scene)
     {
@@ -218,5 +225,38 @@ public class GameStateManager : MonoBehaviour
         {
             scene.Value.LoadDefaultState();
         }
+    }
+
+    /// <summary>
+    /// This co-routine forces the game to wait for the player's warping
+    /// animation to complete before continuing on.
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator Warp()
+    {
+        //block player controls
+        PlayerController.Instance.inputBlocked = true;
+        PlayerController.Instance.beingWarped = true;
+
+        //wait for the animation to be completed
+        yield return new WaitForSeconds(1.2f);
+
+        //check if the player is at the starting point
+        if (startPoint.Equals(respawnPoint))
+        {
+            //UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+            //changed so that camera bounds would load on player repawn
+            StartCoroutine(GameController.Instance.sceneTransitionManager.CheckTransition(SceneManager.GetActiveScene().name));
+        }
+
+        //move the player to their respawn point
+        PlayerController.Instance.transform.position = respawnPoint;
+
+        PlayerController.Instance.playerHealth.HealthUp(100);
+        PlayerController.Instance.batteryManager.Activate();
+
+        //unblock player controls
+        PlayerController.Instance.inputBlocked = false;
+        PlayerController.Instance.beingWarped = false;
     }
 }
