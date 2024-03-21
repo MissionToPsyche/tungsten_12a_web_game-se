@@ -232,7 +232,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 45.3, y: 16.3, z: -10.301082}
-  m_LocalScale: {x: 132, y: 45.12, z: 1}
+  m_LocalScale: {x: 132, y: 43.76, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1195215620}
@@ -13129,19 +13129,19 @@ CompositeCollider2D:
   - m_Collider: {fileID: 1195215622}
     m_ColliderPaths:
     - - X: 660000000
-        Y: 225600000
+        Y: 218799984
       - X: -660000000
-        Y: 225600000
+        Y: 218799984
       - X: -660000000
-        Y: -225600000
+        Y: -218799984
       - X: 660000000
-        Y: -225600000
+        Y: -218799984
   m_CompositePaths:
     m_Paths:
-    - - {x: 65.99997, y: -22.56}
-      - {x: 65.99997, y: 22.56}
-      - {x: -66, y: 22.55997}
-      - {x: -65.99997, y: -22.56}
+    - - {x: 65.99997, y: -21.88}
+      - {x: 65.99997, y: 21.88}
+      - {x: -66, y: 21.87997}
+      - {x: -65.99997, y: -21.88}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
   m_UseDelaunayMesh: 0
@@ -15235,34 +15235,10 @@ PrefabInstance:
       propertyPath: m_BoundingShape2D
       value: 
       objectReference: {fileID: 1195215623}
-    - target: {fileID: 4822381043481428571, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.13000318
-      objectReference: {fileID: 0}
-    - target: {fileID: 4822381043481428571, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.576635
-      objectReference: {fileID: 0}
     - target: {fileID: 5378337755738974863, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: m_BoundingShape2D
       value: 
       objectReference: {fileID: 1195215623}
-    - target: {fileID: 5691790185104106558, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -0.01999998
-      objectReference: {fileID: 0}
-    - target: {fileID: 7257319662046715863, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
-      propertyPath: m_UpdateMethod
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7257319662046715863, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
-      propertyPath: m_BlendUpdateMethod
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4822381043481428571, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -2.5
-      objectReference: {fileID: 0}
     - target: {fileID: 7911676450372591580, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: playerHealth
       value: 
