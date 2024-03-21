@@ -183,9 +183,9 @@ public class SceneTransitionManager : MonoBehaviour {
             GameObject caveObject = objectsWithTransitionTag[0]; // set to first but might change below
 
             // we differentiate the proper transition objects for the player with the layer as well
-            // caves use the terrain layer so these are the ones we want
+            // caves use the default layer so these are the ones we want
             foreach (GameObject obj in objectsWithTransitionTag) {
-                if (obj.layer == 3) { // terrain layer
+                if (obj.layer == 0) { // default layer
                     caveObject = obj;                   
                     break; // break since we only need one GameObject
                 }
