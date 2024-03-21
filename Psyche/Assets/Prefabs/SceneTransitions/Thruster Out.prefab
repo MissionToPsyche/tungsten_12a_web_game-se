@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5983715131246086142}
   - component: {fileID: 2487323537213563450}
   - component: {fileID: 2735515010974077279}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: 06_Thruster Out
   m_TagString: TransitionObjectOut
   m_Icon: {fileID: 0}
@@ -141,7 +141,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2917294876533333647}
   - component: {fileID: 6681248829550411773}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Thruster Out
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -282,7 +282,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5824598847134807716, guid: 03038793f38437e42b224298834c254e, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5824598847134807716, guid: 03038793f38437e42b224298834c254e, type: 3}
       propertyPath: m_IsActive

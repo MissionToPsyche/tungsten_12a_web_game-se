@@ -6,7 +6,7 @@ public class GameStateManager : MonoBehaviour
 {
     //Private variables
     private GameController _gameController;
-    private Dictionary<GameState, Dictionary<Scene, BaseState>> _gameStateToScene;
+    private Dictionary<Scene, BaseState> _gameStateToScene;
 
     // Public variables
     public GameState currentState { get; private set; } //state of the game
@@ -15,25 +15,17 @@ public class GameStateManager : MonoBehaviour
     public void Initialize(GameController gameController, string scene)
     {
         _gameController = gameController;
-
-        //Expand upon later
-        _gameStateToScene = new Dictionary<GameState, Dictionary<Scene, BaseState>>()
+        _gameStateToScene = new Dictionary<Scene, BaseState>()
         {
-            //MainMenu state mappings
-            { GameState.MainMenu, new Dictionary<Scene, BaseState>() {
-                /*{ SceneState.Title_Screen, new MainMenuState() },*/
-            } },
-
             //InGame state mappings
-            { GameState.InGame, new Dictionary<Scene, BaseState>() {
-                { Scene.Landing,    new Landing_State() },
-                { Scene.Imager,     new Imager_State() },
-                { Scene.GRNS,       new GRNS_State() },
-                { Scene.eMagnet,    new eMagnet_State() },
-                { Scene.Thruster,   new Thruster_State() },
-                { Scene.Combo1,     new Combo1_State() },
-                { Scene.Combo2,     new Combo2_State() },
-            } },
+            { Scene.Landing,    new Landing_State() },
+            { Scene.Imager,     new Imager_State() },
+            { Scene.GRNS,       new GRNS_State() },
+            { Scene.eMagnet,    new eMagnet_State() },
+            { Scene.Thruster,   new Thruster_State() },
+            { Scene.Combo1,     new Combo1_State() },
+            { Scene.Combo2,     new Combo2_State() },
+            //{ Scene.Combo3,     new Combo3_State() }
         };
         
         // Set up the current scene
@@ -70,15 +62,6 @@ public class GameStateManager : MonoBehaviour
     public enum GameState
     {
         MainMenu, InGame, None,
-    }
-
-    /// <summary>
-    /// Changes the state of the game
-    /// </summary>
-    /// <param name="state"></param>
-    public void SetGameState(GameState state)
-    {
-        
     }
 
     /// <summary>
@@ -174,13 +157,10 @@ public class GameStateManager : MonoBehaviour
         _gameController.HandleGameStateEvent();
 
         // Scenes without a viable scene state are ignored
-        if (currentState == GameState.InGame || scene == Scene.Title)
+        if (currentState == GameState.InGame)
         {
             // Temporary check until the respective states are added
-            if (currentScene != Scene.eMagnet && currentScene != Scene.Landing 
-                && currentScene != Scene.Imager && currentScene != Scene.GRNS
-                && currentScene != Scene.Thruster && currentScene != Scene.Combo1
-                && currentScene != Scene.Combo2)
+            if (currentScene == Scene.Combo3)
             {
                 Debug.Log($"Scene state loader for {scene} not yet implemented");
             }
@@ -198,13 +178,9 @@ public class GameStateManager : MonoBehaviour
     public void LoadSceneState()
     {
         // Temporary until others are fully implemented
-        if (currentScene != Scene.eMagnet && currentScene != Scene.Landing 
-            && currentScene != Scene.Imager && currentScene != Scene.GRNS
-            && currentScene != Scene.Thruster && currentScene != Scene.Combo1
-            && currentScene != Scene.Combo2) { return; }
+        if (currentState != GameState.InGame || currentScene == Scene.Combo3) { return; }
 
-        var stateManager = _gameStateToScene[currentState];
-        stateManager[currentScene].LoadState();
+        _gameStateToScene[currentScene].LoadState();
     }
 
     /// <summary>
@@ -215,13 +191,9 @@ public class GameStateManager : MonoBehaviour
     public void SaveSceneState()
     {
         // Temporary until others are fully implemented
-        if (currentScene != Scene.eMagnet && currentScene != Scene.Landing 
-            && currentScene != Scene.Imager && currentScene != Scene.GRNS
-            && currentScene != Scene.Thruster && currentScene != Scene.Combo1
-            && currentScene != Scene.Combo2) { return; }
+        if (currentState != GameState.InGame || currentScene == Scene.Combo3) { return; }
 
-        var stateManager = _gameStateToScene[currentState];
-        stateManager[currentScene].SaveState();
+        _gameStateToScene[currentScene].SaveState();
     }
 
     /// <summary>
@@ -232,13 +204,9 @@ public class GameStateManager : MonoBehaviour
     public void SetObjectState(string key, object value)
     {
         // Temporary until others are fully implemented
-        if (currentScene != Scene.eMagnet && currentScene != Scene.Landing 
-            && currentScene != Scene.Imager && currentScene != Scene.GRNS
-            && currentScene != Scene.Thruster && currentScene != Scene.Combo1
-            && currentScene != Scene.Combo2) { return; }
+        if (currentState != GameState.InGame || currentScene == Scene.Combo3) { return; }
 
-        var stateManager = _gameStateToScene[currentState];
-        stateManager[currentScene].SetObjectState(key, value);
+        _gameStateToScene[currentScene].SetObjectState(key, value);
     }
 
     /// <summary>
@@ -246,7 +214,7 @@ public class GameStateManager : MonoBehaviour
     /// </summary>
     public void ResetScenes()
     {
-        foreach (var scene in _gameStateToScene[GameState.InGame])
+        foreach (var scene in _gameStateToScene)
         {
             scene.Value.LoadDefaultState();
         }
