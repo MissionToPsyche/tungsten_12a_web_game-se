@@ -9,7 +9,7 @@ using System.Collections;
 /// Author: jmolive8, blopezro, dnguye99
 public class OutroController : MonoBehaviour {
 
-    public GameObject outro1, outro2, outro3, outro4, clickText, quitButton;
+    public GameObject outro1, outro2, outro3, outro4, clickText, quitButton, link;
     private Image img1, img2, img3, img4;
     int curScreen = 1;
 
@@ -75,10 +75,21 @@ public class OutroController : MonoBehaviour {
 
                         //enable the quit button
                         quitButton.SetActive(true);
+
+                        //enable the link
+                        link.SetActive(true);
                     }
                     break;
             }
         }
+    }
+
+    /// <summary>
+    /// Opens a link to psyche.asu.edu when the player clicks the link on outro4
+    /// </summary>
+    public void OpenLink()
+    {
+        Application.OpenURL("https://psyche.asu.edu/");
     }
 
     /// <summary>
@@ -136,5 +147,8 @@ public class OutroController : MonoBehaviour {
 
         //enable the quit button
         quitButton.SetActive(true);
+
+        //enable link
+        link.SetActive(true);
     }
 }
