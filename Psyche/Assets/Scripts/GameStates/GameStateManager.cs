@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameStateManager : MonoBehaviour
 {
@@ -25,7 +24,7 @@ public class GameStateManager : MonoBehaviour
             { Scene.Thruster,   new Thruster_State() },
             { Scene.Combo1,     new Combo1_State() },
             { Scene.Combo2,     new Combo2_State() },
-            //{ Scene.Combo3,     new Combo3_State() }
+            { Scene.Combo3,     new Combo3_State() }
         };
         
         // Set up the current scene
@@ -49,11 +48,6 @@ public class GameStateManager : MonoBehaviour
         PlayerController.Instance.playerCollisionManager.SetObjectState += SetObjectState;
         PlayerController.Instance.playerCollisionManager.SaveSceneState += SaveSceneState;
     }
-
-    public void OnEnable() { }
-
-    public void OnDisable() { }
-
 
     /// <summary>
     /// Holds the various states of the game (Experimental)
@@ -159,11 +153,6 @@ public class GameStateManager : MonoBehaviour
         // Scenes without a viable scene state are ignored
         if (currentState == GameState.InGame)
         {
-            // Temporary check until the respective states are added
-            if (currentScene == Scene.Combo3)
-            {
-                Debug.Log($"Scene state loader for {scene} not yet implemented");
-            }
             LoadSceneState();
         }
     }
@@ -177,8 +166,11 @@ public class GameStateManager : MonoBehaviour
     /// <param name="scene"></param>
     public void LoadSceneState()
     {
-        // Temporary until others are fully implemented
-        if (currentState != GameState.InGame || currentScene == Scene.Combo3) { return; }
+        // If not in game, return
+        if (currentState != GameState.InGame)
+        {
+            return;
+        }
 
         _gameStateToScene[currentScene].LoadState();
     }
@@ -190,8 +182,10 @@ public class GameStateManager : MonoBehaviour
     /// <param name="scene"></param>
     public void SaveSceneState()
     {
-        // Temporary until others are fully implemented
-        if (currentState != GameState.InGame || currentScene == Scene.Combo3) { return; }
+        // If not in game, return
+        if (currentState != GameState.InGame) { 
+            return; 
+        }
 
         _gameStateToScene[currentScene].SaveState();
     }
@@ -203,8 +197,11 @@ public class GameStateManager : MonoBehaviour
     /// <param name="value"></param>
     public void SetObjectState(string key, object value)
     {
-        // Temporary until others are fully implemented
-        if (currentState != GameState.InGame || currentScene == Scene.Combo3) { return; }
+        // If not in game, return
+        if (currentState != GameState.InGame)
+        {
+            return;
+        }
 
         _gameStateToScene[currentScene].SetObjectState(key, value);
     }
