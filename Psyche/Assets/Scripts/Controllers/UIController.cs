@@ -550,11 +550,46 @@ public class UIController : BaseController<UIController>
     /// <summary>
     /// Modifies the tool when its upgrade button is pressed
     /// </summary>
-    public void UpgradeInterface(string toolName)
-    {
+    public void UpgradeInterface(string toolName) {
         ArrayList args = new ArrayList { toolName };
-        //Send the message
+        // Send the message
         OnUpdateToolModify?.Invoke(args);
+        
+        // Play audio
+        float soundDuration = 3.0f;
+        AudioSource audioSource = PlayerController.Instance.inventoryManager.MatchTool(toolName) switch {
+            InventoryManager.Tool.IMAGER => GameController.Instance.audioManager.toolImager,
+            InventoryManager.Tool.SOLARPANEL => GameController.Instance.audioManager.buttonClick,
+            InventoryManager.Tool.THRUSTER => GameController.Instance.audioManager.toolThrusters,
+            InventoryManager.Tool.ELECTROMAGNET => GameController.Instance.audioManager.toolEMagnet,
+            _ => null,
+        };
+        if (audioSource != null) {
+            StartCoroutine(FadeOutSound(audioSource, soundDuration));
+            audioSource.Play();
+        }
+    }
+
+    /// <summary>
+    /// Fades out the sound of the audio played when upgrading a tool
+    /// </summary>
+    /// <param name="audioSource"></param>
+    /// <param name="fadeDuration"></param>
+    /// <returns></returns>
+    private IEnumerator FadeOutSound(AudioSource audioSource, float fadeDuration) {
+        float startVolume = 1.0f;
+        float startTime = Time.time;
+        while (Time.time < startTime + fadeDuration) {
+            // Calculate the normalized time elapsed since starting the fade
+            float normalizedTime = (Time.time - startTime) / fadeDuration;
+            // Calculate the new volume based on the fade curve
+            audioSource.volume = Mathf.Lerp(startVolume, 0, normalizedTime);
+            yield return null;
+        }
+        // Ensure the volume is fully faded out, stop the playback, then restore volume
+        audioSource.volume = 0.0f;
+        audioSource.Stop();
+        audioSource.volume = 1.0f;
     }
 
     /// <summary>
