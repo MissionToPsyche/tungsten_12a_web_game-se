@@ -1,7 +1,8 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Combo2_State : BaseState
+public class Combo3_State : BaseState
 {
     /// <summary>
     /// Defines the tracked objects in the scene
@@ -12,12 +13,9 @@ public class Combo2_State : BaseState
     {
         CHECKPOINT_1    = 0,
         CHECKPOINT_2    = 1,
-        TUNGSTEN_1      = 2,
-        GOLD_1          = 3,
-        GOLD_2          = 4,
-        GOLD_3          = 5,
-        GOLD_4          = 6,
-        NICKEL_1        = 7,
+        IRON_1          = 2,
+        IRON_2          = 3,
+        IRON_3          = 4,
 
         CHECKPOINT      = 99,
     }
@@ -31,17 +29,14 @@ public class Combo2_State : BaseState
     {
         return obj.ToLower() switch
         {
-            "checkpoint 1"          => (short)SceneObject.CHECKPOINT_1,
-            "checkpoint 2"          => (short)SceneObject.CHECKPOINT_2,
-            "element_tungsten 1"    => (short)SceneObject.TUNGSTEN_1,
-            "element_gold 1"        => (short)SceneObject.GOLD_1,
-            "element_gold 2"        => (short)SceneObject.GOLD_2,
-            "element_gold 3"        => (short)SceneObject.GOLD_3,
-            "element_gold 4"        => (short)SceneObject.GOLD_4,
-            "element_nickel 1"      => (short)SceneObject.NICKEL_1,
+            "checkpoint 1"      => (short)SceneObject.CHECKPOINT_1,
+            "checkpoint 2"      => (short)SceneObject.CHECKPOINT_2,
+            "element_iron 1"    => (short)SceneObject.IRON_1,
+            "element_iron 2"    => (short)SceneObject.IRON_2,
+            "element_iron 3"    => (short)SceneObject.IRON_3,
 
-            "checkpoint"            => (short)SceneObject.CHECKPOINT,
-            _                       => -1,
+            "checkpoint"        => (short)SceneObject.CHECKPOINT,
+            _                   => -1,
         };
     }
 
@@ -56,34 +51,28 @@ public class Combo2_State : BaseState
         {
             (short)SceneObject.CHECKPOINT_1 => "Checkpoint 1",
             (short)SceneObject.CHECKPOINT_2 => "Checkpoint 2",
-            (short)SceneObject.TUNGSTEN_1   => "Element_Tungsten 1",
-            (short)SceneObject.GOLD_1       => "Element_Gold 1",
-            (short)SceneObject.GOLD_2       => "Element_Gold 2",
-            (short)SceneObject.GOLD_3       => "Element_Gold 3",
-            (short)SceneObject.GOLD_4       => "Element_Gold 4",
-            (short)SceneObject.NICKEL_1     => "Element_Nickel 1",
+            (short)SceneObject.IRON_1       => "Element_Iron 1",
+            (short)SceneObject.IRON_2       => "Element_Iron 2",
+            (short)SceneObject.IRON_3       => "Element_Iron 3",
 
             (short)SceneObject.CHECKPOINT   => "Checkpoint",
-            _                               => null,
+            _ => null,
         };
     }
 
     /// <summary>
     /// Constructor for the scene state
     /// </summary>
-    public Combo2_State()
+    public Combo3_State()
     {
         // This must be set up first before anything else is created as everything else is based off of this
         _defaultState = new Dictionary<short, object>
         {
             { (short)SceneObject.CHECKPOINT_1, true }, // 'true' for available
             { (short)SceneObject.CHECKPOINT_2, true }, // `true` for activate-able
-            { (short)SceneObject.TUNGSTEN_1,   true },
-            { (short)SceneObject.GOLD_1,       true },
-            { (short)SceneObject.GOLD_2,       true },
-            { (short)SceneObject.GOLD_3,       true },
-            { (short)SceneObject.GOLD_4,       true },
-            { (short)SceneObject.NICKEL_1,     true },
+            { (short)SceneObject.IRON_1,       true },
+            { (short)SceneObject.IRON_2,       true },
+            { (short)SceneObject.IRON_3,       true },
         };
         LoadDefaultState();
         SaveState();
@@ -113,7 +102,7 @@ public class Combo2_State : BaseState
                     }
                     break;
 
-                case (short)SceneObject.TUNGSTEN_1:
+                case (short)SceneObject.IRON_1:
                     { // Specifying scope for use of `var value` && `var targetObject`
                         var value = (bool)pair.Value;
 
@@ -132,7 +121,7 @@ public class Combo2_State : BaseState
                     }
                     break;
 
-                case (short)SceneObject.GOLD_1:
+                case (short)SceneObject.IRON_2:
                     { // Specifying scope for use of `var value` && `var targetObject`
                         var value = (bool)pair.Value;
 
@@ -150,64 +139,7 @@ public class Combo2_State : BaseState
                         }
                     }
                     break;
-
-                case (short)SceneObject.GOLD_2:
-                    { // Specifying scope for use of `var value` && `var targetObject`
-                        var value = (bool)pair.Value;
-
-                        // Remove the object if it's already been picked up
-                        if (!value)
-                        {
-                            var targetObject = GameObject.Find(objectName);
-                            if (targetObject == null)
-                            {
-                                Debug.LogError($"Object {objectName} does not exist");
-                                return;
-                            }
-
-                            targetObject.SetActive(value);
-                        }
-                    }
-                    break;
-
-                case (short)SceneObject.GOLD_3:
-                    { // Specifying scope for use of `var value` && `var targetObject`
-                        var value = (bool)pair.Value;
-
-                        // Remove the object if it's already been picked up
-                        if (!value)
-                        {
-                            var targetObject = GameObject.Find(objectName);
-                            if (targetObject == null)
-                            {
-                                Debug.LogError($"Object {objectName} does not exist");
-                                return;
-                            }
-
-                            targetObject.SetActive(value);
-                        }
-                    }
-                    break;
-                case (short)SceneObject.GOLD_4:
-                    { // Specifying scope for use of `var value` && `var targetObject`
-                        var value = (bool)pair.Value;
-
-                        // Remove the object if it's already been picked up
-                        if (!value)
-                        {
-                            var targetObject = GameObject.Find(objectName);
-                            if (targetObject == null)
-                            {
-                                Debug.LogError($"Object {objectName} does not exist");
-                                return;
-                            }
-
-                            targetObject.SetActive(value);
-                        }
-                    }
-                    break;
-
-                case (short)SceneObject.NICKEL_1:
+                case (short)SceneObject.IRON_3:
                     { // Specifying scope for use of `var value` && `var targetObject`
                         var value = (bool)pair.Value;
 
