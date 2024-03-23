@@ -42,12 +42,6 @@ public class EMagnetManager : ToolManager {
                     { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 0 },
                 }
             },
-            {  5, new Dictionary<InventoryManager.Element, ushort>()
-                {
-                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 4 },    
-                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 0 },
-                }   
-            },
         };
 
         //Tool specific variables
@@ -77,6 +71,8 @@ public class EMagnetManager : ToolManager {
 
         do
         {
+            _playerController.batteryManager.DrainBatt(1);
+
             /**
              * Finds angle between player center and mouse position
              */
@@ -89,7 +85,7 @@ public class EMagnetManager : ToolManager {
              * Makes a box cast using the scale of the EMagnet Hit Box
              */
             hit = Physics2D.OverlapBox(eMagHitBox.transform.position, eMagHitBox.transform.lossyScale, angle, 1 << 7);
-            if (hit != null)
+            if (hit != null && !hit.isTrigger)
             {
                 //If movable Iron object hit
                 if (hit.attachedRigidbody != null)
@@ -140,7 +136,7 @@ public class EMagnetManager : ToolManager {
                 grabbedObject.attachedRigidbody.velocity = Vector2.zero;
                 grabbedObject.attachedRigidbody.angularVelocity = 0;
                 if (!_playerController.playerCollider.IsTouching(grabbedObject))
-                    grabbedObject.attachedRigidbody.MovePosition(Vector2.MoveTowards(grabbedObject.transform.position, transform.position, Time.deltaTime * 20));
+                    grabbedObject.attachedRigidbody.MovePosition(Vector2.MoveTowards(grabbedObject.transform.position, transform.position, Time.deltaTime * pullSpeed));
             }
 
             yield return null;
@@ -154,12 +150,10 @@ public class EMagnetManager : ToolManager {
     }
 
     /// <summary>
-    /// Increases length of EMagnet Hit Box to increase hit range
+    /// Increases speed at which the EMagnet pulls object
     /// </summary>
     protected override void UpgradeTool()
     {
-        //eMagHitBox.transform.localScale += new Vector3(0.5f, 0, 0);
-        //eMagHitBox.transform.localPosition += new Vector3(0.25f, 0, 0);
-        pullSpeed += 10;
+        pullSpeed += 6;
     }
 }
