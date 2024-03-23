@@ -19,7 +19,7 @@ public class PlayerController : BaseController<PlayerController>
     //Create the playercharacter assignment
     [Header("Components")]
     public Rigidbody2D playerCharacter;
-    public CapsuleCollider2D playerCollider;
+    public BoxCollider2D playerCollider;
     public GameObject pressUpPopup;
 
     //Set up environmental checks
@@ -61,7 +61,7 @@ public class PlayerController : BaseController<PlayerController>
         
         //Assign and initialize scripts
         playerCharacter = GetComponent<Rigidbody2D>();
-        playerCollider = GetComponent<CapsuleCollider2D>();
+        playerCollider = GetComponent<BoxCollider2D>();
         playerMovement = GetComponent<PlayerMovement>();
         playerMovement.Initialize(this);
         playerCollisionManager = GetComponent<PlayerCollisionManager>();
