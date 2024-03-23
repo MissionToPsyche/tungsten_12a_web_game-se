@@ -3,6 +3,7 @@
  * Author: dnguye99
  * version 20231125
  */
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,20 +11,22 @@ public class Checkpoint : MonoBehaviour
 {
     //Private variables for animation
     private Animator animator;
-    private bool isSpinning;
+    public bool isSpinning = false;
     const string STATIC = "checkpoint-solarpanel-static";
     const string SPIN = "checkpoint-solarpanel-spin";
-
-    //PlayerDeath script related to checkpoints
-    private PlayerDeath playerDeath;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
-        animator.Play(STATIC);
-        isSpinning = false;
-        playerDeath = GetComponent<PlayerDeath>();
+        if (!isSpinning)
+        {
+            animator.Play(STATIC);
+        }
+        else
+        {
+            Spin();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -33,9 +36,17 @@ public class Checkpoint : MonoBehaviour
             //checks if the checkpoint is not spinning
             if (!isSpinning)
             {
-                animator.Play(SPIN);
                 isSpinning = true;
+                Spin();
             }
         }
+    }
+
+    /// <summary>
+    /// Activates the animation for the checkpoint.
+    /// </summary>
+    public void Spin()
+    {
+        animator.Play(SPIN);
     }
 }
