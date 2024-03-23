@@ -76,7 +76,7 @@ public class Landing_State : BaseState
         _defaultState = new Dictionary<short, object>
         {
             { (short)SceneObject.SOLARPANEL,    true }, // 'true' for available
-            { (short)SceneObject.CHECKPOINT_1,  true }, // `false` for not activated
+            { (short)SceneObject.CHECKPOINT_1,  false }, // `false` for not activated
             { (short)SceneObject.COPPER_1,      true },
             { (short)SceneObject.GOLD_1,        true },
             { (short)SceneObject.IRON_1,        true },
@@ -121,7 +121,11 @@ public class Landing_State : BaseState
                 case (short)SceneObject.CHECKPOINT_1:
                     {
                         var value = (bool)pair.Value;
-                        var targetObject = GameObject.Find(objectName);
+                        if (value)
+                        {
+                            var targetObject = GameObject.Find(objectName).GetComponent<Checkpoint>();
+                            targetObject.isSpinning = value;
+                        }
                     }
                     break;
 
