@@ -9,7 +9,7 @@
   </head>
   <body>
     <div id="unity-container" class="unity-desktop">
-      <canvas id="unity-canvas" width=1920 height=1080 tabindex="-1"></canvas>
+      <canvas id="unity-canvas" width=1280 height=720 tabindex="-1"></canvas>
       <div id="unity-loading-bar">
         <div id="unity-logo"></div>
         <div id="unity-progress-bar-empty">
@@ -57,11 +57,11 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/M.I.S.T.loader.js";
+      var loaderUrl = buildUrl + "/tungsten_12a_web_game-se.loader.js";
       var config = {
-        dataUrl: buildUrl + "/M.I.S.T.data",
-        frameworkUrl: buildUrl + "/M.I.S.T.framework.js",
-        codeUrl: buildUrl + "/M.I.S.T.wasm",
+        dataUrl: buildUrl + "/tungsten_12a_web_game-se.data",
+        frameworkUrl: buildUrl + "/tungsten_12a_web_game-se.framework.js",
+        codeUrl: buildUrl + "/tungsten_12a_web_game-se.wasm",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "ASU Tungsten 12A",
         productName: "M.I.S.T.",
@@ -94,11 +94,11 @@
       } else {
         // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
 
-        canvas.style.width = "1920px";
-        canvas.style.height = "1080px";
+        canvas.style.width = "1280px";
+        canvas.style.height = "720px";
       }
 
-      canvas.style.background = "url('" + buildUrl + "/M.I.S.T.jpg') center / cover";
+      canvas.style.background = "url('" + buildUrl + "/tungsten_12a_web_game-se.jpg') center / cover";
       loadingBar.style.display = "block";
 
       var script = document.createElement("script");
