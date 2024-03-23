@@ -126,8 +126,6 @@ public class ImagerManager : ToolManager
         //Increase cursor's spotlight radius
         //_flashlight.pointLightInnerRadius += _radiusIncrease;
         _flashlight.pointLightOuterRadius += _radiusIncrease;
-        GameController.Instance.audioManager.PlayAudio(
-            GameController.Instance.audioManager.toolImager);
     }
 
     /// <summary>
