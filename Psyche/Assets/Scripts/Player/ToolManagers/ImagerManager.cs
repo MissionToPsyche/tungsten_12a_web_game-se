@@ -45,37 +45,37 @@ public class ImagerManager : ToolManager
             {  3, new Dictionary<InventoryManager.Element, ushort>()
                 {
                     { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
-                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 4 },
+                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 2 },
                 }
             },
             {  4, new Dictionary<InventoryManager.Element, ushort>()
                 {
                     { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
-                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 4 },
+                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 2 },
                 }
             },
             {  5, new Dictionary<InventoryManager.Element, ushort>()
                 {
                     { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
-                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 4 },
+                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 2 },
                 }
             },
             {  6, new Dictionary<InventoryManager.Element, ushort>()
                 {
                     { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
-                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 4 },
+                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 2 },
                 }
             },
             {  7, new Dictionary<InventoryManager.Element, ushort>()
                 {
                     { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
-                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 4 },
+                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 2 },
                 }
             },
             {  8, new Dictionary<InventoryManager.Element, ushort>()
                 {
                     { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
-                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 4 },
+                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 2 },
                 }
             },
             {  9, new Dictionary<InventoryManager.Element, ushort>()
@@ -126,8 +126,6 @@ public class ImagerManager : ToolManager
         //Increase cursor's spotlight radius
         //_flashlight.pointLightInnerRadius += _radiusIncrease;
         _flashlight.pointLightOuterRadius += _radiusIncrease;
-        GameController.Instance.audioManager.PlayAudio(
-            GameController.Instance.audioManager.toolImager);
     }
 
     /// <summary>
