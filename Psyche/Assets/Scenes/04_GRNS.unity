@@ -14235,6 +14235,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Imager In
       objectReference: {fileID: 0}
+    - target: {fileID: 3006953032820355726, guid: 24db936823f64314d85b633ce0fc57eb, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3006953032820355726, guid: 24db936823f64314d85b633ce0fc57eb, type: 3}
+      propertyPath: m_TagString
+      value: Checkpoint
+      objectReference: {fileID: 0}
     - target: {fileID: 8790692525431648348, guid: 24db936823f64314d85b633ce0fc57eb, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.02047
@@ -14252,7 +14260,8 @@ PrefabInstance:
       value: 0.1116
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 748305601843839355, guid: 24db936823f64314d85b633ce0fc57eb, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24db936823f64314d85b633ce0fc57eb, type: 3}
@@ -23233,22 +23242,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1724912976}
     m_Modifications:
-    - target: {fileID: 760918158221409483, guid: 94a3038c96c72df4f8e7e4eb91e870e9, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.8343991
-      objectReference: {fileID: 0}
-    - target: {fileID: 760918158221409483, guid: 94a3038c96c72df4f8e7e4eb91e870e9, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.4650662
-      objectReference: {fileID: 0}
-    - target: {fileID: 760918158221409483, guid: 94a3038c96c72df4f8e7e4eb91e870e9, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.0047
-      objectReference: {fileID: 0}
-    - target: {fileID: 760918158221409483, guid: 94a3038c96c72df4f8e7e4eb91e870e9, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.0072
-      objectReference: {fileID: 0}
     - target: {fileID: 2820168180128099632, guid: 94a3038c96c72df4f8e7e4eb91e870e9, type: 3}
       propertyPath: m_Name
       value: eMagnet Out
