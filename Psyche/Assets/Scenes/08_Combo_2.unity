@@ -68164,16 +68164,94 @@ PrefabInstance:
       propertyPath: m_Name
       value: Combo_1 In
       objectReference: {fileID: 0}
+    - target: {fileID: 6716680467694660417, guid: 41ac61e9b23ae4c45a8ec7620fd5626a, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6716680467694660417, guid: 41ac61e9b23ae4c45a8ec7620fd5626a, type: 3}
+      propertyPath: m_TagString
+      value: Checkpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 9058157282025059915, guid: 41ac61e9b23ae4c45a8ec7620fd5626a, type: 3}
+      propertyPath: m_Size.x
+      value: 0.5663141
+      objectReference: {fileID: 0}
+    - target: {fileID: 9058157282025059915, guid: 41ac61e9b23ae4c45a8ec7620fd5626a, type: 3}
+      propertyPath: m_Size.y
+      value: 0.5910958
+      objectReference: {fileID: 0}
+    - target: {fileID: 9058157282025059915, guid: 41ac61e9b23ae4c45a8ec7620fd5626a, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.008673966
+      objectReference: {fileID: 0}
+    - target: {fileID: 9058157282025059915, guid: 41ac61e9b23ae4c45a8ec7620fd5626a, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.003717348
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2706076972452187169, guid: 41ac61e9b23ae4c45a8ec7620fd5626a, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6716680467694660417, guid: 41ac61e9b23ae4c45a8ec7620fd5626a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1812814628}
   m_SourcePrefab: {fileID: 100100000, guid: 41ac61e9b23ae4c45a8ec7620fd5626a, type: 3}
 --- !u!4 &1812814626 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1557068656327804947, guid: 41ac61e9b23ae4c45a8ec7620fd5626a, type: 3}
   m_PrefabInstance: {fileID: 1812814625}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1812814627 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6716680467694660417, guid: 41ac61e9b23ae4c45a8ec7620fd5626a, type: 3}
+  m_PrefabInstance: {fileID: 1812814625}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &1812814628
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1812814627}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.5, y: 0.84375}
+    newSize: {x: 1.453125, y: 0.859375}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 0.84375}
+  m_EdgeRadius: 0
 --- !u!1 &1814174449
 GameObject:
   m_ObjectHideFlags: 0
