@@ -654,16 +654,16 @@ public class UIController : BaseController<UIController>
                 switch (toolName.ToLower())
                 {
                     case "thruster":
-                        errorText.gameObject.SetActive(false);
+                        UpdateRequirements(requirements, thrusterRequirementsList.transform);
                         break;
                     case "battery":
-                        errorText.gameObject.SetActive(false);
+                        UpdateRequirements(requirements, batteryRequirementsList.transform);
                         break;
                     case "imager":
-                        errorText.gameObject.SetActive(false);
+                        UpdateRequirements(requirements, imagerRequirementsList.transform);
                         break;
                     case "electromagnet":
-                        errorText.gameObject.SetActive(false);
+                        UpdateRequirements(requirements, eMagnetRequirementsList.transform);
                         break;
                 }
                 break;
