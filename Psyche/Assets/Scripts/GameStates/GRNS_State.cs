@@ -83,7 +83,7 @@ public class GRNS_State : BaseState
         _defaultState = new Dictionary<short, object>
         {
             { (short)SceneObject.SPECTROMETER, true }, // 'true' for available
-            { (short)SceneObject.CHECKPOINT_1, true },
+            { (short)SceneObject.CHECKPOINT_1, false },
             { (short)SceneObject.GOLD_1, true },
             { (short)SceneObject.GOLD_2, true },
             { (short)SceneObject.GOLD_3, true },
@@ -128,6 +128,14 @@ public class GRNS_State : BaseState
                     break;
 
                 case (short)SceneObject.CHECKPOINT_1:
+                    {
+                        var value = (bool)pair.Value;
+                        if (value)
+                        {
+                            var targetObject = GameObject.Find(objectName).GetComponent<Checkpoint>();
+                            targetObject.isSpinning = value;
+                        }
+                    }
                     break;
 
                 case (short)SceneObject.GOLD_1:

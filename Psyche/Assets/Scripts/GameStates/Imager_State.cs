@@ -81,8 +81,8 @@ public class Imager_State : BaseState
         _defaultState = new Dictionary<short, object>
         {
             { (short)SceneObject.IMAGER,        true }, // 'true' for available
-            { (short)SceneObject.CHECKPOINT_1,  true }, 
-            { (short)SceneObject.CHECKPOINT_2,  true },
+            { (short)SceneObject.CHECKPOINT_1,  false }, 
+            { (short)SceneObject.CHECKPOINT_2,  false },
             { (short)SceneObject.TUNGSTEN_1,    true },
             { (short)SceneObject.GOLD_1,        true },
             { (short)SceneObject.GOLD_2,        true },
@@ -125,15 +125,25 @@ public class Imager_State : BaseState
                 case (short)SceneObject.CHECKPOINT_1:
                     {
                         var value = (bool)pair.Value;
-                        var targetObject = GameObject.Find(objectName);
+                        if (value)
+                        {
+                            var targetObject = GameObject.Find(objectName).GetComponent<Checkpoint>();
+                            targetObject.isSpinning = value;
+                        }
                     }
                     break;
+
                 case (short)SceneObject.CHECKPOINT_2:
                     {
                         var value = (bool)pair.Value;
-                        var targetObject = GameObject.Find(objectName);
+                        if (value)
+                        {
+                            var targetObject = GameObject.Find(objectName).GetComponent<Checkpoint>();
+                            targetObject.isSpinning = value;
+                        }
                     }
                     break;
+
                 case (short)SceneObject.TUNGSTEN_1:
                     { // Specifying scope for use of `var value` && `var targetObject`
                         var value = (bool)pair.Value;

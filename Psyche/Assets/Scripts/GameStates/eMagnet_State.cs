@@ -81,8 +81,8 @@ public class eMagnet_State : BaseState
         _defaultState = new Dictionary<short, object>
         {
             { (short)SceneObject.ELECTROMAGNET, true }, // 'true' for available
-            { (short)SceneObject.CHECKPOINT_0,  true }, // `true` for activate-able
-            { (short)SceneObject.CHECKPOINT_1,  true },
+            { (short)SceneObject.CHECKPOINT_0,  false }, // `true` for activate-able
+            { (short)SceneObject.CHECKPOINT_1,  false },
             { (short)SceneObject.GOLD_1,        true },
             { (short)SceneObject.GOLD_2,        true },
             { (short)SceneObject.IRON_1,        true },
@@ -126,14 +126,22 @@ public class eMagnet_State : BaseState
                 case (short)SceneObject.CHECKPOINT_0:
                     {
                         var value = (bool)pair.Value;
-                        var targetObject = GameObject.Find(objectName);
+                        if (value)
+                        {
+                            var targetObject = GameObject.Find(objectName).GetComponent<Checkpoint>();
+                            targetObject.isSpinning = value;
+                        }
                     }
                     break;
 
                 case (short)SceneObject.CHECKPOINT_1:
                     {
                         var value = (bool)pair.Value;
-                        var targetObject = GameObject.Find(objectName);
+                        if (value)
+                        {
+                            var targetObject = GameObject.Find(objectName).GetComponent<Checkpoint>();
+                            targetObject.isSpinning = value;
+                        }
                     }
                     break;
 

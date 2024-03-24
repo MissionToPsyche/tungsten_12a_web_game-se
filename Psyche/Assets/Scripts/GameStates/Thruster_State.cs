@@ -81,9 +81,9 @@ public class Thruster_State : BaseState
         _defaultState = new Dictionary<short, object>
         {
             { (short)SceneObject.THRUSTER,      true }, // 'true' for available
-            { (short)SceneObject.CHECKPOINT_1,  true }, // `false` for not activated
-            { (short)SceneObject.CHECKPOINT_2,  true },
-            { (short)SceneObject.CHECKPOINT_3,  true },
+            { (short)SceneObject.CHECKPOINT_1,  false }, // `false` for not activated
+            { (short)SceneObject.CHECKPOINT_2,  false },
+            { (short)SceneObject.CHECKPOINT_3,  false },
             { (short)SceneObject.COPPER_1,      true },
             { (short)SceneObject.GOLD_1,        true },
             { (short)SceneObject.GOLD_2,        true },
@@ -127,21 +127,33 @@ public class Thruster_State : BaseState
                 case (short)SceneObject.CHECKPOINT_1:
                     {
                         var value = (bool)pair.Value;
-                        var targetObject = GameObject.Find(objectName);
+                        if (value)
+                        {
+                            var targetObject = GameObject.Find(objectName).GetComponent<Checkpoint>();
+                            targetObject.isSpinning = value;
+                        }
                     }
                     break;
 
                 case (short)SceneObject.CHECKPOINT_2:
                     {
                         var value = (bool)pair.Value;
-                        var targetObject = GameObject.Find(objectName);
+                        if (value)
+                        {
+                            var targetObject = GameObject.Find(objectName).GetComponent<Checkpoint>();
+                            targetObject.isSpinning = value;
+                        }
                     }
                     break;
 
                 case (short)SceneObject.CHECKPOINT_3:
                     {
                         var value = (bool)pair.Value;
-                        var targetObject = GameObject.Find(objectName);
+                        if (value)
+                        {
+                            var targetObject = GameObject.Find(objectName).GetComponent<Checkpoint>();
+                            targetObject.isSpinning = value;
+                        }
                     }
                     break;
 
