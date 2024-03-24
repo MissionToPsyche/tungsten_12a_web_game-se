@@ -41,7 +41,6 @@ public class PlayerDeath : MonoBehaviour {
         ApplyKickback(collision);
         GameController.Instance.audioManager.playerHurt.Play();
         GetHurt(1);
-        StartCoroutine(_playerController.interruptMagnet());
     }
     
     /// <summary>
@@ -105,7 +104,7 @@ public class PlayerDeath : MonoBehaviour {
     /// Respawn character if no health remains.
     /// </summary>
     public void GetHurt(int dmg) {
-        //Debug.Log("Ouch!");
+        StartCoroutine(_playerController.interruptMagnet());
         playerHealth.HealthDown(dmg);
         if (playerHealth.playerHealth <= 0) {
             //start the warping animation & reset player's heath & battery
