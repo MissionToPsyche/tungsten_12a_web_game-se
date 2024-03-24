@@ -103,7 +103,8 @@ public class PlayerDeath : MonoBehaviour {
     /// Lose health on contacts with hazards.
     /// Respawn character if no health remains.
     /// </summary>
-    public void GetHurt(int dmg) {
+    public void GetHurt(int dmg)
+    {
         StartCoroutine(_playerController.interruptMagnet());
         playerHealth.HealthDown(dmg);
         if (playerHealth.playerHealth <= 0) {
