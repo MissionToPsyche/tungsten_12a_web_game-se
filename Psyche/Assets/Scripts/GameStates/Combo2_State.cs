@@ -76,8 +76,8 @@ public class Combo2_State : BaseState
         // This must be set up first before anything else is created as everything else is based off of this
         _defaultState = new Dictionary<short, object>
         {
-            { (short)SceneObject.CHECKPOINT_1, true }, // 'true' for available
-            { (short)SceneObject.CHECKPOINT_2, true }, // `true` for activate-able
+            { (short)SceneObject.CHECKPOINT_1, false }, // 'true' for available
+            { (short)SceneObject.CHECKPOINT_2, false }, // `true` for activate-able
             { (short)SceneObject.TUNGSTEN_1,   true },
             { (short)SceneObject.GOLD_1,       true },
             { (short)SceneObject.GOLD_2,       true },
@@ -102,14 +102,22 @@ public class Combo2_State : BaseState
                 case (short)SceneObject.CHECKPOINT_1:
                     {
                         var value = (bool)pair.Value;
-                        var targetObject = GameObject.Find(objectName);
+                        if (value)
+                        {
+                            var targetObject = GameObject.Find(objectName).GetComponent<Checkpoint>();
+                            targetObject.isSpinning = value;
+                        }
                     }
                     break;
 
                 case (short)SceneObject.CHECKPOINT_2:
                     {
                         var value = (bool)pair.Value;
-                        var targetObject = GameObject.Find(objectName);
+                        if (value)
+                        {
+                            var targetObject = GameObject.Find(objectName).GetComponent<Checkpoint>();
+                            targetObject.isSpinning = value;
+                        }
                     }
                     break;
 
