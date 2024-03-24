@@ -84,9 +84,6 @@ public class PlayerController : BaseController<PlayerController>
         playerDeath.Initialize(this);
         pressUpPopup = transform.Find("Press Up Popup").gameObject;
 
-        //hides mouse cursor
-        Cursor.visible = false;
-
         // Tell GameController to LoadPlayer() after everything's initialized
         GameController.Instance.LoadPlayer();
     }
