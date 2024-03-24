@@ -19,8 +19,9 @@ public class eMagnet_State : BaseState
         CHECKPOINT_1    = 2,
         GOLD_1          = 3,
         GOLD_2          = 4,
-        TUNGSTEN_1      = 5,
-        FIRST_VEINS     = 6,
+        IRON_1          = 5,
+        TUNGSTEN_1      = 6,
+        FIRST_VEINS     = 7,
 
         CHECKPOINT      = 99,
     }
@@ -39,6 +40,7 @@ public class eMagnet_State : BaseState
             "checkpoint 1"          => (short)SceneObject.CHECKPOINT_1,
             "element_gold 1"        => (short)SceneObject.GOLD_1,
             "element_gold 2"        => (short)SceneObject.GOLD_2,
+            "element_iron 1"        => (short)SceneObject.IRON_1,
             "element_tungsten 1"    => (short)SceneObject.TUNGSTEN_1,
             "first_veins"           => (short)SceneObject.FIRST_VEINS,
 
@@ -61,6 +63,7 @@ public class eMagnet_State : BaseState
             (short)SceneObject.CHECKPOINT_1     => "Checkpoint 1",
             (short)SceneObject.GOLD_1           => "Element_Gold 1",
             (short)SceneObject.GOLD_2           => "Element_Gold 2",
+            (short)SceneObject.IRON_1           => "Element_Iron 1",
             (short)SceneObject.TUNGSTEN_1       => "Element_Tungsten 1",
             (short)SceneObject.FIRST_VEINS      => "First_Veins",
 
@@ -82,6 +85,7 @@ public class eMagnet_State : BaseState
             { (short)SceneObject.CHECKPOINT_1,  true },
             { (short)SceneObject.GOLD_1,        true },
             { (short)SceneObject.GOLD_2,        true },
+            { (short)SceneObject.IRON_1,        true },
             { (short)SceneObject.TUNGSTEN_1,    true },
             { (short)SceneObject.FIRST_VEINS,   false },
         };    
@@ -150,6 +154,22 @@ public class eMagnet_State : BaseState
                     break;
 
                 case (short)SceneObject.GOLD_2:
+                    {
+                        var value = (bool)pair.Value;
+                        if (!value)
+                        {
+                            var targetObject = GameObject.Find(objectName);
+                            if (targetObject == null)
+                            {
+                                Debug.LogError($"Object {objectName} does not exist");
+                                return;
+                            }
+                            targetObject.SetActive(value);
+                        }
+                    }
+                    break;
+
+                case (short)SceneObject.IRON_1:
                     {
                         var value = (bool)pair.Value;
                         if (!value)
