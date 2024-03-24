@@ -14,7 +14,7 @@ using UnityEngine.Rendering;
 public class PassthroughPlatform : MonoBehaviour
 {
     private GameObject platform;
-    [SerializeField] private CapsuleCollider2D playerCollider;
+    [SerializeField] private BoxCollider2D playerCollider;
 
     // Update is called once per frame
     void Update()
