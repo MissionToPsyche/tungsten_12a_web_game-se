@@ -84,9 +84,6 @@ public class PlayerController : BaseController<PlayerController>
         playerDeath.Initialize(this);
         pressUpPopup = transform.Find("Press Up Popup").gameObject;
 
-        //groundcheck
-        groundCheckSize = new Vector2(0.785f, 0.1f);
-
         // Tell GameController to LoadPlayer() after everything's initialized
         GameController.Instance.LoadPlayer();
     }
@@ -169,7 +166,6 @@ public class PlayerController : BaseController<PlayerController>
             //ElectroMagnet
             if (inventoryManager.CheckTool("electromagnet") && Input.GetButton("EMagnet") && batteryManager.batteryPercent != 0 && !eMagnetActive && !magnetInterrupt) {
                 eMagnetManager.Activate();
-                batteryManager.DrainBatt(500);
             }
 
             //Passive Battery
