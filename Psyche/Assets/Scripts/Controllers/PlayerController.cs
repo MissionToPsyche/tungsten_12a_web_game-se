@@ -111,14 +111,6 @@ public class PlayerController : BaseController<PlayerController>
     }
 
     /// <summary>
-    /// Called when necessary - not every frame
-    /// </summary>
-    public override void UpdateController()
-    {
-        //Insert Logic
-    }
-    
-    /// <summary>
     /// Runs every frame
     ///   - Checks player status -- sets booleans
     ///   - Player movement handler

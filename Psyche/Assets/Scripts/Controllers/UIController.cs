@@ -70,14 +70,6 @@ public class UIController : BaseController<UIController>
     }
 
     /// <summary>
-    /// Called when necessary - not every frame
-    /// </summary>
-    public override void UpdateController()
-    {
-        //Insert Logic
-    }
-
-    /// <summary>
     /// Runs every frame
     ///   - Empty
     /// </summary>
