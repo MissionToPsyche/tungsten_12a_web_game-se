@@ -10974,6 +10974,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2656750083177499883, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: m_Name
+      value: Solar Array Description
+      objectReference: {fileID: 0}
+    - target: {fileID: 2656750083177499883, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -14236,7 +14240,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2256284953869002401, guid: 4279c030866387f4a82ae42b380b6d37, type: 3}
       propertyPath: m_Name
-      value: SolarPanel
+      value: SolarArray
       objectReference: {fileID: 0}
     - target: {fileID: 2256284953869002401, guid: 4279c030866387f4a82ae42b380b6d37, type: 3}
       propertyPath: m_TagString
