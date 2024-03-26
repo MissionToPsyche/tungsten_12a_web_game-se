@@ -251,7 +251,7 @@ public class GameStateManager : MonoBehaviour
         PlayerController.Instance.transform.position = respawnPoint;
 
         PlayerController.Instance.playerHealth.HealthUp(100);
-        PlayerController.Instance.batteryManager.Activate();
+        PlayerController.Instance.solarArrayManager.Activate();
 
         //unblock player controls
         PlayerController.Instance.inputBlocked = false;
