@@ -494,21 +494,18 @@ public class UIController : BaseController<UIController>
         }
         ///If Title Screen button opened the Confirmation Box
         else
-            EndGame(false);
-    }
+        {
+            /**
+             * Destroys Player and UI so they do not spawn on the start screen
+             */
+            Destroy(PlayerController.Instance.gameObject);
+            Destroy(gameObject);
+            GameController.Instance.sceneTransitionManager.devControl = true;
+            GameController.Instance.sceneTransitionManager.OnInitiateTransition(
+                GameController.Instance.gameStateManager.MatchScene(GameStateManager.Scene.Title)
+                );
 
-    /// <summary>
-    /// Destroys Player and UI so they do not spawn on the start screen or cutscene
-    /// </summary>
-    /// <param name="playCutscene"></param>
-    public void EndGame(bool playCutscene)
-    {
-        Destroy(PlayerController.Instance.gameObject);
-        Destroy(gameObject);
-        if (playCutscene)
-            UnityEngine.SceneManagement.SceneManager.LoadScene("Outro_Cutscene");
-        else
-            UnityEngine.SceneManagement.SceneManager.LoadScene("Title_Screen");
+        }
     }
 
     //========================================================== Upgrades Menu ==========================================================
