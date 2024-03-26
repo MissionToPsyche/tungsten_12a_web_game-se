@@ -71,7 +71,7 @@ public class EMagnetManager : ToolManager {
 
         do
         {
-            _playerController.batteryManager.DrainBatt(1);
+            _playerController.solarArrayManager.DrainBatt(1);
 
             /**
              * Finds angle between player center and mouse position
