@@ -66,14 +66,6 @@ public class GameController : BaseController<GameController>
     }
 
     /// <summary>
-    /// Called when necessary - not every frame
-    /// </summary>
-    public override void UpdateController()
-    {
-        //Insert Logic
-    }
-
-    /// <summary>
     /// Called once per frame
     /// </summary>
     void Update()
