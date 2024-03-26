@@ -104,7 +104,7 @@ public class ImagerManager : ToolManager
     /// </summary>
     public override void Activate()
     {
-        _active = !_playerController.batteryManager.batteryDrained;
+        _active = !_playerController.solarArrayManager.batteryDrained;
         if (_active)
         {
             _flashlight.intensity = 1;

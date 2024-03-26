@@ -55,8 +55,7 @@ public class InventoryManager : MonoBehaviour
     public enum Tool
     {
         IMAGER,
-        BATTERY,
-        SOLARPANEL,
+        SOLARARRAY,
         SPECTROMETER,
         THRUSTER,
         ELECTROMAGNET,
@@ -70,8 +69,7 @@ public class InventoryManager : MonoBehaviour
         return tool.ToLower() switch
         {
             "imager"        => Tool.IMAGER,
-            "battery"       => Tool.BATTERY,
-            "solarpanel"    => Tool.SOLARPANEL,
+            "solararray"    => Tool.SOLARARRAY,
             "spectrometer"  => Tool.SPECTROMETER,
             "thruster"      => Tool.THRUSTER,
             "electromagnet" => Tool.ELECTROMAGNET,
@@ -84,8 +82,7 @@ public class InventoryManager : MonoBehaviour
         return tool switch
         {
             Tool.IMAGER         => "Imager",
-            Tool.BATTERY        => "Battery",
-            Tool.SOLARPANEL     => "SolarPanel",
+            Tool.SOLARARRAY     => "SolarArray",
             Tool.SPECTROMETER   => "Spectrometer",
             Tool.THRUSTER       => "Thruster",
             Tool.ELECTROMAGNET  => "Electromagnet",
@@ -103,7 +100,7 @@ public class InventoryManager : MonoBehaviour
         _tools = new Dictionary<Tool, bool>()
         {
             { Tool.IMAGER,          false },
-            { Tool.BATTERY,         false },
+            { Tool.SOLARARRAY,      false },
             { Tool.SPECTROMETER,    false },
             { Tool.THRUSTER,        false },
             { Tool.ELECTROMAGNET,   false },
@@ -147,19 +144,24 @@ public class InventoryManager : MonoBehaviour
             return;
         }
 
-        if (tool != Tool.None && tool != Tool.BATTERY && tool != Tool.SOLARPANEL)
+        if (tool != Tool.None)
         {
             SetTool(tool, true);
         }
+
+        /*if (tool != Tool.None &&  tool != Tool.SOLARARRAY)
+        {
+            SetTool(tool, true);
+        }*/
         // Remove the object from the scene state
         SetObjectState?.Invoke(toolName, false);
         
         //Other actions
         switch (tool)
         {
-            case Tool.SOLARPANEL or Tool.BATTERY:
-                _playerController.batteryManager.Enable();
-                SetTool(Tool.BATTERY, true);
+            case Tool.SOLARARRAY:
+                _playerController.solarArrayManager.Enable();
+                //SetTool(Tool.SOLARARRAY, true);
                 break;
 
             case Tool.THRUSTER:
@@ -193,10 +195,7 @@ public class InventoryManager : MonoBehaviour
     {
         // Ensure the tool exists
         if (tool == Tool.None) return;
-
-        // Handle if SolarPanel passed explicitly, maybe we should fix this so only one exists?
-        if (tool == Tool.SOLARPANEL) { _tools[Tool.BATTERY] = value; }
-        else { _tools[tool] = value; }
+        _tools[tool] = value;
 
         // Update events
         OnUpdateInventoryTool?.Invoke(tool, value);

@@ -209,9 +209,7 @@ public class DeveloperConsole : MonoBehaviour
                         PlayerController.Instance.inventoryManager.SetElement(InventoryManager.Element.TUNGSTEN,    100);
                         // Enable every tool
                         PlayerController.Instance.inventoryManager.ToolPickUp(
-                            PlayerController.Instance.inventoryManager.MatchTool(InventoryManager.Tool.SOLARPANEL));
-                        PlayerController.Instance.inventoryManager.ToolPickUp(
-                            PlayerController.Instance.inventoryManager.MatchTool(InventoryManager.Tool.BATTERY));
+                            PlayerController.Instance.inventoryManager.MatchTool(InventoryManager.Tool.SOLARARRAY));
                         PlayerController.Instance.inventoryManager.ToolPickUp(
                             PlayerController.Instance.inventoryManager.MatchTool(InventoryManager.Tool.SPECTROMETER));
                         PlayerController.Instance.inventoryManager.ToolPickUp(
@@ -269,8 +267,8 @@ public class DeveloperConsole : MonoBehaviour
                             case InventoryManager.Tool.SPECTROMETER:
                                 // Currently nothing to do here
                                 break;
-                            case InventoryManager.Tool.BATTERY:
-                                PlayerController.Instance.batteryManager.Enable();
+                            case InventoryManager.Tool.SOLARARRAY:
+                                PlayerController.Instance.solarArrayManager.Enable();
                                 break;
                             case InventoryManager.Tool.THRUSTER:
                                 PlayerController.Instance.thrusterManager.Enable();

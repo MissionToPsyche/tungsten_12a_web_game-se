@@ -6475,7 +6475,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7997373476409143001}
   m_Layer: 5
-  m_Name: Solar Panel Description
+  m_Name: Solar Array Description
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8516,7 +8516,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -20.7794}
+  m_AnchoredPosition: {x: 0, y: -20.779388}
   m_SizeDelta: {x: -20, y: -342.4411}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3702138138189241715
@@ -13703,7 +13703,7 @@ MonoBehaviour:
   confirmBoxText: {fileID: 7116520113140859952}
   optionsMenu: {fileID: 5624132768119358631}
   dialogText: {fileID: 6635938548554724783}
-  solarPanelInfoButton: {fileID: 6155521317316860966}
+  solarArrayInfoButton: {fileID: 6155521317316860966}
   imagerInfoButton: {fileID: 1420831044811399160}
   spectrometerInfoButton: {fileID: 5195088121275753458}
   eMagnetInfoButton: {fileID: 523221844082889564}
@@ -13720,15 +13720,15 @@ MonoBehaviour:
   tungstenAmount: {fileID: 5298505535930295765}
   thrusterLevel: {fileID: 226551695672639381}
   eMagnetLevel: {fileID: 8814816173545063682}
-  batteryLevel: {fileID: 6167591648291657674}
+  solarArrayLevel: {fileID: 6167591648291657674}
   imagerLevel: {fileID: 1217337747109957117}
   thrusterRequirementsList: {fileID: 2880800519042991041}
   eMagnetRequirementsList: {fileID: 7966437716574453872}
-  batteryRequirementsList: {fileID: 8229258725527197779}
+  solarArrayRequirementsList: {fileID: 8229258725527197779}
   imagerRequirementsList: {fileID: 6326610677998623885}
   thrusterUpgradeButton: {fileID: 1972633787189536873}
   eMagnetUpgradeButton: {fileID: 7631409065718153272}
-  batteryUpgradeButton: {fileID: 5423813078742066293}
+  solarArrayUpgradeButton: {fileID: 5423813078742066293}
   imagerUpgradeButton: {fileID: 1126702604835087820}
   copperRequirement: {fileID: 2850205873335233286, guid: c493214116bfd954cbc68cfa1eced489, type: 3}
   ironRequirement: {fileID: 2850205873335233286, guid: 3a27aade1ce85234fbe617eee553e116, type: 3}
@@ -13879,7 +13879,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Current Level: 1 / 4'
+  m_text: 'Current Level: 1 / 5'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -14078,7 +14078,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: SolarPanel
+          m_StringArgument: SolarArray
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &5702284626421382063
@@ -15303,7 +15303,7 @@ GameObject:
   - component: {fileID: 1159380274946551764}
   - component: {fileID: 6640879138775479682}
   m_Layer: 5
-  m_Name: Solar Panel Button
+  m_Name: Solar Array Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15325,7 +15325,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 70.20001, y: -89}
+  m_AnchoredPosition: {x: -253.29999, y: -89}
   m_SizeDelta: {x: 90, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8696562259929051984
@@ -16053,14 +16053,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd2ae6f3bb942a548b7a61689e141795, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toolName: 
-  level: 0
-  maxLevel: 0
-  toolEnabled: 0
-  batteryLevel: 0
-  maxCapacity: 0
-  batteryPercent: 0
-  rate: 0
+  toolName: SolarArray
+  level: 1
+  maxLevel: 5
+  toolEnabled: 1
+  batteryLevel: 100
+  maxCapacity: 100
+  batteryPercent: 100
+  rate: 0.5
   batteryDrained: 0
 --- !u!1 &6481837501723963123
 GameObject:
@@ -16353,7 +16353,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2506746866443725022}
   m_Layer: 5
-  m_Name: Battery Section
+  m_Name: Solar Array Section
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17677,8 +17677,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1486125545136538576}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.25, y: 0}
-  m_AnchorMax: {x: 0.25, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -19492,7 +19492,7 @@ RectTransform:
   m_Father: {fileID: 2038781683388870752}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.25, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -21321,7 +21321,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: SolarPanel
+          m_StringArgument: Solar Array
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &8307972444069896128
