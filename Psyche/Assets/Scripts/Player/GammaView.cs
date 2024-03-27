@@ -1,7 +1,7 @@
 /** 
-Description: spectrometer tool gamma view script
+Description: Gamma Ray Neutron Spectrometer Gamma View Script
 Author: blopezro
-Version: 20240224
+Version: 20240326
 **/
 
 using System;
@@ -60,16 +60,22 @@ public class GammaView : MonoBehaviour {
     /// <param name="mode"></param>
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
         GameStateManager.Scene GameStateManagerSn = GameController.Instance.gameStateManager.MatchScene(scene.name);
+
         if (GameStateManagerSn != GameStateManager.Scene.Outro) {
             sceneLight = GameObject.FindGameObjectWithTag("SceneLight").GetComponent<Light2D>();
             sceneTilemap = GameObject.FindGameObjectWithTag("Terrain").GetComponent<Tilemap>();
-            if (GameStateManagerSn == GameStateManager.Scene.eMagnet || GameStateManagerSn == GameStateManager.Scene.Combo1 || GameStateManagerSn == GameStateManager.Scene.Combo3) {
-                sceneTilemapFake = GameObject.FindGameObjectWithTag("FakeTerrain").GetComponent<Tilemap>();
+            
+            if (GameStateManagerSn == GameStateManager.Scene.eMagnet || 
+                GameStateManagerSn == GameStateManager.Scene.Combo1 || 
+                GameStateManagerSn == GameStateManager.Scene.Combo3) {
+                    sceneTilemapFake = GameObject.FindGameObjectWithTag("FakeTerrain").GetComponent<Tilemap>();
             }
+
             sceneBackground = GameObject.FindGameObjectWithTag("Background").GetComponent<SpriteRenderer>();
             origSceneLightIntensity = sceneLight.intensity;
             origSceneTilemapColor = sceneTilemap.color;
             origSceneBackgroundColor = sceneBackground.color;
+            
             if (GameStateManagerSn != GameStateManager.Scene.Landing) {
                 TurnOffSceneLight();
             }
@@ -125,7 +131,6 @@ public class GammaView : MonoBehaviour {
     List<GameObject> CaptureObjectsInView() {
         List<GameObject> objectsInView = new List<GameObject>();
         SpriteRenderer[] sprites = FindObjectsOfType<SpriteRenderer>();
-
         foreach (SpriteRenderer sprite in sprites) {
             GameObject obj = sprite.gameObject;
             // check if the object is within the camera's viewport
@@ -248,7 +253,7 @@ public class GammaView : MonoBehaviour {
                 3 =>  Color.green,  // Terrain
                 6 =>  Color.red,    // Titanium
                 7 =>  Color.yellow, // Iron
-                8 =>  Color.black,  // Cobalt
+                8 =>  Color.black,  // Cave
                 9 =>  Color.grey,   // Nickel
                 10 => Color.blue,   // Copper
                 11 => Color.gray,   // Silver
@@ -256,19 +261,6 @@ public class GammaView : MonoBehaviour {
                 13 => Color.white,  // Platinum
                 14 => Color.cyan,   // Gold
                 15 => Color.clear,  // Clear
-                /** custom colors below to be used in future levels
-                3 =>  new Color(0f, 0f, 0f, 1f),            // Terrain
-                6 =>  new Color(0.5f, 0.5f, 0.5f, 1f),      // Titanium
-                7 =>  new Color(0.5f, 0.5f, 0.5f, 1f),      // Iron
-                8 =>  new Color(0f, 0f, 0f, 1f),            // Cobalt
-                9 =>  new Color(0.5f, 0.5f, 0.5f, 1f),      // Nickel
-                10 => new Color(0.647f, 0.165f, 0.165f, 1f),// Copper
-                11 => new Color(0f, 0.502f, 0f, 1f),        // Silver
-                12 => new Color(0f, 0f, 1f, 1f),            // Tungsten
-                13 => new Color(0f, 0f, 0f, 0f),            // Platinum
-                14 => new Color(0.5f, 0.5f, 0.5f, 1f),      // Gold
-                15 => new Color(0f, 0f, 0f, 0f),            // Clear
-                **/
                 _ => defaultColor,
             };
         }
