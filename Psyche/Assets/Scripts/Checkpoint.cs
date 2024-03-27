@@ -1,41 +1,38 @@
 /**
- * description: checkpoint script to ensure animation
+ * Description: Checkpoint script to ensure animation
  * Author: dnguye99
- * version 20231125
+ * version 20230326
  */
-using System.Collections;
-using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class Checkpoint : MonoBehaviour
-{
-    //Private variables for animation
+using UnityEngine;
+
+public class Checkpoint : MonoBehaviour {
+    // Variables for animation
     private Animator animator;
     public bool isSpinning = false;
     const string STATIC = "checkpoint-solarpanel-static";
     const string SPIN = "checkpoint-solarpanel-spin";
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    /// <summary>
+    /// Start is called before the first frame update
+    /// </summary>
+    void Start() {
         animator = GetComponent<Animator>();
-        if (!isSpinning)
-        {
+        if (!isSpinning) {
             animator.Play(STATIC);
-        }
-        else
-        {
+        } else {
             Spin();
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            //checks if the checkpoint is not spinning
-            if (!isSpinning)
-            {
+    /// <summary>
+    /// What to do when the player collides with the checkpoint
+    /// </summary>
+    /// <param name="collision"></param>
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if (collision.gameObject.CompareTag("Player")) {
+            // Checks if the checkpoint is not spinning
+            if (!isSpinning) {
                 isSpinning = true;
                 Spin();
             }
@@ -43,10 +40,10 @@ public class Checkpoint : MonoBehaviour
     }
 
     /// <summary>
-    /// Activates the animation for the checkpoint.
+    /// Activates the animation for the checkpoint
     /// </summary>
-    public void Spin()
-    {
+    public void Spin() {
         animator.Play(SPIN);
     }
+
 }

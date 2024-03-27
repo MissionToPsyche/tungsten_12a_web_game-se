@@ -1,7 +1,7 @@
 /** 
-Description: audio manager script
+Description: Audio manager script
 Author: blopezro
-Version: 20240222
+Version: 20240326
 **/
 
 using UnityEngine;
@@ -33,14 +33,9 @@ public class AudioManager : MonoBehaviour {
     [SerializeField] public AudioSource checkpoint;
     public List<AudioSource> sfxAudioSources;
     
-    //////////////////////////////////////////////////
-    //Private linker
-    private PlayerController _playerController;
-    public void Initialize(PlayerController playerController) {
-        _playerController = playerController;
-    }
-    //////////////////////////////////////////////////
-    
+    /// <summary>
+    /// collects the same type audio sources into their respected lists
+    /// </summary>
     private void OnEnable() {
         uiAudioSources.Add(buttonClick);
         musicAudioSources.Add(backgroundMusic);
@@ -90,9 +85,26 @@ public class AudioManager : MonoBehaviour {
         }
     }
 
-    public void ToggleAudioMuteForAllUi() {    ToggleAudioMuteForAll(uiAudioSources); }
-    public void ToggleAudioMuteForAllMusic() { ToggleAudioMuteForAll(musicAudioSources); }
-    public void ToggleAudioMuteForAllSfx() {   ToggleAudioMuteForAll(sfxAudioSources); }
+    /// <summary>
+    /// Toggles mute for all UI audio sources
+    /// </summary>
+    public void ToggleAudioMuteForAllUi() {
+        ToggleAudioMuteForAll(uiAudioSources);
+    }
+
+    /// <summary>
+    /// Toggles mute for all music audio sources
+    /// </summary>
+    public void ToggleAudioMuteForAllMusic() {
+        ToggleAudioMuteForAll(musicAudioSources);
+    }
+
+    /// <summary>
+    /// Toggles mute for all sfx audio sources
+    /// </summary>
+    public void ToggleAudioMuteForAllSfx() {
+        ToggleAudioMuteForAll(sfxAudioSources);
+    }
 
     /// <summary>
     /// set an audio source volume
@@ -114,14 +126,26 @@ public class AudioManager : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// set an audio source volume for all ui
+    /// </summary>
+    /// <param name="desiredVolume"></param>
     public void SetAudioVolumeForAllUi(float desiredVolume) {
         SetAudioVolumeForAll(uiAudioSources, desiredVolume);
     }
     
+    /// <summary>
+    /// set an audio source volume for all music
+    /// </summary>
+    /// <param name="desiredVolume"></param>
     public void SetAudioVolumeForAllMusic(float desiredVolume) {
         SetAudioVolumeForAll(musicAudioSources, desiredVolume);
     }
-    
+
+    /// <summary>
+    /// set an audio source volume for all sfx
+    /// </summary>
+    /// <param name="desiredVolume"></param>
     public void SetAudioVolumeForAllSfx(float desiredVolume) {
         SetAudioVolumeForAll(sfxAudioSources, desiredVolume);
     }
