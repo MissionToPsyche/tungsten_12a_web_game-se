@@ -37,26 +37,26 @@ public class SolarArrayManager : ToolManager {
         {
             {  2, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
-                    { InventoryManager.Element.NICKEL, 2 }, { InventoryManager.Element.GOLD, 0 },
+                    { InventoryManager.Element.Copper, 0 }, { InventoryManager.Element.Iron, 0 }, 
+                    { InventoryManager.Element.Nickel, 2 }, { InventoryManager.Element.Gold, 0 },
                 }
             },
             {  3, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
-                    { InventoryManager.Element.NICKEL, 3 }, { InventoryManager.Element.GOLD, 0 },
+                    { InventoryManager.Element.Copper, 0 }, { InventoryManager.Element.Iron, 0 }, 
+                    { InventoryManager.Element.Nickel, 3 }, { InventoryManager.Element.Gold, 0 },
                 }
             },
             {  4, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
-                    { InventoryManager.Element.NICKEL, 4 }, { InventoryManager.Element.GOLD, 0 },
+                    { InventoryManager.Element.Copper, 0 }, { InventoryManager.Element.Iron, 0 }, 
+                    { InventoryManager.Element.Nickel, 4 }, { InventoryManager.Element.Gold, 0 },
                 }
             },
             {  5, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
-                    { InventoryManager.Element.NICKEL, 5 }, { InventoryManager.Element.GOLD, 0 },
+                    { InventoryManager.Element.Copper, 0 }, { InventoryManager.Element.Iron, 0 }, 
+                    { InventoryManager.Element.Nickel, 5 }, { InventoryManager.Element.Gold, 0 },
                 }
             },
         };

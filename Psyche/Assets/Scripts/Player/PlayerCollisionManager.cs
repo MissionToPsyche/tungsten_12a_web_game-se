@@ -197,7 +197,7 @@ public class PlayerCollisionManager : MonoBehaviour
                 _playerController.pressUpPopup.SetActive(true);
 
                 // If ship (tungsten: layer 12) and fewer than 8 tungsten available - disable the BoxCollider
-                if (other.gameObject.layer == 12 && _playerController.inventoryManager.CheckElement(InventoryManager.Element.TUNGSTEN) < 8)
+                if (other.gameObject.layer == 12 && _playerController.inventoryManager.CheckElement(InventoryManager.Element.Tungsten) < 8)
                 {
                     other.gameObject.GetComponent<BoxCollider2D>().enabled = false;
                 }

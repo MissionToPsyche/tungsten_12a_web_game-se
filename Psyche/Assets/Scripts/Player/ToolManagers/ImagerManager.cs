@@ -38,56 +38,56 @@ public class ImagerManager : ToolManager
         {
             {  2, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
-                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 2 },
+                    { InventoryManager.Element.Copper, 0 }, { InventoryManager.Element.Iron, 0 }, 
+                    { InventoryManager.Element.Nickel, 0 }, { InventoryManager.Element.Gold, 2 },
                 }
             },
             {  3, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
-                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 2 },
+                    { InventoryManager.Element.Copper, 0 }, { InventoryManager.Element.Iron, 0 }, 
+                    { InventoryManager.Element.Nickel, 0 }, { InventoryManager.Element.Gold, 2 },
                 }
             },
             {  4, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
-                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 2 },
+                    { InventoryManager.Element.Copper, 0 }, { InventoryManager.Element.Iron, 0 }, 
+                    { InventoryManager.Element.Nickel, 0 }, { InventoryManager.Element.Gold, 2 },
                 }
             },
             {  5, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
-                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 2 },
+                    { InventoryManager.Element.Copper, 0 }, { InventoryManager.Element.Iron, 0 }, 
+                    { InventoryManager.Element.Nickel, 0 }, { InventoryManager.Element.Gold, 2 },
                 }
             },
             {  6, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
-                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 2 },
+                    { InventoryManager.Element.Copper, 0 }, { InventoryManager.Element.Iron, 0 }, 
+                    { InventoryManager.Element.Nickel, 0 }, { InventoryManager.Element.Gold, 2 },
                 }
             },
             {  7, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
-                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 2 },
+                    { InventoryManager.Element.Copper, 0 }, { InventoryManager.Element.Iron, 0 }, 
+                    { InventoryManager.Element.Nickel, 0 }, { InventoryManager.Element.Gold, 2 },
                 }
             },
             {  8, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
-                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 2 },
+                    { InventoryManager.Element.Copper, 0 }, { InventoryManager.Element.Iron, 0 }, 
+                    { InventoryManager.Element.Nickel, 0 }, { InventoryManager.Element.Gold, 2 },
                 }
             },
             {  9, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
-                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 4 },
+                    { InventoryManager.Element.Copper, 0 }, { InventoryManager.Element.Iron, 0 }, 
+                    { InventoryManager.Element.Nickel, 0 }, { InventoryManager.Element.Gold, 4 },
                 }
             },
             {  10, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 },     
-                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 4 },
+                    { InventoryManager.Element.Copper, 0 }, { InventoryManager.Element.Iron, 0 },     
+                    { InventoryManager.Element.Nickel, 0 }, { InventoryManager.Element.Gold, 4 },
                 }
             },
         };
