@@ -32,8 +32,19 @@ public abstract class ToolManager : MonoBehaviour
     /// </summary>
     public enum ToolDirective
     {
-        Upgrade, 
+        /// <summary>
+        /// Upgrading the <see cref="InventoryManager.Tool"/>
+        /// </summary>
+        Upgrade,
+
+        /// <summary>
+        /// Provide info about the <see cref="InventoryManager.Tool"/>
+        /// </summary>
         Info,
+
+        /// <summary>
+        /// Maximum level of the <see cref="InventoryManager.Tool"/>
+        /// </summary>
         MaxLevel
     }
 

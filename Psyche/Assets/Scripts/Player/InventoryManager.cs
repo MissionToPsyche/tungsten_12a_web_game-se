@@ -53,12 +53,34 @@ public class InventoryManager : MonoBehaviour
     /// </summary>
     public enum Element
     {
+        /// <summary>
+        /// Copper <see cref="Element"/> variant.
+        /// </summary>
         Copper,
+
+        /// <summary>
+        /// Iron <see cref="Element"/> variant.
+        /// </summary>
         Iron,
+
+        /// <summary>
+        /// Nickel <see cref="Element"/> variant.
+        /// </summary>
         Nickel,
+
+        /// <summary>
+        /// Gold <see cref="Element"/> variant.
+        /// </summary>
         Gold,
+
+        /// <summary>
+        /// Tungsten <see cref="Element"/> variant.
+        /// </summary>
         Tungsten,
 
+        /// <summary>
+        /// Handles erroneous values being passed.
+        /// </summary>
         None,
     }
 
@@ -103,12 +125,34 @@ public class InventoryManager : MonoBehaviour
     /// </summary>
     public enum Tool
     {
+        /// <summary>
+        /// Imager <see cref="Tool"/> variant
+        /// </summary>
         Imager,
+
+        /// <summary>
+        /// SolarArray <see cref="Tool"/> variant
+        /// </summary>
         SolarArray,
+
+        /// <summary>
+        /// Spectrometer <see cref="Tool"/> variant
+        /// </summary>
         Spectrometer,
+
+        /// <summary>
+        /// Thruster <see cref="Tool"/> variant
+        /// </summary>
         Thruster,
+
+        /// <summary>
+        /// Electromagnet <see cref="Tool"/> variant
+        /// </summary>
         Electromagnet,
 
+        /// <summary>
+        /// Handles erroneous values being passed.
+        /// </summary>
         None,
     }
 
