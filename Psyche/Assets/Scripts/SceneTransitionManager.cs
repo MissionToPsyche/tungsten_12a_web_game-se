@@ -120,9 +120,9 @@ public class SceneTransitionManager : MonoBehaviour {
 
     /// <summary>
     /// Finds and passes the unique boundary of the newly loaded scene to each of the game's cameras.
-    /// </summary>
     /// Needs a WaitForSeconds() before being called so the scene can fully load, or else
     /// will try to find the camera bounds of the previous scene.
+    /// </summary>
     private void LoadCameraBounds()
     {
         //array of the virtual cameras attached to the player
