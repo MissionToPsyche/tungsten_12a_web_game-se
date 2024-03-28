@@ -29,12 +29,12 @@ public class ImagerManager : ToolManager
     public void Initialize(PlayerController playerManagement)
     {
         //Base class variables
-        toolName = "Imager";
-        toolEnabled = false;
-        _playerController = playerManagement;
+        ToolName = "Imager";
+        ToolEnabled = false;
+        PlayerController = playerManagement;
         _flashlight.intensity = 0f;
-        level = 1;
-        levelRequirements = new Dictionary<int, Dictionary<InventoryManager.Element, ushort>>()
+        Level = 1;
+        LevelRequirements = new Dictionary<int, Dictionary<InventoryManager.Element, ushort>>()
         {
             {  2, new Dictionary<InventoryManager.Element, ushort>()
                 {
@@ -93,7 +93,7 @@ public class ImagerManager : ToolManager
         };
 
         //Tool specific variables
-        maxLevel = levelRequirements.Count + 1;
+        MaxLevel = LevelRequirements.Count + 1;
         _radiusIncrease = 1f;
         _active = false;
     }
@@ -104,7 +104,7 @@ public class ImagerManager : ToolManager
     /// </summary>
     public override void Activate()
     {
-        _active = !_playerController.solarArrayManager.batteryDrained;
+        _active = !PlayerController.solarArrayManager.batteryDrained;
         if (_active)
         {
             _flashlight.intensity = 1;
