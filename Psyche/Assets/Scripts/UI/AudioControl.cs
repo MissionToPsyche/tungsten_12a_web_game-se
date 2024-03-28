@@ -10,20 +10,20 @@ public class AudioControl : MonoBehaviour {
     public Slider slider;
 
     private void OnEnable() {
-        checkMark.SetActive(GameController.Instance.colorBlindMode);
+        checkMark.SetActive(GameController.Instance.ColorBlindMode);
     }
 
     public void setUiVolume() {
-        GameController.Instance.audioManager.SetAudioVolumeForAllUi(slider.value);
+        GameController.Instance.AudioManager.SetAudioVolumeForAllUi(slider.value);
         // todo: add example play of sound
     }
 
     public void setMusicVolume() {
-        GameController.Instance.audioManager.SetAudioVolumeForAllMusic(slider.value);
+        GameController.Instance.AudioManager.SetAudioVolumeForAllMusic(slider.value);
     }
 
     public void setSfxVolume() {
-        GameController.Instance.audioManager.SetAudioVolumeForAllSfx(slider.value);
+        GameController.Instance.AudioManager.SetAudioVolumeForAllSfx(slider.value);
         // todo: add example play of sound
     }
 }
