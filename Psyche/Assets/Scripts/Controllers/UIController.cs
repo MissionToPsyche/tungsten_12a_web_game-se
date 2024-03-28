@@ -245,8 +245,8 @@ public class UIController : BaseController<UIController>
         {
             case GameStateManager.Scene.Landing: elementIndex = 0; break;
             case GameStateManager.Scene.Imager: elementIndex = 1; break;
-            case GameStateManager.Scene.GRNS: elementIndex = 2; break;
-            case GameStateManager.Scene.eMagnet: elementIndex = 3; break;
+            case GameStateManager.Scene.Grns: elementIndex = 2; break;
+            case GameStateManager.Scene.EMagnet: elementIndex = 3; break;
             case GameStateManager.Scene.Thruster: elementIndex = 4; break;
             case GameStateManager.Scene.Combo1: elementIndex = 5; break;
             case GameStateManager.Scene.Combo2: elementIndex = 6; break;

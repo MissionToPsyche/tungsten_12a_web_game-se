@@ -20,16 +20,16 @@ public class PlayerDeath : MonoBehaviour {
     public void Initialize(PlayerController playerController)
     {
         _playerController = playerController;
-        GameController.Instance.gameStateManager.startPoint = _playerController.transform.position;
-        GameController.Instance.gameStateManager.respawnPoint = _playerController.transform.position;
+        GameController.Instance.gameStateManager.StartPoint = _playerController.transform.position;
+        GameController.Instance.gameStateManager.RespawnPoint = _playerController.transform.position;
     }
 
     /// <summary>
     /// Initialize respawn point and set starting location.
     /// </summary>
     private void Start() {
-        GameController.Instance.gameStateManager.startPoint = _playerController.transform.position;
-        GameController.Instance.gameStateManager.respawnPoint = _playerController.transform.position;
+        GameController.Instance.gameStateManager.StartPoint = _playerController.transform.position;
+        GameController.Instance.gameStateManager.RespawnPoint = _playerController.transform.position;
     }
 
     /// <summary>
@@ -86,8 +86,8 @@ public class PlayerDeath : MonoBehaviour {
             return;
         }
         //ID of the checkpoint
-        GameController.Instance.gameStateManager.checkpoint = collision.gameObject.GetInstanceID();
-        GameController.Instance.gameStateManager.respawnPoint = _playerController.transform.position;
+        GameController.Instance.gameStateManager.Checkpoint = collision.gameObject.GetInstanceID();
+        GameController.Instance.gameStateManager.RespawnPoint = _playerController.transform.position;
 
         //Recharge health and battery
         playerHealth.HealthUp(100);
