@@ -154,9 +154,9 @@ public class GameController : BaseController<GameController>
     /// <param name="gameState"></param>
     public void HandleGameStateEvent()
     {
-        OnGameStateChanged?.Invoke(gameStateManager.currentState);
+        OnGameStateChanged?.Invoke(gameStateManager.CurrentState);
         // Handle game state updates
-        switch (gameStateManager.currentState)
+        switch (gameStateManager.CurrentState)
         {
             case GameStateManager.GameState.MainMenu:
                 gameStateManager.ResetScenes();
