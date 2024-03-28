@@ -1,11 +1,9 @@
 /**
  * description: checkpoint script to ensure animation
- * Author: dnguye99
+ * Author: dnguye99, JoshBenn
  * version 20231125
  */
-using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Checkpoint : MonoBehaviour
 {
@@ -14,6 +12,7 @@ public class Checkpoint : MonoBehaviour
     public bool isSpinning = false;
     const string STATIC = "checkpoint-solarpanel-static";
     const string SPIN = "checkpoint-solarpanel-spin";
+    System.DateTime LastActivation;
 
     // Start is called before the first frame update
     void Start()
