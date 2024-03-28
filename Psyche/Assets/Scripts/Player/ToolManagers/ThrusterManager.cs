@@ -35,11 +35,11 @@ public class ThrusterManager : ToolManager
     public void Initialize(PlayerController playerController)
     {
         //Base class variables
-        toolName = "Thruster";
-        toolEnabled = false;
-        _playerController = playerController;
-        level = 1;
-        levelRequirements = new Dictionary<int, Dictionary<InventoryManager.Element, ushort>>()
+        ToolName = "Thruster";
+        ToolEnabled = false;
+        PlayerController = playerController;
+        Level = 1;
+        LevelRequirements = new Dictionary<int, Dictionary<InventoryManager.Element, ushort>>()
         {
             {  2, new Dictionary<InventoryManager.Element, ushort>()
                 {
@@ -68,7 +68,7 @@ public class ThrusterManager : ToolManager
         };
 
         //Tool specific variables
-        maxLevel = levelRequirements.Count + 1;
+        MaxLevel = LevelRequirements.Count + 1;
         _thrusterForce = 0.9f;
     }
     
@@ -80,7 +80,7 @@ public class ThrusterManager : ToolManager
     {
         if (working)
         {
-            _playerController.playerCharacter.velocity += new Vector2(0f, _thrusterForce * Time.deltaTime * 10f);
+            PlayerController.playerCharacter.velocity += new Vector2(0f, _thrusterForce * Time.deltaTime * 10f);
         } else
         {
             duration = limit;
