@@ -225,7 +225,7 @@ public class PlayerController : BaseController<PlayerController>
     {
         if(GameController.Instance != null)
         {
-            GameController.Instance.gameStateManager.UnloadPlayer();
+            GameController.Instance.GameStateManager.UnloadPlayer();
         }
         if(UIController.Instance != null)
         {
