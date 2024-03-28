@@ -129,10 +129,10 @@ public class UIController : BaseController<UIController>
         {
             PlayerController.Instance.inventoryManager.OnUpdateInventoryElement += ElementUpdate;
             PlayerController.Instance.inventoryManager.OnUpdateInventoryTool += EnableToolButton;
-            PlayerController.Instance.batteryManager.OnBatteryPercentageChanged += UpdateBattery;
+            PlayerController.Instance.solarArrayManager.OnBatteryPercentageChanged += UpdateBattery;
 
             // ToolInfoGathers
-            PlayerController.Instance.batteryManager.ToolManagerUpdate += ToolInfoGather;
+            PlayerController.Instance.solarArrayManager.ToolManagerUpdate += ToolInfoGather;
             PlayerController.Instance.thrusterManager.ToolManagerUpdate += ToolInfoGather;
             PlayerController.Instance.imagerManager.ToolManagerUpdate += ToolInfoGather;
             PlayerController.Instance.eMagnetManager.ToolManagerUpdate += ToolInfoGather;
@@ -153,10 +153,10 @@ public class UIController : BaseController<UIController>
         {
             PlayerController.Instance.inventoryManager.OnUpdateInventoryElement -= ElementUpdate;
             PlayerController.Instance.inventoryManager.OnUpdateInventoryTool -= EnableToolButton;
-            PlayerController.Instance.batteryManager.OnBatteryPercentageChanged -= UpdateBattery;
+            PlayerController.Instance.solarArrayManager.OnBatteryPercentageChanged -= UpdateBattery;
 
             // ToolInfoGathers
-            PlayerController.Instance.batteryManager.ToolManagerUpdate -= ToolInfoGather;
+            PlayerController.Instance.solarArrayManager.ToolManagerUpdate -= ToolInfoGather;
             PlayerController.Instance.thrusterManager.ToolManagerUpdate -= ToolInfoGather;
             PlayerController.Instance.imagerManager.ToolManagerUpdate -= ToolInfoGather;
             PlayerController.Instance.eMagnetManager.ToolManagerUpdate -= ToolInfoGather;
@@ -171,10 +171,10 @@ public class UIController : BaseController<UIController>
     {
         switch (tool)
         {
-            case InventoryManager.Tool.BATTERY or InventoryManager.Tool.SOLARPANEL:
+            case InventoryManager.Tool.SOLARARRAY:
                 setDialogText("This is a Solar Array. Psyche had 2 of these in cross formations to generate power.\n\nI can use this to automatically recharge my suit's battery.\n\n<i>Press <b>TAB</b> to learn more.</i>");
-                solarPanelInfoButton.SetActive(true);
-                batteryLevel.transform.parent.gameObject.SetActive(true);
+                solarArrayInfoButton.SetActive(true);
+                solarArrayLevel.transform.parent.gameObject.SetActive(true);
                 batteryIndicator.SetActive(true);
                 break;
 
@@ -319,7 +319,7 @@ public class UIController : BaseController<UIController>
                 Application.OpenURL("https://psyche.asu.edu/2018/01/19/electric-thrusters-psyche-spacecraft-work/"); break;
             case "EMagnet":
                 Application.OpenURL("https://psyche.asu.edu/gallery/meet-nasas-psyche-team-who-will-measure-the-asteroids-magnetic-field/"); break;
-            case "SolarPanel":
+            case "SolarArray":
                 Application.OpenURL("https://psyche.asu.edu/mission/the-spacecraft/"); break;
             default:
                 Debug.LogError("Tool link not set or incorrect name passed");
@@ -359,7 +359,7 @@ public class UIController : BaseController<UIController>
     public TMP_Text dialogText;
 
     [Header("Buttons")]
-    public GameObject solarPanelInfoButton;
+    public GameObject solarArrayInfoButton;
     public GameObject imagerInfoButton;
     public GameObject spectrometerInfoButton;
     public GameObject eMagnetInfoButton;
@@ -486,21 +486,18 @@ public class UIController : BaseController<UIController>
         }
         ///If Title Screen button opened the Confirmation Box
         else
-            EndGame(false);
-    }
+        {
+            /**
+             * Destroys Player and UI so they do not spawn on the start screen
+             */
+            Destroy(PlayerController.Instance.gameObject);
+            Destroy(gameObject);
+            GameController.Instance.sceneTransitionManager.devControl = true;
+            GameController.Instance.sceneTransitionManager.OnInitiateTransition(
+                GameController.Instance.gameStateManager.MatchScene(GameStateManager.Scene.Title)
+                );
 
-    /// <summary>
-    /// Destroys Player and UI so they do not spawn on the start screen or cutscene
-    /// </summary>
-    /// <param name="playCutscene"></param>
-    public void EndGame(bool playCutscene)
-    {
-        Destroy(PlayerController.Instance.gameObject);
-        Destroy(gameObject);
-        if (playCutscene)
-            UnityEngine.SceneManagement.SceneManager.LoadScene("Outro_Cutscene");
-        else
-            UnityEngine.SceneManagement.SceneManager.LoadScene("Title_Screen");
+        }
     }
 
     //========================================================== Upgrades Menu ==========================================================
@@ -517,19 +514,19 @@ public class UIController : BaseController<UIController>
     [Header("Tool Levels")]
     public TMP_Text thrusterLevel;
     public TMP_Text eMagnetLevel;
-    public TMP_Text batteryLevel;
+    public TMP_Text solarArrayLevel;
     public TMP_Text imagerLevel;
 
     [Header("Element Requirements")]
     public GameObject thrusterRequirementsList;
     public GameObject eMagnetRequirementsList;
-    public GameObject batteryRequirementsList;
+    public GameObject solarArrayRequirementsList;
     public GameObject imagerRequirementsList;
 
     [Header("Upgrade Buttons")]
     public Button thrusterUpgradeButton;
     public Button eMagnetUpgradeButton;
-    public Button batteryUpgradeButton;
+    public Button solarArrayUpgradeButton;
     public Button imagerUpgradeButton;
 
     [Header("Element Requirement Prefabs")]
@@ -551,7 +548,7 @@ public class UIController : BaseController<UIController>
         float soundDuration = 3.0f;
         AudioSource audioSource = PlayerController.Instance.inventoryManager.MatchTool(toolName) switch {
             InventoryManager.Tool.IMAGER => GameController.Instance.audioManager.toolImager,
-            InventoryManager.Tool.SOLARPANEL => GameController.Instance.audioManager.buttonClick,
+            InventoryManager.Tool.SOLARARRAY => GameController.Instance.audioManager.buttonClick,
             InventoryManager.Tool.THRUSTER => GameController.Instance.audioManager.toolThrusters,
             InventoryManager.Tool.ELECTROMAGNET => GameController.Instance.audioManager.toolEMagnet,
             _ => null,
@@ -627,9 +624,9 @@ public class UIController : BaseController<UIController>
                         thrusterLevel.SetText("Current Level: " + level.ToString() + " / " + maxLevel.ToString());
                         UpdateRequirements(requirements, thrusterRequirementsList.transform);
                         break;
-                    case "battery":
-                        batteryLevel.SetText("Current Level: " + level.ToString() + " / " + maxLevel.ToString());
-                        UpdateRequirements(requirements, batteryRequirementsList.transform);
+                    case "solararray":
+                        solarArrayLevel.SetText("Current Level: " + level.ToString() + " / " + maxLevel.ToString());
+                        UpdateRequirements(requirements, solarArrayRequirementsList.transform);
                         break;
                     case "imager":
                         imagerLevel.SetText("Current Level: " + level.ToString() + " / " + maxLevel.ToString());
@@ -648,8 +645,8 @@ public class UIController : BaseController<UIController>
                     case "thruster":
                         UpdateRequirements(requirements, thrusterRequirementsList.transform);
                         break;
-                    case "battery":
-                        UpdateRequirements(requirements, batteryRequirementsList.transform);
+                    case "solararray":
+                        UpdateRequirements(requirements, solarArrayRequirementsList.transform);
                         break;
                     case "imager":
                         UpdateRequirements(requirements, imagerRequirementsList.transform);
@@ -668,9 +665,9 @@ public class UIController : BaseController<UIController>
                         thrusterLevel.SetText(level.ToString());
                         thrusterUpgradeButton.interactable = false;
                         break;
-                    case "battery":
-                        batteryLevel.SetText(level.ToString());
-                        batteryUpgradeButton.interactable = false;
+                    case "solararray":
+                        solarArrayLevel.SetText(level.ToString());
+                        solarArrayUpgradeButton.interactable = false;
                         break;
                     case "imager":
                         imagerLevel.SetText(level.ToString());
