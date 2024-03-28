@@ -20,16 +20,16 @@ public class PlayerDeath : MonoBehaviour {
     public void Initialize(PlayerController playerController)
     {
         _playerController = playerController;
-        GameController.Instance.gameStateManager.startPoint = _playerController.transform.position;
-        GameController.Instance.gameStateManager.respawnPoint = _playerController.transform.position;
+        GameController.Instance.GameStateManager.startPoint = _playerController.transform.position;
+        GameController.Instance.GameStateManager.respawnPoint = _playerController.transform.position;
     }
 
     /// <summary>
     /// Initialize respawn point and set starting location.
     /// </summary>
     private void Start() {
-        GameController.Instance.gameStateManager.startPoint = _playerController.transform.position;
-        GameController.Instance.gameStateManager.respawnPoint = _playerController.transform.position;
+        GameController.Instance.GameStateManager.startPoint = _playerController.transform.position;
+        GameController.Instance.GameStateManager.respawnPoint = _playerController.transform.position;
     }
 
     /// <summary>
@@ -39,7 +39,7 @@ public class PlayerDeath : MonoBehaviour {
     public void Hazard(Collision2D collision)
     {
         ApplyKickback(collision);
-        GameController.Instance.audioManager.playerHurt.Play();
+        GameController.Instance.AudioManager.playerHurt.Play();
         GetHurt(1);
     }
     
@@ -48,7 +48,7 @@ public class PlayerDeath : MonoBehaviour {
     /// </summary>
     public void Spikes()
     {
-        GameController.Instance.audioManager.playerHurt.Play();
+        GameController.Instance.AudioManager.playerHurt.Play();
         GetHurt(playerHealth.playerHealth);
     }
 
@@ -86,8 +86,8 @@ public class PlayerDeath : MonoBehaviour {
             return;
         }
         //ID of the checkpoint
-        GameController.Instance.gameStateManager.checkpoint = collision.gameObject.GetInstanceID();
-        GameController.Instance.gameStateManager.respawnPoint = _playerController.transform.position;
+        GameController.Instance.GameStateManager.checkpoint = collision.gameObject.GetInstanceID();
+        GameController.Instance.GameStateManager.respawnPoint = _playerController.transform.position;
 
         //Recharge health and battery
         playerHealth.HealthUp(100);
@@ -95,7 +95,7 @@ public class PlayerDeath : MonoBehaviour {
 
         //Play audio if you hit a checkpoint with default layer
         if (collision.gameObject.layer.Equals(0)) {
-            GameController.Instance.audioManager.checkpoint.Play();
+            GameController.Instance.AudioManager.checkpoint.Play();
         }
     }
 
@@ -109,7 +109,7 @@ public class PlayerDeath : MonoBehaviour {
         playerHealth.HealthDown(dmg);
         if (playerHealth.playerHealth <= 0) {
             //start the warping animation & reset player's heath & battery
-            StartCoroutine(GameController.Instance.gameStateManager.Warp());
+            StartCoroutine(GameController.Instance.GameStateManager.Warp());
         }
     }
 }

@@ -10,7 +10,7 @@ public class ColorBlindCheckBox : MonoBehaviour
 
     private void OnEnable()
     {
-        checkMark.SetActive(GameController.Instance.colorBlindMode);
+        checkMark.SetActive(GameController.Instance.ColorBlindMode);
     }
 
     /// <summary>
