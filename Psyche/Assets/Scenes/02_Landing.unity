@@ -10636,7 +10636,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 226551695672639381, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
       propertyPath: m_text
-      value: 'Current Level: 1 / 5'
+      value: 'Current Level: 1 / 3'
       objectReference: {fileID: 0}
     - target: {fileID: 302356308671648100, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
       propertyPath: m_margin.x
@@ -11851,7 +11851,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8814816173545063682, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
       propertyPath: m_text
-      value: 'Current Level: 1 / 5'
+      value: 'Current Level: 1 / 4'
       objectReference: {fileID: 0}
     - target: {fileID: 8851158079926081043, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
       propertyPath: m_AnchoredPosition.y
