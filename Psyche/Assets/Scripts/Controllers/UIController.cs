@@ -504,7 +504,6 @@ public class UIController : BaseController<UIController>
             GameController.Instance.sceneTransitionManager.OnInitiateTransition(
                 GameController.Instance.gameStateManager.MatchScene(GameStateManager.Scene.Title)
                 );
-
         }
     }
 
