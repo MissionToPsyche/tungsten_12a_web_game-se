@@ -635,7 +635,7 @@ GameObject:
   m_Component:
   - component: {fileID: 349364317}
   - component: {fileID: 349364319}
-  - component: {fileID: 349364318}
+  - component: {fileID: 349364320}
   m_Layer: 5
   m_Name: SliderVolMusic
   m_TagString: Untagged
@@ -665,20 +665,6 @@ RectTransform:
   m_AnchoredPosition: {x: 106.71576, y: -26.000015}
   m_SizeDelta: {x: 299.4315, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &349364318
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 349364316}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb20f0bab5ac10f41b09c4a8d26ef504, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  checkMark: {fileID: 302922139}
-  slider: {fileID: 349364319}
 --- !u!114 &349364319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -730,8 +716,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 349364318}
-        m_TargetAssemblyTypeName: AudioControl, Assembly-CSharp
+      - m_Target: {fileID: 349364320}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
         m_MethodName: setMusicVolume
         m_Mode: 1
         m_Arguments:
@@ -742,6 +728,37 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &349364320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 349364316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9827f94284bfcf9478489ba72ef023aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 349364319}
+  uiVol: 0
+  musicVol: 0
+  sfxVol: 0
+  buttonClick: {fileID: 0}
+  uiAudioSources: []
+  backgroundMusic: {fileID: 0}
+  musicAudioSources: []
+  toolGRNS: {fileID: 0}
+  toolImager: {fileID: 0}
+  toolEMagnet: {fileID: 0}
+  toolThrusters: {fileID: 0}
+  playerJump: {fileID: 0}
+  playerHurt: {fileID: 0}
+  pickupElement: {fileID: 0}
+  pickupElementTungsten: {fileID: 0}
+  pickupTool: {fileID: 0}
+  checkpoint: {fileID: 0}
+  sfxAudioSources: []
 --- !u!1 &378708536
 GameObject:
   m_ObjectHideFlags: 0
@@ -4633,7 +4650,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1467916806}
   - component: {fileID: 1467916808}
-  - component: {fileID: 1467916807}
+  - component: {fileID: 1467916809}
   m_Layer: 5
   m_Name: SliderVolSfx
   m_TagString: Untagged
@@ -4663,20 +4680,6 @@ RectTransform:
   m_AnchoredPosition: {x: 106.71576, y: -26.000015}
   m_SizeDelta: {x: 299.4315, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1467916807
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1467916805}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb20f0bab5ac10f41b09c4a8d26ef504, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  checkMark: {fileID: 302922139}
-  slider: {fileID: 1467916808}
 --- !u!114 &1467916808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4728,8 +4731,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1467916807}
-        m_TargetAssemblyTypeName: AudioControl, Assembly-CSharp
+      - m_Target: {fileID: 1467916809}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
         m_MethodName: setSfxVolume
         m_Mode: 1
         m_Arguments:
@@ -4740,6 +4743,37 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1467916809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1467916805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9827f94284bfcf9478489ba72ef023aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 1467916808}
+  uiVol: 0
+  musicVol: 0
+  sfxVol: 0
+  buttonClick: {fileID: 0}
+  uiAudioSources: []
+  backgroundMusic: {fileID: 0}
+  musicAudioSources: []
+  toolGRNS: {fileID: 0}
+  toolImager: {fileID: 0}
+  toolEMagnet: {fileID: 0}
+  toolThrusters: {fileID: 0}
+  playerJump: {fileID: 0}
+  playerHurt: {fileID: 0}
+  pickupElement: {fileID: 0}
+  pickupElementTungsten: {fileID: 0}
+  pickupTool: {fileID: 0}
+  checkpoint: {fileID: 0}
+  sfxAudioSources: []
 --- !u!1 &1497236497
 GameObject:
   m_ObjectHideFlags: 0
@@ -5773,7 +5807,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1904385021}
   - component: {fileID: 1904385023}
-  - component: {fileID: 1904385022}
+  - component: {fileID: 1904385024}
   m_Layer: 5
   m_Name: SliderVolUi
   m_TagString: Untagged
@@ -5803,20 +5837,6 @@ RectTransform:
   m_AnchoredPosition: {x: 106.71576, y: -26.000015}
   m_SizeDelta: {x: 299.4315, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1904385022
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1904385020}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb20f0bab5ac10f41b09c4a8d26ef504, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  checkMark: {fileID: 302922139}
-  slider: {fileID: 1904385023}
 --- !u!114 &1904385023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5868,8 +5888,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1904385022}
-        m_TargetAssemblyTypeName: AudioControl, Assembly-CSharp
+      - m_Target: {fileID: 1904385024}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
         m_MethodName: setUiVolume
         m_Mode: 1
         m_Arguments:
@@ -5880,6 +5900,37 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1904385024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904385020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9827f94284bfcf9478489ba72ef023aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 1904385023}
+  uiVol: 0
+  musicVol: 0
+  sfxVol: 0
+  buttonClick: {fileID: 0}
+  uiAudioSources: []
+  backgroundMusic: {fileID: 0}
+  musicAudioSources: []
+  toolGRNS: {fileID: 0}
+  toolImager: {fileID: 0}
+  toolEMagnet: {fileID: 0}
+  toolThrusters: {fileID: 0}
+  playerJump: {fileID: 0}
+  playerHurt: {fileID: 0}
+  pickupElement: {fileID: 0}
+  pickupElementTungsten: {fileID: 0}
+  pickupTool: {fileID: 0}
+  checkpoint: {fileID: 0}
+  sfxAudioSources: []
 --- !u!1 &1920362818
 GameObject:
   m_ObjectHideFlags: 0
