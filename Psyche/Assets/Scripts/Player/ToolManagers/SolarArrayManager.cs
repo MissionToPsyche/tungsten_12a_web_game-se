@@ -12,7 +12,7 @@ using UnityEngine;
 /// <summary>
 /// Battery class in which a new batt can be created, drained, and charged. 
 /// </summary>
-public class BatteryManager : ToolManager {
+public class SolarArrayManager : ToolManager {
     //Public variables
     public float batteryLevel;
     public float maxCapacity;
@@ -29,7 +29,7 @@ public class BatteryManager : ToolManager {
     /// <param name="playerController"></param>
     public void Initialize(PlayerController playerController) {
         //Base class variables
-        toolName = "Battery";
+        toolName = "SolarArray";
         toolEnabled = false;
         _playerController = playerController;
         level = 1;
