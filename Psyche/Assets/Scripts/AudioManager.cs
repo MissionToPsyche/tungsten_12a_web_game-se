@@ -5,12 +5,15 @@ Version: 20240326
 **/
 
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
 
 /// <summary>
 /// AudioManager class which handles all audio within game.
 /// </summary>
 public class AudioManager : MonoBehaviour {
+    public Slider slider;
+    public float uiVol, musicVol, sfxVol;
 
     // ui
     [SerializeField] public AudioSource buttonClick;
@@ -148,6 +151,30 @@ public class AudioManager : MonoBehaviour {
     /// <param name="desiredVolume"></param>
     public void SetAudioVolumeForAllSfx(float desiredVolume) {
         SetAudioVolumeForAll(sfxAudioSources, desiredVolume);
+    }
+
+    /// <summary>
+    /// Sets the volume for all ui
+    /// </summary>
+    public void setUiVolume() {
+        GameController.Instance.audioManager.SetAudioVolumeForAllUi(slider.value);
+        GameController.Instance.audioManager.uiVol = slider.value;
+    }
+
+    /// <summary>
+    /// Sets the volume for all music
+    /// </summary>
+    public void setMusicVolume() {
+        GameController.Instance.audioManager.SetAudioVolumeForAllMusic(slider.value);
+        GameController.Instance.audioManager.musicVol = slider.value;
+    }
+
+    /// <summary>
+    /// Sets the volume for all sfx
+    /// </summary>
+    public void setSfxVolume() {
+        GameController.Instance.audioManager.SetAudioVolumeForAllSfx(slider.value);
+        GameController.Instance.audioManager.sfxVol = slider.value;
     }
 
 }
