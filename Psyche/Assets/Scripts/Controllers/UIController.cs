@@ -542,7 +542,6 @@ public class UIController : BaseController<UIController>
     public GameObject ironRequirement;
     public GameObject nickelRequirement;
     public GameObject goldRequirement;
-    public GameObject tungstenRequirement;
 
     /// <summary>
     /// Modifies the tool when its upgrade button is pressed
