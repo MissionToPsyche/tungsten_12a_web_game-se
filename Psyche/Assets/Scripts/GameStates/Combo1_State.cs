@@ -19,8 +19,8 @@ public class Combo1_State : BaseState
         // This must be set up first before anything else is created as everything else is based off of this
         _defaultState = new Dictionary<short, object>
         {
-            { (short)SceneObject.Checkpoint1, false }, // 'true' for available
-            { (short)SceneObject.Checkpoint2, false }, // `true` for activate-able
+            { (short)SceneObject.Checkpoint1, false },
+            { (short)SceneObject.Checkpoint2, false },
             { (short)SceneObject.Checkpoint3, false },
             { (short)SceneObject.Checkpoint4, false },
             { (short)SceneObject.Tungsten1,   true },
@@ -103,17 +103,17 @@ public class Combo1_State : BaseState
     public override void LoadState()
     {
 
-        foreach (var pair in _savedState)
+        foreach (KeyValuePair<short, object> pair in _savedState)
         {
             string objectName = Match(pair.Key);
             switch (pair.Key)
             {
                 case (short)SceneObject.Checkpoint1:
                     {
-                        var value = (bool)pair.Value;
+                        bool value = (bool)pair.Value;
                         if (value)
                         {
-                            var targetObject = GameObject.Find(objectName).GetComponent<Checkpoint>();
+                            Checkpoint targetObject = GameObject.Find(objectName).GetComponent<Checkpoint>();
                             targetObject.isSpinning = value;
                         }
                     }
@@ -121,10 +121,10 @@ public class Combo1_State : BaseState
 
                 case (short)SceneObject.Checkpoint2:
                     {
-                        var value = (bool)pair.Value;
+                        bool value = (bool)pair.Value;
                         if (value)
                         {
-                            var targetObject = GameObject.Find(objectName).GetComponent<Checkpoint>();
+                            Checkpoint targetObject = GameObject.Find(objectName).GetComponent<Checkpoint>();
                             targetObject.isSpinning = value;
                         }
                     }
@@ -132,10 +132,10 @@ public class Combo1_State : BaseState
 
                 case (short)SceneObject.Checkpoint3:
                     {
-                        var value = (bool)pair.Value;
+                        bool value = (bool)pair.Value;
                         if (value)
                         {
-                            var targetObject = GameObject.Find(objectName).GetComponent<Checkpoint>();
+                            Checkpoint targetObject = GameObject.Find(objectName).GetComponent<Checkpoint>();
                             targetObject.isSpinning = value;
                         }
                     }
@@ -143,129 +143,104 @@ public class Combo1_State : BaseState
 
                 case (short)SceneObject.Checkpoint4:
                     {
-                        var value = (bool)pair.Value;
+                        bool value = (bool)pair.Value;
                         if (value)
                         {
-                            var targetObject = GameObject.Find(objectName).GetComponent<Checkpoint>();
+                            Checkpoint targetObject = GameObject.Find(objectName).GetComponent<Checkpoint>();
                             targetObject.isSpinning = value;
                         }
                     }
                     break;
 
                 case (short)SceneObject.Tungsten1:
-                    { // Specifying scope for use of `var value` && `var targetObject`
-                        var value = (bool)pair.Value;
-
-                        // Remove the object if it's already been picked up
+                    { 
+                        bool value = (bool)pair.Value;
                         if (!value)
                         {
-                            var targetObject = GameObject.Find(objectName);
+                            GameObject targetObject = GameObject.Find(objectName);
                             if (targetObject == null)
                             {
-                                Debug.LogError($"Object {objectName} does not exist");
                                 return;
                             }
-
                             targetObject.SetActive(value);
                         }
                     }
                     break;
 
                 case (short)SceneObject.Gold1:
-                    { // Specifying scope for use of `var value` && `var targetObject`
-                        var value = (bool)pair.Value;
-
-                        // Remove the object if it's already been picked up
+                    {
+                        bool value = (bool)pair.Value;
                         if (!value)
                         {
-                            var targetObject = GameObject.Find(objectName);
+                            GameObject targetObject = GameObject.Find(objectName);
                             if (targetObject == null)
                             {
-                                Debug.LogError($"Object {objectName} does not exist");
                                 return;
                             }
-
                             targetObject.SetActive(value);
                         }
                     }
                     break;
 
                 case (short) SceneObject.Copper1:
-                    { // Specifying scope for use of `var value` && `var targetObject`
-                        var value = (bool)pair.Value;
-
-                        // Remove the object if it's already been picked up
+                    {
+                        bool value = (bool)pair.Value;
                         if (!value)
                         {
-                            var targetObject = GameObject.Find(objectName);
+                            GameObject targetObject = GameObject.Find(objectName);
                             if (targetObject == null)
                             {
-                                Debug.LogError($"Object {objectName} does not exist");
                                 return;
                             }
-
                             targetObject.SetActive(value);
                         }
                     }
                     break;
 
                 case (short)SceneObject.Copper2:
-                    { // Specifying scope for use of `var value` && `var targetObject`
-                        var value = (bool)pair.Value;
-
-                        // Remove the object if it's already been picked up
+                    {
+                        bool value = (bool)pair.Value;
                         if (!value)
                         {
-                            var targetObject = GameObject.Find(objectName);
+                            GameObject targetObject = GameObject.Find(objectName);
                             if (targetObject == null)
                             {
-                                Debug.LogError($"Object {objectName} does not exist");
                                 return;
                             }
-
                             targetObject.SetActive(value);
                         }
                     }
                     break;
 
                 case (short)SceneObject.Iron1:
-                    { // Specifying scope for use of `var value` && `var targetObject`
-                        var value = (bool)pair.Value;
-
-                        // Remove the object if it's already been picked up
+                    {
+                        bool value = (bool)pair.Value;
                         if (!value)
                         {
-                            var targetObject = GameObject.Find(objectName);
+                            GameObject targetObject = GameObject.Find(objectName);
                             if (targetObject == null)
                             {
-                                Debug.LogError($"Object {objectName} does not exist");
                                 return;
                             }
-
                             targetObject.SetActive(value);
                         }
                     }
                     break;
 
                 case (short)SceneObject.Nickel1:
-                    { // Specifying scope for use of `var value` && `var targetObject`
-                        var value = (bool)pair.Value;
-
-                        // Remove the object if it's already been picked up
+                    {
+                        bool value = (bool)pair.Value;
                         if (!value)
                         {
-                            var targetObject = GameObject.Find(objectName);
+                            GameObject targetObject = GameObject.Find(objectName);
                             if (targetObject == null)
                             {
-                                Debug.LogError($"Object {objectName} does not exist");
                                 return;
                             }
-
                             targetObject.SetActive(value);
                         }
                     }
                     break;
-
 
                 default:
                     break;
