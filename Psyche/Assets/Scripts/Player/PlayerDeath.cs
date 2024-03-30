@@ -14,7 +14,7 @@ public class PlayerDeath : MonoBehaviour
 {
     private PlayerController _playerController;
     public PlayerHealth playerHealth;                               //Initial player health
-    public SolarArrayManager solarArrayManager;                           //Initial battery
+    public SolarArrayManager solarArrayManager;                     //Initial solar array
     public HashSet<int> reachedCheckpoints = new HashSet<int>();    //Stores unique IDs of checkpoints
 
     /// <summary>
