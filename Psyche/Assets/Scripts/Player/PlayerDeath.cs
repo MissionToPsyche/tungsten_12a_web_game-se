@@ -13,9 +13,9 @@ using UnityEngine;
 public class PlayerDeath : MonoBehaviour
 {
     private PlayerController _playerController;
-    public PlayerHealth playerHealth;                               // Initial player health
-    public BatteryManager batteryManager;                           // Initial battery
-    public HashSet<int> reachedCheckpoints = new HashSet<int>();    // Stores unique IDs of checkpoints
+    public PlayerHealth playerHealth;                               //Initial player health
+    public SolarArrayManager solarArrayManager;                           //Initial battery
+    public HashSet<int> reachedCheckpoints = new HashSet<int>();    //Stores unique IDs of checkpoints
 
     /// <summary>
     /// Initialize respawn point and set starting location.
@@ -97,7 +97,7 @@ public class PlayerDeath : MonoBehaviour
 
         // Recharge health and battery
         playerHealth.HealthUp(100);
-        gameObject.GetComponent<BatteryManager>().Activate();
+        gameObject.GetComponent<SolarArrayManager>().Activate();
 
         // Play audio if you hit a checkpoint with default layer
         if (collision.gameObject.layer.Equals(0))

@@ -13,7 +13,7 @@ public class Landing_State : BaseState
     /// </summary>
     public enum SceneObject : short
     {
-        SOLARPANEL      = 0,
+        SOLARARRAY      = 0,
         CHECKPOINT_1    = 1,
         COPPER_1        = 2,
         GOLD_1          = 3,
@@ -33,7 +33,7 @@ public class Landing_State : BaseState
     {
         return obj.ToLower() switch
         {
-            "solarpanel"            => (short)SceneObject.SOLARPANEL,
+            "solararray"            => (short)SceneObject.SOLARARRAY,
             "checkpoint 1"          => (short)SceneObject.CHECKPOINT_1,
             "element_copper 1"      => (short)SceneObject.COPPER_1,
             "element_gold 1"        => (short)SceneObject.GOLD_1,
@@ -54,7 +54,7 @@ public class Landing_State : BaseState
     {
         return obj switch
         {
-            (short)SceneObject.SOLARPANEL   => "SolarPanel",
+            (short)SceneObject.SOLARARRAY   => "SolarArray",
             (short)SceneObject.CHECKPOINT_1 => "Checkpoint 1",
             (short)SceneObject.COPPER_1     => "Element_Copper 1",
             (short)SceneObject.GOLD_1       => "Element_Gold 1",
@@ -75,7 +75,7 @@ public class Landing_State : BaseState
         // This must be set up first before anything else is created as everything else is based off of this
         _defaultState = new Dictionary<short, object>
         {
-            { (short)SceneObject.SOLARPANEL,    true }, // 'true' for available
+            { (short)SceneObject.SOLARARRAY,    true }, // 'true' for available
             { (short)SceneObject.CHECKPOINT_1,  false }, // `false` for not activated
             { (short)SceneObject.COPPER_1,      true },
             { (short)SceneObject.GOLD_1,        true },
@@ -98,7 +98,7 @@ public class Landing_State : BaseState
             string objectName = Match(pair.Key);
             switch (pair.Key)
             {
-                case (short)SceneObject.SOLARPANEL:
+                case (short)SceneObject.SOLARARRAY:
                     { // Specifying scope for use of `var value` && `var targetObject`
                         var value = (bool)pair.Value;
 

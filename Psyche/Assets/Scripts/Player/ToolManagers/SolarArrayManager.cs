@@ -12,7 +12,7 @@ using UnityEngine;
 /// <summary>
 /// Battery class in which a new batt can be created, drained, and charged. 
 /// </summary>
-public class BatteryManager : ToolManager {
+public class SolarArrayManager : ToolManager {
     //Public variables
     public float batteryLevel;
     public float maxCapacity;
@@ -29,7 +29,7 @@ public class BatteryManager : ToolManager {
     /// <param name="playerController"></param>
     public void Initialize(PlayerController playerController) {
         //Base class variables
-        toolName = "Battery";
+        toolName = "SolarArray";
         toolEnabled = false;
         _playerController = playerController;
         level = 1;
@@ -38,25 +38,25 @@ public class BatteryManager : ToolManager {
             {  2, new Dictionary<InventoryManager.Element, ushort>()
                 {
                     { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
-                    { InventoryManager.Element.NICKEL, 2 }, { InventoryManager.Element.GOLD, 0 },
+                    { InventoryManager.Element.NICKEL, 1 }, { InventoryManager.Element.GOLD, 0 },
                 }
             },
             {  3, new Dictionary<InventoryManager.Element, ushort>()
                 {
                     { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
-                    { InventoryManager.Element.NICKEL, 3 }, { InventoryManager.Element.GOLD, 0 },
+                    { InventoryManager.Element.NICKEL, 1 }, { InventoryManager.Element.GOLD, 0 },
                 }
             },
             {  4, new Dictionary<InventoryManager.Element, ushort>()
                 {
                     { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
-                    { InventoryManager.Element.NICKEL, 4 }, { InventoryManager.Element.GOLD, 0 },
+                    { InventoryManager.Element.NICKEL, 1 }, { InventoryManager.Element.GOLD, 0 },
                 }
             },
             {  5, new Dictionary<InventoryManager.Element, ushort>()
                 {
                     { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
-                    { InventoryManager.Element.NICKEL, 5 }, { InventoryManager.Element.GOLD, 0 },
+                    { InventoryManager.Element.NICKEL, 1 }, { InventoryManager.Element.GOLD, 0 },
                 }
             },
         };
@@ -66,7 +66,7 @@ public class BatteryManager : ToolManager {
         maxCapacity = 100f;
         batteryLevel = maxCapacity;
         batteryPercent = batteryLevel / maxCapacity * 100f;
-        rate = 0.5f;
+        rate = 0.1f;
         batteryDrained = (batteryLevel > 0);
     }
 
