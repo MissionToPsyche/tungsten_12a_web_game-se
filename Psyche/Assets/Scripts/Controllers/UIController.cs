@@ -675,20 +675,32 @@ public class UIController : BaseController<UIController>
                 switch (toolName.ToLower())
                 {
                     case "thruster":
-                        thrusterLevel.SetText(level.ToString());
-                        thrusterUpgradeButton.interactable = false;
+                        thrusterUpgradeButton.gameObject.SetActive(false);
+                        thrusterLevel.transform.position = new Vector3(
+                            thrusterLevel.transform.position.x, 
+                            thrusterRequirementsList.gameObject.transform.position.y, 
+                            thrusterLevel.transform.position.z);
                         break;
                     case "solararray":
-                        solarArrayLevel.SetText(level.ToString());
-                        solarArrayUpgradeButton.interactable = false;
+                        solarArrayUpgradeButton.gameObject.SetActive(false);
+                        solarArrayLevel.transform.position = new Vector3(
+                            solarArrayLevel.transform.position.x, 
+                            solarArrayRequirementsList.gameObject.transform.position.y,  
+                            solarArrayLevel.transform.position.z);
                         break;
                     case "imager":
-                        imagerLevel.SetText(level.ToString());
-                        imagerUpgradeButton.interactable = false;
+                        imagerUpgradeButton.gameObject.SetActive(false);
+                        imagerLevel.transform.position = new Vector3(
+                            imagerLevel.transform.position.x,
+                            imagerRequirementsList.gameObject.transform.position.y,
+                            imagerLevel.transform.position.z);
                         break;
                     case "electromagnet":
-                        eMagnetLevel.SetText(level.ToString());
-                        eMagnetUpgradeButton.interactable = false;
+                        eMagnetUpgradeButton.gameObject.SetActive(false);
+                        eMagnetLevel.transform.position = new Vector3(
+                            eMagnetLevel.transform.position.x,
+                            eMagnetRequirementsList.gameObject.transform.position.y,
+                            eMagnetLevel.transform.position.z);
                         break;
                 }
                 break;
