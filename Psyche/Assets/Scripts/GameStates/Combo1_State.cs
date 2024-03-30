@@ -1,78 +1,15 @@
+/*
+ * Authors: JoshBenn
+ */
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Derives the <see cref="BaseState"/> class and implements it for Combo1 <see cref="GameStateManager.Scene.Combo1"/>.
+/// </summary>
 public class Combo1_State : BaseState
 {
-    /// <summary>
-    /// Defines the tracked objects in the scene
-    /// -- Purpose is to reduce the potential for errors in object identification
-    /// -- Identified as `stort` (i16) for ease of use -- will use `-1` for errorneous values
-    /// </summary>
-    public enum SceneObject : short
-    {
-        CHECKPOINT_1    = 0,
-        CHECKPOINT_2    = 1,
-        CHECKPOINT_3    = 2,
-        CHECKPOINT_4    = 3,
-        TUNGSTEN_1      = 4,
-        GOLD_1          = 5,
-        COPPER_1        = 6,
-        COPPER_2        = 7,
-        IRON_1          = 8,
-        NICKEL_1        = 9,
-
-        CHECKPOINT      = 99,
-    }
-
-    /// <summary>
-    /// Matches the input object string with its enum variant -- useful for consistency
-    /// </summary>
-    /// <param name="obj"></param>
-    /// <returns></returns>
-    public override short Match(string obj)
-    {
-        return obj.ToLower() switch
-        {
-            "checkpoint 1"          => (short)SceneObject.CHECKPOINT_1,
-            "checkpoint 2"          => (short)SceneObject.CHECKPOINT_2,
-            "checkpoint 3"          => (short)SceneObject.CHECKPOINT_3,
-            "checkpoint 4"          => (short)SceneObject.CHECKPOINT_4,
-            "element_tungsten 1"    => (short)SceneObject.TUNGSTEN_1,
-            "element_gold 1"        => (short)SceneObject.GOLD_1,
-            "element_copper 1"      => (short)SceneObject.COPPER_1,
-            "element_copper 2"      => (short)SceneObject.COPPER_2,
-            "element_iron 1"        => (short)SceneObject.IRON_1,
-            "element_nickel 1"      => (short)SceneObject.NICKEL_1,
-
-            "checkpoint"            => (short)SceneObject.CHECKPOINT,
-            _                       => -1,
-        };
-    }
-
-    /// <summary>
-    /// Matches the input object short (enum) with its string variant
-    /// </summary>
-    /// <param name="obj"></param>
-    /// <returns></returns>
-    public override string Match(short obj)
-    {
-        return obj switch
-        {
-            (short)SceneObject.CHECKPOINT_1 => "Checkpoint 1",
-            (short)SceneObject.CHECKPOINT_2 => "Checkpoint 2",
-            (short)SceneObject.CHECKPOINT_3 => "Checkpoint 3",
-            (short)SceneObject.CHECKPOINT_4 => "Checkpoint 4",
-            (short)SceneObject.TUNGSTEN_1   => "Element_Tungsten 1",
-            (short)SceneObject.GOLD_1       => "Element_Gold 1",
-            (short)SceneObject.COPPER_1     => "Element_Copper 1",
-            (short)SceneObject.COPPER_2     => "Element_Copper 2",
-            (short)SceneObject.IRON_1       => "Element_Iron 1",
-            (short)SceneObject.NICKEL_1     => "Element_Nickel 1",
-
-            (short)SceneObject.CHECKPOINT   => "Checkpoint",
-            _                               => null,
-        };
-    }
+    //========================================= Initialize/Updates/Destroy =========================================
 
     /// <summary>
     /// Constructor for the scene state
@@ -82,24 +19,87 @@ public class Combo1_State : BaseState
         // This must be set up first before anything else is created as everything else is based off of this
         _defaultState = new Dictionary<short, object>
         {
-            { (short)SceneObject.CHECKPOINT_1, false }, // 'true' for available
-            { (short)SceneObject.CHECKPOINT_2, false }, // `true` for activate-able
-            { (short)SceneObject.CHECKPOINT_3, false },
-            { (short)SceneObject.CHECKPOINT_4, false },
-            { (short)SceneObject.TUNGSTEN_1,   true },
-            { (short)SceneObject.GOLD_1,       true },
-            { (short)SceneObject.COPPER_1,     true },
-            { (short)SceneObject.COPPER_2,     true },
-            { (short)SceneObject.IRON_1,       true },
-            { (short)SceneObject.NICKEL_1,     true },
+            { (short)SceneObject.Checkpoint1, false }, // 'true' for available
+            { (short)SceneObject.Checkpoint2, false }, // `true` for activate-able
+            { (short)SceneObject.Checkpoint3, false },
+            { (short)SceneObject.Checkpoint4, false },
+            { (short)SceneObject.Tungsten1,   true },
+            { (short)SceneObject.Gold1,       true },
+            { (short)SceneObject.Copper1,     true },
+            { (short)SceneObject.Copper2,     true },
+            { (short)SceneObject.Iron1,       true },
+            { (short)SceneObject.Nickel1,     true },
         };
         LoadDefaultState();
         SaveState();
     }
 
+    //==================================================== Enums =====================================================
+
     /// <summary>
-    /// Loads the specific state for this scene
+    /// Defines the tracked objects in the <see cref="GameStateManager.Scene"/>.
     /// </summary>
+    public enum SceneObject : short
+    {
+        Checkpoint1    = 0,
+        Checkpoint2    = 1,
+        Checkpoint3    = 2,
+        Checkpoint4    = 3,
+        Tungsten1      = 4,
+        Gold1          = 5,
+        Copper1        = 6,
+        Copper2        = 7,
+        Iron1          = 8,
+        Nickel1        = 9,
+
+        Checkpoint      = 99,
+    }
+
+    /// <inheritdoc />
+    public override short Match(string obj)
+    {
+        return obj.ToLower() switch
+        {
+            "checkpoint 1"          => (short)SceneObject.Checkpoint1,
+            "checkpoint 2"          => (short)SceneObject.Checkpoint2,
+            "checkpoint 3"          => (short)SceneObject.Checkpoint3,
+            "checkpoint 4"          => (short)SceneObject.Checkpoint4,
+            "element_tungsten 1"    => (short)SceneObject.Tungsten1,
+            "element_gold 1"        => (short)SceneObject.Gold1,
+            "element_copper 1"      => (short)SceneObject.Copper1,
+            "element_copper 2"      => (short)SceneObject.Copper2,
+            "element_iron 1"        => (short)SceneObject.Iron1,
+            "element_nickel 1"      => (short)SceneObject.Nickel1,
+
+            "checkpoint"            => (short)SceneObject.Checkpoint,
+            _                       => -1,
+        };
+    }
+
+    /// <inheritdoc />
+    public override string Match(short obj)
+    {
+        return obj switch
+        {
+            (short)SceneObject.Checkpoint1 => "Checkpoint 1",
+            (short)SceneObject.Checkpoint2 => "Checkpoint 2",
+            (short)SceneObject.Checkpoint3 => "Checkpoint 3",
+            (short)SceneObject.Checkpoint4 => "Checkpoint 4",
+            (short)SceneObject.Tungsten1   => "Element_Tungsten 1",
+            (short)SceneObject.Gold1       => "Element_Gold 1",
+            (short)SceneObject.Copper1     => "Element_Copper 1",
+            (short)SceneObject.Copper2     => "Element_Copper 2",
+            (short)SceneObject.Iron1       => "Element_Iron 1",
+            (short)SceneObject.Nickel1     => "Element_Nickel 1",
+
+            (short)SceneObject.Checkpoint   => "Checkpoint",
+            _                               => null,
+        };
+    }
+
+    //==================================================== State =====================================================
+
+    /// <inheritdoc />
     public override void LoadState()
     {
 
@@ -108,7 +108,7 @@ public class Combo1_State : BaseState
             string objectName = Match(pair.Key);
             switch (pair.Key)
             {
-                case (short)SceneObject.CHECKPOINT_1:
+                case (short)SceneObject.Checkpoint1:
                     {
                         var value = (bool)pair.Value;
                         if (value)
@@ -119,7 +119,7 @@ public class Combo1_State : BaseState
                     }
                     break;
 
-                case (short)SceneObject.CHECKPOINT_2:
+                case (short)SceneObject.Checkpoint2:
                     {
                         var value = (bool)pair.Value;
                         if (value)
@@ -130,7 +130,7 @@ public class Combo1_State : BaseState
                     }
                     break;
 
-                case (short)SceneObject.CHECKPOINT_3:
+                case (short)SceneObject.Checkpoint3:
                     {
                         var value = (bool)pair.Value;
                         if (value)
@@ -141,7 +141,7 @@ public class Combo1_State : BaseState
                     }
                     break;
 
-                case (short)SceneObject.CHECKPOINT_4:
+                case (short)SceneObject.Checkpoint4:
                     {
                         var value = (bool)pair.Value;
                         if (value)
@@ -152,7 +152,7 @@ public class Combo1_State : BaseState
                     }
                     break;
 
-                case (short)SceneObject.TUNGSTEN_1:
+                case (short)SceneObject.Tungsten1:
                     { // Specifying scope for use of `var value` && `var targetObject`
                         var value = (bool)pair.Value;
 
@@ -171,7 +171,7 @@ public class Combo1_State : BaseState
                     }
                     break;
 
-                case (short)SceneObject.GOLD_1:
+                case (short)SceneObject.Gold1:
                     { // Specifying scope for use of `var value` && `var targetObject`
                         var value = (bool)pair.Value;
 
@@ -190,7 +190,7 @@ public class Combo1_State : BaseState
                     }
                     break;
 
-                case (short) SceneObject.COPPER_1:
+                case (short) SceneObject.Copper1:
                     { // Specifying scope for use of `var value` && `var targetObject`
                         var value = (bool)pair.Value;
 
@@ -209,7 +209,7 @@ public class Combo1_State : BaseState
                     }
                     break;
 
-                case (short)SceneObject.COPPER_2:
+                case (short)SceneObject.Copper2:
                     { // Specifying scope for use of `var value` && `var targetObject`
                         var value = (bool)pair.Value;
 
@@ -228,7 +228,7 @@ public class Combo1_State : BaseState
                     }
                     break;
 
-                case (short)SceneObject.IRON_1:
+                case (short)SceneObject.Iron1:
                     { // Specifying scope for use of `var value` && `var targetObject`
                         var value = (bool)pair.Value;
 
@@ -247,7 +247,7 @@ public class Combo1_State : BaseState
                     }
                     break;
 
-                case (short)SceneObject.NICKEL_1:
+                case (short)SceneObject.Nickel1:
                     { // Specifying scope for use of `var value` && `var targetObject`
                         var value = (bool)pair.Value;
 

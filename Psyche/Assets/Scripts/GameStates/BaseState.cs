@@ -21,7 +21,18 @@ public abstract class BaseState
     /// </summary>
     public BaseState() { }
 
+    /// <summary>
+    /// Matches the <see cref="string"/> value with its <see cref="short"/> representation of enum variant.
+    /// </summary>
+    /// <param name="obj"><see cref="string"/> object name</param>
+    /// <returns><see cref="short"/> representation of an enum variant</returns>
     public abstract short Match(string obj);
+
+    /// <summary>
+    /// Matches the <see cref="short"/> representation of the enum variant with its <see cref="string"/> value.
+    /// </summary>
+    /// <param name="obj"><see cref="short"/> representation of the <see cref="SceneObject"/> variant</param>
+    /// <returns></returns>
     public abstract string Match(short obj);
 
     /// <summary>
