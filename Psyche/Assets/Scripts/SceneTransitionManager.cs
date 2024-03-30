@@ -180,14 +180,31 @@ public class SceneTransitionManager : MonoBehaviour {
             // with the exception of two "outs" for the landing scene since we can go out from the landing scene
             // to the imager level and to the outro endgame scene
             GameObject[] objectsWithTransitionTag = GameObject.FindGameObjectsWithTag(tag);
-            GameObject caveObject = objectsWithTransitionTag[0]; // set to first but might change below
+            GameObject caveObject = null;
 
-            // we differentiate the proper transition objects for the player with the layer as well
-            // caves use the default layer so these are the ones we want
-            foreach (GameObject obj in objectsWithTransitionTag) {
-                if (obj.layer == 0) { // default layer
-                    caveObject = obj;                   
-                    break; // break since we only need one GameObject
+            /**
+             * If transitioning from Combo3 to Landing gets the transition object of the Combo_3 In cave
+             */
+            if (scene.name == "02_Landing" && tag == "TransitionObjectIn")
+            {
+                foreach (GameObject obj in objectsWithTransitionTag)
+                {
+                    if (obj.name == "09_Combo_3 In")
+                    {
+                        caveObject = obj;
+                        break; // break since we only need one GameObject
+                    }
+                }
+            }
+            else
+            {
+                // we differentiate the proper transition objects for the player with the layer as well
+                // caves use the default layer so these are the ones we want
+                foreach (GameObject obj in objectsWithTransitionTag) {
+                    if (obj.layer == 0) { // default layer
+                        caveObject = obj;                   
+                        break; // break since we only need one GameObject
+                    }
                 }
             }
 
