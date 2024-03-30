@@ -38,25 +38,25 @@ public class SolarArrayManager : ToolManager {
             {  2, new Dictionary<InventoryManager.Element, ushort>()
                 {
                     { InventoryManager.Element.Copper, 0 }, { InventoryManager.Element.Iron, 0 }, 
-                    { InventoryManager.Element.Nickel, 2 }, { InventoryManager.Element.Gold, 0 },
+                    { InventoryManager.Element.Nickel, 1 }, { InventoryManager.Element.Gold, 0 },
                 }
             },
             {  3, new Dictionary<InventoryManager.Element, ushort>()
                 {
                     { InventoryManager.Element.Copper, 0 }, { InventoryManager.Element.Iron, 0 }, 
-                    { InventoryManager.Element.Nickel, 3 }, { InventoryManager.Element.Gold, 0 },
+                    { InventoryManager.Element.Nickel, 1 }, { InventoryManager.Element.Gold, 0 },
                 }
             },
             {  4, new Dictionary<InventoryManager.Element, ushort>()
                 {
                     { InventoryManager.Element.Copper, 0 }, { InventoryManager.Element.Iron, 0 }, 
-                    { InventoryManager.Element.Nickel, 4 }, { InventoryManager.Element.Gold, 0 },
+                    { InventoryManager.Element.Nickel, 1 }, { InventoryManager.Element.Gold, 0 },
                 }
             },
             {  5, new Dictionary<InventoryManager.Element, ushort>()
                 {
                     { InventoryManager.Element.Copper, 0 }, { InventoryManager.Element.Iron, 0 }, 
-                    { InventoryManager.Element.Nickel, 5 }, { InventoryManager.Element.Gold, 0 },
+                    { InventoryManager.Element.Nickel, 1 }, { InventoryManager.Element.Gold, 0 },
                 }
             },
         };
@@ -66,7 +66,7 @@ public class SolarArrayManager : ToolManager {
         maxCapacity = 100f;
         batteryLevel = maxCapacity;
         batteryPercent = batteryLevel / maxCapacity * 100f;
-        rate = 0.5f;
+        rate = 0.1f;
         batteryDrained = (batteryLevel > 0);
     }
 

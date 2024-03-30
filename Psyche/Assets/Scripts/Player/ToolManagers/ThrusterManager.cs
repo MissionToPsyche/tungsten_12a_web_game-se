@@ -52,19 +52,7 @@ public class ThrusterManager : ToolManager
                     { InventoryManager.Element.Copper, 2 } , { InventoryManager.Element.Iron, 0 }, 
                     { InventoryManager.Element.Nickel, 0 } , { InventoryManager.Element.Gold, 0 },
                 }
-            },
-            {  4, new Dictionary<InventoryManager.Element, ushort>()
-                {
-                    { InventoryManager.Element.Copper, 3 } , { InventoryManager.Element.Iron, 0 }, 
-                    { InventoryManager.Element.Nickel, 0 } , { InventoryManager.Element.Gold, 0 },
-                }
-            },
-            {  5, new Dictionary<InventoryManager.Element, ushort>()
-                {
-                    { InventoryManager.Element.Copper, 4 } , { InventoryManager.Element.Iron, 0 }, 
-                    { InventoryManager.Element.Nickel, 0 } , { InventoryManager.Element.Gold, 0 },
-                }
-            },
+            }
         };
 
         //Tool specific variables
