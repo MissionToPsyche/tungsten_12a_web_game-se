@@ -93,7 +93,7 @@ public class Combo2_State : BaseState
     /// <inheritdoc />
     public override void LoadState()
     {
-        foreach (var pair in _savedState)
+        foreach (KeyValuePair<short, object> pair in _savedState)
         {
             string objectName = Match(pair.Key);
             switch (pair.Key)
