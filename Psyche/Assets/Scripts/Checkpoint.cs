@@ -6,7 +6,8 @@
 
 using UnityEngine;
 
-public class Checkpoint : MonoBehaviour {
+public class Checkpoint : MonoBehaviour
+{
     // Variables for animation
     private Animator animator;
     public bool isSpinning = false;
@@ -16,11 +17,15 @@ public class Checkpoint : MonoBehaviour {
     /// <summary>
     /// Start is called before the first frame update
     /// </summary>
-    void Start() {
+    void Start()
+    {
         animator = GetComponent<Animator>();
-        if (!isSpinning) {
+        if (!isSpinning)
+        {
             animator.Play(STATIC);
-        } else {
+        }
+        else
+        {
             Spin();
         }
     }
@@ -29,10 +34,13 @@ public class Checkpoint : MonoBehaviour {
     /// What to do when the player collides with the checkpoint
     /// </summary>
     /// <param name="collision"></param>
-    private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.gameObject.CompareTag("Player")) {
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
             // Checks if the checkpoint is not spinning
-            if (!isSpinning) {
+            if (!isSpinning)
+            {
                 isSpinning = true;
                 Spin();
             }
@@ -42,7 +50,8 @@ public class Checkpoint : MonoBehaviour {
     /// <summary>
     /// Activates the animation for the checkpoint
     /// </summary>
-    public void Spin() {
+    public void Spin()
+    {
         animator.Play(SPIN);
     }
 
