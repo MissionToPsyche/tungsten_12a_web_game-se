@@ -1,25 +1,20 @@
+/*
+ * Authors: JoshBenn
+ */
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 /// <summary> 
-/// Base class for SceneStates to be based on.
-/// -- Implements the methods: LoadState(), SaveState(), and SetObjectState()\
-/// -- Objects are trackd via Dictionaries.  Key: `string` = Object's name || Value: `object` = tracked object state
-///     -- For all `bool` items, `true` means the item can be picked up or the item has yet to be activated (such as checkpoints)
-///     -- For all positions, these can be tracked via a vector
+/// Base class for all <see cref="GameStateManager.Scene"/> states.
 /// </summary>
 public abstract class BaseState
 {
-    //Use C#'s <object> type to store generic values (bool, int, etc.)
-    protected Dictionary<short, object> _defaultState;
-    protected Dictionary<short, object> _sceneState;
-    protected Dictionary<short, object> _savedState;
-
-    /// <summary>
-    /// Create the base class -- Unnecessary in this current iteration
-    /// </summary>
-    public BaseState() { }
+    //======================================== Initialize/Update/Destroy ========================================
+    // Private variables
+    // Use C#'s <object> type to store generic values (bool, int, etc.)
+    protected Dictionary<short, object> DefaultState;
+    protected Dictionary<short, object> SceneState;
+    protected Dictionary<short, object> SavedState;
 
     /// <summary>
     /// Matches the <see cref="string"/> value with its <see cref="short"/> representation of enum variant.
@@ -35,69 +30,64 @@ public abstract class BaseState
     /// <returns></returns>
     public abstract string Match(short obj);
 
+
+    //============================================== State Actions ==============================================
     /// <summary>
-    /// Holds the default game state for the scene, allowing for a state reset
-    /// -- Values are cloned over so they aren't passed by referenced and then modified at a later time
+    /// Holds the default game state for the <see cref="GameStateManager.Scene"/> allowing for a state reset.
     /// </summary>
     public void LoadDefaultState() 
     {
-        _sceneState = new Dictionary<short, object>();
+        SceneState = new Dictionary<short, object>();
 
-        foreach (var pair in _defaultState)
+        foreach (KeyValuePair<short, object> pair in DefaultState)
         {
             if (pair.Value is ICloneable clone)
             {
-                _sceneState[pair.Key] = clone.Clone();
+                SceneState[pair.Key] = clone.Clone();
             }
             else
             {
-                _sceneState[pair.Key] = pair.Value;
+                SceneState[pair.Key] = pair.Value;
             }
         }
         SaveState();
     }
 
     /// <summary>
-    /// Saves the current state of the scene
-    /// -- Values are cloned over so they aren't passed by referenced and then modified at a later time
+    /// Saves the current state of the  <see cref="GameStateManager.Scene"/>.
     /// </summary>
     public void SaveState() 
     {
-        _savedState = new Dictionary<short, object>();
+        SavedState = new Dictionary<short, object>();
 
-        foreach (var pair in _sceneState)
+        foreach (KeyValuePair<short, object> pair in SceneState)
         {
             if (pair.Value is ICloneable clone)
             {
-                _savedState[pair.Key] = clone.Clone();
+                SavedState[pair.Key] = clone.Clone();
             }
             else
             {
-                _savedState[pair.Key] = pair.Value;
+                SavedState[pair.Key] = pair.Value;
             }
-            //Debug.Log($"Object {Match(pair.Key)} saved with value {pair.Value}");
         }
     }
 
     /// <summary>
-    /// Loads the saved state into the scene
+    /// Loads the saved state into the  <see cref="GameStateManager.Scene"/>.
     /// </summary>
     public abstract void LoadState();
 
     /// <summary>
-    /// Sets the state of an object in the scene
+    /// Sets the state of an object in the  <see cref="GameStateManager.Scene"/>.
     /// </summary>
-    /// <param name="key"></param>
-    /// <param name="value"></param>
+    /// <param name="key"><see cref="string"/> object name</param>
+    /// <param name="value"><see cref="object"/> value to set for the object</param>
     public void SetObjectState(string key, object value)
     {
-        //Debug.Log($"Passed in: {key}, {value}");
         short matched_key = Match(key);
-        if (matched_key == -1) 
-        {
-            Debug.Log("No match found for the provided key");
-            return;
+        if (SceneState.ContainsKey(matched_key)) { 
+            SceneState[matched_key] = value; 
         }
-        if (_sceneState.ContainsKey(matched_key)) { _sceneState[matched_key] = value; }
     }
 }

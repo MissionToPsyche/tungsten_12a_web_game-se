@@ -106,7 +106,7 @@ public class SceneTransitionManager : MonoBehaviour {
                 _directionTag = (sceneInfo.Count() > 1) ? sceneInfo[1] : "out";
                 _transition = true;
             }
-            if (_transition && _gameController.gameStateManager.currentState == GameStateManager.GameState.InGame)
+            if (_transition && _gameController.gameStateManager.CurrentState == GameStateManager.GameState.InGame)
             {
                 RepositionPlayer(_travelToSceneName);
                 LoadBackground();

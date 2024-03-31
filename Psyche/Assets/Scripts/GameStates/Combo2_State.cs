@@ -16,7 +16,7 @@ public class Combo2_State : BaseState
     public Combo2_State()
     {
         // This must be set up first before anything else is created as everything else is based off of this
-        _defaultState = new Dictionary<short, object>
+        DefaultState = new Dictionary<short, object>
         {
             { (short)SceneObject.Checkpoint1, false }, // 'true' for available
             { (short)SceneObject.Checkpoint2, false }, // `true` for activate-able
@@ -93,7 +93,7 @@ public class Combo2_State : BaseState
     /// <inheritdoc />
     public override void LoadState()
     {
-        foreach (KeyValuePair<short, object> pair in _savedState)
+        foreach (KeyValuePair<short, object> pair in SavedState)
         {
             string objectName = Match(pair.Key);
             switch (pair.Key)

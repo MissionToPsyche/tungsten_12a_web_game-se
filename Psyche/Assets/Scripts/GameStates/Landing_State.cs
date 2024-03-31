@@ -73,7 +73,7 @@ public class Landing_State : BaseState
     public Landing_State()
     {
         // This must be set up first before anything else is created as everything else is based off of this
-        _defaultState = new Dictionary<short, object>
+        DefaultState = new Dictionary<short, object>
         {
             { (short)SceneObject.SOLARARRAY,    true }, // 'true' for available
             { (short)SceneObject.CHECKPOINT_1,  false }, // `false` for not activated
@@ -93,7 +93,7 @@ public class Landing_State : BaseState
     public override void LoadState()
     {
 
-        foreach (var pair in _savedState)
+        foreach (var pair in SavedState)
         {
             string objectName = Match(pair.Key);
             switch (pair.Key)

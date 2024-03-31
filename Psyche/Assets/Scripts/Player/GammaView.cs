@@ -69,10 +69,9 @@ public class GammaView : MonoBehaviour
         {
             sceneLight = GameObject.FindGameObjectWithTag("SceneLight").GetComponent<Light2D>();
             sceneTilemap = GameObject.FindGameObjectWithTag("Terrain").GetComponent<Tilemap>();
-
-            if (GameStateManagerSn == GameStateManager.Scene.eMagnet ||
-                GameStateManagerSn == GameStateManager.Scene.Combo1 ||
-                GameStateManagerSn == GameStateManager.Scene.Combo3)
+            if (GameStateManagerSn == GameStateManager.Scene.EMagnet
+                || GameStateManagerSn == GameStateManager.Scene.Combo1
+                || GameStateManagerSn == GameStateManager.Scene.Combo3) 
             {
                 sceneTilemapFake = GameObject.FindGameObjectWithTag("FakeTerrain").GetComponent<Tilemap>();
             }
