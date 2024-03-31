@@ -13,17 +13,16 @@ using System.Collections.Generic;
 /// </summary>
 public class AudioManager : MonoBehaviour {
     public Slider slider;
-    public float uiVol, musicVol, sfxVol;
 
-    // ui
+    [Header("User Interface")]
     [SerializeField] public AudioSource buttonClick;
     public List<AudioSource> uiAudioSources;
 
-    // music
+    [Header("Music")]
     [SerializeField] public AudioSource backgroundMusic;
     public List<AudioSource> musicAudioSources;
 
-    // in game sfx
+    [Header("In Game Sound Effects")]
     [SerializeField] public AudioSource toolGRNS;
     [SerializeField] public AudioSource toolImager;
     [SerializeField] public AudioSource toolEMagnet;
@@ -35,6 +34,10 @@ public class AudioManager : MonoBehaviour {
     [SerializeField] public AudioSource pickupTool;
     [SerializeField] public AudioSource checkpoint;
     public List<AudioSource> sfxAudioSources;
+
+    [Header("Videos")]
+    [SerializeField] public AudioSource elementsVideo;
+    public List<AudioSource>videoAudioSources;
     
     /// <summary>
     /// collects the same type audio sources into their respected lists
@@ -52,14 +55,55 @@ public class AudioManager : MonoBehaviour {
         sfxAudioSources.Add(pickupElementTungsten);
         sfxAudioSources.Add(pickupTool);
         sfxAudioSources.Add(checkpoint);
+        videoAudioSources.Add(elementsVideo);
+        foreach (AudioSource audioSource in uiAudioSources)
+            audioSource.volume = GameController.Instance.uiVol;
+        foreach (AudioSource audioSource in musicAudioSources)
+            audioSource.volume = GameController.Instance.musicVol;
+        foreach (AudioSource audioSource in sfxAudioSources)
+            audioSource.volume = GameController.Instance.sfxVol;
+        foreach (AudioSource audioSource in videoAudioSources)
+            audioSource.volume = GameController.Instance.videoVol;
     }
 
     /// <summary>
-    /// play and audio source
+    /// play an audio source
     /// </summary>
     /// <param name="audioSource"></param>
     public void PlayAudio(AudioSource audioSource) {
         audioSource.Play();
+    }
+
+    /// <summary>
+    /// pause an audio source
+    /// </summary>
+    /// <param name="audioSource"></param>
+    public void PauseAudio(AudioSource audioSource) {
+        audioSource.Pause();
+    }
+
+    /// <summary>
+    /// unpause an audio source
+    /// </summary>
+    /// <param name="audioSource"></param>
+    public void UnpauseAudio(AudioSource audioSource) {
+        audioSource.UnPause();
+    }
+
+    /// <summary>
+    /// mute an audio source
+    /// </summary>
+    /// <param name="audioSource"></param>
+    public void MuteAudio(AudioSource audioSource) {
+        audioSource.mute = true;
+    }
+
+    /// <summary>
+    /// unmute an audio source
+    /// </summary>
+    /// <param name="audioSource"></param>
+    public void UnmuteAudio(AudioSource audioSource) {
+        audioSource.mute = false;
     }
 
     /// <summary>
@@ -154,27 +198,11 @@ public class AudioManager : MonoBehaviour {
     }
 
     /// <summary>
-    /// Sets the volume for all ui
+    /// set an audio source volume for all videos
     /// </summary>
-    public void setUiVolume() {
-        GameController.Instance.audioManager.SetAudioVolumeForAllUi(slider.value);
-        GameController.Instance.audioManager.uiVol = slider.value;
-    }
-
-    /// <summary>
-    /// Sets the volume for all music
-    /// </summary>
-    public void setMusicVolume() {
-        GameController.Instance.audioManager.SetAudioVolumeForAllMusic(slider.value);
-        GameController.Instance.audioManager.musicVol = slider.value;
-    }
-
-    /// <summary>
-    /// Sets the volume for all sfx
-    /// </summary>
-    public void setSfxVolume() {
-        GameController.Instance.audioManager.SetAudioVolumeForAllSfx(slider.value);
-        GameController.Instance.audioManager.sfxVol = slider.value;
+    /// <param name="desiredVolume"></param>
+    public void SetAudioVolumeForAllVideos(float desiredVolume) {
+        SetAudioVolumeForAll(videoAudioSources, desiredVolume);
     }
 
 }
