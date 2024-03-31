@@ -20,6 +20,7 @@ public class Thruster_State : BaseState
         GOLD_2          = 6,
         GOLD_3          = 7,
         TUNGSTEN_1      = 8,
+        NICKEL_1        = 9,
 
         CHECKPOINT      = 99,
     }
@@ -42,6 +43,7 @@ public class Thruster_State : BaseState
             "element_gold 2"        => (short)SceneObject.GOLD_2,
             "element_gold 3"        => (short)SceneObject.GOLD_3,
             "element_tungsten 1"    => (short)SceneObject.TUNGSTEN_1,
+            "element_nickel 1"      => (short)SceneObject.NICKEL_1,
 
             "checkpoint"            => (short)SceneObject.CHECKPOINT,
             _                       => -1,
@@ -66,6 +68,7 @@ public class Thruster_State : BaseState
             (short)SceneObject.GOLD_2       => "Element_Gold 2",
             (short)SceneObject.GOLD_3       => "Element_Gold 3",
             (short)SceneObject.TUNGSTEN_1   => "Element_Tungsten 1",
+            (short)SceneObject.NICKEL_1     => "Element_Nickel 1",
 
             (short)SceneObject.CHECKPOINT   => "Checkpoint",
             _                               => null,
@@ -89,6 +92,7 @@ public class Thruster_State : BaseState
             { (short)SceneObject.GOLD_2,        true },
             { (short)SceneObject.GOLD_3,        true },
             { (short)SceneObject.TUNGSTEN_1,    true },
+            { (short)SceneObject.NICKEL_1,      true },
         };
         LoadDefaultState();
         SaveState();
@@ -234,6 +238,25 @@ public class Thruster_State : BaseState
                     break;
 
                 case (short)SceneObject.TUNGSTEN_1:
+                    { // Specifying scope for use of `var value` && `var targetObject`
+                        var value = (bool)pair.Value;
+
+                        // Remove the object if it's already been picked up
+                        if (!value)
+                        {
+                            var targetObject = GameObject.Find(objectName);
+                            if (targetObject == null)
+                            {
+                                Debug.LogError($"Object {objectName} does not exist");
+                                return;
+                            }
+
+                            targetObject.SetActive(value);
+                        }
+                    }
+                    break;
+
+                case (short)SceneObject.NICKEL_1:
                     { // Specifying scope for use of `var value` && `var targetObject`
                         var value = (bool)pair.Value;
 

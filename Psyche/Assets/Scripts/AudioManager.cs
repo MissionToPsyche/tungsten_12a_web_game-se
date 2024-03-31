@@ -1,7 +1,7 @@
 /** 
-Description: audio manager script
+Description: Audio manager script
 Author: blopezro
-Version: 20240222
+Version: 20240326
 **/
 
 using UnityEngine;
@@ -10,7 +10,8 @@ using System.Collections.Generic;
 /// <summary>
 /// AudioManager class which handles all audio within game.
 /// </summary>
-public class AudioManager : MonoBehaviour {
+public class AudioManager : MonoBehaviour
+{
 
     // ui
     [SerializeField] public AudioSource buttonClick;
@@ -32,16 +33,12 @@ public class AudioManager : MonoBehaviour {
     [SerializeField] public AudioSource pickupTool;
     [SerializeField] public AudioSource checkpoint;
     public List<AudioSource> sfxAudioSources;
-    
-    //////////////////////////////////////////////////
-    //Private linker
-    private PlayerController _playerController;
-    public void Initialize(PlayerController playerController) {
-        _playerController = playerController;
-    }
-    //////////////////////////////////////////////////
-    
-    private void OnEnable() {
+
+    /// <summary>
+    /// collects the same type audio sources into their respected lists
+    /// </summary>
+    private void OnEnable()
+    {
         uiAudioSources.Add(buttonClick);
         musicAudioSources.Add(backgroundMusic);
         sfxAudioSources.Add(toolGRNS);
@@ -60,7 +57,8 @@ public class AudioManager : MonoBehaviour {
     /// play and audio source
     /// </summary>
     /// <param name="audioSource"></param>
-    public void PlayAudio(AudioSource audioSource) {
+    public void PlayAudio(AudioSource audioSource)
+    {
         audioSource.Play();
     }
 
@@ -68,7 +66,8 @@ public class AudioManager : MonoBehaviour {
     /// stop an audio source
     /// </summary>
     /// <param name="audioSource"></param>
-    public void StopAudio(AudioSource audioSource) {
+    public void StopAudio(AudioSource audioSource)
+    {
         audioSource.Stop();
     }
 
@@ -76,7 +75,8 @@ public class AudioManager : MonoBehaviour {
     /// toggle an audio source mute
     /// </summary>
     /// <param name="audioSource"></param>
-    public void ToggleAudioMute(AudioSource audioSource) {
+    public void ToggleAudioMute(AudioSource audioSource)
+    {
         audioSource.mute = !audioSource.mute;
     }
 
@@ -84,22 +84,45 @@ public class AudioManager : MonoBehaviour {
     /// toggle an audio source mute for all in a list
     /// </summary>
     /// <param name="audioSources"></param>
-    public void ToggleAudioMuteForAll(List<AudioSource> audioSources) {
-        foreach(AudioSource audioSource in audioSources) {
+    public void ToggleAudioMuteForAll(List<AudioSource> audioSources)
+    {
+        foreach (AudioSource audioSource in audioSources)
+        {
             audioSource.mute = !audioSource.mute;
         }
     }
 
-    public void ToggleAudioMuteForAllUi() {    ToggleAudioMuteForAll(uiAudioSources); }
-    public void ToggleAudioMuteForAllMusic() { ToggleAudioMuteForAll(musicAudioSources); }
-    public void ToggleAudioMuteForAllSfx() {   ToggleAudioMuteForAll(sfxAudioSources); }
+    /// <summary>
+    /// Toggles mute for all UI audio sources
+    /// </summary>
+    public void ToggleAudioMuteForAllUi()
+    {
+        ToggleAudioMuteForAll(uiAudioSources);
+    }
+
+    /// <summary>
+    /// Toggles mute for all music audio sources
+    /// </summary>
+    public void ToggleAudioMuteForAllMusic()
+    {
+        ToggleAudioMuteForAll(musicAudioSources);
+    }
+
+    /// <summary>
+    /// Toggles mute for all sfx audio sources
+    /// </summary>
+    public void ToggleAudioMuteForAllSfx()
+    {
+        ToggleAudioMuteForAll(sfxAudioSources);
+    }
 
     /// <summary>
     /// set an audio source volume
     /// </summary>
     /// <param name="audioSource"></param>
     /// <param name="desiredVolume"></param>
-    public void SetAudioVolume(AudioSource audioSource, float desiredVolume) {
+    public void SetAudioVolume(AudioSource audioSource, float desiredVolume)
+    {
         audioSource.volume = desiredVolume;
     }
 
@@ -108,21 +131,38 @@ public class AudioManager : MonoBehaviour {
     /// </summary>
     /// <param name="audioSources"></param>
     /// <param name="desiredVolume"></param>
-    public void SetAudioVolumeForAll(List<AudioSource> audioSources, float desiredVolume) {
-        foreach(AudioSource audioSource in audioSources) {
+    public void SetAudioVolumeForAll(List<AudioSource> audioSources, float desiredVolume)
+    {
+        foreach (AudioSource audioSource in audioSources)
+        {
             audioSource.volume = desiredVolume;
         }
     }
 
-    public void SetAudioVolumeForAllUi(float desiredVolume) {
+    /// <summary>
+    /// set an audio source volume for all ui
+    /// </summary>
+    /// <param name="desiredVolume"></param>
+    public void SetAudioVolumeForAllUi(float desiredVolume)
+    {
         SetAudioVolumeForAll(uiAudioSources, desiredVolume);
     }
-    
-    public void SetAudioVolumeForAllMusic(float desiredVolume) {
+
+    /// <summary>
+    /// set an audio source volume for all music
+    /// </summary>
+    /// <param name="desiredVolume"></param>
+    public void SetAudioVolumeForAllMusic(float desiredVolume)
+    {
         SetAudioVolumeForAll(musicAudioSources, desiredVolume);
     }
-    
-    public void SetAudioVolumeForAllSfx(float desiredVolume) {
+
+    /// <summary>
+    /// set an audio source volume for all sfx
+    /// </summary>
+    /// <param name="desiredVolume"></param>
+    public void SetAudioVolumeForAllSfx(float desiredVolume)
+    {
         SetAudioVolumeForAll(sfxAudioSources, desiredVolume);
     }
 
