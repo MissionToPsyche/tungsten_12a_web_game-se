@@ -571,14 +571,14 @@ public class UIController : BaseController<UIController>
     }
 
     /// <summary>
-    /// Fades out the sound of the audio played when upgrading a tool
+    /// Fades out the sound of the audio played
     /// </summary>
     /// <param name="audioSource"></param>
     /// <param name="fadeDuration"></param>
     /// <returns></returns>
     private IEnumerator FadeOutSound(AudioSource audioSource, float fadeDuration)
     {
-        float startVolume = 1.0f;
+        float startVolume = GameController.Instance.uiVol;
         float startTime = Time.time;
         while (Time.time < startTime + fadeDuration)
         {
@@ -591,7 +591,7 @@ public class UIController : BaseController<UIController>
         // Ensure the volume is fully faded out, stop the playback, then restore volume
         audioSource.volume = 0.0f;
         audioSource.Stop();
-        audioSource.volume = 1.0f;
+        audioSource.volume = GameController.Instance.uiVol;
     }
 
     /// <summary>
