@@ -1,13 +1,18 @@
+/**
+Description: Custom check box for managing color blind mode
+Author: jmolive8
+Version: 20240326
+**/
+
 using UnityEngine;
 
-/// <summary>
-/// Custom check box for managing color blind mode
-/// </summary>
-/// Author: jmolive8
 public class ColorBlindCheckBox : MonoBehaviour
 {
     public GameObject checkMark;
 
+    /// <summary>
+    /// Activates color blind mode instance
+    /// </summary>
     private void OnEnable()
     {
         checkMark.SetActive(GameController.Instance.ColorBlindMode);
@@ -21,4 +26,5 @@ public class ColorBlindCheckBox : MonoBehaviour
         checkMark.SetActive(!checkMark.activeInHierarchy);
         GameController.Instance.ChangeColorBlindMode(checkMark.activeInHierarchy);
     }
+
 }
