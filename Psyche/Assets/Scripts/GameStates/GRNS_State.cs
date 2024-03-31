@@ -21,6 +21,7 @@ public class GRNS_State : BaseState
         GOLD_6 = 8,
         GOLD_7 = 9,
         TUNGSTEN_1 = 10,
+        NICKEL_1 = 11,
         CHECKPOINT = 99,
     }
 
@@ -43,6 +44,7 @@ public class GRNS_State : BaseState
             "element_gold 6"        => (short)SceneObject.GOLD_6,
             "element_gold 7"        => (short)SceneObject.GOLD_7,
             "element_tungsten 1"    => (short)SceneObject.TUNGSTEN_1,
+            "element_nickel 1"      => (short)SceneObject.NICKEL_1,
 
             "checkpoint"            => (short)SceneObject.CHECKPOINT,
             _                       => -1,
@@ -68,6 +70,7 @@ public class GRNS_State : BaseState
             (short)SceneObject.GOLD_6       => "Element_Gold 6", 
             (short)SceneObject.GOLD_7       => "Element_Gold 7", 
             (short)SceneObject.TUNGSTEN_1   => "Element_Tungsten 1",
+            (short)SceneObject.NICKEL_1     => "Element_Nickel 1",
 
             (short)SceneObject.CHECKPOINT   => "Checkpoint",
             _ => "",
@@ -92,6 +95,7 @@ public class GRNS_State : BaseState
             { (short)SceneObject.GOLD_6, true },
             { (short)SceneObject.GOLD_7, true },
             { (short)SceneObject.TUNGSTEN_1, true },
+            { (short)SceneObject.NICKEL_1,   true },
         };
         LoadDefaultState();
         SaveState();
@@ -290,6 +294,24 @@ public class GRNS_State : BaseState
                     }
                     break;
 
+                case (short)SceneObject.NICKEL_1:
+                    { // Specifying scope for use of `var value` && `var targetObject`
+                        var value = (bool)pair.Value;
+
+                        // Remove the object if it's already been picked up
+                        if (!value)
+                        {
+                            var targetObject = GameObject.Find(objectName);
+                            if (targetObject == null)
+                            {
+                                Debug.LogError($"Object {objectName} does not exist");
+                                return;
+                            }
+
+                            targetObject.SetActive(value);
+                        }
+                    }
+                    break;
 
                 default: break;
             }
