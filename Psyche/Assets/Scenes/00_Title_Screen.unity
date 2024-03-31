@@ -180,7 +180,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &65298548
 RectTransform:
   m_ObjectHideFlags: 0
@@ -573,8 +573,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: M.I.S.T. (Magnetometer. Imager. Spectrometer. Thruster.) is a 2D platformer
     in space! Set in the distant future, a space delivery driver has crash-landed
-    onto the metal-rich asteroid, Psyche. Discover instruments that were used on
-    the Psyche spacecraft to traverse 7 levels, fix his ship, and get back to work!
+    onto the metal-rich asteroid, Psyche. You'll need to find instruments that were
+    used on the Psyche spacecraft to traverse 7 levels, fix the ship, and get back
+    to work!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
