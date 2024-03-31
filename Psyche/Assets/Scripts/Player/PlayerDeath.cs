@@ -91,15 +91,9 @@ public class PlayerDeath : MonoBehaviour
         {
             return;
         }
-<<<<<<< HEAD
         //ID of the checkpoint
         GameController.Instance.gameStateManager.Checkpoint = collision.gameObject.GetInstanceID();
         GameController.Instance.gameStateManager.RespawnPoint = _playerController.transform.position;
-=======
-        // ID of the checkpoint
-        GameController.Instance.gameStateManager.checkpoint = collision.gameObject.GetInstanceID();
-        GameController.Instance.gameStateManager.respawnPoint = _playerController.transform.position;
->>>>>>> dev
 
         // Recharge health and battery
         playerHealth.HealthUp(100);
