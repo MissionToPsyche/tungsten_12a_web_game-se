@@ -135,17 +135,17 @@ public class GameController : BaseController<GameController>
     /// </summary>
     private void OnDisable()
     {
-        if(UIController.Instance != null)
+        if (UIController.Instance != null)
         {
 
         }
-        if(PlayerController.Instance != null)
+        if (PlayerController.Instance != null)
         {
 
         }
     }
 
-    
+
 
     //======================================================= Gamestate ======================================================
 
