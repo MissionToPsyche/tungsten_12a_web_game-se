@@ -120,9 +120,9 @@ public class SceneTransitionManager : MonoBehaviour {
 
     /// <summary>
     /// Finds and passes the unique boundary of the newly loaded scene to each of the game's cameras.
-    /// </summary>
     /// Needs a WaitForSeconds() before being called so the scene can fully load, or else
     /// will try to find the camera bounds of the previous scene.
+    /// </summary>
     private void LoadCameraBounds()
     {
         //array of the virtual cameras attached to the player
@@ -180,7 +180,7 @@ public class SceneTransitionManager : MonoBehaviour {
             // with the exception of two "outs" for the landing scene since we can go out from the landing scene
             // to the imager level and to the outro endgame scene
             GameObject[] objectsWithTransitionTag = GameObject.FindGameObjectsWithTag(tag);
-            GameObject caveObject = objectsWithTransitionTag[0]; // set to first but might change below
+            GameObject caveObject = null;
 
             // we differentiate the proper transition objects for the player with the layer as well
             // caves use the default layer so these are the ones we want
