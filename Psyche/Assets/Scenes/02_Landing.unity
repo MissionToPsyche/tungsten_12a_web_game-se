@@ -16116,11 +16116,11 @@ PrefabInstance:
       objectReference: {fileID: 1195215623}
     - target: {fileID: 4822381043481428571, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.000002682209
+      value: -0.0000021457672
       objectReference: {fileID: 0}
     - target: {fileID: 4822381043481428571, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.46655
+      value: 0.4732525
       objectReference: {fileID: 0}
     - target: {fileID: 5207462503417578920, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: m_BoundingShape2D
@@ -16178,10 +16178,6 @@ PrefabInstance:
     - target: {fileID: 2256284953869002401, guid: 4279c030866387f4a82ae42b380b6d37, type: 3}
       propertyPath: m_Name
       value: SolarArray
-      objectReference: {fileID: 0}
-    - target: {fileID: 2256284953869002401, guid: 4279c030866387f4a82ae42b380b6d37, type: 3}
-      propertyPath: m_TagString
-      value: Tool
       objectReference: {fileID: 0}
     - target: {fileID: 4879092171002727389, guid: 4279c030866387f4a82ae42b380b6d37, type: 3}
       propertyPath: m_LocalPosition.x
