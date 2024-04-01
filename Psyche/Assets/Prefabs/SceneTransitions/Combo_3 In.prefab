@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1812182970340502703}
   - component: {fileID: 5624682388616511653}
   - component: {fileID: 5456742364315090568}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 09_Combo_3 In
   m_TagString: TransitionObjectIn
   m_Icon: {fileID: 0}
@@ -156,7 +156,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4660144002196951121}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -17.74, y: 9.89, z: 3.4632}
   m_LocalScale: {x: 4.5645, y: 4.5645, z: 1.5215}
   m_ConstrainProportionsScale: 0
