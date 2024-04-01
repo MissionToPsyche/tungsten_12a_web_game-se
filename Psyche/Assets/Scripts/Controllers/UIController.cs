@@ -504,7 +504,6 @@ public class UIController : BaseController<UIController>
             GameController.Instance.sceneTransitionManager.OnInitiateTransition(
                 GameController.Instance.gameStateManager.MatchScene(GameStateManager.Scene.Title)
                 );
-
         }
     }
 
@@ -542,7 +541,6 @@ public class UIController : BaseController<UIController>
     public GameObject ironRequirement;
     public GameObject nickelRequirement;
     public GameObject goldRequirement;
-    public GameObject tungstenRequirement;
 
     /// <summary>
     /// Modifies the tool when its upgrade button is pressed
