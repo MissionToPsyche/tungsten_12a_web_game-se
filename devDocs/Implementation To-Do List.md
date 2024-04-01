@@ -17,23 +17,6 @@
 
 ### James
 
-- [ ] Pause during falls and mid jump
-- [ ] player can get stuck moving when inventory is openned
-- [ ] Pause in front of caves disables entrance
-- [ ] Player sprite child object, center player
-      
-- [ ] Rework upgrade menu to run on seperate script
-- [ ] Display tool upgrade limits on upgrades ui
-      
-- [ ] move TempGameManager code to GameController
-      
-- [ ] Fix battery / health pickup warning
-- [ ] getbutton input names
-- [ ] Slight dialog box optimisation
-      
-- [ ] Implement UI scaling for various window sizes
-      
-- [ ] Fix Magnet level lighting
 
 ### Joshua
 
