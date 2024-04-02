@@ -11,6 +11,7 @@ public class OutroController : MonoBehaviour {
 
     public GameObject outro1, outro2, outro3, outro4, clickText, quitButton, link;
     private Image img1, img2, img3, img4;
+    private bool IsTransitioning;
     int curScreen = 1;
 
     /// <summary>
@@ -34,6 +35,8 @@ public class OutroController : MonoBehaviour {
 
         //fade in the first image
         StartCoroutine(FadeIn(img1));
+
+        IsTransitioning = false;
     }
 
     /// <summary>
@@ -43,43 +46,44 @@ public class OutroController : MonoBehaviour {
     {
         if (Input.GetButtonDown("EMagnet"))
         {
-            switch (curScreen)
+            if (!IsTransitioning)
             {
-                case 1:
-                    curScreen++;
-                    StartCoroutine(CrossFade(img1, img2));
-                    break;
+                switch (curScreen)
+                {
+                    case 1:
+                        StartCoroutine(CrossFade(img1, img2));
+                        break;
 
-                case 2:
-                    curScreen++;
-                    StartCoroutine(CrossFade(img2, img3));
-                    break;
+                    case 2:
+                        StartCoroutine(CrossFade(img2, img3));
+                        break;
 
-                case 3:
-                    curScreen++;
-                    StartCoroutine(CrossFadeLastCS(img3, img4));
-                    break;
+                    case 3:
+                        StartCoroutine(CrossFadeLastCS(img3, img4));
+                        break;
 
-                default:
-                    // in case there's some error in the outro, the last image still shows, and the correct buttons are active
-                    //set all their alphas to 0, except img1 (first cs)
-                    if (img4.canvasRenderer.GetAlpha() == 0)
-                    {
-                        img1.canvasRenderer.SetAlpha(0);
-                        img2.canvasRenderer.SetAlpha(0);
-                        img3.canvasRenderer.SetAlpha(0);
-                        img4.canvasRenderer.SetAlpha(1);
+                    default:
+                        // in case there's some error in the outro, the last image still shows, and the correct buttons are active
+                        //set all their alphas to 0, except img1 (first cs)
+                        if (img4.canvasRenderer.GetAlpha() == 0)
+                        {
+                            img1.canvasRenderer.SetAlpha(0);
+                            img2.canvasRenderer.SetAlpha(0);
+                            img3.canvasRenderer.SetAlpha(0);
+                            img4.canvasRenderer.SetAlpha(1);
 
-                        //disable the "click to continue" text
-                        clickText.SetActive(false);
+                            //disable the "click to continue" text
+                            clickText.SetActive(false);
 
-                        //enable the quit button
-                        quitButton.SetActive(true);
+                            //enable the quit button
+                            quitButton.SetActive(true);
 
-                        //enable the link
-                        link.SetActive(true);
-                    }
-                    break;
+                            //enable the link
+                            link.SetActive(true);
+                        }
+                        break;
+                }
+                curScreen++;
             }
         }
     }
@@ -112,6 +116,8 @@ public class OutroController : MonoBehaviour {
     /// <returns></returns>
     private IEnumerator CrossFade(Image img1, Image img2)
     {
+        IsTransitioning = true;
+
         //fades out the first image
         img1.CrossFadeAlpha(0, 1.0f, false);
         yield return new WaitForSeconds(1.0f);
@@ -119,6 +125,8 @@ public class OutroController : MonoBehaviour {
         //fades in the second image
         img2.CrossFadeAlpha(1, 2.0f, false);
         yield return new WaitForSeconds(2.0f);
+
+        IsTransitioning = false;
     }
 
     /// <summary>
