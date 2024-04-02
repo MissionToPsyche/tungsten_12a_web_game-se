@@ -177,7 +177,7 @@ public class InventoryManager : MonoBehaviour
 
             case Tool.ELECTROMAGNET:
                 _playerController.eMagnetManager.Enable();
-                SetObjectState?.Invoke("First_Veins", true);
+                SetObjectState?.Invoke("First_Deposits", true);
                 break;
 
             default:

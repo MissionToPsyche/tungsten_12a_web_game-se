@@ -21,7 +21,7 @@ public class eMagnet_State : BaseState
         GOLD_2          = 4,
         IRON_1          = 5,
         TUNGSTEN_1      = 6,
-        FIRST_VEINS     = 7,
+        FIRST_DEPOSITS  = 7,
 
         CHECKPOINT      = 99,
     }
@@ -42,7 +42,7 @@ public class eMagnet_State : BaseState
             "element_gold 2"        => (short)SceneObject.GOLD_2,
             "element_iron 1"        => (short)SceneObject.IRON_1,
             "element_tungsten 1"    => (short)SceneObject.TUNGSTEN_1,
-            "first_veins"           => (short)SceneObject.FIRST_VEINS,
+            "first_deposits"        => (short)SceneObject.FIRST_DEPOSITS,
 
             "checkpoint"            => (short)SceneObject.CHECKPOINT,
             _                       => -1,
@@ -65,7 +65,7 @@ public class eMagnet_State : BaseState
             (short)SceneObject.GOLD_2           => "Element_Gold 2",
             (short)SceneObject.IRON_1           => "Element_Iron 1",
             (short)SceneObject.TUNGSTEN_1       => "Element_Tungsten 1",
-            (short)SceneObject.FIRST_VEINS      => "First_Veins",
+            (short)SceneObject.FIRST_DEPOSITS   => "First_Deposits",
 
             (short)SceneObject.CHECKPOINT       => "Checkpoint",
             _                                   => null,
@@ -80,14 +80,14 @@ public class eMagnet_State : BaseState
         // This must be set up first before anything else is created as everything else is based off of this
         _defaultState = new Dictionary<short, object>
         {
-            { (short)SceneObject.ELECTROMAGNET, true }, // 'true' for available
-            { (short)SceneObject.CHECKPOINT_0,  false }, // `true` for activate-able
-            { (short)SceneObject.CHECKPOINT_1,  false },
-            { (short)SceneObject.GOLD_1,        true },
-            { (short)SceneObject.GOLD_2,        true },
-            { (short)SceneObject.IRON_1,        true },
-            { (short)SceneObject.TUNGSTEN_1,    true },
-            { (short)SceneObject.FIRST_VEINS,   false },
+            { (short)SceneObject.ELECTROMAGNET,     true }, // 'true' for available
+            { (short)SceneObject.CHECKPOINT_0,      false }, // `true` for activate-able
+            { (short)SceneObject.CHECKPOINT_1,      false },
+            { (short)SceneObject.GOLD_1,            true },
+            { (short)SceneObject.GOLD_2,            true },
+            { (short)SceneObject.IRON_1,            true },
+            { (short)SceneObject.TUNGSTEN_1,        true },
+            { (short)SceneObject.FIRST_DEPOSITS,    false },
         };    
         LoadDefaultState();
         SaveState();
@@ -209,7 +209,7 @@ public class eMagnet_State : BaseState
                     }
                     break;
 
-                case (short)SceneObject.FIRST_VEINS:
+                case (short)SceneObject.FIRST_DEPOSITS:
                     {
                         var value = (bool)pair.Value;
                         if (!value)
