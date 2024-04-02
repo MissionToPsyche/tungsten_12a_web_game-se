@@ -119,7 +119,11 @@ public class IntroController : MonoBehaviour
     /// <returns></returns>
     private IEnumerator FadeIn(Image img)
     {
+        IsTransitioning = true;
+
         img.CrossFadeAlpha(1, 2.0f, false);
         yield return new WaitForSeconds(2.0f);
+
+        IsTransitioning = false;
     }
 }
