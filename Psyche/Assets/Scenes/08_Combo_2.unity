@@ -3169,47 +3169,47 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 277567257}
     m_Modifications:
-    - target: {fileID: 3325924169283356502, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 3325924169283356502, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_Name
-      value: Iron Vein (10)
+      value: Magnetized Deposit
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.091
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.778
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
@@ -3217,10 +3217,10 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
 --- !u!4 &95783076 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
   m_PrefabInstance: {fileID: 95783075}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &105723190
@@ -3567,47 +3567,47 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 277567257}
     m_Modifications:
-    - target: {fileID: 3325924169283356502, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 3325924169283356502, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_Name
-      value: Iron Vein (8)
+      value: Magnetized Deposit
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.239
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.519
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
@@ -3615,10 +3615,10 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
 --- !u!4 &116241954 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
   m_PrefabInstance: {fileID: 116241953}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &128711113
@@ -4027,7 +4027,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8692036041642331315, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
       propertyPath: m_Name
-      value: Basic Moving Hazard (4)
+      value: Spiked Ball (Moving)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4137,47 +4137,47 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 277567257}
     m_Modifications:
-    - target: {fileID: 3325924169283356502, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 3325924169283356502, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_Name
-      value: Iron Vein (14)
+      value: Magnetized Deposit
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 22.917
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.839
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.w
       value: -0.9099613
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0.41469333
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 409
       objectReference: {fileID: 0}
@@ -4185,10 +4185,10 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
 --- !u!4 &155322913 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
   m_PrefabInstance: {fileID: 155322912}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &157925646
@@ -5851,7 +5851,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8692036041642331315, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
       propertyPath: m_Name
-      value: Basic Moving Hazard (5)
+      value: Spiked Ball (Moving)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6523,47 +6523,47 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 277567257}
     m_Modifications:
-    - target: {fileID: 3325924169283356502, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 3325924169283356502, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_Name
-      value: Iron Vein (3)
+      value: Magnetized Deposit
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
@@ -6571,10 +6571,10 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
 --- !u!4 &229316229 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
   m_PrefabInstance: {fileID: 229316228}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &231890352
@@ -6799,47 +6799,47 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 277567257}
     m_Modifications:
-    - target: {fileID: 3325924169283356502, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 3325924169283356502, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_Name
-      value: Iron Vein (1)
+      value: Magnetized Deposit
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 22.681145
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.9533839
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
@@ -6847,10 +6847,10 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
 --- !u!4 &243131200 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
   m_PrefabInstance: {fileID: 243131199}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &248522132
@@ -7811,7 +7811,7 @@ GameObject:
   m_Component:
   - component: {fileID: 277567257}
   m_Layer: 0
-  m_Name: Iron Veins
+  m_Name: Magnetized Deposits
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35490,7 +35490,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8692036041642331315, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
       propertyPath: m_Name
-      value: Basic Moving Hazard (6)
+      value: Spiked Ball (Moving)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -39778,47 +39778,47 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 277567257}
     m_Modifications:
-    - target: {fileID: 3325924169283356502, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 3325924169283356502, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_Name
-      value: Iron Vein (19)
+      value: Magnetized Deposit
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 21.23
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.95
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.9396927
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0.3420201
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 40
       objectReference: {fileID: 0}
@@ -39826,10 +39826,10 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
 --- !u!4 &667939706 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
   m_PrefabInstance: {fileID: 667939705}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &670064435
@@ -40935,47 +40935,47 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 277567257}
     m_Modifications:
-    - target: {fileID: 3325924169283356502, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 3325924169283356502, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_Name
-      value: Iron Vein (6)
+      value: Magnetized Deposit
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.08
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.1
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.92387956
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0.38268343
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -45
       objectReference: {fileID: 0}
@@ -40983,10 +40983,10 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
 --- !u!4 &707434752 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
   m_PrefabInstance: {fileID: 707434751}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &710413227
@@ -40997,47 +40997,47 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 277567257}
     m_Modifications:
-    - target: {fileID: 3325924169283356502, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 3325924169283356502, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_Name
-      value: Iron Vein
+      value: Magnetized Deposit
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.004638672
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.95337725
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
@@ -41045,10 +41045,10 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
 --- !u!4 &710413228 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
   m_PrefabInstance: {fileID: 710413227}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &711870442
@@ -43886,47 +43886,47 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 277567257}
     m_Modifications:
-    - target: {fileID: 3325924169283356502, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 3325924169283356502, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_Name
-      value: Iron Vein (9)
+      value: Magnetized Deposit
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.239
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.y
       value: 2.043
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
@@ -43934,10 +43934,10 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
 --- !u!4 &791991285 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
   m_PrefabInstance: {fileID: 791991284}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &793218913
@@ -44476,47 +44476,47 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 277567257}
     m_Modifications:
-    - target: {fileID: 3325924169283356502, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 3325924169283356502, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_Name
-      value: Iron Vein (16)
+      value: Magnetized Deposit
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 23.952
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.y
       value: 2.186
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.w
       value: -0.7660445
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0.6427876
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 440
       objectReference: {fileID: 0}
@@ -44524,10 +44524,10 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
 --- !u!4 &826892923 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
   m_PrefabInstance: {fileID: 826892922}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &830268679
@@ -45776,7 +45776,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8692036041642331315, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
       propertyPath: m_Name
-      value: Basic Moving Hazard (7)
+      value: Spiked Ball (Moving)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -45833,7 +45833,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6646021675751896344, guid: d81e982550e193942a6c867fe684e4b1, type: 3}
       propertyPath: m_Name
-      value: Moveable Iron Rectangle (1)
+      value: Magnetized Rectangle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -46948,47 +46948,47 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 277567257}
     m_Modifications:
-    - target: {fileID: 3325924169283356502, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 3325924169283356502, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_Name
-      value: Iron Vein (2)
+      value: Magnetized Deposit
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 22.690426
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.0022668839
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
@@ -46996,10 +46996,10 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
 --- !u!4 &926301369 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
   m_PrefabInstance: {fileID: 926301368}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &933916994
@@ -47178,47 +47178,47 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 277567257}
     m_Modifications:
-    - target: {fileID: 3325924169283356502, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 3325924169283356502, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_Name
-      value: Iron Vein (15)
+      value: Magnetized Deposit
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 23.522
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.429
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.w
       value: -0.93969274
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0.34201995
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 400
       objectReference: {fileID: 0}
@@ -47226,10 +47226,10 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
 --- !u!4 &946168340 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
   m_PrefabInstance: {fileID: 946168339}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &949293166
@@ -52440,7 +52440,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8692036041642331315, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
       propertyPath: m_Name
-      value: Basic Moving Hazard (2)
+      value: Spiked Ball (Moving)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -56045,7 +56045,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8692036041642331315, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
       propertyPath: m_Name
-      value: Basic Moving Hazard (8)
+      value: Spiked Ball (Moving)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -57913,47 +57913,47 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 277567257}
     m_Modifications:
-    - target: {fileID: 3325924169283356502, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 3325924169283356502, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_Name
-      value: Iron Vein (13)
+      value: Magnetized Deposit
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 22.312
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.984
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.8660254
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 60
       objectReference: {fileID: 0}
@@ -57961,10 +57961,10 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
 --- !u!4 &1317640989 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
   m_PrefabInstance: {fileID: 1317640988}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1319370244
@@ -60266,47 +60266,47 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 277567257}
     m_Modifications:
-    - target: {fileID: 3325924169283356502, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 3325924169283356502, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_Name
-      value: Iron Vein (5)
+      value: Magnetized Deposit
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.48
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.92387956
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0.38268343
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -45
       objectReference: {fileID: 0}
@@ -60314,10 +60314,10 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
 --- !u!4 &1395594463 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
   m_PrefabInstance: {fileID: 1395594462}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1396186139
@@ -60496,47 +60496,47 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 277567257}
     m_Modifications:
-    - target: {fileID: 3325924169283356502, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 3325924169283356502, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_Name
-      value: Iron Vein (4)
+      value: Magnetized Deposit
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.47
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.47
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.92387956
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0.38268343
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 45
       objectReference: {fileID: 0}
@@ -60544,10 +60544,10 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
 --- !u!4 &1398556999 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
   m_PrefabInstance: {fileID: 1398556998}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1398635799
@@ -63407,47 +63407,47 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 277567257}
     m_Modifications:
-    - target: {fileID: 3325924169283356502, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 3325924169283356502, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_Name
-      value: Iron Vein (17)
+      value: Magnetized Deposit
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 24.317
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.559
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.w
       value: -0.9848077
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0.17364846
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 340
       objectReference: {fileID: 0}
@@ -63455,10 +63455,10 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
 --- !u!4 &1518242731 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
   m_PrefabInstance: {fileID: 1518242730}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1519111367
@@ -63553,47 +63553,47 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 277567257}
     m_Modifications:
-    - target: {fileID: 3325924169283356502, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 3325924169283356502, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_Name
-      value: Iron Vein (11)
+      value: Magnetized Deposit
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.89
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.64
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.9914449
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0.13052616
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 15
       objectReference: {fileID: 0}
@@ -63601,10 +63601,10 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
 --- !u!4 &1519676674 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
   m_PrefabInstance: {fileID: 1519676673}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1525119286
@@ -64710,47 +64710,47 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 277567257}
     m_Modifications:
-    - target: {fileID: 3325924169283356502, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 3325924169283356502, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_Name
-      value: Iron Vein (18)
+      value: Magnetized Deposit
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 21.7
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.45
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.9063079
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0.42261827
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 50
       objectReference: {fileID: 0}
@@ -64758,10 +64758,10 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
 --- !u!4 &1575948105 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
   m_PrefabInstance: {fileID: 1575948104}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1576534242
@@ -64994,7 +64994,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8692036041642331315, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
       propertyPath: m_Name
-      value: Basic Moving Hazard (3)
+      value: Spiked Ball (Moving)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -74946,7 +74946,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6646021675751896344, guid: d81e982550e193942a6c867fe684e4b1, type: 3}
       propertyPath: m_Name
-      value: Moveable Iron Rectangle
+      value: Magnetized Rectangle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -75091,7 +75091,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8692036041642331315, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
       propertyPath: m_Name
-      value: Basic Moving Hazard (1)
+      value: Spiked Ball (Moving)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -76428,47 +76428,47 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 277567257}
     m_Modifications:
-    - target: {fileID: 3325924169283356502, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 3325924169283356502, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_Name
-      value: Iron Vein (12)
+      value: Magnetized Deposit
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.091
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.y
       value: 2.036
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
@@ -76476,10 +76476,10 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
 --- !u!4 &2020639462 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
   m_PrefabInstance: {fileID: 2020639461}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2026447751
@@ -76636,47 +76636,47 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 277567257}
     m_Modifications:
-    - target: {fileID: 3325924169283356502, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 3325924169283356502, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_Name
-      value: Iron Vein (7)
+      value: Magnetized Deposit
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.06
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.06
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.92387956
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0.38268343
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+    - target: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 45
       objectReference: {fileID: 0}
@@ -76684,10 +76684,10 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
 --- !u!4 &2029927268 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 8710560225024395914, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8710560225024395914, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
   m_PrefabInstance: {fileID: 2029927267}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2030704988
@@ -76996,7 +76996,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8692036041642331315, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
       propertyPath: m_Name
-      value: Basic Moving Hazard
+      value: Spiked Ball (Moving)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
