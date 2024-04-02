@@ -498,12 +498,12 @@ public class UIController : BaseController<UIController>
             /**
              * Destroys Player and UI so they do not spawn on the start screen
              */
-            Destroy(PlayerController.Instance.gameObject);
-            Destroy(gameObject);
             GameController.Instance.sceneTransitionManager.devControl = true;
             GameController.Instance.sceneTransitionManager.OnInitiateTransition(
                 GameController.Instance.gameStateManager.MatchScene(GameStateManager.Scene.Title)
                 );
+            Destroy(PlayerController.Instance.gameObject);
+            Destroy(gameObject);
         }
     }
 
