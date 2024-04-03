@@ -63,7 +63,7 @@ public class EMagnetManager : ToolManager {
     /// <returns></returns>
     public IEnumerator handleEMagnet()
     {
-        GameController.Instance.audioManager.toolEMagnet.Play();
+        GameController.Instance.AudioManager.toolEMagnet.Play();
         PlayerController.eMagnetActive = true;
         hitBoxRotator.gameObject.SetActive(true);
         Collider2D hit, targetVein = null, grabbedObject = null;
@@ -142,7 +142,7 @@ public class EMagnetManager : ToolManager {
             yield return null;
         } while (Input.GetButton("EMagnet") && !PlayerController.magnetInterrupt);
 
-        GameController.Instance.audioManager.toolEMagnet.Stop();
+        GameController.Instance.AudioManager.toolEMagnet.Stop();
         PlayerController.playerCharacter.gravityScale = curGrav;
         hitBoxRotator.gameObject.SetActive(false);
         PlayerController.eMagnetActive = false;
