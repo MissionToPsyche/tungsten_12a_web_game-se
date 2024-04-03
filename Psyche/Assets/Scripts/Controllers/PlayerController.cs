@@ -111,14 +111,6 @@ public class PlayerController : BaseController<PlayerController>
     }
 
     /// <summary>
-    /// Called when necessary - not every frame
-    /// </summary>
-    public override void UpdateController()
-    {
-        //Insert Logic
-    }
-    
-    /// <summary>
     /// Runs every frame
     ///   - Checks player status -- sets booleans
     ///   - Player movement handler
@@ -233,7 +225,7 @@ public class PlayerController : BaseController<PlayerController>
     {
         if(GameController.Instance != null)
         {
-            GameController.Instance.gameStateManager.UnloadPlayer();
+            GameController.Instance.GameStateManager.UnloadPlayer();
         }
         if(UIController.Instance != null)
         {

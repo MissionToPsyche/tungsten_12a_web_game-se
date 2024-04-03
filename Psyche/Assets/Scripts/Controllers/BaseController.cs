@@ -1,51 +1,47 @@
-using System.Collections;
-using System.Collections.Generic;
+/**
+ * Authors: JoshBenn
+ */
 using UnityEngine;
 
 /// <summary>
-/// Controller abstract script with generalization for subclasses
+/// Generic base Controller class with generalization for Controller subclasses implementing Singleton and DontDestroyOnLoad
 /// </summary>
 public abstract class BaseController<T> : MonoBehaviour where T : BaseController<T>
 {
     //============================================== Initialize/Updates/Destroy ==============================================
 
     //Allows the subclass to implement this logic without the required code
-    private static T _instance;
+    private static T Singleton;
 
     /// <summary>
-    /// Default initialization
+    /// Default initialization of the class
     /// </summary>
     public virtual void Initialize() { }
 
     /// <summary>
-    /// Singleton pattern to prevent duplication
+    /// Accessor for the Singleton Instance -- prevents duplication
     /// </summary>
     public static T Instance
     {
         get
         {
-            if (_instance == null)
+            if (Singleton == null)
             {
-                _instance = FindAnyObjectByType<T>();
-
-                if (_instance == null)
-                {
-                    //Debug.LogError($"An instance of {typeof(T)} doesn't exist!");
-                }
+                Singleton = FindAnyObjectByType<T>();
             }
-            return _instance;
+            return Singleton;
         }
     }
 
     /// <summary>
-    /// Virtual Awake() class, implements dontdestroyonload
+    /// Implementation of DontDestroyOnLoad to prevent object destruction when transitioning between scenes
     /// </summary>
     protected virtual void Awake()
     {
         //Singleton to ensure only one instance exists
-        if (_instance == null || _instance == this)
+        if (Singleton == null || Singleton == this)
         {
-            _instance = (T)this;
+            Singleton = (T)this;
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -55,22 +51,13 @@ public abstract class BaseController<T> : MonoBehaviour where T : BaseController
     }
 
     /// <summary>
-    /// Updates the controller when called
-    ///   - Empty
-    /// </summary>
-    public abstract void UpdateController();
-
-    /// <summary>
-    /// Shuts down or destroys the controller if implemented
+    /// Shuts down and destroys the controller
     /// </summary>
     public virtual void Shutdown() 
     {
-        // Implement any cleanup necessary
-
-        // Destroy the instance
-        if (_instance == this)
+        if (Singleton == this)
         {
-            _instance = null;
+            Singleton = null;
             Destroy(gameObject);
         }
     }
