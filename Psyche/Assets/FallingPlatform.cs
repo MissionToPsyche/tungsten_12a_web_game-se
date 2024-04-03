@@ -62,6 +62,7 @@ public class FallingPlatform : MonoBehaviour
         yield return new WaitForSeconds(OnDelay);
         RigidBody.bodyType = RigidbodyType2D.Dynamic;
         yield return new WaitForSeconds(OffDelay);
+
         Falling = false;
         RigidBody.bodyType = RigidbodyType2D.Kinematic;
         RigidBody.velocity = new Vector3(0, 0, 0);
