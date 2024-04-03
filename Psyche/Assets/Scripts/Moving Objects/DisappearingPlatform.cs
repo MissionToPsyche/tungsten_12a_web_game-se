@@ -1,10 +1,8 @@
 /*
- * Description: Disappearing Platform Script
+ * Description: Disappearing platform script
  * Authors: mcmyers4
  * Version: 20240402
  */
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -12,11 +10,15 @@ using UnityEngine;
 /// </summary>
 public class DisappearingPlatform : MonoBehaviour
 {
-    // Variables for timing
-    public float OffDuration = 1;
-    public float OnDuration = 4;
+    //======================================== Initialize/Update/Destroy =========================================
+
+    // Private variables
     private float Now = 0;
     private bool Enabled = true;
+
+    // Public variables
+    public float OffDuration = 1;
+    public float OnDuration = 4;
 
     /// <summary>
     /// Start is called before the first frame update
@@ -45,7 +47,9 @@ public class DisappearingPlatform : MonoBehaviour
             TogglePlatform();
         }
     }
-    
+
+    //============================================== Platform Actions ============================================
+
     /// <summary>
     /// Toggles on and off all child objects of the
     /// platform parent except for the player.
