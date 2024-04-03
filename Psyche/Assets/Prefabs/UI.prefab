@@ -15470,9 +15470,11 @@ MonoBehaviour:
   - {fileID: 6257963918514445753}
   - {fileID: 7622062497504766336}
   inventoryMenu: {fileID: 1690373141205758407}
-  confirmBoxText: {fileID: 7116520113140859952}
   optionsMenu: {fileID: 5624132768119358631}
+  upgradesMenu: {fileID: 8169344938353891804}
+  elementsMenu: {fileID: 8919908072273728615}
   dialogText: {fileID: 6635938548554724783}
+  confirmBoxText: {fileID: 7116520113140859952}
   solarArrayInfoButton: {fileID: 6155521317316860966}
   imagerInfoButton: {fileID: 1420831044811399160}
   spectrometerInfoButton: {fileID: 5195088121275753458}
@@ -18171,10 +18173,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd2ae6f3bb942a548b7a61689e141795, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toolName: SolarArray
-  level: 1
-  maxLevel: 5
-  toolEnabled: 1
+  ToolName: 
+  Level: 0
+  MaxLevel: 0
+  ToolEnabled: 0
   batteryLevel: 100
   maxCapacity: 100
   batteryPercent: 100
