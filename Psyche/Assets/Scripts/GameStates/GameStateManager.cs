@@ -156,7 +156,7 @@ public class GameStateManager : MonoBehaviour
                 break;
         }
 
-        _gameController.HandleGameStateEvent();
+        _gameController.HandleGameStateChange();
 
         // Scenes without a viable scene state are ignored
         if (currentState == GameState.InGame)
@@ -244,7 +244,7 @@ public class GameStateManager : MonoBehaviour
         {
             //UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
             //changed so that camera bounds would load on player repawn
-            StartCoroutine(GameController.Instance.sceneTransitionManager.CheckTransition(SceneManager.GetActiveScene().name));
+            StartCoroutine(GameController.Instance.SceneTransitionManager.CheckTransition(SceneManager.GetActiveScene().name));
         }
 
         //move the player to their respawn point
