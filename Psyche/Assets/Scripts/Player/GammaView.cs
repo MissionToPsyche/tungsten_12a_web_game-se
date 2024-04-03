@@ -63,16 +63,14 @@ public class GammaView : MonoBehaviour
     /// <param name="mode"></param>
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        GameStateManager.Scene GameStateManagerSn = GameController.Instance.gameStateManager.MatchScene(scene.name);
-
+        GameStateManager.Scene GameStateManagerSn = GameController.Instance.GameStateManager.MatchScene(scene.name);
         if (GameStateManagerSn != GameStateManager.Scene.Outro)
         {
             sceneLight = GameObject.FindGameObjectWithTag("SceneLight").GetComponent<Light2D>();
             sceneTilemap = GameObject.FindGameObjectWithTag("Terrain").GetComponent<Tilemap>();
-
-            if (GameStateManagerSn == GameStateManager.Scene.eMagnet ||
-                GameStateManagerSn == GameStateManager.Scene.Combo1 ||
-                GameStateManagerSn == GameStateManager.Scene.Combo3)
+            if (GameStateManagerSn == GameStateManager.Scene.EMagnet
+                || GameStateManagerSn == GameStateManager.Scene.Combo1
+                || GameStateManagerSn == GameStateManager.Scene.Combo3) 
             {
                 sceneTilemapFake = GameObject.FindGameObjectWithTag("FakeTerrain").GetComponent<Tilemap>();
             }
@@ -123,7 +121,7 @@ public class GammaView : MonoBehaviour
         }
 
         // apply modifications to sprites when color blind mode is enabled
-        colorBlindMode = GameController.Instance.colorBlindMode;
+        colorBlindMode = GameController.Instance.ColorBlindMode;
         if (colorBlindMode)
         {
             foreach (var spriteRenderer in spriteRenderersList)
@@ -185,9 +183,12 @@ public class GammaView : MonoBehaviour
                 spriteRenderersList[i].color = LayerColor(spriteRenderersList[i].gameObject);
                 if (Input.GetButtonDown("FireGRNS"))
                 {
-                    GameController.Instance.audioManager.toolGRNS.Play();
+                    GameController.Instance.AudioManager.toolGRNS.Play();
                 }
-                if (colorBlindMode) { ActivateGRNSaltView(); }
+                if (colorBlindMode)
+                { 
+                    ActivateGRNSaltView();
+                }
                 if (!sceneLight.intensity.Equals(1) && grnsControlsSceneLight)
                 {
                     TurnOnSceneLight();
@@ -208,9 +209,12 @@ public class GammaView : MonoBehaviour
                 spriteRenderersList[i].color = origColorArray[i];
                 if (Input.GetButtonUp("FireGRNS"))
                 {
-                    GameController.Instance.audioManager.toolGRNS.Stop();
+                    GameController.Instance.AudioManager.toolGRNS.Stop();
                 }
-                if (colorBlindMode) { DeactivateGRNSaltView(); }
+                if (colorBlindMode) 
+                {
+                    DeactivateGRNSaltView(); 
+                }
                 if (!sceneLight.intensity.Equals(origSceneLightIntensity) && grnsControlsSceneLight)
                 {
                     RevertSceneLight();
