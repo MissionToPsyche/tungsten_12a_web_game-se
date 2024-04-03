@@ -29,71 +29,71 @@ public class ImagerManager : ToolManager
     public void Initialize(PlayerController playerManagement)
     {
         //Base class variables
-        toolName = "Imager";
-        toolEnabled = false;
-        _playerController = playerManagement;
+        ToolName = "Imager";
+        ToolEnabled = false;
+        PlayerController = playerManagement;
         _flashlight.intensity = 0f;
-        level = 1;
-        levelRequirements = new Dictionary<int, Dictionary<InventoryManager.Element, ushort>>()
+        Level = 1;
+        LevelRequirements = new Dictionary<int, Dictionary<InventoryManager.Element, ushort>>()
         {
             {  2, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
-                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 2 },
+                    { InventoryManager.Element.Copper, 0 }, { InventoryManager.Element.Iron, 0 }, 
+                    { InventoryManager.Element.Nickel, 0 }, { InventoryManager.Element.Gold, 2 },
                 }
             },
             {  3, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
-                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 2 },
+                    { InventoryManager.Element.Copper, 0 }, { InventoryManager.Element.Iron, 0 }, 
+                    { InventoryManager.Element.Nickel, 0 }, { InventoryManager.Element.Gold, 2 },
                 }
             },
             {  4, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
-                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 2 },
+                    { InventoryManager.Element.Copper, 0 }, { InventoryManager.Element.Iron, 0 }, 
+                    { InventoryManager.Element.Nickel, 0 }, { InventoryManager.Element.Gold, 2 },
                 }
             },
             {  5, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
-                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 2 },
+                    { InventoryManager.Element.Copper, 0 }, { InventoryManager.Element.Iron, 0 }, 
+                    { InventoryManager.Element.Nickel, 0 }, { InventoryManager.Element.Gold, 2 },
                 }
             },
             {  6, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
-                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 2 },
+                    { InventoryManager.Element.Copper, 0 }, { InventoryManager.Element.Iron, 0 }, 
+                    { InventoryManager.Element.Nickel, 0 }, { InventoryManager.Element.Gold, 2 },
                 }
             },
             {  7, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
-                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 2 },
+                    { InventoryManager.Element.Copper, 0 }, { InventoryManager.Element.Iron, 0 }, 
+                    { InventoryManager.Element.Nickel, 0 }, { InventoryManager.Element.Gold, 2 },
                 }
             },
             {  8, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
-                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 2 },
+                    { InventoryManager.Element.Copper, 0 }, { InventoryManager.Element.Iron, 0 }, 
+                    { InventoryManager.Element.Nickel, 0 }, { InventoryManager.Element.Gold, 2 },
                 }
             },
             {  9, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
-                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 4 },
+                    { InventoryManager.Element.Copper, 0 }, { InventoryManager.Element.Iron, 0 }, 
+                    { InventoryManager.Element.Nickel, 0 }, { InventoryManager.Element.Gold, 4 },
                 }
             },
             {  10, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 },     
-                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 4 },
+                    { InventoryManager.Element.Copper, 0 }, { InventoryManager.Element.Iron, 0 },     
+                    { InventoryManager.Element.Nickel, 0 }, { InventoryManager.Element.Gold, 4 },
                 }
             },
         };
 
         //Tool specific variables
-        maxLevel = levelRequirements.Count + 1;
+        MaxLevel = LevelRequirements.Count + 1;
         _radiusIncrease = 1f;
         _active = false;
     }
@@ -104,7 +104,7 @@ public class ImagerManager : ToolManager
     /// </summary>
     public override void Activate()
     {
-        _active = !_playerController.solarArrayManager.batteryDrained;
+        _active = !PlayerController.solarArrayManager.batteryDrained;
         if (_active)
         {
             _flashlight.intensity = 1;

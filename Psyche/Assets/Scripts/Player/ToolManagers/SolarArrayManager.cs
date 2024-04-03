@@ -29,40 +29,40 @@ public class SolarArrayManager : ToolManager {
     /// <param name="playerController"></param>
     public void Initialize(PlayerController playerController) {
         //Base class variables
-        toolName = "SolarArray";
-        toolEnabled = false;
-        _playerController = playerController;
-        level = 1;
-        levelRequirements = new Dictionary<int, Dictionary<InventoryManager.Element, ushort>>()
+        ToolName = "SolarArray";
+        ToolEnabled = false;
+        PlayerController = playerController;
+        Level = 1;
+        LevelRequirements = new Dictionary<int, Dictionary<InventoryManager.Element, ushort>>()
         {
             {  2, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
-                    { InventoryManager.Element.NICKEL, 1 }, { InventoryManager.Element.GOLD, 0 },
+                    { InventoryManager.Element.Copper, 0 }, { InventoryManager.Element.Iron, 0 }, 
+                    { InventoryManager.Element.Nickel, 1 }, { InventoryManager.Element.Gold, 0 },
                 }
             },
             {  3, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
-                    { InventoryManager.Element.NICKEL, 1 }, { InventoryManager.Element.GOLD, 0 },
+                    { InventoryManager.Element.Copper, 0 }, { InventoryManager.Element.Iron, 0 }, 
+                    { InventoryManager.Element.Nickel, 1 }, { InventoryManager.Element.Gold, 0 },
                 }
             },
             {  4, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
-                    { InventoryManager.Element.NICKEL, 1 }, { InventoryManager.Element.GOLD, 0 },
+                    { InventoryManager.Element.Copper, 0 }, { InventoryManager.Element.Iron, 0 }, 
+                    { InventoryManager.Element.Nickel, 1 }, { InventoryManager.Element.Gold, 0 },
                 }
             },
             {  5, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
-                    { InventoryManager.Element.NICKEL, 1 }, { InventoryManager.Element.GOLD, 0 },
+                    { InventoryManager.Element.Copper, 0 }, { InventoryManager.Element.Iron, 0 }, 
+                    { InventoryManager.Element.Nickel, 1 }, { InventoryManager.Element.Gold, 0 },
                 }
             },
         };
 
         //Tool specific
-        maxLevel = levelRequirements.Count + 1;
+        MaxLevel = LevelRequirements.Count + 1;
         maxCapacity = 100f;
         batteryLevel = maxCapacity;
         batteryPercent = batteryLevel / maxCapacity * 100f;
