@@ -1,7 +1,7 @@
 /*
  * Description: Scene Transitions
  * Authors: joshbenn, blopezro, mcmyers4
- * Version: 20240119
+ * Version: 20240401
  */
 
 using Cinemachine;
@@ -19,6 +19,7 @@ public class SceneTransitionManager : MonoBehaviour {
     private GameController  _gameController;
     private Vector3         _landingPosition;
     private bool            _transition = false;
+    private string          _travelFromSceneName;
     private string          _travelToSceneName;
     private string          _directionTag;
     private bool            _inputBlocked = false;
@@ -73,7 +74,7 @@ public class SceneTransitionManager : MonoBehaviour {
     /// <param name="tag"></param>
     /// <returns></returns>
     public IEnumerator CheckTransition(string objectLabel) {
-        // objectLabel = "Scene_Name Direction"; --> sceneInfo = ["Scene_Name", "Direction"];
+        
         string[] sceneInfo = objectLabel.Split(' ');
 
         // Get the axis (positive or negative) for vertical buttons
@@ -92,15 +93,15 @@ public class SceneTransitionManager : MonoBehaviour {
             devControl = false;
             // Block the input until the scene is loaded
             _inputBlocked = true;
-
+            // -- Travel From Scene --
+            _travelFromSceneName = SceneManager.GetActiveScene().name;
             // -- Travel To Scene --
             _travelToSceneName = sceneInfo[0];
             // Load the scene
             yield return SceneManager.LoadSceneAsync(_gameController.gameStateManager.MatchScene(scene));
             // Set the scene
             _gameController.gameStateManager.SetScene(scene);
-
-            //yield return new WaitForSeconds(0.1f); // <-- Necessary anymore?
+            
             if (!_transition)
             {
                 _directionTag = (sceneInfo.Count() > 1) ? sceneInfo[1] : "out";
@@ -176,17 +177,23 @@ public class SceneTransitionManager : MonoBehaviour {
             // we must be going in reverse so then we look for the TransitionObjectOut (out).
             string tag = _directionTag.ToLower().Contains("out") ? "TransitionObjectIn" : "TransitionObjectOut";
 
-            // there should only be one transition object in and one transition object out for each scene
-            // with the exception of two "outs" for the landing scene since we can go out from the landing scene
-            // to the imager level and to the outro endgame scene
+            // There should only be one transition object in and one transition object out for each scene
+            // with the exception of two "outs" and "ins" for the Landing scene:
+            // Landing scene out to Imager level    // Landing scene out to Outro Cutscene scene
+            // Landing scene in from Title Screen   // Landing scene in from Combo 3
             GameObject[] objectsWithTransitionTag = GameObject.FindGameObjectsWithTag(tag);
             GameObject caveObject = null;
 
-            // we differentiate the proper transition objects for the player with the layer as well
-            // caves use the default layer so these are the ones we want
+            // We differentiate the proper transition objects for the player with the layer as well
+            // Default caves use the default layer while special case transition objects use other layers
             foreach (GameObject obj in objectsWithTransitionTag) {
-                if (obj.layer == 0) { // default layer
+                // If the object in the list is the default transition object and we ARE NOT coming from Combo 3
+                if (obj.layer == 0 && GameController.Instance.gameStateManager.MatchScene(_travelFromSceneName) != GameStateManager.Scene.Combo3) { // default layer
                     caveObject = obj;                   
+                    break; // break since we only need one GameObject
+                // If the object in the list is the cave layered transition object and we ARE coming from Combo 3
+                } else if (obj.layer == 8 && GameController.Instance.gameStateManager.MatchScene(_travelFromSceneName) == GameStateManager.Scene.Combo3) { // cave layer
+                    caveObject = obj;
                     break; // break since we only need one GameObject
                 }
             }
