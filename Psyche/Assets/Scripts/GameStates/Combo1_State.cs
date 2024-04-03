@@ -81,16 +81,16 @@ public class Combo1_State : BaseState
     {
         return obj switch
         {
-            (short)SceneObject.Checkpoint1 => "Checkpoint 1",
-            (short)SceneObject.Checkpoint2 => "Checkpoint 2",
-            (short)SceneObject.Checkpoint3 => "Checkpoint 3",
-            (short)SceneObject.Checkpoint4 => "Checkpoint 4",
-            (short)SceneObject.Tungsten1   => "Element_Tungsten 1",
-            (short)SceneObject.Gold1       => "Element_Gold 1",
-            (short)SceneObject.Copper1     => "Element_Copper 1",
-            (short)SceneObject.Copper2     => "Element_Copper 2",
-            (short)SceneObject.Iron1       => "Element_Iron 1",
-            (short)SceneObject.Nickel1     => "Element_Nickel 1",
+            (short)SceneObject.Checkpoint1  => "Checkpoint 1",
+            (short)SceneObject.Checkpoint2  => "Checkpoint 2",
+            (short)SceneObject.Checkpoint3  => "Checkpoint 3",
+            (short)SceneObject.Checkpoint4  => "Checkpoint 4",
+            (short)SceneObject.Tungsten1    => "Element_Tungsten 1",
+            (short)SceneObject.Gold1        => "Element_Gold 1",
+            (short)SceneObject.Copper1      => "Element_Copper 1",
+            (short)SceneObject.Copper2      => "Element_Copper 2",
+            (short)SceneObject.Iron1        => "Element_Iron 1",
+            (short)SceneObject.Nickel1      => "Element_Nickel 1",
 
             (short)SceneObject.Checkpoint   => "Checkpoint",
             _                               => null,
