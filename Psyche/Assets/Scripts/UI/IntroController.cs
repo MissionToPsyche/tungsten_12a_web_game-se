@@ -42,7 +42,7 @@ public class IntroController : MonoBehaviour
         //fade in the first image
         StartCoroutine(FadeIn(img1));
 
-        IsTransitioning = false;
+        IsTransitioning = true;
     }
 
     /// <summary>
