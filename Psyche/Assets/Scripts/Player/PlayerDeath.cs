@@ -13,6 +13,8 @@ using UnityEngine;
 public class PlayerDeath : MonoBehaviour
 {
     private PlayerController _playerController;
+    private System.DateTime LastActivation;
+
     public PlayerHealth playerHealth;                               //Initial player health
     public SolarArrayManager solarArrayManager;                     //Initial solar array
     public HashSet<int> reachedCheckpoints = new HashSet<int>();    //Stores unique IDs of checkpoints
@@ -102,7 +104,20 @@ public class PlayerDeath : MonoBehaviour
         //Play audio if you hit a checkpoint with default layer
         if (collision.gameObject.layer.Equals(0))
         {
-            GameController.Instance.AudioManager.checkpoint.Play();
+            if (LastActivation == null)
+            {
+                GameController.Instance.AudioManager.checkpoint.Play();
+                LastActivation = System.DateTime.Now;
+            }
+            else
+            {
+                System.TimeSpan diff = System.DateTime.Now - LastActivation;
+                if (diff.TotalSeconds > 5)
+                {
+                    LastActivation = System.DateTime.Now;
+                    GameController.Instance.AudioManager.checkpoint.Play();
+                }
+            }
         }
     }
 

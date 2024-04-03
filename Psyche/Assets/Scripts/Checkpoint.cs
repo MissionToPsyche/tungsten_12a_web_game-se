@@ -1,7 +1,8 @@
 /**
- * Description: Checkpoint script to ensure animation
- * Author: dnguye99
- * version 20230326
+
+ * description: checkpoint script to ensure animation
+ * Author: dnguye99, JoshBenn
+ * version 20231125
  */
 
 using UnityEngine;
@@ -13,6 +14,7 @@ public class Checkpoint : MonoBehaviour
     public bool isSpinning = false;
     const string STATIC = "checkpoint-solarpanel-static";
     const string SPIN = "checkpoint-solarpanel-spin";
+    System.DateTime LastActivation;
 
     /// <summary>
     /// Start is called before the first frame update
