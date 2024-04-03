@@ -217,25 +217,23 @@ public class GameStateManager : MonoBehaviour
     public void SetScene(Scene scene)
     {
         // Check for None
-        if (scene == Scene.None) { return; }
+        if (scene == Scene.None) 
+        { 
+            return; 
+        }
 
         // Set current scene
         CurrentScene = scene;
 
         // Set current gamestate based on passed scene
-        switch (scene)
+        CurrentState = scene switch
         {
-            case Scene.Title or Scene.Intro or Scene.Outro:
-                CurrentState = GameState.MainMenu;
-                break;
-            
-            default:
-                CurrentState = GameState.InGame;
-                break;
-        }
+            Scene.Title or Scene.Intro or Scene.Outro => GameState.MainMenu,
+            _ => GameState.InGame,
+        };
 
         // Have the GameController handle the events of Game State change
-        GameController.HandleGameStateEvent();
+        GameController.HandleGameStateChange();
 
         // Load the requisite scene state
         if (CurrentState == GameState.InGame)
@@ -264,7 +262,8 @@ public class GameStateManager : MonoBehaviour
     public void SaveSceneState()
     {
         // If not in game, return
-        if (CurrentState != GameState.InGame) { 
+        if (CurrentState != GameState.InGame) 
+        { 
             return; 
         }
 
@@ -314,9 +313,8 @@ public class GameStateManager : MonoBehaviour
         //check if the player is at the starting point
         if (StartPoint.Equals(RespawnPoint))
         {
-            //UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
             //changed so that camera bounds would load on player repawn
-            StartCoroutine(GameController.Instance.sceneTransitionManager.CheckTransition(SceneManager.GetActiveScene().name));
+            StartCoroutine(GameController.Instance.SceneTransitionManager.CheckTransition(SceneManager.GetActiveScene().name));
         }
 
         //move the player to their respawn point

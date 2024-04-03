@@ -18,34 +18,34 @@ public class EMagnetManager : ToolManager {
     public void Initialize(PlayerController playerManagement)
     {
         //Base class varibles
-        toolName = "Electromagnet";
-        toolEnabled = false;
-        _playerController = playerManagement;
-        level = 1;
-        levelRequirements = new Dictionary<int, Dictionary<InventoryManager.Element, ushort>>()
+        ToolName = "Electromagnet";
+        ToolEnabled = false;
+        PlayerController = playerManagement;
+        Level = 1;
+        LevelRequirements = new Dictionary<int, Dictionary<InventoryManager.Element, ushort>>()
         {
             {  2, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 2 }, 
-                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 0 },
+                    { InventoryManager.Element.Copper, 0 }, { InventoryManager.Element.Iron, 2 }, 
+                    { InventoryManager.Element.Nickel, 0 }, { InventoryManager.Element.Gold, 0 },
                 }
             },
             {  3, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 2 }, 
-                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 0 },
+                    { InventoryManager.Element.Copper, 0 }, { InventoryManager.Element.Iron, 2 }, 
+                    { InventoryManager.Element.Nickel, 0 }, { InventoryManager.Element.Gold, 0 },
                 }
             },
             {  4, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 3 }, 
-                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 0 },
+                    { InventoryManager.Element.Copper, 0 }, { InventoryManager.Element.Iron, 3 }, 
+                    { InventoryManager.Element.Nickel, 0 }, { InventoryManager.Element.Gold, 0 },
                 }
             },
         };
 
         //Tool specific variables
-        maxLevel = levelRequirements.Count + 1;
+        MaxLevel = LevelRequirements.Count + 1;
         hitBoxRotator = eMagHitBox.transform.parent;
     }
 
@@ -63,15 +63,15 @@ public class EMagnetManager : ToolManager {
     /// <returns></returns>
     public IEnumerator handleEMagnet()
     {
-        GameController.Instance.audioManager.toolEMagnet.Play();
-        _playerController.eMagnetActive = true;
+        GameController.Instance.AudioManager.toolEMagnet.Play();
+        PlayerController.eMagnetActive = true;
         hitBoxRotator.gameObject.SetActive(true);
         Collider2D hit, targetVein = null, grabbedObject = null;
-        float curGrav = _playerController.playerCharacter.gravityScale;
+        float curGrav = PlayerController.playerCharacter.gravityScale;
 
         do
         {
-            _playerController.solarArrayManager.DrainBatt(1);
+            PlayerController.solarArrayManager.DrainBatt(1);
 
             /**
              * Finds angle between player center and mouse position
@@ -101,11 +101,11 @@ public class EMagnetManager : ToolManager {
                      */
                     if (targetVein == null)
                     {
-                        _playerController.beingPulled = true;
-                        _playerController.playerCharacter.gravityScale = 0;
+                        PlayerController.beingPulled = true;
+                        PlayerController.playerCharacter.gravityScale = 0;
                     }
 
-                    _playerController.playerCharacter.velocity = Vector2.zero;
+                    PlayerController.playerCharacter.velocity = Vector2.zero;
                     targetVein = hit;
                 }
             }
@@ -116,14 +116,14 @@ public class EMagnetManager : ToolManager {
             if (targetVein != null)
             {
                 if (targetVein.gameObject.activeInHierarchy)
-                    _playerController.playerCharacter.MovePosition(Vector2.MoveTowards(transform.position, targetVein.transform.position, Time.deltaTime * pullSpeed));
+                    PlayerController.playerCharacter.MovePosition(Vector2.MoveTowards(transform.position, targetVein.transform.position, Time.deltaTime * pullSpeed));
                 else
                 {
                     /**
                      * Stops pulling the player if the most recently hit Iron Vein has disappeared
                      */
-                    _playerController.beingPulled = false;
-                    _playerController.playerCharacter.gravityScale = curGrav;
+                    PlayerController.beingPulled = false;
+                    PlayerController.playerCharacter.gravityScale = curGrav;
                     targetVein = null;
                 }
             }
@@ -135,18 +135,18 @@ public class EMagnetManager : ToolManager {
             {
                 grabbedObject.attachedRigidbody.velocity = Vector2.zero;
                 grabbedObject.attachedRigidbody.angularVelocity = 0;
-                if (!_playerController.playerCollider.IsTouching(grabbedObject))
+                if (!PlayerController.playerCollider.IsTouching(grabbedObject))
                     grabbedObject.attachedRigidbody.MovePosition(Vector2.MoveTowards(grabbedObject.transform.position, transform.position, Time.deltaTime * pullSpeed));
             }
 
             yield return null;
-        } while (Input.GetButton("EMagnet") && !_playerController.magnetInterrupt);
+        } while (Input.GetButton("EMagnet") && !PlayerController.magnetInterrupt);
 
-        GameController.Instance.audioManager.toolEMagnet.Stop();
-        _playerController.playerCharacter.gravityScale = curGrav;
+        GameController.Instance.AudioManager.toolEMagnet.Stop();
+        PlayerController.playerCharacter.gravityScale = curGrav;
         hitBoxRotator.gameObject.SetActive(false);
-        _playerController.eMagnetActive = false;
-        _playerController.beingPulled = false;
+        PlayerController.eMagnetActive = false;
+        PlayerController.beingPulled = false;
     }
 
     /// <summary>
