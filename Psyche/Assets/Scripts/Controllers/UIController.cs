@@ -48,9 +48,6 @@ public class UIController : BaseController<UIController>
         _devConsoleFPSPanel.SetActive(false);
         _devConsoleResourcePanel.SetActive(false);
 
-        // Temporary workaround until UI issues fixed -- Tell GameController to load the UI event and DevConsole script
-        GameController.Instance.LoadUI();
-
         //Specific to this class
         _aspectRatio = (float)Screen.width / Screen.height; //<-- Use this to adjust UI layout/positioning
 
@@ -67,14 +64,6 @@ public class UIController : BaseController<UIController>
     {
         base.Awake();
         Initialize();
-    }
-
-    /// <summary>
-    /// Called when necessary - not every frame
-    /// </summary>
-    public override void UpdateController()
-    {
-        //Insert Logic
     }
 
     /// <summary>
@@ -130,7 +119,7 @@ public class UIController : BaseController<UIController>
     {
         if (GameController.Instance != null)
         {
-            GameController.Instance.developerConsole.OnDevConsoleUIUpdate += ProcessDevConsole;
+            GameController.Instance.DeveloperConsole.OnDevConsoleUIUpdate += ProcessDevConsole;
         }
 
         if (PlayerController.Instance != null)
@@ -155,7 +144,7 @@ public class UIController : BaseController<UIController>
     {
         if (GameController.Instance != null)
         {
-            GameController.Instance.developerConsole.OnDevConsoleUIUpdate -= ProcessDevConsole;
+            GameController.Instance.DeveloperConsole.OnDevConsoleUIUpdate -= ProcessDevConsole;
         }
         if (PlayerController.Instance != null)
         {
@@ -179,33 +168,33 @@ public class UIController : BaseController<UIController>
     {
         switch (tool)
         {
-            case InventoryManager.Tool.SOLARARRAY:
+            case InventoryManager.Tool.SolarArray:
                 setDialogText("This is a Solar Array. Psyche had 2 of these in cross formations to generate power.\n\nI can use this to automatically recharge my suit's battery!\n\n<i>Press <b>TAB</b> to learn more.</i>");
                 solarArrayInfoButton.SetActive(true);
                 solarArrayLevel.transform.parent.gameObject.SetActive(true);
                 batteryIndicator.SetActive(true);
                 break;
 
-            case InventoryManager.Tool.THRUSTER:
+            case InventoryManager.Tool.Thruster:
                 setDialogText("This is a Hall Thruster. This thruster used electricity to propel Psyche from Earth's orbit to the asteroid.\n\nI can use this to help me reach high up areas!\n\n<i>Hold <b>SPACEBAR</b> to fly upwards.</i>\n\n<i>Press <b>TAB</b> to learn more.</i>");
                 thrusterInfoButton.SetActive(true);
                 thrusterLevel.transform.parent.gameObject.SetActive(true);
                 thrusterIcon.SetActive(true);
                 break;
 
-            case InventoryManager.Tool.IMAGER:
+            case InventoryManager.Tool.Imager:
                 setDialogText("This is Multispectral Imager. It is highly sensitive to light and Psyche used 2 of these to analyze the asteroid's geology and topography.\n\nI can use this to help me see in the dark!\n\n<i>Look around with the spotlight using your mouse.</i>\n\n<i>Press <b>TAB</b> to learn more.</i>");
                 imagerInfoButton.SetActive(true);
                 imagerLevel.transform.parent.gameObject.SetActive(true);
                 break;
 
-            case InventoryManager.Tool.SPECTROMETER:
+            case InventoryManager.Tool.Spectrometer:
                 setDialogText("This is a Gamma-Ray and Neutron Spectrometer. This system was used on Psyche to map the elemental composition of the asteroid.\n\nI can use this to help me search for the elements I need!\n\n<i>Hold <b>RIGHT CLICK</b> to see through objects.</i>\n\n<i>Press <b>TAB</b> to learn more.</i>");
                 spectrometerInfoButton.SetActive(true);
                 GRNSIcon.SetActive(true);
                 break;
 
-            case InventoryManager.Tool.ELECTROMAGNET:
+            case InventoryManager.Tool.Electromagnet:
                 setDialogText("This is a Magnetometer. Psyche used 2 of these to detect the asteroid's remanent (leftover) magnetic field.\n\nI can use this to detect surface materials that have remanent magnetism! With my suit's Electro-Magnet, I'll propel myself towards magnetized deposits.\n\n<i>Hold <b>LEFT CLICK</b> to aim the Electro-Magnet with your mouse and pull yourself towards magnetized deposits.</i>\n\n<i>Press <b>TAB</b> to learn more.</i>");
                 eMagnetInfoButton.SetActive(true);
                 eMagnetLevel.transform.parent.gameObject.SetActive(true);
@@ -245,8 +234,8 @@ public class UIController : BaseController<UIController>
         {
             case GameStateManager.Scene.Landing: elementIndex = 0; break;
             case GameStateManager.Scene.Imager: elementIndex = 1; break;
-            case GameStateManager.Scene.GRNS: elementIndex = 2; break;
-            case GameStateManager.Scene.eMagnet: elementIndex = 3; break;
+            case GameStateManager.Scene.Grns: elementIndex = 2; break;
+            case GameStateManager.Scene.EMagnet: elementIndex = 3; break;
             case GameStateManager.Scene.Thruster: elementIndex = 4; break;
             case GameStateManager.Scene.Combo1: elementIndex = 5; break;
             case GameStateManager.Scene.Combo2: elementIndex = 6; break;
@@ -259,7 +248,7 @@ public class UIController : BaseController<UIController>
             Color newColor = elements[elementIndex].color;
             newColor.a = 1f;
             elements[elementIndex].color = newColor;
-            GameController.Instance.audioManager.pickupElementTungsten.Play();
+            GameController.Instance.AudioManager.pickupElementTungsten.Play();
         }
     }
 
@@ -269,7 +258,7 @@ public class UIController : BaseController<UIController>
     /// <param name="args"></param>
     private void ProcessDevConsole(ArrayList args)
     {
-        var command = GameController.Instance.developerConsole.Match(args[0].ToString());
+        var command = GameController.Instance.DeveloperConsole.Match(args[0].ToString());
 
         switch (command)
         {
@@ -284,7 +273,7 @@ public class UIController : BaseController<UIController>
                 }
                 break;
             case DeveloperConsole.DevConsoleCommand.TOGGLE:
-                var sub_command = GameController.Instance.developerConsole.Match(args[1].ToString());
+                var sub_command = GameController.Instance.DeveloperConsole.Match(args[1].ToString());
                 Debug.Log($"{sub_command} -- {args[1].ToString()}");
                 switch (sub_command)
                 {
@@ -341,7 +330,7 @@ public class UIController : BaseController<UIController>
     /// </summary>
     public void playButtonSound()
     {
-        GameController.Instance.audioManager.buttonClick.Play();
+        GameController.Instance.AudioManager.buttonClick.Play();
     }
 
     //========================================================== UI ==========================================================
@@ -490,7 +479,7 @@ public class UIController : BaseController<UIController>
             confirmBoxText.transform.parent.gameObject.SetActive(false);
             inventoryMenu.SetActive(false);
             PlayerController.Instance.inputBlocked = false;
-            StartCoroutine(GameController.Instance.gameStateManager.Warp());
+            StartCoroutine(GameController.Instance.GameStateManager.Warp());
         }
         ///If Title Screen button opened the Confirmation Box
         else
@@ -500,10 +489,10 @@ public class UIController : BaseController<UIController>
              */
             Destroy(PlayerController.Instance.gameObject);
             Destroy(gameObject);
-            GameController.Instance.sceneTransitionManager.devControl = true;
-            GameController.Instance.sceneTransitionManager.OnInitiateTransition(
-                GameController.Instance.gameStateManager.MatchScene(GameStateManager.Scene.Title)
-                );
+            GameController.Instance.SceneTransitionManager.devControl = true;
+            GameController.Instance.SceneTransitionManager.OnInitiateTransition(
+                GameController.Instance.GameStateManager.MatchScene(GameStateManager.Scene.Title)
+            );
 
         }
     }
@@ -557,10 +546,10 @@ public class UIController : BaseController<UIController>
         float soundDuration = 3.0f;
         AudioSource audioSource = PlayerController.Instance.inventoryManager.MatchTool(toolName) switch
         {
-            InventoryManager.Tool.IMAGER => GameController.Instance.audioManager.toolImager,
-            InventoryManager.Tool.SOLARARRAY => GameController.Instance.audioManager.buttonClick,
-            InventoryManager.Tool.THRUSTER => GameController.Instance.audioManager.toolThrusters,
-            InventoryManager.Tool.ELECTROMAGNET => GameController.Instance.audioManager.toolEMagnet,
+            InventoryManager.Tool.Imager => GameController.Instance.AudioManager.toolImager,
+            InventoryManager.Tool.SolarArray => GameController.Instance.AudioManager.buttonClick,
+            InventoryManager.Tool.Thruster => GameController.Instance.AudioManager.toolThrusters,
+            InventoryManager.Tool.Electromagnet => GameController.Instance.AudioManager.toolEMagnet,
             _ => null,
         };
         if (audioSource != null)
@@ -615,10 +604,10 @@ public class UIController : BaseController<UIController>
                         {
                             string name = requirement.Key switch
                             {
-                                InventoryManager.Element.COPPER => "Copper",
-                                InventoryManager.Element.IRON => "Iron",
-                                InventoryManager.Element.NICKEL => "Nickel",
-                                InventoryManager.Element.GOLD => "Gold",
+                                InventoryManager.Element.Copper => "Copper",
+                                InventoryManager.Element.Iron => "Iron",
+                                InventoryManager.Element.Nickel => "Nickel",
+                                InventoryManager.Element.Gold => "Gold",
                                 _ => ""
                             };
 
@@ -720,19 +709,19 @@ public class UIController : BaseController<UIController>
             Destroy(child.gameObject);
         }
 
-        int amount = levelRequirements[InventoryManager.Element.COPPER];
+        int amount = levelRequirements[InventoryManager.Element.Copper];
         if (amount > 0)
             Instantiate(copperRequirement, requirementsArea).GetComponentInChildren<TMP_Text>().SetText(amount.ToString());
 
-        amount = levelRequirements[InventoryManager.Element.IRON];
+        amount = levelRequirements[InventoryManager.Element.Iron];
         if (amount > 0)
             Instantiate(ironRequirement, requirementsArea).GetComponentInChildren<TMP_Text>().SetText(amount.ToString());
 
-        amount = levelRequirements[InventoryManager.Element.NICKEL];
+        amount = levelRequirements[InventoryManager.Element.Nickel];
         if (amount > 0)
             Instantiate(nickelRequirement, requirementsArea).GetComponentInChildren<TMP_Text>().SetText(amount.ToString());
 
-        amount = levelRequirements[InventoryManager.Element.GOLD];
+        amount = levelRequirements[InventoryManager.Element.Gold];
         if (amount > 0)
             Instantiate(goldRequirement, requirementsArea).GetComponentInChildren<TMP_Text>().SetText(amount.ToString());
 
@@ -751,19 +740,19 @@ public class UIController : BaseController<UIController>
 
         switch (element)
         {
-            case InventoryManager.Element.COPPER:
+            case InventoryManager.Element.Copper:
                 copperAmount.SetText(value);
                 break;
-            case InventoryManager.Element.IRON:
+            case InventoryManager.Element.Iron:
                 ironAmount.SetText(value);
                 break;
-            case InventoryManager.Element.NICKEL:
+            case InventoryManager.Element.Nickel:
                 nickelAmount.SetText(value);
                 break;
-            case InventoryManager.Element.GOLD:
+            case InventoryManager.Element.Gold:
                 goldAmount.SetText(value);
                 break;
-            case InventoryManager.Element.TUNGSTEN:
+            case InventoryManager.Element.Tungsten:
                 tungstenAmount.SetText(value);
                 break;
             default:
