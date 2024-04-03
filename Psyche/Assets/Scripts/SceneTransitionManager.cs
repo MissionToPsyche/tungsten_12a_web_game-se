@@ -41,7 +41,7 @@ public class SceneTransitionManager : MonoBehaviour {
 
     public void LoadDevConsole()
     {
-        _gameController.developerConsole.OnDevConsoleTransition += OnInitiateTransition;
+        _gameController.DeveloperConsole.OnDevConsoleTransition += OnInitiateTransition;
     }
 
     /// <summary>
@@ -80,7 +80,7 @@ public class SceneTransitionManager : MonoBehaviour {
         float verticalAxis = Input.GetAxis("Vertical");
 
         // Cross reference scene -- None == Non-Scene Input
-        GameStateManager.Scene scene = _gameController.gameStateManager.MatchScene(sceneInfo[0]);
+        GameStateManager.Scene scene = _gameController.GameStateManager.MatchScene(sceneInfo[0]);
         if (scene == GameStateManager.Scene.None)
         {
             Debug.LogError($"Invalid Scene Transition {sceneInfo[0]}");
@@ -96,9 +96,9 @@ public class SceneTransitionManager : MonoBehaviour {
             // -- Travel To Scene --
             _travelToSceneName = sceneInfo[0];
             // Load the scene
-            yield return SceneManager.LoadSceneAsync(_gameController.gameStateManager.MatchScene(scene));
+            yield return SceneManager.LoadSceneAsync(_gameController.GameStateManager.MatchScene(scene));
             // Set the scene
-            _gameController.gameStateManager.SetScene(scene);
+            _gameController.GameStateManager.SetScene(scene);
 
             //yield return new WaitForSeconds(0.1f); // <-- Necessary anymore?
             if (!_transition)
@@ -106,7 +106,7 @@ public class SceneTransitionManager : MonoBehaviour {
                 _directionTag = (sceneInfo.Count() > 1) ? sceneInfo[1] : "out";
                 _transition = true;
             }
-            if (_transition && _gameController.gameStateManager.currentState == GameStateManager.GameState.InGame)
+            if (_transition && _gameController.GameStateManager.currentState == GameStateManager.GameState.InGame)
             {
                 RepositionPlayer(_travelToSceneName);
                 LoadBackground();
