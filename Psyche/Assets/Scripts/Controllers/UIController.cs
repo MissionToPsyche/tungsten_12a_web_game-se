@@ -48,9 +48,6 @@ public class UIController : BaseController<UIController>
         _devConsoleFPSPanel.SetActive(false);
         _devConsoleResourcePanel.SetActive(false);
 
-        // Temporary workaround until UI issues fixed -- Tell GameController to load the UI event and DevConsole script
-        GameController.Instance.LoadUI();
-
         //Specific to this class
         _aspectRatio = (float)Screen.width / Screen.height; //<-- Use this to adjust UI layout/positioning
 
@@ -67,14 +64,6 @@ public class UIController : BaseController<UIController>
     {
         base.Awake();
         Initialize();
-    }
-
-    /// <summary>
-    /// Called when necessary - not every frame
-    /// </summary>
-    public override void UpdateController()
-    {
-        //Insert Logic
     }
 
     /// <summary>
@@ -130,7 +119,7 @@ public class UIController : BaseController<UIController>
     {
         if (GameController.Instance != null)
         {
-            GameController.Instance.developerConsole.OnDevConsoleUIUpdate += ProcessDevConsole;
+            GameController.Instance.DeveloperConsole.OnDevConsoleUIUpdate += ProcessDevConsole;
         }
 
         if (PlayerController.Instance != null)
@@ -155,7 +144,7 @@ public class UIController : BaseController<UIController>
     {
         if (GameController.Instance != null)
         {
-            GameController.Instance.developerConsole.OnDevConsoleUIUpdate -= ProcessDevConsole;
+            GameController.Instance.DeveloperConsole.OnDevConsoleUIUpdate -= ProcessDevConsole;
         }
         if (PlayerController.Instance != null)
         {
@@ -259,7 +248,7 @@ public class UIController : BaseController<UIController>
             Color newColor = elements[elementIndex].color;
             newColor.a = 1f;
             elements[elementIndex].color = newColor;
-            GameController.Instance.audioManager.pickupElementTungsten.Play();
+            GameController.Instance.AudioManager.pickupElementTungsten.Play();
         }
     }
 
@@ -269,7 +258,7 @@ public class UIController : BaseController<UIController>
     /// <param name="args"></param>
     private void ProcessDevConsole(ArrayList args)
     {
-        var command = GameController.Instance.developerConsole.Match(args[0].ToString());
+        var command = GameController.Instance.DeveloperConsole.Match(args[0].ToString());
 
         switch (command)
         {
@@ -284,7 +273,7 @@ public class UIController : BaseController<UIController>
                 }
                 break;
             case DeveloperConsole.DevConsoleCommand.TOGGLE:
-                var sub_command = GameController.Instance.developerConsole.Match(args[1].ToString());
+                var sub_command = GameController.Instance.DeveloperConsole.Match(args[1].ToString());
                 Debug.Log($"{sub_command} -- {args[1].ToString()}");
                 switch (sub_command)
                 {
@@ -341,7 +330,7 @@ public class UIController : BaseController<UIController>
     /// </summary>
     public void playButtonSound()
     {
-        GameController.Instance.audioManager.buttonClick.Play();
+        GameController.Instance.AudioManager.buttonClick.Play();
     }
 
     //========================================================== UI ==========================================================
@@ -490,7 +479,7 @@ public class UIController : BaseController<UIController>
             confirmBoxText.transform.parent.gameObject.SetActive(false);
             inventoryMenu.SetActive(false);
             PlayerController.Instance.inputBlocked = false;
-            StartCoroutine(GameController.Instance.gameStateManager.Warp());
+            StartCoroutine(GameController.Instance.GameStateManager.Warp());
         }
         ///If Title Screen button opened the Confirmation Box
         else
@@ -500,10 +489,10 @@ public class UIController : BaseController<UIController>
              */
             Destroy(PlayerController.Instance.gameObject);
             Destroy(gameObject);
-            GameController.Instance.sceneTransitionManager.devControl = true;
-            GameController.Instance.sceneTransitionManager.OnInitiateTransition(
-                GameController.Instance.gameStateManager.MatchScene(GameStateManager.Scene.Title)
-                );
+            GameController.Instance.SceneTransitionManager.devControl = true;
+            GameController.Instance.SceneTransitionManager.OnInitiateTransition(
+                GameController.Instance.GameStateManager.MatchScene(GameStateManager.Scene.Title)
+            );
 
         }
     }
@@ -555,12 +544,11 @@ public class UIController : BaseController<UIController>
 
         // Play audio
         float soundDuration = 3.0f;
-        AudioSource audioSource = PlayerController.Instance.inventoryManager.MatchTool(toolName) switch
-        {
-            InventoryManager.Tool.IMAGER => GameController.Instance.audioManager.toolImager,
-            InventoryManager.Tool.SOLARARRAY => GameController.Instance.audioManager.buttonClick,
-            InventoryManager.Tool.THRUSTER => GameController.Instance.audioManager.toolThrusters,
-            InventoryManager.Tool.ELECTROMAGNET => GameController.Instance.audioManager.toolEMagnet,
+        AudioSource audioSource = PlayerController.Instance.inventoryManager.MatchTool(toolName) switch {
+            InventoryManager.Tool.IMAGER => GameController.Instance.AudioManager.toolImager,
+            InventoryManager.Tool.SOLARARRAY => GameController.Instance.AudioManager.buttonClick,
+            InventoryManager.Tool.THRUSTER => GameController.Instance.AudioManager.toolThrusters,
+            InventoryManager.Tool.ELECTROMAGNET => GameController.Instance.AudioManager.toolEMagnet,
             _ => null,
         };
         if (audioSource != null)
