@@ -122,7 +122,7 @@ public class GammaView : MonoBehaviour
             origColorArray[i] = spriteRenderersList[i].color;
         }
 
-        // apply modifications to sprites when color blind mode is enabled
+        // apply modifications to sprites when color blind mode is Enabled
         colorBlindMode = GameController.Instance.colorBlindMode;
         if (colorBlindMode)
         {
