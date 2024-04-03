@@ -85,5 +85,8 @@ public abstract class ToolManager : MonoBehaviour
             ToolManagerUpdate?.Invoke(ToolDirective.Upgrade, upgraded, toolName, levelRequirements[nextLevel + 1], nextLevel, maxLevel);
         else
             ToolManagerUpdate?.Invoke(ToolDirective.Upgrade, upgraded, toolName, levelRequirements[nextLevel], nextLevel, maxLevel);
+        
+        if (level == maxLevel)
+            ToolManagerUpdate?.Invoke(ToolDirective.MaxLevel, false, toolName, levelRequirements[nextLevel], level, maxLevel);
     }
 }
