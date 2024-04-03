@@ -80,11 +80,10 @@ public class GameController : BaseController<GameController>
     /// </summary>
     public void HandleGameStateChange()
     {
-        OnGameStateChanged?.Invoke(GameStateManager.currentState);
-        if (GameStateManager.currentState == GameStateManager.GameState.MainMenu)
+        OnGameStateChanged?.Invoke(GameStateManager.CurrentState);
+        if (GameStateManager.CurrentState == GameStateManager.GameState.MainMenu)
         {
             GameStateManager.ResetScenes();
-
         }
     }
 
