@@ -21,12 +21,12 @@ public class OptionsController : MonoBehaviour
     /// </summary>
     private void OnEnable()
     {
-        checkMark.SetActive(GameController.Instance.colorBlindMode);
+        checkMark.SetActive(GameController.Instance.ColorBlindMode);
         musicVolSlider.value = GameController.Instance.musicVol;
         sfxVolSlider.value = GameController.Instance.sfxVol;
         uiVolSlider.value = GameController.Instance.uiVol;
         GameStateManager.Scene GameStateManagerSn =
-            GameController.Instance.gameStateManager.MatchScene(SceneManager.GetActiveScene().name);
+            GameController.Instance.GameStateManager.MatchScene(SceneManager.GetActiveScene().name);
         // set video volume when not in title screen
         if (GameStateManagerSn != GameStateManager.Scene.Title)
         {
@@ -49,7 +49,7 @@ public class OptionsController : MonoBehaviour
     public void setMusicVolume()
     {
         GameController.Instance.musicVol = musicVolSlider.value;
-        GameController.Instance.audioManager.SetAudioVolumeForAllMusic(musicVolSlider.value);
+        GameController.Instance.AudioManager.SetAudioVolumeForAllMusic(musicVolSlider.value);
     }
 
     /// <summary>
@@ -58,7 +58,7 @@ public class OptionsController : MonoBehaviour
     public void setSfxVolume()
     {
         GameController.Instance.sfxVol = sfxVolSlider.value;
-        GameController.Instance.audioManager.SetAudioVolumeForAllSfx(sfxVolSlider.value);
+        GameController.Instance.AudioManager.SetAudioVolumeForAllSfx(sfxVolSlider.value);
     }
 
     /// <summary>
@@ -67,7 +67,7 @@ public class OptionsController : MonoBehaviour
     public void setUiVolume()
     {
         GameController.Instance.uiVol = uiVolSlider.value;
-        GameController.Instance.audioManager.SetAudioVolumeForAllUi(uiVolSlider.value);
+        GameController.Instance.AudioManager.SetAudioVolumeForAllUi(uiVolSlider.value);
     }
 
     /// <summary>
@@ -76,6 +76,6 @@ public class OptionsController : MonoBehaviour
     public void setVideoVolume()
     {
         GameController.Instance.videoVol = videoSlider.value;
-        GameController.Instance.audioManager.SetAudioVolumeForAllVideos(videoSlider.value);
+        GameController.Instance.AudioManager.SetAudioVolumeForAllVideos(videoSlider.value);
     }
 }
