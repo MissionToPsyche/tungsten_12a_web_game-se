@@ -57,23 +57,21 @@ public class MovingPlatform : MonoBehaviour
         }
     }
 
-    //=================================================== Collisions ===================================================
+    //=================================================== Collisions ===============================================
 
     /// <summary>
-    /// Keeps the player on the platform by making the player
-    /// a child of the object.
+    /// Keeps the player on the platform by making the player a child of the object.
     /// </summary>
-    /// <param name="collision"></param>
+    /// <param name="collision"><see cref="Collision2D"/></param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
         collision.transform.SetParent(transform);
     }
 
     /// <summary>
-    /// Releases the player by setting the player's parent
-    /// to null when the player leaves the platform.
+    /// Releases the player by setting the player's parent to null when the player leaves the platform.
     /// </summary>
-    /// <param name="collision"></param>
+    /// <param name="collision"><see cref="Collision2D"/></param>
     private void OnCollisionExit2D(Collision2D collision)
     {
         collision.transform.SetParent(null);

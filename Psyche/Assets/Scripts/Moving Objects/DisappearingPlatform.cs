@@ -30,12 +30,12 @@ public class DisappearingPlatform : MonoBehaviour
 
     /// <summary>
     /// Update is called once per frame.
-    /// Waits for the set on or off duration and
-    /// toggles the platform on or off accordingly.
+    /// Waits for the set on or off duration and toggles the platform on or off accordingly.
     /// </summary>
     void Update()
     {
         Now += Time.deltaTime;
+
         if (Enabled && Now >= OnDuration)
         {
             Now = 0;
@@ -51,12 +51,12 @@ public class DisappearingPlatform : MonoBehaviour
     //============================================== Platform Actions ============================================
 
     /// <summary>
-    /// Toggles on and off all child objects of the
-    /// platform parent except for the player.
+    /// Toggles on and off all child objects of the platform parent except for the player.
     /// </summary>
     void TogglePlatform()
     {
         Enabled = !Enabled;
+
         foreach (Transform child in gameObject.transform)
         {
             if (child.tag != "Player")
