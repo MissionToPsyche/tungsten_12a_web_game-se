@@ -24,7 +24,7 @@ public class GameController : BaseController<GameController>
     public override void Initialize()
     {
         // Set up the gamestate
-        var scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+        string scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
         GameStateManager = GetComponent<GameStateManager>();
         GameStateManager.Initialize(this, scene);
 
