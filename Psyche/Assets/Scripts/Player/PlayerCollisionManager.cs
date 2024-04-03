@@ -185,13 +185,13 @@ public class PlayerCollisionManager : MonoBehaviour
             case CollisionTag.Element:
                 PlayerController.inventoryManager.AddElement(other.name, 1);
                 Destroy(other.gameObject);
-                GameController.Instance.audioManager.pickupElement.Play();
+                GameController.Instance.AudioManager.pickupElement.Play();
                 break;
 
             case CollisionTag.Tool:
                 PlayerController.inventoryManager.ToolPickUp(other.name);
                 Destroy(other.gameObject);
-                GameController.Instance.audioManager.pickupTool.Play();
+                GameController.Instance.AudioManager.pickupTool.Play();
                 break;
 
             case CollisionTag.Checkpoint:

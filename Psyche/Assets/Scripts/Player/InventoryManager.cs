@@ -298,7 +298,7 @@ public class InventoryManager : MonoBehaviour
         
         // If the element is tungsten, updates the UI for the element at the current scene
         if (element == Element.Tungsten) {
-            GameStateManager.Scene currentScene = GameController.Instance.gameStateManager.currentScene;
+            GameStateManager.Scene currentScene = GameController.Instance.GameStateManager.currentScene;
             UIController.Instance.UpdateCapturedTungstens(currentScene);
         }
 

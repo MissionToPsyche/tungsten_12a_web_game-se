@@ -78,7 +78,7 @@ public abstract class ToolManager : MonoBehaviour
         bool upgraded = true;
         if (LevelRequirements.ContainsKey(Level + 1))
         {
-            foreach (var requirement in LevelRequirements[Level + 1])
+            foreach (KeyValuePair<InventoryManager.Element, ushort> requirement in LevelRequirements[Level + 1])
             {
                 if (PlayerController.inventoryManager.CheckElement(requirement.Key) < requirement.Value)
                 {
@@ -90,7 +90,7 @@ public abstract class ToolManager : MonoBehaviour
         if (upgraded && (Level + 1) <= nextLevel)
         {
             //Remove the required elements
-            foreach (var requirement in LevelRequirements[nextLevel])
+            foreach (KeyValuePair<InventoryManager.Element, ushort> requirement in LevelRequirements[nextLevel])
             {
                 if (requirement.Value > 0) //No need to activate underlying code if this isn't met
                 {
