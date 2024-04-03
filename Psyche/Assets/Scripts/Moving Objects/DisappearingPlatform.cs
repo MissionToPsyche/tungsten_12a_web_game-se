@@ -1,10 +1,8 @@
 /*
- * Description: Disappearing Platform Script
+ * Description: Disappearing platform script
  * Authors: mcmyers4
- * Version: 20240215
+ * Version: 20240402
  */
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -12,43 +10,58 @@ using UnityEngine;
 /// </summary>
 public class DisappearingPlatform : MonoBehaviour
 {
-    public float offDuration = 1;
-    public float onDuration = 4;
-    private float now = 0;
-    private new bool enabled = true;
+    //======================================== Initialize/Update/Destroy =========================================
 
-    // Start is called before the first frame update
+    // Private variables
+    private float Now = 0;
+    private bool Enabled = true;
+
+    // Public variables
+    public float OffDuration = 1;
+    public float OnDuration = 4;
+
+    /// <summary>
+    /// Start is called before the first frame update
+    /// </summary>
     void Start()
     {
-        enabled = true;
+        Enabled = true;
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Update is called once per frame.
+    /// Waits for the set on or off duration and toggles the platform on or off accordingly.
+    /// </summary>
     void Update()
     {
-        now += Time.deltaTime;
-        if (enabled && now >= onDuration)
+        Now += Time.deltaTime;
+
+        if (Enabled && Now >= OnDuration)
         {
-            now = 0;
+            Now = 0;
             TogglePlatform();
-        } else if (!enabled && now >= offDuration) 
+        }
+        else if (!Enabled && Now >= OffDuration) 
         {
-            now = 0;
+            Now = 0;
             TogglePlatform();
         }
     }
-    
+
+    //============================================== Platform Actions ============================================
+
     /// <summary>
-    /// Toggles on and off all child objects except for the player
+    /// Toggles on and off all child objects of the platform parent except for the player.
     /// </summary>
     void TogglePlatform()
     {
-        enabled = !enabled;
+        Enabled = !Enabled;
+
         foreach (Transform child in gameObject.transform)
         {
             if (child.tag != "Player")
             {
-                child.gameObject.SetActive(enabled);
+                child.gameObject.SetActive(Enabled);
             }
         }
     }
