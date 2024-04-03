@@ -1,5 +1,4 @@
 /**
-
  * description: checkpoint script to ensure animation
  * Author: dnguye99, JoshBenn
  * version 20231125
