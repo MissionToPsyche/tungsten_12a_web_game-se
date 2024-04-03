@@ -1,5 +1,5 @@
 /*
- * Description: Enables one way functionality on Enabled platforms
+ * Description: Enables one way functionality on enabled platforms
  * Authors: mcmyers4
  * Version: 20240227
  */
