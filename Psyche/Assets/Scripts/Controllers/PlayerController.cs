@@ -146,7 +146,7 @@ public class PlayerController : BaseController<PlayerController>
             //Imager
             if (inventoryManager.CheckTool("imager") && solarArrayManager.BatteryPercent != 0) {
                 //flashlight functionality
-                imagerManager.updateFlashlightPosition();
+                imagerManager.UpdateFlashlightPosition();
             }
 
             //Spectrometer
