@@ -42,7 +42,7 @@ public class SceneTransitionManager : MonoBehaviour {
 
     public void LoadDevConsole()
     {
-        _gameController.developerConsole.OnDevConsoleTransition += OnInitiateTransition;
+        _gameController.DeveloperConsole.OnDevConsoleTransition += OnInitiateTransition;
     }
 
     /// <summary>
@@ -81,7 +81,7 @@ public class SceneTransitionManager : MonoBehaviour {
         float verticalAxis = Input.GetAxis("Vertical");
 
         // Cross reference scene -- None == Non-Scene Input
-        GameStateManager.Scene scene = _gameController.gameStateManager.MatchScene(sceneInfo[0]);
+        GameStateManager.Scene scene = _gameController.GameStateManager.MatchScene(sceneInfo[0]);
         if (scene == GameStateManager.Scene.None)
         {
             Debug.LogError($"Invalid Scene Transition {sceneInfo[0]}");
@@ -89,7 +89,8 @@ public class SceneTransitionManager : MonoBehaviour {
         }
         
         // If a positive vertical button is pressed (w or up), then transition
-        if ((!_inputBlocked && Input.GetButton("Vertical") && verticalAxis > 0) || devControl) {
+        if ((!_inputBlocked && Input.GetButton("Vertical") && verticalAxis > 0) || devControl) 
+        {
             devControl = false;
             // Block the input until the scene is loaded
             _inputBlocked = true;
@@ -98,16 +99,16 @@ public class SceneTransitionManager : MonoBehaviour {
             // -- Travel To Scene --
             _travelToSceneName = sceneInfo[0];
             // Load the scene
-            yield return SceneManager.LoadSceneAsync(_gameController.gameStateManager.MatchScene(scene));
+            yield return SceneManager.LoadSceneAsync(_gameController.GameStateManager.MatchScene(scene));
             // Set the scene
-            _gameController.gameStateManager.SetScene(scene);
-            
+            _gameController.GameStateManager.SetScene(scene);
+
             if (!_transition)
             {
                 _directionTag = (sceneInfo.Count() > 1) ? sceneInfo[1] : "out";
                 _transition = true;
             }
-            if (_transition && _gameController.gameStateManager.currentState == GameStateManager.GameState.InGame)
+            if (_transition && _gameController.GameStateManager.CurrentState == GameStateManager.GameState.InGame)
             {
                 RepositionPlayer(_travelToSceneName);
                 LoadBackground();
@@ -188,24 +189,27 @@ public class SceneTransitionManager : MonoBehaviour {
             // Default caves use the default layer while special case transition objects use other layers
             foreach (GameObject obj in objectsWithTransitionTag) {
                 // If the object in the list is the default transition object and we ARE NOT coming from Combo 3
-                if (obj.layer == 0 && GameController.Instance.gameStateManager.MatchScene(_travelFromSceneName) != GameStateManager.Scene.Combo3) { // default layer
+                if (obj.layer == 0 && GameController.Instance.GameStateManager.MatchScene(_travelFromSceneName) != GameStateManager.Scene.Combo3) { // default layer
                     caveObject = obj;                   
                     break; // break since we only need one GameObject
                 // If the object in the list is the cave layered transition object and we ARE coming from Combo 3
-                } else if (obj.layer == 8 && GameController.Instance.gameStateManager.MatchScene(_travelFromSceneName) == GameStateManager.Scene.Combo3) { // cave layer
+                } else if (obj.layer == 8 && GameController.Instance.GameStateManager.MatchScene(_travelFromSceneName) == GameStateManager.Scene.Combo3) { // cave layer
                     caveObject = obj;
                     break; // break since we only need one GameObject
                 }
             }
 
             // return proper cave object position
-            if (caveObject != null) {
+            if (caveObject != null) 
+            {
                 return caveObject.transform.position;
             } else {
                 Debug.LogWarning(tag+" not found.");
             }
 
-        } else {
+        } 
+        else 
+        {
             Debug.LogWarning("Scene "+sceneName+" is not loaded.");
         }
         return Vector3.zero;
