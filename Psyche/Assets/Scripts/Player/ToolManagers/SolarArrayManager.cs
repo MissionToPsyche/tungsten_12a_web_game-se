@@ -1,5 +1,5 @@
 /** 
-Description: Solar array and battery script
+Description: Solar array tool and battery script
 Author: blopezro, mcmyers4
 Version: 20240403
 **/
@@ -16,7 +16,7 @@ public class SolarArrayManager : ToolManager
 {
     //======================================== Initialize/Update/Destroy =========================================
 
-    //Public variables
+    // Public variables
     public float BatteryLevel;
     public float MaxCapacity;
     public float BatteryPercent;
@@ -29,7 +29,7 @@ public class SolarArrayManager : ToolManager
     /// <param name="playerController"></param>
     public void Initialize(PlayerController playerController)
     {
-        //Base class variables
+        // Base class variables
         ToolName = "SolarArray";
         ToolEnabled = false;
         PlayerController = playerController;
@@ -70,7 +70,7 @@ public class SolarArrayManager : ToolManager
             },
         };
 
-        //Tool specific
+        // Tool specific
         MaxLevel = LevelRequirements.Count + 1;
         MaxCapacity = 100f;
         BatteryLevel = MaxCapacity;
@@ -81,7 +81,7 @@ public class SolarArrayManager : ToolManager
 
     //================================================== Events ==================================================
 
-    //Events to communicate to UI
+    // Events to communicate to UI
     public event Action<float> OnBatteryPercentageChanged;
 
     //=============================================== Tool Actions ===============================================
