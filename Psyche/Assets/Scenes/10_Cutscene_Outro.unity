@@ -247,8 +247,8 @@ MonoBehaviour:
   outro3: {fileID: 287181428}
   outro4: {fileID: 1207955232}
   clickText: {fileID: 214791830}
-  quitButton: {fileID: 384936676}
-  link: {fileID: 1843827359}
+  quitButton: {fileID: 384936678}
+  link: {fileID: 1843827364}
 --- !u!1 &80190068
 GameObject:
   m_ObjectHideFlags: 0
@@ -747,7 +747,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &384936677
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1100,7 +1100,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1843827360
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1197,7 +1197,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1843827362}
   m_OnClick:
     m_PersistentCalls:
