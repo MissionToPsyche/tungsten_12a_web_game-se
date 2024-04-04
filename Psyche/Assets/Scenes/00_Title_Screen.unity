@@ -1183,7 +1183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 349364317}
   - component: {fileID: 349364319}
-  - component: {fileID: 349364318}
+  - component: {fileID: 349364321}
   m_Layer: 5
   m_Name: SliderVolMusic
   m_TagString: Untagged
@@ -1206,6 +1206,7 @@ RectTransform:
   - {fileID: 688031644}
   - {fileID: 1977162264}
   - {fileID: 731045881}
+  - {fileID: 1856451619}
   m_Father: {fileID: 2010887355}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1213,20 +1214,6 @@ RectTransform:
   m_AnchoredPosition: {x: 106.71576, y: -26.000015}
   m_SizeDelta: {x: 299.4315, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &349364318
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 349364316}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb20f0bab5ac10f41b09c4a8d26ef504, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  checkMark: {fileID: 302922139}
-  slider: {fileID: 349364319}
 --- !u!114 &349364319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1278,8 +1265,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 349364318}
-        m_TargetAssemblyTypeName: AudioControl, Assembly-CSharp
+      - m_Target: {fileID: 349364321}
+        m_TargetAssemblyTypeName: ColorBlindCheckBox, Assembly-CSharp
         m_MethodName: setMusicVolume
         m_Mode: 1
         m_Arguments:
@@ -1290,6 +1277,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &349364321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 349364316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4abd1e97f7f64c64badb29abd27891bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkMark: {fileID: 302922139}
+  musicVolSlider: {fileID: 349364319}
+  sfxVolSlider: {fileID: 1467916808}
+  uiVolSlider: {fileID: 1904385023}
+  videoSlider: {fileID: 0}
 --- !u!1 &378708536
 GameObject:
   m_ObjectHideFlags: 0
@@ -1619,6 +1623,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkMark: {fileID: 302922139}
+  musicVolSlider: {fileID: 349364319}
+  sfxVolSlider: {fileID: 1467916808}
+  uiVolSlider: {fileID: 1904385023}
+  videoSlider: {fileID: 0}
 --- !u!114 &404213382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2091,6 +2099,10 @@ MonoBehaviour:
   sceneTransitionManager: {fileID: 0}
   audioManager: {fileID: 1773880520}
   colorBlindMode: 0
+  musicVol: 0.25
+  sfxVol: 0.25
+  uiVol: 0.25
+  videoVol: 0.25
 --- !u!4 &527361052
 Transform:
   m_ObjectHideFlags: 0
@@ -4454,12 +4466,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1501171008}
+  m_Father: {fileID: 1467916806}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 24.528801, y: 9.639992}
-  m_SizeDelta: {x: 350, y: -19.28}
+  m_AnchoredPosition: {x: -123.09771, y: 35.640015}
+  m_SizeDelta: {x: 350, y: 31.279997}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1097772345
 MonoBehaviour:
@@ -4780,12 +4792,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1920362819}
+  m_Father: {fileID: 1904385021}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 24.528801, y: 9.639996}
-  m_SizeDelta: {x: 350, y: -19.28}
+  m_AnchoredPosition: {x: -123.09771, y: 35.639996}
+  m_SizeDelta: {x: 350, y: 31.279997}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1248793078
 MonoBehaviour:
@@ -5837,7 +5849,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1467916806}
   - component: {fileID: 1467916808}
-  - component: {fileID: 1467916807}
+  - component: {fileID: 1467916810}
   m_Layer: 5
   m_Name: SliderVolSfx
   m_TagString: Untagged
@@ -5860,6 +5872,7 @@ RectTransform:
   - {fileID: 771347609}
   - {fileID: 1835046366}
   - {fileID: 420245037}
+  - {fileID: 1097772344}
   m_Father: {fileID: 1501171008}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -5867,20 +5880,6 @@ RectTransform:
   m_AnchoredPosition: {x: 106.71576, y: -26.000015}
   m_SizeDelta: {x: 299.4315, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1467916807
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1467916805}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb20f0bab5ac10f41b09c4a8d26ef504, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  checkMark: {fileID: 302922139}
-  slider: {fileID: 1467916808}
 --- !u!114 &1467916808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5932,8 +5931,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1467916807}
-        m_TargetAssemblyTypeName: AudioControl, Assembly-CSharp
+      - m_Target: {fileID: 1467916810}
+        m_TargetAssemblyTypeName: ColorBlindCheckBox, Assembly-CSharp
         m_MethodName: setSfxVolume
         m_Mode: 1
         m_Arguments:
@@ -5944,6 +5943,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1467916810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1467916805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4abd1e97f7f64c64badb29abd27891bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkMark: {fileID: 302922139}
+  musicVolSlider: {fileID: 349364319}
+  sfxVolSlider: {fileID: 1467916808}
+  uiVolSlider: {fileID: 1904385023}
+  videoSlider: {fileID: 0}
 --- !u!1 &1497236497
 GameObject:
   m_ObjectHideFlags: 0
@@ -6107,7 +6123,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1467916806}
-  - {fileID: 1097772344}
   m_Father: {fileID: 1361315601}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -7052,12 +7067,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2010887355}
+  m_Father: {fileID: 349364317}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 24.528801, y: 9.639999}
-  m_SizeDelta: {x: 350, y: -19.28}
+  m_AnchoredPosition: {x: -123.09771, y: 35.64}
+  m_SizeDelta: {x: 350, y: 31.279997}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1856451620
 MonoBehaviour:
@@ -7111,7 +7126,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1904385021}
   - component: {fileID: 1904385023}
-  - component: {fileID: 1904385022}
+  - component: {fileID: 1904385025}
   m_Layer: 5
   m_Name: SliderVolUi
   m_TagString: Untagged
@@ -7134,6 +7149,7 @@ RectTransform:
   - {fileID: 2022363751}
   - {fileID: 1815734558}
   - {fileID: 1958721501}
+  - {fileID: 1248793077}
   m_Father: {fileID: 1920362819}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -7141,20 +7157,6 @@ RectTransform:
   m_AnchoredPosition: {x: 106.71576, y: -26.000015}
   m_SizeDelta: {x: 299.4315, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1904385022
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1904385020}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb20f0bab5ac10f41b09c4a8d26ef504, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  checkMark: {fileID: 302922139}
-  slider: {fileID: 1904385023}
 --- !u!114 &1904385023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7206,8 +7208,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1904385022}
-        m_TargetAssemblyTypeName: AudioControl, Assembly-CSharp
+      - m_Target: {fileID: 1904385025}
+        m_TargetAssemblyTypeName: ColorBlindCheckBox, Assembly-CSharp
         m_MethodName: setUiVolume
         m_Mode: 1
         m_Arguments:
@@ -7218,6 +7220,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1904385025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904385020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4abd1e97f7f64c64badb29abd27891bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkMark: {fileID: 302922139}
+  musicVolSlider: {fileID: 349364319}
+  sfxVolSlider: {fileID: 1467916808}
+  uiVolSlider: {fileID: 1904385023}
+  videoSlider: {fileID: 0}
 --- !u!1 &1920362818
 GameObject:
   m_ObjectHideFlags: 0
@@ -7247,7 +7266,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1904385021}
-  - {fileID: 1248793077}
   m_Father: {fileID: 1361315601}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -7624,7 +7642,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 349364317}
-  - {fileID: 1856451619}
   m_Father: {fileID: 1361315601}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}

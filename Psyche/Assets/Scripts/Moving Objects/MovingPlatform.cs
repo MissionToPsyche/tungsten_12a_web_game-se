@@ -18,7 +18,7 @@ public class MovingPlatform : MonoBehaviour
 
     // Public variables
     public Transform PointsObject;
-    public float MoveSpeed;
+    public float MoveSpeed = 2.5f;
 
     /// <summary>
     /// Start is called before the first frame update
