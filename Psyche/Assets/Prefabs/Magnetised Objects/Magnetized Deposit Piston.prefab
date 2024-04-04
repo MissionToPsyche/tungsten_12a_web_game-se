@@ -218,7 +218,7 @@ PrefabInstance:
     - target: {fileID: 5198483908214934543, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
       propertyPath: hazard
       value: 
-      objectReference: {fileID: 3325924169283356502, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
+      objectReference: {fileID: 8209088927417907195}
     - target: {fileID: 5198483908214934543, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
       propertyPath: moveSpeed
       value: 2.5
@@ -287,5 +287,10 @@ PrefabInstance:
 --- !u!4 &7214277085661669540 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7877526449693348844, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
+  m_PrefabInstance: {fileID: 670150520168381256}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8209088927417907195 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8692036041642331315, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
   m_PrefabInstance: {fileID: 670150520168381256}
   m_PrefabAsset: {fileID: 0}
