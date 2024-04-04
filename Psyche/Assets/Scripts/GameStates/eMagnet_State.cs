@@ -99,19 +99,15 @@ public class EMagnet_State : BaseState
             switch (pair.Key)
             {
                 case (short)SceneObject.Electromagnet:
-                    { // Specifying scope for use of `var value` && `var targetObject`
-                        var value = (bool)pair.Value;
-                        
-                        // Remove the object if it's already been picked up
+                    {
+                        bool value = (bool)pair.Value;
                         if (!value)
                         {
-                            var targetObject = GameObject.Find(objectName);
+                            GameObject targetObject = GameObject.Find(objectName);
                             if (targetObject == null)
                             {
-                                Debug.LogError($"Object {objectName} does not exist");
                                 return;
                             }
-
                             targetObject.SetActive(value);
                         }
                     }
