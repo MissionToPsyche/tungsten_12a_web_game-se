@@ -207,8 +207,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ead843394346c694eada07bb52dfca41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointsObject: {fileID: 3522257259456775252}
-  moveSpeed: 2.5
+  PointsObject: {fileID: 3522257259456775252}
+  MoveSpeed: 2.5
 --- !u!251 &570958073381346106
 PlatformEffector2D:
   m_ObjectHideFlags: 0
