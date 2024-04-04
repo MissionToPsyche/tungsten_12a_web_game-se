@@ -121,7 +121,7 @@ public class PlayerMovement : MonoBehaviour
             if (!_playerManagement.inputBlocked && !_playerManagement.beingPulled && _playerManagement.isGrounded && Input.GetButtonDown("Jump"))
             {
                 _playerManagement.playerCharacter.velocity = new Vector2(_playerManagement.playerCharacter.velocity.x, 7f);
-                GameController.Instance.audioManager.playerJump.Play();
+                GameController.Instance.AudioManager.playerJump.Play();
             }
         }
 
@@ -161,9 +161,9 @@ public class PlayerMovement : MonoBehaviour
             //play the new animation
             _animator.Play(_newAnimation);
             if (_newAnimation.Equals(PLAYER_THRUSTER)) {
-                GameController.Instance.audioManager.toolThrusters.Play();
+                GameController.Instance.AudioManager.toolThrusters.Play();
             } else {
-                GameController.Instance.audioManager.toolThrusters.Stop();
+                GameController.Instance.AudioManager.toolThrusters.Stop();
             }
 
             //set the current animation state

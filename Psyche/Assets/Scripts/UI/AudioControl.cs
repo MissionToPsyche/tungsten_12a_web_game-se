@@ -15,36 +15,26 @@ public class AudioControl : MonoBehaviour
     public GameObject checkMark;
     public Slider slider;
 
-    /// <summary>
-    /// Activates check mark
-    /// </summary>
     private void OnEnable()
     {
-        checkMark.SetActive(GameController.Instance.colorBlindMode);
+        checkMark.SetActive(GameController.Instance.ColorBlindMode);
     }
 
-    /// <summary>
-    /// Sets the volume for all ui
-    /// </summary>
     public void setUiVolume()
     {
-        GameController.Instance.audioManager.SetAudioVolumeForAllUi(slider.value);
+        GameController.Instance.AudioManager.SetAudioVolumeForAllUi(slider.value);
+        // todo: add example play of sound
     }
 
-    /// <summary>
-    /// Sets the volume for all music
-    /// </summary>
     public void setMusicVolume()
     {
-        GameController.Instance.audioManager.SetAudioVolumeForAllMusic(slider.value);
+        GameController.Instance.AudioManager.SetAudioVolumeForAllMusic(slider.value);
     }
 
-    /// <summary>
-    /// Sets the volume for all sfx
-    /// </summary>
     public void setSfxVolume()
     {
-        GameController.Instance.audioManager.SetAudioVolumeForAllSfx(slider.value);
+        GameController.Instance.AudioManager.SetAudioVolumeForAllSfx(slider.value);
+        // todo: add example play of sound
     }
 
 }
