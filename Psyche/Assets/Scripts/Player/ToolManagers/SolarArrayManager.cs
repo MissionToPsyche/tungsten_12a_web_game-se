@@ -70,7 +70,7 @@ public class SolarArrayManager : ToolManager
             },
         };
 
-        // Tool specific
+        // Tool specific variables
         MaxLevel = LevelRequirements.Count + 1;
         MaxCapacity = 100f;
         BatteryLevel = MaxCapacity;
@@ -85,6 +85,21 @@ public class SolarArrayManager : ToolManager
     public event Action<float> OnBatteryPercentageChanged;
 
     //=============================================== Tool Actions ===============================================
+
+    /// <summary>
+    /// Charges battery to max capacity
+    /// </summary>
+    public override void Activate()
+    {
+        BatteryLevel += MaxCapacity;
+        BatteryLevel = Mathf.Clamp(BatteryLevel, 0f, MaxCapacity); // keeps batt level between 0-100
+        BatteryPercent = BatteryLevel / MaxCapacity * 100f;
+        if (BatteryPercent > 0)
+        {
+            BatteryDrained = false;
+        }
+        OnBatteryPercentageChanged?.Invoke(Mathf.RoundToInt(BatteryPercent));
+    }
 
     /// <summary>
     /// Drains battery at given rate
@@ -124,21 +139,6 @@ public class SolarArrayManager : ToolManager
     public void PassiveBatt()
     {
         BatteryLevel += Rate/1000 ;
-        BatteryLevel = Mathf.Clamp(BatteryLevel, 0f, MaxCapacity); // keeps batt level between 0-100
-        BatteryPercent = BatteryLevel / MaxCapacity * 100f;
-        if (BatteryPercent > 0)
-        {
-            BatteryDrained = false;
-        }
-        OnBatteryPercentageChanged?.Invoke(Mathf.RoundToInt(BatteryPercent));
-    }
-
-    /// <summary>
-    /// Charges battery to max capacity
-    /// </summary>
-    public override void Activate()
-    {
-        BatteryLevel += MaxCapacity;        
         BatteryLevel = Mathf.Clamp(BatteryLevel, 0f, MaxCapacity); // keeps batt level between 0-100
         BatteryPercent = BatteryLevel / MaxCapacity * 100f;
         if (BatteryPercent > 0)
