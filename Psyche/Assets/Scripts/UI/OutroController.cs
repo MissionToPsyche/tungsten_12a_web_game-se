@@ -104,10 +104,11 @@ public class OutroController : MonoBehaviour {
     /// </summary>
     public void QuitGame()
     {
-        GameController.Instance.audioManager.buttonClick.Play();
-        string scene = GameController.Instance.gameStateManager.MatchScene(GameStateManager.Scene.Title);
-        GameController.Instance.sceneTransitionManager.devControl = true;
-        GameController.Instance.sceneTransitionManager.OnInitiateTransition(scene);
+        GameController.Instance.AudioManager.buttonClick.Play();
+        string scene = GameController.Instance.GameStateManager.MatchScene(GameStateManager.Scene.Title);
+        GameController.Instance.SceneTransitionManager.devControl = true;
+        GameController.Instance.SceneTransitionManager.OnInitiateTransition(scene);
+        //UnityEngine.SceneManagement.SceneManager.LoadScene("Title_Screen");
     }
 
     /// <summary>
