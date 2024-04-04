@@ -17,13 +17,13 @@ public class TitleScreenManager : MonoBehaviour {
     public void startGame()
     {
         //Play button click sound
-        GameController.Instance.audioManager.buttonClick.Play();
+        GameController.Instance.AudioManager.buttonClick.Play();
 
         // Load the scene
         // Set the value this way so if any changes are made they are accounted for
-        string scene = GameController.Instance.gameStateManager.MatchScene(GameStateManager.Scene.Intro);
-        GameController.Instance.sceneTransitionManager.devControl = true;
-        GameController.Instance.sceneTransitionManager.OnInitiateTransition(scene);
+        string scene = GameController.Instance.GameStateManager.MatchScene(GameStateManager.Scene.Intro);
+        GameController.Instance.SceneTransitionManager.devControl = true;
+        GameController.Instance.SceneTransitionManager.OnInitiateTransition(scene);
     }
 
     /// <summary>
@@ -33,7 +33,7 @@ public class TitleScreenManager : MonoBehaviour {
     public void openSubmenu(GameObject submenu)
     {
         //Play button click sound
-        GameController.Instance.audioManager.buttonClick.Play();
+        GameController.Instance.AudioManager.buttonClick.Play();
 
         curSubmenu = submenu;
         mainMenu.SetActive(false);

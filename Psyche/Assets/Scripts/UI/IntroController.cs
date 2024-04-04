@@ -81,9 +81,9 @@ public class IntroController : MonoBehaviour
                         break;
                     default:
                         // Set the value this way so if any changes are made they are accounted for
-                        string scene = GameController.Instance.gameStateManager.MatchScene(GameStateManager.Scene.Landing);
-                        GameController.Instance.sceneTransitionManager.devControl = true;
-                        GameController.Instance.sceneTransitionManager.OnInitiateTransition(scene);
+                        string scene = GameController.Instance.GameStateManager.MatchScene(GameStateManager.Scene.Landing);
+                        GameController.Instance.SceneTransitionManager.devControl = true;
+                        GameController.Instance.SceneTransitionManager.OnInitiateTransition(scene);
                         break;
                 }
                 curScreen++;

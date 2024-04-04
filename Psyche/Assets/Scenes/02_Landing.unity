@@ -10221,6 +10221,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5401305743031009588, guid: 18c62cc30af92324fa96282ddd60bd99, type: 3}
   m_PrefabInstance: {fileID: 567626612}
   m_PrefabAsset: {fileID: 0}
+--- !u!61 &1405282094 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 2257811646393419205, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+  m_PrefabInstance: {fileID: 3172487196972866785}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1413773409
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11377,11 +11382,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0e5cf764854e6b4c97604068d9814b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  developerConsole: {fileID: 0}
-  gameStateManager: {fileID: 0}
-  sceneTransitionManager: {fileID: 0}
-  audioManager: {fileID: 0}
-  colorBlindMode: 0
+  DeveloperConsole: {fileID: 0}
+  GameStateManager: {fileID: 0}
+  SceneTransitionManager: {fileID: 0}
+  AudioManager: {fileID: 0}
+  ColorBlindMode: 0
 --- !u!4 &2144772172
 Transform:
   m_ObjectHideFlags: 0
@@ -11707,6 +11712,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -0.01
       objectReference: {fileID: 0}
+    - target: {fileID: 6997680745713006484, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: PlayerCollider
+      value: 
+      objectReference: {fileID: 1405282094}
     - target: {fileID: 7257319662046715863, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: m_UpdateMethod
       value: 0

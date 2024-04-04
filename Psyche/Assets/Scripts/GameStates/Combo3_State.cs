@@ -66,7 +66,7 @@ public class Combo3_State : BaseState
     public Combo3_State()
     {
         // This must be set up first before anything else is created as everything else is based off of this
-        _defaultState = new Dictionary<short, object>
+        DefaultState = new Dictionary<short, object>
         {
             { (short)SceneObject.CHECKPOINT_1, false }, // 'true' for available
             { (short)SceneObject.CHECKPOINT_2, false }, // `true` for activate-able
@@ -83,7 +83,7 @@ public class Combo3_State : BaseState
     /// </summary>
     public override void LoadState()
     {
-        foreach (var pair in _savedState)
+        foreach (var pair in SavedState)
         {
             string objectName = Match(pair.Key);
             switch (pair.Key)
