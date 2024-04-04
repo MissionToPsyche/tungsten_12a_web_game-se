@@ -347,13 +347,15 @@ public class UIController : BaseController<UIController>
 
     public SpriteRenderer[] elements = new SpriteRenderer[8];
 
-    [Header("Inventory Menus")]
+    [Header("Menus")]
     public GameObject inventoryMenu;
-    public TMP_Text confirmBoxText;
     public GameObject optionsMenu;
+    public GameObject upgradesMenu;
+    public GameObject elementsMenu;
 
-    [Header("Dialog Box")]
+    [Header("Text Box")]
     public TMP_Text dialogText;
+    public TMP_Text confirmBoxText;
 
     [Header("Buttons")]
     public GameObject solarArrayInfoButton;
@@ -438,12 +440,20 @@ public class UIController : BaseController<UIController>
 
     /// <summary>
     /// Closes currently open submenu and returns to Inventory
+    /// Also closes elements menu if active
     /// </summary>
     public void closeSubmenu()
-    {
-        curSubmenu.SetActive(false);
-        curSubmenu = null;
-        inventoryMenu.SetActive(true);
+    {   
+        if (elementsMenu.activeSelf) {
+            elementsMenu.SetActive(false);
+            GameController.Instance.AudioManager.UnmuteAudio(
+                GameController.Instance.AudioManager.backgroundMusic);
+            openSubmenu(upgradesMenu);
+        } else {
+            curSubmenu.SetActive(false);
+            curSubmenu = null;
+            inventoryMenu.SetActive(true);
+        }
     }
 
     private bool shouldRespawn;
