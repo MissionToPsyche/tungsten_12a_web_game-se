@@ -267,5 +267,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ead843394346c694eada07bb52dfca41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointsObject: {fileID: 2787385851810444181}
-  moveSpeed: 2.5
+  PointsObject: {fileID: 2787385851810444181}
+  MoveSpeed: 2.5

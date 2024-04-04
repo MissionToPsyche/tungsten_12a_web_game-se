@@ -14,8 +14,8 @@ public class FallingPlatform : MonoBehaviour
     //======================================== Initialize/Update/Destroy =========================================
 
     // Private variables
-    [SerializeField] private float OnDelay = 2.0f;
-    [SerializeField] private float OffDelay = 2.0f;
+    [SerializeField] private float OnDelay = 1.0f;
+    [SerializeField] private float OffDelay = 6.0f;
     private Vector2 Spot;
     private bool Falling = false;
 
