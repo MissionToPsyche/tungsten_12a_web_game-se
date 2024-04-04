@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Imager tool script with spotlight surrounding the character and a spotlight that follows the user's mouse cursor
+/// Imager tool class with a spotlight surrounding the character and a spotlight that follows the user's mouse cursor
 /// with the ability to increase the radius of each spotlight.
 /// </summary>
 public class ImagerManager : ToolManager
@@ -118,6 +118,8 @@ public class ImagerManager : ToolManager
         RadiusIncrease = 1f;
         Active = false;
     }
+
+    //=============================================== Tool Actions ===============================================
 
     /// <summary>
     /// Inherited
