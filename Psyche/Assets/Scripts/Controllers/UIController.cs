@@ -497,7 +497,7 @@ public class UIController : BaseController<UIController>
             /**
              * Destroys Player and UI so they do not spawn on the start screen
              */
-            GameController.Instance.SceneTransitionManager.devControl = true;
+            GameController.Instance.SceneTransitionManager.DevControl = true;
             GameController.Instance.SceneTransitionManager.OnInitiateTransition(
                 GameController.Instance.GameStateManager.MatchScene(GameStateManager.Scene.Title)
                 );

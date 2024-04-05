@@ -291,7 +291,7 @@ public class DeveloperConsole : MonoBehaviour
                     case DevConsoleCommand.SCENE:
                         // Adhoc, convert the scene to enum then back to string until transitioned over to enum passing
                         string scene = GameController.Instance.GameStateManager.MatchScene(GameController.Instance.GameStateManager.MatchScene(commands[2].ToString()));
-                        GameController.Instance.SceneTransitionManager.devControl = true;
+                        GameController.Instance.SceneTransitionManager.DevControl = true;
                         OnDevConsoleTransition?.Invoke((commands.Count > 3) ? scene + " " + commands[3].ToString() : scene);
                         break;
                     default:
