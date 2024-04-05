@@ -126,19 +126,19 @@ TextureImporter:
       name: battery_full
       rect:
         serializedVersion: 2
-        x: 5
-        y: 7
-        width: 62
-        height: 26
+        x: 1
+        y: 3
+        width: 64
+        height: 28
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5890e6bc0f51a5d478a45b9322189bdf
-      internalID: 231044240
+      spriteID: 8a26188718816bb4985cd8450915f815
+      internalID: 447576028
       vertices: []
       indices: 
       edges: []
@@ -147,19 +147,19 @@ TextureImporter:
       name: battery_5
       rect:
         serializedVersion: 2
-        x: 77
-        y: 7
-        width: 62
-        height: 26
+        x: 70
+        y: 3
+        width: 64
+        height: 28
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 54d07bacd062f984eb3fbbfe78310754
-      internalID: -2090482627
+      spriteID: 2b773eaa27dd9134295b502524be49ac
+      internalID: 668690496
       vertices: []
       indices: 
       edges: []
@@ -168,19 +168,19 @@ TextureImporter:
       name: battery_4
       rect:
         serializedVersion: 2
-        x: 149
-        y: 7
-        width: 62
-        height: 26
+        x: 139
+        y: 3
+        width: 64
+        height: 28
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4ab13f61c3d9aac42b9b82c5a80c6434
-      internalID: -943899848
+      spriteID: e30e1e255cba16d4b86f5df7770830b5
+      internalID: 1266105963
       vertices: []
       indices: 
       edges: []
@@ -189,19 +189,19 @@ TextureImporter:
       name: battery_3
       rect:
         serializedVersion: 2
-        x: 221
-        y: 7
-        width: 62
-        height: 26
+        x: 208
+        y: 3
+        width: 64
+        height: 28
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f86de6b6b6fd4a241bb0568fc81589c2
-      internalID: -549937431
+      spriteID: a9d2eb1cc0f33af49a1b8f429e16f756
+      internalID: -1297789366
       vertices: []
       indices: 
       edges: []
@@ -210,19 +210,19 @@ TextureImporter:
       name: battery_2
       rect:
         serializedVersion: 2
-        x: 293
-        y: 7
-        width: 62
-        height: 26
+        x: 277
+        y: 3
+        width: 64
+        height: 28
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c1d3a42b2bd6d6946b561841e6d5a602
-      internalID: -39812770
+      spriteID: 63c1dc9444df9c946985e6e6b34162b7
+      internalID: -1880986385
       vertices: []
       indices: 
       edges: []
@@ -231,19 +231,19 @@ TextureImporter:
       name: battery_1
       rect:
         serializedVersion: 2
-        x: 365
-        y: 7
-        width: 62
-        height: 26
+        x: 346
+        y: 3
+        width: 64
+        height: 28
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8dd3813e492943a459a61c145dc0c738
-      internalID: 88227712
+      spriteID: cf8d05f7e0156554698b858c18865213
+      internalID: -687265699
       vertices: []
       indices: 
       edges: []
@@ -252,19 +252,19 @@ TextureImporter:
       name: battery_empty
       rect:
         serializedVersion: 2
-        x: 437
-        y: 7
-        width: 62
-        height: 26
+        x: 415
+        y: 3
+        width: 64
+        height: 28
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d3d0de424f177ed448ed19a54dad6da5
-      internalID: -797366915
+      spriteID: 76c2df836da6a0041b7bf70d50118e71
+      internalID: -1824068771
       vertices: []
       indices: 
       edges: []
@@ -280,13 +280,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      battery_1: 88227712
-      battery_2: -39812770
-      battery_3: -549937431
-      battery_4: -943899848
-      battery_5: -2090482627
-      battery_empty: -797366915
-      battery_full: 231044240
+      battery_1: -687265699
+      battery_2: -1880986385
+      battery_3: -1297789366
+      battery_4: 1266105963
+      battery_5: 668690496
+      battery_empty: -1824068771
+      battery_full: 447576028
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
