@@ -1,7 +1,7 @@
 /*
- * Description: Player loss and reset
+ * Description: Player Loss and Reset
  * Authors: mcmyers4, blopezro, dnguye99asu
- * Version: 20240326
+ * Version: 20240130
  */
 
 using System.Collections.Generic;
@@ -19,10 +19,6 @@ public class PlayerDeath : MonoBehaviour
     public SolarArrayManager solarArrayManager;                     //Initial solar array
     public HashSet<int> reachedCheckpoints = new HashSet<int>();    //Stores unique IDs of checkpoints
 
-    /// <summary>
-    /// Initialize respawn point and set starting location.
-    /// </summary>
-    /// <param name="playerController"></param>
     public void Initialize(PlayerController playerController)
     {
         _playerController = playerController;
@@ -31,7 +27,7 @@ public class PlayerDeath : MonoBehaviour
     }
 
     /// <summary>
-    /// Start respawn point and set starting location.
+    /// Initialize respawn point and set starting location.
     /// </summary>
     private void Start()
     {
@@ -51,7 +47,7 @@ public class PlayerDeath : MonoBehaviour
     }
 
     /// <summary>
-    /// When player touches spikes.
+    /// When player touches spikes
     /// </summary>
     public void Spikes()
     {
@@ -60,11 +56,12 @@ public class PlayerDeath : MonoBehaviour
     }
 
     /// <summary>
-    /// Applies a kickback force to the player character.
+    /// Applies a kickback force to the player character
     /// </summary>
     private void ApplyKickback(Collision2D collision)
     {
         // calculate kickback direction
+        // left up or right up, TODO: base it off collision
         Vector2 kickbackDirection;
         if (PlayerController.Instance.playerMovement._isFacingRight)
         {
@@ -76,10 +73,13 @@ public class PlayerDeath : MonoBehaviour
         }
 
         // set force and apply
+        //Debug.Log($"Before kickback, velocity: {PlayerController.Instance.playerCharacter.velocity}");
         PlayerController.Instance.inputBlocked = true;
         float kickbackForce = 5f;
         PlayerController.Instance.playerCharacter.AddForce(kickbackDirection * kickbackForce, ForceMode2D.Impulse);
+        // TODO: Simulate horizontal key press here as horizontal force is not being applied   
         PlayerController.Instance.inputBlocked = false;
+        //Debug.Log($"After kickback, velocity: {PlayerController.Instance.playerCharacter.velocity}");
     }
 
     /// <summary>
@@ -97,7 +97,7 @@ public class PlayerDeath : MonoBehaviour
         GameController.Instance.GameStateManager.Checkpoint = collision.gameObject.GetInstanceID();
         GameController.Instance.GameStateManager.RespawnPoint = _playerController.transform.position;
 
-        // Recharge health and battery
+        //Recharge health and battery
         playerHealth.HealthUp(100);
         gameObject.GetComponent<SolarArrayManager>().Activate();
 
