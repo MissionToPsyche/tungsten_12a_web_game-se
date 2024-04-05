@@ -19,10 +19,10 @@ public class AimCamera : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera PlayerCamera;
     [SerializeField] private CinemachineVirtualCamera MouseCamera;
     [SerializeField] private Transform Player;
-    [SerializeField] private float XMax;
-    [SerializeField] private float YMax;
-    [SerializeField] private float XCushion;
-    [SerializeField] private float YCushion;
+    [SerializeField] private float XMax = 4;
+    [SerializeField] private float YMax = 2;
+    [SerializeField] private float XCushion = 8;
+    [SerializeField] private float YCushion = 4;
 
     /// <summary>
     /// Update is called once per frame.

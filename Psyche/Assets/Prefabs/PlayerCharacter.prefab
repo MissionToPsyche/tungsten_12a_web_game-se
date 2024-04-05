@@ -899,14 +899,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f743335839a35d4facac174cf4a98c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Camera: {fileID: 0}
+  Camera: {fileID: 48771900030827911}
   PlayerCamera: {fileID: 3736213204358428459}
   MouseCamera: {fileID: 246276419384116564}
   Player: {fileID: 3118868635833949731}
-  XMax: 0
-  YMax: 0
-  XCushion: 0
-  YCushion: 0
+  XMax: 4
+  YMax: 2
+  XCushion: 8
+  YCushion: 4
 --- !u!1 &2746429122550390308
 GameObject:
   m_ObjectHideFlags: 0
@@ -936,7 +936,7 @@ Transform:
   m_GameObject: {fileID: 2746429122550390308}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -2.5}
+  m_LocalPosition: {x: -0.0000017285347, y: 0.58575, z: -2.5}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
