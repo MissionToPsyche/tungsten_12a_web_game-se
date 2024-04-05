@@ -121,9 +121,7 @@ public class ImagerManager : ToolManager
 
     //=============================================== Tool Actions ===============================================
 
-    /// <summary>
-    /// Inherited
-    /// </summary>
+    /// <inheritdoc/>
     public override void Activate()
     {
         Active = !PlayerController.solarArrayManager.BatteryDrained;
@@ -138,9 +136,8 @@ public class ImagerManager : ToolManager
         }
     }
 
-    /// <summary>
+    /// <inheritdoc/>
     /// Increases the radius of both playerlight and flashlight when called
-    /// </summary>
     protected override void UpgradeTool()
     {
         Playerlight.pointLightOuterRadius += RadiusIncrease;

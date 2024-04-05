@@ -75,10 +75,8 @@ public class ThrusterManager : ToolManager
 
     //=============================================== Tool Actions ===============================================
 
-    /// <summary>
+    /// <inheritdoc/>
     /// Activates the thruster applying a vertical force if time remains on timer
-    /// </summary>
-    /// <param name="playerCharacter"></param>
     public override void Activate()
     {
         if (Working)
@@ -91,9 +89,8 @@ public class ThrusterManager : ToolManager
         }
     }
 
-    /// <summary>
+    /// <inheritdoc/>
     /// Increases thruster force when called
-    /// </summary>
     protected override void UpgradeTool()
     {
         ThrusterForce += 0.25f;
