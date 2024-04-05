@@ -5,11 +5,11 @@ using UnityEngine;
 /// Functions for controlling the title screen.
 /// Functions are called from the OnClick() event of buttons.
 /// </summary>
-/// Author: jmolive8
+/// Author: jmolive8, dnguye99
 public class TitleScreenManager : MonoBehaviour {
-    public GameObject mainMenu;
+    public GameObject MainMenu;
 
-    private GameObject curSubmenu;
+    private GameObject CurSubmenu;
 
     /// <summary>
     /// Starts the intro cutscene
@@ -35,9 +35,9 @@ public class TitleScreenManager : MonoBehaviour {
         //Play button click sound
         GameController.Instance.AudioManager.buttonClick.Play();
 
-        curSubmenu = submenu;
-        mainMenu.SetActive(false);
-        curSubmenu.SetActive(true);
+        CurSubmenu = submenu;
+        MainMenu.SetActive(false);
+        CurSubmenu.SetActive(true);
     }
 
     /// <summary>
@@ -45,8 +45,8 @@ public class TitleScreenManager : MonoBehaviour {
     /// </summary>
     public void closeSubmenu()
     {
-        curSubmenu.SetActive(false);
-        curSubmenu = null;
-        mainMenu.SetActive(true);
+        CurSubmenu.SetActive(false);
+        CurSubmenu = null;
+        MainMenu.SetActive(true);
     }
 }
