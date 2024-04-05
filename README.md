@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://missiontopsyche.github.io/tungsten_12a_web_game-se/M.I.S.T/">
-    <img src="M.I.S.T/Cover.png" alt="Logo">
+    <img src="Cover.png" alt="Logo">
   </a>
   <h1 align="center">M.I.S.T.</h1>
   <h6 align="center">magnetometer + imager + spectrometer + thruster</h6>
