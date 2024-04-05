@@ -1,32 +1,24 @@
+/*
+ * Description: Thruster tool script
+ * Authors: JoshBenn, mcmyers4
+ * Version: 20240403
+ */
+
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Script to manage the behavior of the Thruster tool
+/// Thruster tool class in which the player can hold jump in order to fly or slow falls
 /// </summary>
 public class ThrusterManager : ToolManager
 {
-    //Private Variables
-    private float _thrusterForce;
-    [SerializeField] private float limit = 4;
-    private float duration;
-    private bool working = true;
+    //======================================== Initialize/Update/Destroy =========================================
 
-    /// <summary>
-    /// Countdown timer
-    /// </summary>
-    private void Update()
-    {
-        if (duration > 0)
-        {
-            duration--;
-            working = true;
-        } else
-        {
-            duration = 0;
-            working = false;
-        }
-    }
+    // Private Variables
+    [SerializeField] private float Limit = 4;
+    private float ThrusterForce;
+    private float Duration;
+    private bool Working = true;
 
     /// <summary>
     /// Initializes the tool
@@ -34,52 +26,73 @@ public class ThrusterManager : ToolManager
     /// <param name="playerController"></param>
     public void Initialize(PlayerController playerController)
     {
-        //Base class variables
-        toolName = "Thruster";
-        toolEnabled = false;
-        _playerController = playerController;
-        level = 1;
-        levelRequirements = new Dictionary<int, Dictionary<InventoryManager.Element, ushort>>()
+        // Base class variables
+        ToolName = "Thruster";
+        ToolEnabled = false;
+        PlayerController = playerController;
+        Level = 1;
+        LevelRequirements = new Dictionary<int, Dictionary<InventoryManager.Element, ushort>>()
         {
             {  2, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { InventoryManager.Element.COPPER, 2 }, { InventoryManager.Element.IRON, 0 }, 
-                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 0 },
+                    { InventoryManager.Element.Copper, 2 },
+                    { InventoryManager.Element.Iron, 0 }, 
+                    { InventoryManager.Element.Nickel, 0 },
+                    { InventoryManager.Element.Gold, 0 },
                 }
             },
             {  3, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { InventoryManager.Element.COPPER, 2 } , { InventoryManager.Element.IRON, 0 }, 
-                    { InventoryManager.Element.NICKEL, 0 } , { InventoryManager.Element.GOLD, 0 },
+                    { InventoryManager.Element.Copper, 2 },
+                    { InventoryManager.Element.Iron, 0 }, 
+                    { InventoryManager.Element.Nickel, 0 },
+                    { InventoryManager.Element.Gold, 0 },
                 }
             }
         };
 
-        //Tool specific variables
-        maxLevel = levelRequirements.Count + 1;
-        _thrusterForce = 0.9f;
-    }
-    
-    /// <summary>
-    /// Activates the thruster applying a vertical force if time remains on timer
-    /// </summary>
-    /// <param name="playerCharacter"></param>
-    public override void Activate()
-    {
-        if (working)
-        {
-            _playerController.playerCharacter.velocity += new Vector2(0f, _thrusterForce * Time.deltaTime * 10f);
-        } else
-        {
-            duration = limit;
-        }
+        // Tool specific variables
+        MaxLevel = LevelRequirements.Count + 1;
+        ThrusterForce = 0.9f;
     }
 
     /// <summary>
-    /// Increases thruster force
+    /// Countdown timer to limit thruster use
     /// </summary>
+    private void Update()
+    {
+        if (Duration > 0)
+        {
+            Duration--;
+            Working = true;
+        }
+        else
+        {
+            Duration = 0;
+            Working = false;
+        }
+    }
+
+    //=============================================== Tool Actions ===============================================
+
+    /// <inheritdoc/>
+    /// Activates the thruster applying a vertical force if time remains on timer
+    public override void Activate()
+    {
+        if (Working)
+        {
+            PlayerController.playerCharacter.velocity += new Vector2(0f, ThrusterForce * Time.deltaTime * 10f);
+        }
+        else
+        {
+            Duration = Limit;
+        }
+    }
+
+    /// <inheritdoc/>
+    /// Increases thruster force when called
     protected override void UpgradeTool()
     {
-        _thrusterForce += 0.25f;
+        ThrusterForce += 0.25f;
     }
 }

@@ -1,135 +1,156 @@
 /** 
-Description: battery script
-Author: blopezro, mcmyers
-Version: 20240220
+Description: Solar array tool and battery script
+Author: blopezro, mcmyers4
+Version: 20240403
 **/
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Battery class in which a new batt can be created, drained, and charged. 
+/// Solar array class in which a solar array can be picked up in order to recharge the player's battery.
+/// Also contains the logic for draining the player's battery.
 /// </summary>
-public class SolarArrayManager : ToolManager {
-    //Public variables
-    public float batteryLevel;
-    public float maxCapacity;
-    public float batteryPercent;
-    public float rate;
-    public bool  batteryDrained;
+public class SolarArrayManager : ToolManager
+{
+    //======================================== Initialize/Update/Destroy =========================================
 
-    //Events to communicate to UI
-    public event Action<float> OnBatteryPercentageChanged;
+    // Public variables
+    public float BatteryLevel;
+    public float MaxCapacity;
+    public float BatteryPercent;
+    public float Rate;
+    public bool  BatteryDrained;
 
     /// <summary>
     /// Initialize this script
     /// </summary>
     /// <param name="playerController"></param>
-    public void Initialize(PlayerController playerController) {
-        //Base class variables
-        toolName = "SolarArray";
-        toolEnabled = false;
-        _playerController = playerController;
-        level = 1;
-        levelRequirements = new Dictionary<int, Dictionary<InventoryManager.Element, ushort>>()
+    public void Initialize(PlayerController playerController)
+    {
+        // Base class variables
+        ToolName = "SolarArray";
+        ToolEnabled = false;
+        PlayerController = playerController;
+        Level = 1;
+        LevelRequirements = new Dictionary<int, Dictionary<InventoryManager.Element, ushort>>()
         {
             {  2, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
-                    { InventoryManager.Element.NICKEL, 1 }, { InventoryManager.Element.GOLD, 0 },
+                    { InventoryManager.Element.Copper, 0 },
+                    { InventoryManager.Element.Iron, 0 }, 
+                    { InventoryManager.Element.Nickel, 1 },
+                    { InventoryManager.Element.Gold, 0 },
                 }
             },
             {  3, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
-                    { InventoryManager.Element.NICKEL, 1 }, { InventoryManager.Element.GOLD, 0 },
+                    { InventoryManager.Element.Copper, 0 },
+                    { InventoryManager.Element.Iron, 0 }, 
+                    { InventoryManager.Element.Nickel, 1 },
+                    { InventoryManager.Element.Gold, 0 },
                 }
             },
             {  4, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
-                    { InventoryManager.Element.NICKEL, 1 }, { InventoryManager.Element.GOLD, 0 },
+                    { InventoryManager.Element.Copper, 0 },
+                    { InventoryManager.Element.Iron, 0 }, 
+                    { InventoryManager.Element.Nickel, 1 },
+                    { InventoryManager.Element.Gold, 0 },
                 }
             },
             {  5, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 0 }, 
-                    { InventoryManager.Element.NICKEL, 1 }, { InventoryManager.Element.GOLD, 0 },
+                    { InventoryManager.Element.Copper, 0 },
+                    { InventoryManager.Element.Iron, 0 }, 
+                    { InventoryManager.Element.Nickel, 1 },
+                    { InventoryManager.Element.Gold, 0 },
                 }
             },
         };
 
-        //Tool specific
-        maxLevel = levelRequirements.Count + 1;
-        maxCapacity = 100f;
-        batteryLevel = maxCapacity;
-        batteryPercent = batteryLevel / maxCapacity * 100f;
-        rate = 0.1f;
-        batteryDrained = (batteryLevel > 0);
+        // Tool specific variables
+        MaxLevel = LevelRequirements.Count + 1;
+        MaxCapacity = 100f;
+        BatteryLevel = MaxCapacity;
+        BatteryPercent = BatteryLevel / MaxCapacity * 100f;
+        Rate = 0.1f;
+        BatteryDrained = (BatteryLevel > 0);
+    }
+
+    //================================================== Events ==================================================
+
+    // Events to communicate to UI
+    public event Action<float> OnBatteryPercentageChanged;
+
+    //=============================================== Tool Actions ===============================================
+
+    /// <inheritdoc/>
+    /// Charges battery to max capacity
+    public override void Activate()
+    {
+        BatteryLevel += MaxCapacity;
+        BatteryLevel = Mathf.Clamp(BatteryLevel, 0f, MaxCapacity); // keeps batt level between 0-100
+        BatteryPercent = BatteryLevel / MaxCapacity * 100f;
+        if (BatteryPercent > 0)
+        {
+            BatteryDrained = false;
+        }
+        OnBatteryPercentageChanged?.Invoke(Mathf.RoundToInt(BatteryPercent));
     }
 
     /// <summary>
-    /// drains battery at given rate
+    /// Drains battery at given rate
     /// </summary>
     /// <param name="rate"></param>
-    public void DrainBatt(float rate) {
-        batteryLevel -= Time.deltaTime * rate;
-        batteryLevel = Mathf.Clamp(batteryLevel, 0f, maxCapacity); // keeps batt level between 0-100
-        batteryPercent = batteryLevel / maxCapacity * 100f;
-        if (batteryPercent == 0) {
-            batteryDrained = true;
+    public void DrainBatt(float rate)
+    {
+        BatteryLevel -= Time.deltaTime * rate;
+        BatteryLevel = Mathf.Clamp(BatteryLevel, 0f, MaxCapacity); // keeps batt level between 0-100
+        BatteryPercent = BatteryLevel / MaxCapacity * 100f;
+        if (BatteryPercent == 0)
+        {
+            BatteryDrained = true;
         }
-        OnBatteryPercentageChanged?.Invoke(Mathf.RoundToInt(batteryPercent));
+        OnBatteryPercentageChanged?.Invoke(Mathf.RoundToInt(BatteryPercent));
     }
 
     /// <summary>
-    /// charges battery at given rate
+    /// Charges battery at given rate
     /// </summary>
     /// <param name="rate"></param>
-    public void ChargeBatt(float rate) {
-        batteryLevel += Time.deltaTime * rate;        
-        batteryLevel = Mathf.Clamp(batteryLevel, 0f, maxCapacity); // keeps batt level between 0-100
-        batteryPercent = batteryLevel / maxCapacity * 100f;
-        if (batteryPercent > 0) {
-            batteryDrained = false;
+    public void ChargeBatt(float rate)
+    {
+        BatteryLevel += Time.deltaTime * rate;        
+        BatteryLevel = Mathf.Clamp(BatteryLevel, 0f, MaxCapacity); // keeps batt level between 0-100
+        BatteryPercent = BatteryLevel / MaxCapacity * 100f;
+        if (BatteryPercent > 0)
+        {
+            BatteryDrained = false;
         }
-        OnBatteryPercentageChanged?.Invoke(Mathf.RoundToInt(batteryPercent));
+        OnBatteryPercentageChanged?.Invoke(Mathf.RoundToInt(BatteryPercent));
     }
 
     /// <summary>
-    /// passively recharges battery at given rate
+    /// Passively recharges battery at given rate
     /// </summary>
     public void PassiveBatt()
     {
-        batteryLevel += rate/1000 ;
-        batteryLevel = Mathf.Clamp(batteryLevel, 0f, maxCapacity); // keeps batt level between 0-100
-        batteryPercent = batteryLevel / maxCapacity * 100f;
-        if (batteryPercent > 0)
+        BatteryLevel += Rate/1000 ;
+        BatteryLevel = Mathf.Clamp(BatteryLevel, 0f, MaxCapacity); // keeps batt level between 0-100
+        BatteryPercent = BatteryLevel / MaxCapacity * 100f;
+        if (BatteryPercent > 0)
         {
-            batteryDrained = false;
+            BatteryDrained = false;
         }
-        OnBatteryPercentageChanged?.Invoke(Mathf.RoundToInt(batteryPercent));
+        OnBatteryPercentageChanged?.Invoke(Mathf.RoundToInt(BatteryPercent));
     }
 
-    /// <summary>
-    /// charges battery to max capacity
-    /// </summary>
-    public override void Activate() {
-        batteryLevel += maxCapacity;        
-        batteryLevel = Mathf.Clamp(batteryLevel, 0f, maxCapacity); // keeps batt level between 0-100
-        batteryPercent = batteryLevel / maxCapacity * 100f;
-        if (batteryPercent > 0) {
-            batteryDrained = false;
-        }
-        OnBatteryPercentageChanged?.Invoke(Mathf.RoundToInt(batteryPercent));
-    }
-
-    /// <summary>
-    /// Increases the max capacity when called.
-    /// </summary>
-    protected override void UpgradeTool() {
-        rate += 0.5f;
+    /// <inheritdoc/>
+    /// Increases the rate of recharge when called.
+    protected override void UpgradeTool()
+    {
+        Rate += 0.5f;
     }
 }

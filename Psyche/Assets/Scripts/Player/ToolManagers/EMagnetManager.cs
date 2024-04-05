@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Tool to pull the player towards iron objects
+/// Tool to pull the player towards magnetized objects
 /// </summary>
 /// Author: jmolive8
 public class EMagnetManager : ToolManager {
@@ -18,34 +18,34 @@ public class EMagnetManager : ToolManager {
     public void Initialize(PlayerController playerManagement)
     {
         //Base class varibles
-        toolName = "Electromagnet";
-        toolEnabled = false;
-        _playerController = playerManagement;
-        level = 1;
-        levelRequirements = new Dictionary<int, Dictionary<InventoryManager.Element, ushort>>()
+        ToolName = "Electromagnet";
+        ToolEnabled = false;
+        PlayerController = playerManagement;
+        Level = 1;
+        LevelRequirements = new Dictionary<int, Dictionary<InventoryManager.Element, ushort>>()
         {
             {  2, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 2 }, 
-                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 0 },
+                    { InventoryManager.Element.Copper, 0 }, { InventoryManager.Element.Iron, 2 }, 
+                    { InventoryManager.Element.Nickel, 0 }, { InventoryManager.Element.Gold, 0 },
                 }
             },
             {  3, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 2 }, 
-                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 0 },
+                    { InventoryManager.Element.Copper, 0 }, { InventoryManager.Element.Iron, 2 }, 
+                    { InventoryManager.Element.Nickel, 0 }, { InventoryManager.Element.Gold, 0 },
                 }
             },
             {  4, new Dictionary<InventoryManager.Element, ushort>()
                 {
-                    { InventoryManager.Element.COPPER, 0 }, { InventoryManager.Element.IRON, 3 }, 
-                    { InventoryManager.Element.NICKEL, 0 }, { InventoryManager.Element.GOLD, 0 },
+                    { InventoryManager.Element.Copper, 0 }, { InventoryManager.Element.Iron, 3 }, 
+                    { InventoryManager.Element.Nickel, 0 }, { InventoryManager.Element.Gold, 0 },
                 }
             },
         };
 
         //Tool specific variables
-        maxLevel = levelRequirements.Count + 1;
+        MaxLevel = LevelRequirements.Count + 1;
         hitBoxRotator = eMagHitBox.transform.parent;
     }
 
@@ -63,15 +63,15 @@ public class EMagnetManager : ToolManager {
     /// <returns></returns>
     public IEnumerator handleEMagnet()
     {
-        GameController.Instance.audioManager.toolEMagnet.Play();
-        _playerController.eMagnetActive = true;
+        GameController.Instance.AudioManager.toolEMagnet.Play();
+        PlayerController.eMagnetActive = true;
         hitBoxRotator.gameObject.SetActive(true);
-        Collider2D hit, targetVein = null, grabbedObject = null;
-        float curGrav = _playerController.playerCharacter.gravityScale;
+        Collider2D hit, targetDeposit = null, grabbedObject = null;
+        float curGrav = PlayerController.playerCharacter.gravityScale;
 
         do
         {
-            _playerController.solarArrayManager.DrainBatt(1);
+            PlayerController.solarArrayManager.DrainBatt(1);
 
             /**
              * Finds angle between player center and mouse position
@@ -87,70 +87,70 @@ public class EMagnetManager : ToolManager {
             hit = Physics2D.OverlapBox(eMagHitBox.transform.position, eMagHitBox.transform.lossyScale, angle, 1 << 7);
             if (hit != null && !hit.isTrigger)
             {
-                //If movable Iron object hit
+                //If movable Magnetized object hit
                 if (hit.attachedRigidbody != null)
                 {
                     if (hit != grabbedObject)
                         grabbedObject = hit;
                 }
                 //If new Iron Vein hit
-                else if (hit != targetVein)
+                else if (hit != targetDeposit)
                 {
                     /**
-                     * Disables gravity and player movement when being pulled towards an Iron Vein
+                     * Disables gravity and player movement when being pulled towards an Magnetized Deposit
                      */
-                    if (targetVein == null)
+                    if (targetDeposit == null)
                     {
-                        _playerController.beingPulled = true;
-                        _playerController.playerCharacter.gravityScale = 0;
+                        PlayerController.beingPulled = true;
+                        PlayerController.playerCharacter.gravityScale = 0;
                     }
 
-                    _playerController.playerCharacter.velocity = Vector2.zero;
-                    targetVein = hit;
+                    PlayerController.playerCharacter.velocity = Vector2.zero;
+                    targetDeposit = hit;
                 }
             }
 
             /**
-             * Pulls Player towards most recently hit Iron Vein
+             * Pulls Player towards most recently hit Magnetized Deposit
              */
-            if (targetVein != null)
+            if (targetDeposit != null)
             {
-                if (targetVein.gameObject.activeInHierarchy)
-                    _playerController.playerCharacter.MovePosition(Vector2.MoveTowards(transform.position, targetVein.transform.position, Time.deltaTime * pullSpeed));
+                if (targetDeposit.gameObject.activeInHierarchy)
+                    PlayerController.playerCharacter.MovePosition(Vector2.MoveTowards(transform.position, targetDeposit.transform.position, Time.deltaTime * pullSpeed));
                 else
                 {
                     /**
-                     * Stops pulling the player if the most recently hit Iron Vein has disappeared
+                     * Stops pulling the player if the most recently hit Magnetized Deposit has disappeared
                      */
-                    _playerController.beingPulled = false;
-                    _playerController.playerCharacter.gravityScale = curGrav;
-                    targetVein = null;
+                    PlayerController.beingPulled = false;
+                    PlayerController.playerCharacter.gravityScale = curGrav;
+                    targetDeposit = null;
                 }
             }
 
             /**
-             * Pulls the most recently hit Movable Iron Object towards the Player
+             * Pulls the most recently hit Movable Magnetized Object towards the Player
              */
             if (grabbedObject != null)
             {
                 grabbedObject.attachedRigidbody.velocity = Vector2.zero;
                 grabbedObject.attachedRigidbody.angularVelocity = 0;
-                if (!_playerController.playerCollider.IsTouching(grabbedObject))
+                if (!PlayerController.playerCollider.IsTouching(grabbedObject))
                     grabbedObject.attachedRigidbody.MovePosition(Vector2.MoveTowards(grabbedObject.transform.position, transform.position, Time.deltaTime * pullSpeed));
             }
 
             yield return null;
-        } while (Input.GetButton("EMagnet") && !_playerController.magnetInterrupt);
+        } while (Input.GetButton("EMagnet") && !PlayerController.magnetInterrupt);
 
-        GameController.Instance.audioManager.toolEMagnet.Stop();
-        _playerController.playerCharacter.gravityScale = curGrav;
+        GameController.Instance.AudioManager.toolEMagnet.Stop();
+        PlayerController.playerCharacter.gravityScale = curGrav;
         hitBoxRotator.gameObject.SetActive(false);
-        _playerController.eMagnetActive = false;
-        _playerController.beingPulled = false;
+        PlayerController.eMagnetActive = false;
+        PlayerController.beingPulled = false;
     }
 
     /// <summary>
-    /// Increases speed at which the EMagnet pulls object
+    /// Increases speed at which the EMagnet pulls the player or objects
     /// </summary>
     protected override void UpgradeTool()
     {

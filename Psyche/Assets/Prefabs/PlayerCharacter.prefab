@@ -189,15 +189,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07d825c06d903f741a5349c051bf5d4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toolName: 
-  level: 0
-  maxLevel: 0
-  toolEnabled: 0
-  _playerlight: {fileID: 4567901035931106489}
+  ToolName: 
+  Level: 0
+  MaxLevel: 0
+  ToolEnabled: 0
+  Playerlight: {fileID: 4567901035931106489}
   _active: 0
-  _flashlight: {fileID: 4681648833962158228}
-  speed: 1
+  Flashlight: {fileID: 4681648833962158228}
   _radiusIncrease: 0
+  speed: 1
 --- !u!114 &4691425001880923315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,10 +238,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8206ff74d192b874187abf217bf57ec9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toolName: 
-  level: 0
-  maxLevel: 0
-  toolEnabled: 0
+  ToolName: 
+  Level: 0
+  MaxLevel: 0
+  ToolEnabled: 0
   eMagHitBox: {fileID: 2155109396161933314}
 --- !u!114 &8966456805578203647
 MonoBehaviour:
@@ -256,7 +256,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHealth: {fileID: 0}
-  solarArrayManager: {fileID: 0}
+  solarArrayManager: {fileID: 3447453164145479344}
 --- !u!114 &4004592847061855459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,10 +269,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 803067f3d4100c74c8ff18ba48d08dc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toolName: 
-  level: 0
-  maxLevel: 0
-  toolEnabled: 0
+  ToolName: 
+  Level: 0
+  MaxLevel: 0
+  ToolEnabled: 0
   limit: 4
 --- !u!114 &3447453164145479344
 MonoBehaviour:
@@ -286,15 +286,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd2ae6f3bb942a548b7a61689e141795, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toolName: 
-  level: 0
-  maxLevel: 0
-  toolEnabled: 0
-  batteryLevel: 0
-  maxCapacity: 0
-  batteryPercent: 0
-  rate: 0
-  batteryDrained: 0
+  ToolName: 
+  Level: 0
+  MaxLevel: 0
+  ToolEnabled: 0
+  BatteryLevel: 0
+  MaxCapacity: 0
+  BatteryPercent: 0
+  Rate: 0
+  BatteryDrained: 0
 --- !u!114 &2286438820298863988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -331,7 +331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed7b7eb61de2944cb32814bb980b7e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCollider: {fileID: 2257811646393419205}
+  PlayerCollider: {fileID: 2257811646393419205}
 --- !u!1 &755320635745964846
 GameObject:
   m_ObjectHideFlags: 0
@@ -936,7 +936,7 @@ Transform:
   m_GameObject: {fileID: 2746429122550390308}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.000001013279, y: 0.576635, z: -2.5}
+  m_LocalPosition: {x: -0.0000017285347, y: 0.48825002, z: -2.5}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
