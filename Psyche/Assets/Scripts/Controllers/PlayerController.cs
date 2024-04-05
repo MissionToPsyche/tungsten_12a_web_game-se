@@ -111,14 +111,6 @@ public class PlayerController : BaseController<PlayerController>
     }
 
     /// <summary>
-    /// Called when necessary - not every frame
-    /// </summary>
-    public override void UpdateController()
-    {
-        //Insert Logic
-    }
-    
-    /// <summary>
     /// Runs every frame
     ///   - Checks player status -- sets booleans
     ///   - Player movement handler
@@ -145,31 +137,31 @@ public class PlayerController : BaseController<PlayerController>
         {
             //Call the requisite tool scripts here:
             //Thruster
-            if (inventoryManager.CheckTool("thruster") && Input.GetButton("Jump") && solarArrayManager.batteryPercent != 0 && !beingPulled) {
+            if (inventoryManager.CheckTool("thruster") && Input.GetButton("Jump") && solarArrayManager.BatteryPercent != 0 && !beingPulled) {
                 thrusterManager.Activate();
                 usingThruster = true;
                 solarArrayManager.DrainBatt(1);
             }
 
             //Imager
-            if (inventoryManager.CheckTool("imager") && solarArrayManager.batteryPercent != 0) {
+            if (inventoryManager.CheckTool("imager") && solarArrayManager.BatteryPercent != 0) {
                 //flashlight functionality
-                imagerManager.updateFlashlightPosition();
+                imagerManager.UpdateFlashlightPosition();
             }
 
             //Spectrometer
-            if (inventoryManager.CheckTool("spectrometer") && Input.GetButton("FireGRNS") && solarArrayManager.batteryPercent != 0) {
+            if (inventoryManager.CheckTool("spectrometer") && Input.GetButton("FireGRNS") && solarArrayManager.BatteryPercent != 0) {
                 gammaView.ActivateGRNS();
                 solarArrayManager.DrainBatt(2);
             }
 
             //ElectroMagnet
-            if (inventoryManager.CheckTool("electromagnet") && Input.GetButton("EMagnet") && solarArrayManager.batteryPercent != 0 && !eMagnetActive && !magnetInterrupt) {
+            if (inventoryManager.CheckTool("electromagnet") && Input.GetButton("EMagnet") && solarArrayManager.BatteryPercent != 0 && !eMagnetActive && !magnetInterrupt) {
                 eMagnetManager.Activate();
             }
 
             //Passive Battery
-            if (!Input.GetButton("Jump") && !Input.GetButton("FireGRNS") && !Input.GetButton("EMagnet") && solarArrayManager.batteryPercent != 100 && !eMagnetActive && !beingPulled && !usingThruster)
+            if (!Input.GetButton("Jump") && !Input.GetButton("FireGRNS") && !Input.GetButton("EMagnet") && solarArrayManager.BatteryPercent != 100 && !eMagnetActive && !beingPulled && !usingThruster)
             {
                 solarArrayManager.PassiveBatt();
             }
@@ -233,7 +225,7 @@ public class PlayerController : BaseController<PlayerController>
     {
         if(GameController.Instance != null)
         {
-            GameController.Instance.gameStateManager.UnloadPlayer();
+            GameController.Instance.GameStateManager.UnloadPlayer();
         }
         if(UIController.Instance != null)
         {

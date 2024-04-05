@@ -1,7 +1,7 @@
 /*
- * Description: Player loss and reset
+ * Description: Player Loss and Reset
  * Authors: mcmyers4, blopezro, dnguye99asu
- * Version: 20240326
+ * Version: 20240130
  */
 
 using System.Collections.Generic;
@@ -13,28 +13,26 @@ using UnityEngine;
 public class PlayerDeath : MonoBehaviour
 {
     private PlayerController _playerController;
+    private System.DateTime LastActivation;
+
     public PlayerHealth playerHealth;                               //Initial player health
     public SolarArrayManager solarArrayManager;                     //Initial solar array
     public HashSet<int> reachedCheckpoints = new HashSet<int>();    //Stores unique IDs of checkpoints
 
-    /// <summary>
-    /// Initialize respawn point and set starting location.
-    /// </summary>
-    /// <param name="playerController"></param>
     public void Initialize(PlayerController playerController)
     {
         _playerController = playerController;
-        GameController.Instance.gameStateManager.startPoint = _playerController.transform.position;
-        GameController.Instance.gameStateManager.respawnPoint = _playerController.transform.position;
+        GameController.Instance.GameStateManager.StartPoint = _playerController.transform.position;
+        GameController.Instance.GameStateManager.RespawnPoint = _playerController.transform.position;
     }
 
     /// <summary>
-    /// Start respawn point and set starting location.
+    /// Initialize respawn point and set starting location.
     /// </summary>
     private void Start()
     {
-        GameController.Instance.gameStateManager.startPoint = _playerController.transform.position;
-        GameController.Instance.gameStateManager.respawnPoint = _playerController.transform.position;
+        GameController.Instance.GameStateManager.StartPoint = _playerController.transform.position;
+        GameController.Instance.GameStateManager.RespawnPoint = _playerController.transform.position;
     }
 
     /// <summary>
@@ -44,25 +42,26 @@ public class PlayerDeath : MonoBehaviour
     public void Hazard(Collision2D collision)
     {
         ApplyKickback(collision);
-        GameController.Instance.audioManager.playerHurt.Play();
+        GameController.Instance.AudioManager.playerHurt.Play();
         GetHurt(1);
     }
 
     /// <summary>
-    /// When player touches spikes.
+    /// When player touches spikes
     /// </summary>
     public void Spikes()
     {
-        GameController.Instance.audioManager.playerHurt.Play();
+        GameController.Instance.AudioManager.playerHurt.Play();
         GetHurt(playerHealth.playerHealth);
     }
 
     /// <summary>
-    /// Applies a kickback force to the player character.
+    /// Applies a kickback force to the player character
     /// </summary>
     private void ApplyKickback(Collision2D collision)
     {
         // calculate kickback direction
+        // left up or right up, TODO: base it off collision
         Vector2 kickbackDirection;
         if (PlayerController.Instance.playerMovement._isFacingRight)
         {
@@ -74,10 +73,13 @@ public class PlayerDeath : MonoBehaviour
         }
 
         // set force and apply
+        //Debug.Log($"Before kickback, velocity: {PlayerController.Instance.playerCharacter.velocity}");
         PlayerController.Instance.inputBlocked = true;
         float kickbackForce = 5f;
         PlayerController.Instance.playerCharacter.AddForce(kickbackDirection * kickbackForce, ForceMode2D.Impulse);
+        // TODO: Simulate horizontal key press here as horizontal force is not being applied   
         PlayerController.Instance.inputBlocked = false;
+        //Debug.Log($"After kickback, velocity: {PlayerController.Instance.playerCharacter.velocity}");
     }
 
     /// <summary>
@@ -91,18 +93,31 @@ public class PlayerDeath : MonoBehaviour
         {
             return;
         }
-        // ID of the checkpoint
-        GameController.Instance.gameStateManager.checkpoint = collision.gameObject.GetInstanceID();
-        GameController.Instance.gameStateManager.respawnPoint = _playerController.transform.position;
+        //ID of the checkpoint
+        GameController.Instance.GameStateManager.Checkpoint = collision.gameObject.GetInstanceID();
+        GameController.Instance.GameStateManager.RespawnPoint = _playerController.transform.position;
 
-        // Recharge health and battery
+        //Recharge health and battery
         playerHealth.HealthUp(100);
         gameObject.GetComponent<SolarArrayManager>().Activate();
 
-        // Play audio if you hit a checkpoint with default layer
+        //Play audio if you hit a checkpoint with default layer
         if (collision.gameObject.layer.Equals(0))
         {
-            GameController.Instance.audioManager.checkpoint.Play();
+            if (LastActivation == null)
+            {
+                GameController.Instance.AudioManager.checkpoint.Play();
+                LastActivation = System.DateTime.Now;
+            }
+            else
+            {
+                System.TimeSpan diff = System.DateTime.Now - LastActivation;
+                if (diff.TotalSeconds > 5)
+                {
+                    LastActivation = System.DateTime.Now;
+                    GameController.Instance.AudioManager.checkpoint.Play();
+                }
+            }
         }
     }
 
@@ -116,8 +131,8 @@ public class PlayerDeath : MonoBehaviour
         playerHealth.HealthDown(dmg);
         if (playerHealth.playerHealth <= 0)
         {
-            // start the warping animation & reset player's heath & battery
-            StartCoroutine(GameController.Instance.gameStateManager.Warp());
+            //start the warping animation & reset player's heath & battery
+            StartCoroutine(GameController.Instance.GameStateManager.Warp());
         }
     }
 }
