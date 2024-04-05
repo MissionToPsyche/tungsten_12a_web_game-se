@@ -242,13 +242,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 995765b3135bd864cb200a828ee76f3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outro1: {fileID: 1882850038}
-  outro2: {fileID: 1513244344}
-  outro3: {fileID: 287181428}
-  outro4: {fileID: 1207955232}
-  clickText: {fileID: 214791830}
-  quitButton: {fileID: 384936678}
-  link: {fileID: 1843827364}
+  Outro1: {fileID: 1882850038}
+  Outro2: {fileID: 1513244344}
+  Outro3: {fileID: 287181428}
+  Outro4: {fileID: 1207955232}
+  ClickToContText: {fileID: 214791830}
+  QuitButton: {fileID: 384936678}
+  LinkButton: {fileID: 1843827364}
 --- !u!1 &80190068
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,7 +532,7 @@ GameObject:
   - component: {fileID: 214791832}
   - component: {fileID: 214791831}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Click To Continue Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1095,7 +1095,7 @@ GameObject:
   - component: {fileID: 1843827362}
   - component: {fileID: 1843827364}
   m_Layer: 5
-  m_Name: psyche link
+  m_Name: Psyche Link Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
