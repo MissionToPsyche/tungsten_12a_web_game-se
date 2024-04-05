@@ -347,13 +347,15 @@ public class UIController : BaseController<UIController>
 
     public SpriteRenderer[] elements = new SpriteRenderer[8];
 
-    [Header("Inventory Menus")]
+    [Header("Menus")]
     public GameObject inventoryMenu;
-    public TMP_Text confirmBoxText;
     public GameObject optionsMenu;
+    public GameObject upgradesMenu;
+    public GameObject elementsMenu;
 
-    [Header("Dialog Box")]
+    [Header("Text Box")]
     public TMP_Text dialogText;
+    public TMP_Text confirmBoxText;
 
     [Header("Buttons")]
     public GameObject solarArrayInfoButton;
@@ -438,12 +440,20 @@ public class UIController : BaseController<UIController>
 
     /// <summary>
     /// Closes currently open submenu and returns to Inventory
+    /// Also closes elements menu if active
     /// </summary>
     public void closeSubmenu()
-    {
-        curSubmenu.SetActive(false);
-        curSubmenu = null;
-        inventoryMenu.SetActive(true);
+    {   
+        if (elementsMenu.activeSelf) {
+            elementsMenu.SetActive(false);
+            GameController.Instance.AudioManager.UnmuteAudio(
+                GameController.Instance.AudioManager.backgroundMusic);
+            openSubmenu(upgradesMenu);
+        } else {
+            curSubmenu.SetActive(false);
+            curSubmenu = null;
+            inventoryMenu.SetActive(true);
+        }
     }
 
     private bool shouldRespawn;
@@ -487,13 +497,12 @@ public class UIController : BaseController<UIController>
             /**
              * Destroys Player and UI so they do not spawn on the start screen
              */
-            Destroy(PlayerController.Instance.gameObject);
-            Destroy(gameObject);
             GameController.Instance.SceneTransitionManager.devControl = true;
             GameController.Instance.SceneTransitionManager.OnInitiateTransition(
                 GameController.Instance.GameStateManager.MatchScene(GameStateManager.Scene.Title)
-            );
-
+                );
+            Destroy(PlayerController.Instance.gameObject);
+            Destroy(gameObject);
         }
     }
 
@@ -531,7 +540,6 @@ public class UIController : BaseController<UIController>
     public GameObject ironRequirement;
     public GameObject nickelRequirement;
     public GameObject goldRequirement;
-    public GameObject tungstenRequirement;
 
     /// <summary>
     /// Modifies the tool when its upgrade button is pressed
@@ -560,14 +568,14 @@ public class UIController : BaseController<UIController>
     }
 
     /// <summary>
-    /// Fades out the sound of the audio played when upgrading a tool
+    /// Fades out the sound of the audio played
     /// </summary>
     /// <param name="audioSource"></param>
     /// <param name="fadeDuration"></param>
     /// <returns></returns>
     private IEnumerator FadeOutSound(AudioSource audioSource, float fadeDuration)
     {
-        float startVolume = 1.0f;
+        float startVolume = GameController.Instance.uiVol;
         float startTime = Time.time;
         while (Time.time < startTime + fadeDuration)
         {
@@ -580,7 +588,7 @@ public class UIController : BaseController<UIController>
         // Ensure the volume is fully faded out, stop the playback, then restore volume
         audioSource.volume = 0.0f;
         audioSource.Stop();
-        audioSource.volume = 1.0f;
+        audioSource.volume = GameController.Instance.uiVol;
     }
 
     /// <summary>
@@ -664,20 +672,32 @@ public class UIController : BaseController<UIController>
                 switch (toolName.ToLower())
                 {
                     case "thruster":
-                        thrusterLevel.SetText(level.ToString());
-                        thrusterUpgradeButton.interactable = false;
+                        thrusterUpgradeButton.gameObject.SetActive(false);
+                        thrusterLevel.transform.position = new Vector3(
+                            thrusterLevel.transform.position.x, 
+                            thrusterRequirementsList.gameObject.transform.position.y, 
+                            thrusterLevel.transform.position.z);
                         break;
                     case "solararray":
-                        solarArrayLevel.SetText(level.ToString());
-                        solarArrayUpgradeButton.interactable = false;
+                        solarArrayUpgradeButton.gameObject.SetActive(false);
+                        solarArrayLevel.transform.position = new Vector3(
+                            solarArrayLevel.transform.position.x, 
+                            solarArrayRequirementsList.gameObject.transform.position.y,  
+                            solarArrayLevel.transform.position.z);
                         break;
                     case "imager":
-                        imagerLevel.SetText(level.ToString());
-                        imagerUpgradeButton.interactable = false;
+                        imagerUpgradeButton.gameObject.SetActive(false);
+                        imagerLevel.transform.position = new Vector3(
+                            imagerLevel.transform.position.x,
+                            imagerRequirementsList.gameObject.transform.position.y,
+                            imagerLevel.transform.position.z);
                         break;
                     case "electromagnet":
-                        eMagnetLevel.SetText(level.ToString());
-                        eMagnetUpgradeButton.interactable = false;
+                        eMagnetUpgradeButton.gameObject.SetActive(false);
+                        eMagnetLevel.transform.position = new Vector3(
+                            eMagnetLevel.transform.position.x,
+                            eMagnetRequirementsList.gameObject.transform.position.y,
+                            eMagnetLevel.transform.position.z);
                         break;
                 }
                 break;

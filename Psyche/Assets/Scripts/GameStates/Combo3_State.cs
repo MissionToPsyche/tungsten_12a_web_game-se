@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,9 +12,13 @@ public class Combo3_State : BaseState
     {
         CHECKPOINT_1    = 0,
         CHECKPOINT_2    = 1,
-        IRON_1          = 2,
-        IRON_2          = 3,
-        IRON_3          = 4,
+        CHECKPOINT_3    = 2,
+        TUNGSTEN_1      = 3,
+        IRON_1          = 4,
+        IRON_2          = 5,
+        IRON_3          = 6,
+        IRON_4          = 7,
+        IRON_5          = 8,
 
         CHECKPOINT      = 99,
     }
@@ -29,14 +32,18 @@ public class Combo3_State : BaseState
     {
         return obj.ToLower() switch
         {
-            "checkpoint 1"      => (short)SceneObject.CHECKPOINT_1,
-            "checkpoint 2"      => (short)SceneObject.CHECKPOINT_2,
-            "element_iron 1"    => (short)SceneObject.IRON_1,
-            "element_iron 2"    => (short)SceneObject.IRON_2,
-            "element_iron 3"    => (short)SceneObject.IRON_3,
+            "checkpoint 1"          => (short)SceneObject.CHECKPOINT_1,
+            "checkpoint 2"          => (short)SceneObject.CHECKPOINT_2,
+            "checkpoint 3"          => (short)SceneObject.CHECKPOINT_3,
+            "element_tungsten 1"    => (short)SceneObject.TUNGSTEN_1,
+            "element_iron 1"        => (short)SceneObject.IRON_1,
+            "element_iron 2"        => (short)SceneObject.IRON_2,
+            "element_iron 3"        => (short)SceneObject.IRON_3,
+            "element_iron 4"        => (short)SceneObject.IRON_4,
+            "element_iron 5"        => (short)SceneObject.IRON_5,
 
-            "checkpoint"        => (short)SceneObject.CHECKPOINT,
-            _                   => -1,
+            "checkpoint"            => (short)SceneObject.CHECKPOINT,
+            _                       => -1,
         };
     }
 
@@ -51,9 +58,13 @@ public class Combo3_State : BaseState
         {
             (short)SceneObject.CHECKPOINT_1 => "Checkpoint 1",
             (short)SceneObject.CHECKPOINT_2 => "Checkpoint 2",
+            (short)SceneObject.CHECKPOINT_3 => "Checkpoint 3",
+            (short)SceneObject.TUNGSTEN_1   => "Element_Tungsten 1",
             (short)SceneObject.IRON_1       => "Element_Iron 1",
             (short)SceneObject.IRON_2       => "Element_Iron 2",
             (short)SceneObject.IRON_3       => "Element_Iron 3",
+            (short)SceneObject.IRON_4       => "Element_Iron 4",
+            (short)SceneObject.IRON_5       => "Element_Iron 5",
 
             (short)SceneObject.CHECKPOINT   => "Checkpoint",
             _ => null,
@@ -70,9 +81,13 @@ public class Combo3_State : BaseState
         {
             { (short)SceneObject.CHECKPOINT_1, false }, // 'true' for available
             { (short)SceneObject.CHECKPOINT_2, false }, // `true` for activate-able
+            { (short)SceneObject.CHECKPOINT_3, false },
+            { (short)SceneObject.TUNGSTEN_1,   true },
             { (short)SceneObject.IRON_1,       true },
             { (short)SceneObject.IRON_2,       true },
             { (short)SceneObject.IRON_3,       true },
+            { (short)SceneObject.IRON_4,       true },
+            { (short)SceneObject.IRON_5,       true },
         };
         LoadDefaultState();
         SaveState();
@@ -106,6 +121,36 @@ public class Combo3_State : BaseState
                         {
                             var targetObject = GameObject.Find(objectName).GetComponent<Checkpoint>();
                             targetObject.isSpinning = value;
+                        }
+                    }
+                    break;
+
+                case (short)SceneObject.CHECKPOINT_3:
+                    {
+                        var value = (bool)pair.Value;
+                        if (value)
+                        {
+                            var targetObject = GameObject.Find(objectName).GetComponent<Checkpoint>();
+                            targetObject.isSpinning = value;
+                        }
+                    }
+                    break;
+
+                case (short)SceneObject.TUNGSTEN_1:
+                    { // Specifying scope for use of `var value` && `var targetObject`
+                        var value = (bool)pair.Value;
+
+                        // Remove the object if it's already been picked up
+                        if (!value)
+                        {
+                            var targetObject = GameObject.Find(objectName);
+                            if (targetObject == null)
+                            {
+                                Debug.LogError($"Object {objectName} does not exist");
+                                return;
+                            }
+
+                            targetObject.SetActive(value);
                         }
                     }
                     break;
@@ -147,7 +192,46 @@ public class Combo3_State : BaseState
                         }
                     }
                     break;
+
                 case (short)SceneObject.IRON_3:
+                    { // Specifying scope for use of `var value` && `var targetObject`
+                        var value = (bool)pair.Value;
+
+                        // Remove the object if it's already been picked up
+                        if (!value)
+                        {
+                            var targetObject = GameObject.Find(objectName);
+                            if (targetObject == null)
+                            {
+                                Debug.LogError($"Object {objectName} does not exist");
+                                return;
+                            }
+
+                            targetObject.SetActive(value);
+                        }
+                    }
+                    break;
+
+                case (short)SceneObject.IRON_4:
+                    { // Specifying scope for use of `var value` && `var targetObject`
+                        var value = (bool)pair.Value;
+
+                        // Remove the object if it's already been picked up
+                        if (!value)
+                        {
+                            var targetObject = GameObject.Find(objectName);
+                            if (targetObject == null)
+                            {
+                                Debug.LogError($"Object {objectName} does not exist");
+                                return;
+                            }
+
+                            targetObject.SetActive(value);
+                        }
+                    }
+                    break;
+
+                case (short)SceneObject.IRON_5:
                     { // Specifying scope for use of `var value` && `var targetObject`
                         var value = (bool)pair.Value;
 
