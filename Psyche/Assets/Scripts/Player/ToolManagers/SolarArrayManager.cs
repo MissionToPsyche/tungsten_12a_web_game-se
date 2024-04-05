@@ -86,9 +86,8 @@ public class SolarArrayManager : ToolManager
 
     //=============================================== Tool Actions ===============================================
 
-    /// <summary>
+    /// <inheritdoc/>
     /// Charges battery to max capacity
-    /// </summary>
     public override void Activate()
     {
         BatteryLevel += MaxCapacity;
@@ -148,9 +147,8 @@ public class SolarArrayManager : ToolManager
         OnBatteryPercentageChanged?.Invoke(Mathf.RoundToInt(BatteryPercent));
     }
 
-    /// <summary>
+    /// <inheritdoc/>
     /// Increases the rate of recharge when called.
-    /// </summary>
     protected override void UpgradeTool()
     {
         Rate += 0.5f;
