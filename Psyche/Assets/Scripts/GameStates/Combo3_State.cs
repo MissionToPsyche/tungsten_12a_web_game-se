@@ -18,7 +18,6 @@ public class Combo3_State : BaseState
         IRON_2          = 5,
         IRON_3          = 6,
         IRON_4          = 7,
-        IRON_5          = 8,
 
         CHECKPOINT      = 99,
     }
@@ -40,7 +39,6 @@ public class Combo3_State : BaseState
             "element_iron 2"        => (short)SceneObject.IRON_2,
             "element_iron 3"        => (short)SceneObject.IRON_3,
             "element_iron 4"        => (short)SceneObject.IRON_4,
-            "element_iron 5"        => (short)SceneObject.IRON_5,
 
             "checkpoint"            => (short)SceneObject.CHECKPOINT,
             _                       => -1,
@@ -64,7 +62,6 @@ public class Combo3_State : BaseState
             (short)SceneObject.IRON_2       => "Element_Iron 2",
             (short)SceneObject.IRON_3       => "Element_Iron 3",
             (short)SceneObject.IRON_4       => "Element_Iron 4",
-            (short)SceneObject.IRON_5       => "Element_Iron 5",
 
             (short)SceneObject.CHECKPOINT   => "Checkpoint",
             _ => null,
@@ -87,7 +84,6 @@ public class Combo3_State : BaseState
             { (short)SceneObject.IRON_2,       true },
             { (short)SceneObject.IRON_3,       true },
             { (short)SceneObject.IRON_4,       true },
-            { (short)SceneObject.IRON_5,       true },
         };
         LoadDefaultState();
         SaveState();
@@ -213,25 +209,6 @@ public class Combo3_State : BaseState
                     break;
 
                 case (short)SceneObject.IRON_4:
-                    { // Specifying scope for use of `var value` && `var targetObject`
-                        var value = (bool)pair.Value;
-
-                        // Remove the object if it's already been picked up
-                        if (!value)
-                        {
-                            var targetObject = GameObject.Find(objectName);
-                            if (targetObject == null)
-                            {
-                                Debug.LogError($"Object {objectName} does not exist");
-                                return;
-                            }
-
-                            targetObject.SetActive(value);
-                        }
-                    }
-                    break;
-
-                case (short)SceneObject.IRON_5:
                     { // Specifying scope for use of `var value` && `var targetObject`
                         var value = (bool)pair.Value;
 
