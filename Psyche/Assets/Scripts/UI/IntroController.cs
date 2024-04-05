@@ -11,7 +11,7 @@ public class IntroController : MonoBehaviour
 {
     public GameObject intro1, intro2, intro3, intro4, intro5, intro6, intro7;
     private Image img1, img2, img3, img4, img5, img6, img7;
-
+    private bool IsTransitioning;
     int curScreen = 1;
 
     /// <summary>
@@ -41,6 +41,8 @@ public class IntroController : MonoBehaviour
 
         //fade in the first image
         StartCoroutine(FadeIn(img1));
+
+        IsTransitioning = true;
     }
 
     /// <summary>
@@ -50,44 +52,41 @@ public class IntroController : MonoBehaviour
     {
         if (Input.GetButtonDown("EMagnet"))
         {
-            switch (curScreen)
+            if (!IsTransitioning)
             {
-                case 1:
-                    curScreen++;
-                    StartCoroutine(CrossFade(img1, img2));
-                    break;
+                switch (curScreen)
+                {
+                    case 1:
+                        StartCoroutine(CrossFade(img1, img2));
+                        break;
 
-                case 2:
-                    curScreen++;
-                    StartCoroutine(CrossFade(img2, img3));
-                    break;
+                    case 2:
+                        StartCoroutine(CrossFade(img2, img3));
+                        break;
 
-                case 3:
-                    curScreen++;
-                    StartCoroutine(CrossFade(img3, img4));
-                    break;
-                
-                case 4:
-                    curScreen++;
-                    StartCoroutine(CrossFade(img4, img5));
-                    break;
+                    case 3:
+                        StartCoroutine(CrossFade(img3, img4));
+                        break;
 
-                case 5:
-                    curScreen++;
-                    StartCoroutine(CrossFade(img5, img6));
-                    break;
+                    case 4:
+                        StartCoroutine(CrossFade(img4, img5));
+                        break;
 
-                case 6:
-                    curScreen++;
-                    StartCoroutine(CrossFade(img6, img7));
-                    break;
+                    case 5:
+                        StartCoroutine(CrossFade(img5, img6));
+                        break;
 
-                default:
-                    // Set the value this way so if any changes are made they are accounted for
-                    string scene = GameController.Instance.GameStateManager.MatchScene(GameStateManager.Scene.Landing);
-                    GameController.Instance.SceneTransitionManager.devControl = true;
-                    GameController.Instance.SceneTransitionManager.OnInitiateTransition(scene);
-                    break;
+                    case 6:
+                        StartCoroutine(CrossFade(img6, img7));
+                        break;
+                    default:
+                        // Set the value this way so if any changes are made they are accounted for
+                        string scene = GameController.Instance.GameStateManager.MatchScene(GameStateManager.Scene.Landing);
+                        GameController.Instance.SceneTransitionManager.devControl = true;
+                        GameController.Instance.SceneTransitionManager.OnInitiateTransition(scene);
+                        break;
+                }
+                curScreen++;
             }
         }
     }
@@ -100,6 +99,8 @@ public class IntroController : MonoBehaviour
     /// <returns></returns>
     private IEnumerator CrossFade(Image img1, Image img2)
     {
+        IsTransitioning = true;
+
         //fades out the first image
         img1.CrossFadeAlpha(0, 1.0f, false);
         yield return new WaitForSeconds(1.0f);
@@ -107,6 +108,8 @@ public class IntroController : MonoBehaviour
         //fades in the second image
         img2.CrossFadeAlpha(1, 2.0f, false);
         yield return new WaitForSeconds(2.0f);
+
+        IsTransitioning = false;
     }
 
     /// <summary>
@@ -116,7 +119,11 @@ public class IntroController : MonoBehaviour
     /// <returns></returns>
     private IEnumerator FadeIn(Image img)
     {
+        IsTransitioning = true;
+
         img.CrossFadeAlpha(1, 2.0f, false);
         yield return new WaitForSeconds(2.0f);
+
+        IsTransitioning = false;
     }
 }
