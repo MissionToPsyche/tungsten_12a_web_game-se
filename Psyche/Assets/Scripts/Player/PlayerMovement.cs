@@ -155,8 +155,6 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            // TODO need to set alpha faders for entering and exiting cave -Dhalia
-
             // play the new animation
             Animator.Play(NewAnimation);
             if (NewAnimation.Equals(PLAYER_THRUSTER))
