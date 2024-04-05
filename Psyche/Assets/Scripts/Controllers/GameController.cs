@@ -16,6 +16,7 @@ public class GameController : BaseController<GameController>
     public SceneTransitionManager SceneTransitionManager;
     public AudioManager AudioManager;
     public bool ColorBlindMode;
+    public float musicVol, sfxVol, uiVol, videoVol;
 
     /// <summary>
     /// Initialize the object and parent class
