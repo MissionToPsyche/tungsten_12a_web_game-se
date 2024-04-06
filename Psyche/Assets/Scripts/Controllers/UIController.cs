@@ -497,13 +497,12 @@ public class UIController : BaseController<UIController>
             /**
              * Destroys Player and UI so they do not spawn on the start screen
              */
-            Destroy(PlayerController.Instance.gameObject);
-            Destroy(gameObject);
             GameController.Instance.SceneTransitionManager.devControl = true;
             GameController.Instance.SceneTransitionManager.OnInitiateTransition(
                 GameController.Instance.GameStateManager.MatchScene(GameStateManager.Scene.Title)
-            );
-
+                );
+            Destroy(PlayerController.Instance.gameObject);
+            Destroy(gameObject);
         }
     }
 
@@ -541,7 +540,6 @@ public class UIController : BaseController<UIController>
     public GameObject ironRequirement;
     public GameObject nickelRequirement;
     public GameObject goldRequirement;
-    public GameObject tungstenRequirement;
 
     /// <summary>
     /// Modifies the tool when its upgrade button is pressed
