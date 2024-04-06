@@ -36,10 +36,6 @@ public class AudioManager : MonoBehaviour
     [SerializeField] public AudioSource checkpoint;
     public List<AudioSource> sfxAudioSources;
 
-    [Header("Videos")]
-    [SerializeField] public AudioSource elementsVideo;
-    public List<AudioSource> videoAudioSources;
-
     /// <summary>
     /// collects the same type audio sources into their respected lists
     /// </summary>
@@ -57,15 +53,12 @@ public class AudioManager : MonoBehaviour
         sfxAudioSources.Add(pickupElementTungsten);
         sfxAudioSources.Add(pickupTool);
         sfxAudioSources.Add(checkpoint);
-        videoAudioSources.Add(elementsVideo);
         foreach (AudioSource audioSource in uiAudioSources)
             audioSource.volume = GameController.Instance.uiVol;
         foreach (AudioSource audioSource in musicAudioSources)
             audioSource.volume = GameController.Instance.musicVol;
         foreach (AudioSource audioSource in sfxAudioSources)
             audioSource.volume = GameController.Instance.sfxVol;
-        foreach (AudioSource audioSource in videoAudioSources)
-            audioSource.volume = GameController.Instance.videoVol;
     }
 
     /// <summary>
@@ -215,15 +208,6 @@ public class AudioManager : MonoBehaviour
     public void SetAudioVolumeForAllSfx(float desiredVolume)
     {
         SetAudioVolumeForAll(sfxAudioSources, desiredVolume);
-    }
-
-    /// <summary>
-    /// set an audio source volume for all videos
-    /// </summary>
-    /// <param name="desiredVolume"></param>
-    public void SetAudioVolumeForAllVideos(float desiredVolume)
-    {
-        SetAudioVolumeForAll(videoAudioSources, desiredVolume);
     }
 
 }

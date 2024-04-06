@@ -11,6 +11,7 @@ using UnityEngine.SceneManagement;
 public class OptionsController : MonoBehaviour
 {
     public GameObject checkMark;
+    private float musicVolSliderPrevious;
     public Slider musicVolSlider;
     public Slider sfxVolSlider;
     public Slider uiVolSlider;
@@ -71,11 +72,20 @@ public class OptionsController : MonoBehaviour
     }
 
     /// <summary>
-    /// Sets video volume
+    /// Sets the music to mute
     /// </summary>
-    public void setVideoVolume()
+    public void setMusicMute()
     {
-        GameController.Instance.videoVol = videoSlider.value;
-        GameController.Instance.AudioManager.SetAudioVolumeForAllVideos(videoSlider.value);
+        musicVolSliderPrevious = musicVolSlider.value;
+        musicVolSlider.value = 0; 
     }
+
+    /// <summary>
+    /// Unmutes the music
+    /// </summary>
+    public void setMusicUnmute()
+    {
+        musicVolSlider.value = musicVolSliderPrevious; 
+    }
+
 }
