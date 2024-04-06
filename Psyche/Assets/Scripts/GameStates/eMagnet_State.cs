@@ -19,13 +19,13 @@ public class EMagnet_State : BaseState
         DefaultState = new Dictionary<short, object>
         {
             { (short)SceneObject.Electromagnet, true },
-            { (short)SceneObject.Checkpoint0,  false },
-            { (short)SceneObject.Checkpoint1,  false },
-            { (short)SceneObject.Gold1,        true },
-            { (short)SceneObject.Gold2,        true },
-            { (short)SceneObject.Iron1,        true },
-            { (short)SceneObject.Tungsten1,    true },
-            { (short)SceneObject.FirstVeins,   false },
+            { (short)SceneObject.Checkpoint0,   false },
+            { (short)SceneObject.Checkpoint1,   false },
+            { (short)SceneObject.Gold1,         true },
+            { (short)SceneObject.Gold2,         true },
+            { (short)SceneObject.Iron1,         true },
+            { (short)SceneObject.Tungsten1,     true },
+            { (short)SceneObject.FirstDeposits,    false },
         };    
         LoadDefaultState();
         SaveState();
@@ -45,7 +45,7 @@ public class EMagnet_State : BaseState
         Gold2           = 4,
         Iron1           = 5,
         Tungsten1       = 6,
-        FirstVeins      = 7,
+        FirstDeposits      = 7,
 
         Checkpoint      = 99,
     }
@@ -62,7 +62,7 @@ public class EMagnet_State : BaseState
             "element_gold 2"        => (short)SceneObject.Gold2,
             "element_iron 1"        => (short)SceneObject.Iron1,
             "element_tungsten 1"    => (short)SceneObject.Tungsten1,
-            "first_veins"           => (short)SceneObject.FirstVeins,
+            "first_deposits"        => (short)SceneObject.FirstDeposits,
 
             "checkpoint"            => (short)SceneObject.Checkpoint,
             _                       => -1,
@@ -81,7 +81,7 @@ public class EMagnet_State : BaseState
             (short)SceneObject.Gold2            => "Element_Gold 2",
             (short)SceneObject.Iron1            => "Element_Iron 1",
             (short)SceneObject.Tungsten1        => "Element_Tungsten 1",
-            (short)SceneObject.FirstVeins       => "First_Veins",
+            (short)SceneObject.FirstDeposits    => "First_Deposits",
 
             (short)SceneObject.Checkpoint       => "Checkpoint",
             _                                   => null,
@@ -195,7 +195,7 @@ public class EMagnet_State : BaseState
                     }
                     break;
 
-                case (short)SceneObject.FirstVeins:
+                case (short)SceneObject.FirstDeposits:
                     {
                         bool value = (bool)pair.Value;
                         if (!value)

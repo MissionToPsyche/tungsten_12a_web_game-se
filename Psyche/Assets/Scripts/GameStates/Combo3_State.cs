@@ -18,11 +18,15 @@ public class Combo3_State : BaseState
         // This must be set up first before anything else is created as everything else is based off of this
         DefaultState = new Dictionary<short, object>
         {
-            { (short)SceneObject.Checkpoint1, false }, // 'true' for available
-            { (short)SceneObject.Checkpoint2, false }, // `true` for activate-able
+            { (short)SceneObject.Checkpoint1, false }, 
+            { (short)SceneObject.Checkpoint2, false },
+            { (short)SceneObject.Checkpoint3, false },
+            { (short)SceneObject.Tungsten1,   true },
             { (short)SceneObject.Iron1,       true },
             { (short)SceneObject.Iron2,       true },
             { (short)SceneObject.Iron3,       true },
+            { (short)SceneObject.Iron4,       true },
+            { (short)SceneObject.Iron5,       true },
         };
         LoadDefaultState();
         SaveState();
@@ -37,9 +41,13 @@ public class Combo3_State : BaseState
     {
         Checkpoint1     = 0,
         Checkpoint2     = 1,
-        Iron1           = 2,
-        Iron2           = 3,
-        Iron3           = 4,
+        Checkpoint3     = 2,
+        Tungsten1       = 3,
+        Iron1           = 4,
+        Iron2           = 5,
+        Iron3           = 6,
+        Iron4           = 7,
+        Iron5           = 8,
 
         Checkpoint      = 99,
     }
@@ -49,14 +57,18 @@ public class Combo3_State : BaseState
     {
         return obj.ToLower() switch
         {
-            "checkpoint 1"      => (short)SceneObject.Checkpoint1,
-            "checkpoint 2"      => (short)SceneObject.Checkpoint2,
-            "element_iron 1"    => (short)SceneObject.Iron1,
-            "element_iron 2"    => (short)SceneObject.Iron2,
-            "element_iron 3"    => (short)SceneObject.Iron3,
+            "checkpoint 1"          => (short)SceneObject.Checkpoint1,
+            "checkpoint 2"          => (short)SceneObject.Checkpoint2,
+            "checkpoint 3"          => (short)SceneObject.Checkpoint2,
+            "element_tungsten 1"    => (short)SceneObject.Tungsten1,
+            "element_iron 1"        => (short)SceneObject.Iron1,
+            "element_iron 2"        => (short)SceneObject.Iron2,
+            "element_iron 3"        => (short)SceneObject.Iron3,
+            "element_iron 4"        => (short)SceneObject.Iron4,
+            "element_iron 5"        => (short)SceneObject.Iron5,
 
-            "checkpoint"        => (short)SceneObject.Checkpoint,
-            _                   => -1,
+            "checkpoint"            => (short)SceneObject.Checkpoint,
+            _                       => -1,
         };
     }
 
@@ -108,6 +120,32 @@ public class Combo3_State : BaseState
                     }
                     break;
 
+                case (short)SceneObject.Checkpoint3:
+                    {
+                        bool value = (bool)pair.Value;
+                        if (value)
+                        {
+                            Checkpoint targetObject = GameObject.Find(objectName).GetComponent<Checkpoint>();
+                            targetObject.isSpinning = value;
+                        }
+                    }
+                    break;
+
+                case (short)SceneObject.Tungsten1:
+                    {
+                        bool value = (bool)pair.Value;
+                        if (!value)
+                        {
+                            GameObject targetObject = GameObject.Find(objectName);
+                            if (targetObject == null)
+                            {
+                                return;
+                            }
+                            targetObject.SetActive(value);
+                        }
+                    }
+                    break;
+
                 case (short)SceneObject.Iron1:
                     {
                         bool value = (bool)pair.Value;
@@ -138,6 +176,36 @@ public class Combo3_State : BaseState
                     }
                     break;
                 case (short)SceneObject.Iron3:
+                    {
+                        bool value = (bool)pair.Value;
+                        if (!value)
+                        {
+                            GameObject targetObject = GameObject.Find(objectName);
+                            if (targetObject == null)
+                            {
+                                return;
+                            }
+                            targetObject.SetActive(value);
+                        }
+                    }
+                    break;
+
+                case (short)SceneObject.Iron4:
+                    {
+                        bool value = (bool)pair.Value;
+                        if (!value)
+                        {
+                            GameObject targetObject = GameObject.Find(objectName);
+                            if (targetObject == null)
+                            {
+                                return;
+                            }
+                            targetObject.SetActive(value);
+                        }
+                    }
+                    break;
+
+                case (short)SceneObject.Iron5:
                     {
                         bool value = (bool)pair.Value;
                         if (!value)

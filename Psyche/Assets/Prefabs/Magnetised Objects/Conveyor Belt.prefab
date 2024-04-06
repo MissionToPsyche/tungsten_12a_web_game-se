@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 1961990147921514564}
   - component: {fileID: 497446575545236285}
   m_Layer: 0
-  m_Name: Iron Conveyor Belt
+  m_Name: Conveyor Belt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -108,11 +108,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3db0380f3de95443b5476612405b40e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ironVeinPrefab: {fileID: 3325924169283356502, guid: 19f702046084e434a88c0831d88bd428, type: 3}
+  depositPrefab: {fileID: 3325924169283356502, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
   pointsObject: {fileID: 6881837900786384127}
   moveSpeed: 2.5
   spacingBetweenIrons: 2
-  numOfIrons: 3
+  numOfDeposits: 3
 --- !u!1 &4757371670708788897
 GameObject:
   m_ObjectHideFlags: 0
