@@ -57833,6 +57833,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5198483908214934543, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
+      propertyPath: MoveSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5198483908214934543, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
       propertyPath: moveSpeed
       value: 3
       objectReference: {fileID: 0}
@@ -59235,6 +59239,10 @@ PrefabInstance:
       value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 5198483908214934543, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
+      propertyPath: MoveSpeed
+      value: 1.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5198483908214934543, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
       propertyPath: moveSpeed
       value: 1.7
       objectReference: {fileID: 0}
@@ -59641,6 +59649,10 @@ PrefabInstance:
     - target: {fileID: 4364914062602311851, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5198483908214934543, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
+      propertyPath: WarpToStart
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5198483908214934543, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
       propertyPath: pointsIndex
@@ -60206,6 +60218,10 @@ PrefabInstance:
     - target: {fileID: 4364914062602311851, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5198483908214934543, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
+      propertyPath: MoveSpeed
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5198483908214934543, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
       propertyPath: moveSpeed
@@ -60819,6 +60835,10 @@ PrefabInstance:
       value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 5198483908214934543, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
+      propertyPath: MoveSpeed
+      value: 1.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5198483908214934543, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
       propertyPath: moveSpeed
       value: 1.7
       objectReference: {fileID: 0}
@@ -61109,6 +61129,10 @@ PrefabInstance:
     - target: {fileID: 4364914062602311851, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
       propertyPath: m_LocalPosition.y
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5198483908214934543, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
+      propertyPath: MoveSpeed
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: 5198483908214934543, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
       propertyPath: moveSpeed
@@ -61456,6 +61480,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1479967773}
     m_Modifications:
     - target: {fileID: 497446575545236285, guid: 15fd2b5ec1408e24ab4f8ee917000aaa, type: 3}
+      propertyPath: MoveSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 497446575545236285, guid: 15fd2b5ec1408e24ab4f8ee917000aaa, type: 3}
       propertyPath: moveSpeed
       value: 2
       objectReference: {fileID: 0}
@@ -61464,11 +61492,19 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 497446575545236285, guid: 15fd2b5ec1408e24ab4f8ee917000aaa, type: 3}
+      propertyPath: NumOfDeposits
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 497446575545236285, guid: 15fd2b5ec1408e24ab4f8ee917000aaa, type: 3}
       propertyPath: numOfDeposits
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 497446575545236285, guid: 15fd2b5ec1408e24ab4f8ee917000aaa, type: 3}
       propertyPath: spacingBetweenIrons
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 497446575545236285, guid: 15fd2b5ec1408e24ab4f8ee917000aaa, type: 3}
+      propertyPath: SpacingBetweenDeposits
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 497446575545236285, guid: 15fd2b5ec1408e24ab4f8ee917000aaa, type: 3}
@@ -62482,6 +62518,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5198483908214934543, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
+      propertyPath: WarpToStart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5198483908214934543, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
       propertyPath: warpToStart
       value: 1
       objectReference: {fileID: 0}
@@ -63404,11 +63444,19 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 497446575545236285, guid: 15fd2b5ec1408e24ab4f8ee917000aaa, type: 3}
+      propertyPath: NumOfDeposits
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 497446575545236285, guid: 15fd2b5ec1408e24ab4f8ee917000aaa, type: 3}
       propertyPath: numOfDeposits
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 497446575545236285, guid: 15fd2b5ec1408e24ab4f8ee917000aaa, type: 3}
       propertyPath: spacingBetweenIrons
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 497446575545236285, guid: 15fd2b5ec1408e24ab4f8ee917000aaa, type: 3}
+      propertyPath: SpacingBetweenDeposits
       value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 497446575545236285, guid: 15fd2b5ec1408e24ab4f8ee917000aaa, type: 3}
@@ -63687,6 +63735,10 @@ PrefabInstance:
     - target: {fileID: 4364914062602311851, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5198483908214934543, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
+      propertyPath: MoveSpeed
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5198483908214934543, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
       propertyPath: moveSpeed
@@ -64221,6 +64273,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1479967773}
     m_Modifications:
     - target: {fileID: 497446575545236285, guid: 15fd2b5ec1408e24ab4f8ee917000aaa, type: 3}
+      propertyPath: MoveSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 497446575545236285, guid: 15fd2b5ec1408e24ab4f8ee917000aaa, type: 3}
       propertyPath: moveSpeed
       value: 2
       objectReference: {fileID: 0}
@@ -64229,11 +64285,19 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 497446575545236285, guid: 15fd2b5ec1408e24ab4f8ee917000aaa, type: 3}
+      propertyPath: NumOfDeposits
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 497446575545236285, guid: 15fd2b5ec1408e24ab4f8ee917000aaa, type: 3}
       propertyPath: numOfDeposits
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 497446575545236285, guid: 15fd2b5ec1408e24ab4f8ee917000aaa, type: 3}
       propertyPath: spacingBetweenIrons
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 497446575545236285, guid: 15fd2b5ec1408e24ab4f8ee917000aaa, type: 3}
+      propertyPath: SpacingBetweenDeposits
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 497446575545236285, guid: 15fd2b5ec1408e24ab4f8ee917000aaa, type: 3}

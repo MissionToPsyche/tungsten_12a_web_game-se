@@ -6,15 +6,15 @@ using UnityEngine;
 /// Author: jmolive8
 public class ControlsOverlayCheckBox : MonoBehaviour
 {
-    public GameObject checkMark;
-    public GameObject controlsOverlay;
+    public GameObject CheckMark;
+    public GameObject ControlsOverlay;
 
     /// <summary>
-    /// Toggles check mark
+    /// Toggles the check mark and the visibility of the Controls Overlay
     /// </summary>
     public void toggleCheckMark()
     {
-        checkMark.SetActive(!checkMark.activeInHierarchy);
-        controlsOverlay.SetActive(!controlsOverlay.activeInHierarchy);
+        CheckMark.SetActive(!CheckMark.activeInHierarchy);
+        ControlsOverlay.SetActive(!ControlsOverlay.activeInHierarchy);
     }
 }
