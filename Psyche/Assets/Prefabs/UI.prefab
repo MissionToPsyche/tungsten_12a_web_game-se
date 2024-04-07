@@ -14650,13 +14650,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   battPerText: {fileID: 6002241573994103103}
   activeBattSpriteRenderer: {fileID: 5170621815784714003}
-  batterySprite6: {fileID: 231044240, guid: 95f5ab7703bd6f349b506610baa6faa9, type: 3}
-  batterySprite5: {fileID: -2090482627, guid: 95f5ab7703bd6f349b506610baa6faa9, type: 3}
-  batterySprite4: {fileID: -943899848, guid: 95f5ab7703bd6f349b506610baa6faa9, type: 3}
-  batterySprite3: {fileID: -549937431, guid: 95f5ab7703bd6f349b506610baa6faa9, type: 3}
-  batterySprite2: {fileID: -39812770, guid: 95f5ab7703bd6f349b506610baa6faa9, type: 3}
-  batterySprite1: {fileID: 88227712, guid: 95f5ab7703bd6f349b506610baa6faa9, type: 3}
-  batterySprite0: {fileID: -797366915, guid: 95f5ab7703bd6f349b506610baa6faa9, type: 3}
+  batterySprite6: {fileID: 447576028, guid: 95f5ab7703bd6f349b506610baa6faa9, type: 3}
+  batterySprite5: {fileID: 668690496, guid: 95f5ab7703bd6f349b506610baa6faa9, type: 3}
+  batterySprite4: {fileID: 1266105963, guid: 95f5ab7703bd6f349b506610baa6faa9, type: 3}
+  batterySprite3: {fileID: -1297789366, guid: 95f5ab7703bd6f349b506610baa6faa9, type: 3}
+  batterySprite2: {fileID: -1880986385, guid: 95f5ab7703bd6f349b506610baa6faa9, type: 3}
+  batterySprite1: {fileID: -687265699, guid: 95f5ab7703bd6f349b506610baa6faa9, type: 3}
+  batterySprite0: {fileID: -1824068771, guid: 95f5ab7703bd6f349b506610baa6faa9, type: 3}
   elements:
   - {fileID: 2759517852222390772}
   - {fileID: 1049013582365762751}
@@ -17257,12 +17257,12 @@ SpriteRenderer:
   m_SortingLayerID: 1746178165
   m_SortingLayer: 6
   m_SortingOrder: 0
-  m_Sprite: {fileID: 231044240, guid: 95f5ab7703bd6f349b506610baa6faa9, type: 3}
+  m_Sprite: {fileID: 447576028, guid: 95f5ab7703bd6f349b506610baa6faa9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.62, y: 0.26}
+  m_Size: {x: 0.64, y: 0.28}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
