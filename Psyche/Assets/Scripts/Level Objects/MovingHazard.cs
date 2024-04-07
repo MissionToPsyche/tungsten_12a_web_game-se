@@ -6,49 +6,50 @@ using UnityEngine;
 /// Author: jmolive8
 public class MovingHazard : MonoBehaviour
 {
-    public GameObject hazard;
-    public Transform pointsObject;
+    public GameObject Hazard;
+    public Transform PointsObject;
 
     [Tooltip("The first point to start moving towards.")]
-    public int pointsIndex = 1;
-    public float moveSpeed;
-    public bool warpToStart = false;
+    public int PointsIndex = 1;
+    public float MoveSpeed = 2.5f;
+    public bool WarpToStart = false;
 
-    private Vector2[] points;
-
+    private Vector2[] Points;
 
     void Start()
     {
-        points = new Vector2[pointsObject.childCount];
+        Points = new Vector2[PointsObject.childCount];
         int i = 0;
-        foreach (Transform child in pointsObject)
+        foreach (Transform child in PointsObject)
         {
-            points[i] = child.position;
+            Points[i] = child.position;
             i++;
         }
     }
 
     void Update()
     {
-        Vector2 moveVect = Vector2.MoveTowards(hazard.transform.position, points[pointsIndex], moveSpeed * Time.deltaTime);
-        hazard.transform.position = new Vector3(moveVect.x, moveVect.y, hazard.transform.position.z);
+        Vector2 moveVect = Vector2.MoveTowards(Hazard.transform.position, Points[PointsIndex], MoveSpeed * Time.deltaTime);
+        Hazard.transform.position = new Vector3(moveVect.x, moveVect.y, Hazard.transform.position.z);
 
         /**
          * Sets the next target position when current target is reached
          */
-        if ((Vector2)hazard.transform.position == points[pointsIndex])
+        if ((Vector2)Hazard.transform.position == Points[PointsIndex])
         {
-            pointsIndex++;
+            PointsIndex++;
 
             /**
              * When final position reached starts moving towards the first position
              */
-            if (pointsIndex == points.Length)
+            if (PointsIndex == Points.Length)
             {
-                pointsIndex = 0;
+                PointsIndex = 0;
 
-                if (warpToStart)
-                    hazard.transform.position = new Vector3(points[0].x, points[0].y, hazard.transform.position.z);
+                if (WarpToStart)
+                {
+                    Hazard.transform.position = new Vector3(Points[0].x, Points[0].y, Hazard.transform.position.z);
+                }
             }
         }
     }
