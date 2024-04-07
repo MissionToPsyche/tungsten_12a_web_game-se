@@ -123,28 +123,28 @@ public class Landing_State : BaseState
                     break;
 
 
-                case (short)SceneObject.Checkpoint2:
-                    {
-                        bool value = (bool)pair.Value;
-                        if (value)
-                        {
-                            Checkpoint targetObject = GameObject.Find(objectName).GetComponent<Checkpoint>();
-                            targetObject.isSpinning = value;
-                        }
-                    }
-                    break;
+                //case (short)SceneObject.Checkpoint2:
+                //    {
+                //        bool value = (bool)pair.Value;
+                //        if (value)
+                //        {
+                //            Checkpoint targetObject = GameObject.Find(objectName).GetComponent<Checkpoint>();
+                //            targetObject.isSpinning = value;
+                //        }
+                //    }
+                //    break;
 
 
-                case (short)SceneObject.Checkpoint3:
-                    {
-                        bool value = (bool)pair.Value;
-                        if (value)
-                        {
-                            Checkpoint targetObject = GameObject.Find(objectName).GetComponent<Checkpoint>();
-                            targetObject.isSpinning = value;
-                        }
-                    }
-                    break;
+                //case (short)SceneObject.Checkpoint3:
+                //    {
+                //        bool value = (bool)pair.Value;
+                //        if (value)
+                //        {
+                //            Checkpoint targetObject = GameObject.Find(objectName).GetComponent<Checkpoint>();
+                //            targetObject.isSpinning = value;
+                //        }
+                //    }
+                //    break;
 
 
                 case (short)SceneObject.Iron1:
