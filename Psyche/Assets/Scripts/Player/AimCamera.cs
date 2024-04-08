@@ -45,7 +45,7 @@ public class AimCamera : MonoBehaviour
         {
             MouseCamera.GetComponent<CinemachineVirtualCamera>().Priority = 20;
             PlayerCamera.GetComponent<CinemachineVirtualCamera>().Priority = 0;
-            this.transform.position = midPoint;
+            transform.position = midPoint;
         }
         else
         {
