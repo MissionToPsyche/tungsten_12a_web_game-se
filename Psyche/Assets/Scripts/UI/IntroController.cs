@@ -21,7 +21,7 @@ public class IntroController : MonoBehaviour
     //variables
     private Image Img1, Img2, Img3, Img4, Img5, Img6, Img7;
     private bool IsTransitioning;
-    int CurScreen = 1;
+    private int CurScreen = 1;
 
     /// <summary>
     /// Gets all the image components of all the intro cutscene GameObjects,

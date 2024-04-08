@@ -27,7 +27,7 @@ public class OutroController : MonoBehaviour {
     private TMP_Text ButtonText;
     private bool IsTransitioning;
     private Color ButtonColor;
-    int CurScreen = 1;
+    private int CurScreen = 1;
 
     /// <summary>
     /// Gets rid of objects not needed anymore, as well as instantiates
