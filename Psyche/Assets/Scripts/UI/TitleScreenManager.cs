@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 /// <summary>
@@ -8,13 +7,12 @@ using UnityEngine;
 /// Author: jmolive8, dnguye99
 public class TitleScreenManager : MonoBehaviour {
     public GameObject MainMenu;
-
     private GameObject CurSubmenu;
 
     /// <summary>
     /// Starts the intro cutscene
     /// </summary>
-    public void startGame()
+    public void StartGame()
     {
         //Play button click sound
         GameController.Instance.AudioManager.buttonClick.Play();
@@ -30,7 +28,7 @@ public class TitleScreenManager : MonoBehaviour {
     /// Hides the main menu and opens a submenu
     /// </summary>
     /// <param name="submenu"></param>
-    public void openSubmenu(GameObject submenu)
+    public void OpenSubmenu(GameObject submenu)
     {
         //Play button click sound
         GameController.Instance.AudioManager.buttonClick.Play();
@@ -43,7 +41,7 @@ public class TitleScreenManager : MonoBehaviour {
     /// <summary>
     /// Closes the current submenu and unhides the main menu
     /// </summary>
-    public void closeSubmenu()
+    public void CloseSubmenu()
     {
         CurSubmenu.SetActive(false);
         CurSubmenu = null;
