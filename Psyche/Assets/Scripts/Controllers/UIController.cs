@@ -318,6 +318,8 @@ public class UIController : BaseController<UIController>
                 Application.OpenURL("https://psyche.asu.edu/gallery/meet-nasas-psyche-team-who-will-measure-the-asteroids-magnetic-field/"); break;
             case "SolarArray":
                 Application.OpenURL("https://psyche.asu.edu/mission/the-spacecraft/"); break;
+            case "NASA":
+                Application.OpenURL("https://psyche.asu.edu/gallery/nasas-psyche-mission-to-an-asteroid-official-nasa-trailer/"); break;
             default:
                 Debug.LogError("Tool link not set or incorrect name passed");
                 break;
