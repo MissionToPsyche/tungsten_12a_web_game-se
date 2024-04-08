@@ -106,7 +106,7 @@ public class OutroController : MonoBehaviour {
     {
         GameController.Instance.AudioManager.buttonClick.Play();
         string scene = GameController.Instance.GameStateManager.MatchScene(GameStateManager.Scene.Title);
-        GameController.Instance.SceneTransitionManager.devControl = true;
+        GameController.Instance.SceneTransitionManager.DevControl = true;
         GameController.Instance.SceneTransitionManager.OnInitiateTransition(scene);
         //UnityEngine.SceneManagement.SceneManager.LoadScene("Title_Screen");
     }
