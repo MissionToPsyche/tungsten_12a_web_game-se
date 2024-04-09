@@ -28,19 +28,19 @@ public class ConveyorBelt : MonoBehaviour
             i++;
         }
 
-        StartCoroutine(spawnDeposit());
+        StartCoroutine(SpawnDeposit());
     }
 
     /// <summary>
     /// Spawns the specified number of Magnetized Deposits with a delay to ensure there is space between them while they are moving
     /// </summary>
-    private IEnumerator spawnDeposit()
+    private IEnumerator SpawnDeposit()
     {
         for (int i = 0; i < NumOfDeposits; i++)
         {
             GameObject deposit = Instantiate(DepositPrefab, transform);
             deposit.transform.position = Points[0];
-            StartCoroutine(moveDeposit(deposit));
+            StartCoroutine(MoveDeposit(deposit));
             yield return SpawnDelay;
         }
     }
@@ -48,7 +48,7 @@ public class ConveyorBelt : MonoBehaviour
     /// <summary>
     /// Handles moving Magnetized Deposits along the Belt's path
     /// </summary>
-    private IEnumerator moveDeposit(GameObject deposit)
+    private IEnumerator MoveDeposit(GameObject deposit)
     {
         int pointsIndex = 1;
 

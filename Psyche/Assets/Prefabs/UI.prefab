@@ -5880,7 +5880,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4085518003072981745}
         m_TargetAssemblyTypeName: ControlsOverlayCheckBox, Assembly-CSharp
-        m_MethodName: toggleCheckMark
+        m_MethodName: ToggleCheckMark
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
