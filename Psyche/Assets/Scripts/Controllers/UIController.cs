@@ -48,9 +48,6 @@ public class UIController : BaseController<UIController>
         _devConsoleFPSPanel.SetActive(false);
         _devConsoleResourcePanel.SetActive(false);
 
-        // Temporary workaround until UI issues fixed -- Tell GameController to load the UI event and DevConsole script
-        GameController.Instance.LoadUI();
-
         //Specific to this class
         _aspectRatio = (float)Screen.width / Screen.height; //<-- Use this to adjust UI layout/positioning
 
@@ -67,14 +64,6 @@ public class UIController : BaseController<UIController>
     {
         base.Awake();
         Initialize();
-    }
-
-    /// <summary>
-    /// Called when necessary - not every frame
-    /// </summary>
-    public override void UpdateController()
-    {
-        //Insert Logic
     }
 
     /// <summary>
@@ -130,17 +119,17 @@ public class UIController : BaseController<UIController>
     {
         if (GameController.Instance != null)
         {
-            GameController.Instance.developerConsole.OnDevConsoleUIUpdate += ProcessDevConsole;
+            GameController.Instance.DeveloperConsole.OnDevConsoleUIUpdate += ProcessDevConsole;
         }
 
         if (PlayerController.Instance != null)
         {
             PlayerController.Instance.inventoryManager.OnUpdateInventoryElement += ElementUpdate;
             PlayerController.Instance.inventoryManager.OnUpdateInventoryTool += EnableToolButton;
-            PlayerController.Instance.batteryManager.OnBatteryPercentageChanged += UpdateBattery;
+            PlayerController.Instance.solarArrayManager.OnBatteryPercentageChanged += UpdateBattery;
 
             // ToolInfoGathers
-            PlayerController.Instance.batteryManager.ToolManagerUpdate += ToolInfoGather;
+            PlayerController.Instance.solarArrayManager.ToolManagerUpdate += ToolInfoGather;
             PlayerController.Instance.thrusterManager.ToolManagerUpdate += ToolInfoGather;
             PlayerController.Instance.imagerManager.ToolManagerUpdate += ToolInfoGather;
             PlayerController.Instance.eMagnetManager.ToolManagerUpdate += ToolInfoGather;
@@ -155,16 +144,16 @@ public class UIController : BaseController<UIController>
     {
         if (GameController.Instance != null)
         {
-            GameController.Instance.developerConsole.OnDevConsoleUIUpdate -= ProcessDevConsole;
+            GameController.Instance.DeveloperConsole.OnDevConsoleUIUpdate -= ProcessDevConsole;
         }
         if (PlayerController.Instance != null)
         {
             PlayerController.Instance.inventoryManager.OnUpdateInventoryElement -= ElementUpdate;
             PlayerController.Instance.inventoryManager.OnUpdateInventoryTool -= EnableToolButton;
-            PlayerController.Instance.batteryManager.OnBatteryPercentageChanged -= UpdateBattery;
+            PlayerController.Instance.solarArrayManager.OnBatteryPercentageChanged -= UpdateBattery;
 
             // ToolInfoGathers
-            PlayerController.Instance.batteryManager.ToolManagerUpdate -= ToolInfoGather;
+            PlayerController.Instance.solarArrayManager.ToolManagerUpdate -= ToolInfoGather;
             PlayerController.Instance.thrusterManager.ToolManagerUpdate -= ToolInfoGather;
             PlayerController.Instance.imagerManager.ToolManagerUpdate -= ToolInfoGather;
             PlayerController.Instance.eMagnetManager.ToolManagerUpdate -= ToolInfoGather;
@@ -179,34 +168,34 @@ public class UIController : BaseController<UIController>
     {
         switch (tool)
         {
-            case InventoryManager.Tool.BATTERY or InventoryManager.Tool.SOLARPANEL:
-                setDialogText("This is a Solar Array. Psyche had 2 of these in cross formations to generate power.\n\nI can use this to automatically recharge my suit's battery.\n\n<i>Press <b>TAB</b> to learn more.</i>");
-                solarPanelInfoButton.SetActive(true);
-                batteryLevel.transform.parent.gameObject.SetActive(true);
+            case InventoryManager.Tool.SolarArray:
+                setDialogText("This is a Solar Array. Psyche had 2 of these in cross formations to generate power.\n\nI can use this to automatically recharge my suit's battery!\n\n<i>Press <b>TAB</b> to learn more.</i>");
+                solarArrayInfoButton.SetActive(true);
+                solarArrayLevel.transform.parent.gameObject.SetActive(true);
                 batteryIndicator.SetActive(true);
                 break;
 
-            case InventoryManager.Tool.THRUSTER:
-                setDialogText("This is a Hall Thruster. This thruster used electricity to propel Psyche from Earth's orbit to the asteroid.\n\nI can use this to help me reach high up areas.\n<i>Hold <b>SPACEBAR</b> to fly upwards.</i>\n\n<i>Press <b>TAB</b> to learn more.</i>");
+            case InventoryManager.Tool.Thruster:
+                setDialogText("This is a Hall Thruster. This thruster used electricity to propel Psyche from Earth's orbit to the asteroid.\n\nI can use this to help me reach high up areas!\n\n<i>Hold <b>SPACEBAR</b> to fly upwards.</i>\n\n<i>Press <b>TAB</b> to learn more.</i>");
                 thrusterInfoButton.SetActive(true);
                 thrusterLevel.transform.parent.gameObject.SetActive(true);
                 thrusterIcon.SetActive(true);
                 break;
 
-            case InventoryManager.Tool.IMAGER:
-                setDialogText("This is Multispectral Imager. It is highly sensitive to light and Psyche used 2 of these to analyze the asteroid's geology and topography.\n\nI can use this to help me see in the dark.\n<i>Look around with the spotlight using your mouse</i>\n\n<i>Press <b>TAB</b> to learn more.</i>");
+            case InventoryManager.Tool.Imager:
+                setDialogText("This is Multispectral Imager. It is highly sensitive to light and Psyche used 2 of these to analyze the asteroid's geology and topography.\n\nI can use this to help me see in the dark!\n\n<i>Look around with the spotlight using your mouse.</i>\n\n<i>Press <b>TAB</b> to learn more.</i>");
                 imagerInfoButton.SetActive(true);
                 imagerLevel.transform.parent.gameObject.SetActive(true);
                 break;
 
-            case InventoryManager.Tool.SPECTROMETER:
-                setDialogText("This is a Gamma-Ray and Neutron Spectrometer. This system was used on Psyche to map the elemental composition of the asteroid.\n\nI can use this to help me search for the elements I need.\n<i>Hold <b>RIGHT CLICK</b> to see see through objects.</i>\n\n<i>Press <b>TAB</b> to learn more.</i>");
+            case InventoryManager.Tool.Spectrometer:
+                setDialogText("This is a Gamma-Ray and Neutron Spectrometer. This system was used on Psyche to map the elemental composition of the asteroid.\n\nI can use this to help me search for the elements I need!\n\n<i>Hold <b>RIGHT CLICK</b> to see through objects.</i>\n\n<i>Press <b>TAB</b> to learn more.</i>");
                 spectrometerInfoButton.SetActive(true);
                 GRNSIcon.SetActive(true);
                 break;
 
-            case InventoryManager.Tool.ELECTROMAGNET:
-                setDialogText("This is an Magnetometer. Psyche used 2 of these to measure the asteroid's magnetic field.\n\nI can use this to detect deposits of iron. I should then be able to use my suit's Electro-Magnet to propel myself towards them.\n<i>Hold <b>LEFT CLICK</b> to aim the Electro-Magnet with your mouse and pull yourself towards iron deposits</i>\n\n<i>Press <b>TAB</b> to learn more.</i>");
+            case InventoryManager.Tool.Electromagnet:
+                setDialogText("This is a Magnetometer. Psyche used 2 of these to detect the asteroid's remanent (leftover) magnetic field.\n\nI can use this to detect surface materials that have remanent magnetism! With my suit's Electro-Magnet, I'll propel myself towards magnetized deposits.\n\n<i>Hold <b>LEFT CLICK</b> to aim the Electro-Magnet with your mouse and pull yourself towards magnetized deposits.</i>\n\n<i>Press <b>TAB</b> to learn more.</i>");
                 eMagnetInfoButton.SetActive(true);
                 eMagnetLevel.transform.parent.gameObject.SetActive(true);
                 eMagnetIcon.SetActive(true);
@@ -232,8 +221,8 @@ public class UIController : BaseController<UIController>
             case > 50.01f: activeBattSpriteRenderer.sprite = batterySprite4; break;
             case > 33.34f: activeBattSpriteRenderer.sprite = batterySprite3; break;
             case > 16.67f: activeBattSpriteRenderer.sprite = batterySprite2; break;
-            case > 0f:     activeBattSpriteRenderer.sprite = batterySprite1; break;
-            case <= 0f:    activeBattSpriteRenderer.sprite = batterySprite0; break;
+            case > 0f: activeBattSpriteRenderer.sprite = batterySprite1; break;
+            case <= 0f: activeBattSpriteRenderer.sprite = batterySprite0; break;
         }
     }
 
@@ -243,14 +232,14 @@ public class UIController : BaseController<UIController>
         int elementIndex = -1;
         switch (currentScene)
         {
-            case GameStateManager.Scene.Landing:  elementIndex = 0; break;
-            case GameStateManager.Scene.Imager:   elementIndex = 1; break;
-            case GameStateManager.Scene.GRNS:     elementIndex = 2; break;
-            case GameStateManager.Scene.eMagnet:  elementIndex = 3; break;
+            case GameStateManager.Scene.Landing: elementIndex = 0; break;
+            case GameStateManager.Scene.Imager: elementIndex = 1; break;
+            case GameStateManager.Scene.Grns: elementIndex = 2; break;
+            case GameStateManager.Scene.EMagnet: elementIndex = 3; break;
             case GameStateManager.Scene.Thruster: elementIndex = 4; break;
-            case GameStateManager.Scene.Combo1:   elementIndex = 5; break;
-            case GameStateManager.Scene.Combo2:   elementIndex = 6; break;
-            case GameStateManager.Scene.Combo3:   elementIndex = 7; break;
+            case GameStateManager.Scene.Combo1: elementIndex = 5; break;
+            case GameStateManager.Scene.Combo2: elementIndex = 6; break;
+            case GameStateManager.Scene.Combo3: elementIndex = 7; break;
         }
 
         // If elementIndex is valid, update the corresponding element's alpha to "unghost"
@@ -259,7 +248,7 @@ public class UIController : BaseController<UIController>
             Color newColor = elements[elementIndex].color;
             newColor.a = 1f;
             elements[elementIndex].color = newColor;
-            GameController.Instance.audioManager.pickupElementTungsten.Play();
+            GameController.Instance.AudioManager.pickupElementTungsten.Play();
         }
     }
 
@@ -269,7 +258,7 @@ public class UIController : BaseController<UIController>
     /// <param name="args"></param>
     private void ProcessDevConsole(ArrayList args)
     {
-        var command = GameController.Instance.developerConsole.Match(args[0].ToString());
+        var command = GameController.Instance.DeveloperConsole.Match(args[0].ToString());
 
         switch (command)
         {
@@ -284,7 +273,7 @@ public class UIController : BaseController<UIController>
                 }
                 break;
             case DeveloperConsole.DevConsoleCommand.TOGGLE:
-                var sub_command = GameController.Instance.developerConsole.Match(args[1].ToString());
+                var sub_command = GameController.Instance.DeveloperConsole.Match(args[1].ToString());
                 Debug.Log($"{sub_command} -- {args[1].ToString()}");
                 switch (sub_command)
                 {
@@ -327,8 +316,10 @@ public class UIController : BaseController<UIController>
                 Application.OpenURL("https://psyche.asu.edu/2018/01/19/electric-thrusters-psyche-spacecraft-work/"); break;
             case "EMagnet":
                 Application.OpenURL("https://psyche.asu.edu/gallery/meet-nasas-psyche-team-who-will-measure-the-asteroids-magnetic-field/"); break;
-            case "SolarPanel":
+            case "SolarArray":
                 Application.OpenURL("https://psyche.asu.edu/mission/the-spacecraft/"); break;
+            case "NASA":
+                Application.OpenURL("https://psyche.asu.edu/gallery/nasas-psyche-mission-to-an-asteroid-official-nasa-trailer/"); break;
             default:
                 Debug.LogError("Tool link not set or incorrect name passed");
                 break;
@@ -341,7 +332,7 @@ public class UIController : BaseController<UIController>
     /// </summary>
     public void playButtonSound()
     {
-        GameController.Instance.audioManager.buttonClick.Play();
+        GameController.Instance.AudioManager.buttonClick.Play();
     }
 
     //========================================================== UI ==========================================================
@@ -358,16 +349,18 @@ public class UIController : BaseController<UIController>
 
     public SpriteRenderer[] elements = new SpriteRenderer[8];
 
-    [Header("Inventory Menus")]
+    [Header("Menus")]
     public GameObject inventoryMenu;
-    public TMP_Text confirmBoxText;
     public GameObject optionsMenu;
+    public GameObject upgradesMenu;
+    public GameObject elementsMenu;
 
-    [Header("Dialog Box")]
+    [Header("Text Box")]
     public TMP_Text dialogText;
+    public TMP_Text confirmBoxText;
 
     [Header("Buttons")]
-    public GameObject solarPanelInfoButton;
+    public GameObject solarArrayInfoButton;
     public GameObject imagerInfoButton;
     public GameObject spectrometerInfoButton;
     public GameObject eMagnetInfoButton;
@@ -415,14 +408,12 @@ public class UIController : BaseController<UIController>
         {
             PlayerController.Instance.inputBlocked = false;
             dialogText.transform.parent.gameObject.SetActive(false);
-            Cursor.visible = false;
         }
         else
         {
             PlayerController.Instance.inputBlocked = true;
             dialogText.SetText(text);
             dialogText.transform.parent.gameObject.SetActive(true);
-            Cursor.visible = true;
         }
     }
 
@@ -433,7 +424,6 @@ public class UIController : BaseController<UIController>
     public void setInventory(bool setActive)
     {
         PlayerController.Instance.inputBlocked = setActive;
-        Cursor.visible = setActive;
         inventoryMenu.SetActive(setActive);
     }
 
@@ -452,12 +442,20 @@ public class UIController : BaseController<UIController>
 
     /// <summary>
     /// Closes currently open submenu and returns to Inventory
+    /// Also closes elements menu if active
     /// </summary>
     public void closeSubmenu()
-    {
-        curSubmenu.SetActive(false);
-        curSubmenu = null;
-        inventoryMenu.SetActive(true);
+    {   
+        if (elementsMenu.activeSelf) {
+            elementsMenu.SetActive(false);
+            GameController.Instance.AudioManager.UnmuteAudio(
+                GameController.Instance.AudioManager.backgroundMusic);
+            openSubmenu(upgradesMenu);
+        } else {
+            curSubmenu.SetActive(false);
+            curSubmenu = null;
+            inventoryMenu.SetActive(true);
+        }
     }
 
     private bool shouldRespawn;
@@ -493,26 +491,21 @@ public class UIController : BaseController<UIController>
             confirmBoxText.transform.parent.gameObject.SetActive(false);
             inventoryMenu.SetActive(false);
             PlayerController.Instance.inputBlocked = false;
-            StartCoroutine(PlayerController.Instance.playerDeath.Warp());
+            StartCoroutine(GameController.Instance.GameStateManager.Warp());
         }
         ///If Title Screen button opened the Confirmation Box
         else
-            EndGame(false);
-    }
-
-    /// <summary>
-    /// Destroys Player and UI so they do not spawn on the start screen or cutscene
-    /// </summary>
-    /// <param name="playCutscene"></param>
-    public void EndGame(bool playCutscene)
-    {
-        Destroy(PlayerController.Instance.gameObject);
-        Destroy(gameObject);
-        Cursor.visible = true;
-        if (playCutscene)
-            UnityEngine.SceneManagement.SceneManager.LoadScene("Outro_Cutscene");
-        else
-            UnityEngine.SceneManagement.SceneManager.LoadScene("Title_Screen");
+        {
+            /**
+             * Destroys Player and UI so they do not spawn on the start screen
+             */
+            GameController.Instance.SceneTransitionManager.DevControl = true;
+            GameController.Instance.SceneTransitionManager.OnInitiateTransition(
+                GameController.Instance.GameStateManager.MatchScene(GameStateManager.Scene.Title)
+                );
+            Destroy(PlayerController.Instance.gameObject);
+            Destroy(gameObject);
+        }
     }
 
     //========================================================== Upgrades Menu ==========================================================
@@ -529,19 +522,19 @@ public class UIController : BaseController<UIController>
     [Header("Tool Levels")]
     public TMP_Text thrusterLevel;
     public TMP_Text eMagnetLevel;
-    public TMP_Text batteryLevel;
+    public TMP_Text solarArrayLevel;
     public TMP_Text imagerLevel;
 
     [Header("Element Requirements")]
     public GameObject thrusterRequirementsList;
     public GameObject eMagnetRequirementsList;
-    public GameObject batteryRequirementsList;
+    public GameObject solarArrayRequirementsList;
     public GameObject imagerRequirementsList;
 
     [Header("Upgrade Buttons")]
     public Button thrusterUpgradeButton;
     public Button eMagnetUpgradeButton;
-    public Button batteryUpgradeButton;
+    public Button solarArrayUpgradeButton;
     public Button imagerUpgradeButton;
 
     [Header("Element Requirement Prefabs")]
@@ -549,7 +542,6 @@ public class UIController : BaseController<UIController>
     public GameObject ironRequirement;
     public GameObject nickelRequirement;
     public GameObject goldRequirement;
-    public GameObject tungstenRequirement;
 
     /// <summary>
     /// Modifies the tool when its upgrade button is pressed
@@ -557,8 +549,48 @@ public class UIController : BaseController<UIController>
     public void UpgradeInterface(string toolName)
     {
         ArrayList args = new ArrayList { toolName };
-        //Send the message
+        // Send the message
         OnUpdateToolModify?.Invoke(args);
+
+        // Play audio
+        float soundDuration = 3.0f;
+        AudioSource audioSource = PlayerController.Instance.inventoryManager.MatchTool(toolName) switch
+        {
+            InventoryManager.Tool.Imager => GameController.Instance.AudioManager.toolImager,
+            InventoryManager.Tool.SolarArray => GameController.Instance.AudioManager.buttonClick,
+            InventoryManager.Tool.Thruster => GameController.Instance.AudioManager.toolThrusters,
+            InventoryManager.Tool.Electromagnet => GameController.Instance.AudioManager.toolEMagnet,
+            _ => null,
+        };
+        if (audioSource != null)
+        {
+            StartCoroutine(FadeOutSound(audioSource, soundDuration));
+            audioSource.Play();
+        }
+    }
+
+    /// <summary>
+    /// Fades out the sound of the audio played
+    /// </summary>
+    /// <param name="audioSource"></param>
+    /// <param name="fadeDuration"></param>
+    /// <returns></returns>
+    private IEnumerator FadeOutSound(AudioSource audioSource, float fadeDuration)
+    {
+        float startVolume = GameController.Instance.uiVol;
+        float startTime = Time.time;
+        while (Time.time < startTime + fadeDuration)
+        {
+            // Calculate the normalized time elapsed since starting the fade
+            float normalizedTime = (Time.time - startTime) / fadeDuration;
+            // Calculate the new volume based on the fade curve
+            audioSource.volume = Mathf.Lerp(startVolume, 0, normalizedTime);
+            yield return null;
+        }
+        // Ensure the volume is fully faded out, stop the playback, then restore volume
+        audioSource.volume = 0.0f;
+        audioSource.Stop();
+        audioSource.volume = GameController.Instance.uiVol;
     }
 
     /// <summary>
@@ -582,10 +614,10 @@ public class UIController : BaseController<UIController>
                         {
                             string name = requirement.Key switch
                             {
-                                InventoryManager.Element.COPPER => "Copper",
-                                InventoryManager.Element.IRON => "Iron",
-                                InventoryManager.Element.NICKEL => "Nickel",
-                                InventoryManager.Element.GOLD => "Gold",
+                                InventoryManager.Element.Copper => "Copper",
+                                InventoryManager.Element.Iron => "Iron",
+                                InventoryManager.Element.Nickel => "Nickel",
+                                InventoryManager.Element.Gold => "Gold",
                                 _ => ""
                             };
 
@@ -604,9 +636,9 @@ public class UIController : BaseController<UIController>
                         thrusterLevel.SetText("Current Level: " + level.ToString() + " / " + maxLevel.ToString());
                         UpdateRequirements(requirements, thrusterRequirementsList.transform);
                         break;
-                    case "battery":
-                        batteryLevel.SetText("Current Level: " + level.ToString() + " / " + maxLevel.ToString());
-                        UpdateRequirements(requirements, batteryRequirementsList.transform);
+                    case "solararray":
+                        solarArrayLevel.SetText("Current Level: " + level.ToString() + " / " + maxLevel.ToString());
+                        UpdateRequirements(requirements, solarArrayRequirementsList.transform);
                         break;
                     case "imager":
                         imagerLevel.SetText("Current Level: " + level.ToString() + " / " + maxLevel.ToString());
@@ -623,16 +655,16 @@ public class UIController : BaseController<UIController>
                 switch (toolName.ToLower())
                 {
                     case "thruster":
-                        errorText.gameObject.SetActive(false);
+                        UpdateRequirements(requirements, thrusterRequirementsList.transform);
                         break;
-                    case "battery":
-                        errorText.gameObject.SetActive(false);
+                    case "solararray":
+                        UpdateRequirements(requirements, solarArrayRequirementsList.transform);
                         break;
                     case "imager":
-                        errorText.gameObject.SetActive(false);
+                        UpdateRequirements(requirements, imagerRequirementsList.transform);
                         break;
                     case "electromagnet":
-                        errorText.gameObject.SetActive(false);
+                        UpdateRequirements(requirements, eMagnetRequirementsList.transform);
                         break;
                 }
                 break;
@@ -642,20 +674,32 @@ public class UIController : BaseController<UIController>
                 switch (toolName.ToLower())
                 {
                     case "thruster":
-                        thrusterLevel.SetText(level.ToString());
-                        thrusterUpgradeButton.interactable = false;
+                        thrusterUpgradeButton.gameObject.SetActive(false);
+                        thrusterLevel.transform.position = new Vector3(
+                            thrusterLevel.transform.position.x, 
+                            thrusterRequirementsList.gameObject.transform.position.y, 
+                            thrusterLevel.transform.position.z);
                         break;
-                    case "battery":
-                        batteryLevel.SetText(level.ToString());
-                        batteryUpgradeButton.interactable = false;
+                    case "solararray":
+                        solarArrayUpgradeButton.gameObject.SetActive(false);
+                        solarArrayLevel.transform.position = new Vector3(
+                            solarArrayLevel.transform.position.x, 
+                            solarArrayRequirementsList.gameObject.transform.position.y,  
+                            solarArrayLevel.transform.position.z);
                         break;
                     case "imager":
-                        imagerLevel.SetText(level.ToString());
-                        imagerUpgradeButton.interactable = false;
+                        imagerUpgradeButton.gameObject.SetActive(false);
+                        imagerLevel.transform.position = new Vector3(
+                            imagerLevel.transform.position.x,
+                            imagerRequirementsList.gameObject.transform.position.y,
+                            imagerLevel.transform.position.z);
                         break;
                     case "electromagnet":
-                        eMagnetLevel.SetText(level.ToString());
-                        eMagnetUpgradeButton.interactable = false;
+                        eMagnetUpgradeButton.gameObject.SetActive(false);
+                        eMagnetLevel.transform.position = new Vector3(
+                            eMagnetLevel.transform.position.x,
+                            eMagnetRequirementsList.gameObject.transform.position.y,
+                            eMagnetLevel.transform.position.z);
                         break;
                 }
                 break;
@@ -675,25 +719,21 @@ public class UIController : BaseController<UIController>
             Destroy(child.gameObject);
         }
 
-        int amount = levelRequirements[InventoryManager.Element.COPPER];
+        int amount = levelRequirements[InventoryManager.Element.Copper];
         if (amount > 0)
             Instantiate(copperRequirement, requirementsArea).GetComponentInChildren<TMP_Text>().SetText(amount.ToString());
 
-        amount = levelRequirements[InventoryManager.Element.IRON];
+        amount = levelRequirements[InventoryManager.Element.Iron];
         if (amount > 0)
             Instantiate(ironRequirement, requirementsArea).GetComponentInChildren<TMP_Text>().SetText(amount.ToString());
 
-        amount = levelRequirements[InventoryManager.Element.NICKEL];
+        amount = levelRequirements[InventoryManager.Element.Nickel];
         if (amount > 0)
             Instantiate(nickelRequirement, requirementsArea).GetComponentInChildren<TMP_Text>().SetText(amount.ToString());
 
-        amount = levelRequirements[InventoryManager.Element.GOLD];
+        amount = levelRequirements[InventoryManager.Element.Gold];
         if (amount > 0)
             Instantiate(goldRequirement, requirementsArea).GetComponentInChildren<TMP_Text>().SetText(amount.ToString());
-
-        /*amount = levelRequirements[];
-        if (amount > 0)
-            Instantiate(tungstenRequirement, requirementsArea).GetComponentInChildren<TMP_Text>().SetText(amount.ToString());*/
     }
 
     /// <summary>
@@ -706,19 +746,19 @@ public class UIController : BaseController<UIController>
 
         switch (element)
         {
-            case InventoryManager.Element.COPPER:
+            case InventoryManager.Element.Copper:
                 copperAmount.SetText(value);
                 break;
-            case InventoryManager.Element.IRON:
+            case InventoryManager.Element.Iron:
                 ironAmount.SetText(value);
                 break;
-            case InventoryManager.Element.NICKEL:
+            case InventoryManager.Element.Nickel:
                 nickelAmount.SetText(value);
                 break;
-            case InventoryManager.Element.GOLD:
+            case InventoryManager.Element.Gold:
                 goldAmount.SetText(value);
                 break;
-            case InventoryManager.Element.TUNGSTEN:
+            case InventoryManager.Element.Tungsten:
                 tungstenAmount.SetText(value);
                 break;
             default:

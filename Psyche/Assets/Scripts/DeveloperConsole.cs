@@ -114,7 +114,7 @@ public class DeveloperConsole : MonoBehaviour
         _totalUsedMemory = ProfilerRecorder.StartNew(ProfilerCategory.Memory, "Total Used Memory");
         
         // Load the event messaging
-        _gameController.sceneTransitionManager.LoadDevConsole();
+        _gameController.SceneTransitionManager.LoadDevConsole();
     }
 
     private void OnDestroy()
@@ -201,21 +201,23 @@ public class DeveloperConsole : MonoBehaviour
                 switch (sub_command)
                 {
                     case DevConsoleCommand.ALL:
-                        PlayerController.Instance.inventoryManager.SetElement(InventoryManager.Element.COPPER,      100);
-                        PlayerController.Instance.inventoryManager.SetElement(InventoryManager.Element.IRON,        100);
-                        PlayerController.Instance.inventoryManager.SetElement(InventoryManager.Element.GOLD,        100);
-                        PlayerController.Instance.inventoryManager.SetElement(InventoryManager.Element.NICKEL,      100);
-                        PlayerController.Instance.inventoryManager.SetElement(InventoryManager.Element.TUNGSTEN,    100);
-                        PlayerController.Instance.inventoryManager.SetTool(InventoryManager.Tool.SOLARPANEL, true);
-                        PlayerController.Instance.batteryManager.Enable();
-                        PlayerController.Instance.inventoryManager.SetTool(InventoryManager.Tool.SPECTROMETER, true);
-                        PlayerController.Instance.inventoryManager.SetTool(InventoryManager.Tool.THRUSTER, true);
-                        PlayerController.Instance.thrusterManager.Enable();
-                        PlayerController.Instance.inventoryManager.SetTool(InventoryManager.Tool.ELECTROMAGNET, true);
-                        PlayerController.Instance.eMagnetManager.Enable();
-                        PlayerController.Instance.eMagnetActive = true;
-                        PlayerController.Instance.inventoryManager.SetTool(InventoryManager.Tool.IMAGER, true);
-                        PlayerController.Instance.imagerManager.Enable();
+                        // Add 100 of each element
+                        PlayerController.Instance.inventoryManager.SetElement(InventoryManager.Element.Copper,      100);
+                        PlayerController.Instance.inventoryManager.SetElement(InventoryManager.Element.Iron,        100);
+                        PlayerController.Instance.inventoryManager.SetElement(InventoryManager.Element.Gold,        100);
+                        PlayerController.Instance.inventoryManager.SetElement(InventoryManager.Element.Nickel,      100);
+                        PlayerController.Instance.inventoryManager.SetElement(InventoryManager.Element.Tungsten,    100);
+                        // Enable every tool
+                        PlayerController.Instance.inventoryManager.ToolPickUp(
+                            PlayerController.Instance.inventoryManager.MatchTool(InventoryManager.Tool.SolarArray));
+                        PlayerController.Instance.inventoryManager.ToolPickUp(
+                            PlayerController.Instance.inventoryManager.MatchTool(InventoryManager.Tool.Spectrometer));
+                        PlayerController.Instance.inventoryManager.ToolPickUp(
+                            PlayerController.Instance.inventoryManager.MatchTool(InventoryManager.Tool.Thruster));
+                        PlayerController.Instance.inventoryManager.ToolPickUp(
+                            PlayerController.Instance.inventoryManager.MatchTool(InventoryManager.Tool.Electromagnet));
+                        PlayerController.Instance.inventoryManager.ToolPickUp(
+                            PlayerController.Instance.inventoryManager.MatchTool(InventoryManager.Tool.Imager));
                         break;
                     // Element Manipulation
                     case DevConsoleCommand.ELEMENT:
@@ -262,20 +264,20 @@ public class DeveloperConsole : MonoBehaviour
                         // Update the specific tool itself
                         switch (tool)
                         {
-                            case InventoryManager.Tool.SPECTROMETER:
+                            case InventoryManager.Tool.Spectrometer:
                                 // Currently nothing to do here
                                 break;
-                            case InventoryManager.Tool.BATTERY:
-                                PlayerController.Instance.batteryManager.Enable();
+                            case InventoryManager.Tool.SolarArray:
+                                PlayerController.Instance.solarArrayManager.Enable();
                                 break;
-                            case InventoryManager.Tool.THRUSTER:
+                            case InventoryManager.Tool.Thruster:
                                 PlayerController.Instance.thrusterManager.Enable();
                                 break;
-                            case InventoryManager.Tool.ELECTROMAGNET:
+                            case InventoryManager.Tool.Electromagnet:
                                 PlayerController.Instance.eMagnetManager.Enable();
                                 PlayerController.Instance.eMagnetActive = value;
                                 break;
-                            case InventoryManager.Tool.IMAGER:
+                            case InventoryManager.Tool.Imager:
                                 PlayerController.Instance.imagerManager.Enable();
                                 break;
                             default:
@@ -288,8 +290,8 @@ public class DeveloperConsole : MonoBehaviour
                     // Scene Manipulation
                     case DevConsoleCommand.SCENE:
                         // Adhoc, convert the scene to enum then back to string until transitioned over to enum passing
-                        string scene = GameController.Instance.gameStateManager.MatchScene(GameController.Instance.gameStateManager.MatchScene(commands[2].ToString()));
-                        GameController.Instance.sceneTransitionManager.devControl = true;
+                        string scene = GameController.Instance.GameStateManager.MatchScene(GameController.Instance.GameStateManager.MatchScene(commands[2].ToString()));
+                        GameController.Instance.SceneTransitionManager.DevControl = true;
                         OnDevConsoleTransition?.Invoke((commands.Count > 3) ? scene + " " + commands[3].ToString() : scene);
                         break;
                     default:

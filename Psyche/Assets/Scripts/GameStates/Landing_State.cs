@@ -1,71 +1,15 @@
+/*
+ * Authors: JoshBenn
+ */
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Integration of the state saving for the Landing Scene
+/// Derives the <see cref="BaseState"/> class and implements it for Combo1 <see cref="GameStateManager.Scene.Landing" />.
 /// </summary>
 public class Landing_State : BaseState
 {
-    /// <summary>
-    /// Defines the tracked objects in the scene
-    /// -- Purpose is to reduce the potential for errors in object identification
-    /// -- Identified as `stort` (i16) for ease of use -- will use `-1` for errorneous values
-    /// </summary>
-    public enum SceneObject : short
-    {
-        SOLARPANEL      = 0,
-        CHECKPOINT_1    = 1,
-        COPPER_1        = 2,
-        GOLD_1          = 3,
-        IRON_1          = 4,
-        NICKEL_1        = 5,
-        TUNGSTEN_1      = 6,
-
-        CHECKPOINT      = 99,
-    }
-
-    /// <summary>
-    /// Matches the input object string with its enum variant -- useful for consistency
-    /// </summary>
-    /// <param name="obj"></param>
-    /// <returns></returns>
-    public override short Match(string obj)
-    {
-        return obj.ToLower() switch
-        {
-            "solarpanel"            => (short)SceneObject.SOLARPANEL,
-            "checkpoint 1"          => (short)SceneObject.CHECKPOINT_1,
-            "element_copper 1"      => (short)SceneObject.COPPER_1,
-            "element_gold 1"        => (short)SceneObject.GOLD_1,
-            "element_iron 1"        => (short)SceneObject.IRON_1,
-            "element_nickel 1"      => (short)SceneObject.NICKEL_1,
-            "element_tungsten 1"    => (short)SceneObject.TUNGSTEN_1,
-            "checkpoint"            => (short)SceneObject.CHECKPOINT,
-            _                       => -1,
-        };
-    }
-
-    /// <summary>
-    /// Matches the input object short (enum) with its string variant
-    /// </summary>
-    /// <param name="obj"></param>
-    /// <returns></returns>
-    public override string Match(short obj)
-    {
-        return obj switch
-        {
-            (short)SceneObject.SOLARPANEL   => "SolarPanel",
-            (short)SceneObject.CHECKPOINT_1 => "Checkpoint 1",
-            (short)SceneObject.COPPER_1     => "Element_Copper 1",
-            (short)SceneObject.GOLD_1       => "Element_Gold 1",
-            (short)SceneObject.IRON_1       => "Element_Iron 1",
-            (short)SceneObject.NICKEL_1     => "Element_Nickel 1",
-            (short)SceneObject.TUNGSTEN_1   => "Element_Tungsten 1",
-
-            (short)SceneObject.CHECKPOINT   => "Checkpoint",
-            _                               => null,
-        };
-    }
+    //========================================= Initialize/Updates/Destroy =========================================
 
     /// <summary>
     /// Constructor for the scene state
@@ -73,153 +17,186 @@ public class Landing_State : BaseState
     public Landing_State()
     {
         // This must be set up first before anything else is created as everything else is based off of this
-        _defaultState = new Dictionary<short, object>
+        DefaultState = new Dictionary<short, object>
         {
-            { (short)SceneObject.SOLARPANEL,    true }, // 'true' for available
-            { (short)SceneObject.CHECKPOINT_1,  true }, // `false` for not activated
-            { (short)SceneObject.COPPER_1,      true },
-            { (short)SceneObject.GOLD_1,        true },
-            { (short)SceneObject.IRON_1,        true },
-            { (short)SceneObject.NICKEL_1,      true },
-            { (short)SceneObject.TUNGSTEN_1,    true },
+            { (short)SceneObject.SolarArray,    true },
+            { (short)SceneObject.Checkpoint1,   false },
+            { (short)SceneObject.Copper1,       true },
+            { (short)SceneObject.Gold1,         true },
+            { (short)SceneObject.Iron1,         true },
+            { (short)SceneObject.Nickel1,       true },
+            { (short)SceneObject.Tungsten1,     true },
         };
         LoadDefaultState();
         SaveState();
     }
 
+    //==================================================== Enums =====================================================
+
     /// <summary>
-    /// Loads the specific state for this scene
+    /// Defines the tracked objects in the <see cref="GameStateManager.Scene"/>.
     /// </summary>
+    public enum SceneObject : short
+    {
+        SolarArray      = 0,
+        Checkpoint1     = 1,
+        Copper1         = 2,
+        Gold1           = 3,
+        Iron1           = 4,
+        Nickel1         = 5,
+        Tungsten1       = 6,
+
+        Checkpoint      = 99,
+    }
+
+    /// <inheritdoc />
+    public override short Match(string obj)
+    {
+        return obj.ToLower() switch
+        {
+            "solararray"            => (short)SceneObject.SolarArray,
+            "checkpoint 1"          => (short)SceneObject.Checkpoint1,
+            "element_copper 1"      => (short)SceneObject.Copper1,
+            "element_gold 1"        => (short)SceneObject.Gold1,
+            "element_iron 1"        => (short)SceneObject.Iron1,
+            "element_nickel 1"      => (short)SceneObject.Nickel1,
+            "element_tungsten 1"    => (short)SceneObject.Tungsten1,
+            "checkpoint"            => (short)SceneObject.Checkpoint,
+            _                       => -1,
+        };
+    }
+
+    /// <inheritdoc />
+    public override string Match(short obj)
+    {
+        return obj switch
+        {
+            (short)SceneObject.SolarArray   => "SolarArray",
+            (short)SceneObject.Checkpoint1  => "Checkpoint 1",
+            (short)SceneObject.Copper1  => "Element_Copper 1",
+            (short)SceneObject.Gold1  => "Element_Gold 1",
+            (short)SceneObject.Iron1        => "Element_Iron 1",
+            (short)SceneObject.Nickel1      => "Element_Nickel 1",
+            (short)SceneObject.Tungsten1    => "Element_Tungsten 1",
+
+            (short)SceneObject.Checkpoint   => "Checkpoint",
+            _                               => null,
+        };
+    }
+
+    //==================================================== State =====================================================
+
+    /// <inheritdoc />
     public override void LoadState()
     {
 
-        foreach (var pair in _savedState)
+        foreach (KeyValuePair<short, object> pair in SavedState)
         {
             string objectName = Match(pair.Key);
             switch (pair.Key)
             {
-                case (short)SceneObject.SOLARPANEL:
-                    { // Specifying scope for use of `var value` && `var targetObject`
-                        var value = (bool)pair.Value;
-
-                        // Remove the object if it's already been picked up
-                        if (!value)
-                        {
-                            var targetObject = GameObject.Find(objectName);
-                            if (targetObject == null)
-                            {
-                                Debug.LogError($"Object {objectName} does not exist");
-                                return;
-                            }
-
-                            targetObject.SetActive(value);
-                        }
-                    }
-                    break;
-
-
-                case (short)SceneObject.CHECKPOINT_1:
+                case (short)SceneObject.SolarArray:
                     {
-                        var value = (bool)pair.Value;
-                        var targetObject = GameObject.Find(objectName);
-                    }
-                    break;
-
-
-                case (short)SceneObject.COPPER_1:
-                    { // Specifying scope for use of `var value` && `var targetObject`
-                        var value = (bool)pair.Value;
-
-                        // Remove the object if it's already been picked up
+                        bool value = (bool)pair.Value;
                         if (!value)
                         {
-                            var targetObject = GameObject.Find(objectName);
+                            GameObject targetObject = GameObject.Find(objectName);
                             if (targetObject == null)
                             {
-                                Debug.LogError($"Object {objectName} does not exist");
                                 return;
                             }
-
                             targetObject.SetActive(value);
                         }
                     }
                     break;
 
 
-                case (short)SceneObject.GOLD_1:
-                    { // Specifying scope for use of `var value` && `var targetObject`
-                        var value = (bool)pair.Value;
+                case (short)SceneObject.Checkpoint1:
+                    {
+                        bool value = (bool)pair.Value;
+                        if (value)
+                        {
+                            Checkpoint targetObject = GameObject.Find(objectName).GetComponent<Checkpoint>();
+                            targetObject.isSpinning = value;
+                        }
+                    }
+                    break;
 
-                        // Remove the object if it's already been picked up
+
+                case (short)SceneObject.Copper1:
+                    {
+                        bool value = (bool)pair.Value;
                         if (!value)
                         {
-                            var targetObject = GameObject.Find(objectName);
+                            GameObject targetObject = GameObject.Find(objectName);
                             if (targetObject == null)
                             {
-                                Debug.LogError($"Object {objectName} does not exist");
                                 return;
                             }
-
                             targetObject.SetActive(value);
                         }
                     }
                     break;
 
 
-                case (short)SceneObject.IRON_1:
-                    { // Specifying scope for use of `var value` && `var targetObject`
-                        var value = (bool)pair.Value;
-
-                        // Remove the object if it's already been picked up
+                case (short)SceneObject.Gold1:
+                    {
+                        bool value = (bool)pair.Value;
                         if (!value)
                         {
-                            var targetObject = GameObject.Find(objectName);
+                            GameObject targetObject = GameObject.Find(objectName);
                             if (targetObject == null)
                             {
-                                Debug.LogError($"Object {objectName} does not exist");
                                 return;
                             }
-
                             targetObject.SetActive(value);
                         }
                     }
                     break;
 
 
-                case (short)SceneObject.NICKEL_1:
-                    { // Specifying scope for use of `var value` && `var targetObject`
-                        var value = (bool)pair.Value;
-
-                        // Remove the object if it's already been picked up
+                case (short)SceneObject.Iron1:
+                    {
+                        bool value = (bool)pair.Value;
                         if (!value)
                         {
-                            var targetObject = GameObject.Find(objectName);
+                            GameObject targetObject = GameObject.Find(objectName);
                             if (targetObject == null)
                             {
-                                Debug.LogError($"Object {objectName} does not exist");
                                 return;
                             }
-
                             targetObject.SetActive(value);
                         }
                     }
                     break;
 
 
-                case (short)SceneObject.TUNGSTEN_1:
-                    { // Specifying scope for use of `var value` && `var targetObject`
-                        var value = (bool)pair.Value;
-
-                        // Remove the object if it's already been picked up
+                case (short)SceneObject.Nickel1:
+                    {
+                        bool value = (bool)pair.Value;
                         if (!value)
                         {
-                            var targetObject = GameObject.Find(objectName);
+                            GameObject targetObject = GameObject.Find(objectName);
                             if (targetObject == null)
                             {
-                                Debug.LogError($"Object {objectName} does not exist");
                                 return;
                             }
+                            targetObject.SetActive(value);
+                        }
+                    }
+                    break;
 
+
+                case (short)SceneObject.Tungsten1:
+                    {
+                        bool value = (bool)pair.Value;
+                        if (!value)
+                        {
+                            GameObject targetObject = GameObject.Find(objectName);
+                            if (targetObject == null)
+                            {
+                                return;
+                            }
                             targetObject.SetActive(value);
                         }
                     }

@@ -1080,6 +1080,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9827f94284bfcf9478489ba72ef023aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slider: {fileID: 0}
   buttonClick: {fileID: 2607266026247796242}
   uiAudioSources: []
   backgroundMusic: {fileID: 5948697260629374984}
@@ -1095,6 +1096,8 @@ MonoBehaviour:
   pickupTool: {fileID: 5431169951113118705}
   checkpoint: {fileID: 4700842513073213003}
   sfxAudioSources: []
+  elementsVideo: {fileID: 0}
+  videoPlayers: []
 --- !u!1 &7050517347784413412
 GameObject:
   m_ObjectHideFlags: 0
