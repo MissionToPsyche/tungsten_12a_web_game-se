@@ -4,35 +4,35 @@
  * Version: 20240130
  */
 
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
 /// Player death script to handle hazard interactions and respawn attempts.
 /// </summary>
-public class PlayerDeath : MonoBehaviour {
+public class PlayerDeath : MonoBehaviour
+{
     private PlayerController _playerController;
-    private Vector3 respawnPoint;         //Respawn location
-    private Vector3 startPoint;           //Initial character location when level first begins
-    public PlayerHealth playerHealth;     //Initial player health
-    public BatteryManager batteryManager; //Initial battery
-    public HashSet<int> reachedCheckpoints = new HashSet<int>(); //Stores unique IDs of checkpoints
+    private System.DateTime LastActivation;
 
+    public PlayerHealth playerHealth;                               //Initial player health
+    public SolarArrayManager solarArrayManager;                     //Initial solar array
+    public HashSet<int> reachedCheckpoints = new HashSet<int>();    //Stores unique IDs of checkpoints
 
     public void Initialize(PlayerController playerController)
     {
         _playerController = playerController;
-        startPoint = transform.position;
-        respawnPoint = transform.position;
+        GameController.Instance.GameStateManager.StartPoint = _playerController.transform.position;
+        GameController.Instance.GameStateManager.RespawnPoint = _playerController.transform.position;
     }
 
     /// <summary>
     /// Initialize respawn point and set starting location.
     /// </summary>
-    private void Start() {
-        startPoint = transform.position;
-        respawnPoint = transform.position;
+    private void Start()
+    {
+        GameController.Instance.GameStateManager.StartPoint = _playerController.transform.position;
+        GameController.Instance.GameStateManager.RespawnPoint = _playerController.transform.position;
     }
 
     /// <summary>
@@ -42,37 +42,40 @@ public class PlayerDeath : MonoBehaviour {
     public void Hazard(Collision2D collision)
     {
         ApplyKickback(collision);
-        GameController.Instance.audioManager.playerHurt.Play();
+        GameController.Instance.AudioManager.playerHurt.Play();
         GetHurt(1);
-        StartCoroutine(_playerController.interruptMagnet());
     }
-    
+
     /// <summary>
     /// When player touches spikes
     /// </summary>
     public void Spikes()
     {
-        GameController.Instance.audioManager.playerHurt.Play();
+        GameController.Instance.AudioManager.playerHurt.Play();
         GetHurt(playerHealth.playerHealth);
     }
 
     /// <summary>
     /// Applies a kickback force to the player character
     /// </summary>
-    private void ApplyKickback(Collision2D collision) {
+    private void ApplyKickback(Collision2D collision)
+    {
         // calculate kickback direction
         // left up or right up, TODO: base it off collision
         Vector2 kickbackDirection;
-        if (PlayerController.Instance.playerMovement._isFacingRight) {
+        if (PlayerController.Instance.playerMovement.IsFacingRight)
+        {
             kickbackDirection = new Vector2(-5f, 5f).normalized;
-        } else {
+        }
+        else
+        {
             kickbackDirection = new Vector2(5f, 5f).normalized;
         }
 
         // set force and apply
         //Debug.Log($"Before kickback, velocity: {PlayerController.Instance.playerCharacter.velocity}");
         PlayerController.Instance.inputBlocked = true;
-        float kickbackForce = 5f;        
+        float kickbackForce = 5f;
         PlayerController.Instance.playerCharacter.AddForce(kickbackDirection * kickbackForce, ForceMode2D.Impulse);
         // TODO: Simulate horizontal key press here as horizontal force is not being applied   
         PlayerController.Instance.inputBlocked = false;
@@ -84,25 +87,35 @@ public class PlayerDeath : MonoBehaviour {
     /// Additionally recharges health and battery.
     /// </summary>
     /// <param name="collision"></param>
-    public void Checkpoint(Collider2D collision) {
-        if (collision.gameObject.CompareTag("Checkpoint")) {
-            //ID of the checkpoint
-            int checkpointID = collision.gameObject.GetInstanceID();
-            //Check if this checkpoint has been reached before
-            if (reachedCheckpoints.Contains(checkpointID)) {
-                //Debug.Log("Already reached this checkpoint!");
-            } else {
-                //Add the checkpoint ID to the HashSet
-                reachedCheckpoints.Add(checkpointID);
-                respawnPoint = transform.position;
-                //Debug.Log("#### Checkpoint captured: " + respawnPoint + " ####");
-                //Debug.Log("Checkpoint ID: " + checkpointID);
-                //Recharge health and battery
-                playerHealth.HealthUp(100);
-                gameObject.GetComponent<BatteryManager>().Activate();
-                //Play audio if you hit a checkpoint with default layer
-                if (collision.gameObject.layer.Equals(0)) {
-                    GameController.Instance.audioManager.checkpoint.Play();
+    public void Checkpoint(Collider2D collision)
+    {
+        if (!collision.gameObject.CompareTag(_playerController.playerCollisionManager.MatchTag(PlayerCollisionManager.CollisionTag.Checkpoint)))
+        {
+            return;
+        }
+        //ID of the checkpoint
+        GameController.Instance.GameStateManager.Checkpoint = collision.gameObject.GetInstanceID();
+        GameController.Instance.GameStateManager.RespawnPoint = _playerController.transform.position;
+
+        //Recharge health and battery
+        playerHealth.HealthUp(100);
+        gameObject.GetComponent<SolarArrayManager>().Activate();
+
+        //Play audio if you hit a checkpoint with default layer
+        if (collision.gameObject.layer.Equals(0))
+        {
+            if (LastActivation == null)
+            {
+                GameController.Instance.AudioManager.checkpoint.Play();
+                LastActivation = System.DateTime.Now;
+            }
+            else
+            {
+                System.TimeSpan diff = System.DateTime.Now - LastActivation;
+                if (diff.TotalSeconds > 5)
+                {
+                    LastActivation = System.DateTime.Now;
+                    GameController.Instance.AudioManager.checkpoint.Play();
                 }
             }
         }
@@ -112,45 +125,14 @@ public class PlayerDeath : MonoBehaviour {
     /// Lose health on contacts with hazards.
     /// Respawn character if no health remains.
     /// </summary>
-    public void GetHurt(int dmg) {
-        //Debug.Log("Ouch!");
+    public void GetHurt(int dmg)
+    {
+        StartCoroutine(_playerController.interruptMagnet());
         playerHealth.HealthDown(dmg);
-        if (playerHealth.playerHealth <= 0) {
-            //Debug.Log("Game should rest to checkpoint here.....");
-
+        if (playerHealth.playerHealth <= 0)
+        {
             //start the warping animation & reset player's heath & battery
-            StartCoroutine(Warp());
+            StartCoroutine(GameController.Instance.GameStateManager.Warp());
         }
-    }
-
-    /// <summary>
-    /// This co-routine forces the game to wait for the player's warping
-    /// animation to complete before continuing on.
-    /// </summary>
-    /// <returns></returns>
-    public IEnumerator Warp() {
-        //block player controls
-        PlayerController.Instance.inputBlocked = true;
-        PlayerController.Instance.beingWarped = true;
-
-        //wait for the animation to be completed
-        yield return new WaitForSeconds(1.2f);
-
-        //check if the player is at the starting point
-        if (startPoint.Equals(respawnPoint)) {
-            //UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
-            //changed so that camera bounds would load on player repawn
-            StartCoroutine(GameController.Instance.sceneTransitionManager.CheckTransition(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name));
-        }
-
-        //move the player to their respawn point
-        transform.position = respawnPoint;
-
-        playerHealth.HealthUp(100);
-        gameObject.GetComponent<BatteryManager>().Activate();
-
-        //unblock player controls
-        PlayerController.Instance.inputBlocked = false;
-        PlayerController.Instance.beingWarped = false;
     }
 }

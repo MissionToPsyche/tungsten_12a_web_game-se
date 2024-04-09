@@ -35,7 +35,7 @@ public class PlayerController : BaseController<PlayerController>
     [Header("Scripts")]
     public PlayerCollisionManager playerCollisionManager;
     public PlayerHealth playerHealth;
-    public BatteryManager batteryManager;
+    public SolarArrayManager solarArrayManager;
     public PlayerMovement playerMovement;
     public ImagerManager imagerManager;
     public EMagnetManager eMagnetManager;
@@ -67,8 +67,8 @@ public class PlayerController : BaseController<PlayerController>
         playerCollisionManager = GetComponent<PlayerCollisionManager>();
         playerCollisionManager.Initialize(this);
         // ##### Managers #####
-        batteryManager = GetComponent<BatteryManager>();
-        batteryManager.Initialize(this);
+        solarArrayManager = GetComponent<SolarArrayManager>();
+        solarArrayManager.Initialize(this);
         thrusterManager = GetComponent<ThrusterManager>();
         thrusterManager.Initialize(this);
         eMagnetManager = GetComponent<EMagnetManager>();
@@ -83,12 +83,6 @@ public class PlayerController : BaseController<PlayerController>
         playerDeath = GetComponent<PlayerDeath>();
         playerDeath.Initialize(this);
         pressUpPopup = transform.Find("Press Up Popup").gameObject;
-
-        //hides mouse cursor
-        Cursor.visible = false;
-
-        //groundcheck
-        groundCheckSize = new Vector2(0.785f, 0.1f);
 
         // Tell GameController to LoadPlayer() after everything's initialized
         GameController.Instance.LoadPlayer();
@@ -117,14 +111,6 @@ public class PlayerController : BaseController<PlayerController>
     }
 
     /// <summary>
-    /// Called when necessary - not every frame
-    /// </summary>
-    public override void UpdateController()
-    {
-        //Insert Logic
-    }
-    
-    /// <summary>
     /// Runs every frame
     ///   - Checks player status -- sets booleans
     ///   - Player movement handler
@@ -151,38 +137,37 @@ public class PlayerController : BaseController<PlayerController>
         {
             //Call the requisite tool scripts here:
             //Thruster
-            if (inventoryManager.CheckTool("thruster") && Input.GetButton("Jump") && batteryManager.batteryPercent != 0 && !beingPulled) {
+            if (inventoryManager.CheckTool("thruster") && Input.GetButton("Jump") && solarArrayManager.BatteryPercent != 0 && !beingPulled) {
                 thrusterManager.Activate();
                 usingThruster = true;
-                batteryManager.DrainBatt(1);
+                solarArrayManager.DrainBatt(1);
             }
 
             //Imager
-            if (inventoryManager.CheckTool("imager") && batteryManager.batteryPercent != 0) {
+            if (inventoryManager.CheckTool("imager") && solarArrayManager.BatteryPercent != 0) {
                 //flashlight functionality
-                imagerManager.updateFlashlightPosition();
+                imagerManager.UpdateFlashlightPosition();
             }
 
             //Spectrometer
-            if (inventoryManager.CheckTool("spectrometer") && Input.GetButton("FireGRNS") && batteryManager.batteryPercent != 0) {
+            if (inventoryManager.CheckTool("spectrometer") && Input.GetButton("FireGRNS") && solarArrayManager.BatteryPercent != 0) {
                 gammaView.ActivateGRNS();
-                batteryManager.DrainBatt(2);
+                solarArrayManager.DrainBatt(2);
             }
 
             //ElectroMagnet
-            if (inventoryManager.CheckTool("electromagnet") && Input.GetButton("EMagnet") && batteryManager.batteryPercent != 0 && !eMagnetActive && !magnetInterrupt) {
+            if (inventoryManager.CheckTool("electromagnet") && Input.GetButton("EMagnet") && solarArrayManager.BatteryPercent != 0 && !eMagnetActive && !magnetInterrupt) {
                 eMagnetManager.Activate();
-                batteryManager.DrainBatt(500);
             }
 
             //Passive Battery
-            if (!Input.GetButton("Jump") && !Input.GetButton("FireGRNS") && !Input.GetButton("EMagnet") && batteryManager.batteryPercent != 100 && !eMagnetActive && !beingPulled && !usingThruster)
+            if (!Input.GetButton("Jump") && !Input.GetButton("FireGRNS") && !Input.GetButton("EMagnet") && solarArrayManager.BatteryPercent != 100 && !eMagnetActive && !beingPulled && !usingThruster)
             {
-                batteryManager.PassiveBatt();
+                solarArrayManager.PassiveBatt();
             }
         }
 
-        playerMovement.handleMovement(usingThruster, beingWarped, enteringCave, exitingCave);
+        playerMovement.HandleMovement(usingThruster, beingWarped, enteringCave, exitingCave);
 
         //Inventory and Dialog Box 
         if (Input.GetButtonDown("Inventory") && !Input.GetButton("FireGRNS")) { UIController.Instance.handleUI(); }
@@ -207,8 +192,8 @@ public class PlayerController : BaseController<PlayerController>
         string toolName = args[0].ToString();
         switch (toolName.ToLower())
         {
-            case "battery":
-                batteryManager.Modify();
+            case "solararray":
+                solarArrayManager.Modify();
                 break;
             case "thruster":
                 thrusterManager.Modify();
@@ -240,7 +225,7 @@ public class PlayerController : BaseController<PlayerController>
     {
         if(GameController.Instance != null)
         {
-            GameController.Instance.gameStateManager.UnloadPlayer();
+            GameController.Instance.GameStateManager.UnloadPlayer();
         }
         if(UIController.Instance != null)
         {

@@ -1,99 +1,21 @@
-using System.Collections;
+/*
+ * Authors: JoshBenn
+ */
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Diagnostics.Tracing;
 
 /// <summary>
-/// Manages the inventory and all items within it
+/// Manages the inventory for the player character.
 /// </summary>
 public class InventoryManager : MonoBehaviour
-{ 
-    private PlayerController _playerController;
-    private Dictionary<Tool, bool>      _tools;
-    private Dictionary<Element, ushort> _elements;
-
-    // Events
-    public event Action<Tool, bool>         OnUpdateInventoryTool;
-    public event Action<Element, ushort>    OnUpdateInventoryElement;
-    public event Action<string, object>     SetObjectState;
-
-    public enum Element
-    {
-        COPPER,
-        IRON,
-        NICKEL,
-        GOLD,
-        TUNGSTEN,
-
-        None,
-    }
-
-    public Element MatchElement(string element)
-    {
-        return element.ToLower() switch
-        {
-            "copper"    or "element_copper"     => Element.COPPER,
-            "iron"      or "element_iron"       => Element.IRON,
-            "nickel"    or "element_nickel"     => Element.NICKEL,
-            "gold"      or "element_gold"       => Element.GOLD,
-            "tungsten"  or "element_tungsten"   => Element.TUNGSTEN,
-            _                                   => Element.None
-        };
-    }
-    public string MatchElement(Element element)
-    {
-        return element switch
-        {
-            Element.COPPER      => "element_copper",
-            Element.IRON        => "element_iron",
-            Element.NICKEL      => "element_nickel",
-            Element.GOLD        => "element_gold",
-            Element.TUNGSTEN    => "element_tungsten",
-            _                   => null
-        };
-    }
-
-    public enum Tool
-    {
-        IMAGER,
-        BATTERY,
-        SOLARPANEL,
-        SPECTROMETER,
-        THRUSTER,
-        ELECTROMAGNET,
-        // MAGNETOMETER,
-
-        None,
-    }
-
-    public Tool MatchTool(string tool)
-    {
-        return tool.ToLower() switch
-        {
-            "imager"        => Tool.IMAGER,
-            "battery"       => Tool.BATTERY,
-            "solarpanel"    => Tool.SOLARPANEL,
-            "spectrometer"  => Tool.SPECTROMETER,
-            "thruster"      => Tool.THRUSTER,
-            "electromagnet" => Tool.ELECTROMAGNET,
-            _               => Tool.None,
-        };
-    }
-
-    public string MatchTool(Tool tool)
-    {
-        return tool switch
-        {
-            Tool.IMAGER         => "Imager",
-            Tool.BATTERY        => "Battery",
-            Tool.SOLARPANEL     => "SolarPanel",
-            Tool.SPECTROMETER   => "Spectrometer",
-            Tool.THRUSTER       => "Thruster",
-            Tool.ELECTROMAGNET  => "Electromagnet",
-            _                   => null,
-        };
-    }
+{
+    //============================================== Initialize/Updates/Destroy ==============================================
+    // Private variables
+    private PlayerController PlayerController;
+    private Dictionary<Tool, bool> Tools;
+    private Dictionary<Element, ushort> Elements;
+    
 
     /// <summary>
     /// Initialize the class and set up base dictionaries
@@ -101,42 +23,179 @@ public class InventoryManager : MonoBehaviour
     /// <param name="playerController"></param>
     public void Initialize(PlayerController playerController)
     {
-        _playerController = playerController;
-        _tools = new Dictionary<Tool, bool>()
+        PlayerController = playerController;
+        Tools = new Dictionary<Tool, bool>()
         {
-            { Tool.IMAGER,          false },
-            { Tool.BATTERY,         false },
-            { Tool.SPECTROMETER,    false },
-            { Tool.THRUSTER,        false },
-            { Tool.ELECTROMAGNET,   false },
+            { Tool.Imager,          false },
+            { Tool.SolarArray,      false },
+            { Tool.Spectrometer,    false },
+            { Tool.Thruster,        false },
+            { Tool.Electromagnet,   false },
         };
-        _elements = new Dictionary<Element, ushort>()
+        Elements = new Dictionary<Element, ushort>()
         {
-            { Element.COPPER,     0 },
-            { Element.IRON,       0 },
-            { Element.NICKEL,     0 },
-            { Element.GOLD,       0 },
-            { Element.TUNGSTEN,   0 },
+            { Element.Copper,     0 },
+            { Element.Iron,       0 },
+            { Element.Nickel,     0 },
+            { Element.Gold,       0 },
+            { Element.Tungsten,   0 },
         };
     }
-    /// <summary>
-    /// Subscribes to events and activates when event triggered
-    /// </summary>
-    private void OnEnable()
-    {
 
+    //================================================== Events ==================================================
+    public event Action<Tool, bool> OnUpdateInventoryTool;
+    public event Action<Element, ushort> OnUpdateInventoryElement;
+    public event Action<string, object> SetObjectState;
+
+    //=================================================== Enum ===================================================
+    /// <summary>
+    /// The various elements used within the game.
+    /// </summary>
+    public enum Element
+    {
+        /// <summary>
+        /// Copper <see cref="Element"/> variant.
+        /// </summary>
+        Copper,
+
+        /// <summary>
+        /// Iron <see cref="Element"/> variant.
+        /// </summary>
+        Iron,
+
+        /// <summary>
+        /// Nickel <see cref="Element"/> variant.
+        /// </summary>
+        Nickel,
+
+        /// <summary>
+        /// Gold <see cref="Element"/> variant.
+        /// </summary>
+        Gold,
+
+        /// <summary>
+        /// Tungsten <see cref="Element"/> variant.
+        /// </summary>
+        Tungsten,
+
+        /// <summary>
+        /// Handles erroneous values being passed.
+        /// </summary>
+        None,
     }
 
     /// <summary>
-    /// When event call is no longer active, turns off function
+    /// Matches a given string with the <see cref="Element"/> variant
     /// </summary>
-    private void OnDisable()
+    /// <param name="element"><see cref="string"/> element name</param>
+    /// <returns><see cref="Element"/> variant</returns>
+    public Element MatchElement(string element)
     {
-
+        return element.ToLower() switch
+        {
+            "copper" or "element_copper"        => Element.Copper,
+            "iron" or "element_iron"            => Element.Iron,
+            "nickel" or "element_nickel"        => Element.Nickel,
+            "gold" or "element_gold"            => Element.Gold,
+            "tungsten" or "element_tungsten"    => Element.Tungsten,
+            _                                   => Element.None
+        };
     }
 
     /// <summary>
-    /// Activates tool when its pickup is collected
+    /// Matches a given <see cref="Element"/> variant with a string value.
+    /// </summary>
+    /// <param name="element"><see cref="Element"/> variant</param>
+    /// <returns><see cref="string"/> or <see cref="null"/> if no match is found</returns>
+    public string MatchElement(Element element)
+    {
+        return element switch
+        {
+            Element.Copper      => "element_copper",
+            Element.Iron        => "element_iron",
+            Element.Nickel      => "element_nickel",
+            Element.Gold        => "element_gold",
+            Element.Tungsten    => "element_tungsten",
+            _                   => null
+        };
+    }
+
+    /// <summary>
+    /// The various tools used within the game.
+    /// </summary>
+    public enum Tool
+    {
+        /// <summary>
+        /// Imager <see cref="Tool"/> variant
+        /// </summary>
+        Imager,
+
+        /// <summary>
+        /// SolarArray <see cref="Tool"/> variant
+        /// </summary>
+        SolarArray,
+
+        /// <summary>
+        /// Spectrometer <see cref="Tool"/> variant
+        /// </summary>
+        Spectrometer,
+
+        /// <summary>
+        /// Thruster <see cref="Tool"/> variant
+        /// </summary>
+        Thruster,
+
+        /// <summary>
+        /// Electromagnet <see cref="Tool"/> variant
+        /// </summary>
+        Electromagnet,
+
+        /// <summary>
+        /// Handles erroneous values being passed.
+        /// </summary>
+        None,
+    }
+
+    /// <summary>
+    /// Matches a given string with the <see cref="Tool"/> variant
+    /// </summary>
+    /// <param name="tool"><see cref="string"/> tool name</param>
+    /// <returns><see cref="Tool"/> variant</returns>
+    public Tool MatchTool(string tool)
+    {
+        return tool.ToLower() switch
+        {
+            "imager" => Tool.Imager,
+            "solararray" => Tool.SolarArray,
+            "spectrometer" => Tool.Spectrometer,
+            "thruster" => Tool.Thruster,
+            "electromagnet" => Tool.Electromagnet,
+            _ => Tool.None,
+        };
+    }
+
+    /// <summary>
+    /// Matches a given <see cref="Tool"/> variant with a string value.
+    /// </summary>
+    /// <param name="tool"><see cref="Tool"/> variant</param>
+    /// <returns><see cref="string"/> or <see cref="null"/> if no match is found</returns>
+    public string MatchTool(Tool tool)
+    {
+        return tool switch
+        {
+            Tool.Imager => "Imager",
+            Tool.SolarArray => "SolarArray",
+            Tool.Spectrometer => "Spectrometer",
+            Tool.Thruster => "Thruster",
+            Tool.Electromagnet => "Electromagnet",
+            _ => null,
+        };
+    }
+
+    //======================================================= Inventory ======================================================
+
+    /// <summary>
+    /// Activates the tool when its pickup is collected
     /// </summary>
     /// <param name="toolName"></param>
     public void ToolPickUp(string toolName)
@@ -145,42 +204,34 @@ public class InventoryManager : MonoBehaviour
         Tool tool = MatchTool(toolName);
         if (tool == Tool.None)
         {
-            Debug.Log($"Not a tool {toolName}");
             return;
         }
+        SetTool(tool, true);
 
-        if (tool != Tool.None && tool != Tool.BATTERY && tool != Tool.SOLARPANEL)
-        {
-            SetTool(tool, true);
-        }
         // Remove the object from the scene state
         SetObjectState?.Invoke(toolName, false);
         
-        //Other actions
+        // Enable the tool and activate any other actions involved
         switch (tool)
         {
-            case Tool.SOLARPANEL or Tool.BATTERY:
-                _playerController.batteryManager.Enable();
-                SetTool(Tool.BATTERY, true);
+            case Tool.SolarArray:
+                PlayerController.solarArrayManager.Enable();
                 break;
 
-            case Tool.THRUSTER:
-                _playerController.thrusterManager.Enable();
+            case Tool.Thruster:
+                PlayerController.thrusterManager.Enable();
                 break;
 
-            case Tool.IMAGER:
-                _playerController.imagerManager.Enable();
+            case Tool.Imager:
+                PlayerController.imagerManager.Enable();
                 break;
 
-            case Tool.SPECTROMETER:
+            case Tool.Spectrometer:
                 break;
 
-            case Tool.ELECTROMAGNET:
-                _playerController.eMagnetManager.Enable();
-                break;
-
-            default:
-                Debug.LogWarning("Tool name '" + toolName + "' not found!");
+            case Tool.Electromagnet:
+                PlayerController.eMagnetManager.Enable();
+                SetObjectState?.Invoke("First_Deposits", true);
                 break;
         }
     }
@@ -188,57 +239,55 @@ public class InventoryManager : MonoBehaviour
     /// <summary>
     /// Set the tool as obtained or not obtained
     /// </summary>
-    /// <param name="toolName"></param>
-    /// <param name="value"></param>
+    /// <param name="tool"><see cref="Tool"/> variant</param>
+    /// <param name="value"><see cref="bool"/></param>
     public void SetTool(Tool tool, bool value)
     {
         // Ensure the tool exists
-        if (tool == Tool.None) return;
-
-        // Handle if SolarPanel passed explicitly, maybe we should fix this so only one exists?
-        if (tool == Tool.SOLARPANEL) { _tools[Tool.BATTERY] = value; }
-        else { _tools[tool] = value; }
+        if (tool == Tool.None)
+        {
+            return;
+        }
+        Tools[tool] = value;
 
         // Update events
         OnUpdateInventoryTool?.Invoke(tool, value);
     }
 
     /// <summary>
-    /// Checks if the tool is true or false
+    /// Checks if the tool has been picked up.
     /// </summary>
-    /// <param name="tool"></param>
+    /// <param name="tool"><see cref="Tool"/></param>
     public bool CheckTool(Tool tool)
     {
         //Check if valid name passed and return boolean
         if (tool == Tool.None)
         {
-            Debug.LogError($"Incorrect tool name passed -- InventoryManager Check: {tool}");
             return false;
         }
-        return _tools[tool];
+        return Tools[tool];
     }
 
     /// <summary>
-    /// Checks if the tool is true or false
+    /// Checks if the tool has been picked up.
     /// </summary>
-    /// <param name="toolName"></param>
+    /// <param name="toolName"><see cref="string"/></param>
     public bool CheckTool(string toolName)
     {
         Tool tool = MatchTool(toolName);
         //Check if valid name passed and return boolean
-        if (!_tools.ContainsKey(tool))
+        if (tool == Tool.None)
         {
-            Debug.LogError("Incorrect tool name passed -- InventoryManager Check");
             return false;
         }
-        return _tools[tool];
+        return Tools[tool];
     }
 
     /// <summary>
-    /// Sets the amount of an element
+    /// Adds a number of elements.
     /// </summary>
-    /// <param name="elementName"></param>
-    /// <param name="amount"></param>
+    /// <param name="item"><see cref="string"/> element name</param>
+    /// <param name="amount"><see cref="ushort"/> element amount</param>
     public void AddElement(string item, ushort amount)
     {
         // Split the incoming value from its element name and element ID
@@ -248,70 +297,72 @@ public class InventoryManager : MonoBehaviour
         Element element = MatchElement(element_set[0]);
         
         // If the element is tungsten, updates the UI for the element at the current scene
-        if (element == Element.TUNGSTEN) {
-            GameStateManager.Scene currentScene = GameController.Instance.gameStateManager.currentScene;
+        if (element == Element.Tungsten) 
+        {
+            GameStateManager.Scene currentScene = GameController.Instance.GameStateManager.CurrentScene;
             UIController.Instance.UpdateCapturedTungstens(currentScene);
         }
 
-        if (!_elements.ContainsKey(element))
+        // Update the dictionary
+        if (!Elements.ContainsKey(element))
         {
-            Debug.LogError($"Incorrect element name passed -- InventoryManager Add: {element}");
             return;
         }
-        _elements[element] += amount;
+        Elements[element] += amount;
 
         // Update events
         SetObjectState?.Invoke(item, false);
-        OnUpdateInventoryElement?.Invoke(element, _elements[element]);
+        OnUpdateInventoryElement?.Invoke(element, Elements[element]);
     }
 
     /// <summary>
-    /// Removes an amount of an element from the inventory
+    /// Removes a number of elements from the inventory.
     /// </summary>
-    /// <param name="element"></param>
-    /// <param name="amount"></param>
+    /// <param name="element"><see cref="Element"/> variant</param>
+    /// <param name="amount"><see cref="ushort"/> amount</param>
     public void RemoveElement(Element element, ushort amount)
     {
         //Check if valid name passed and return int
-        if (!_elements.ContainsKey(element))
+        if (!Elements.ContainsKey(element))
         {
-            Debug.LogError("Incorrect element name passed -- InventoryManager Remove");
             return;
         }
-        _elements[element] -= amount;
+        Elements[element] -= amount;
 
         // Update events
-        OnUpdateInventoryElement?.Invoke(element, _elements[element]);
+        OnUpdateInventoryElement?.Invoke(element, Elements[element]);
     }
 
     /// <summary>
     /// Sets the amount of an element
     /// </summary>
-    /// <param name="element"></param>
-    /// <param name="amount"></param>
+    /// <param name="element"><see cref="Element"/> variant</param>
+    /// <param name="amount"><see cref="ushort"/> amount</param>
     public void SetElement(Element element, ushort amount)
     {
         //Check if valid name passed and return int
-        if (element == Element.None) { return; }
-        _elements[element] = amount;
+        if (element == Element.None) 
+        { 
+            return; 
+        }
+        Elements[element] = amount;
 
         // Update events
-        OnUpdateInventoryElement?.Invoke(element, _elements[element]);
+        OnUpdateInventoryElement?.Invoke(element, Elements[element]);
     }
 
     /// <summary>
-    /// Returns the amount of elements the player has
+    /// Returns the number of elements the player has
     /// </summary>
-    /// <param name="element"></param>
-    /// <returns></returns>
+    /// <param name="element"><see cref="Element"/> variant</param>
+    /// <returns><see cref="ushorrt"/> number of that element</returns>
     public ushort CheckElement(Element element)
     {
         //Check if valid name passed and return int
         if (element == Element.None)
         {
-            Debug.LogError($"Incorrect element name passed -- InventoryManager Check: {element}");
             return 0;
         }
-        return _elements[element];
+        return Elements[element];
     }
 }
