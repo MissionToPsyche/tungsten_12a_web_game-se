@@ -268,11 +268,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.453125, y: 0.859375}
   m_EdgeRadius: 0
---- !u!82 &108780234 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 5948697260629374984, guid: a8e002363ddfe6b4c808eff8789167be, type: 3}
-  m_PrefabInstance: {fileID: 720648161}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &150432812
 GameObject:
   m_ObjectHideFlags: 0
@@ -10277,17 +10272,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7671858847318387960, guid: a8e002363ddfe6b4c808eff8789167be, type: 3}
   m_PrefabInstance: {fileID: 720648161}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &720648163 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 69310307322683353, guid: a8e002363ddfe6b4c808eff8789167be, type: 3}
-  m_PrefabInstance: {fileID: 720648161}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9827f94284bfcf9478489ba72ef023aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &725522951 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3253192762782356155, guid: 7811ee804ab455a47b4b742ce011b472, type: 3}
@@ -11300,14 +11284,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9032889383197227996, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 720648163}
-    - target: {fileID: 9032889383197227996, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
-      value: 
-      objectReference: {fileID: 108780234}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12617,7 +12593,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20939742c2bb1b144945dc2b8dde111c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  devControl: 0
+  DevControl: 0
 --- !u!114 &2144772175
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -49,10 +49,7 @@ public class UIController : BaseController<UIController>
         _devConsoleResourcePanel.SetActive(false);
 
         //Specific to this class
-        _aspectRatio = (float)Screen.width / Screen.height; //<-- Use this to adjust UI layout/positioning
-
-        //TODO: add child components
-        //battPerText = GetComponent<TMP_Text>();
+        _aspectRatio = (float)Screen.width / Screen.height;
     }
 
     /// <summary>
@@ -445,13 +442,15 @@ public class UIController : BaseController<UIController>
     /// Also closes elements menu if active
     /// </summary>
     public void closeSubmenu()
-    {   
-        if (elementsMenu.activeSelf) {
+    {
+        if (elementsMenu.activeSelf)
+        {
             elementsMenu.SetActive(false);
-            GameController.Instance.AudioManager.UnmuteAudio(
-                GameController.Instance.AudioManager.backgroundMusic);
+            optionsMenu.GetComponent<OptionsController>().setMusicUnmute();
             openSubmenu(upgradesMenu);
-        } else {
+        }
+        else
+        {
             curSubmenu.SetActive(false);
             curSubmenu = null;
             inventoryMenu.SetActive(true);
@@ -676,15 +675,15 @@ public class UIController : BaseController<UIController>
                     case "thruster":
                         thrusterUpgradeButton.gameObject.SetActive(false);
                         thrusterLevel.transform.position = new Vector3(
-                            thrusterLevel.transform.position.x, 
-                            thrusterRequirementsList.gameObject.transform.position.y, 
+                            thrusterLevel.transform.position.x,
+                            thrusterRequirementsList.gameObject.transform.position.y,
                             thrusterLevel.transform.position.z);
                         break;
                     case "solararray":
                         solarArrayUpgradeButton.gameObject.SetActive(false);
                         solarArrayLevel.transform.position = new Vector3(
-                            solarArrayLevel.transform.position.x, 
-                            solarArrayRequirementsList.gameObject.transform.position.y,  
+                            solarArrayLevel.transform.position.x,
+                            solarArrayRequirementsList.gameObject.transform.position.y,
                             solarArrayLevel.transform.position.z);
                         break;
                     case "imager":
@@ -734,10 +733,6 @@ public class UIController : BaseController<UIController>
         amount = levelRequirements[InventoryManager.Element.Gold];
         if (amount > 0)
             Instantiate(goldRequirement, requirementsArea).GetComponentInChildren<TMP_Text>().SetText(amount.ToString());
-
-        /*amount = levelRequirements[];
-        if (amount > 0)
-            Instantiate(tungstenRequirement, requirementsArea).GetComponentInChildren<TMP_Text>().SetText(amount.ToString());*/
     }
 
     /// <summary>
