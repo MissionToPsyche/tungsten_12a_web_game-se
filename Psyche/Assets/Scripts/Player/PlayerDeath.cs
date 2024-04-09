@@ -63,7 +63,7 @@ public class PlayerDeath : MonoBehaviour
         // calculate kickback direction
         // left up or right up, TODO: base it off collision
         Vector2 kickbackDirection;
-        if (PlayerController.Instance.playerMovement._isFacingRight)
+        if (PlayerController.Instance.playerMovement.IsFacingRight)
         {
             kickbackDirection = new Vector2(-5f, 5f).normalized;
         }

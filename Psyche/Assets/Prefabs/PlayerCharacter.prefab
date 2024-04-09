@@ -176,7 +176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e4205c21202344ba1bf727cda06856, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isFacingRight: 0
+  IsFacingRight: 0
 --- !u!114 &2031395883439144302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -899,14 +899,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f743335839a35d4facac174cf4a98c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Camera: {fileID: 48771900030827911}
-  m_PlayerCamera: {fileID: 3736213204358428459}
-  m_AimCamera: {fileID: 246276419384116564}
-  m_Player: {fileID: 3118868635833949731}
-  xMax: 4
-  yMax: 2
-  xCushion: 8
-  yCushion: 4
+  Camera: {fileID: 48771900030827911}
+  PlayerCamera: {fileID: 3736213204358428459}
+  MouseCamera: {fileID: 246276419384116564}
+  Player: {fileID: 3118868635833949731}
+  XMax: 4
+  YMax: 2
+  XCushion: 8
+  YCushion: 4
 --- !u!1 &2746429122550390308
 GameObject:
   m_ObjectHideFlags: 0

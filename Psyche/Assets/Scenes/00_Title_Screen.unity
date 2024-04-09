@@ -2809,7 +2809,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 882906425}
         m_TargetAssemblyTypeName: TitleScreenManager, Assembly-CSharp
-        m_MethodName: closeSubmenu
+        m_MethodName: CloseSubmenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3727,7 +3727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6633721149760fe4faf617e75176a80e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMenu: {fileID: 308785648}
+  MainMenu: {fileID: 308785648}
 --- !u!95 &882906426
 Animator:
   serializedVersion: 5
@@ -3834,7 +3834,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 882906425}
         m_TargetAssemblyTypeName: TitleScreenManager, Assembly-CSharp
-        m_MethodName: startGame
+        m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4313,7 +4313,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 882906425}
         m_TargetAssemblyTypeName: TitleScreenManager, Assembly-CSharp
-        m_MethodName: openSubmenu
+        m_MethodName: OpenSubmenu
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 65298547}
@@ -4997,7 +4997,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 882906425}
         m_TargetAssemblyTypeName: TitleScreenManager, Assembly-CSharp
-        m_MethodName: openSubmenu
+        m_MethodName: OpenSubmenu
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 693923083}
@@ -5130,7 +5130,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 882906425}
         m_TargetAssemblyTypeName: TitleScreenManager, Assembly-CSharp
-        m_MethodName: closeSubmenu
+        m_MethodName: CloseSubmenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7554,7 +7554,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 882906425}
         m_TargetAssemblyTypeName: TitleScreenManager, Assembly-CSharp
-        m_MethodName: closeSubmenu
+        m_MethodName: CloseSubmenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8219,7 +8219,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 882906425}
         m_TargetAssemblyTypeName: TitleScreenManager, Assembly-CSharp
-        m_MethodName: openSubmenu
+        m_MethodName: OpenSubmenu
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 806676436}

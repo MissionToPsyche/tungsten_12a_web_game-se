@@ -1,20 +1,18 @@
-using System;
 using UnityEngine;
 
 /// <summary>
 /// Functions for controlling the title screen.
 /// Functions are called from the OnClick() event of buttons.
 /// </summary>
-/// Author: jmolive8
+/// Author: jmolive8, dnguye99
 public class TitleScreenManager : MonoBehaviour {
-    public GameObject mainMenu;
-
-    private GameObject curSubmenu;
+    public GameObject MainMenu;
+    private GameObject CurSubmenu;
 
     /// <summary>
     /// Starts the intro cutscene
     /// </summary>
-    public void startGame()
+    public void StartGame()
     {
         //Play button click sound
         GameController.Instance.AudioManager.buttonClick.Play();
@@ -22,7 +20,7 @@ public class TitleScreenManager : MonoBehaviour {
         // Load the scene
         // Set the value this way so if any changes are made they are accounted for
         string scene = GameController.Instance.GameStateManager.MatchScene(GameStateManager.Scene.Intro);
-        GameController.Instance.SceneTransitionManager.devControl = true;
+        GameController.Instance.SceneTransitionManager.DevControl = true;
         GameController.Instance.SceneTransitionManager.OnInitiateTransition(scene);
     }
 
@@ -30,23 +28,23 @@ public class TitleScreenManager : MonoBehaviour {
     /// Hides the main menu and opens a submenu
     /// </summary>
     /// <param name="submenu"></param>
-    public void openSubmenu(GameObject submenu)
+    public void OpenSubmenu(GameObject submenu)
     {
         //Play button click sound
         GameController.Instance.AudioManager.buttonClick.Play();
 
-        curSubmenu = submenu;
-        mainMenu.SetActive(false);
-        curSubmenu.SetActive(true);
+        CurSubmenu = submenu;
+        MainMenu.SetActive(false);
+        CurSubmenu.SetActive(true);
     }
 
     /// <summary>
     /// Closes the current submenu and unhides the main menu
     /// </summary>
-    public void closeSubmenu()
+    public void CloseSubmenu()
     {
-        curSubmenu.SetActive(false);
-        curSubmenu = null;
-        mainMenu.SetActive(true);
+        CurSubmenu.SetActive(false);
+        CurSubmenu = null;
+        MainMenu.SetActive(true);
     }
 }

@@ -167,7 +167,7 @@ public class PlayerController : BaseController<PlayerController>
             }
         }
 
-        playerMovement.handleMovement(usingThruster, beingWarped, enteringCave, exitingCave);
+        playerMovement.HandleMovement(usingThruster, beingWarped, enteringCave, exitingCave);
 
         //Inventory and Dialog Box 
         if (Input.GetButtonDown("Inventory") && !Input.GetButton("FireGRNS")) { UIController.Instance.handleUI(); }

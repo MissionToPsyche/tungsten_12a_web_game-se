@@ -35,7 +35,7 @@ public class GameStateManager : MonoBehaviour
             { Scene.Landing,    new Landing_State() },
             { Scene.Imager,     new Imager_State() },
             { Scene.Grns,       new GRNS_State() },
-            { Scene.EMagnet,    new eMagnet_State() },
+            { Scene.EMagnet,    new EMagnet_State() },
             { Scene.Thruster,   new Thruster_State() },
             { Scene.Combo1,     new Combo1_State() },
             { Scene.Combo2,     new Combo2_State() },
