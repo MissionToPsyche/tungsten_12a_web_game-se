@@ -734,10 +734,6 @@ public class UIController : BaseController<UIController>
         amount = levelRequirements[InventoryManager.Element.Gold];
         if (amount > 0)
             Instantiate(goldRequirement, requirementsArea).GetComponentInChildren<TMP_Text>().SetText(amount.ToString());
-
-        /*amount = levelRequirements[];
-        if (amount > 0)
-            Instantiate(tungstenRequirement, requirementsArea).GetComponentInChildren<TMP_Text>().SetText(amount.ToString());*/
     }
 
     /// <summary>

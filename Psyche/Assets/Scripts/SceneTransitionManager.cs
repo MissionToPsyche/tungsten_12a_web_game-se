@@ -202,19 +202,19 @@ public class SceneTransitionManager : MonoBehaviour
             GameObject[] objectsWithTransitionTag = GameObject.FindGameObjectsWithTag(tag);
             GameObject caveObject = null;
 
-            // we differentiate the proper transition objects for the player with the layer as well
-            // default caves use the default layer while special case transition objects use other layers
+            // We differentiate the proper transition objects for the player with the layer as well
+            // Default caves use the default layer while special case transition objects use other layers
             foreach (GameObject obj in objectsWithTransitionTag)
             {
-                // if the object in the list is the cave layered transition object and we ARE coming from Combo 3
-                if (GameController.Instance.GameStateManager.MatchScene(TravelFromSceneName)
-                    == GameStateManager.Scene.Combo3 && GameController.Instance.GameStateManager.MatchScene(sceneName)
-                    == GameStateManager.Scene.Landing && obj.layer == 8) // cave layer
+                // If the object in the list is the cave layered transition object and we ARE going from Combo 3 to Landing
+                if (GameController.Instance.GameStateManager.MatchScene(TravelFromSceneName) == GameStateManager.Scene.Combo3
+                    && GameController.Instance.GameStateManager.MatchScene(sceneName) == GameStateManager.Scene.Landing
+                    && obj.layer == 8) // cave layer
                 {
                     caveObject = obj;
                     break; // break since we only need one GameObject
                 }
-                // if the object in the list is the default transition object and we ARE NOT coming from Combo 3
+                // If the object in the list is the default transition object and we ARE NOT going from Combo 3 to Landing
                 else if (obj.layer == 0) // default layer
                 {
                     caveObject = obj;                   

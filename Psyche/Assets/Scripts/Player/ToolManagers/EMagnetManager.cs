@@ -7,13 +7,13 @@ using UnityEngine;
 /// </summary>
 /// Author: jmolive8
 public class EMagnetManager : ToolManager {
-    public GameObject eMagHitBox;
+    public GameObject EMagHitBox;
 
     /// <summary>
     /// Parent object of EMagnet Hit Box. Used for rotating the Hit Box around the player's center
     /// </summary>
-    private Transform hitBoxRotator;
-    private int pullSpeed = 20;
+    private Transform HitBoxRotator;
+    private int PullSpeed = 20;
 
     public void Initialize(PlayerController playerManagement)
     {
@@ -46,7 +46,7 @@ public class EMagnetManager : ToolManager {
 
         //Tool specific variables
         MaxLevel = LevelRequirements.Count + 1;
-        hitBoxRotator = eMagHitBox.transform.parent;
+        HitBoxRotator = EMagHitBox.transform.parent;
     }
 
     /// <summary>
@@ -54,18 +54,18 @@ public class EMagnetManager : ToolManager {
     /// </summary>
     public override void Activate()
     {
-        StartCoroutine(handleEMagnet());
+        StartCoroutine(HandleEMagnet());
     }
 
     /// <summary>
     /// Activates EMagnet tool
     /// </summary>
     /// <returns></returns>
-    public IEnumerator handleEMagnet()
+    public IEnumerator HandleEMagnet()
     {
         GameController.Instance.AudioManager.toolEMagnet.Play();
         PlayerController.eMagnetActive = true;
-        hitBoxRotator.gameObject.SetActive(true);
+        HitBoxRotator.gameObject.SetActive(true);
         Collider2D hit, targetDeposit = null, grabbedObject = null;
         float curGrav = PlayerController.playerCharacter.gravityScale;
 
@@ -77,23 +77,25 @@ public class EMagnetManager : ToolManager {
              * Finds angle between player center and mouse position
              */
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector3 direction = mousePosition - hitBoxRotator.position;
+            Vector3 direction = mousePosition - HitBoxRotator.position;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            hitBoxRotator.eulerAngles = new Vector3(0, 0, angle);
+            HitBoxRotator.eulerAngles = new Vector3(0, 0, angle);
 
             /**
              * Makes a box cast using the scale of the EMagnet Hit Box
              */
-            hit = Physics2D.OverlapBox(eMagHitBox.transform.position, eMagHitBox.transform.lossyScale, angle, 1 << 7);
+            hit = Physics2D.OverlapBox(EMagHitBox.transform.position, EMagHitBox.transform.lossyScale, angle, 1 << 7);
             if (hit != null && !hit.isTrigger)
             {
                 //If movable Magnetized object hit
                 if (hit.attachedRigidbody != null)
                 {
                     if (hit != grabbedObject)
+                    {
                         grabbedObject = hit;
+                    }
                 }
-                //If new Iron Vein hit
+                //If new Magnetized Deposit hit
                 else if (hit != targetDeposit)
                 {
                     /**
@@ -116,7 +118,9 @@ public class EMagnetManager : ToolManager {
             if (targetDeposit != null)
             {
                 if (targetDeposit.gameObject.activeInHierarchy)
-                    PlayerController.playerCharacter.MovePosition(Vector2.MoveTowards(transform.position, targetDeposit.transform.position, Time.deltaTime * pullSpeed));
+                {
+                    PlayerController.playerCharacter.MovePosition(Vector2.MoveTowards(transform.position, targetDeposit.transform.position, Time.deltaTime * PullSpeed));
+                }
                 else
                 {
                     /**
@@ -136,15 +140,17 @@ public class EMagnetManager : ToolManager {
                 grabbedObject.attachedRigidbody.velocity = Vector2.zero;
                 grabbedObject.attachedRigidbody.angularVelocity = 0;
                 if (!PlayerController.playerCollider.IsTouching(grabbedObject))
-                    grabbedObject.attachedRigidbody.MovePosition(Vector2.MoveTowards(grabbedObject.transform.position, transform.position, Time.deltaTime * pullSpeed));
+                {
+                    grabbedObject.attachedRigidbody.MovePosition(Vector2.MoveTowards(grabbedObject.transform.position, transform.position, Time.deltaTime * PullSpeed));
+                }
             }
 
             yield return null;
-        } while (Input.GetButton("EMagnet") && !PlayerController.magnetInterrupt);
+        } while (Input.GetButton("EMagnet") && !PlayerController.magnetInterrupt && PlayerController.solarArrayManager.BatteryPercent != 0);
 
         GameController.Instance.AudioManager.toolEMagnet.Stop();
         PlayerController.playerCharacter.gravityScale = curGrav;
-        hitBoxRotator.gameObject.SetActive(false);
+        HitBoxRotator.gameObject.SetActive(false);
         PlayerController.eMagnetActive = false;
         PlayerController.beingPulled = false;
     }
@@ -154,6 +160,6 @@ public class EMagnetManager : ToolManager {
     /// </summary>
     protected override void UpgradeTool()
     {
-        pullSpeed += 6;
+        PullSpeed += 6;
     }
 }
