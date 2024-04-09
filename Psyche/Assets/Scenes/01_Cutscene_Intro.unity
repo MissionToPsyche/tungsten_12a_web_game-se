@@ -750,13 +750,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f54704826ade3d48aa2f96a5ee624aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  intro1: {fileID: 894890281}
-  intro2: {fileID: 2139470690}
-  intro3: {fileID: 327550629}
-  intro4: {fileID: 1372688058}
-  intro5: {fileID: 1231587301}
-  intro6: {fileID: 398934900}
-  intro7: {fileID: 1572451955}
+  Intro1: {fileID: 894890281}
+  Intro2: {fileID: 2139470690}
+  Intro3: {fileID: 327550629}
+  Intro4: {fileID: 1372688058}
+  Intro5: {fileID: 1231587301}
+  Intro6: {fileID: 398934900}
+  Intro7: {fileID: 1572451955}
 --- !u!1 &1372688058
 GameObject:
   m_ObjectHideFlags: 0
@@ -844,7 +844,7 @@ GameObject:
   - component: {fileID: 1445208252}
   - component: {fileID: 1445208251}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Click to Continue Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
