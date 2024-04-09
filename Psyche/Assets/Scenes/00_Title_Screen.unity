@@ -2131,7 +2131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20939742c2bb1b144945dc2b8dde111c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  devControl: 0
+  DevControl: 0
 --- !u!114 &527361054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3063,8 +3063,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb84ddb6fb7e1e045860e28f58100394, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkMark: {fileID: 439078853}
-  controlsOverlay: {fileID: 0}
+  CheckMark: {fileID: 439078853}
+  ControlsOverlay: {fileID: 0}
 --- !u!114 &716904777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3111,7 +3111,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 716904776}
         m_TargetAssemblyTypeName: ControlsOverlayCheckBox, Assembly-CSharp
-        m_MethodName: toggleCheckMark
+        m_MethodName: ToggleCheckMark
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

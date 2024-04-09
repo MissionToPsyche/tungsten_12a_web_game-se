@@ -5880,7 +5880,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4085518003072981745}
         m_TargetAssemblyTypeName: ControlsOverlayCheckBox, Assembly-CSharp
-        m_MethodName: toggleCheckMark
+        m_MethodName: ToggleCheckMark
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5902,8 +5902,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb84ddb6fb7e1e045860e28f58100394, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkMark: {fileID: 6864219612130196977}
-  controlsOverlay: {fileID: 5702284626421382063}
+  CheckMark: {fileID: 6864219612130196977}
+  ControlsOverlay: {fileID: 5702284626421382063}
 --- !u!1 &2493504057731867454
 GameObject:
   m_ObjectHideFlags: 0

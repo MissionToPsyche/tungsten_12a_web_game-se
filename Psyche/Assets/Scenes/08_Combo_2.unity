@@ -3974,6 +3974,10 @@ PrefabInstance:
       value: 1.53
       objectReference: {fileID: 0}
     - target: {fileID: 5198483908214934543, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
+      propertyPath: MoveSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5198483908214934543, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
       propertyPath: moveSpeed
       value: 4
       objectReference: {fileID: 0}
@@ -5796,6 +5800,10 @@ PrefabInstance:
     - target: {fileID: 4364914062602311851, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.63
+      objectReference: {fileID: 0}
+    - target: {fileID: 5198483908214934543, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
+      propertyPath: MoveSpeed
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5198483908214934543, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
       propertyPath: moveSpeed
@@ -35445,6 +35453,10 @@ PrefabInstance:
       value: 3.55
       objectReference: {fileID: 0}
     - target: {fileID: 5198483908214934543, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
+      propertyPath: MoveSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5198483908214934543, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
       propertyPath: moveSpeed
       value: 4
       objectReference: {fileID: 0}
@@ -45731,6 +45743,10 @@ PrefabInstance:
       value: 2.636
       objectReference: {fileID: 0}
     - target: {fileID: 5198483908214934543, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
+      propertyPath: MoveSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5198483908214934543, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
       propertyPath: moveSpeed
       value: 4
       objectReference: {fileID: 0}
@@ -52395,6 +52411,10 @@ PrefabInstance:
       value: 1.38
       objectReference: {fileID: 0}
     - target: {fileID: 5198483908214934543, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
+      propertyPath: MoveSpeed
+      value: 2.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5198483908214934543, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
       propertyPath: moveSpeed
       value: 2.4
       objectReference: {fileID: 0}
@@ -55998,6 +56018,10 @@ PrefabInstance:
     - target: {fileID: 4364914062602311851, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
       propertyPath: m_LocalPosition.y
       value: 2.486
+      objectReference: {fileID: 0}
+    - target: {fileID: 5198483908214934543, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
+      propertyPath: MoveSpeed
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5198483908214934543, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
       propertyPath: moveSpeed
@@ -60880,8 +60904,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ca0219d56b41f84ba7133e3f9c6c4f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offDuration: 1
-  onDuration: 2.1
+  OffDuration: 1
+  OnDuration: 4
 --- !u!4 &1408969987
 Transform:
   m_ObjectHideFlags: 0
@@ -64949,6 +64973,10 @@ PrefabInstance:
       value: 3.55
       objectReference: {fileID: 0}
     - target: {fileID: 5198483908214934543, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
+      propertyPath: MoveSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5198483908214934543, guid: 0e2fc3e2bdc8a164c91df3402e18411d, type: 3}
       propertyPath: moveSpeed
       value: 4
       objectReference: {fileID: 0}
@@ -67704,8 +67732,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ca0219d56b41f84ba7133e3f9c6c4f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offDuration: 1
-  onDuration: 2
+  OffDuration: 1
+  OnDuration: 4
 --- !u!4 &1694260660
 Transform:
   m_ObjectHideFlags: 0
@@ -76375,8 +76403,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ca0219d56b41f84ba7133e3f9c6c4f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offDuration: 1
-  onDuration: 2.2
+  OffDuration: 1
+  OnDuration: 4
 --- !u!4 &2017298398
 Transform:
   m_ObjectHideFlags: 0

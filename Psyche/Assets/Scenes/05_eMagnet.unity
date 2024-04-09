@@ -1631,6 +1631,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1212499436}
     - target: {fileID: 3736933085750048782, guid: 6f065834d363ff44b81d9cda2988a82a, type: 3}
+      propertyPath: FirstDeposits
+      value: 
+      objectReference: {fileID: 1212499436}
+    - target: {fileID: 3736933085750048782, guid: 6f065834d363ff44b81d9cda2988a82a, type: 3}
       propertyPath: firstDeposits
       value: 
       objectReference: {fileID: 1212499436}
