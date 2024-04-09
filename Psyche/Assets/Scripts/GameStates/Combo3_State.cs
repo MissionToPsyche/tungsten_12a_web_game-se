@@ -1,5 +1,5 @@
 /*
- * Authors: JoshBenn
+ * Authors: JoshBenn, JamesOliver
  */
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,7 +26,6 @@ public class Combo3_State : BaseState
             { (short)SceneObject.Iron2,       true },
             { (short)SceneObject.Iron3,       true },
             { (short)SceneObject.Iron4,       true },
-            { (short)SceneObject.Iron5,       true },
         };
         LoadDefaultState();
         SaveState();
@@ -47,7 +46,6 @@ public class Combo3_State : BaseState
         Iron2           = 5,
         Iron3           = 6,
         Iron4           = 7,
-        Iron5           = 8,
 
         Checkpoint      = 99,
     }
@@ -65,7 +63,6 @@ public class Combo3_State : BaseState
             "element_iron 2"        => (short)SceneObject.Iron2,
             "element_iron 3"        => (short)SceneObject.Iron3,
             "element_iron 4"        => (short)SceneObject.Iron4,
-            "element_iron 5"        => (short)SceneObject.Iron5,
 
             "checkpoint"            => (short)SceneObject.Checkpoint,
             _                       => -1,
@@ -82,6 +79,7 @@ public class Combo3_State : BaseState
             (short)SceneObject.Iron1       => "Element_Iron 1",
             (short)SceneObject.Iron2       => "Element_Iron 2",
             (short)SceneObject.Iron3       => "Element_Iron 3",
+            (short)SceneObject.Iron4       => "Element_Iron 4",
 
             (short)SceneObject.Checkpoint   => "Checkpoint",
             _ => null,
@@ -191,21 +189,6 @@ public class Combo3_State : BaseState
                     break;
 
                 case (short)SceneObject.Iron4:
-                    {
-                        bool value = (bool)pair.Value;
-                        if (!value)
-                        {
-                            GameObject targetObject = GameObject.Find(objectName);
-                            if (targetObject == null)
-                            {
-                                return;
-                            }
-                            targetObject.SetActive(value);
-                        }
-                    }
-                    break;
-
-                case (short)SceneObject.Iron5:
                     {
                         bool value = (bool)pair.Value;
                         if (!value)

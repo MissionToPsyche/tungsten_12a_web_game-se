@@ -207,7 +207,7 @@ public class SceneTransitionManager : MonoBehaviour
             foreach (GameObject obj in objectsWithTransitionTag)
             {
                 // If the object in the list is the cave layered transition object and we ARE going from Combo 3 to Landing
-                if (GameController.Instance.GameStateManager.MatchScene(_travelFromSceneName) == GameStateManager.Scene.Combo3 
+                if (GameController.Instance.GameStateManager.MatchScene(TravelFromSceneName) == GameStateManager.Scene.Combo3
                     && GameController.Instance.GameStateManager.MatchScene(sceneName) == GameStateManager.Scene.Landing
                     && obj.layer == 8) // cave layer
                 {
