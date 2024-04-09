@@ -12,7 +12,7 @@ public class ControlsOverlayCheckBox : MonoBehaviour
     /// <summary>
     /// Toggles the check mark and the visibility of the Controls Overlay
     /// </summary>
-    public void toggleCheckMark()
+    public void ToggleCheckMark()
     {
         CheckMark.SetActive(!CheckMark.activeInHierarchy);
         ControlsOverlay.SetActive(!ControlsOverlay.activeInHierarchy);

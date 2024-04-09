@@ -54,14 +54,14 @@ public class EMagnetManager : ToolManager {
     /// </summary>
     public override void Activate()
     {
-        StartCoroutine(handleEMagnet());
+        StartCoroutine(HandleEMagnet());
     }
 
     /// <summary>
     /// Activates EMagnet tool
     /// </summary>
     /// <returns></returns>
-    public IEnumerator handleEMagnet()
+    public IEnumerator HandleEMagnet()
     {
         GameController.Instance.AudioManager.toolEMagnet.Play();
         PlayerController.eMagnetActive = true;
