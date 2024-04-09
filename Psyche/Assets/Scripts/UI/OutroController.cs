@@ -10,16 +10,28 @@ using TMPro;
 /// Author: jmolive8, blopezro, dnguye99
 public class OutroController : MonoBehaviour {
 
-    public GameObject outro1, outro2, outro3, outro4, clickText;
-    public Button quitButton, link;
-    private Image img1, img2, img3, img4, buttonImg, linkImg;
-    private TMP_Text buttonText;
+    [Header("Images")]
+    public GameObject Outro1;
+    public GameObject Outro2;
+    public GameObject Outro3;
+    public GameObject Outro4;
+    public GameObject ClickToContText;
+
+
+    [Header("Buttons")]
+    public Button QuitButton;
+    public Button LinkButton;
+
+    //variables
+    private Image Img1, Img2, Img3, Img4, ButtonImg, LinkImg;
+    private TMP_Text ButtonText;
     private bool IsTransitioning;
-    private Color buttonColor;
-    int curScreen = 1;
+    private Color ButtonColor;
+    private int CurScreen = 1;
 
     /// <summary>
-    /// Gets rid of objects not needed anymore
+    /// Gets rid of objects not needed anymore, as well as instantiates
+    /// objects needed for transitioning and fading.
     /// </summary>
     void Awake() {
         //remove the Player and UI objects so they aren't on screen
@@ -27,41 +39,39 @@ public class OutroController : MonoBehaviour {
         Destroy(GameObject.FindGameObjectWithTag("UI"));
 
         //get all the images from the cutscene game objects
-        img1 = outro1.GetComponentInChildren<Image>();
-        img2 = outro2.GetComponentInChildren<Image>();
-        img3 = outro3.GetComponentInChildren<Image>();
-        img4 = outro4.GetComponentInChildren<Image>();
+        Img1 = Outro1.GetComponentInChildren<Image>();
+        Img2 = Outro2.GetComponentInChildren<Image>();
+        Img3 = Outro3.GetComponentInChildren<Image>();
+        Img4 = Outro4.GetComponentInChildren<Image>();
 
         //get the images/sprites from the buttons
-        buttonImg = quitButton.GetComponent<Image>();
-        buttonText = quitButton.GetComponentInChildren<TMP_Text>();
-        linkImg = link.GetComponent<Image>();
+        ButtonImg = QuitButton.GetComponent<Image>();
+        ButtonText = QuitButton.GetComponentInChildren<TMP_Text>();
+        LinkImg = LinkButton.GetComponent<Image>();
 
         //save the Quit to Title button color
-        buttonColor = buttonImg.color;
+        //This has to happen before making the button non-interactable, as non-interactable buttons have a different color
+        ButtonColor = ButtonImg.color;
 
         //then make the button not interactable
-        quitButton.interactable = false;
+        QuitButton.interactable = false;
 
         //set all the components' alphas to 0, except img1 (first cs)
-        img1.canvasRenderer.SetAlpha(0);
-        img2.canvasRenderer.SetAlpha(0);
-        img3.canvasRenderer.SetAlpha(0);
-        img4.canvasRenderer.SetAlpha(0);
-        linkImg.canvasRenderer.SetAlpha(0);
-        buttonText.canvasRenderer.SetAlpha(0);
+        Img1.canvasRenderer.SetAlpha(0);
+        Img2.canvasRenderer.SetAlpha(0);
+        Img3.canvasRenderer.SetAlpha(0);
+        Img4.canvasRenderer.SetAlpha(0);
+        LinkImg.canvasRenderer.SetAlpha(0);
+        ButtonText.canvasRenderer.SetAlpha(0);
         //the quit button doesn't have an "image", so it has to adjust the color on the "image"
-        buttonImg.color = new Color(buttonText.color.r, buttonText.color.b, buttonText.color.b, 0);
+        ButtonImg.color = new Color(ButtonText.color.r, ButtonText.color.b, ButtonText.color.b, 0);
 
         //fade in the first image
-        StartCoroutine(FadeIn(img1));
-
-        //set bool for transitioning
-        IsTransitioning = true;
+        StartCoroutine(FadeIn(Img1));
     }
 
     /// <summary>
-    /// Shows next screen on Left Click
+    /// Handles the transitioning when the player clicks Left Click
     /// </summary>
     void Update()
     {
@@ -69,24 +79,26 @@ public class OutroController : MonoBehaviour {
         if (Input.GetButtonDown("EMagnet"))
         {
             //checks if there is a transition between images currently happening
+            //necessary to ensure transitions behave correctly without overlapping images
             if (!IsTransitioning)
             {
                 //crossfades if there is no transition occurring
-                switch (curScreen)
+                switch (CurScreen)
                 {
                     case 1:
-                        StartCoroutine(CrossFade(img1, img2));
+                        StartCoroutine(CrossFade(Img1, Img2));
                         break;
                     case 2:
-                        StartCoroutine(CrossFade(img2, img3));
+                        StartCoroutine(CrossFade(Img2, Img3));
                         break;
                     case 3:
-                        StartCoroutine(CrossFadeLastCS(img3, img4));
+                        StartCoroutine(CrossFadeLastCS(Img3, Img4));
                         break;
                     default:
                         break;
                 }
-                curScreen++; //increment the counter 
+                //increment the counter 
+                CurScreen++;
             }
         }
     }
@@ -106,9 +118,8 @@ public class OutroController : MonoBehaviour {
     {
         GameController.Instance.AudioManager.buttonClick.Play();
         string scene = GameController.Instance.GameStateManager.MatchScene(GameStateManager.Scene.Title);
-        GameController.Instance.SceneTransitionManager.devControl = true;
+        GameController.Instance.SceneTransitionManager.DevControl = true;
         GameController.Instance.SceneTransitionManager.OnInitiateTransition(scene);
-        //UnityEngine.SceneManagement.SceneManager.LoadScene("Title_Screen");
     }
 
     /// <summary>
@@ -162,11 +173,12 @@ public class OutroController : MonoBehaviour {
     private IEnumerator CrossFadeLastCS(Image img1, Image img2)
     {
         //variables needed to fade in the Quit Button
+        //counter keeps track of the current time since the start of the fading, and duration is how long the fading should take
         float counter = 0f;
         float duration = 2.0f;
 
-        //disable the "click to continue" text
-        clickText.SetActive(false);
+        //disable the "click to continue" text; only the Quit Button will move the player to a new screen
+        ClickToContText.SetActive(false);
 
         //fades out the first image (cs3)
         img1.CrossFadeAlpha(0, 1.0f, false);
@@ -174,21 +186,21 @@ public class OutroController : MonoBehaviour {
 
         //fades in last cs image and its components
         img2.CrossFadeAlpha(1, 2.0f, false);
-        linkImg.CrossFadeAlpha(1, 2.0f, false);
-        buttonText.CrossFadeAlpha(1, 2.0f, false);
+        LinkImg.CrossFadeAlpha(1, 2.0f, false);
+        ButtonText.CrossFadeAlpha(1, 2.0f, false);
         
         //fading in the Quit button by adjusting the alpha value little by little
         while (counter < duration)
         {
             counter += Time.deltaTime;
             float alpha = Mathf.Lerp(0, 1, counter/duration);
-            buttonColor.a = alpha;
-            buttonImg.color = buttonColor;
+            ButtonColor.a = alpha;
+            ButtonImg.color = ButtonColor;
         }
         yield return new WaitForSeconds(2.0f);
 
         //set the buttons to interactable once the fading has finished
-        quitButton.interactable = true;
-        link.interactable = true;
+        QuitButton.interactable = true;
+        LinkButton.interactable = true;
     }
 }

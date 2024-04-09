@@ -1,7 +1,7 @@
 /*
  * Description: Scene Transitions
  * Authors: joshbenn, blopezro, mcmyers4
- * Version: 20240401
+ * Version: 20240404
  */
 
 using Cinemachine;
@@ -13,36 +13,29 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// Manages the transitions between scenes
 /// </summary>
-public class SceneTransitionManager : MonoBehaviour {
-    private SceneTransitionManager _instance;
-    //Private variables
-    private GameController  _gameController;
-    private Vector3         _landingPosition;
-    private bool            _transition = false;
-    private string          _travelFromSceneName;
-    private string          _travelToSceneName;
-    private string          _directionTag;
-    private bool            _inputBlocked = false;
-    public bool             devControl = false;
+public class SceneTransitionManager : MonoBehaviour
+{
+    //======================================== Initialize/Update/Destroy =========================================
+
+    // Private variables
+    private GameController  GameController;
+    private Vector3         LandingPosition;
+    private bool            Transition = false;
+    private string          TravelFromSceneName;
+    private string          TravelToSceneName;
+    private string          DirectionTag;
+    private bool            InputBlocked = false;
+
+    // Public variables
+    public bool             DevControl = false;
 
     /// <summary>
     /// Initializes this script
     /// </summary>
     /// <param name="playerManagement"></param>
-    public void Initialize(GameController gameController) {
-        _gameController = gameController;
-    }
-
-    // #####################################################  Events #####################################################
-
-    public void LoadPlayer()
+    public void Initialize(GameController gameController)
     {
-        PlayerController.Instance.playerCollisionManager.InitiateTransition += OnInitiateTransition;
-    }
-
-    public void LoadDevConsole()
-    {
-        _gameController.DeveloperConsole.OnDevConsoleTransition += OnInitiateTransition;
+        GameController = gameController;
     }
 
     /// <summary>
@@ -56,7 +49,25 @@ public class SceneTransitionManager : MonoBehaviour {
         }
     }
 
-    // ################################################  Scene Management ################################################
+    //================================================== Events ==================================================
+
+    /// <summary>
+    /// Loads player
+    /// </summary>
+    public void LoadPlayer()
+    {
+        PlayerController.Instance.playerCollisionManager.InitiateTransition += OnInitiateTransition;
+    }
+
+    /// <summary>
+    /// Loads dev console
+    /// </summary>
+    public void LoadDevConsole()
+    {
+        GameController.DeveloperConsole.OnDevConsoleTransition += OnInitiateTransition;
+    }
+
+    //============================================== Scene Management ============================================
 
     /// <summary>
     /// Wrapper which handles event calls to initiate transition loading
@@ -72,51 +83,53 @@ public class SceneTransitionManager : MonoBehaviour {
     /// </summary>
     /// <param name="objectLabel"></param>
     /// <param name="tag"></param>
-    /// <returns></returns>
-    public IEnumerator CheckTransition(string objectLabel) {
-        
+    /// <returns><see cref="IEnumerator"/></returns>
+    public IEnumerator CheckTransition(string objectLabel)
+    {
         string[] sceneInfo = objectLabel.Split(' ');
 
-        // Get the axis (positive or negative) for vertical buttons
+        // get the axis (positive or negative) for vertical buttons
         float verticalAxis = Input.GetAxis("Vertical");
 
-        // Cross reference scene -- None == Non-Scene Input
-        GameStateManager.Scene scene = _gameController.GameStateManager.MatchScene(sceneInfo[0]);
+        // cross reference scene -- None == Non-Scene Input
+        GameStateManager.Scene scene = GameController.GameStateManager.MatchScene(sceneInfo[0]);
+
         if (scene == GameStateManager.Scene.None)
         {
             Debug.LogError($"Invalid Scene Transition {sceneInfo[0]}");
             yield break;
         }
         
-        // If a positive vertical button is pressed (w or up), then transition
-        if ((!_inputBlocked && Input.GetButton("Vertical") && verticalAxis > 0) || devControl) 
+        // if a positive vertical button is pressed (w or up), then transition
+        if ((!InputBlocked && Input.GetButton("Vertical") && verticalAxis > 0) || DevControl) 
         {
-            devControl = false;
-            // Block the input until the scene is loaded
-            _inputBlocked = true;
-            // -- Travel From Scene --
-            _travelFromSceneName = SceneManager.GetActiveScene().name;
-            // -- Travel To Scene --
-            _travelToSceneName = sceneInfo[0];
-            // Load the scene
-            yield return SceneManager.LoadSceneAsync(_gameController.GameStateManager.MatchScene(scene));
-            // Set the scene
-            _gameController.GameStateManager.SetScene(scene);
+            DevControl = false;
+            // block the input until the scene is loaded
+            InputBlocked = true;
+            // -- travel from scene --
+            TravelFromSceneName = SceneManager.GetActiveScene().name;
+            // -- travel to scene --
+            TravelToSceneName = sceneInfo[0];
+            // load the scene
+            yield return SceneManager.LoadSceneAsync(GameController.GameStateManager.MatchScene(scene));
+            // set the scene
+            GameController.GameStateManager.SetScene(scene);
 
-            if (!_transition)
+            if (!Transition)
             {
-                _directionTag = (sceneInfo.Count() > 1) ? sceneInfo[1] : "out";
-                _transition = true;
+                DirectionTag = (sceneInfo.Count() > 1) ? sceneInfo[1] : "out";
+                Transition = true;
             }
-            if (_transition && _gameController.GameStateManager.CurrentState == GameStateManager.GameState.InGame)
+
+            if (Transition && GameController.GameStateManager.CurrentState == GameStateManager.GameState.InGame)
             {
-                RepositionPlayer(_travelToSceneName);
+                RepositionPlayer(TravelToSceneName);
                 LoadBackground();
                 LoadCameraBounds();
             }
             
             yield return new WaitForSeconds(0.5f);
-            _inputBlocked = false;
+            InputBlocked = false;
         }
     }
 
@@ -127,11 +140,12 @@ public class SceneTransitionManager : MonoBehaviour {
     /// </summary>
     private void LoadCameraBounds()
     {
-        //array of the virtual cameras attached to the player
+        // array of the virtual cameras attached to the player
         GameObject[] vcs = GameObject.FindGameObjectsWithTag("VirtualCamera");
         GameObject bounds;
         CompositeCollider2D shape;
-        //loops through and assigns the boundary to each of the virtual cameras
+
+        // loops through and assigns the boundary to each of the virtual cameras
         foreach (GameObject vc in vcs)
         {
             vc.GetComponent<CinemachineConfiner2D>().InvalidateCache();
@@ -142,8 +156,8 @@ public class SceneTransitionManager : MonoBehaviour {
     }
 
     /// <summary>
-    /// Finds the main camera after loading into a scene and connects the
-    /// background to the camera. Thus, the background always follows the camera.
+    /// Finds the main camera after loading into a scene and connects the background to the camera.
+    /// Thus, the background always follows the camera.
     /// </summary>
     private void LoadBackground()
     {
@@ -158,27 +172,30 @@ public class SceneTransitionManager : MonoBehaviour {
     /// Repositions player based on landing position 
     /// </summary>
     /// <param name="travelToSceneName"></param>
-    public void RepositionPlayer(string travelToSceneName) {
-        _landingPosition = GetTransitionObjectPosition(travelToSceneName);
-        PlayerController.Instance.playerCharacter.transform.position = _landingPosition;
-        _transition = false;
+    public void RepositionPlayer(string travelToSceneName)
+    {
+        LandingPosition = GetTransitionObjectPosition(travelToSceneName);
+        PlayerController.Instance.playerCharacter.transform.position = LandingPosition;
+        Transition = false;
     }
 
     /// <summary>
     /// Gets the position of the tagged game object
     /// </summary>
     /// <param name="sceneName"></param>
-    /// <returns></returns>
-    public Vector3 GetTransitionObjectPosition(string sceneName) {
+    /// <returns><see cref="Vector3"/></returns>
+    public Vector3 GetTransitionObjectPosition(string sceneName)
+    {
         Scene scene = SceneManager.GetSceneByName(sceneName);
-        if (scene.isLoaded) {
 
-            // If the tag is "out" as in if "out" is part of the game object the player is interacting with
+        if (scene.isLoaded)
+        {
+            // if the tag is "out" as in if "out" is part of the game object the player is interacting with
             // then we want to "look for" the TransitionObjectIn (in) on the scene we are going into, else
-            // we must be going in reverse so then we look for the TransitionObjectOut (out).
-            string tag = _directionTag.ToLower().Contains("out") ? "TransitionObjectIn" : "TransitionObjectOut";
+            // we must be going in reverse so then we look for the TransitionObjectOut (out)
+            string tag = DirectionTag.ToLower().Contains("out") ? "TransitionObjectIn" : "TransitionObjectOut";
 
-            // There should only be one transition object in and one transition object out for each scene
+            // there should only be one transition object in and one transition object out for each scene
             // with the exception of two "outs" and "ins" for the Landing scene:
             // Landing scene out to Imager level    // Landing scene out to Outro Cutscene scene
             // Landing scene in from Title Screen   // Landing scene in from Combo 3
@@ -187,7 +204,8 @@ public class SceneTransitionManager : MonoBehaviour {
 
             // We differentiate the proper transition objects for the player with the layer as well
             // Default caves use the default layer while special case transition objects use other layers
-            foreach (GameObject obj in objectsWithTransitionTag) {
+            foreach (GameObject obj in objectsWithTransitionTag)
+            {
                 // If the object in the list is the cave layered transition object and we ARE going from Combo 3 to Landing
                 if (GameController.Instance.GameStateManager.MatchScene(_travelFromSceneName) == GameStateManager.Scene.Combo3 
                     && GameController.Instance.GameStateManager.MatchScene(sceneName) == GameStateManager.Scene.Landing
@@ -208,7 +226,9 @@ public class SceneTransitionManager : MonoBehaviour {
             if (caveObject != null) 
             {
                 return caveObject.transform.position;
-            } else {
+            }
+            else
+            {
                 Debug.LogWarning(tag+" not found.");
             }
 
@@ -217,6 +237,7 @@ public class SceneTransitionManager : MonoBehaviour {
         {
             Debug.LogWarning("Scene "+sceneName+" is not loaded.");
         }
+
         return Vector3.zero;
     }
 }
