@@ -8178,13 +8178,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-        m_MethodName: UnmuteAudio
-        m_Mode: 2
+      - m_Target: {fileID: 8408042124309936}
+        m_TargetAssemblyTypeName: OptionsController, Assembly-CSharp
+        m_MethodName: setMusicUnmute
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -11022,7 +11022,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3265503081047878199}
+      - m_Target: {fileID: 8408042124309936}
         m_TargetAssemblyTypeName: OptionsController, Assembly-CSharp
         m_MethodName: setMusicMute
         m_Mode: 1
@@ -11032,7 +11032,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 5511835568738583566}
         m_TargetAssemblyTypeName: UnityEngine.Video.VideoPlayer, UnityEngine
@@ -14679,6 +14679,7 @@ GameObject:
   - component: {fileID: 3739745722489845252}
   - component: {fileID: 151177179381038223}
   - component: {fileID: 8770079017525868098}
+  - component: {fileID: 8408042124309936}
   m_Layer: 5
   m_Name: Options Menu
   m_TagString: Untagged
@@ -14747,6 +14748,23 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8408042124309936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5624132768119358631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4abd1e97f7f64c64badb29abd27891bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkMark: {fileID: 2605753800641985410}
+  musicVolSlider: {fileID: 5669328167644140726}
+  sfxVolSlider: {fileID: 6670206970594604876}
+  uiVolSlider: {fileID: 2642029444388704681}
+  videoSlider: {fileID: 5512113395739676700}
 --- !u!1 &5657426830867328170
 GameObject:
   m_ObjectHideFlags: 0
@@ -15984,7 +16002,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3265503081047878199}
+      - m_Target: {fileID: 8408042124309936}
         m_TargetAssemblyTypeName: OptionsController, Assembly-CSharp
         m_MethodName: setMusicUnmute
         m_Mode: 1
@@ -21472,7 +21490,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3265503081047878199}
+      - m_Target: {fileID: 8408042124309936}
         m_TargetAssemblyTypeName: OptionsController, Assembly-CSharp
         m_MethodName: setMusicUnmute
         m_Mode: 1
