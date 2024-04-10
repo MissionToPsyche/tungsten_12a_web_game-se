@@ -183,7 +183,7 @@ public class GammaView : MonoBehaviour
                 SpriteRenderersList[i].color = LayerColor(SpriteRenderersList[i].gameObject);
                 if (Input.GetButtonDown("FireGRNS"))
                 {
-                    GameController.Instance.AudioManager.toolGRNS.Play();
+                    GameController.Instance.AudioManager.ToolGRNS.Play();
                 }
                 if (ColorBlindMode)
                 {
@@ -209,7 +209,7 @@ public class GammaView : MonoBehaviour
                 SpriteRenderersList[i].color = OrigColorArray[i];
                 if (Input.GetButtonUp("FireGRNS"))
                 {
-                    GameController.Instance.AudioManager.toolGRNS.Stop();
+                    GameController.Instance.AudioManager.ToolGRNS.Stop();
                 }
                 if (ColorBlindMode)
                 {

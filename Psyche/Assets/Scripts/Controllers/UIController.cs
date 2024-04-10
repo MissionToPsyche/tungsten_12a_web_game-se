@@ -245,7 +245,7 @@ public class UIController : BaseController<UIController>
             Color newColor = elements[elementIndex].color;
             newColor.a = 1f;
             elements[elementIndex].color = newColor;
-            GameController.Instance.AudioManager.pickupElementTungsten.Play();
+            GameController.Instance.AudioManager.PickupElementTungsten.Play();
         }
     }
 
@@ -329,7 +329,7 @@ public class UIController : BaseController<UIController>
     /// </summary>
     public void playButtonSound()
     {
-        GameController.Instance.AudioManager.buttonClick.Play();
+        GameController.Instance.AudioManager.ButtonClick.Play();
     }
 
     //========================================================== UI ==========================================================
@@ -446,7 +446,7 @@ public class UIController : BaseController<UIController>
         if (elementsMenu.activeSelf)
         {
             elementsMenu.SetActive(false);
-            optionsMenu.GetComponent<OptionsController>().setMusicUnmute();
+            optionsMenu.GetComponent<OptionsController>().SetMusicUnmute();
             openSubmenu(upgradesMenu);
         }
         else
@@ -555,10 +555,10 @@ public class UIController : BaseController<UIController>
         float soundDuration = 3.0f;
         AudioSource audioSource = PlayerController.Instance.inventoryManager.MatchTool(toolName) switch
         {
-            InventoryManager.Tool.Imager => GameController.Instance.AudioManager.toolImager,
-            InventoryManager.Tool.SolarArray => GameController.Instance.AudioManager.buttonClick,
-            InventoryManager.Tool.Thruster => GameController.Instance.AudioManager.toolThrusters,
-            InventoryManager.Tool.Electromagnet => GameController.Instance.AudioManager.toolEMagnet,
+            InventoryManager.Tool.Imager => GameController.Instance.AudioManager.ToolImager,
+            InventoryManager.Tool.SolarArray => GameController.Instance.AudioManager.ButtonClick,
+            InventoryManager.Tool.Thruster => GameController.Instance.AudioManager.ToolThrusters,
+            InventoryManager.Tool.Electromagnet => GameController.Instance.AudioManager.ToolEMagnet,
             _ => null,
         };
         if (audioSource != null)

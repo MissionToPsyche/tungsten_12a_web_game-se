@@ -42,7 +42,7 @@ public class PlayerDeath : MonoBehaviour
     public void Hazard(Collision2D collision)
     {
         ApplyKickback(collision);
-        GameController.Instance.AudioManager.playerHurt.Play();
+        GameController.Instance.AudioManager.PlayerHurt.Play();
         GetHurt(1);
     }
 
@@ -51,7 +51,7 @@ public class PlayerDeath : MonoBehaviour
     /// </summary>
     public void Spikes()
     {
-        GameController.Instance.AudioManager.playerHurt.Play();
+        GameController.Instance.AudioManager.PlayerHurt.Play();
         GetHurt(playerHealth.playerHealth);
     }
 
@@ -83,7 +83,7 @@ public class PlayerDeath : MonoBehaviour
     }
 
     /// <summary>
-    /// Updates respawn location once a checkpoint has been touched.
+    /// Updates respawn location once a Checkpoint has been touched.
     /// Additionally recharges health and battery.
     /// </summary>
     /// <param name="collision"></param>
@@ -93,7 +93,7 @@ public class PlayerDeath : MonoBehaviour
         {
             return;
         }
-        //ID of the checkpoint
+        //ID of the Checkpoint
         GameController.Instance.GameStateManager.Checkpoint = collision.gameObject.GetInstanceID();
         GameController.Instance.GameStateManager.RespawnPoint = _playerController.transform.position;
 
@@ -101,12 +101,12 @@ public class PlayerDeath : MonoBehaviour
         playerHealth.HealthUp(100);
         gameObject.GetComponent<SolarArrayManager>().Activate();
 
-        //Play audio if you hit a checkpoint with default layer
+        //Play audio if you hit a Checkpoint with default layer
         if (collision.gameObject.layer.Equals(0))
         {
             if (LastActivation == null)
             {
-                GameController.Instance.AudioManager.checkpoint.Play();
+                GameController.Instance.AudioManager.Checkpoint.Play();
                 LastActivation = System.DateTime.Now;
             }
             else
@@ -115,7 +115,7 @@ public class PlayerDeath : MonoBehaviour
                 if (diff.TotalSeconds > 5)
                 {
                     LastActivation = System.DateTime.Now;
-                    GameController.Instance.AudioManager.checkpoint.Play();
+                    GameController.Instance.AudioManager.Checkpoint.Play();
                 }
             }
         }
