@@ -2094,11 +2094,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0e5cf764854e6b4c97604068d9814b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  developerConsole: {fileID: 0}
-  gameStateManager: {fileID: 0}
-  sceneTransitionManager: {fileID: 0}
-  audioManager: {fileID: 1773880520}
-  colorBlindMode: 0
+  DeveloperConsole: {fileID: 0}
+  GameStateManager: {fileID: 0}
+  SceneTransitionManager: {fileID: 0}
+  AudioManager: {fileID: 0}
+  ColorBlindMode: 0
   musicVol: 0.25
   sfxVol: 0.25
   uiVol: 0.25
@@ -2131,7 +2131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20939742c2bb1b144945dc2b8dde111c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  devControl: 0
+  DevControl: 0
 --- !u!114 &527361054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2809,7 +2809,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 882906425}
         m_TargetAssemblyTypeName: TitleScreenManager, Assembly-CSharp
-        m_MethodName: closeSubmenu
+        m_MethodName: CloseSubmenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3063,8 +3063,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb84ddb6fb7e1e045860e28f58100394, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkMark: {fileID: 439078853}
-  controlsOverlay: {fileID: 0}
+  CheckMark: {fileID: 439078853}
+  ControlsOverlay: {fileID: 0}
 --- !u!114 &716904777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3111,7 +3111,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 716904776}
         m_TargetAssemblyTypeName: ControlsOverlayCheckBox, Assembly-CSharp
-        m_MethodName: toggleCheckMark
+        m_MethodName: ToggleCheckMark
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3727,7 +3727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6633721149760fe4faf617e75176a80e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMenu: {fileID: 308785648}
+  MainMenu: {fileID: 308785648}
 --- !u!95 &882906426
 Animator:
   serializedVersion: 5
@@ -3834,7 +3834,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 882906425}
         m_TargetAssemblyTypeName: TitleScreenManager, Assembly-CSharp
-        m_MethodName: startGame
+        m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4313,7 +4313,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 882906425}
         m_TargetAssemblyTypeName: TitleScreenManager, Assembly-CSharp
-        m_MethodName: openSubmenu
+        m_MethodName: OpenSubmenu
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 65298547}
@@ -4997,7 +4997,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 882906425}
         m_TargetAssemblyTypeName: TitleScreenManager, Assembly-CSharp
-        m_MethodName: openSubmenu
+        m_MethodName: OpenSubmenu
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 693923083}
@@ -5130,7 +5130,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 882906425}
         m_TargetAssemblyTypeName: TitleScreenManager, Assembly-CSharp
-        m_MethodName: closeSubmenu
+        m_MethodName: CloseSubmenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6954,17 +6954,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7671858847318387960, guid: a8e002363ddfe6b4c808eff8789167be, type: 3}
   m_PrefabInstance: {fileID: 1773880518}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1773880520 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 69310307322683353, guid: a8e002363ddfe6b4c808eff8789167be, type: 3}
-  m_PrefabInstance: {fileID: 1773880518}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9827f94284bfcf9478489ba72ef023aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1815734557
 GameObject:
   m_ObjectHideFlags: 0
@@ -7565,7 +7554,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 882906425}
         m_TargetAssemblyTypeName: TitleScreenManager, Assembly-CSharp
-        m_MethodName: closeSubmenu
+        m_MethodName: CloseSubmenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8230,7 +8219,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 882906425}
         m_TargetAssemblyTypeName: TitleScreenManager, Assembly-CSharp
-        m_MethodName: openSubmenu
+        m_MethodName: OpenSubmenu
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 806676436}
