@@ -8180,7 +8180,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 8408042124309936}
         m_TargetAssemblyTypeName: OptionsController, Assembly-CSharp
-        m_MethodName: setMusicUnmute
+        m_MethodName: SetMusicUnmute
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11024,7 +11024,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8408042124309936}
         m_TargetAssemblyTypeName: OptionsController, Assembly-CSharp
-        m_MethodName: setMusicMute
+        m_MethodName: SetMusicMute
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16004,7 +16004,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8408042124309936}
         m_TargetAssemblyTypeName: OptionsController, Assembly-CSharp
-        m_MethodName: setMusicUnmute
+        m_MethodName: SetMusicUnmute
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -21492,7 +21492,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8408042124309936}
         m_TargetAssemblyTypeName: OptionsController, Assembly-CSharp
-        m_MethodName: setMusicUnmute
+        m_MethodName: SetMusicUnmute
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
