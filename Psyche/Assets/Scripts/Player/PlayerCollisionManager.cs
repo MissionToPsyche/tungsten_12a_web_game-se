@@ -163,7 +163,7 @@ public class PlayerCollisionManager : MonoBehaviour
         switch (MatchTag(other.gameObject.tag))
         {
             case CollisionTag.Hazard:
-                PlayerController.playerDeath.Hazard(other);
+                PlayerController.playerDeath.Hazard();
                 break;
             case CollisionTag.Spikes:
                 PlayerController.playerDeath.Spikes();
