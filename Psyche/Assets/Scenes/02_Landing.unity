@@ -10210,6 +10210,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4879092171002727389, guid: 4279c030866387f4a82ae42b380b6d37, type: 3}
   m_PrefabInstance: {fileID: 4033906277226449923}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &700734583 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2642029444388704681, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+  m_PrefabInstance: {fileID: 1330709035}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &720648161
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10853,6 +10864,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &992267790 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5512113395739676700, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+  m_PrefabInstance: {fileID: 1330709035}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1058330183
 GameObject:
   m_ObjectHideFlags: 0
@@ -11025,6 +11047,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1104301629 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6670206970594604876, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+  m_PrefabInstance: {fileID: 1330709035}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1195215619
 GameObject:
   m_ObjectHideFlags: 0
@@ -11196,6 +11229,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8408042124309936, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: CheckMark
+      value: 
+      objectReference: {fileID: 1807422463}
+    - target: {fileID: 8408042124309936, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: UiVolSlider
+      value: 
+      objectReference: {fileID: 700734583}
+    - target: {fileID: 8408042124309936, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: VideoSlider
+      value: 
+      objectReference: {fileID: 992267790}
+    - target: {fileID: 8408042124309936, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: SfxVolSlider
+      value: 
+      objectReference: {fileID: 1104301629}
+    - target: {fileID: 8408042124309936, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: MusicVolSlider
+      value: 
+      objectReference: {fileID: 1745586346}
     - target: {fileID: 195382080778571717, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
       propertyPath: m_fontSize
       value: 36
@@ -11236,10 +11289,70 @@ PrefabInstance:
       propertyPath: m_HorizontalAlignment
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1573635709456180375, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: CheckMark
+      value: 
+      objectReference: {fileID: 1807422463}
+    - target: {fileID: 1573635709456180375, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: UiVolSlider
+      value: 
+      objectReference: {fileID: 700734583}
+    - target: {fileID: 1573635709456180375, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: VideoSlider
+      value: 
+      objectReference: {fileID: 992267790}
+    - target: {fileID: 1573635709456180375, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: SfxVolSlider
+      value: 
+      objectReference: {fileID: 1104301629}
+    - target: {fileID: 1573635709456180375, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: MusicVolSlider
+      value: 
+      objectReference: {fileID: 1745586346}
     - target: {fileID: 1690373141205758407, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2996666474651010981, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: CheckMark
+      value: 
+      objectReference: {fileID: 1807422463}
+    - target: {fileID: 2996666474651010981, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: UiVolSlider
+      value: 
+      objectReference: {fileID: 700734583}
+    - target: {fileID: 2996666474651010981, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: VideoSlider
+      value: 
+      objectReference: {fileID: 992267790}
+    - target: {fileID: 2996666474651010981, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: SfxVolSlider
+      value: 
+      objectReference: {fileID: 1104301629}
+    - target: {fileID: 2996666474651010981, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: MusicVolSlider
+      value: 
+      objectReference: {fileID: 1745586346}
+    - target: {fileID: 3265503081047878199, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: CheckMark
+      value: 
+      objectReference: {fileID: 1807422463}
+    - target: {fileID: 3265503081047878199, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: UiVolSlider
+      value: 
+      objectReference: {fileID: 700734583}
+    - target: {fileID: 3265503081047878199, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: VideoSlider
+      value: 
+      objectReference: {fileID: 992267790}
+    - target: {fileID: 3265503081047878199, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: SfxVolSlider
+      value: 
+      objectReference: {fileID: 1104301629}
+    - target: {fileID: 3265503081047878199, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: MusicVolSlider
+      value: 
+      objectReference: {fileID: 1745586346}
     - target: {fileID: 5172690812288988953, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
       propertyPath: m_Camera
       value: 
@@ -11248,6 +11361,70 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 5669328167644140726, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetMusicVolume
+      objectReference: {fileID: 0}
+    - target: {fileID: 5669328167644140726, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: OptionsController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6670206970594604876, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetSfxVolume
+      objectReference: {fileID: 0}
+    - target: {fileID: 6670206970594604876, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: OptionsController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7113130394700590722, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: CheckMark
+      value: 
+      objectReference: {fileID: 1807422463}
+    - target: {fileID: 7113130394700590722, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: UiVolSlider
+      value: 
+      objectReference: {fileID: 700734583}
+    - target: {fileID: 7113130394700590722, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: VideoSlider
+      value: 
+      objectReference: {fileID: 992267790}
+    - target: {fileID: 7113130394700590722, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: SfxVolSlider
+      value: 
+      objectReference: {fileID: 1104301629}
+    - target: {fileID: 7113130394700590722, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: MusicVolSlider
+      value: 
+      objectReference: {fileID: 1745586346}
+    - target: {fileID: 7171803073027568085, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ToggleCheckMark
+      objectReference: {fileID: 0}
+    - target: {fileID: 7171803073027568085, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: OptionsController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7204953653430246511, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: CheckMark
+      value: 
+      objectReference: {fileID: 1807422463}
+    - target: {fileID: 7204953653430246511, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: UiVolSlider
+      value: 
+      objectReference: {fileID: 700734583}
+    - target: {fileID: 7204953653430246511, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: VideoSlider
+      value: 
+      objectReference: {fileID: 992267790}
+    - target: {fileID: 7204953653430246511, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: SfxVolSlider
+      value: 
+      objectReference: {fileID: 1104301629}
+    - target: {fileID: 7204953653430246511, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+      propertyPath: MusicVolSlider
+      value: 
+      objectReference: {fileID: 1745586346}
     - target: {fileID: 7331055490882894279, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -12023,6 +12200,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1745586346 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5669328167644140726, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+  m_PrefabInstance: {fileID: 1330709035}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1807422463 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2605753800641985410, guid: 0043e28fc164ad04b87c444c3de969ce, type: 3}
+  m_PrefabInstance: {fileID: 1330709035}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1810091845
 GameObject:
   m_ObjectHideFlags: 0
