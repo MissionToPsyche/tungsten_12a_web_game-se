@@ -255,8 +255,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5dacd5bf9b3e07468c207e4593d48b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHealth: {fileID: 0}
-  solarArrayManager: {fileID: 3447453164145479344}
+  PlayerHealth: {fileID: 0}
+  SolarArrayManager: {fileID: 0}
 --- !u!114 &4004592847061855459
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -51,7 +51,7 @@ public class PlayerDeath : MonoBehaviour
     public void Spikes()
     {
         GameController.Instance.AudioManager.PlayerHurt.Play();
-        GetHurt(PlayerHealth.playerHealth);
+        GetHurt(PlayerHealth.Health);
     }
 
     /// <summary>
@@ -61,20 +61,20 @@ public class PlayerDeath : MonoBehaviour
     {
         // calculate kickback direction
         // left up or right up
-        Vector2 kickbackDirection;
+        Vector2 KickbackDirection;
         if (PlayerController.Instance.playerMovement.IsFacingRight)
         {
-            kickbackDirection = new Vector2(-5f, 5f).normalized;
+            KickbackDirection = new Vector2(-5f, 5f).normalized;
         }
         else
         {
-            kickbackDirection = new Vector2(5f, 5f).normalized;
+            KickbackDirection = new Vector2(5f, 5f).normalized;
         }
 
         // set force and apply
-        float kickbackForce = 5f;
+        float KickbackForce = 5f;
         PlayerController.Instance.inputBlocked = true;
-        PlayerController.Instance.playerCharacter.AddForce(kickbackDirection * kickbackForce, ForceMode2D.Impulse);
+        PlayerController.Instance.playerCharacter.AddForce(KickbackDirection * KickbackForce, ForceMode2D.Impulse);
         PlayerController.Instance.inputBlocked = false;
     }
 
@@ -121,11 +121,11 @@ public class PlayerDeath : MonoBehaviour
     /// Lose health on contacts with hazards.
     /// Respawn character if no health remains.
     /// </summary>
-    public void GetHurt(int dmg)
+    public void GetHurt(int Dmg)
     {
         StartCoroutine(_playerController.interruptMagnet());
-        PlayerHealth.HealthDown(dmg);
-        if (PlayerHealth.playerHealth <= 0)
+        PlayerHealth.HealthDown(Dmg);
+        if (PlayerHealth.Health <= 0)
         {
             //start the warping animation & reset player's heath & battery
             StartCoroutine(GameController.Instance.GameStateManager.Warp());

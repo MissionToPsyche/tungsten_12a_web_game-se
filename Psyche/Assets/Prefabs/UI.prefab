@@ -16584,13 +16584,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b219ad24d70c084f91173d1e06a70de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHealth: 0
-  amount: 0
-  playerHealthZero: 0
-  healthText: {fileID: 4913807385749006362}
-  healthSpriteNormal: {fileID: -831315000, guid: 4ae77b5d770386442a7ad2647db65b8b, type: 3}
-  healthSpriteDamaged: {fileID: 2053673110, guid: 4ae77b5d770386442a7ad2647db65b8b, type: 3}
-  healthSpriteCritical: {fileID: -2113561379, guid: 4ae77b5d770386442a7ad2647db65b8b, type: 3}
+  Health: 0
+  PlayerHealthZero: 0
+  HealthText: {fileID: 4913807385749006362}
+  HealthSpriteNormal: {fileID: -831315000, guid: 4ae77b5d770386442a7ad2647db65b8b, type: 3}
+  HealthSpriteDamaged: {fileID: 2053673110, guid: 4ae77b5d770386442a7ad2647db65b8b, type: 3}
+  HealthSpriteCritical: {fileID: -2113561379, guid: 4ae77b5d770386442a7ad2647db65b8b, type: 3}
 --- !u!1 &6144967997530013542
 GameObject:
   m_ObjectHideFlags: 0
