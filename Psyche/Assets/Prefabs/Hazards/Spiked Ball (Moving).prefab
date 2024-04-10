@@ -261,8 +261,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 165dd0d92b1242243ac84762db3d1e12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hazard: {fileID: 7533270941303128252}
-  pointsObject: {fileID: 5107281147881149891}
+  Hazard: {fileID: 7533270941303128252}
+  PointsObject: {fileID: 5107281147881149891}
   pointsIndex: 1
   moveSpeed: 2.5
   warpToStart: 0

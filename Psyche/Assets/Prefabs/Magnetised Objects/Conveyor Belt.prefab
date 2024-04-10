@@ -108,11 +108,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3db0380f3de95443b5476612405b40e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  depositPrefab: {fileID: 3325924169283356502, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
-  pointsObject: {fileID: 6881837900786384127}
-  moveSpeed: 2.5
-  spacingBetweenDeposits: 2
-  numOfDeposits: 3
+  DepositPrefab: {fileID: 3325924169283356502, guid: ae357b42738f10349b8062b6893bb7f1, type: 3}
+  PointsObject: {fileID: 6881837900786384127}
+  MoveSpeed: 2.5
+  SpacingBetweenDeposits: 2
+  NumOfDeposits: 3
 --- !u!1 &4757371670708788897
 GameObject:
   m_ObjectHideFlags: 0
