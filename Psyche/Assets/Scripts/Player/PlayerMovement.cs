@@ -120,7 +120,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 PlayerManagement.playerCharacter.velocity = 
                     new Vector2(PlayerManagement.playerCharacter.velocity.x, 7f);
-                GameController.Instance.AudioManager.playerJump.Play();
+                GameController.Instance.AudioManager.PlayerJump.Play();
             }
         }
 
@@ -159,11 +159,11 @@ public class PlayerMovement : MonoBehaviour
             Animator.Play(NewAnimation);
             if (NewAnimation.Equals(PLAYER_THRUSTER))
             {
-                GameController.Instance.AudioManager.toolThrusters.Play();
+                GameController.Instance.AudioManager.ToolThrusters.Play();
             }
             else
             {
-                GameController.Instance.AudioManager.toolThrusters.Stop();
+                GameController.Instance.AudioManager.ToolThrusters.Stop();
             }
 
             // set the current animation state

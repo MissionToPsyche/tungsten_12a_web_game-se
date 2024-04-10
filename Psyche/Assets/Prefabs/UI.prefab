@@ -2190,8 +2190,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7204953653430246511}
-        m_TargetAssemblyTypeName: ColorBlindCheckBox, Assembly-CSharp
-        m_MethodName: setSfxVolume
+        m_TargetAssemblyTypeName: OptionsController, Assembly-CSharp
+        m_MethodName: SetSfxVolume
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2213,11 +2213,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4abd1e97f7f64c64badb29abd27891bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkMark: {fileID: 2605753800641985410}
-  musicVolSlider: {fileID: 5669328167644140726}
-  sfxVolSlider: {fileID: 6670206970594604876}
-  uiVolSlider: {fileID: 2642029444388704681}
-  videoSlider: {fileID: 5512113395739676700}
+  CheckMark: {fileID: 2605753800641985410}
+  MusicVolSlider: {fileID: 5669328167644140726}
+  SfxVolSlider: {fileID: 6670206970594604876}
+  UiVolSlider: {fileID: 2642029444388704681}
+  VideoSlider: {fileID: 5512113395739676700}
 --- !u!1 &1101928457253581678
 GameObject:
   m_ObjectHideFlags: 0
@@ -3159,8 +3159,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2996666474651010981}
-        m_TargetAssemblyTypeName: ColorBlindCheckBox, Assembly-CSharp
-        m_MethodName: toggleCheckMark
+        m_TargetAssemblyTypeName: OptionsController, Assembly-CSharp
+        m_MethodName: ToggleCheckMark
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3182,11 +3182,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4abd1e97f7f64c64badb29abd27891bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkMark: {fileID: 2605753800641985410}
-  musicVolSlider: {fileID: 5669328167644140726}
-  sfxVolSlider: {fileID: 6670206970594604876}
-  uiVolSlider: {fileID: 2642029444388704681}
-  videoSlider: {fileID: 5512113395739676700}
+  CheckMark: {fileID: 2605753800641985410}
+  MusicVolSlider: {fileID: 5669328167644140726}
+  SfxVolSlider: {fileID: 6670206970594604876}
+  UiVolSlider: {fileID: 2642029444388704681}
+  VideoSlider: {fileID: 5512113395739676700}
 --- !u!1 &1345583977117197403
 GameObject:
   m_ObjectHideFlags: 0
@@ -3868,11 +3868,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4abd1e97f7f64c64badb29abd27891bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkMark: {fileID: 2605753800641985410}
-  musicVolSlider: {fileID: 5669328167644140726}
-  sfxVolSlider: {fileID: 6670206970594604876}
-  uiVolSlider: {fileID: 2642029444388704681}
-  videoSlider: {fileID: 5512113395739676700}
+  CheckMark: {fileID: 2605753800641985410}
+  MusicVolSlider: {fileID: 5669328167644140726}
+  SfxVolSlider: {fileID: 6670206970594604876}
+  UiVolSlider: {fileID: 2642029444388704681}
+  VideoSlider: {fileID: 5512113395739676700}
 --- !u!1 &1687714391246426089
 GameObject:
   m_ObjectHideFlags: 0
@@ -11329,8 +11329,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3265503081047878199}
-        m_TargetAssemblyTypeName: ColorBlindCheckBox, Assembly-CSharp
-        m_MethodName: setMusicVolume
+        m_TargetAssemblyTypeName: OptionsController, Assembly-CSharp
+        m_MethodName: SetMusicVolume
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11352,11 +11352,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4abd1e97f7f64c64badb29abd27891bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkMark: {fileID: 2605753800641985410}
-  musicVolSlider: {fileID: 5669328167644140726}
-  sfxVolSlider: {fileID: 6670206970594604876}
-  uiVolSlider: {fileID: 2642029444388704681}
-  videoSlider: {fileID: 5512113395739676700}
+  CheckMark: {fileID: 2605753800641985410}
+  MusicVolSlider: {fileID: 5669328167644140726}
+  SfxVolSlider: {fileID: 6670206970594604876}
+  UiVolSlider: {fileID: 2642029444388704681}
+  VideoSlider: {fileID: 5512113395739676700}
 --- !u!1 &4365923230534106531
 GameObject:
   m_ObjectHideFlags: 0
@@ -13660,11 +13660,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4abd1e97f7f64c64badb29abd27891bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkMark: {fileID: 2605753800641985410}
-  musicVolSlider: {fileID: 5669328167644140726}
-  sfxVolSlider: {fileID: 6670206970594604876}
-  uiVolSlider: {fileID: 2642029444388704681}
-  videoSlider: {fileID: 5512113395739676700}
+  CheckMark: {fileID: 2605753800641985410}
+  MusicVolSlider: {fileID: 5669328167644140726}
+  SfxVolSlider: {fileID: 6670206970594604876}
+  UiVolSlider: {fileID: 2642029444388704681}
+  VideoSlider: {fileID: 5512113395739676700}
 --- !u!1 &5319946133590872728
 GameObject:
   m_ObjectHideFlags: 0
@@ -14760,11 +14760,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4abd1e97f7f64c64badb29abd27891bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkMark: {fileID: 2605753800641985410}
-  musicVolSlider: {fileID: 5669328167644140726}
-  sfxVolSlider: {fileID: 6670206970594604876}
-  uiVolSlider: {fileID: 2642029444388704681}
-  videoSlider: {fileID: 5512113395739676700}
+  CheckMark: {fileID: 2605753800641985410}
+  MusicVolSlider: {fileID: 5669328167644140726}
+  SfxVolSlider: {fileID: 6670206970594604876}
+  UiVolSlider: {fileID: 2642029444388704681}
+  VideoSlider: {fileID: 5512113395739676700}
 --- !u!1 &5657426830867328170
 GameObject:
   m_ObjectHideFlags: 0
@@ -22439,8 +22439,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 0}
-  m_sharedMaterial: {fileID: 0}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -22459,19 +22459,19 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: -99
+  m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 0
-  m_fontSizeMin: 0
-  m_fontSizeMax: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -22480,17 +22480,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 0
+  m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 0
+  m_enableKerning: 1
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
   m_parseCtrlCharacters: 1
-  m_isOrthographic: 0
+  m_isOrthographic: 1
   m_isCullingEnabled: 0
   m_horizontalMapping: 0
   m_verticalMapping: 0
