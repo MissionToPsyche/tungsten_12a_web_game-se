@@ -57942,22 +57942,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3948003671661331134, guid: d2a821454870094469cb8a9be4d837ec, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.9095951
-      objectReference: {fileID: 0}
-    - target: {fileID: 3948003671661331134, guid: d2a821454870094469cb8a9be4d837ec, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.2545704
-      objectReference: {fileID: 0}
-    - target: {fileID: 3948003671661331134, guid: d2a821454870094469cb8a9be4d837ec, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.0948
-      objectReference: {fileID: 0}
-    - target: {fileID: 3948003671661331134, guid: d2a821454870094469cb8a9be4d837ec, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.082
-      objectReference: {fileID: 0}
     - target: {fileID: 9116578824788770093, guid: d2a821454870094469cb8a9be4d837ec, type: 3}
       propertyPath: m_Name
       value: Combo_2 In
@@ -62470,14 +62454,6 @@ PrefabInstance:
     - target: {fileID: 4590503176572477457, guid: fd11c07f7542c254a8cb7de869704f73, type: 3}
       propertyPath: m_Name
       value: Landing Out
-      objectReference: {fileID: 0}
-    - target: {fileID: 7739462625316779031, guid: fd11c07f7542c254a8cb7de869704f73, type: 3}
-      propertyPath: m_Name
-      value: 02_Landing Out
-      objectReference: {fileID: 0}
-    - target: {fileID: 7739462625316779031, guid: fd11c07f7542c254a8cb7de869704f73, type: 3}
-      propertyPath: m_TagString
-      value: TransitionObjectOut
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
