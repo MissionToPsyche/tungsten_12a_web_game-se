@@ -23,7 +23,7 @@ public class Thruster_State : BaseState
             { (short)SceneObject.Checkpoint1,  false }, // `false` for not activated
             { (short)SceneObject.Checkpoint2,  false },
             { (short)SceneObject.Checkpoint3,  false },
-            { (short)SceneObject.Copper1,      true },
+            { (short)SceneObject.Iron1,        true },
             { (short)SceneObject.Gold1,        true },
             { (short)SceneObject.Gold2,        true },
             { (short)SceneObject.Gold3,        true },
@@ -45,7 +45,7 @@ public class Thruster_State : BaseState
         Checkpoint1     = 1,
         Checkpoint2     = 2,
         Checkpoint3     = 3,
-        Copper1         = 4,
+        Iron1           = 4,
         Gold1           = 5,
         Gold2           = 6,
         Gold3           = 7,
@@ -64,7 +64,7 @@ public class Thruster_State : BaseState
             "checkpoint 1"          => (short)SceneObject.Checkpoint1,
             "checkpoint 2"          => (short)SceneObject.Checkpoint2,
             "checkpoint 3"          => (short)SceneObject.Checkpoint3,
-            "element_copper 1"      => (short)SceneObject.Copper1,
+            "element_iron 1"        => (short)SceneObject.Iron1,
             "element_gold 1"        => (short)SceneObject.Gold1,
             "element_gold 2"        => (short)SceneObject.Gold2,
             "element_gold 3"        => (short)SceneObject.Gold3,
@@ -85,7 +85,7 @@ public class Thruster_State : BaseState
             (short)SceneObject.Checkpoint1 => "Checkpoint 1",
             (short)SceneObject.Checkpoint2 => "Checkpoint 2",
             (short)SceneObject.Checkpoint3 => "Checkpoint 3",
-            (short)SceneObject.Copper1     => "Element_Copper 1",
+            (short)SceneObject.Iron1       => "Element_Iron 1",
             (short)SceneObject.Gold1       => "Element_Gold 1",
             (short)SceneObject.Gold2       => "Element_Gold 2",
             (short)SceneObject.Gold3       => "Element_Gold 3",
@@ -156,7 +156,7 @@ public class Thruster_State : BaseState
                     }
                     break;
 
-                case (short)SceneObject.Copper1:
+                case (short)SceneObject.Iron1:
                     {
                         bool value = (bool)pair.Value;
                         if (!value)
