@@ -163,7 +163,7 @@ public class PlayerCollisionManager : MonoBehaviour
         switch (MatchTag(other.gameObject.tag))
         {
             case CollisionTag.Hazard:
-                PlayerController.playerDeath.Hazard(other);
+                PlayerController.playerDeath.Hazard();
                 break;
             case CollisionTag.Spikes:
                 PlayerController.playerDeath.Spikes();
@@ -185,13 +185,13 @@ public class PlayerCollisionManager : MonoBehaviour
             case CollisionTag.Element:
                 PlayerController.inventoryManager.AddElement(other.name, 1);
                 Destroy(other.gameObject);
-                GameController.Instance.AudioManager.pickupElement.Play();
+                GameController.Instance.AudioManager.PickupElement.Play();
                 break;
 
             case CollisionTag.Tool:
                 PlayerController.inventoryManager.ToolPickUp(other.name);
                 Destroy(other.gameObject);
-                GameController.Instance.AudioManager.pickupTool.Play();
+                GameController.Instance.AudioManager.PickupTool.Play();
                 break;
 
             case CollisionTag.Checkpoint:

@@ -102,7 +102,7 @@ public class Combo3_State : BaseState
                         if (value)
                         {
                             Checkpoint targetObject = GameObject.Find(objectName).GetComponent<Checkpoint>();
-                            targetObject.isSpinning = value;
+                            targetObject.IsSpinning = value;
                         }
                     }
                     break;
@@ -113,7 +113,7 @@ public class Combo3_State : BaseState
                         if (value)
                         {
                             Checkpoint targetObject = GameObject.Find(objectName).GetComponent<Checkpoint>();
-                            targetObject.isSpinning = value;
+                            targetObject.IsSpinning = value;
                         }
                     }
                     break;
@@ -124,7 +124,7 @@ public class Combo3_State : BaseState
                         if (value)
                         {
                             Checkpoint targetObject = GameObject.Find(objectName).GetComponent<Checkpoint>();
-                            targetObject.isSpinning = value;
+                            targetObject.IsSpinning = value;
                         }
                     }
                     break;
