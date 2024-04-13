@@ -47,4 +47,26 @@ public class TitleScreenManager : MonoBehaviour {
         CurSubmenu = null;
         MainMenu.SetActive(true);
     }
+
+    public void OpenLink(string source)
+    {
+        switch (source)
+        {
+            case "Bensound":
+                Application.OpenURL("https://www.bensound.com/free-music-for-videos");
+                //License code: UD7WUXTB2NG5WX73
+                break;
+            case "Pixabay":
+                Application.OpenURL("https://pixabay.com/sound-effects/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=80241");
+                break;
+            case "PixelAdventure":
+                Application.OpenURL("https://assetstore.unity.com/packages/2d/characters/pixel-adventure-1-155360");
+                break;
+            case "PixelSpace":
+                Application.OpenURL("https://assetstore.unity.com/packages/2d/characters/free-pixel-space-platform-pack-146318");
+                break;
+            default:
+                break;
+        }
+    }
 }
