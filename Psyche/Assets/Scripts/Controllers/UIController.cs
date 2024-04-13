@@ -49,10 +49,7 @@ public class UIController : BaseController<UIController>
         _devConsoleResourcePanel.SetActive(false);
 
         //Specific to this class
-        _aspectRatio = (float)Screen.width / Screen.height; //<-- Use this to adjust UI layout/positioning
-
-        //TODO: add child components
-        //battPerText = GetComponent<TMP_Text>();
+        _aspectRatio = (float)Screen.width / Screen.height;
     }
 
     /// <summary>
@@ -248,7 +245,7 @@ public class UIController : BaseController<UIController>
             Color newColor = elements[elementIndex].color;
             newColor.a = 1f;
             elements[elementIndex].color = newColor;
-            GameController.Instance.AudioManager.pickupElementTungsten.Play();
+            GameController.Instance.AudioManager.PickupElementTungsten.Play();
         }
     }
 
@@ -332,7 +329,7 @@ public class UIController : BaseController<UIController>
     /// </summary>
     public void playButtonSound()
     {
-        GameController.Instance.AudioManager.buttonClick.Play();
+        GameController.Instance.AudioManager.ButtonClick.Play();
     }
 
     //========================================================== UI ==========================================================
@@ -445,13 +442,15 @@ public class UIController : BaseController<UIController>
     /// Also closes elements menu if active
     /// </summary>
     public void closeSubmenu()
-    {   
-        if (elementsMenu.activeSelf) {
+    {
+        if (elementsMenu.activeSelf)
+        {
             elementsMenu.SetActive(false);
-            GameController.Instance.AudioManager.UnmuteAudio(
-                GameController.Instance.AudioManager.backgroundMusic);
+            optionsMenu.GetComponent<OptionsController>().SetMusicUnmute();
             openSubmenu(upgradesMenu);
-        } else {
+        }
+        else
+        {
             curSubmenu.SetActive(false);
             curSubmenu = null;
             inventoryMenu.SetActive(true);
@@ -556,10 +555,10 @@ public class UIController : BaseController<UIController>
         float soundDuration = 3.0f;
         AudioSource audioSource = PlayerController.Instance.inventoryManager.MatchTool(toolName) switch
         {
-            InventoryManager.Tool.Imager => GameController.Instance.AudioManager.toolImager,
-            InventoryManager.Tool.SolarArray => GameController.Instance.AudioManager.buttonClick,
-            InventoryManager.Tool.Thruster => GameController.Instance.AudioManager.toolThrusters,
-            InventoryManager.Tool.Electromagnet => GameController.Instance.AudioManager.toolEMagnet,
+            InventoryManager.Tool.Imager => GameController.Instance.AudioManager.ToolImager,
+            InventoryManager.Tool.SolarArray => GameController.Instance.AudioManager.ButtonClick,
+            InventoryManager.Tool.Thruster => GameController.Instance.AudioManager.ToolThrusters,
+            InventoryManager.Tool.Electromagnet => GameController.Instance.AudioManager.ToolEMagnet,
             _ => null,
         };
         if (audioSource != null)
@@ -676,15 +675,15 @@ public class UIController : BaseController<UIController>
                     case "thruster":
                         thrusterUpgradeButton.gameObject.SetActive(false);
                         thrusterLevel.transform.position = new Vector3(
-                            thrusterLevel.transform.position.x, 
-                            thrusterRequirementsList.gameObject.transform.position.y, 
+                            thrusterLevel.transform.position.x,
+                            thrusterRequirementsList.gameObject.transform.position.y,
                             thrusterLevel.transform.position.z);
                         break;
                     case "solararray":
                         solarArrayUpgradeButton.gameObject.SetActive(false);
                         solarArrayLevel.transform.position = new Vector3(
-                            solarArrayLevel.transform.position.x, 
-                            solarArrayRequirementsList.gameObject.transform.position.y,  
+                            solarArrayLevel.transform.position.x,
+                            solarArrayRequirementsList.gameObject.transform.position.y,
                             solarArrayLevel.transform.position.z);
                         break;
                     case "imager":
