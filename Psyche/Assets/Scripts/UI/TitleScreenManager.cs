@@ -15,7 +15,7 @@ public class TitleScreenManager : MonoBehaviour {
     public void StartGame()
     {
         //Play button click sound
-        GameController.Instance.AudioManager.buttonClick.Play();
+        GameController.Instance.AudioManager.ButtonClick.Play();
 
         // Load the scene
         // Set the value this way so if any changes are made they are accounted for
@@ -31,7 +31,7 @@ public class TitleScreenManager : MonoBehaviour {
     public void OpenSubmenu(GameObject submenu)
     {
         //Play button click sound
-        GameController.Instance.AudioManager.buttonClick.Play();
+        GameController.Instance.AudioManager.ButtonClick.Play();
 
         CurSubmenu = submenu;
         MainMenu.SetActive(false);
