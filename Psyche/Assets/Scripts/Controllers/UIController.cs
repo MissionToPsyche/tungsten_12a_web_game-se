@@ -70,7 +70,7 @@ public class UIController : BaseController<UIController>
     public void Update()
     {
         //MOVE TO GAMECONTROLLER WHEN NO LONGER STARTING FROM SAMPLESCENE
-        if (Input.GetButtonDown("DevConsole"))  //Activate the dev Console
+        if (Input.GetButtonDown("DevConsole") || _devConsolePanel.activeSelf && Input.GetButtonDown("Inventory"))  //Activate the dev Console
         {
             _devConsolePanel.SetActive(!_devConsolePanel.activeSelf); //shows panel
             PlayerController.Instance.inputBlocked = _devConsolePanel.activeSelf; //blocks movement
