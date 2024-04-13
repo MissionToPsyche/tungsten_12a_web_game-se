@@ -1,7 +1,7 @@
 /** 
 Description: Gamma Ray Neutron Spectrometer Gamma View Script
 Author: blopezro
-Version: 20240326
+Version: 20240410
 **/
 
 using System;
@@ -19,26 +19,26 @@ public class GammaView : MonoBehaviour
 {
 
     /* arrays and lists that hold data of the grns */
-    public List<GameObject> sceneObjects;            // holds all current game objects in the scene
-    public List<SpriteRenderer> spriteRenderersList; // holds all sprite renderers of game objects
-    public Color[] origColorArray;                   // holds original colors of the sprite renderers
-    public List<GameObject> colorBlindModeObjects;   // holds objects stored for assistance with color blindness
+    public List<GameObject> SceneObjects;            // holds all current game objects in the scene
+    public List<SpriteRenderer> SpriteRenderersList; // holds all sprite renderers of game objects
+    public Color[] OrigColorArray;                   // holds original colors of the sprite renderers
+    public List<GameObject> ColorBlindModeObjects;   // holds objects stored for assistance with color blindness
     /* scene light */
-    public Light2D sceneLight;                       // light in the current scene
-    public float origSceneLightIntensity;            // light intensity of the scene
-    public bool grnsControlsSceneLight = false;      // boolean to set if grns will influence scene light    
+    public Light2D SceneLight;                       // light in the current scene
+    public float OrigSceneLightIntensity;            // light intensity of the scene
+    public bool GrnsControlsSceneLight = false;      // boolean to set if grns will influence scene light    
     /* scene terrain */
-    public Tilemap sceneTilemap;                     // tilemap of terrain component in current scene
-    public Tilemap sceneTilemapFake;                 // tilemap of fake terrain component in current scene
-    public Color origSceneTilemapColor;              // terrain color of the scene
+    public Tilemap SceneTilemap;                     // tilemap of terrain component in current scene
+    public Tilemap SceneTilemapFake;                 // tilemap of fake terrain component in current scene
+    public Color OrigSceneTilemapColor;              // terrain color of the scene
     /* scene background image */
-    public SpriteRenderer sceneBackground;           // background image in current scene
-    public Color origSceneBackgroundColor;           // background color of the scene
+    public SpriteRenderer SceneBackground;           // background image in current scene
+    public Color OrigSceneBackgroundColor;           // background color of the scene
     /* other variables */
-    public Color defaultColor = Color.green;         // default color to use when default layer is used
-    public bool colorBlindMode;                      // color blind mode boolean
-    public bool colorBlindModeNames = true;          // boolean to set if color blind mode will set layer name vice number
-    public Camera mainCamera;                        // scene camera used to only load objects within view
+    public Color DefaultColor = Color.green;         // default color to use when default layer is used
+    public bool ColorBlindMode;                      // color blind mode boolean
+    public bool ColorBlindModeNames = true;          // boolean to set if color blind mode will set layer name vice number
+    public Camera MainCamera;                        // scene camera used to only load objects within view
 
     /// <summary>
     /// Subscribes to the SceneManager.sceneLoaded event
@@ -59,26 +59,26 @@ public class GammaView : MonoBehaviour
     /// <summary>
     /// Runs each time a new scene is loaded
     /// </summary>
-    /// <param name="scene"></param>
-    /// <param name="mode"></param>
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    /// <param name="Scene"></param>
+    /// <param name="Mode"></param>
+    void OnSceneLoaded(Scene Scene, LoadSceneMode Mode)
     {
-        GameStateManager.Scene GameStateManagerSn = GameController.Instance.GameStateManager.MatchScene(scene.name);
+        GameStateManager.Scene GameStateManagerSn = GameController.Instance.GameStateManager.MatchScene(Scene.name);
         if (GameStateManagerSn != GameStateManager.Scene.Outro)
         {
-            sceneLight = GameObject.FindGameObjectWithTag("SceneLight").GetComponent<Light2D>();
-            sceneTilemap = GameObject.FindGameObjectWithTag("Terrain").GetComponent<Tilemap>();
+            SceneLight = GameObject.FindGameObjectWithTag("SceneLight").GetComponent<Light2D>();
+            SceneTilemap = GameObject.FindGameObjectWithTag("Terrain").GetComponent<Tilemap>();
             if (GameStateManagerSn == GameStateManager.Scene.EMagnet
                 || GameStateManagerSn == GameStateManager.Scene.Combo1
-                || GameStateManagerSn == GameStateManager.Scene.Combo3) 
+                || GameStateManagerSn == GameStateManager.Scene.Combo3)
             {
-                sceneTilemapFake = GameObject.FindGameObjectWithTag("FakeTerrain").GetComponent<Tilemap>();
+                SceneTilemapFake = GameObject.FindGameObjectWithTag("FakeTerrain").GetComponent<Tilemap>();
             }
 
-            sceneBackground = GameObject.FindGameObjectWithTag("Background").GetComponent<SpriteRenderer>();
-            origSceneLightIntensity = sceneLight.intensity;
-            origSceneTilemapColor = sceneTilemap.color;
-            origSceneBackgroundColor = sceneBackground.color;
+            SceneBackground = GameObject.FindGameObjectWithTag("Background").GetComponent<SpriteRenderer>();
+            OrigSceneLightIntensity = SceneLight.intensity;
+            OrigSceneTilemapColor = SceneTilemap.color;
+            OrigSceneBackgroundColor = SceneBackground.color;
 
             if (GameStateManagerSn != GameStateManager.Scene.Landing)
             {
@@ -102,31 +102,31 @@ public class GammaView : MonoBehaviour
     void Initialize()
     {
         // sets main camera for use during objects in view capture
-        if (mainCamera == null)
+        if (MainCamera == null)
         {
-            mainCamera = Camera.main;
+            MainCamera = Camera.main;
         }
 
         // capture only objects within cameras view in scene
-        sceneObjects = CaptureObjectsInView();
-        CaptureSpriteRenderers(sceneObjects);
+        SceneObjects = CaptureObjectsInView();
+        CaptureSpriteRenderers(SceneObjects);
 
         // resizes based on sprite renderers in the scene
-        Array.Resize(ref origColorArray, spriteRenderersList.Count);
+        Array.Resize(ref OrigColorArray, SpriteRenderersList.Count);
 
         // captures original colors of sprites
-        for (int i = 0; i < spriteRenderersList.Count; i++)
+        for (int i = 0; i < SpriteRenderersList.Count; i++)
         {
-            origColorArray[i] = spriteRenderersList[i].color;
+            OrigColorArray[i] = SpriteRenderersList[i].color;
         }
 
         // apply modifications to sprites when color blind mode is enabled
-        colorBlindMode = GameController.Instance.ColorBlindMode;
-        if (colorBlindMode)
+        ColorBlindMode = GameController.Instance.ColorBlindMode;
+        if (ColorBlindMode)
         {
-            foreach (var spriteRenderer in spriteRenderersList)
+            foreach (var SpriteRenderer in SpriteRenderersList)
             {
-                ApplyColorBlindModifications(spriteRenderer);
+                ApplyColorBlindModifications(SpriteRenderer);
             }
         }
 
@@ -145,28 +145,28 @@ public class GammaView : MonoBehaviour
         SpriteRenderer[] sprites = FindObjectsOfType<SpriteRenderer>();
         foreach (SpriteRenderer sprite in sprites)
         {
-            GameObject obj = sprite.gameObject;
+            GameObject Obj = sprite.gameObject;
             // check if the object is within the camera's viewport
             // and that it does not have layer 5 (UI) or 16 (GRNS_Ignore)
-            if (IsObjectInView(obj) && !obj.layer.Equals(5))
+            if (IsObjectInView(Obj) && !Obj.layer.Equals(5))
             {
                 // add the object to the list for scanning or processing
-                objectsInView.Add(obj);
+                objectsInView.Add(Obj);
             }
         }
         return objectsInView;
     }
 
     /// <summary>
-    /// Checks if obj is within bounds
+    /// Checks if Obj is within bounds
     /// </summary>
-    /// <param name="obj"></param>
+    /// <param name="Obj"></param>
     /// <returns></returns>
-    bool IsObjectInView(GameObject obj)
+    bool IsObjectInView(GameObject Obj)
     {
-        Bounds bounds = obj.GetComponent<SpriteRenderer>().bounds;
+        Bounds bounds = Obj.GetComponent<SpriteRenderer>().bounds;
         Vector3 objectPosition = bounds.center;
-        Vector3 screenPoint = mainCamera.WorldToViewportPoint(objectPosition);
+        Vector3 screenPoint = MainCamera.WorldToViewportPoint(objectPosition);
         return screenPoint.x >= 0 && screenPoint.x <= 1 && screenPoint.y >= 0 && screenPoint.y <= 1;
     }
 
@@ -176,20 +176,20 @@ public class GammaView : MonoBehaviour
     public void ActivateGRNS()
     {
         Initialize(); //DebugReportLog();
-        for (int i = 0; i < spriteRenderersList.Count; i++)
+        for (int i = 0; i < SpriteRenderersList.Count; i++)
         {
-            if (spriteRenderersList[i] != null)
+            if (SpriteRenderersList[i] != null)
             {
-                spriteRenderersList[i].color = LayerColor(spriteRenderersList[i].gameObject);
+                SpriteRenderersList[i].color = LayerColor(SpriteRenderersList[i].gameObject);
                 if (Input.GetButtonDown("FireGRNS"))
                 {
-                    GameController.Instance.AudioManager.toolGRNS.Play();
+                    GameController.Instance.AudioManager.ToolGRNS.Play();
                 }
-                if (colorBlindMode)
-                { 
+                if (ColorBlindMode)
+                {
                     ActivateGRNSaltView();
                 }
-                if (!sceneLight.intensity.Equals(1) && grnsControlsSceneLight)
+                if (!SceneLight.intensity.Equals(1) && GrnsControlsSceneLight)
                 {
                     TurnOnSceneLight();
                 }
@@ -202,20 +202,20 @@ public class GammaView : MonoBehaviour
     /// </summary>
     public void DeactivateGRNS()
     {
-        for (int i = 0; i < spriteRenderersList.Count; i++)
+        for (int i = 0; i < SpriteRenderersList.Count; i++)
         {
-            if (spriteRenderersList[i] != null)
+            if (SpriteRenderersList[i] != null)
             {
-                spriteRenderersList[i].color = origColorArray[i];
+                SpriteRenderersList[i].color = OrigColorArray[i];
                 if (Input.GetButtonUp("FireGRNS"))
                 {
-                    GameController.Instance.AudioManager.toolGRNS.Stop();
+                    GameController.Instance.AudioManager.ToolGRNS.Stop();
                 }
-                if (colorBlindMode) 
+                if (ColorBlindMode)
                 {
-                    DeactivateGRNSaltView(); 
+                    DeactivateGRNSaltView();
                 }
-                if (!sceneLight.intensity.Equals(origSceneLightIntensity) && grnsControlsSceneLight)
+                if (!SceneLight.intensity.Equals(OrigSceneLightIntensity) && GrnsControlsSceneLight)
                 {
                     RevertSceneLight();
                 }
@@ -229,7 +229,7 @@ public class GammaView : MonoBehaviour
     /// </summary>
     void TurnOnSceneLight()
     {
-        sceneLight.intensity = 1;
+        SceneLight.intensity = 1;
     }
 
     /// <summary>
@@ -237,7 +237,7 @@ public class GammaView : MonoBehaviour
     /// </summary>
     void TurnOffSceneLight()
     {
-        sceneLight.intensity = 0;
+        SceneLight.intensity = 0;
     }
 
     /// <summary>
@@ -245,20 +245,20 @@ public class GammaView : MonoBehaviour
     /// </summary>
     void RevertSceneLight()
     {
-        sceneLight.intensity = origSceneLightIntensity;
+        SceneLight.intensity = OrigSceneLightIntensity;
     }
 
     /// <summary>
     /// Adds to the list the sprite renderers from the game objects in the scene
     /// </summary>
-    /// <param name="sceneObjects"></param>
-    void CaptureSpriteRenderers(List<GameObject> sceneObjects)
+    /// <param name="SceneObjects"></param>
+    void CaptureSpriteRenderers(List<GameObject> SceneObjects)
     {
-        foreach (GameObject obj in sceneObjects)
+        foreach (GameObject Obj in SceneObjects)
         {
-            if (obj.GetComponent(typeof(SpriteRenderer)))
+            if (Obj.GetComponent(typeof(SpriteRenderer)))
             {
-                spriteRenderersList.Add((SpriteRenderer)obj.GetComponent(typeof(SpriteRenderer)));
+                SpriteRenderersList.Add((SpriteRenderer)Obj.GetComponent(typeof(SpriteRenderer)));
             }
         }
     }
@@ -266,46 +266,46 @@ public class GammaView : MonoBehaviour
     /// <summary>
     /// Returns the game objects layer
     /// </summary>
-    /// <param name="obj"></param>
+    /// <param name="Obj"></param>
     /// <returns></returns>
-    int GetLayer(GameObject obj)
+    int GetLayer(GameObject Obj)
     {
-        return obj.layer;
+        return Obj.layer;
     }
 
     /// <summary>
     /// Returns set color for the layer
     /// </summary>
-    /// <param name="obj"></param>
+    /// <param name="Obj"></param>
     /// <returns></returns>
-    Color LayerColor(GameObject obj)
+    Color LayerColor(GameObject Obj)
     {
         // if colorblind mode return clear or default color
-        if (colorBlindMode)
+        if (ColorBlindMode)
         {
-            return obj.layer switch
+            return Obj.layer switch
             {
                 15 => Color.clear,
-                _ => defaultColor,
+                _ => DefaultColor,
             };
         }
         else
         {
-            return obj.layer switch
+            return Obj.layer switch
             {
                 // User Layers within Unity are 3 and 6-31                
-                3 => Color.green,  // Terrain
-                6 => Color.red,    // Titanium
-                7 => Color.yellow, // Iron
-                8 => Color.black,  // Cave
-                9 => Color.grey,   // Nickel
+                3 => Color.green,   // Terrain
+                6 => Color.red,     // Titanium
+                7 => Color.yellow,  // Iron
+                8 => Color.black,   // Cave
+                9 => Color.grey,    // Nickel
                 10 => Color.blue,   // Copper
                 11 => Color.gray,   // Silver
                 12 => Color.magenta,// Tungsten
                 13 => Color.white,  // Platinum
                 14 => Color.cyan,   // Gold
                 15 => Color.clear,  // Clear
-                _ => defaultColor,
+                _ => DefaultColor,
             };
         }
     }
@@ -314,66 +314,66 @@ public class GammaView : MonoBehaviour
     /// Modifies game object properties to assist with color blind players
     /// by displaying the layers text vice a new color
     /// </summary>
-    /// <param name="spriteRenderer"></param>
-    void ApplyColorBlindModifications(SpriteRenderer spriteRenderer)
+    /// <param name="SpriteRenderer"></param>
+    void ApplyColorBlindModifications(SpriteRenderer SpriteRenderer)
     {
-        if (colorBlindMode)
+        if (ColorBlindMode)
         {
-            GameObject gameObject = spriteRenderer.gameObject;      // get current game object
-            int layerNum = gameObject.layer;                        // get layer number of game object
-            string layerName = LayerMask.LayerToName(layerNum);     // get layer name of game object
+            GameObject gameObject = SpriteRenderer.gameObject;      // get current game object
+            int LayerNum = gameObject.layer;                        // get layer number of game object
+            string LayerName = LayerMask.LayerToName(LayerNum);     // get layer name of game object
 
             // create game object to display text and anchor in center
-            GameObject grnsTextObject = new GameObject("GRNS_ColorBlindMode");
-            TextMesh textMesh = grnsTextObject.AddComponent<TextMesh>();
+            GameObject GrnsTextObject = new GameObject("GRNS_ColorBlindMode");
+            TextMesh TextMesh = GrnsTextObject.AddComponent<TextMesh>();
 
             // initially set to false until GRNS is activated
-            grnsTextObject.SetActive(false);
-            colorBlindModeObjects.Add(grnsTextObject);
+            GrnsTextObject.SetActive(false);
+            ColorBlindModeObjects.Add(GrnsTextObject);
 
             // set the text and game object properties
-            SetTextMeshProperties(textMesh, layerNum, layerName);
-            SetTextObjProperties(grnsTextObject, spriteRenderer);
+            SetTextMeshProperties(TextMesh, LayerNum, LayerName);
+            SetTextObjProperties(GrnsTextObject, SpriteRenderer);
         }
     }
 
     /// <summary>
     /// Sets the text properties of the given text mesh
     /// </summary>
-    /// <param name="textMesh"></param>
-    /// <param name="layerNum"></param>
-    /// <param name="layerName"></param>
-    public void SetTextMeshProperties(TextMesh textMesh, int layerNum, String layerName)
+    /// <param name="TextMesh"></param>
+    /// <param name="LayerNum"></param>
+    /// <param name="LayerName"></param>
+    public void SetTextMeshProperties(TextMesh TextMesh, int LayerNum, String LayerName)
     {
         // text properties based on layer number
-        textMesh.text = layerNum switch
+        TextMesh.text = LayerNum switch
         {
             <= 5 or >= 15 => "", // layers to ignore for labeling
             // else displays text based on bool? true:false
-            _ => colorBlindModeNames ? layerName.ToString() : layerNum.ToString(),
+            _ => ColorBlindModeNames ? LayerName.ToString() : LayerNum.ToString(),
         };
-        textMesh.characterSize = 0.15f;
-        textMesh.fontSize = 30;
-        textMesh.font = Resources.Load<Font>("");
-        textMesh.color = Color.yellow;
-        textMesh.anchor = TextAnchor.MiddleCenter;
+        TextMesh.characterSize = 0.15f;
+        TextMesh.fontSize = 30;
+        TextMesh.font = Resources.Load<Font>("");
+        TextMesh.color = Color.yellow;
+        TextMesh.anchor = TextAnchor.MiddleCenter;
     }
 
     /// <summary>
     /// Sets the game object properties
     /// </summary>
-    /// <param name="grnsTextObject"></param>
-    /// <param name="spriteRenderer"></param>
-    public void SetTextObjProperties(GameObject grnsTextObject, SpriteRenderer spriteRenderer)
+    /// <param name="GrnsTextObject"></param>
+    /// <param name="SpriteRenderer"></param>
+    public void SetTextObjProperties(GameObject GrnsTextObject, SpriteRenderer SpriteRenderer)
     {
         // set the text object as a child of the sprite renderer
-        grnsTextObject.transform.parent = spriteRenderer.transform;
+        GrnsTextObject.transform.parent = SpriteRenderer.transform;
         // position at the center and rotate 45 degrees
-        grnsTextObject.transform.position = spriteRenderer.transform.position;
-        grnsTextObject.transform.Rotate(new Vector3(0, 0, 45));
+        GrnsTextObject.transform.position = SpriteRenderer.transform.position;
+        GrnsTextObject.transform.Rotate(new Vector3(0, 0, 45));
         // set sorting layer and order to view text in front of game object
-        grnsTextObject.GetComponent<Renderer>().sortingLayerName = "UI";
-        grnsTextObject.GetComponent<Renderer>().sortingOrder = 1;
+        GrnsTextObject.GetComponent<Renderer>().sortingLayerName = "UI";
+        GrnsTextObject.GetComponent<Renderer>().sortingOrder = 1;
     }
 
     /// <summary>
@@ -381,11 +381,11 @@ public class GammaView : MonoBehaviour
     /// </summary>
     void ActivateGRNSaltView()
     {
-        foreach (GameObject obj in colorBlindModeObjects)
+        foreach (GameObject Obj in ColorBlindModeObjects)
         {
-            if (obj != null)
+            if (Obj != null)
             {
-                obj.SetActive(true);
+                Obj.SetActive(true);
             }
         }
     }
@@ -395,12 +395,12 @@ public class GammaView : MonoBehaviour
     /// </summary>
     void DeactivateGRNSaltView()
     {
-        foreach (GameObject obj in colorBlindModeObjects)
+        foreach (GameObject Obj in ColorBlindModeObjects)
         {
-            if (obj != null)
+            if (Obj != null)
             {
-                obj.SetActive(false);
-                Destroy(obj);
+                Obj.SetActive(false);
+                Destroy(Obj);
             }
         }
     }
@@ -411,7 +411,7 @@ public class GammaView : MonoBehaviour
     void DebugReportLog()
     {
         Debug.Log("Objects captured, Sprite renderers captured, Orig color array length, Colorblind objects: "
-        + sceneObjects.Count + ", " + spriteRenderersList.Count + ", " + origColorArray.Length + ", " + colorBlindModeObjects.Count);
+        + SceneObjects.Count + ", " + SpriteRenderersList.Count + ", " + OrigColorArray.Length + ", " + ColorBlindModeObjects.Count);
     }
 
     /// <summary>
@@ -419,10 +419,10 @@ public class GammaView : MonoBehaviour
     /// </summary>
     void DeInitialize()
     {
-        sceneObjects.Clear();
-        spriteRenderersList.Clear();
-        origColorArray = new Color[0];
-        colorBlindModeObjects.Clear();
+        SceneObjects.Clear();
+        SpriteRenderersList.Clear();
+        OrigColorArray = new Color[0];
+        ColorBlindModeObjects.Clear();
         RevertTerrainAndBackgroundColor();
     }
 
@@ -431,9 +431,9 @@ public class GammaView : MonoBehaviour
     /// </summary>
     void ChangeTerrainAndBackgroundColor()
     {
-        if (sceneTilemap != null) { sceneTilemap.color = defaultColor; }
-        if (sceneTilemapFake != null) { sceneTilemapFake.color = LayerColor(sceneTilemapFake.gameObject); }
-        if (sceneBackground != null) { sceneBackground.color = defaultColor; }
+        if (SceneTilemap != null) { SceneTilemap.color = DefaultColor; }
+        if (SceneTilemapFake != null) { SceneTilemapFake.color = LayerColor(SceneTilemapFake.gameObject); }
+        if (SceneBackground != null) { SceneBackground.color = DefaultColor; }
     }
 
     /// <summary>
@@ -441,9 +441,9 @@ public class GammaView : MonoBehaviour
     /// </summary>
     void RevertTerrainAndBackgroundColor()
     {
-        if (sceneTilemap != null) { sceneTilemap.color = origSceneTilemapColor; }
-        if (sceneTilemapFake != null) { sceneTilemapFake.color = origSceneTilemapColor; }
-        if (sceneBackground != null) { sceneBackground.color = origSceneBackgroundColor; }
+        if (SceneTilemap != null) { SceneTilemap.color = OrigSceneTilemapColor; }
+        if (SceneTilemapFake != null) { SceneTilemapFake.color = OrigSceneTilemapColor; }
+        if (SceneBackground != null) { SceneBackground.color = OrigSceneBackgroundColor; }
     }
 
 }
