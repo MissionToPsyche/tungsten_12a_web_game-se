@@ -147,7 +147,7 @@ public class EMagnetManager : ToolManager {
             }
 
             yield return null;
-        } while (Input.GetButton("EMagnet") && !PlayerController.magnetInterrupt && PlayerController.solarArrayManager.BatteryPercent != 0);
+        } while (Input.GetButton("EMagnet") && !PlayerController.toolInterrupt && PlayerController.solarArrayManager.BatteryPercent != 0);
 
         GameController.Instance.AudioManager.ToolEMagnet.Stop();
         PlayerController.playerCharacter.gravityScale = curGrav;
