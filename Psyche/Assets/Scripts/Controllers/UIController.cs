@@ -246,7 +246,7 @@ public class UIController : BaseController<UIController>
         if (elementIndex >= 0 && elementIndex < elements.Length)
         {
             Color newColor = elements[elementIndex].color;
-            newColor.a = 1f;
+            newColor.a = 0.8f;
             elements[elementIndex].color = newColor;
             GameController.Instance.AudioManager.pickupElementTungsten.Play();
         }
