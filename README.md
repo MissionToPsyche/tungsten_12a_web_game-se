@@ -6,6 +6,11 @@
   <h1 align="center">M.I.S.T.</h1>
   <h6 align="center">magnetometer + imager + spectrometer + thruster</h6>
 
+  <img src="Psyche/Assets/Graphics/pick ups/tools/magnetometer.png" alt="magnetometer">
+  <img src="Psyche/Assets/Graphics/pick ups/tools/imager.png" alt="imager">
+  <img src="Psyche/Assets/Graphics/pick ups/tools/grs.png" alt="grns">
+  <img src="Psyche/Assets/Graphics/pick ups/tools/thruster.png" alt="thruster">
+
   <br><p4 align="center" ><i>Created by:</i></p4><br>
   <p5 align="center">Bryant Lopez Roman</p5><br>
   <p5 align="center">Dhalia Nguyen</p5><br>
@@ -18,14 +23,35 @@
 ## Overview
 <p>
 A futuristic adventure exploration 2D platformer using tools inspired by the Psyche spacecraft to navigate a new environment.
+In the far, distant future, after getting lost and crashing into the old Psyche spacecraft, a space delivery driver ends up
+stranded on the Psyche asteroid. Find elements throughout 7 unique levels to upgrade your tools, collect 8 tungsten pieces to
+fix up the ship, and get this poor delivery driver back on track!
+
+<div align="center">
+  <img src="Psyche/Assets/Graphics/Cutscenes/intro6.png" alt="opening cs6" width="384" height="216">
+  <img src="Psyche/Assets/Graphics/Cutscenes/outro2.png" alt="ending cs2" width="384" height="216">
+</div>
 
 ## Controls
 
-Movement  | Jump | Thrusters | Spectrometer | Emagnet | Magnetometer | Imager
-:---------: | :-----:| :----------:| :------------: | :-------: | :------------: | :------:
-WASD      | Spacebar(tap) | Spacebar(hold) | G | Left Click | Passive | Passive
+Movement  | Inventory | Jump | Thrusters | Spectrometer | Emagnet | Magnetometer | Imager
+:---------: | :-----: | :-----: | :----------:| :------------: | :-------: | :------------: | :------:
+WASD/Arrow Keys | ESC/Tab | Spacebar(tap) | Spacebar(hold)/T | Right Click/G | Left Click/E | Passive | Passive
 
-### Built With
+## Main Features
+
+- [x] 7 levels (+1 tutorial level) with tool-specific navigation
+- [x] Resource gathering and management
+- [x] Upgradable tool enhancements
+- [x] Links to educational NASA resources for the Psyche mission
+- [x] Developer console showing hardware specific benchmarks
+- [x] UI overlay
+- [x] Colorblind accessibility option
+- [x] Atmospheric audio integration
+- [x] Original storyline
+- [x] Custom artwork and animations
+
+## Built With
 
 * [![Unity][Unity.img]][Unity-url]
 * [![VS][VS.img]][VS-url]
@@ -33,18 +59,7 @@ WASD      | Spacebar(tap) | Spacebar(hold) | G | Left Click | Passive | Passive
 * [![Discord][Discord.img]][Discord-url]
 * [![Slack][Slack.img]][Slack-url]
 * [![Github][Github.img]][Github-url]
-
-### Main Features
-
-- [x] Resource gathering and management
-- [x] Developer console showing hardware specific benchmarks
-- [x] Multiple levels with tool-specific navigation
-- [x] Custom artwork and animations
-- [x] Links to educational NASA resources
-- [x] Colorblind accessibility options
-- [x] Upgradable tool enhancements
-- [x] UI overlay
-- [x] Atmospheric audio integration
+* [![Aseprite][Aseprite.img]][Aseprite-url]
 
 <!-- MARKDOWN LINKS & IMAGES -->
 [Unity-url]: https://unity.com/
@@ -60,3 +75,5 @@ WASD      | Spacebar(tap) | Spacebar(hold) | G | Left Click | Passive | Passive
 [Slack.img]: https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white
 [Github-url]: https://github.com/MissionToPsyche/tungsten_12a_web_game-se
 [Github.img]: https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white
+[Aseprite-url]: https://www.aseprite.org/
+[Aseprite.img]: https://img.shields.io/badge/Aesprite-7D929E?style=for-the-badge&logo=aseprite&logoColor=white
