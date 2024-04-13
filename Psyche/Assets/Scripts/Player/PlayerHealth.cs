@@ -1,7 +1,7 @@
 /** 
 Description: Player health script
 Author: blopezro
-Version: 20240326
+Version: 20240410
 **/
 
 using TMPro;
@@ -12,25 +12,24 @@ using UnityEngine;
 /// </summary>
 public class PlayerHealth : MonoBehaviour
 {
-    public int playerHealth;
-    public int amount;
-    public bool playerHealthZero;
-    public TMP_Text healthText;
-    public Sprite healthSpriteNormal;
-    public Sprite healthSpriteDamaged;
-    public Sprite healthSpriteCritical;
+    public int Health;
+    public bool PlayerHealthZero;
+    public TMP_Text HealthText;
+    public Sprite HealthSpriteNormal;
+    public Sprite HealthSpriteDamaged;
+    public Sprite HealthSpriteCritical;
 
     /// <summary>
     /// player health down by amount
     /// </summary>
-    /// <param name="amount"></param>
-    public void HealthDown(int amount)
+    /// <param name="Amount"></param>
+    public void HealthDown(int Amount)
     {
-        playerHealth -= amount;
-        playerHealth = Mathf.Clamp(playerHealth, 0, 5); // keeps between 0-5
-        if (playerHealth == 0)
+        Health -= Amount;
+        Health = Mathf.Clamp(Health, 0, 5); // keeps between 0-5
+        if (Health == 0)
         {
-            playerHealthZero = true;
+            PlayerHealthZero = true;
         }
         UpdateScene();
     }
@@ -38,14 +37,14 @@ public class PlayerHealth : MonoBehaviour
     /// <summary>
     /// player health up by amount
     /// </summary>
-    /// <param name="amount"></param>
-    public void HealthUp(int amount)
+    /// <param name="Amount"></param>
+    public void HealthUp(int Amount)
     {
-        playerHealth += amount;
-        playerHealth = Mathf.Clamp(playerHealth, 0, 5); // keeps between 0-5
-        if (playerHealth == 0)
+        Health += Amount;
+        Health = Mathf.Clamp(Health, 0, 5); // keeps between 0-5
+        if (Health == 0)
         {
-            playerHealthZero = true;
+            PlayerHealthZero = true;
         }
         UpdateScene();
     }
@@ -55,15 +54,15 @@ public class PlayerHealth : MonoBehaviour
     /// </summary>
     public void UpdateScene()
     {
-        healthText.text = playerHealth.ToString();
-        switch (healthText.text)
+        HealthText.text = Health.ToString();
+        switch (HealthText.text)
         {
             case "5":
-            case "4": gameObject.GetComponent<SpriteRenderer>().sprite = healthSpriteNormal; break;
+            case "4": gameObject.GetComponent<SpriteRenderer>().sprite = HealthSpriteNormal; break;
             case "3":
-            case "2": gameObject.GetComponent<SpriteRenderer>().sprite = healthSpriteDamaged; break;
+            case "2": gameObject.GetComponent<SpriteRenderer>().sprite = HealthSpriteDamaged; break;
             case "1":
-            case "0": gameObject.GetComponent<SpriteRenderer>().sprite = healthSpriteCritical; break;
+            case "0": gameObject.GetComponent<SpriteRenderer>().sprite = HealthSpriteCritical; break;
         }
     }
 
