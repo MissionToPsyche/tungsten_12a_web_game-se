@@ -48,7 +48,7 @@ public class PlayerController : BaseController<PlayerController>
     private bool usingThruster; //for animation purposes  // <--Implement boolean in thruster script
 
     //Booleans to prevent needless code runs
-    [HideInInspector] public bool eMagnetActive, magnetInterrupt, beingPulled, inputBlocked, beingWarped, enteringCave, exitingCave; //Create a dictionary or list to track these
+    [HideInInspector] public bool eMagnetActive, toolInterrupt, beingPulled, inputBlocked, beingWarped, enteringCave, exitingCave; //Create a dictionary or list to track these
 
     /// <summary>
     /// Initialize the object and parent class
@@ -137,7 +137,7 @@ public class PlayerController : BaseController<PlayerController>
         {
             //Call the requisite tool scripts here:
             //Thruster
-            if (inventoryManager.CheckTool("thruster") && Input.GetButton("Jump") && solarArrayManager.BatteryPercent != 0 && !beingPulled) {
+            if (inventoryManager.CheckTool("thruster") && Input.GetButton("Jump") && solarArrayManager.BatteryPercent != 0 && !beingPulled && !toolInterrupt) {
                 thrusterManager.Activate();
                 usingThruster = true;
                 solarArrayManager.DrainBatt(1);
@@ -156,7 +156,7 @@ public class PlayerController : BaseController<PlayerController>
             }
 
             //ElectroMagnet
-            if (inventoryManager.CheckTool("electromagnet") && Input.GetButton("EMagnet") && solarArrayManager.BatteryPercent != 0 && !eMagnetActive && !magnetInterrupt) {
+            if (inventoryManager.CheckTool("electromagnet") && Input.GetButton("EMagnet") && solarArrayManager.BatteryPercent != 0 && !eMagnetActive && !toolInterrupt) {
                 eMagnetManager.Activate();
             }
 
@@ -254,11 +254,11 @@ public class PlayerController : BaseController<PlayerController>
     /// <summary>
     /// Disables EMagnet for a bit when the player gets damaged
     /// </summary>
-    public IEnumerator interruptMagnet()
+    public IEnumerator interruptTools()
     {
-        magnetInterrupt = true;
+        toolInterrupt = true;
         yield return new WaitForSeconds(1);
-        magnetInterrupt = false;
+        toolInterrupt = false;
     }
 
     /// <summary>
