@@ -1,7 +1,7 @@
 /**
  * description: checkpoint script to ensure animation
  * Author: dnguye99, JoshBenn
- * version 20231125
+ * version 20240410
  */
 
 using UnityEngine;
@@ -9,8 +9,8 @@ using UnityEngine;
 public class Checkpoint : MonoBehaviour
 {
     // Variables for animation
-    private Animator animator;
-    public bool isSpinning = false;
+    private Animator Animator;
+    public bool IsSpinning = false;
     const string STATIC = "checkpoint-solarpanel-static";
     const string SPIN = "checkpoint-solarpanel-spin";
     System.DateTime LastActivation;
@@ -20,10 +20,10 @@ public class Checkpoint : MonoBehaviour
     /// </summary>
     void Start()
     {
-        animator = GetComponent<Animator>();
-        if (!isSpinning)
+        Animator = GetComponent<Animator>();
+        if (!IsSpinning)
         {
-            animator.Play(STATIC);
+            Animator.Play(STATIC);
         }
         else
         {
@@ -40,9 +40,9 @@ public class Checkpoint : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             // Checks if the checkpoint is not spinning
-            if (!isSpinning)
+            if (!IsSpinning)
             {
-                isSpinning = true;
+                IsSpinning = true;
                 Spin();
             }
         }
@@ -53,7 +53,7 @@ public class Checkpoint : MonoBehaviour
     /// </summary>
     public void Spin()
     {
-        animator.Play(SPIN);
+        Animator.Play(SPIN);
     }
 
 }

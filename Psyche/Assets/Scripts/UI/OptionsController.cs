@@ -1,7 +1,7 @@
 /**
 Description: Custom options for managing color blind mode and audio
 Author: jmolive8, blopezro
-Version: 20240331
+Version: 20240410
 **/
 
 using UnityEngine;
@@ -10,82 +10,82 @@ using UnityEngine.SceneManagement;
 
 public class OptionsController : MonoBehaviour
 {
-    public GameObject checkMark;
-    private float musicVolSliderPrevious;
-    public Slider musicVolSlider;
-    public Slider sfxVolSlider;
-    public Slider uiVolSlider;
-    public Slider videoSlider;
+    public GameObject CheckMark;
+    private float MusicVolSliderPrevious;
+    public Slider MusicVolSlider;
+    public Slider SfxVolSlider;
+    public Slider UiVolSlider;
+    public Slider VideoSlider;
 
     /// <summary>
     /// Activates color blind mode and audio instances
     /// </summary>
     private void OnEnable()
     {
-        checkMark.SetActive(GameController.Instance.ColorBlindMode);
-        musicVolSlider.value = GameController.Instance.musicVol;
-        sfxVolSlider.value = GameController.Instance.sfxVol;
-        uiVolSlider.value = GameController.Instance.uiVol;
+        CheckMark.SetActive(GameController.Instance.ColorBlindMode);
+        MusicVolSlider.value = GameController.Instance.musicVol;
+        SfxVolSlider.value = GameController.Instance.sfxVol;
+        UiVolSlider.value = GameController.Instance.uiVol;
         GameStateManager.Scene GameStateManagerSn =
             GameController.Instance.GameStateManager.MatchScene(SceneManager.GetActiveScene().name);
         // set video volume when not in title screen
         if (GameStateManagerSn != GameStateManager.Scene.Title)
         {
-            videoSlider.value = GameController.Instance.videoVol;
+            VideoSlider.value = GameController.Instance.videoVol;
         }
     }
 
     /// <summary>
     /// Toggles check mark
     /// </summary>
-    public void toggleCheckMark()
+    public void ToggleCheckMark()
     {
-        checkMark.SetActive(!checkMark.activeInHierarchy);
-        GameController.Instance.ChangeColorBlindMode(checkMark.activeInHierarchy);
+        CheckMark.SetActive(!CheckMark.activeInHierarchy);
+        GameController.Instance.ChangeColorBlindMode(CheckMark.activeInHierarchy);
     }
 
     /// <summary>
     /// Sets music volume
     /// </summary>
-    public void setMusicVolume()
+    public void SetMusicVolume()
     {
-        GameController.Instance.musicVol = musicVolSlider.value;
-        GameController.Instance.AudioManager.SetAudioVolumeForAllMusic(musicVolSlider.value);
+        GameController.Instance.musicVol = MusicVolSlider.value;
+        GameController.Instance.AudioManager.SetAudioVolumeForAllMusic(MusicVolSlider.value);
     }
 
     /// <summary>
     /// Sets sfx volume
     /// </summary>
-    public void setSfxVolume()
+    public void SetSfxVolume()
     {
-        GameController.Instance.sfxVol = sfxVolSlider.value;
-        GameController.Instance.AudioManager.SetAudioVolumeForAllSfx(sfxVolSlider.value);
+        GameController.Instance.sfxVol = SfxVolSlider.value;
+        GameController.Instance.AudioManager.SetAudioVolumeForAllSfx(SfxVolSlider.value);
     }
 
     /// <summary>
     /// Sets ui volume
     /// </summary>
-    public void setUiVolume()
+    public void SetUiVolume()
     {
-        GameController.Instance.uiVol = uiVolSlider.value;
-        GameController.Instance.AudioManager.SetAudioVolumeForAllUi(uiVolSlider.value);
+        GameController.Instance.uiVol = UiVolSlider.value;
+        GameController.Instance.AudioManager.SetAudioVolumeForAllUi(UiVolSlider.value);
     }
 
     /// <summary>
     /// Sets the music to mute
     /// </summary>
-    public void setMusicMute()
+    public void SetMusicMute()
     {
-        musicVolSliderPrevious = musicVolSlider.value;
-        musicVolSlider.value = 0; 
+        MusicVolSliderPrevious = MusicVolSlider.value;
+        MusicVolSlider.value = 0;
     }
 
     /// <summary>
     /// Unmutes the music
     /// </summary>
-    public void setMusicUnmute()
+    public void SetMusicUnmute()
     {
-        musicVolSlider.value = musicVolSliderPrevious; 
+        MusicVolSlider.value = MusicVolSliderPrevious;
     }
 
 }
