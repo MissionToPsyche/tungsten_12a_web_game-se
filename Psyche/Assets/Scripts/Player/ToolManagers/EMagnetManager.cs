@@ -103,6 +103,7 @@ public class EMagnetManager : ToolManager {
                      */
                     if (targetDeposit == null)
                     {
+                        PlayerController.playerCharacter.transform.SetParent(null);
                         PlayerController.beingPulled = true;
                         PlayerController.playerCharacter.gravityScale = 0;
                     }
