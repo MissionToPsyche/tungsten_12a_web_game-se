@@ -6,10 +6,10 @@
   <h1 align="center">M.I.S.T.</h1>
   <h6 align="center">magnetometer + imager + spectrometer + thruster</h6>
   
-  <img src="Psyche/Assets/Graphics/pick ups/tools/magnetometer.png" alt="magnetometer.png" alt="magnetometer">
-  <img src="Psyche/Assets/Graphics/pick ups/tools/imager.png" alt="imager">
-  <img src="Psyche/Assets/Graphics/pick ups/tools/grs.png" alt="grns">
-  <img src="Psyche/Assets/Graphics/pick ups/tools/thruster.png" alt="thruster">
+  <img src="magnetometer.png" alt="magnetometer">
+  <img src="imager.png" alt="imager">
+  <img src="grns.png" alt="grns">
+  <img src="thruster.png" alt="thruster">
   
   <br><p4 align="center" ><i>Created by:</i></p4><br>
   <p5 align="center">Bryant Lopez Roman</p5><br>
@@ -26,8 +26,8 @@ stranded on the Psyche asteroid. Find elements throughout 7 unique levels to upg
 fix up the ship, and get this poor delivery driver back on track!
 
 <div align="center">
-  <img src="Psyche/Assets/Graphics/Cutscenes/intro6.png" alt="opening cs6" width="384" height="216">
-  <img src="Psyche/Assets/Graphics/Cutscenes/outro2.png" alt="ending cs2" width="384" height="216">
+  <img src="intro6.png" alt="opening cs6" width="384" height="216">
+  <img src="outro2.png" alt="ending cs2" width="384" height="216">
 </div>
 
 ### Access URL: [Play M.I.S.T.](https://missiontopsyche.github.io/tungsten_12a_web_game-se/M.I.S.T/)
