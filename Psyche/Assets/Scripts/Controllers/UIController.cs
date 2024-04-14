@@ -70,7 +70,7 @@ public class UIController : BaseController<UIController>
     public void Update()
     {
         //MOVE TO GAMECONTROLLER WHEN NO LONGER STARTING FROM SAMPLESCENE
-        if (Input.GetButtonDown("DevConsole"))  //Activate the dev Console
+        if (Input.GetButtonDown("DevConsole") || _devConsolePanel.activeSelf && Input.GetButtonDown("Inventory"))  //Activate the dev Console
         {
             _devConsolePanel.SetActive(!_devConsolePanel.activeSelf); //shows panel
             PlayerController.Instance.inputBlocked = _devConsolePanel.activeSelf; //blocks movement
@@ -243,7 +243,7 @@ public class UIController : BaseController<UIController>
         if (elementIndex >= 0 && elementIndex < elements.Length)
         {
             Color newColor = elements[elementIndex].color;
-            newColor.a = 1f;
+            newColor.a = 0.8f;
             elements[elementIndex].color = newColor;
             GameController.Instance.AudioManager.PickupElementTungsten.Play();
         }

@@ -123,7 +123,7 @@ public class PlayerDeath : MonoBehaviour
     /// </summary>
     public void GetHurt(int Dmg)
     {
-        StartCoroutine(_playerController.interruptMagnet());
+        StartCoroutine(_playerController.interruptTools());
         PlayerHealth.HealthDown(Dmg);
         if (PlayerHealth.Health <= 0)
         {

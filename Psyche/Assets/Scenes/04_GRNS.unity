@@ -14297,33 +14297,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Imager In
       objectReference: {fileID: 0}
-    - target: {fileID: 3006953032820355726, guid: 24db936823f64314d85b633ce0fc57eb, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3006953032820355726, guid: 24db936823f64314d85b633ce0fc57eb, type: 3}
-      propertyPath: m_TagString
-      value: Checkpoint
-      objectReference: {fileID: 0}
-    - target: {fileID: 8790692525431648348, guid: 24db936823f64314d85b633ce0fc57eb, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.02047
-      objectReference: {fileID: 0}
-    - target: {fileID: 8790692525431648348, guid: 24db936823f64314d85b633ce0fc57eb, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.2466229
-      objectReference: {fileID: 0}
-    - target: {fileID: 8790692525431648348, guid: 24db936823f64314d85b633ce0fc57eb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.0395
-      objectReference: {fileID: 0}
-    - target: {fileID: 8790692525431648348, guid: 24db936823f64314d85b633ce0fc57eb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.1116
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 748305601843839355, guid: 24db936823f64314d85b633ce0fc57eb, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24db936823f64314d85b633ce0fc57eb, type: 3}
