@@ -6,11 +6,6 @@
   <h1 align="center">M.I.S.T.</h1>
   <h6 align="center">magnetometer + imager + spectrometer + thruster</h6>
   
-  <img src="magnetometer.png" alt="magnetometer">
-  <img src="imager.png" alt="imager">
-  <img src="grns.png" alt="grns">
-  <img src="thruster.png" alt="thruster">
-  
   <br><p4 align="center" ><i>Created by:</i></p4><br>
   <p5 align="center">Bryant Lopez Roman</p5><br>
   <p5 align="center">Dhalia Nguyen</p5><br>
