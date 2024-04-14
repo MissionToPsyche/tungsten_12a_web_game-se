@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://missiontopsyche.github.io/tungsten_12a_web_game-se/M.I.S.T/">
-    <img src="Cover.png" alt="Logo">
+    <img src="Cover.png" alt="Logo">https://github.com/MissionToPsyche/tungsten_12a_web_game-se/blob/US679_Task680/README.md
   </a>
   
   <h1 align="center">M.I.S.T.</h1>
@@ -88,4 +88,5 @@ WASD/Arrow Keys | ESC/Tab | Spacebar(tap) | Spacebar(hold)/T | Right Click/G | L
 - Navigate to URL:
   - http://localhost:9000/
 
-
+# Leave us some feedback :)
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd8H6gbkJdhOj6H3-D0T2M22WIM07zK0cMOKndf9nf4uXr3FA/viewform?embedded=true" width="640" height="666" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
