@@ -13,7 +13,7 @@ public class EMagnetManager : ToolManager {
     /// Parent object of EMagnet Hit Box. Used for rotating the Hit Box around the player's center
     /// </summary>
     private Transform HitBoxRotator;
-    private int PullSpeed = 20;
+    private int PullSpeed = 5;
 
     public void Initialize(PlayerController playerManagement)
     {
@@ -63,16 +63,21 @@ public class EMagnetManager : ToolManager {
     /// <returns></returns>
     public IEnumerator HandleEMagnet()
     {
+        //============================================== EMagnet Setup ==============================================
         GameController.Instance.AudioManager.ToolEMagnet.Play();
         PlayerController.eMagnetActive = true;
         HitBoxRotator.gameObject.SetActive(true);
         Collider2D hit, targetDeposit = null, grabbedObject = null;
         float curGrav = PlayerController.playerCharacter.gravityScale;
 
+
+        //============================================== EMagnet Starts ==============================================
         do
         {
             PlayerController.solarArrayManager.DrainBatt(1);
 
+
+            //============================================== Rotates Emagnet HitBox ==============================================
             /**
              * Finds angle between player center and mouse position
              */
@@ -81,6 +86,8 @@ public class EMagnetManager : ToolManager {
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             HitBoxRotator.eulerAngles = new Vector3(0, 0, angle);
 
+
+            //============================================== Checks for Hits ==============================================
             /**
              * Makes a box cast using the scale of the EMagnet Hit Box
              */
@@ -113,6 +120,8 @@ public class EMagnetManager : ToolManager {
                 }
             }
 
+
+            //============================================== Moves Player ==============================================
             /**
              * Pulls Player towards most recently hit Magnetized Deposit
              */
@@ -120,19 +129,23 @@ public class EMagnetManager : ToolManager {
             {
                 if (targetDeposit.gameObject.activeInHierarchy)
                 {
-                    PlayerController.playerCharacter.MovePosition(Vector2.MoveTowards(transform.position, targetDeposit.transform.position, Time.deltaTime * PullSpeed));
+                    Vector2 pullDirection = targetDeposit.transform.position - PlayerController.transform.position;
+                    PlayerController.playerCharacter.velocity = pullDirection.normalized * PullSpeed;
                 }
                 else
                 {
                     /**
                      * Stops pulling the player if the most recently hit Magnetized Deposit has disappeared
                      */
+                    PlayerController.playerCharacter.velocity = Vector2.zero;
                     PlayerController.beingPulled = false;
                     PlayerController.playerCharacter.gravityScale = curGrav;
                     targetDeposit = null;
                 }
             }
 
+
+            //============================================== Moves Objects ==============================================
             /**
              * Pulls the most recently hit Movable Magnetized Object towards the Player
              */
@@ -140,15 +153,23 @@ public class EMagnetManager : ToolManager {
             {
                 grabbedObject.attachedRigidbody.velocity = Vector2.zero;
                 grabbedObject.attachedRigidbody.angularVelocity = 0;
+
                 if (!PlayerController.playerCollider.IsTouching(grabbedObject))
                 {
-                    grabbedObject.attachedRigidbody.MovePosition(Vector2.MoveTowards(grabbedObject.transform.position, transform.position, Time.deltaTime * PullSpeed));
+                    Vector2 pullDirection = PlayerController.transform.position - grabbedObject.transform.position;
+                    grabbedObject.attachedRigidbody.velocity = pullDirection.normalized * PullSpeed;
                 }
             }
 
             yield return null;
         } while (Input.GetButton("EMagnet") && !PlayerController.toolInterrupt && PlayerController.solarArrayManager.BatteryPercent != 0);
 
+
+        //============================================== EMagnet End Cleanup  ==============================================
+        if (PlayerController.beingPulled)
+        {
+            PlayerController.playerCharacter.velocity = Vector2.zero;
+        }
         GameController.Instance.AudioManager.ToolEMagnet.Stop();
         PlayerController.playerCharacter.gravityScale = curGrav;
         HitBoxRotator.gameObject.SetActive(false);
@@ -161,6 +182,6 @@ public class EMagnetManager : ToolManager {
     /// </summary>
     protected override void UpgradeTool()
     {
-        PullSpeed += 6;
+        PullSpeed += 1;
     }
 }
