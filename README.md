@@ -30,9 +30,14 @@ fix up the ship, and get this poor delivery driver back on track!
 ### Leave Feedback: [M.I.S.T. Game Feedback Form](https://docs.google.com/forms/d/e/1FAIpQLSd8H6gbkJdhOj6H3-D0T2M22WIM07zK0cMOKndf9nf4uXr3FA/viewform?usp=sf_link)
 
 # Controls
-Movement  | Inventory | Jump | Thrusters | Spectrometer | Emagnet | Magnetometer | Imager
-:---------: | :-----: | :-----: | :----------:| :------------: | :-------: | :------------: | :------:
-WASD/Arrow Keys | ESC/Tab | Spacebar(tap) | Spacebar(hold)/T | Right Click/G | Left Click/E | Passive | Passive
+* <b>Movement:</b> WASD/Arrow Keys
+* <b>Inventory:</b> ESC/Tab
+* <b>Jump:</b> Spacebar(tap)
+* <b>Thruster:</b> Spacebar(hold)/T
+* <b>Spectrometer:</b> Right Click/G
+* <b>Electro-Magnet:</b> Left Click/E
+* <b>Magnetometer:</b> Passive
+* <b>Imager:</b> Passive
 
 # Main Features
 - [x] 7 levels (+1 tutorial level) with tool-specific navigation
