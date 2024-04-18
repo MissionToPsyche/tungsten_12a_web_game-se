@@ -12732,18 +12732,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCharacter
       objectReference: {fileID: 0}
-    - target: {fileID: 982301986617122030, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.035
-      objectReference: {fileID: 0}
-    - target: {fileID: 982301986617122030, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -0.413
-      objectReference: {fileID: 0}
-    - target: {fileID: 1078862222496993058, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3118868635833949731, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.88
@@ -12784,10 +12772,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4312992291254986266, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
-      propertyPath: m_HorizontalAlignment
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4822381043481428571, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.0000017285347
@@ -12808,10 +12792,6 @@ PrefabInstance:
       propertyPath: playerHealth
       value: 
       objectReference: {fileID: 905260923}
-    - target: {fileID: 8825183538254624580, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8966456805578203647, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: PlayerHealth
       value: 
