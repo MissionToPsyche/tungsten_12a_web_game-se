@@ -97,22 +97,6 @@ public class GameStateManager : MonoBehaviour
     /// </summary>
     public enum Scene
     {
-        // ===== Main Menu =====
-        /// <summary>
-        /// For Title_Screen Scene.
-        /// </summary>
-        Title,
-
-        /// <summary>
-        /// For Cutscene_Intro Scene.
-        /// </summary>
-        Intro,
-
-        /// <summary>
-        /// For Cutscene_Outro Scene.
-        /// </summary>
-        Outro,
-
         // ===== In Game =====
         /// <summary>
         /// For Landing Scene.
@@ -120,9 +104,9 @@ public class GameStateManager : MonoBehaviour
         Landing,
 
         /// <summary>
-        /// For eMagnet Scene.
+        /// For Imager Scene.
         /// </summary>
-        EMagnet,
+        Imager,
 
         /// <summary>
         /// For GRNS Scene.
@@ -130,9 +114,9 @@ public class GameStateManager : MonoBehaviour
         Grns,
 
         /// <summary>
-        /// For Imager Scene.
+        /// For eMagnet Scene.
         /// </summary>
-        Imager,
+        EMagnet,
 
         /// <summary>
         /// For Thruster Scene.
@@ -153,6 +137,22 @@ public class GameStateManager : MonoBehaviour
         /// For Combo_3 Scene.
         /// </summary>
         Combo3,
+
+        // ===== Main Menu =====
+        /// <summary>
+        /// For Title_Screen Scene.
+        /// </summary>
+        Title,
+
+        /// <summary>
+        /// For Cutscene_Intro Scene.
+        /// </summary>
+        Intro,
+
+        /// <summary>
+        /// For Cutscene_Outro Scene.
+        /// </summary>
+        Outro,
 
         // ===== Error ======
         /// <summary>

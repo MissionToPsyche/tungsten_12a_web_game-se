@@ -12732,6 +12732,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCharacter
       objectReference: {fileID: 0}
+    - target: {fileID: 982301986617122030, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.035
+      objectReference: {fileID: 0}
+    - target: {fileID: 982301986617122030, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.413
+      objectReference: {fileID: 0}
+    - target: {fileID: 1078862222496993058, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3118868635833949731, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.88
@@ -12772,14 +12784,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3223081988913854855, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
-      propertyPath: m_BoundingShape2D
-      value: 
-      objectReference: {fileID: 1195215623}
-    - target: {fileID: 3895818665434327867, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
-      propertyPath: m_BoundingShape2D
-      value: 
-      objectReference: {fileID: 1195215623}
+    - target: {fileID: 4312992291254986266, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4822381043481428571, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.0000017285347
@@ -12800,24 +12808,16 @@ PrefabInstance:
       propertyPath: playerHealth
       value: 
       objectReference: {fileID: 905260923}
-    - target: {fileID: 7927103040186434401, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
-      propertyPath: m_BoundingShape2D
-      value: 
-      objectReference: {fileID: 1195215623}
-    - target: {fileID: 8717720623438440928, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
-      propertyPath: m_BoundingShape2D
-      value: 
-      objectReference: {fileID: 1195215623}
+    - target: {fileID: 8825183538254624580, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8966456805578203647, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
       propertyPath: PlayerHealth
       value: 
       objectReference: {fileID: 905260923}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 3411147457334915318, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
-    - {fileID: 5700309934708913256, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
-    - {fileID: 7275083810297286146, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
-    - {fileID: 3277319507839146222, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82c86cb8a92e160419480666861a14e9, type: 3}
