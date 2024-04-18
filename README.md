@@ -17,7 +17,7 @@
 # Overview
 A futuristic adventure exploration 2D platformer using tools inspired by the Psyche spacecraft to navigate a new environment.
 In the far, distant future, after getting lost and crashing into the old Psyche spacecraft, a space delivery driver ends up
-stranded on the Psyche asteroid. Find elements throughout 7 unique levels to upgrade your tools, collect 8 tungsten pieces to
+stranded on the Psyche asteroid. Find elements throughout 8 unique levels to upgrade your tools, collect 8 tungsten pieces to
 fix up the ship, and get this poor delivery driver back on track!
 
 <div align="center">
@@ -30,24 +30,24 @@ fix up the ship, and get this poor delivery driver back on track!
 ### Leave Feedback: [M.I.S.T. Game Feedback Form](https://docs.google.com/forms/d/e/1FAIpQLSd8H6gbkJdhOj6H3-D0T2M22WIM07zK0cMOKndf9nf4uXr3FA/viewform?usp=sf_link)
 
 # Controls
-* <b>Movement:</b> WASD/Arrow Keys
-* <b>Inventory:</b> ESC/Tab
-* <b>Jump:</b> Spacebar(tap)
-* <b>Thruster:</b> Spacebar(hold)/T
-* <b>Spectrometer:</b> Right Click/G
-* <b>Electro-Magnet:</b> Left Click/E
-* <b>Magnetometer:</b> Passive
-* <b>Imager:</b> Passive
+* <b>Movement:</b> `WASD/Arrow Keys`
+* <b>Inventory:</b> `ESC/Tab`
+* <b>Jump:</b> `Spacebar(tap)`
+* <b>Thruster:</b> `Spacebar(hold)/T`
+* <b>Spectrometer:</b> `Right Click/G`
+* <b>Electro-Magnet:</b> `Left Click/E`
+* <b>Magnetometer:</b> `Passive`
+* <b>Imager:</b> `Passive`
 
 # Main Features
-- [x] 7 levels (+1 tutorial level) with tool-specific navigation
+- [x] 8 levels with tool-specific navigation
 - [x] Resource gathering and management
 - [x] Upgradable tool enhancements
 - [x] Links to educational NASA resources for the Psyche mission
 - [x] Developer console showing hardware specific benchmarks
 - [x] UI overlay
 - [x] Colorblind accessibility option
-- [x] Atmospheric audio integration
+- [x] Atmospheric audio
 - [x] Original storyline
 - [x] Custom artwork and animations
       
@@ -81,12 +81,12 @@ fix up the ship, and get this poor delivery driver back on track!
 ### Requirements
 - Simple Web Server:\
   Typically in\
-  "...\Unity\Hub\Editor\2022.3.9f1\Editor\Data\PlaybackEngines\WebGLSupport\BuildTools\SimpleWebServer.exe"
+  `"...\Unity\Hub\Editor\2022.3.9f1\Editor\Data\PlaybackEngines\WebGLSupport\BuildTools\SimpleWebServer.exe"`
 - Cmd:\
-  SimpleWebServer.exe <"path">\M.I.S.T <"port">
-  - Example: .\SimpleWebServer.exe "D:\1. Temp\tungsten_12a_web_game-se\M.I.S.T" 9000
+  `SimpleWebServer.exe <"path">\M.I.S.T <"port">`
+  - Example: `.\SimpleWebServer.exe "D:\1. Temp\tungsten_12a_web_game-se\M.I.S.T" 9000`
 - Navigate to URL:
-  - http://localhost:9000/
+  - `http://localhost:9000/`
 
 # Leave us some feedback :)
 <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd8H6gbkJdhOj6H3-D0T2M22WIM07zK0cMOKndf9nf4uXr3FA/viewform?embedded=true" width="640" height="666" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
