@@ -21,6 +21,7 @@ public class PlayerController : BaseController<PlayerController>
     public Rigidbody2D playerCharacter;
     public BoxCollider2D playerCollider;
     public GameObject pressUpPopup;
+    public GameObject tungstenNoticePopup;
 
     //Set up environmental checks
     public Transform groundCheck;
@@ -82,7 +83,6 @@ public class PlayerController : BaseController<PlayerController>
         inventoryManager.Initialize(this);
         playerDeath = GetComponent<PlayerDeath>();
         playerDeath.Initialize(this);
-        pressUpPopup = transform.Find("Press Up Popup").gameObject;
 
         // Tell GameController to LoadPlayer() after everything's initialized
         GameController.Instance.LoadPlayer();
