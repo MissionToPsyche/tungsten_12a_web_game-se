@@ -206,13 +206,20 @@ public class SceneTransitionManager : MonoBehaviour
             // Default caves use the default layer while special case transition objects use other layers
             foreach (GameObject obj in objectsWithTransitionTag)
             {
+
+                //Debug.Log(GameController.Instance.GameStateManager.MatchScene(TravelFromSceneName) == GameStateManager.Scene.Combo3);
+                //Debug.Log(GameController.Instance.GameStateManager.MatchScene(sceneName) == GameStateManager.Scene.Landing);
+                //Debug.Log(obj.layer == 8);
+
                 // If the object in the list is the cave layered transition object and we ARE going from Combo 3 to Landing
                 if (GameController.Instance.GameStateManager.MatchScene(TravelFromSceneName) == GameStateManager.Scene.Combo3
-                    && GameController.Instance.GameStateManager.MatchScene(sceneName) == GameStateManager.Scene.Landing
-                    && obj.layer == 8) // cave layer
+                    && GameController.Instance.GameStateManager.MatchScene(sceneName) == GameStateManager.Scene.Landing) // cave layer
                 {
-                    caveObject = obj;
-                    break; // break since we only need one GameObject
+                    if (obj.layer == 8)
+                    {
+                        caveObject = obj;
+                        break; // break since we only need one GameObject
+                    }
                 }
                 // If the object in the list is the default transition object and we ARE NOT going from Combo 3 to Landing
                 else if (obj.layer == 0) // default layer

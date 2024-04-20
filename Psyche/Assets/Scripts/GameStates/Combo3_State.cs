@@ -25,7 +25,7 @@ public class Combo3_State : BaseState
             { (short)SceneObject.Iron1,       true },
             { (short)SceneObject.Iron2,       true },
             { (short)SceneObject.Iron3,       true },
-            { (short)SceneObject.Iron4,       true },
+            { (short)SceneObject.Copper1,     true },
         };
         LoadDefaultState();
         SaveState();
@@ -45,7 +45,7 @@ public class Combo3_State : BaseState
         Iron1           = 4,
         Iron2           = 5,
         Iron3           = 6,
-        Iron4           = 7,
+        Copper1         = 7,
 
         Checkpoint      = 99,
     }
@@ -62,7 +62,7 @@ public class Combo3_State : BaseState
             "element_iron 1"        => (short)SceneObject.Iron1,
             "element_iron 2"        => (short)SceneObject.Iron2,
             "element_iron 3"        => (short)SceneObject.Iron3,
-            "element_iron 4"        => (short)SceneObject.Iron4,
+            "element_copper 1"      => (short)SceneObject.Copper1,
 
             "checkpoint"            => (short)SceneObject.Checkpoint,
             _                       => -1,
@@ -76,10 +76,12 @@ public class Combo3_State : BaseState
         {
             (short)SceneObject.Checkpoint1 => "Checkpoint 1",
             (short)SceneObject.Checkpoint2 => "Checkpoint 2",
+            (short)SceneObject.Checkpoint3 => "Checkpoint 3",
+            (short)SceneObject.Tungsten1   => "Element_Tungsten 1",
             (short)SceneObject.Iron1       => "Element_Iron 1",
             (short)SceneObject.Iron2       => "Element_Iron 2",
             (short)SceneObject.Iron3       => "Element_Iron 3",
-            (short)SceneObject.Iron4       => "Element_Iron 4",
+            (short)SceneObject.Copper1     => "Element_Copper 1",
 
             (short)SceneObject.Checkpoint   => "Checkpoint",
             _ => null,
@@ -102,7 +104,7 @@ public class Combo3_State : BaseState
                         if (value)
                         {
                             Checkpoint targetObject = GameObject.Find(objectName).GetComponent<Checkpoint>();
-                            targetObject.isSpinning = value;
+                            targetObject.IsSpinning = value;
                         }
                     }
                     break;
@@ -113,7 +115,7 @@ public class Combo3_State : BaseState
                         if (value)
                         {
                             Checkpoint targetObject = GameObject.Find(objectName).GetComponent<Checkpoint>();
-                            targetObject.isSpinning = value;
+                            targetObject.IsSpinning = value;
                         }
                     }
                     break;
@@ -124,7 +126,7 @@ public class Combo3_State : BaseState
                         if (value)
                         {
                             Checkpoint targetObject = GameObject.Find(objectName).GetComponent<Checkpoint>();
-                            targetObject.isSpinning = value;
+                            targetObject.IsSpinning = value;
                         }
                     }
                     break;
@@ -188,7 +190,7 @@ public class Combo3_State : BaseState
                     }
                     break;
 
-                case (short)SceneObject.Iron4:
+                case (short)SceneObject.Copper1:
                     {
                         bool value = (bool)pair.Value;
                         if (!value)
