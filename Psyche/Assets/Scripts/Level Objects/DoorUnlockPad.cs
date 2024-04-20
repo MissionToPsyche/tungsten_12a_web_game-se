@@ -12,9 +12,16 @@ public class DoorUnlockPad : MonoBehaviour
     public Collider2D magKey;
     public SpriteRenderer padLight;
     public GameObject door;
+    private Animator Animator;
 
     [Tooltip("Change this value if you change the height of the door.")]
     public float openDistance = 3f;
+
+    private void Awake()
+    {
+        Animator = GetComponentInChildren<Animator>();
+        Animator.Play("red pad");
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -23,7 +30,8 @@ public class DoorUnlockPad : MonoBehaviour
          */
         if (collision == magKey)
         {
-            padLight.color = new Color(0, 1, 0, 0.3f);
+            //padLight.color = new Color(0, 1, 0, 0.3f);
+            Animator.Play("green_pad");
             Destroy(collision.gameObject);
             StartCoroutine(MoveDoor());
         }

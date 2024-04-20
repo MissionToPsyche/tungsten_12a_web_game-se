@@ -72,7 +72,7 @@ public class PlayerCollisionManager : MonoBehaviour
         /// Element items as defined by <see cref="InventoryManager.Element"/>.
         /// </summary>
         Element,
-        
+
         /// <summary>
         /// Tool items as defined by <see cref="InventoryManager.Tool"/>.
         /// </summary>
@@ -83,7 +83,7 @@ public class PlayerCollisionManager : MonoBehaviour
         /// Transition objects into a <see cref="GameStateManager.Scene"/>.
         /// </summary>
         TransitionObjectIn,
-        
+
         /// <summary>
         /// Transition objects out of a <see cref="GameStateManager.Scene"/>.
         /// </summary>
@@ -122,14 +122,14 @@ public class PlayerCollisionManager : MonoBehaviour
     {
         return tag.ToLower() switch
         {
-            "element"               => CollisionTag.Element,
-            "tool"                  => CollisionTag.Tool,
-            "transitionobjectin"    => CollisionTag.TransitionObjectIn,
-            "transitionobjectout"   => CollisionTag.TransitionObjectOut,
-            "checkpoint"            => CollisionTag.Checkpoint,
-            "hazard"                => CollisionTag.Hazard,
-            "spikes"                => CollisionTag.Spikes,
-            _                       => CollisionTag.None,
+            "element"             => CollisionTag.Element,
+            "tool"                => CollisionTag.Tool,
+            "transitionobjectin"  => CollisionTag.TransitionObjectIn,
+            "transitionobjectout" => CollisionTag.TransitionObjectOut,
+            "checkpoint"          => CollisionTag.Checkpoint,
+            "hazard"              => CollisionTag.Hazard,
+            "spikes"              => CollisionTag.Spikes,
+            _                     => CollisionTag.None,
         };
     }
 
@@ -142,14 +142,14 @@ public class PlayerCollisionManager : MonoBehaviour
     {
         return tag switch
         {
-            CollisionTag.Element                => "Element",
-            CollisionTag.Tool                   => "Tool",
-            CollisionTag.TransitionObjectIn     => "TransitionObjectIn",
-            CollisionTag.TransitionObjectOut    => "TransitionObjectOut",
-            CollisionTag.Checkpoint             => "Checkpoint",
-            CollisionTag.Hazard                 => "Hazard",
-            CollisionTag.Spikes                 => "Spikes",
-            _                                   => null,
+            CollisionTag.Element             => "Element",
+            CollisionTag.Tool                => "Tool",
+            CollisionTag.TransitionObjectIn  => "TransitionObjectIn",
+            CollisionTag.TransitionObjectOut => "TransitionObjectOut",
+            CollisionTag.Checkpoint          => "Checkpoint",
+            CollisionTag.Hazard              => "Hazard",
+            CollisionTag.Spikes              => "Spikes",
+            _                                => null,
         };
     }
 
@@ -163,7 +163,7 @@ public class PlayerCollisionManager : MonoBehaviour
         switch (MatchTag(other.gameObject.tag))
         {
             case CollisionTag.Hazard:
-                PlayerController.playerDeath.Hazard(other);
+                PlayerController.playerDeath.Hazard();
                 break;
             case CollisionTag.Spikes:
                 PlayerController.playerDeath.Spikes();
@@ -185,13 +185,13 @@ public class PlayerCollisionManager : MonoBehaviour
             case CollisionTag.Element:
                 PlayerController.inventoryManager.AddElement(other.name, 1);
                 Destroy(other.gameObject);
-                GameController.Instance.AudioManager.pickupElement.Play();
+                GameController.Instance.AudioManager.PickupElement.Play();
                 break;
 
             case CollisionTag.Tool:
                 PlayerController.inventoryManager.ToolPickUp(other.name);
                 Destroy(other.gameObject);
-                GameController.Instance.AudioManager.pickupTool.Play();
+                GameController.Instance.AudioManager.PickupTool.Play();
                 break;
 
             case CollisionTag.Checkpoint:
@@ -201,7 +201,19 @@ public class PlayerCollisionManager : MonoBehaviour
                 break;
 
             case CollisionTag.TransitionObjectIn or CollisionTag.TransitionObjectOut:
-                // Popup over the player
+
+                // Popup tungsten reminder text over player
+                if (MatchTag(other.tag) == CollisionTag.TransitionObjectOut && 
+                    UIController.Instance.elements[(int)GameController.Instance.GameStateManager.CurrentScene].color.a != 0.8f)
+                {
+                    PlayerController.tungstenNoticePopup.SetActive(true);
+                }
+                else
+                {
+                    PlayerController.tungstenNoticePopup.SetActive(false);
+                }
+                
+                // Popup w/up key over player
                 PlayerController.pressUpPopup.SetActive(true);
 
                 // If ship (tungsten: layer 12) and fewer than 8 tungsten available - disable the BoxCollider
@@ -226,8 +238,9 @@ public class PlayerCollisionManager : MonoBehaviour
         switch (MatchTag(other.tag))
         {
             case CollisionTag.TransitionObjectIn or CollisionTag.TransitionObjectOut:
-                // Popup over the player
+                // Popups over the player
                 PlayerController.pressUpPopup.SetActive(false);
+                PlayerController.tungstenNoticePopup.SetActive(false);
 
                 // If ship (tungsten: layer 12) - enable the BoxCollider
                 if (other.gameObject.layer == 12)

@@ -65,7 +65,10 @@ public class MovingPlatform : MonoBehaviour
     /// <param name="collision"><see cref="Collision2D"/></param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        collision.transform.SetParent(transform);
+        if (collision.gameObject.tag.Equals("Player"))
+        {
+            collision.transform.SetParent(transform);
+        }
     }
 
     /// <summary>
@@ -74,7 +77,10 @@ public class MovingPlatform : MonoBehaviour
     /// <param name="collision"><see cref="Collision2D"/></param>
     private void OnCollisionExit2D(Collision2D collision)
     {
-        collision.transform.SetParent(null);
-        DontDestroyOnLoad(collision.gameObject);
+        if (collision.gameObject.tag.Equals("Player"))
+        {
+            collision.transform.SetParent(null);
+            DontDestroyOnLoad(collision.gameObject);
+        }
     }
 }

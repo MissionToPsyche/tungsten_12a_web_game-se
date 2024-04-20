@@ -1,7 +1,7 @@
 /** 
 Description: Audio manager script
 Author: blopezro
-Version: 20240326
+Version: 20240410
 **/
 
 using UnityEngine;
@@ -13,126 +13,126 @@ using System.Collections.Generic;
 /// </summary>
 public class AudioManager : MonoBehaviour
 {
-    public Slider slider;
+    public Slider Slider;
 
     [Header("User Interface")]
-    [SerializeField] public AudioSource buttonClick;
-    public List<AudioSource> uiAudioSources;
+    [SerializeField] public AudioSource ButtonClick;
+    public List<AudioSource> UiAudioSources;
 
     [Header("Music")]
-    [SerializeField] public AudioSource backgroundMusic;
-    public List<AudioSource> musicAudioSources;
+    [SerializeField] public AudioSource BackgroundMusic;
+    public List<AudioSource> MusicAudioSources;
 
     [Header("In Game Sound Effects")]
-    [SerializeField] public AudioSource toolGRNS;
-    [SerializeField] public AudioSource toolImager;
-    [SerializeField] public AudioSource toolEMagnet;
-    [SerializeField] public AudioSource toolThrusters;
-    [SerializeField] public AudioSource playerJump;
-    [SerializeField] public AudioSource playerHurt;
-    [SerializeField] public AudioSource pickupElement;
-    [SerializeField] public AudioSource pickupElementTungsten;
-    [SerializeField] public AudioSource pickupTool;
-    [SerializeField] public AudioSource checkpoint;
-    public List<AudioSource> sfxAudioSources;
+    [SerializeField] public AudioSource ToolGRNS;
+    [SerializeField] public AudioSource ToolImager;
+    [SerializeField] public AudioSource ToolEMagnet;
+    [SerializeField] public AudioSource ToolThrusters;
+    [SerializeField] public AudioSource PlayerJump;
+    [SerializeField] public AudioSource PlayerHurt;
+    [SerializeField] public AudioSource PickupElement;
+    [SerializeField] public AudioSource PickupElementTungsten;
+    [SerializeField] public AudioSource PickupTool;
+    [SerializeField] public AudioSource Checkpoint;
+    public List<AudioSource> SfxAudioSources;
 
     /// <summary>
     /// collects the same type audio sources into their respected lists
     /// </summary>
     private void OnEnable()
     {
-        uiAudioSources.Add(buttonClick);
-        musicAudioSources.Add(backgroundMusic);
-        sfxAudioSources.Add(toolGRNS);
-        sfxAudioSources.Add(toolImager);
-        sfxAudioSources.Add(toolEMagnet);
-        sfxAudioSources.Add(toolThrusters);
-        sfxAudioSources.Add(playerJump);
-        sfxAudioSources.Add(playerHurt);
-        sfxAudioSources.Add(pickupElement);
-        sfxAudioSources.Add(pickupElementTungsten);
-        sfxAudioSources.Add(pickupTool);
-        sfxAudioSources.Add(checkpoint);
-        foreach (AudioSource audioSource in uiAudioSources)
-            audioSource.volume = GameController.Instance.uiVol;
-        foreach (AudioSource audioSource in musicAudioSources)
-            audioSource.volume = GameController.Instance.musicVol;
-        foreach (AudioSource audioSource in sfxAudioSources)
-            audioSource.volume = GameController.Instance.sfxVol;
+        UiAudioSources.Add(ButtonClick);
+        MusicAudioSources.Add(BackgroundMusic);
+        SfxAudioSources.Add(ToolGRNS);
+        SfxAudioSources.Add(ToolImager);
+        SfxAudioSources.Add(ToolEMagnet);
+        SfxAudioSources.Add(ToolThrusters);
+        SfxAudioSources.Add(PlayerJump);
+        SfxAudioSources.Add(PlayerHurt);
+        SfxAudioSources.Add(PickupElement);
+        SfxAudioSources.Add(PickupElementTungsten);
+        SfxAudioSources.Add(PickupTool);
+        SfxAudioSources.Add(Checkpoint);
+        foreach (AudioSource AudioSource in UiAudioSources)
+            AudioSource.volume = GameController.Instance.uiVol;
+        foreach (AudioSource AudioSource in MusicAudioSources)
+            AudioSource.volume = GameController.Instance.musicVol;
+        foreach (AudioSource AudioSource in SfxAudioSources)
+            AudioSource.volume = GameController.Instance.sfxVol;
     }
 
     /// <summary>
     /// play an audio source
     /// </summary>
-    /// <param name="audioSource"></param>
-    public void PlayAudio(AudioSource audioSource)
+    /// <param name="AudioSource"></param>
+    public void PlayAudio(AudioSource AudioSource)
     {
-        audioSource.Play();
+        AudioSource.Play();
     }
 
     /// <summary>
     /// pause an audio source
     /// </summary>
-    /// <param name="audioSource"></param>
-    public void PauseAudio(AudioSource audioSource)
+    /// <param name="AudioSource"></param>
+    public void PauseAudio(AudioSource AudioSource)
     {
-        audioSource.Pause();
+        AudioSource.Pause();
     }
 
     /// <summary>
     /// unpause an audio source
     /// </summary>
-    /// <param name="audioSource"></param>
-    public void UnpauseAudio(AudioSource audioSource)
+    /// <param name="AudioSource"></param>
+    public void UnpauseAudio(AudioSource AudioSource)
     {
-        audioSource.UnPause();
+        AudioSource.UnPause();
     }
 
     /// <summary>
     /// mute an audio source
     /// </summary>
-    /// <param name="audioSource"></param>
-    public void MuteAudio(AudioSource audioSource)
+    /// <param name="AudioSource"></param>
+    public void MuteAudio(AudioSource AudioSource)
     {
-        audioSource.mute = true;
+        AudioSource.mute = true;
     }
 
     /// <summary>
     /// unmute an audio source
     /// </summary>
-    /// <param name="audioSource"></param>
-    public void UnmuteAudio(AudioSource audioSource)
+    /// <param name="AudioSource"></param>
+    public void UnmuteAudio(AudioSource AudioSource)
     {
-        audioSource.mute = false;
+        AudioSource.mute = false;
     }
 
     /// <summary>
     /// stop an audio source
     /// </summary>
-    /// <param name="audioSource"></param>
-    public void StopAudio(AudioSource audioSource)
+    /// <param name="AudioSource"></param>
+    public void StopAudio(AudioSource AudioSource)
     {
-        audioSource.Stop();
+        AudioSource.Stop();
     }
 
     /// <summary>
     /// toggle an audio source mute
     /// </summary>
-    /// <param name="audioSource"></param>
-    public void ToggleAudioMute(AudioSource audioSource)
+    /// <param name="AudioSource"></param>
+    public void ToggleAudioMute(AudioSource AudioSource)
     {
-        audioSource.mute = !audioSource.mute;
+        AudioSource.mute = !AudioSource.mute;
     }
 
     /// <summary>
     /// toggle an audio source mute for all in a list
     /// </summary>
-    /// <param name="audioSources"></param>
-    public void ToggleAudioMuteForAll(List<AudioSource> audioSources)
+    /// <param name="AudioSources"></param>
+    public void ToggleAudioMuteForAll(List<AudioSource> AudioSources)
     {
-        foreach (AudioSource audioSource in audioSources)
+        foreach (AudioSource AudioSource in AudioSources)
         {
-            audioSource.mute = !audioSource.mute;
+            AudioSource.mute = !AudioSource.mute;
         }
     }
 
@@ -141,7 +141,7 @@ public class AudioManager : MonoBehaviour
     /// </summary>
     public void ToggleAudioMuteForAllUi()
     {
-        ToggleAudioMuteForAll(uiAudioSources);
+        ToggleAudioMuteForAll(UiAudioSources);
     }
 
     /// <summary>
@@ -149,7 +149,7 @@ public class AudioManager : MonoBehaviour
     /// </summary>
     public void ToggleAudioMuteForAllMusic()
     {
-        ToggleAudioMuteForAll(musicAudioSources);
+        ToggleAudioMuteForAll(MusicAudioSources);
     }
 
     /// <summary>
@@ -157,57 +157,57 @@ public class AudioManager : MonoBehaviour
     /// </summary>
     public void ToggleAudioMuteForAllSfx()
     {
-        ToggleAudioMuteForAll(sfxAudioSources);
+        ToggleAudioMuteForAll(SfxAudioSources);
     }
 
     /// <summary>
     /// set an audio source volume
     /// </summary>
-    /// <param name="audioSource"></param>
-    /// <param name="desiredVolume"></param>
-    public void SetAudioVolume(AudioSource audioSource, float desiredVolume)
+    /// <param name="AudioSource"></param>
+    /// <param name="DesiredVolume"></param>
+    public void SetAudioVolume(AudioSource AudioSource, float DesiredVolume)
     {
-        audioSource.volume = desiredVolume;
+        AudioSource.volume = DesiredVolume;
     }
 
     /// <summary>
     /// set an audio source volume for all in a list
     /// </summary>
-    /// <param name="audioSources"></param>
-    /// <param name="desiredVolume"></param>
-    public void SetAudioVolumeForAll(List<AudioSource> audioSources, float desiredVolume)
+    /// <param name="AudioSources"></param>
+    /// <param name="DesiredVolume"></param>
+    public void SetAudioVolumeForAll(List<AudioSource> AudioSources, float DesiredVolume)
     {
-        foreach (AudioSource audioSource in audioSources)
+        foreach (AudioSource AudioSource in AudioSources)
         {
-            audioSource.volume = desiredVolume;
+            AudioSource.volume = DesiredVolume;
         }
     }
 
     /// <summary>
     /// set an audio source volume for all ui
     /// </summary>
-    /// <param name="desiredVolume"></param>
-    public void SetAudioVolumeForAllUi(float desiredVolume)
+    /// <param name="DesiredVolume"></param>
+    public void SetAudioVolumeForAllUi(float DesiredVolume)
     {
-        SetAudioVolumeForAll(uiAudioSources, desiredVolume);
+        SetAudioVolumeForAll(UiAudioSources, DesiredVolume);
     }
 
     /// <summary>
     /// set an audio source volume for all music
     /// </summary>
-    /// <param name="desiredVolume"></param>
-    public void SetAudioVolumeForAllMusic(float desiredVolume)
+    /// <param name="DesiredVolume"></param>
+    public void SetAudioVolumeForAllMusic(float DesiredVolume)
     {
-        SetAudioVolumeForAll(musicAudioSources, desiredVolume);
+        SetAudioVolumeForAll(MusicAudioSources, DesiredVolume);
     }
 
     /// <summary>
     /// set an audio source volume for all sfx
     /// </summary>
-    /// <param name="desiredVolume"></param>
-    public void SetAudioVolumeForAllSfx(float desiredVolume)
+    /// <param name="DesiredVolume"></param>
+    public void SetAudioVolumeForAllSfx(float DesiredVolume)
     {
-        SetAudioVolumeForAll(sfxAudioSources, desiredVolume);
+        SetAudioVolumeForAll(SfxAudioSources, DesiredVolume);
     }
 
 }

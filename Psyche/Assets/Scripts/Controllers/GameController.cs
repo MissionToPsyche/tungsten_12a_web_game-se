@@ -9,7 +9,7 @@ using UnityEngine;
 /// </summary>
 public class GameController : BaseController<GameController>
 {
-    //============================================== Initialize/Updates/Destroy ==============================================
+    //============================================== Initialize/Updates/Destroy ===============================================
     //Public variables
     public DeveloperConsole DeveloperConsole;
     public GameStateManager GameStateManager;
@@ -24,18 +24,22 @@ public class GameController : BaseController<GameController>
     /// </summary>
     public override void Initialize()
     {
-        // Set up the gamestate
+        // Set the game state manager
         string scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
         GameStateManager = GetComponent<GameStateManager>();
         GameStateManager.Initialize(this, scene);
 
-        // Set up the audio manager
+        // Set the audio manager
         AudioManager = GameObject.FindGameObjectWithTag("AudioSources").GetComponent<AudioManager>();
+
+        // Set the transition manager
         if (SceneTransitionManager == null)
         {
             SceneTransitionManager = GetComponent<SceneTransitionManager>();
             SceneTransitionManager.Initialize(this);
         }
+
+        // Set the developer console
         DeveloperConsole = GetComponent<DeveloperConsole>();
         DeveloperConsole.Initialize(this);
     }
@@ -60,7 +64,7 @@ public class GameController : BaseController<GameController>
         base.Shutdown();
     }
 
-    //======================================================== Events ========================================================
+    //======================================================== Events =========================================================
 
     //Event Definitions
     public event Action<GameStateManager.GameState> OnGameStateChanged;
@@ -74,7 +78,7 @@ public class GameController : BaseController<GameController>
         SceneTransitionManager.LoadPlayer();
     }
 
-    //======================================================= Gamestate ======================================================
+    //======================================================= Game State ======================================================
 
     /// <summary>
     /// Event handling for game state changes

@@ -17128,37 +17128,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1912888945894354404, guid: 74b0739e459ba774fac64942826ce749, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.0838714
-      objectReference: {fileID: 0}
-    - target: {fileID: 1912888945894354404, guid: 74b0739e459ba774fac64942826ce749, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.1932191
-      objectReference: {fileID: 0}
-    - target: {fileID: 1912888945894354404, guid: 74b0739e459ba774fac64942826ce749, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.0235
-      objectReference: {fileID: 0}
-    - target: {fileID: 1912888945894354404, guid: 74b0739e459ba774fac64942826ce749, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.1415
-      objectReference: {fileID: 0}
     - target: {fileID: 8932464823840423120, guid: 74b0739e459ba774fac64942826ce749, type: 3}
       propertyPath: m_Name
       value: Landing In
       objectReference: {fileID: 0}
-    - target: {fileID: 8932464823840423120, guid: 74b0739e459ba774fac64942826ce749, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8932464823840423120, guid: 74b0739e459ba774fac64942826ce749, type: 3}
-      propertyPath: m_TagString
-      value: Checkpoint
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 7572699284904303811, guid: 74b0739e459ba774fac64942826ce749, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74b0739e459ba774fac64942826ce749, type: 3}
